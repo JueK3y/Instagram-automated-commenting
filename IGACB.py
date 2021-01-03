@@ -12,6 +12,7 @@ from tkinter import simpledialog, messagebox
 
 from pip._vendor import requests
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 
 # class MyDialog(simpledialog.Dialog):
@@ -46,6 +47,28 @@ def connected():
         messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
         web.close()
         sys.exit(0)
+
+
+def browser():
+    BRW = simpledialog.askstring(title="Wrong browser", prompt="Please use one of the 3 given options: Firefox, "
+                                                               "Chrome 87, Chrome 88. Restart the program afterwards.")
+    if not BRW:
+        messagebox.showerror("Missing browser", "You need to enter one of the three browser names.")
+        # Save preferred browser
+        BrwCo = {
+            'Browser': None,
+        }
+        with open('JSON/Browser.json', 'w') as BrwFi:
+            json.dump(BrwCo, BrwFi)
+
+    # Save preferred browser
+    BrwCo = {
+        'Browser': BRW,
+    }
+    with open('JSON/Browser.json', 'w') as BrwFi:
+        json.dump(BrwCo, BrwFi)
+    print("Browser successful registered")
+    sys.exit(0)
 
 
 # Make JSON folder
@@ -99,7 +122,6 @@ else:
     print("Folder doesnt exist")
     mk_folder()
     mk_files()
-
 
 # Read Browser.json
 with open('JSON/Browser.json', 'r') as BrwFi:
@@ -205,39 +227,39 @@ with open('JSON/Browser.json', 'r') as BrwFi:
 obj = json.loads(data)
 
 if str(obj['Browser']) == 'Firefox':
-    print('Using Firefox')
-    web = webdriver.Firefox(executable_path=os.getcwd() + '/driver/geckodriver.exe')
-    web.maximize_window()
+    try:
+        print('Using Firefox')
+        web = webdriver.Firefox(executable_path=os.getcwd() + '/driver/geckodriver.exe')
+        web.maximize_window()
+    except WebDriverException:
+        print("Looks like Firefox isn't accessible.")
+        browser()
+
 
 elif str(obj['Browser']) == 'Chrome 87':
-    print('Using Chrome 87')
-    chrOpt = webdriver.ChromeOptions()
-    chrOpt.add_argument("--incognito")
-    web = webdriver.Chrome(executable_path=os.getcwd() + '/driver/chromedriver-87.exe', options=chrOpt)
-    web.maximize_window()
+    try:
+        print('Using Chrome 87')
+        chrOpt = webdriver.ChromeOptions()
+        chrOpt.add_argument("--incognito")
+        web = webdriver.Chrome(executable_path=os.getcwd() + '/driver/chromedriver-87.exe', options=chrOpt)
+        web.maximize_window()
+    except WebDriverException:
+        print("Looks like Chrome 87 isn't accessible.")
+        browser()
 
 elif str(obj['Browser']) == 'Chrome 88':
-    print('Using Chrome 88')
-    chrOpt = webdriver.ChromeOptions()
-    chrOpt.add_argument("--incognito")
-    web = webdriver.Chrome(executable_path=os.getcwd() + '/driver/chromedriver-88.exe', options=chrOpt)
-    web.maximize_window()
+    try:
+        print('Using Chrome 88')
+        chrOpt = webdriver.ChromeOptions()
+        chrOpt.add_argument("--incognito")
+        web = webdriver.Chrome(executable_path=os.getcwd() + '/driver/chromedriver-88.exe', options=chrOpt)
+        web.maximize_window()
+    except WebDriverException:
+        print("Looks like Chrome 88 isn't accessible.")
+        browser()
 
 else:
-    print('Wrong browser input!')
-    BRW = simpledialog.askstring(title="Wrong browser", prompt="Please use one of the 3 given options: Firefox, "
-                                                               "Chrome 87, Chrome 88. Restart the program afterwards.")
-    if not BRW:
-        messagebox.showerror("Missing browser", "You need to enter one of the three browser names.")
-        sys.exit(0)
-    # Save preferred browser
-    BrwCo = {
-        'Browser': BRW,
-    }
-    with open('JSON/Browser.json', 'w') as BrwFi:
-        json.dump(BrwCo, BrwFi)
-    print("Browser successful registered")
-    sys.exit(0)
+    browser()
 
 connected()
 
@@ -273,6 +295,7 @@ if web.find_element_by_css_selector('.sqdOP'):
 
     lines = open('soco').read().splitlines()
 
+
     def comment():
         for word in lines:
             myline = random.choice(lines)
@@ -294,6 +317,7 @@ if web.find_element_by_css_selector('.sqdOP'):
             text.send_keys(Keys.ENTER)
 
             time.sleep(zeit)
+
 
     comment()
     comment()
