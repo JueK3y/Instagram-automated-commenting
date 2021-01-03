@@ -41,7 +41,7 @@ root.withdraw()
 def connected():
     timeout = 10
     try:
-        requests.get('https://google.de', timeout=timeout)
+        requests.get('https://google.com', timeout=timeout)
     except (requests.ConnectionError, requests.Timeout):
         print("Missing Internet connection")
         messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
@@ -50,25 +50,26 @@ def connected():
 
 
 def browser():
-    BRW = simpledialog.askstring(title="Wrong browser", prompt="Please use one of the 3 given options: Firefox, "
-                                                               "Chrome 87, Chrome 88. Restart the program afterwards.")
+    BRW = simpledialog.askstring(title="Wrong browser", prompt="Please use one of the 4 given options: Internet "
+                                                               "Explorer, Firefox, Chrome 87, Chrome 88. Restart the "
+                                                               "program afterwards.")
     if not BRW:
-        messagebox.showerror("Missing browser", "You need to enter one of the three browser names.")
+        messagebox.showerror("Missing browser", "You need to enter one of the four browser names.")
         # Save preferred browser
         BrwCo = {
             'Browser': None,
         }
         with open('JSON/Browser.json', 'w') as BrwFi:
             json.dump(BrwCo, BrwFi)
-
-    # Save preferred browser
-    BrwCo = {
-        'Browser': BRW,
-    }
-    with open('JSON/Browser.json', 'w') as BrwFi:
-        json.dump(BrwCo, BrwFi)
-    print("Browser successful registered")
-    sys.exit(0)
+        sys.exit(0)
+    else:
+        # Save preferred browser
+        BrwCo = {
+            'Browser': BRW,
+        }
+        with open('JSON/Browser.json', 'w') as BrwFi:
+            json.dump(BrwCo, BrwFi)
+        print("Browser successful registered")
 
 
 # Make JSON folder
@@ -226,7 +227,19 @@ with open('JSON/Browser.json', 'r') as BrwFi:
 
 obj = json.loads(data)
 
-if str(obj['Browser']) == 'Firefox':
+BrNa = str(obj['Browser']).lower()
+
+if BrNa == 'internet explorer' or BrNa == 'ie':
+    try:
+        print('Using IE')
+        web = webdriver.Ie(executable_path=os.getcwd() + '/driver/IEDriverServer.exe')
+        web.maximize_window()
+    except WebDriverException:
+        print("Looks like Internet Explorer isn't accessible.")
+        browser()
+        sys.exit(0)
+
+elif BrNa == 'firefox':
     try:
         print('Using Firefox')
         web = webdriver.Firefox(executable_path=os.getcwd() + '/driver/geckodriver.exe')
@@ -234,9 +247,10 @@ if str(obj['Browser']) == 'Firefox':
     except WebDriverException:
         print("Looks like Firefox isn't accessible.")
         browser()
+        sys.exit(0)
 
 
-elif str(obj['Browser']) == 'Chrome 87':
+elif BrNa == 'chrome 87':
     try:
         print('Using Chrome 87')
         chrOpt = webdriver.ChromeOptions()
@@ -247,7 +261,7 @@ elif str(obj['Browser']) == 'Chrome 87':
         print("Looks like Chrome 87 isn't accessible.")
         browser()
 
-elif str(obj['Browser']) == 'Chrome 88':
+elif BrNa == 'chrome 88':
     try:
         print('Using Chrome 88')
         chrOpt = webdriver.ChromeOptions()
