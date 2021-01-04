@@ -27,7 +27,7 @@ from selenium.webdriver.common.keys import Keys
 #    def apply(self):
 #        first = self.e1.get()
 #        self.result = first
-
+from selenium.webdriver.support.wait import WebDriverWait
 
 root = tk.Tk()
 root.wm_attributes("-topmost", 1)
@@ -305,10 +305,10 @@ if web.find_element_by_css_selector('.sqdOP'):
     svin = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/section/div/button')
     svin.click()
 
+
     time.sleep(10)
 
     lines = open('soco').read().splitlines()
-
 
     def comment():
         for word in lines:
