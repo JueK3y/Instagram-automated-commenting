@@ -6,7 +6,6 @@ import sys
 import time
 import random
 import tkinter as tk
-# from doctest import master
 
 from tkinter import simpledialog, messagebox
 
@@ -15,26 +14,9 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 
-# class MyDialog(simpledialog.Dialog):
-#    def body(self, master):
-#        self.geometry("300x100")
-#        tk.Label(master, text="Enter your text").grid(row=0)
-#
-#        self.e1 = tk.Entry(master)
-#        self.e1.grid(row=0, column=1)
-#        return self.e1
-#
-#    def apply(self):
-#        first = self.e1.get()
-#        self.result = first
-from selenium.webdriver.support.wait import WebDriverWait
-
 root = tk.Tk()
 root.wm_attributes("-topmost", 1)
 root.withdraw()
-
-
-# test = MyDialog(root, "tets")
 
 
 # Check for internet connection
@@ -123,6 +105,7 @@ else:
     print("Folder doesnt exist")
     mk_folder()
     mk_files()
+
 
 # Read Browser.json
 with open('JSON/Browser.json', 'r') as BrwFi:
