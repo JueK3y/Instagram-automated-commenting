@@ -1,4 +1,5 @@
 import json
+import sys
 import os.path
 import pathlib
 import shutil
@@ -23,6 +24,7 @@ root.resizable(False, False)
 
 def auto_comment():
     global web
+    connected()
     if browser_text.get() == 'Internet Explorer':
         try:
             web = webdriver.Ie(executable_path=os.getcwd() + '/driver/IEDriverServer.exe')
@@ -69,7 +71,7 @@ def auto_comment():
             return
     print("Browser found")
 
-    # connected()
+    connected()
 
     web.get(url_text.get())
 
@@ -81,9 +83,12 @@ def auto_comment():
         web.close()
         return
 
-    comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section[1]/span['
-                                        '2]/button')
-    comment.click()
+    try:
+        comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section[1]/span['
+                                            '2]/button')
+        comment.click()
+    except NoSuchElementException:
+        messagebox.showerror("Error", "Something went wrong. Is the link wrong?.")
 
     alias = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[1]/div/label/input')
     alias.send_keys(username_text.get())
@@ -91,7 +96,7 @@ def auto_comment():
     pw = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[2]/div/label/input')
     pw.send_keys(password_text.get())
 
-    # connected()
+    connected()
 
     login = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[3]/button')
     login.click()
@@ -132,7 +137,7 @@ def auto_comment():
                 text = web.find_element_by_css_selector('.Ypffh')
                 text.send_keys(myline)
 
-                # connected()
+                connected()
 
                 text.send_keys(Keys.ENTER)
 
@@ -142,11 +147,13 @@ def auto_comment():
         comment()
         comment()
 
+
 def run():
     if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e1.get()) == "None" or \
             str(e2.get()) == "None" or str(e4.get()) == "None":
         messagebox.showerror("Missing input", "All fields must be filled in.")
-
+    elif len(str(e4.get())) < 6:
+        messagebox.showerror("Incorrect password", "Your password can't be that short.")
     else:
         # Save URL
         safe_url = {
@@ -185,6 +192,22 @@ def close():
             return
 
 
+# Check for internet connection
+def connected():
+    timeout = 10
+    try:
+        requests.get('https://instagram.com', timeout=timeout)
+    except (requests.ConnectionError, requests.Timeout):
+        print("Missing Internet connection")
+        messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
+        try:
+            web.close()
+            return
+        except:
+            sys.exit()
+
+
+# Button hover
 def on_enter(e):
     e.widget['background'] = '#BABABA'  # #484644
 
