@@ -106,7 +106,6 @@ else:
     mk_folder()
     mk_files()
 
-
 # Read Browser.json
 with open('JSON/Browser.json', 'r') as BrwFi:
     data = BrwFi.read()
@@ -288,10 +287,10 @@ if web.find_element_by_css_selector('.sqdOP'):
     svin = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/section/div/button')
     svin.click()
 
-
     time.sleep(10)
 
     lines = open('soco').read().splitlines()
+
 
     def comment():
         for word in lines:
