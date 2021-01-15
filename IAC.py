@@ -10,15 +10,15 @@ import shutil
 import random
 import os.path
 import pathlib
-
 import requests
-from zipfile import ZipFile
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox
+from threading import *
+from zipfile import ZipFile
 from selenium import webdriver
-from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException
+from tkinter import messagebox
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException
 
 root = tk.Tk()
 root.geometry('420x100')
@@ -28,12 +28,16 @@ root.wm_attributes("-topmost", 1)
 root.resizable(False, False)
 
 
+def threading():
+    t1 = Thread(target=run)
+    t1.start()
+
+
 def auto_comment():
     global web
-    connected()
     if browser_text.get() == 'Internet Explorer':
         try:
-            web = webdriver.Ie(executable_path=os.getcwd() + '/driver/IEDriverServer.exe')
+            web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/IEDriverServer.exe')
             web.maximize_window()
         except WebDriverException:
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
@@ -179,6 +183,31 @@ def auto_comment():
         return
 
 
+def check_comment():
+    global web
+    connected()
+
+    with open('Resource/JSON/firstRun.json', 'r') as runfi:
+        run_data = runfi.read()
+    run_obj = json.loads(run_data)
+
+    if str(run_obj['First Run?']) == "yes":
+        first_run = {
+            'First Run?': "no"
+        }
+        with open('Resource/JSON/firstRun.json', 'w') as runfi:
+            json.dump(first_run, runfi)
+        runfi.close()
+        print("True")
+
+        # Waiting for firewall request
+        time.sleep(10)
+        auto_comment()
+    else:
+        print("False")
+        auto_comment()
+
+
 def run():
     if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e1.get()) == "None" or \
             str(e2.get()) == "None" or str(e4.get()) == "None":
@@ -199,7 +228,6 @@ def run():
             return
         else:
             exit()
-
     else:
         # Save URL
         safe_url = {
@@ -216,7 +244,7 @@ def run():
         with open('Resource/JSON/LogIn.json', 'w') as lginfi:
             json.dump(login, lginfi)
         # check_txt()
-        auto_comment()
+        check_comment()
 
 
 def help_act():
@@ -226,12 +254,14 @@ def help_act():
 def close():
     msg_box = tk.messagebox.askquestion('Exit Application', 'Are you sure you want to exit the application?',
                                         icon='warning')
-    if msg_box:
+    if msg_box == 'yes':
         root.destroy()
         try:
             web.close()
-        except:
+        except NameError:
             return
+    else:
+        return
 
 
 # Check for internet connection
@@ -347,6 +377,12 @@ def mk_files():
     }
     with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
         json.dump(safe_url, urlfi)
+    # Generating firstRun.json
+    first_run = {
+        'First Run?': "yes"
+    }
+    with open('Resource/JSON/firstRun.json', 'w') as runfi:
+        json.dump(first_run, runfi)
     return
 
 
@@ -360,11 +396,12 @@ d_JSON = pathlib.Path("Resource/JSON")
 f_browser = pathlib.Path("Resource/JSON/Browser.json")
 f_login = pathlib.Path("Resource/JSON/LogIn.json")
 f_url = pathlib.Path("Resource/JSON/URLhistory.json")
+f_run = pathlib.Path("Resource/JSON/firstRun.json")
 
 if d_Resource.exists():
     if d_driver.exists() & d_JSON.exists():
-        if f_browser.exists() & f_login.exists() & f_url.exists() & f_gecko.exists() & f_chrome_87.exists() & \
-                f_chrome_88.exists():
+        if f_browser.exists() & f_login.exists() & f_url.exists() & f_run.exists() & f_gecko.exists() & \
+                f_chrome_87.exists() & f_chrome_88.exists():
             print("Looks good")
         else:
             # Delete old folders
@@ -391,6 +428,9 @@ else:
     mk_files()
 
 # check_txt()
+
+# Input doesn't work after the messagebox
+messagebox.showwarning("Warning", "Some Serious Warning.")
 
 # Label
 li = Label(root, text="Post URL")
@@ -455,7 +495,7 @@ var = IntVar()
 bp = Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
 bp.grid(row=1, column=4)
 
-b1 = Button(root, text="Run", width=12, command=run)
+b1 = Button(root, text="Run", width=12, command=threading)
 b1.grid(row=2, column=1)
 b1.bind("<Enter>", on_enter)
 b1.bind("<Leave>", on_leave)
