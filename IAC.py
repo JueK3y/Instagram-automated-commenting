@@ -149,8 +149,8 @@ def auto_comment():
         def comment():
 
             for line in open("Resource/comments.txt"):
-                li = line.strip()
-                if not li.startswith("#"):
+                lin = line.strip()
+                if not lin.startswith("#"):
                     print(line.strip())
 
                     myline = random.choice(lines)
@@ -187,21 +187,21 @@ def check_comment():
     global web
     connected()
 
-    with open('Resource/JSON/firstRun.json', 'r') as runfi:
-        run_data = runfi.read()
-    run_obj = json.loads(run_data)
+    with open('Resource/JSON/firstRun.json', 'r') as runfil:
+        run__data = runfil.read()
+    run__obj = json.loads(run__data)
 
-    if str(run_obj['First Run?']) == "yes":
-        first_run = {
-            'First Run?': "no"
+    if str(run__obj['First Run?']) == "Yes":
+        first__run = {
+            'First Run?': "No",
+            'Agree to EULA?': "Yes"
         }
-        with open('Resource/JSON/firstRun.json', 'w') as runfi:
-            json.dump(first_run, runfi)
-        runfi.close()
+        with open('Resource/JSON/firstRun.json', 'w') as runfil:
+            json.dump(first__run, runfi)
+        runfil.close()
         print("True")
 
         # Waiting for firewall request
-        time.sleep(10)
         auto_comment()
     else:
         print("False")
@@ -247,8 +247,8 @@ def run():
         check_comment()
 
 
-def help_act():
-    messagebox.showerror("Not available", "Help is currently not available.")
+def settings():
+    messagebox.showerror("Not available", "Settings are currently not available.")
 
 
 def close():
@@ -378,11 +378,12 @@ def mk_files():
     with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
         json.dump(safe_url, urlfi)
     # Generating firstRun.json
-    first_run = {
-        'First Run?': "yes"
+    first__run = {
+        'First Run?': "Yes",
+        'Agree to EULA?': "No"
     }
-    with open('Resource/JSON/firstRun.json', 'w') as runfi:
-        json.dump(first_run, runfi)
+    with open('Resource/JSON/firstRun.json', 'w') as runfil:
+        json.dump(first__run, runfil)
     return
 
 
@@ -429,8 +430,40 @@ else:
 
 # check_txt()
 
-# Input doesn't work after the messagebox
-messagebox.showwarning("Warning", "Some Serious Warning.")
+
+with open('Resource/JSON/firstRun.json', 'r') as runfi:
+    run_data = runfi.read()
+run_obj = json.loads(run_data)
+
+root.update()
+
+if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
+    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?")
+    if eula:
+        first_run = {
+            'First Run?': "Yes",
+            'Agree to EULA?': "Yes"
+        }
+        with open('Resource/JSON/firstRun.json', 'w') as runfi:
+            json.dump(first_run, runfi)
+        runfi.close()
+    else:
+        quit()
+elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Yes":
+    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?")
+    if eula:
+        first_run = {
+            'First Run?': "No",
+            'Agree to EULA?': "Yes"
+        }
+        with open('Resource/JSON/firstRun.json', 'w') as runfi:
+            json.dump(first_run, runfi)
+        runfi.close()
+    else:
+        quit()
+
+messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only. "
+                                                   "Please use it accordingly!")
 
 # Label
 li = Label(root, text="Post URL")
@@ -500,7 +533,7 @@ b1.grid(row=2, column=1)
 b1.bind("<Enter>", on_enter)
 b1.bind("<Leave>", on_leave)
 
-b2 = Button(root, text="Help", width=12, command=help_act)
+b2 = Button(root, text="Settings", width=12, command=settings)
 b2.grid(row=2, column=2)
 b2.bind("<Enter>", on_enter)
 b2.bind("<Leave>", on_leave)
