@@ -198,7 +198,6 @@ def check_comment():
         }
         with open('Resource/JSON/firstRun.json', 'w') as runfil:
             json.dump(first__run, runfi)
-        runfil.close()
         print("True")
 
         # Waiting for firewall request
