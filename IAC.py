@@ -145,16 +145,16 @@ def auto_comment():
 
         time.sleep(10)
 
-        lines = open('soco').read().splitlines()
+    # lines = open('src/soco').read().splitlines()
 
         def comment():
-
+            # Major error?
             for line in open("Resource/comments.txt"):
                 lin = line.strip()
                 if not lin.startswith("#"):
                     print(line.strip())
 
-                    myline = random.choice(lines)
+                    myline = random.choice(lin)
                     print(myline)
                     zeit = random.randint(25, 90)
                     print(zeit)

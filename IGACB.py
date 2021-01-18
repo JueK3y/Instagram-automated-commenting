@@ -289,7 +289,7 @@ if web.find_element_by_css_selector('.sqdOP'):
 
     time.sleep(10)
 
-    lines = open('soco').read().splitlines()
+    lines = open('src/soco').read().splitlines()
 
 
     def comment():

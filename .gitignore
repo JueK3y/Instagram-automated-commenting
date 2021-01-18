@@ -1,4 +1,4 @@
-/__pychache__/
+/__pycache__/
 /Resource/
 /.idea/
 /build/
@@ -7,4 +7,4 @@ geckodriver.log
 testlab2.py
 testlab.py
 test.py
-soco
+src/soco
