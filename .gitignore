@@ -1,5 +1,8 @@
+/__pychache__/
 /Resource/
 /.idea/
+/build/
+/dist/
 geckodriver.log
 testlab2.py
 testlab.py
