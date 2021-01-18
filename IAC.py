@@ -18,7 +18,8 @@ from zipfile import ZipFile
 from selenium import webdriver
 from tkinter import messagebox
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException
+from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
+    InvalidSessionIdException
 
 root = tk.Tk()
 root.geometry('420x100')
@@ -37,7 +38,7 @@ def auto_comment():
     global web
     if browser_text.get() == 'Internet Explorer':
         try:
-            web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/IEDriverServer.exe')
+            web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
             web.maximize_window()
         except WebDriverException:
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
@@ -46,7 +47,7 @@ def auto_comment():
 
     elif browser_text.get() == 'Firefox':
         try:
-            web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/geckodriver.exe')
+            web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
             web.maximize_window()
 
             # Save preferred browser
@@ -64,7 +65,7 @@ def auto_comment():
         try:
             chr_opt = webdriver.ChromeOptions()
             chr_opt.add_argument("--incognito")
-            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/chromedriver_87.exe',
+            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
                                    options=chr_opt)
             web.maximize_window()
         except WebDriverException:
@@ -75,7 +76,7 @@ def auto_comment():
         try:
             chr_opt = webdriver.ChromeOptions()
             chr_opt.add_argument("--incognito")
-            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/chromedriver_88.exe',
+            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
                                    options=chr_opt)
             web.maximize_window()
         except WebDriverException:
@@ -197,7 +198,7 @@ def check_comment():
             'Agree to EULA?': "Yes"
         }
         with open('Resource/JSON/firstRun.json', 'w') as runfil:
-            json.dump(first__run, runfi)
+            json.dump(first__run, runfil)
         runfil.close()
         print("True")
 
@@ -259,6 +260,12 @@ def close():
         try:
             web.close()
         except NameError:
+            print(NameError)
+            exit()
+            return
+        except InvalidSessionIdException:
+            print(InvalidSessionIdException)
+            exit()
             return
     else:
         return
