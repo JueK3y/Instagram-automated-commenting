@@ -1,8 +1,11 @@
-# This programme is written and may only be used for educational purposes!
-# Using it for real purposes violates the Instagram guidelines!
-# Consequences are, for example, the blocking of the Instagram account.
-# Please read Instagram's guidelines for more information.
-# DO NOT indicate used program sections as your own. ©2020 - 2021 by www.github.com/JueK3y/
+"""
+This programme is written and may only be used for educational purposes!
+Using it for real purposes violates the Instagram guidelines!
+Consequences are, for example, the blocking of the Instagram account.
+Please read Instagram's guidelines for more information.
+DO NOT indicate used program sections as your own. ©2020 - 2021 by www.github.com/JueK3y/
+"""
+
 
 import time
 import json
@@ -10,6 +13,8 @@ import shutil
 import random
 import os.path
 import pathlib
+import datetime
+
 import requests
 import tkinter as tk
 from tkinter import *
@@ -28,6 +33,8 @@ root.title("Automated Commenting")
 root.wm_attributes("-topmost", 1)
 root.resizable(False, False)
 
+e = datetime.datetime.now()
+
 
 def threading():
     t1 = Thread(target=run)
@@ -40,6 +47,13 @@ def auto_comment():
         try:
             web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
             web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "IE",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
         except WebDriverException:
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
             return
@@ -68,6 +82,13 @@ def auto_comment():
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
                                    options=chr_opt)
             web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Chrome 87",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
         except WebDriverException:
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser.")
             return
@@ -79,6 +100,13 @@ def auto_comment():
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
                                    options=chr_opt)
             web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Chrome 88",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
         except WebDriverException:
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser.")
             return
@@ -145,11 +173,11 @@ def auto_comment():
 
         time.sleep(10)
 
-    # lines = open('src/soco').read().splitlines()
+        # lines = open('src/soco').read().splitlines()
 
         def comment():
             # Major error?
-            for line in open("Resource/comments.txt"):
+            for line in open("Resource/txt/comments.txt"):
                 lin = line.strip()
                 if not lin.startswith("#"):
                     print(line.strip())
@@ -221,11 +249,11 @@ def run():
                                          "You don't have any sentences to comment on Instagram. Do you "
                                          "want to create some now?", icon='warning')
         if comment:
-            comment_txt = open("Resource/comments.txt", "a")
+            comment_txt = open("Resource/txt/comments.txt", "a")
             comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
             comment_txt.close()
 
-            os.system("notepad Resource/comments.txt")
+            os.system("notepad Resource/txt/comments.txt")
             return
         else:
             exit()
@@ -286,12 +314,12 @@ def connected():
 
 
 # Button hover
-def on_enter(e):
-    e.widget['background'] = '#BABABA'  # #484644
+def on_enter(d):
+    d.widget['background'] = '#BABABA'  # #484644
 
 
-def on_leave(e):
-    e.widget['background'] = 'SystemButtonFace'
+def on_leave(d):
+    d.widget['background'] = 'SystemButtonFace'
 
 
 # Make folder
@@ -313,6 +341,12 @@ def mk_folder():
     directory_name = "JSON"
     json_path = os.path.join(json_dir, directory_name)
     os.mkdir(json_path)
+
+    # Make txt folder
+    txt_dir = os.getcwd() + '/Resource'
+    directory_name = "txt"
+    txt_path = os.path.join(txt_dir, directory_name)
+    os.mkdir(txt_path)
     return
 
 
@@ -320,10 +354,12 @@ def dow_driver():
     gecko = "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-win64.zip"
     chr87 = "https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_win32.zip"
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
+    EULA = "https://juek3y.com/src/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
 
     a = requests.get(gecko)
     b = requests.get(chr87)
     c = requests.get(chr88)
+    d = requests.get(EULA)
 
     with open("Resource/driver/geckodriver.zip", 'wb') as f:
         f.write(a.content)
@@ -333,6 +369,9 @@ def dow_driver():
 
     with open("Resource/driver/chromedriver-88.zip", 'wb') as f:
         f.write(c.content)
+
+    with open("Resource/txt/EULA.txt", 'wb') as f:
+        f.write(d.content)
     return
 
 
@@ -371,6 +410,7 @@ def mk_files():
     }
     with open('Resource/JSON/Browser.json', 'w') as BrwFi:
         json.dump(brwco, BrwFi)
+
     # Generating LogIn.json
     login = {
         'Username': None,
@@ -378,12 +418,14 @@ def mk_files():
     }
     with open('Resource/JSON/LogIn.json', 'w') as lginfi:
         json.dump(login, lginfi)
+
     # Generating URLhistory.json
     safe_url = {
         'Last URL': None
     }
     with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
         json.dump(safe_url, urlfi)
+
     # Generating firstRun.json
     first__run = {
         'First Run?': "Yes",
@@ -395,7 +437,8 @@ def mk_files():
 
 
 d_Resource = pathlib.Path("Resource")
-f_comment = pathlib.Path("Resource/comments.txt")
+d_txt = pathlib.Path("Resource/txt")
+f_comment = pathlib.Path("Resource/txt/comments.txt")
 d_driver = pathlib.Path("Resource/driver")
 f_gecko = pathlib.Path("Resource/driver/geckodriver.exe")
 f_chrome_87 = pathlib.Path("Resource/driver/chromedriver_87.exe")
@@ -407,13 +450,14 @@ f_url = pathlib.Path("Resource/JSON/URLhistory.json")
 f_run = pathlib.Path("Resource/JSON/firstRun.json")
 
 if d_Resource.exists():
-    if d_driver.exists() & d_JSON.exists():
+    if d_driver.exists() & d_JSON.exists() & d_txt.exists():
         if f_browser.exists() & f_login.exists() & f_url.exists() & f_run.exists() & f_gecko.exists() & \
                 f_chrome_87.exists() & f_chrome_88.exists():
             print("Looks good")
         else:
             # Delete old folders
             shutil.rmtree("Resource")
+            shutil.rmtree("Resource/txt")
             shutil.rmtree("Resource/JSON")
             shutil.rmtree("Resource/driver")
             mk_folder()
@@ -423,6 +467,7 @@ if d_Resource.exists():
     else:
         # Delete old folders
         shutil.rmtree("Resource")
+        shutil.rmtree("Resource/txt")
         shutil.rmtree("Resource/JSON")
         shutil.rmtree("Resource/driver")
         mk_folder()
@@ -437,6 +482,11 @@ else:
 
 # check_txt()
 
+disagree = False
+
+with open('Resource/txt/EULA.txt') as f:
+    if not ('User ' + os.getenv('username') + ' agreed to the EULA on') in f.read():
+        disagree = True
 
 with open('Resource/JSON/firstRun.json', 'r') as runfi:
     run_data = runfi.read()
@@ -454,6 +504,11 @@ if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No
         with open('Resource/JSON/firstRun.json', 'w') as runfi:
             json.dump(first_run, runfi)
         runfi.close()
+        with open('Resource/txt/EULA.txt', 'a') as file:
+            file.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
+                       ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
+        file.close()
+
     else:
         quit()
 elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Yes":
@@ -466,6 +521,34 @@ elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Y
         with open('Resource/JSON/firstRun.json', 'w') as runfi:
             json.dump(first_run, runfi)
         runfi.close()
+        with open('Resource/txt/EULA.txt', 'a') as file:
+            file.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
+                       ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
+        file.close()
+    else:
+        quit()
+
+elif disagree:
+    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?")
+    if eula:
+        first_run = {
+            'First Run?': "No",
+            'Agree to EULA?': "Yes"
+        }
+        with open('Resource/JSON/firstRun.json', 'w') as runfi:
+            json.dump(first_run, runfi)
+        runfi.close()
+
+        with open("Resource/txt/EULA.txt", "a+") as file_object:
+            file_object.seek(0)
+            data = file_object.read(118)
+            if len(data) > 0:
+                file_object.write("\n")
+            file_object.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month,
+                                                                                                     e.year) +
+                              ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
+            file_object.close()
+
     else:
         quit()
 
