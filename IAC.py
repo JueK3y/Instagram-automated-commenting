@@ -13,10 +13,11 @@ import random
 import os.path
 import pathlib
 import datetime
-
 import requests
 import tkinter as tk
+
 from tkinter import *
+from tqdm import tqdm
 from threading import *
 from zipfile import ZipFile
 from selenium import webdriver
@@ -268,7 +269,8 @@ def run():
         messagebox.showerror("Missing input", "All fields must be filled in.")
     elif len(str(e4.get())) < 6:
         messagebox.showerror("Incorrect password", "Your password can't be that short.")
-
+    elif len(str(e1.get())) < 11:
+        messagebox.showerror("Wrong link", "The link have to lead to an instagram post.")
     elif not f_comment.exists():
         comment = tk.messagebox.askyesno('No comments',
                                          "You don't have any sentences to comment on Instagram. Do you "
@@ -353,6 +355,10 @@ def connected():
         except NoSuchWindowException:
             print(NoSuchWindowException, " for connected()")
             return
+        except NameError:
+            print(NoSuchWindowException, " for connected()")
+            quit()
+            return
 
 
 # Button hover
@@ -393,27 +399,56 @@ def mk_folder():
 
 
 def dow_driver():
+    connected()
     gecko = "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-win64.zip"
     chr87 = "https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_win32.zip"
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
     EULA = "https://juek3y.com/src/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
 
-    a = requests.get(gecko)
-    b = requests.get(chr87)
-    c = requests.get(chr88)
-    d = requests.get(EULA)
+    a = requests.get(gecko, stream=True)
+    b = requests.get(chr87, stream=True)
+    c = requests.get(chr88, stream=True)
+    d = requests.get(EULA, stream=True)
+
+    tsb_a = int(a.headers.get('content-length', 0))
+    block_size = 1024
+    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
 
     with open("Resource/driver/geckodriver.zip", 'wb') as gec:
-        gec.write(a.content)
+        for data_gec in a.iter_content(block_size):
+            progress_bar.update(len(data_gec))
+            gec.write(a.content)
+    progress_bar.close()
+
+    tsb_a = int(b.headers.get('content-length', 0))
+    block_size = 1024
+    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
 
     with open("Resource/driver/chromedriver-87.zip", 'wb') as c87:
-        c87.write(b.content)
+        for data_c87 in b.iter_content(block_size):
+            progress_bar.update(len(data_c87))
+            c87.write(b.content)
+    progress_bar.close()
+
+    tsb_a = int(c.headers.get('content-length', 0))
+    block_size = 1024
+    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
 
     with open("Resource/driver/chromedriver-88.zip", 'wb') as c88:
-        c88.write(c.content)
+        for data_c88 in c.iter_content(block_size):
+            progress_bar.update(len(data_c88))
+            c88.write(c.content)
+    progress_bar.close()
+
+    tsb_a = int(d.headers.get('content-length', 0))
+    block_size = 1024
+    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
 
     with open("Resource/txt/EULA.txt", 'wb') as eul:
-        eul.write(d.content)
+        for data_eul in d.iter_content(block_size):
+            progress_bar.update(len(data_eul))
+            eul.write(d.content)
+    progress_bar.close()
     return
 
 
@@ -495,28 +530,28 @@ if d_Resource.exists():
     if d_driver.exists() & d_JSON.exists() & d_txt.exists():
         if f_browser.exists() & f_login.exists() & f_url.exists() & f_run.exists() & f_gecko.exists() & \
                 f_chrome_87.exists() & f_chrome_88.exists():
-            print("Looks good")
+            print("All files are downloaded")
         else:
+            root.update()
+            messagebox.askokcancel("Creating files ", "Some files are being downloaded. This will take some time.")
             # Delete old folders
             shutil.rmtree("Resource")
-            shutil.rmtree("Resource/txt")
-            shutil.rmtree("Resource/JSON")
-            shutil.rmtree("Resource/driver")
             mk_folder()
             dow_driver()
             exe_driver()
             mk_files()
     else:
+        root.update()
+        messagebox.askokcancel("Creating files 1", "Some files are being downloaded. This may take a while.")
         # Delete old folders
         shutil.rmtree("Resource")
-        shutil.rmtree("Resource/txt")
-        shutil.rmtree("Resource/JSON")
-        shutil.rmtree("Resource/driver")
         mk_folder()
         dow_driver()
         exe_driver()
         mk_files()
 else:
+    root.update()
+    messagebox.askokcancel("Creating files 2", "Some files are being downloaded. This may take a while.")
     mk_folder()
     dow_driver()
     exe_driver()
