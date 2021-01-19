@@ -6,7 +6,6 @@ Please read Instagram's guidelines for more information.
 DO NOT indicate used program sections as your own. ©2020 - 2021 by www.github.com/JueK3y/
 """
 
-
 import time
 import json
 import shutil
@@ -55,6 +54,7 @@ def auto_comment():
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
                 json.dump(brwco, BrwFi)
         except WebDriverException:
+            print(WebDriverException, " for auto_comment()")
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
             return
             # messagebox.showerror("Wrong browser", "IE couldn't be found. Please select another browser.")
@@ -72,6 +72,7 @@ def auto_comment():
                 json.dump(brwco, BrwFi)
 
         except WebDriverException:
+            print(WebDriverException, " for auto_comment()")
             messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser.")
             return
 
@@ -90,6 +91,7 @@ def auto_comment():
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
                 json.dump(brwco, BrwFi)
         except WebDriverException:
+            print(WebDriverException, " for auto_comment()")
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser.")
             return
 
@@ -108,6 +110,7 @@ def auto_comment():
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
                 json.dump(brwco, BrwFi)
         except WebDriverException:
+            print(WebDriverException, " for auto_comment()")
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser.")
             return
 
@@ -119,24 +122,34 @@ def auto_comment():
         cookies = web.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
         cookies.click()
     except NoSuchElementException:
+        print(NoSuchElementException, " for auto_comment()")
         messagebox.showerror("Wrong link", "The link does not lead (directly) to any Instagram post.")
         web.close()
         return
     except NoSuchWindowException:
+        print(NoSuchWindowException, " for auto_comment()")
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         return
+    except InvalidSessionIdException:
+        print(InvalidSessionIdException, " for auto_comment()")
+        quit()
 
     try:
         comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
                                             '1]/span[2]/button')
         comment.click()
     except NoSuchElementException:
+        print(NoSuchElementException, " for auto_comment()")
         messagebox.showerror("Error", "Something went wrong. Does the link lead to a picture?")
         web.close()
         return
     except NoSuchWindowException:
+        print(NoSuchWindowException, " for auto_comment()")
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         return
+    except InvalidSessionIdException:
+        print(InvalidSessionIdException, " for auto_comment()")
+        quit()
 
     try:
         alias = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[1]/div/label/input')
@@ -153,37 +166,49 @@ def auto_comment():
         time.sleep(5)
 
     except NoSuchWindowException:
+        print(NoSuchWindowException, " for auto_comment()")
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         return
 
     except NoSuchElementException:
+        print(NoSuchElementException, " for auto_comment()")
         messagebox.showerror("Error", "Something went wrong. Please restart the program.")
         return
+    except InvalidSessionIdException:
+        print(InvalidSessionIdException, " for auto_comment()")
+        quit()
 
     try:
         web.find_element_by_css_selector('#slfErrorAlert')
         messagebox.showerror("Wrong information", "Your username and / or your password was wrong.")
         web.close()
         return
-
+    except InvalidSessionIdException:
+        print(InvalidSessionIdException, " for auto_comment()")
+        quit()
     except NoSuchElementException:
+        print(NoSuchElementException, " for auto_comment()")
         web.find_element_by_css_selector('.sqdOP')
         svin = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/section/div/button')
         svin.click()
 
         time.sleep(10)
 
-        # lines = open('src/soco').read().splitlines()
+        comfi = open('Resource/txt/comments.txt').read().splitlines()
 
         def comment():
             # Major error?
-            for line in open("Resource/txt/comments.txt"):
-                lin = line.strip()
-                if not lin.startswith("#"):
+            for line in comfi:
+                hash = line.strip()
+                if not hash.startswith("#"):
                     print(line.strip())
 
-                    myline = random.choice(lin)
-                    print(myline)
+                    # It doesn't ignore # or ""
+                    # myline = random.choice(comfi)
+                    # print(myline)
+
+                    # Does post a random letter from the sentence.
+                    # myline = random.choice(line.strip())
                     zeit = random.randint(25, 90)
                     print(zeit)
 
@@ -195,7 +220,8 @@ def auto_comment():
                     time.sleep(1)
 
                     text = web.find_element_by_css_selector('.Ypffh')
-                    text.send_keys(myline)
+                    # text.send_keys(myline)
+                    text.send_keys(line.strip())
 
                     connected()
 
@@ -208,6 +234,7 @@ def auto_comment():
         comment()
 
     except NoSuchWindowException:
+        print(NoSuchWindowException, " for auto_comment()")
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         return
 
@@ -229,8 +256,6 @@ def check_comment():
             json.dump(first__run, runfil)
         runfil.close()
         print("True")
-
-        # Waiting for firewall request
         auto_comment()
     else:
         print("False")
@@ -273,7 +298,25 @@ def run():
         with open('Resource/JSON/LogIn.json', 'w') as lginfi:
             json.dump(login, lginfi)
         # check_txt()
+
         check_comment()
+
+        # Close the old window and starts a new one.
+        # Does the user wants this?
+        """
+        try:
+            web.close()
+            check_comment()
+            return
+        except NameError:
+            print(NameError, " for run()")
+            check_comment()
+            return
+        except InvalidSessionIdException:
+            print(InvalidSessionIdException, " for run()")
+            check_comment()
+            return
+        """
 
 
 def settings():
@@ -288,13 +331,11 @@ def close():
         try:
             web.close()
         except NameError:
-            print(NameError)
-            exit()
-            return
+            print(NameError, " for close()")
+            quit()
         except InvalidSessionIdException:
-            print(InvalidSessionIdException)
-            exit()
-            return
+            print(InvalidSessionIdException, " for close()")
+            quit()
     else:
         return
 
@@ -310,6 +351,7 @@ def connected():
             web.close()
             return
         except NoSuchWindowException:
+            print(NoSuchWindowException, " for connected()")
             return
 
 
@@ -361,17 +403,17 @@ def dow_driver():
     c = requests.get(chr88)
     d = requests.get(EULA)
 
-    with open("Resource/driver/geckodriver.zip", 'wb') as f:
-        f.write(a.content)
+    with open("Resource/driver/geckodriver.zip", 'wb') as gec:
+        gec.write(a.content)
 
-    with open("Resource/driver/chromedriver-87.zip", 'wb') as f:
-        f.write(b.content)
+    with open("Resource/driver/chromedriver-87.zip", 'wb') as c87:
+        c87.write(b.content)
 
-    with open("Resource/driver/chromedriver-88.zip", 'wb') as f:
-        f.write(c.content)
+    with open("Resource/driver/chromedriver-88.zip", 'wb') as c88:
+        c88.write(c.content)
 
-    with open("Resource/txt/EULA.txt", 'wb') as f:
-        f.write(d.content)
+    with open("Resource/txt/EULA.txt", 'wb') as eul:
+        eul.write(d.content)
     return
 
 
