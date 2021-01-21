@@ -13,6 +13,8 @@ import random
 import os.path
 import pathlib
 import datetime
+from tkinter.filedialog import askopenfilename
+
 import requests
 import tkinter as tk
 
@@ -65,7 +67,7 @@ def run():
         messagebox.showerror("Incorrect password", "Your password can't be that short.")
     elif len(str(e1.get())) < 11:
         messagebox.showerror("Wrong link", "The link have to lead to an instagram post.")
-    elif not pathlib.Path("Resource/txt/comments.txt").exists():
+    elif not pathlib.Path(comments_path).exists():
         comment = tk.messagebox.askyesno('No comments',
                                          "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
                                                                                                           "want to create some now?",
@@ -358,83 +360,31 @@ def threading_settings():
 
 
 def settings():
-    # messagebox.showerror("Not available", "Settings are currently not available.")
-    # Label
-    li = Label(root, text="Post URL")
-    li.grid(row=0, column=0)
-    li = Label(root, text="Username")
-    li.grid(row=0, column=2)
-    li = Label(root, text="Browser")
-    li.grid(row=1, column=0)
-    li = Label(root, text="Password")
-    li.grid(row=1, column=2)
+    # Tkinter Stuff
+    settingsWin = Toplevel(root)
+    settingsWin.title("Settings | Automated Commenting")
+    settingsWin.geometry('350x100'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
+    try:
+        settingsWin.iconbitmap('Resource/IAC-Icon.ico')
+    except TclError:
+        check_content()
 
-    # Read URL file
-    with open('Resource/JSON/URLhistory.json', 'r') as URLFi:
-        data = URLFi.read()
 
-    obj = json.loads(data)
+    def sel_file():
+        filename = askopenfilename(filetypes=(("*.txt", "*.txt"), ("All Files", "*.*")))
+        comments_path = filename
+        print(filename)
 
-    # Input
-    url_text = StringVar()
-    e1 = Entry(root, textvariable=url_text)
-    e1.insert(0, str(obj['Last URL']))
-    e1.grid(row=0, column=1)
+    # Content
+    Label(settingsWin, text="Appearance").place(x=60)
+    Button(settingsWin, text="Light", command='light').place(x=40, y=20, width=50)
+    Button(settingsWin, text="Dark", command='dark').place(x=90, y=20, width=50)
 
-    # Dropdown Menu
-    OptionList = [
-        "Firefox",
-        "Chrome 87",
-        "Chrome 88"
-    ]
-    browser_text = StringVar()
-    browser_text.set(OptionList[0])
-    e3 = tk.OptionMenu(root, browser_text, *OptionList)
-    e3.config(width=12, font=('Helvetica', 9))
-    e3.grid(row=1, column=1)
-
-    # Read LogIn file
-    with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
-        data = LgInFi.read()
-
-    obj = json.loads(data)
-
-    username_text = StringVar()
-    e2 = Entry(root, textvariable=username_text)
-    e2.insert(0, str(obj['Username']))
-    e2.grid(row=0, column=3)
-
-    password_text = StringVar()
-    e4 = Entry(root, textvariable=password_text)
-    e4.insert(0, str(obj['Password']))
-    e4.grid(row=1, column=3)
-
-    # Button hover
-    def on_enter(d):
-        d.widget['background'] = '#BABABA'  # #484644
-
-    def on_leave(d):
-        d.widget['background'] = 'SystemButtonFace'
-
-    # Buttons
-    var = IntVar()
-    bp = Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
-    bp.grid(row=1, column=4)
-
-    b1 = Button(root, text="Run", width=12, command=threading_run)
-    b1.grid(row=2, column=1)
-    b1.bind("<Enter>", on_enter)
-    b1.bind("<Leave>", on_leave)
-
-    b2 = Button(root, text="Settings", width=12, command=threading_settings)
-    b2.grid(row=2, column=2)
-    b2.bind("<Enter>", on_enter)
-    b2.bind("<Leave>", on_leave)
-
-    b3 = Button(root, text="Exit", width=12, command=close)
-    b3.grid(row=2, column=3, pady=(10, 10))
-    b3.bind("<Enter>", on_enter)
-    b3.bind("<Leave>", on_leave)
+    Label(settingsWin, text="Comments").place(x=230)
+    Button(settingsWin, text="Add", command='comments').place(x=210, y=20, width=50)
+    Button(settingsWin, text="Import", command=sel_file).place(x=260, y=20, width=50)
+    Button(settingsWin, text="Help", command='help').place(x=40, y=60, width=100)
+    Button(settingsWin, text="Close", command=close).place(x=210, y=60, width=100)
 
 
 def close():
@@ -646,16 +596,20 @@ def mk_files():
 # Start of the actual program
 root = tk.Tk()
 root.geometry('420x100')
-root.title("Automated Commenting")
-# root.configure(bg='#2D2C2C')
-root.wm_attributes("-topmost", 1)
-root.resizable(False, False)
+screen_width, screen_height = 420, 100
+x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
+y_Top = int(root.winfo_screenheight() / 2 - screen_height / 2)
+root.geometry("+{}+{}".format(x_Left, y_Top))
+
+root.title("Automated Commenting"), root.wm_attributes("-topmost", 1), root.resizable(False, False)
 try:
     root.iconbitmap('Resource/IAC-Icon.ico')
 except TclError:
     check_content()
 
 e = datetime.datetime.now()
+
+comments_path = 'Resource/txt/comments.txt'
 
 check_content()
 # check_txt()
