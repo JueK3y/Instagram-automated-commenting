@@ -405,50 +405,22 @@ def dow_driver():
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
     EULA = "https://juek3y.com/src/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
 
-    a = requests.get(gecko, stream=True)
-    b = requests.get(chr87, stream=True)
-    c = requests.get(chr88, stream=True)
-    d = requests.get(EULA, stream=True)
-
-    tsb_a = int(a.headers.get('content-length', 0))
-    block_size = 1024
-    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
+    a = requests.get(gecko)
+    b = requests.get(chr87)
+    c = requests.get(chr88)
+    d = requests.get(EULA)
 
     with open("Resource/driver/geckodriver.zip", 'wb') as gec:
-        for data_gec in a.iter_content(block_size):
-            progress_bar.update(len(data_gec))
-            gec.write(a.content)
-    progress_bar.close()
-
-    tsb_a = int(b.headers.get('content-length', 0))
-    block_size = 1024
-    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
+        gec.write(a.content)
 
     with open("Resource/driver/chromedriver-87.zip", 'wb') as c87:
-        for data_c87 in b.iter_content(block_size):
-            progress_bar.update(len(data_c87))
-            c87.write(b.content)
-    progress_bar.close()
-
-    tsb_a = int(c.headers.get('content-length', 0))
-    block_size = 1024
-    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
+        c87.write(b.content)
 
     with open("Resource/driver/chromedriver-88.zip", 'wb') as c88:
-        for data_c88 in c.iter_content(block_size):
-            progress_bar.update(len(data_c88))
-            c88.write(c.content)
-    progress_bar.close()
-
-    tsb_a = int(d.headers.get('content-length', 0))
-    block_size = 1024
-    progress_bar = tqdm(total=tsb_a, unit='iB', unit_scale=True)
+        c88.write(c.content)
 
     with open("Resource/txt/EULA.txt", 'wb') as eul:
-        for data_eul in d.iter_content(block_size):
-            progress_bar.update(len(data_eul))
-            eul.write(d.content)
-    progress_bar.close()
+        eul.write(d.content)
     return
 
 
