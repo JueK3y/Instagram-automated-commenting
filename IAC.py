@@ -23,243 +23,38 @@ from selenium import webdriver
 from tkinter import messagebox
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
-    InvalidSessionIdException
-
-root = tk.Tk()
-root.geometry('420x100')
-root.title("Automated Commenting")
-# root.configure(bg='#2D2C2C')
-root.wm_attributes("-topmost", 1)
-root.resizable(False, False)
-
-e = datetime.datetime.now()
+    InvalidSessionIdException, InvalidArgumentException
 
 
-def threading():
+class Colors:
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    BOLD = '\033[1m'
+    ENDC = '\033[0m'
+
+
+def connected():
+    timeout = 10
+    try:
+        requests.get('https://instagram.com', timeout=timeout)
+    except (requests.ConnectionError, requests.Timeout):
+        messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
+        try:
+            web.close()
+            return
+        except NoSuchWindowException:
+            print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
+            return
+        except NameError:
+            print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
+            quit()
+            return
+
+
+def threading_run():
     t1 = Thread(target=run)
     t1.start()
-
-
-def auto_comment():
-    global web
-    if browser_text.get() == 'Internet Explorer':
-        try:
-            web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
-            web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "IE",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
-        except WebDriverException:
-            print(WebDriverException, " for auto_comment()")
-            messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
-            return
-            # messagebox.showerror("Wrong browser", "IE couldn't be found. Please select another browser.")
-
-    elif browser_text.get() == 'Firefox':
-        try:
-            web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
-            web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "Firefox",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
-
-        except WebDriverException:
-            print(WebDriverException, " for auto_comment()")
-            messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser.")
-            return
-
-    elif browser_text.get() == 'Chrome 87':
-        try:
-            chr_opt = webdriver.ChromeOptions()
-            chr_opt.add_argument("--incognito")
-            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
-                                   options=chr_opt)
-            web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "Chrome 87",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
-        except WebDriverException:
-            print(WebDriverException, " for auto_comment()")
-            messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser.")
-            return
-
-    elif browser_text.get() == 'Chrome 88':
-        try:
-            chr_opt = webdriver.ChromeOptions()
-            chr_opt.add_argument("--incognito")
-            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
-                                   options=chr_opt)
-            web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "Chrome 88",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
-        except WebDriverException:
-            print(WebDriverException, " for auto_comment()")
-            messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser.")
-            return
-
-    connected()
-
-    web.get(url_text.get())
-
-    try:
-        cookies = web.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
-        cookies.click()
-    except NoSuchElementException:
-        print(NoSuchElementException, " for auto_comment()")
-        messagebox.showerror("Wrong link", "The link does not lead (directly) to any Instagram post.")
-        web.close()
-        return
-    except NoSuchWindowException:
-        print(NoSuchWindowException, " for auto_comment()")
-        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        return
-    except InvalidSessionIdException:
-        print(InvalidSessionIdException, " for auto_comment()")
-        quit()
-
-    try:
-        comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                                            '1]/span[2]/button')
-        comment.click()
-    except NoSuchElementException:
-        print(NoSuchElementException, " for auto_comment()")
-        messagebox.showerror("Error", "Something went wrong. Does the link lead to a picture?")
-        web.close()
-        return
-    except NoSuchWindowException:
-        print(NoSuchWindowException, " for auto_comment()")
-        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        return
-    except InvalidSessionIdException:
-        print(InvalidSessionIdException, " for auto_comment()")
-        quit()
-
-    try:
-        alias = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[1]/div/label/input')
-        alias.send_keys(username_text.get())
-
-        pw = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[2]/div/label/input')
-        pw.send_keys(password_text.get())
-
-        connected()
-
-        login = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[3]/button')
-        login.click()
-
-        time.sleep(5)
-
-    except NoSuchWindowException:
-        print(NoSuchWindowException, " for auto_comment()")
-        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        return
-
-    except NoSuchElementException:
-        print(NoSuchElementException, " for auto_comment()")
-        messagebox.showerror("Error", "Something went wrong. Please restart the program.")
-        return
-    except InvalidSessionIdException:
-        print(InvalidSessionIdException, " for auto_comment()")
-        quit()
-
-    try:
-        web.find_element_by_css_selector('#slfErrorAlert')
-        messagebox.showerror("Wrong information", "Your username and / or your password was wrong.")
-        web.close()
-        return
-    except InvalidSessionIdException:
-        print(InvalidSessionIdException, " for auto_comment()")
-        quit()
-    except NoSuchElementException:
-        print(NoSuchElementException, " for auto_comment()")
-        web.find_element_by_css_selector('.sqdOP')
-        svin = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/section/div/button')
-        svin.click()
-
-        time.sleep(10)
-
-        comfi = open('Resource/txt/comments.txt').read().splitlines()
-
-        def comment():
-            # Major error?
-            for line in comfi:
-                hash = line.strip()
-                if not hash.startswith("#"):
-                    print(line.strip())
-
-                    # It doesn't ignore # or ""
-                    # myline = random.choice(comfi)
-                    # print(myline)
-
-                    # Does post a random letter from the sentence.
-                    # myline = random.choice(line.strip())
-                    zeit = random.randint(25, 90)
-                    print(zeit)
-
-                    select = web.find_element_by_xpath(
-                        '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                        '3]/div/form/textarea')
-                    select.click()
-
-                    time.sleep(1)
-
-                    text = web.find_element_by_css_selector('.Ypffh')
-                    # text.send_keys(myline)
-                    text.send_keys(line.strip())
-
-                    connected()
-
-                    text.send_keys(Keys.ENTER)
-
-                    time.sleep(zeit)
-
-        comment()
-        comment()
-        comment()
-
-    except NoSuchWindowException:
-        print(NoSuchWindowException, " for auto_comment()")
-        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        return
-
-
-def check_comment():
-    global web
-    connected()
-
-    with open('Resource/JSON/firstRun.json', 'r') as runfil:
-        run__data = runfil.read()
-    run__obj = json.loads(run__data)
-
-    if str(run__obj['First Run?']) == "Yes":
-        first__run = {
-            'First Run?': "No",
-            'Agree to EULA?': "Yes"
-        }
-        with open('Resource/JSON/firstRun.json', 'w') as runfil:
-            json.dump(first__run, runfil)
-        runfil.close()
-        print("True")
-        auto_comment()
-    else:
-        print("False")
-        auto_comment()
 
 
 def run():
@@ -270,10 +65,11 @@ def run():
         messagebox.showerror("Incorrect password", "Your password can't be that short.")
     elif len(str(e1.get())) < 11:
         messagebox.showerror("Wrong link", "The link have to lead to an instagram post.")
-    elif not f_comment.exists():
+    elif not pathlib.Path("Resource/txt/comments.txt").exists():
         comment = tk.messagebox.askyesno('No comments',
-                                         "You don't have any sentences to comment on Instagram. Do you "
-                                         "want to create some now?", icon='warning')
+                                         "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
+                                                                                                          "want to create some now?",
+                                         icon='warning')
         if comment:
             comment_txt = open("Resource/txt/comments.txt", "a")
             comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
@@ -310,18 +106,335 @@ def run():
             check_comment()
             return
         except NameError:
-            print(NameError, " for run()")
+            print(Colors.WARNING, NameError, "for run()", Colors.ENDC)
             check_comment()
             return
         except InvalidSessionIdException:
-            print(InvalidSessionIdException, " for run()")
+            print(Colors.WARNING, InvalidSessionIdException, "for run()", Colors.ENDC)
             check_comment()
             return
         """
 
 
+def check_comment():
+    global web
+    connected()
+
+    with open('Resource/JSON/firstRun.json', 'r') as runfil:
+        run__data = runfil.read()
+    run__obj = json.loads(run__data)
+
+    if str(run__obj['First Run?']) == "Yes":
+        first__run = {
+            'First Run?': "No",
+            'Agree to EULA?': "Yes"
+        }
+        with open('Resource/JSON/firstRun.json', 'w') as runfil:
+            json.dump(first__run, runfil)
+        runfil.close()
+        print(Colors.BOLD, "First Run", Colors.ENDC)
+        auto_comment()
+    else:
+        print(Colors.BOLD, "Another round", Colors.ENDC)
+        auto_comment()
+
+
+def auto_comment():
+    global web
+    if browser_text.get() == 'Internet Explorer':
+        try:
+            web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "IE",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
+            return
+            # messagebox.showerror("Wrong browser", "IE couldn't be found. Please select another browser.")
+
+    elif browser_text.get() == 'Firefox':
+        try:
+            web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Firefox",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser." + '\n' +
+                                 "It is also possible that Firefox was closed accidentally.")
+            return
+
+    elif browser_text.get() == 'Chrome 87':
+        try:
+            chr_opt = webdriver.ChromeOptions()
+            chr_opt.add_argument("--incognito")
+            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
+                                   options=chr_opt)
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Chrome 87",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser." + '\n' +
+                                 "It is also possible that Chrome was closed accidentally.")
+            return
+
+    elif browser_text.get() == 'Chrome 88':
+        try:
+            chr_opt = webdriver.ChromeOptions()
+            chr_opt.add_argument("--incognito")
+            web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
+                                   options=chr_opt)
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Chrome 88",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
+                                 "It is also possible that Chrome was closed accidentally.")
+            return
+
+    connected()
+
+    try:
+        web.get(url_text.get())
+    except InvalidArgumentException:
+        print(Colors.WARNING, InvalidArgumentException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("No valid URL", "The URL provided is not a real link." + '\n' + "Please copy the URL "
+                                                                                             "from the post you want "
+                                                                                             "to comment.")
+        web.close()
+        return
+    except WebDriverException:
+        print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        return
+    try:
+        cookies = web.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
+        cookies.click()
+    except NoSuchElementException:
+        print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Wrong link", "The link does not lead (directly) to any Instagram post.")
+        web.close()
+        return
+    except NoSuchWindowException or WebDriverException:
+        print(Colors.WARNING, NoSuchWindowException, "or", WebDriverException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        return
+    except InvalidSessionIdException:
+        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+        quit()
+
+    try:
+        comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
+                                            '1]/span[2]/button')
+        comment.click()
+    except NoSuchElementException:
+        print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Error", "Something went wrong. Does the link lead to a picture?")
+        web.close()
+        return
+    except NoSuchWindowException:
+        print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        return
+    except InvalidSessionIdException:
+        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+        quit()
+
+    try:
+        alias = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[1]/div/label/input')
+        alias.send_keys(username_text.get())
+
+        pw = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[2]/div/label/input')
+        pw.send_keys(password_text.get())
+
+        connected()
+
+        login = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[3]/button')
+        login.click()
+
+        time.sleep(5)
+
+    except NoSuchWindowException:
+        print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        return
+
+    except NoSuchElementException:
+        print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Error", "Something went wrong. Please restart the program.")
+        return
+    except InvalidSessionIdException:
+        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+        quit()
+
+    try:
+        web.find_element_by_css_selector('#slfErrorAlert')
+        messagebox.showerror("Wrong information", "Your username and / or your password was wrong.")
+        web.close()
+        return
+    except InvalidSessionIdException:
+        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+        quit()
+    except NoSuchElementException:
+        print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
+        web.find_element_by_css_selector('.sqdOP')
+        svin = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/section/div/button')
+        svin.click()
+
+        time.sleep(10)
+
+        comfi = open('Resource/txt/comments.txt').read().splitlines()
+
+        def comment():
+            # Major error?
+            for line in comfi:
+                t = line.strip()
+                if not t.startswith("#"):
+                    print(Colors.BOLD, line.strip(), Colors.ENDC)
+
+                    # It doesn't ignore # or ""
+                    # myline = random.choice(comfi)
+                    # print(myline)
+
+                    # Does post a random letter from the sentence.
+                    # myline = random.choice(line.strip())
+                    zeit = random.randint(25, 90)
+                    print(Colors.BOLD, zeit, Colors.ENDC)
+
+                    select = web.find_element_by_xpath(
+                        '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
+                        '3]/div/form/textarea')
+                    select.click()
+
+                    time.sleep(1)
+
+                    text = web.find_element_by_css_selector('.Ypffh')
+                    # text.send_keys(myline)
+                    text.send_keys(line.strip())
+
+                    connected()
+
+                    text.send_keys(Keys.ENTER)
+
+                    time.sleep(zeit)
+
+        comment()
+        comment()
+        comment()
+
+    except NoSuchWindowException:
+        print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        return
+
+
+def threading_settings():
+    t1 = Thread(target=settings)
+    t1.start()
+
+
 def settings():
-    messagebox.showerror("Not available", "Settings are currently not available.")
+    # messagebox.showerror("Not available", "Settings are currently not available.")
+    # Label
+    li = Label(root, text="Post URL")
+    li.grid(row=0, column=0)
+    li = Label(root, text="Username")
+    li.grid(row=0, column=2)
+    li = Label(root, text="Browser")
+    li.grid(row=1, column=0)
+    li = Label(root, text="Password")
+    li.grid(row=1, column=2)
+
+    # Read URL file
+    with open('Resource/JSON/URLhistory.json', 'r') as URLFi:
+        data = URLFi.read()
+
+    obj = json.loads(data)
+
+    # Input
+    url_text = StringVar()
+    e1 = Entry(root, textvariable=url_text)
+    e1.insert(0, str(obj['Last URL']))
+    e1.grid(row=0, column=1)
+
+    # Dropdown Menu
+    OptionList = [
+        "Firefox",
+        "Chrome 87",
+        "Chrome 88"
+    ]
+    browser_text = StringVar()
+    browser_text.set(OptionList[0])
+    e3 = tk.OptionMenu(root, browser_text, *OptionList)
+    e3.config(width=12, font=('Helvetica', 9))
+    e3.grid(row=1, column=1)
+
+    # Read LogIn file
+    with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
+        data = LgInFi.read()
+
+    obj = json.loads(data)
+
+    username_text = StringVar()
+    e2 = Entry(root, textvariable=username_text)
+    e2.insert(0, str(obj['Username']))
+    e2.grid(row=0, column=3)
+
+    password_text = StringVar()
+    e4 = Entry(root, textvariable=password_text)
+    e4.insert(0, str(obj['Password']))
+    e4.grid(row=1, column=3)
+
+    # Button hover
+    def on_enter(d):
+        d.widget['background'] = '#BABABA'  # #484644
+
+    def on_leave(d):
+        d.widget['background'] = 'SystemButtonFace'
+
+    # Buttons
+    var = IntVar()
+    bp = Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
+    bp.grid(row=1, column=4)
+
+    b1 = Button(root, text="Run", width=12, command=threading_run)
+    b1.grid(row=2, column=1)
+    b1.bind("<Enter>", on_enter)
+    b1.bind("<Leave>", on_leave)
+
+    b2 = Button(root, text="Settings", width=12, command=threading_settings)
+    b2.grid(row=2, column=2)
+    b2.bind("<Enter>", on_enter)
+    b2.bind("<Leave>", on_leave)
+
+    b3 = Button(root, text="Exit", width=12, command=close)
+    b3.grid(row=2, column=3, pady=(10, 10))
+    b3.bind("<Enter>", on_enter)
+    b3.bind("<Leave>", on_leave)
 
 
 def close():
@@ -332,41 +445,81 @@ def close():
         try:
             web.close()
         except NameError:
-            print(NameError, " for close()")
+            print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
             quit()
         except InvalidSessionIdException:
-            print(InvalidSessionIdException, " for close()")
+            print(Colors.WARNING, InvalidSessionIdException, "for close()", Colors.ENDC)
+            quit()
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
             quit()
     else:
         return
 
 
-# Check for internet connection
-def connected():
-    timeout = 10
-    try:
-        requests.get('https://instagram.com', timeout=timeout)
-    except (requests.ConnectionError, requests.Timeout):
-        messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
-        try:
-            web.close()
-            return
-        except NoSuchWindowException:
-            print(NoSuchWindowException, " for connected()")
-            return
-        except NameError:
-            print(NoSuchWindowException, " for connected()")
+def check_content():
+    d_Resource = pathlib.Path("Resource")
+    f_icon = pathlib.Path("Resource/IAC-Icon.ico")
+    d_txt = pathlib.Path("Resource/txt")
+    f_eula = pathlib.Path("Resource/txt/EULA.txt")
+    d_driver = pathlib.Path("Resource/driver")
+    f_gecko = pathlib.Path("Resource/driver/geckodriver.exe")
+    f_chrome_87 = pathlib.Path("Resource/driver/chromedriver_87.exe")
+    f_chrome_88 = pathlib.Path("Resource/driver/chromedriver_88.exe")
+    d_JSON = pathlib.Path("Resource/JSON")
+    f_browser = pathlib.Path("Resource/JSON/Browser.json")
+    f_login = pathlib.Path("Resource/JSON/LogIn.json")
+    f_url = pathlib.Path("Resource/JSON/URLhistory.json")
+    f_run = pathlib.Path("Resource/JSON/firstRun.json")
+
+    if d_Resource.exists():
+        if d_driver.exists() & d_JSON.exists() & d_txt.exists():
+            if f_browser.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_gecko.exists() & \
+                    f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
+            else:
+                root.update()
+                msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take "
+                                                                   "some time.")
+                if msg_box:
+                    print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                    # Delete old folders
+                    shutil.rmtree("Resource")
+                    mk_folder()
+                    dow_driver()
+                    exe_driver()
+                    mk_files()
+                else:
+                    print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                    quit()
+        else:
+            root.update()
+            msg_box = messagebox.askokcancel("Creating files",
+                                             "Some files are being downloaded. This will take some time.")
+            if msg_box:
+                print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                # Delete old folders
+                shutil.rmtree("Resource")
+                mk_folder()
+                dow_driver()
+                exe_driver()
+                mk_files()
+            else:
+                print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                quit()
+    else:
+        root.update()
+        msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
+        if msg_box:
+            print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+            # Delete old folders
+            mk_folder()
+            dow_driver()
+            exe_driver()
+            mk_files()
+        else:
+            print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
             quit()
-            return
-
-
-# Button hover
-def on_enter(d):
-    d.widget['background'] = '#BABABA'  # #484644
-
-
-def on_leave(d):
-    d.widget['background'] = 'SystemButtonFace'
 
 
 # Make folder
@@ -490,50 +643,21 @@ def mk_files():
     return
 
 
-d_Resource = pathlib.Path("Resource")
-d_txt = pathlib.Path("Resource/txt")
-f_comment = pathlib.Path("Resource/txt/comments.txt")
-d_driver = pathlib.Path("Resource/driver")
-f_gecko = pathlib.Path("Resource/driver/geckodriver.exe")
-f_chrome_87 = pathlib.Path("Resource/driver/chromedriver_87.exe")
-f_chrome_88 = pathlib.Path("Resource/driver/chromedriver_88.exe")
-d_JSON = pathlib.Path("Resource/JSON")
-f_browser = pathlib.Path("Resource/JSON/Browser.json")
-f_login = pathlib.Path("Resource/JSON/LogIn.json")
-f_url = pathlib.Path("Resource/JSON/URLhistory.json")
-f_run = pathlib.Path("Resource/JSON/firstRun.json")
+# Start of the actual program
+root = tk.Tk()
+root.geometry('420x100')
+root.title("Automated Commenting")
+# root.configure(bg='#2D2C2C')
+root.wm_attributes("-topmost", 1)
+root.resizable(False, False)
+try:
+    root.iconbitmap('Resource/IAC-Icon.ico')
+except TclError:
+    check_content()
 
-if d_Resource.exists():
-    if d_driver.exists() & d_JSON.exists() & d_txt.exists():
-        if f_browser.exists() & f_login.exists() & f_url.exists() & f_run.exists() & f_gecko.exists() & \
-                f_chrome_87.exists() & f_chrome_88.exists():
-            print("All files are downloaded")
-        else:
-            root.update()
-            messagebox.askokcancel("Creating files ", "Some files are being downloaded. This will take some time.")
-            # Delete old folders
-            shutil.rmtree("Resource")
-            mk_folder()
-            dow_driver()
-            exe_driver()
-            mk_files()
-    else:
-        root.update()
-        messagebox.askokcancel("Creating files 1", "Some files are being downloaded. This may take a while.")
-        # Delete old folders
-        shutil.rmtree("Resource")
-        mk_folder()
-        dow_driver()
-        exe_driver()
-        mk_files()
-else:
-    root.update()
-    messagebox.askokcancel("Creating files 2", "Some files are being downloaded. This may take a while.")
-    mk_folder()
-    dow_driver()
-    exe_driver()
-    mk_files()
+e = datetime.datetime.now()
 
+check_content()
 # check_txt()
 
 disagree = False
@@ -549,8 +673,10 @@ run_obj = json.loads(run_data)
 root.update()
 
 if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
-    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?")
+    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
+                                  "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
     if eula:
+        print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
         first_run = {
             'First Run?': "Yes",
             'Agree to EULA?': "Yes"
@@ -564,10 +690,13 @@ if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No
         file.close()
 
     else:
+        print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
         quit()
 elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Yes":
-    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?")
+    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
+                                  "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
     if eula:
+        print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
         first_run = {
             'First Run?': "No",
             'Agree to EULA?': "Yes"
@@ -580,11 +709,14 @@ elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Y
                        ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
         file.close()
     else:
+        print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
         quit()
 
 elif disagree:
-    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?")
+    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
+                                  "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
     if eula:
+        print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
         first_run = {
             'First Run?': "No",
             'Agree to EULA?': "Yes"
@@ -604,10 +736,11 @@ elif disagree:
             file_object.close()
 
     else:
+        print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
         quit()
 
-messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only. "
-                                                   "Please use it accordingly!")
+messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only." + '\n' +
+                       "Please use it accordingly!")
 
 # Label
 li = Label(root, text="Post URL")
@@ -667,17 +800,26 @@ def password():
         e4.configure(show="*")
 
 
+# Button hover
+def on_enter(d):
+    d.widget['background'] = '#BABABA'  # #484644
+
+
+def on_leave(d):
+    d.widget['background'] = 'SystemButtonFace'
+
+
 # Buttons
 var = IntVar()
 bp = Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
 bp.grid(row=1, column=4)
 
-b1 = Button(root, text="Run", width=12, command=threading)
+b1 = Button(root, text="Run", width=12, command=threading_run)
 b1.grid(row=2, column=1)
 b1.bind("<Enter>", on_enter)
 b1.bind("<Leave>", on_leave)
 
-b2 = Button(root, text="Settings", width=12, command=settings)
+b2 = Button(root, text="Settings", width=12, command=threading_settings)
 b2.grid(row=2, column=2)
 b2.bind("<Enter>", on_enter)
 b2.bind("<Leave>", on_leave)
