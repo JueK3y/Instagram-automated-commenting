@@ -17,7 +17,6 @@ import requests
 import tkinter as tk
 
 from tkinter import *
-from tqdm import tqdm
 from threading import *
 from zipfile import ZipFile
 from selenium import webdriver
@@ -403,12 +402,14 @@ def dow_driver():
     gecko = "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-win64.zip"
     chr87 = "https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_win32.zip"
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
-    EULA = "https://juek3y.com/src/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
+    EULA = "https://juek3y.com/src/download/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
+    icon = "https://juek3y.com/src/download/img/IAC-Icon-Ver.-2.ico"
 
     a = requests.get(gecko)
     b = requests.get(chr87)
     c = requests.get(chr88)
     d = requests.get(EULA)
+    g = requests.get(icon)
 
     with open("Resource/driver/geckodriver.zip", 'wb') as gec:
         gec.write(a.content)
@@ -421,6 +422,10 @@ def dow_driver():
 
     with open("Resource/txt/EULA.txt", 'wb') as eul:
         eul.write(d.content)
+
+    with open("Resource/IAC-Icon.ico", "wb") as ico:
+        ico.write(g.content)
+    root.iconbitmap('Resource/IAC-Icon.ico')
     return
 
 
