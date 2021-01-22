@@ -13,16 +13,16 @@ import random
 import os.path
 import pathlib
 import datetime
-from tkinter.filedialog import askopenfilename
-
 import requests
 import tkinter as tk
+import subprocess as sp
 
 from tkinter import *
 from threading import *
 from zipfile import ZipFile
 from selenium import webdriver
 from tkinter import messagebox
+from tkinter.filedialog import askopenfilename
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
     InvalidSessionIdException, InvalidArgumentException
@@ -70,9 +70,14 @@ def run():
     elif not pathlib.Path(comments_path).exists():
         comment = tk.messagebox.askyesno('No comments',
                                          "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
-                                                                                                          "want to create some now?",
+                                                                                                          "want to "
+                                                                                                          "create "
+                                                                                                          "some now?",
                                          icon='warning')
-        if comment:
+        if comment and pathlib.Path("Resource/txt/comments.txt").exists():
+            os.system("notepad Resource/txt/comments.txt")
+            return
+        elif comment:
             comment_txt = open("Resource/txt/comments.txt", "a")
             comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
             comment_txt.close()
@@ -233,6 +238,11 @@ def auto_comment():
         print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         return
+    except RuntimeError:
+        print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Runtime error", "IAC was closed.", icon='warning')
+        web.close()
+        return
     try:
         cookies = web.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
         cookies.click()
@@ -279,12 +289,10 @@ def auto_comment():
         login.click()
 
         time.sleep(5)
-
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         return
-
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Error", "Something went wrong. Please restart the program.")
@@ -301,6 +309,10 @@ def auto_comment():
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         quit()
+    except NoSuchWindowException:
+        print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
+        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        return
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         web.find_element_by_css_selector('.sqdOP')
@@ -309,7 +321,13 @@ def auto_comment():
 
         time.sleep(10)
 
-        comfi = open('Resource/txt/comments.txt').read().splitlines()
+        # Read LogIn file
+        with open('Resource/JSON/settings.json', 'r') as setfil:
+            data_set = setfil.read()
+        obj_set = json.loads(data_set)
+
+        comfi = open(str(obj_set['commentsPath'])).read().splitlines()
+        print(comments_path)
 
         def comment():
             # Major error?
@@ -317,6 +335,7 @@ def auto_comment():
                 t = line.strip()
                 if not t.startswith("#"):
                     print(Colors.BOLD, line.strip(), Colors.ENDC)
+                    print(comments_path)
 
                     # It doesn't ignore # or ""
                     # myline = random.choice(comfi)
@@ -327,31 +346,26 @@ def auto_comment():
                     zeit = random.randint(25, 90)
                     print(Colors.BOLD, zeit, Colors.ENDC)
 
-                    select = web.find_element_by_xpath(
-                        '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                        '3]/div/form/textarea')
-                    select.click()
-
-                    time.sleep(1)
-
-                    text = web.find_element_by_css_selector('.Ypffh')
-                    # text.send_keys(myline)
-                    text.send_keys(line.strip())
-
-                    connected()
-
-                    text.send_keys(Keys.ENTER)
-
-                    time.sleep(zeit)
+                    try:
+                        select = web.find_element_by_xpath(
+                            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
+                            '3]/div/form/textarea')
+                        select.click()
+                        time.sleep(1)
+                        text = web.find_element_by_css_selector('.Ypffh')
+                        # text.send_keys(myline)
+                        text.send_keys(line.strip())
+                        connected()
+                        text.send_keys(Keys.ENTER)
+                        time.sleep(zeit)
+                    except InvalidSessionIdException:
+                        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+                        # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+                        quit()
 
         comment()
         comment()
         comment()
-
-    except NoSuchWindowException:
-        print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
-        messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        return
 
 
 def threading_settings():
@@ -369,22 +383,90 @@ def settings():
     except TclError:
         check_content()
 
+    with open('Resource/JSON/settings.json', 'r') as setfil:
+        data_s = setfil.read()
+    obj_s = json.loads(data_s)
 
-    def sel_file():
-        filename = askopenfilename(filetypes=(("*.txt", "*.txt"), ("All Files", "*.*")))
-        comments_path = filename
-        print(filename)
+    if str(obj_s['lightMode']) == "yes":
+        settingsWin.configure(bg='#fff')
+
+    elif str(obj_s['darkMode']) == "yes":
+        settingsWin.configure(bg='#000')
+
+    def add_com():
+        if not pathlib.Path(comments_path).exists():
+            comment = tk.messagebox.askyesno('No comments',
+                                             "You don't have any comments to edit." + '\n' + "Do you want to create "
+                                                                                             "some now?",
+                                             icon='info')
+            if comment:
+                comment_txt = open("Resource/txt/comments.txt", "a")
+                comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
+                                  "ignored.")
+                comment_txt.close()
+
+                # Read LogIn file
+                with open('Resource/JSON/settings.json', 'r') as setfile:
+                    data_set = setfile.read()
+                obj_set = json.loads(data_set)
+
+                programName = "notepad.exe"
+                fileName = str(obj_set['commentsPath'])
+                sp.Popen([programName, fileName])
+                print(str(obj_set['commentsPath']))
+
+                settingsWin.update()
+                root.update()
+                return
+        else:
+            # Read LogIn file
+            with open('Resource/JSON/settings.json', 'r') as setfile:
+                data_set = setfile.read()
+            obj_set = json.loads(data_set)
+
+            programName = "notepad.exe"
+            fileName = str(obj_set['commentsPath'])
+            sp.Popen([programName, fileName])
+            print(str(obj_set['commentsPath']))
+
+            settingsWin.update()
+            root.update()
+            return
+
+    def sel_com():
+        comments_path = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
+        print(comments_path)
+
+        sett = {
+            'commentsPath': comments_path,
+            'lightMode': "yes",
+            'darkMde': "no"
+        }
+        with open('Resource/JSON/settings.json', 'w') as setfile:
+            json.dump(sett, setfile)
+
+        if comments_path:
+            messagebox.showinfo("Success", "Your .txt file has been added to the comments.")
+
+    def s_help():
+        messagebox.showwarning("In progress", "This feature is currently not available")
+
+    def back():
+        settingsWin.destroy()
 
     # Content
     Label(settingsWin, text="Appearance").place(x=60)
-    Button(settingsWin, text="Light", command='light').place(x=40, y=20, width=50)
-    Button(settingsWin, text="Dark", command='dark').place(x=90, y=20, width=50)
+    sw_appearance = tk.StringVar(value="Light")
+    Radiobutton(settingsWin, text="Light", variable=sw_appearance, indicatoron=False, value="Light", command='').\
+        place(x=40, y=20, width=50)
+    Radiobutton(settingsWin, text="Dark", variable=sw_appearance, indicatoron=False, value="Dark", command=s_help).place\
+        (x=90, y=20, width=50)
 
     Label(settingsWin, text="Comments").place(x=230)
-    Button(settingsWin, text="Add", command='comments').place(x=210, y=20, width=50)
-    Button(settingsWin, text="Import", command=sel_file).place(x=260, y=20, width=50)
-    Button(settingsWin, text="Help", command='help').place(x=40, y=60, width=100)
-    Button(settingsWin, text="Close", command=close).place(x=210, y=60, width=100)
+    Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
+    Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=50)
+    Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=100)
+    Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=100)
 
 
 def close():
@@ -421,11 +503,12 @@ def check_content():
     f_login = pathlib.Path("Resource/JSON/LogIn.json")
     f_url = pathlib.Path("Resource/JSON/URLhistory.json")
     f_run = pathlib.Path("Resource/JSON/firstRun.json")
+    f_set = pathlib.Path("Resource/JSON/settings.json")
 
     if d_Resource.exists():
         if d_driver.exists() & d_JSON.exists() & d_txt.exists():
-            if f_browser.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_gecko.exists() & \
-                    f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+            if f_browser.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
+                    f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
                 print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
             else:
                 root.update()
@@ -590,6 +673,15 @@ def mk_files():
     }
     with open('Resource/JSON/firstRun.json', 'w') as runfil:
         json.dump(first__run, runfil)
+
+    # Generating Settings.json
+    sett = {
+        'commentsPath': "Resource/txt/comments.txt",
+        'lightMode': "yes",
+        'darkMde': "no"
+    }
+    with open('Resource/JSON/settings.json', 'w') as setfil:
+        json.dump(sett, setfil)
     return
 
 
@@ -600,19 +692,39 @@ screen_width, screen_height = 420, 100
 x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
 y_Top = int(root.winfo_screenheight() / 2 - screen_height / 2)
 root.geometry("+{}+{}".format(x_Left, y_Top))
-
 root.title("Automated Commenting"), root.wm_attributes("-topmost", 1), root.resizable(False, False)
 try:
     root.iconbitmap('Resource/IAC-Icon.ico')
 except TclError:
     check_content()
 
+check_content()
+
+with open('Resource/JSON/settings.json', 'r') as setfi:
+    data = setfi.read()
+obj = json.loads(data)
+
+if str(obj['lightMode']) == "yes":
+    light = str(obj['lightMode'])
+    root.configure(bg='#fff')
+    print(Colors.OKGREEN, "Using Light Mode", Colors.ENDC)
+
+elif str(obj['darkMode']) == "yes":
+    dark = str(obj['darkMode'])
+    root.configure(bg='#000')
+    print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
+
 e = datetime.datetime.now()
 
-comments_path = 'Resource/txt/comments.txt'
-
-check_content()
 # check_txt()
+
+# Read Browser.json
+with open('Resource/JSON/settings.json', 'r') as setfi:
+    data = setfi.read()
+
+obj = json.loads(data)
+
+comments_path = str(obj['commentsPath'])
 
 disagree = False
 
@@ -756,7 +868,12 @@ def password():
 
 # Button hover
 def on_enter(d):
-    d.widget['background'] = '#BABABA'  # #484644
+    try:
+        if light:
+            d.widget['background'] = '#E5F1FB'  # #484644
+    except NameError:
+        if dark:
+            d.widget['background'] = '#484644'
 
 
 def on_leave(d):
