@@ -6,7 +6,7 @@ This is a Pyton program that automatically comments on Instagram.
 You need Chrome (Ver. 87 or 88), Firefox or Internet Explorer, the URL of the post and the access data of an Instagram account for the programme to work.
 
 The program was tested on Windows 10 x64 with Python 3.9. It may not work on other systems.
-If this is the case, please create an ![Issue](https://github.com/JueK3y/Instagram-automated-commenting/issues) and describe your problem there.
+If this is the case, please create an [Issue](https://github.com/JueK3y/Instagram-automated-commenting/issues) and describe your problem there.
 
 ###### The program does not work with the Instagram API.
 
