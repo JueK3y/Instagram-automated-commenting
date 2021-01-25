@@ -44,6 +44,8 @@ def connected():
         messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
         try:
             web.close()
+            b1_text.set("Run")
+            b1["command"] = threading_run
             return
         except NoSuchWindowException:
             print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
@@ -105,23 +107,6 @@ def run():
 
         check_comment()
 
-        # Close the old window and starts a new one.
-        # Does the user wants this?
-        """
-        try:
-            web.close()
-            check_comment()
-            return
-        except NameError:
-            print(Colors.WARNING, NameError, "for run()", Colors.ENDC)
-            check_comment()
-            return
-        except InvalidSessionIdException:
-            print(Colors.WARNING, InvalidSessionIdException, "for run()", Colors.ENDC)
-            check_comment()
-            return
-        """
-
 
 def check_comment():
     global web
@@ -148,6 +133,10 @@ def check_comment():
 
 def auto_comment():
     global web
+
+    b1_text.set("Stop")
+    b1["command"] = stop
+
     if browser_text.get() == 'Internet Explorer':
         try:
             web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
@@ -233,6 +222,8 @@ def auto_comment():
                                                                                              "from the post you want "
                                                                                              "to comment.")
         web.close()
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except WebDriverException:
         print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
@@ -242,6 +233,8 @@ def auto_comment():
         print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Runtime error", "IAC was closed.", icon='warning')
         web.close()
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     try:
         cookies = web.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
@@ -250,6 +243,8 @@ def auto_comment():
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Wrong link", "The link does not lead (directly) to any Instagram post.")
         web.close()
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except NoSuchWindowException or WebDriverException:
         print(Colors.WARNING, NoSuchWindowException, "or", WebDriverException, "for auto_comment()", Colors.ENDC)
@@ -267,6 +262,8 @@ def auto_comment():
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Error", "Something went wrong. Does the link lead to a picture?")
         web.close()
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
@@ -305,6 +302,8 @@ def auto_comment():
         web.find_element_by_css_selector('#slfErrorAlert')
         messagebox.showerror("Wrong information", "Your username and / or your password was wrong.")
         web.close()
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
@@ -476,6 +475,8 @@ def close():
         root.destroy()
         try:
             web.close()
+            b1_text.set("Run")
+            b1["command"] = threading_run
         except NameError:
             print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
             quit()
@@ -485,6 +486,27 @@ def close():
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
             quit()
+    else:
+        return
+
+
+def stop():
+    msg_box = tk.messagebox.askquestion('Stop Commenting', 'Are you sure you want to stop commenting?',
+                                        icon='warning')
+    if msg_box == 'yes':
+        try:
+            web.close()
+            b1_text.set("Run")
+            b1["command"] = threading_run
+        except NameError:
+            print(Colors.WARNING, NameError, "for stop()", Colors.ENDC)
+            return
+        except InvalidSessionIdException:
+            print(Colors.WARNING, InvalidSessionIdException, "for stop()", Colors.ENDC)
+            return
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for stop()", Colors.ENDC)
+            return
     else:
         return
 
@@ -885,7 +907,9 @@ var = IntVar()
 bp = Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
 bp.grid(row=1, column=4)
 
-b1 = Button(root, text="Run", width=12, command=threading_run)
+b1_text = tk.StringVar()
+b1 = Button(root, textvariable=b1_text, width=12, command=threading_run)
+b1_text.set("Run")
 b1.grid(row=2, column=1)
 b1.bind("<Enter>", on_enter)
 b1.bind("<Leave>", on_leave)
