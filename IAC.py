@@ -21,7 +21,8 @@ from tkinter import *
 from threading import *
 from zipfile import ZipFile
 from selenium import webdriver
-from tkinter import messagebox
+from tkinter import messagebox, ttk
+from ttkthemes import ThemedTk
 from tkinter.filedialog import askopenfilename
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
@@ -373,7 +374,6 @@ def threading_settings():
 
 
 def settings():
-    # Tkinter Stuff
     settingsWin = Toplevel(root)
     settingsWin.title("Settings | Automated Commenting")
     settingsWin.geometry('350x100'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
@@ -382,51 +382,127 @@ def settings():
     except TclError:
         check_content()
 
-    with open('Resource/JSON/settings.json', 'r') as setfil:
-        data_s = setfil.read()
-    obj_s = json.loads(data_s)
+    with open('Resource/JSON/settings.json', 'r') as setfile:
+        data_set = setfile.read()
+    obj_set = json.loads(data_set)
 
-    if str(obj_s['lightMode']) == "yes":
-        settingsWin.configure(bg='#fff')
+    def app_light():
+        if str(obj_set['lightMode']) == 'no':
+            msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the program "
+                                                                                                       "must be "
+                                                                                                       "restarted.")
+            if msg:
+                obj_set['lightMode'] = 'yes'
+                obj_set['darkMode'] = 'no'
+                print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
+                with open('Resource/JSON/settings.json', 'w') as settfile:
+                    json.dump(obj_set, settfile)
+                settfile.close()
+                close()
 
-    elif str(obj_s['darkMode']) == "yes":
-        settingsWin.configure(bg='#000')
+        elif str(obj_set['lightMode']) == 'yes':
+            msg = messagebox.askyesno("Light Mode", "The light mode has already been activated." + '\n' + "Do you want "
+                                                                                                          "to reapply "
+                                                                                                          "it?")
+            if msg:
+                msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the "
+                                                                                                           "program "
+                                                                                                           "must be "
+                                                                                                           "restarted.")
+                if msg:
+                    obj_set['lightMode'] = 'yes'
+                    obj_set['darkMode'] = 'no'
+                    print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
+                    with open('Resource/JSON/settings.json', 'w') as settfile:
+                        json.dump(obj_set, settfile)
+                    settfile.close()
+                    close()
+            elif not msg:
+                return
+        else:
+            msg = messagebox.askyesno("File corrupted",
+                                      "Hm, the file for the light mode seems to be corrupted." + '\n' +
+                                      "Do you want to download it again?")
+            if msg:
+                shutil.rmtree("Resource/JSON")
+                mk_files()
+
+    def app_dark():
+        if str(obj_set['darkMode']) == 'no':
+            msg = messagebox.askokcancel("Dark Mode",
+                                         "In order to activate the dark mode," + '\n' + "the program must be "
+                                                                                        "restarted.")
+            if msg:
+                obj_set['lightMode'] = 'no'
+                obj_set['darkMode'] = 'yes'
+                print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
+                with open('Resource/JSON/settings.json', 'w') as settfile:
+                    json.dump(obj_set, settfile)
+                settfile.close()
+                close()
+
+        elif str(obj_set['darkMode']) == 'yes':
+            msg = messagebox.askyesno("Dark Mode", "The dark mode has already been activated." + '\n' + "Do you want "
+                                                                                                        "to reapply "
+                                                                                                        "it?")
+            if msg:
+                msg = messagebox.askokcancel("Dark Mode",
+                                             "In order to activate the dark mode," + '\n' + "the program must be "
+                                                                                            "restarted.")
+                if msg:
+                    obj_set['lightMode'] = 'no'
+                    obj_set['darkMode'] = 'yes'
+                    print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
+                    with open('Resource/JSON/settings.json', 'w') as setfile:
+                        json.dump(obj_set, setfile)
+                    setfile.close()
+                    close()
+            elif not msg:
+                return
+        else:
+            msg = messagebox.askyesno("File corrupted", "Hm, the file for the dark mode seems to be corrupted." + '\n' +
+                                      "Do you want to download it again?")
+            if msg:
+                shutil.rmtree("Resource/JSON")
+                mk_files()
 
     def add_com():
-        if not pathlib.Path(comments_path).exists():
-            comment = tk.messagebox.askyesno('No comments',
-                                             "You don't have any comments to edit." + '\n' + "Do you want to create "
-                                                                                             "some now?",
-                                             icon='info')
-            if comment:
-                comment_txt = open("Resource/txt/comments.txt", "a")
-                comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
-                                  "ignored.")
-                comment_txt.close()
+        f_comm = pathlib.Path(comments_path)
+        print('test')
 
-                # Read LogIn file
-                with open('Resource/JSON/settings.json', 'r') as setfile:
-                    data_set = setfile.read()
-                obj_set = json.loads(data_set)
+        if not f_comm.exists() or str(obj_set['commentsPath']) == "":
+            if not pathlib.Path('Resource/txt/comments.txt').exists():
+                comment = tk.messagebox.askyesno('No comments', "You don't have any comments to edit." + '\n' +
+                                                 "Do you want to create some now?", icon='info')
+                if comment:
+                    obj_set['commentsPath'] = 'Resource/txt/comments.txt'
+
+                    comment_txt = open("Resource/txt/comments.txt", "a")
+                    comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
+                                      "ignored.")
+                    comment_txt.close()
+
+                    programName = "notepad.exe"
+                    fileName = str(obj_set['commentsPath'])
+                    sp.Popen([programName, fileName])
+
+                    settingsWin.update()
+                    root.update()
+                    return
+            else:
+                obj_set['commentsPath'] = 'Resource/txt/comments.txt'
 
                 programName = "notepad.exe"
-                fileName = str(obj_set['commentsPath'])
+                fileName = 'Resource/txt/comments.txt'
                 sp.Popen([programName, fileName])
-                print(str(obj_set['commentsPath']))
 
                 settingsWin.update()
                 root.update()
                 return
         else:
-            # Read LogIn file
-            with open('Resource/JSON/settings.json', 'r') as setfile:
-                data_set = setfile.read()
-            obj_set = json.loads(data_set)
-
             programName = "notepad.exe"
             fileName = str(obj_set['commentsPath'])
             sp.Popen([programName, fileName])
-            print(str(obj_set['commentsPath']))
 
             settingsWin.update()
             root.update()
@@ -456,16 +532,16 @@ def settings():
     # Content
     Label(settingsWin, text="Appearance").place(x=60)
     sw_appearance = tk.StringVar(value="Light")
-    Radiobutton(settingsWin, text="Light", variable=sw_appearance, indicatoron=False, value="Light", command='').\
-        place(x=40, y=20, width=50)
-    Radiobutton(settingsWin, text="Dark", variable=sw_appearance, indicatoron=False, value="Dark", command=s_help).place\
-        (x=90, y=20, width=50)
+    Radiobutton(settingsWin, text="Light", variable=sw_appearance, indicatoron=False, value="Light", command=app_light) \
+        .place(x=40, y=20, width=50)
+    Radiobutton(settingsWin, text="Dark", variable=sw_appearance, indicatoron=False, value="Dark", command=app_dark). \
+        place(x=90, y=20, width=50)
 
-    Label(settingsWin, text="Comments").place(x=230)
-    Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
-    Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=50)
-    Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=100)
-    Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=100)
+    ttk.Label(settingsWin, text="Comments").place(x=230)
+    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
+    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=50)
+    ttk.Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=100)
+    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=100)
 
 
 def close():
@@ -528,7 +604,7 @@ def check_content():
     f_set = pathlib.Path("Resource/JSON/settings.json")
 
     if d_Resource.exists():
-        if d_driver.exists() & d_JSON.exists() & d_txt.exists():
+        if d_driver.exists() & d_JSON.exists() & d_txt.exists() & f_set.exists():
             if f_browser.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
                     f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
                 print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
@@ -700,7 +776,7 @@ def mk_files():
     sett = {
         'commentsPath': "Resource/txt/comments.txt",
         'lightMode': "yes",
-        'darkMde': "no"
+        'darkMode': "no"
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
@@ -708,7 +784,39 @@ def mk_files():
 
 
 # Start of the actual program
-root = tk.Tk()
+try:
+    with open('Resource/JSON/settings.json', 'r') as setfi:
+        data = setfi.read()
+    obj = json.loads(data)
+    if str(obj['lightMode']) == "yes":
+        light = str(obj['lightMode'])
+        root = ThemedTk(theme="yaru")
+        root['background'] = '#F5F6F7'
+        print(Colors.OKGREEN, "Using Light Mode", Colors.ENDC)
+    elif str(obj['darkMode']) == "yes":
+        dark = str(obj['darkMode'])
+        root = ThemedTk(theme="equilux")
+        root['background'] = '#464646'
+        print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
+    # elif str(obj['darkMode']) == "yes" and str(obj['lightMode']) == "yes":
+    #    messagebox.showerror("File corrupted", "Hm, the appearance file seems to be corrupted." + '\n' +
+    #                         "For the program to work, the file is reinstalled.")
+    #    shutil.rmtree("Resource/JSON")
+    #    mk_files()
+    # elif str(obj['darkMode']) == "" and str(obj['lightMode']) == "":
+    #    messagebox.showerror("File corrupted", "Hm, the appearance file seems to be corrupted." + '\n' +
+    #                         "For the program to work, the file is reinstalled.")
+    #    shutil.rmtree("Resource/JSON")
+    #    mk_files()
+    else:
+        root = ThemedTk(theme="yaru")
+        root.geometry('420x100'), root.title("Automated Commenting")
+        check_content()
+except FileNotFoundError:
+    root = ThemedTk(theme="yaru")
+    root.geometry('420x100'), root.title("Automated Commenting")
+    check_content()
+
 root.geometry('420x100')
 screen_width, screen_height = 420, 100
 x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
@@ -721,20 +829,6 @@ except TclError:
     check_content()
 
 check_content()
-
-with open('Resource/JSON/settings.json', 'r') as setfi:
-    data = setfi.read()
-obj = json.loads(data)
-
-if str(obj['lightMode']) == "yes":
-    light = str(obj['lightMode'])
-    root.configure(bg='#fff')
-    print(Colors.OKGREEN, "Using Light Mode", Colors.ENDC)
-
-elif str(obj['darkMode']) == "yes":
-    dark = str(obj['darkMode'])
-    root.configure(bg='#000')
-    print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
 
 e = datetime.datetime.now()
 
@@ -831,13 +925,13 @@ messagebox.showwarning("Educational purpose only", "This program was written for
                        "Please use it accordingly!")
 
 # Label
-li = Label(root, text="Post URL")
+li = ttk.Label(root, text="Post URL")
 li.grid(row=0, column=0)
-li = Label(root, text="Username")
+li = ttk.Label(root, text="Username")
 li.grid(row=0, column=2)
-li = Label(root, text="Browser")
+li = ttk.Label(root, text="Browser")
 li.grid(row=1, column=0)
-li = Label(root, text="Password")
+li = ttk.Label(root, text="Password")
 li.grid(row=1, column=2)
 
 # Read URL file
@@ -848,7 +942,7 @@ obj = json.loads(data)
 
 # Input
 url_text = StringVar()
-e1 = Entry(root, textvariable=url_text)
+e1 = ttk.Entry(root, textvariable=url_text)
 e1.insert(0, str(obj['Last URL']))
 e1.grid(row=0, column=1)
 
@@ -871,12 +965,12 @@ with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
 obj = json.loads(data)
 
 username_text = StringVar()
-e2 = Entry(root, textvariable=username_text)
+e2 = ttk.Entry(root, textvariable=username_text)
 e2.insert(0, str(obj['Username']))
 e2.grid(row=0, column=3)
 
 password_text = StringVar()
-e4 = Entry(root, textvariable=password_text, show='*')
+e4 = ttk.Entry(root, textvariable=password_text, show='*')
 e4.insert(0, str(obj['Password']))
 e4.grid(row=1, column=3)
 
@@ -904,24 +998,24 @@ def on_leave(d):
 
 # Buttons
 var = IntVar()
-bp = Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
+bp = ttk.Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
 bp.grid(row=1, column=4)
 
 b1_text = tk.StringVar()
-b1 = Button(root, textvariable=b1_text, width=12, command=threading_run)
+b1 = ttk.Button(root, textvariable=b1_text, width=12, command=threading_run)
 b1_text.set("Run")
 b1.grid(row=2, column=1)
-b1.bind("<Enter>", on_enter)
-b1.bind("<Leave>", on_leave)
+# b1.bind("<Enter>", on_enter)
+# b1.bind("<Leave>", on_leave)
 
-b2 = Button(root, text="Settings", width=12, command=threading_settings)
+b2 = ttk.Button(root, text="Settings", width=12, command=threading_settings)
 b2.grid(row=2, column=2)
-b2.bind("<Enter>", on_enter)
-b2.bind("<Leave>", on_leave)
+# b2.bind("<Enter>", on_enter)
+# b2.bind("<Leave>", on_leave)
 
-b3 = Button(root, text="Exit", width=12, command=close)
+b3 = ttk.Button(root, text="Exit", width=12, command=close)
 b3.grid(row=2, column=3, pady=(10, 10))
-b3.bind("<Enter>", on_enter)
-b3.bind("<Leave>", on_leave)
+# b3.bind("<Enter>", on_enter)
+# b3.bind("<Leave>", on_leave)
 
 root.mainloop()
