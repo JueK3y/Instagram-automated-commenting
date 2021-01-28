@@ -45,8 +45,6 @@ def connected():
         messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
         try:
             web.close()
-            b1_text.set("Run")
-            b1["command"] = threading_run
             return
         except NoSuchWindowException:
             print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
@@ -63,8 +61,7 @@ def threading_run():
 
 
 def run():
-    if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e1.get()) == "None" or \
-            str(e2.get()) == "None" or str(e4.get()) == "None":
+    if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e2.get()) == "None":
         messagebox.showerror("Missing input", "All fields must be filled in.")
     elif len(str(e4.get())) < 6:
         messagebox.showerror("Incorrect password", "Your password can't be that short.")
@@ -386,6 +383,15 @@ def settings():
         data_set = setfile.read()
     obj_set = json.loads(data_set)
 
+    if light:
+        settingsWin['background'] = '#F5F6F7'
+        setfi.close()
+    elif dark:
+        settingsWin['background'] = '#464646'
+        setfi.close()
+    else:
+        print("Uhh, this wasn't supposed happen.")
+
     def app_light():
         if str(obj_set['lightMode']) == 'no':
             msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the program "
@@ -453,9 +459,9 @@ def settings():
                     obj_set['lightMode'] = 'no'
                     obj_set['darkMode'] = 'yes'
                     print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
-                    with open('Resource/JSON/settings.json', 'w') as setfile:
-                        json.dump(obj_set, setfile)
-                    setfile.close()
+                    with open('Resource/JSON/settings.json', 'w') as settfile:
+                        json.dump(obj_set, settfile)
+                    settfile.close()
                     close()
             elif not msg:
                 return
@@ -468,7 +474,6 @@ def settings():
 
     def add_com():
         f_comm = pathlib.Path(comments_path)
-        print('test')
 
         if not f_comm.exists() or str(obj_set['commentsPath']) == "":
             if not pathlib.Path('Resource/txt/comments.txt').exists():
@@ -509,19 +514,15 @@ def settings():
             return
 
     def sel_com():
-        comments_path = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
-        print(comments_path)
+        commentsPath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
 
-        sett = {
-            'commentsPath': comments_path,
-            'lightMode': "yes",
-            'darkMde': "no"
-        }
-        with open('Resource/JSON/settings.json', 'w') as setfile:
-            json.dump(sett, setfile)
-
-        if comments_path:
+        if commentsPath:
             messagebox.showinfo("Success", "Your .txt file has been added to the comments.")
+
+            obj_set['commentsPath'] = commentsPath
+
+            with open('Resource/JSON/settings.json', 'w') as settfile:
+                json.dump(obj_set, settfile)
 
     def s_help():
         messagebox.showwarning("In progress", "This feature is currently not available")
@@ -530,18 +531,21 @@ def settings():
         settingsWin.destroy()
 
     # Content
-    Label(settingsWin, text="Appearance").place(x=60)
-    sw_appearance = tk.StringVar(value="Light")
-    Radiobutton(settingsWin, text="Light", variable=sw_appearance, indicatoron=False, value="Light", command=app_light) \
-        .place(x=40, y=20, width=50)
-    Radiobutton(settingsWin, text="Dark", variable=sw_appearance, indicatoron=False, value="Dark", command=app_dark). \
-        place(x=90, y=20, width=50)
+    ttk.Label(settingsWin, text="Appearance").place(x=65)
+    if light:
+        sw_appearance = tk.StringVar(value='lightMode')
+    else:
+        sw_appearance = tk.StringVar(value='darkMode')
+    ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light)\
+        .place(x=35, y=20, width=70)
+    ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
+        place(x=95, y=20, width=70)
 
-    ttk.Label(settingsWin, text="Comments").place(x=230)
+    ttk.Label(settingsWin, text="Comments").place(x=235)
     ttk.Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
-    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=50)
-    ttk.Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=100)
-    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=100)
+    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=60)
+    ttk.Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=110)
+    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=110)
 
 
 def close():
@@ -689,28 +693,34 @@ def dow_driver():
     EULA = "https://juek3y.com/src/download/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
     icon = "https://juek3y.com/src/download/img/IAC-Icon-Ver.-2.ico"
 
-    a = requests.get(gecko)
-    b = requests.get(chr87)
-    c = requests.get(chr88)
-    d = requests.get(EULA)
-    g = requests.get(icon)
+    try:
+        a = requests.get(gecko)
+        b = requests.get(chr87)
+        c = requests.get(chr88)
+        d = requests.get(EULA)
+        g = requests.get(icon)
 
-    with open("Resource/driver/geckodriver.zip", 'wb') as gec:
-        gec.write(a.content)
+        with open("Resource/driver/geckodriver.zip", 'wb') as gec:
+            gec.write(a.content)
 
-    with open("Resource/driver/chromedriver-87.zip", 'wb') as c87:
-        c87.write(b.content)
+        with open("Resource/driver/chromedriver-87.zip", 'wb') as c87:
+            c87.write(b.content)
 
-    with open("Resource/driver/chromedriver-88.zip", 'wb') as c88:
-        c88.write(c.content)
+        with open("Resource/driver/chromedriver-88.zip", 'wb') as c88:
+            c88.write(c.content)
 
-    with open("Resource/txt/EULA.txt", 'wb') as eul:
-        eul.write(d.content)
+        with open("Resource/txt/EULA.txt", 'wb') as eul:
+            eul.write(d.content)
 
-    with open("Resource/IAC-Icon.ico", "wb") as ico:
-        ico.write(g.content)
-    root.iconbitmap('Resource/IAC-Icon.ico')
-    return
+        with open("Resource/IAC-Icon.ico", "wb") as ico:
+            ico.write(g.content)
+        root.iconbitmap('Resource/IAC-Icon.ico')
+        return
+
+    except requests.exceptions.ConnectionError:
+        print(Colors.FAIL, requests.exceptions.ConnectionError, "for dow_driver()", Colors.ENDC)
+        print(Colors.FAIL, "This is an time-out error! Please restart the program and try it again.", Colors.ENDC)
+        messagebox.showerror("Time out", "Something went wrong when downloading the files. Please restart the program.")
 
 
 def exe_driver():
@@ -744,22 +754,22 @@ def mk_files():
     # Generating Browser.json
     # Currently not used
     brwco = {
-        'Browser': None
+        'Browser': ""
     }
     with open('Resource/JSON/Browser.json', 'w') as BrwFi:
         json.dump(brwco, BrwFi)
 
     # Generating LogIn.json
     login = {
-        'Username': None,
-        'Password': None
+        'Username': "",
+        'Password': ""
     }
     with open('Resource/JSON/LogIn.json', 'w') as lginfi:
         json.dump(login, lginfi)
 
     # Generating URLhistory.json
     safe_url = {
-        'Last URL': None
+        'Last URL': ""
     }
     with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
         json.dump(safe_url, urlfi)
@@ -783,21 +793,73 @@ def mk_files():
     return
 
 
+def check_json():
+    try:
+        with open('Resource/JSON/firstRun.json', 'r') as json_file:
+            data_json = json_file.read()
+        obj_json = json.loads(data_json)
+        str(obj_json['First Run?'])
+        str(obj_json['Agree to EULA?'])
+        json_file.close()
+    except KeyError:
+        shutil.rmtree("Resource/JSON")
+        check_content()
+
+    try:
+        with open('Resource/JSON/LogIn.json', 'r') as json_file:
+            data_json = json_file.read()
+        obj_json = json.loads(data_json)
+        str(obj_json['Username'])
+        str(obj_json['Password'])
+        json_file.close()
+    except KeyError:
+        shutil.rmtree("Resource/JSON")
+        check_content()
+
+    try:
+        with open('Resource/JSON/settings.json', 'r') as json_file:
+            data_json = json_file.read()
+        obj_json = json.loads(data_json)
+        str(obj_json['commentsPath'])
+        str(obj_json['lightMode'])
+        str(obj_json['darkMode'])
+        json_file.close()
+    except KeyError:
+        shutil.rmtree("Resource/JSON")
+        check_content()
+
+    try:
+        with open('Resource/JSON/URLhistory.json', 'r') as json_file:
+            data_json = json_file.read()
+        obj_json = json.loads(data_json)
+        str(obj_json['Last URL'])
+        json_file.close()
+    except KeyError:
+        shutil.rmtree("Resource/JSON")
+        check_content()
+
+
 # Start of the actual program
 try:
     with open('Resource/JSON/settings.json', 'r') as setfi:
         data = setfi.read()
     obj = json.loads(data)
     if str(obj['lightMode']) == "yes":
-        light = str(obj['lightMode'])
-        root = ThemedTk(theme="yaru")
+        light = True
+        dark = False
+        root = ThemedTk(theme="arc")
         root['background'] = '#F5F6F7'
+        screen_width, screen_height = 440, 105
         print(Colors.OKGREEN, "Using Light Mode", Colors.ENDC)
+        setfi.close()
     elif str(obj['darkMode']) == "yes":
-        dark = str(obj['darkMode'])
+        light = False
+        dark = True
         root = ThemedTk(theme="equilux")
         root['background'] = '#464646'
+        screen_width, screen_height = 440, 105
         print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
+        setfi.close()
     # elif str(obj['darkMode']) == "yes" and str(obj['lightMode']) == "yes":
     #    messagebox.showerror("File corrupted", "Hm, the appearance file seems to be corrupted." + '\n' +
     #                         "For the program to work, the file is reinstalled.")
@@ -810,15 +872,28 @@ try:
     #    mk_files()
     else:
         root = ThemedTk(theme="yaru")
-        root.geometry('420x100'), root.title("Automated Commenting")
+        light = True
+        dark = False
+        screen_width, screen_height = 440, 105
+        root.title("Automated Commenting")
         check_content()
 except FileNotFoundError:
-    root = ThemedTk(theme="yaru")
-    root.geometry('420x100'), root.title("Automated Commenting")
+    root = tk.Tk()
+    light = True
+    dark = False
+    screen_width, screen_height = 440, 105
+    root.title("Automated Commenting")
+    check_content()
+except KeyError:
+    root = tk.Tk()
+    light = True
+    dark = False
+    screen_width, screen_height = 440, 105
+    root.title("Automated Commenting")
+    shutil.rmtree("Resource/JSON")
     check_content()
 
-root.geometry('420x100')
-screen_width, screen_height = 420, 100
+root.geometry(str(screen_width) + "x" + str(screen_height))
 x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
 y_Top = int(root.winfo_screenheight() / 2 - screen_height / 2)
 root.geometry("+{}+{}".format(x_Left, y_Top))
@@ -829,15 +904,12 @@ except TclError:
     check_content()
 
 check_content()
+check_json()
 
 e = datetime.datetime.now()
 
-# check_txt()
-
-# Read Browser.json
 with open('Resource/JSON/settings.json', 'r') as setfi:
     data = setfi.read()
-
 obj = json.loads(data)
 
 comments_path = str(obj['commentsPath'])
@@ -853,7 +925,6 @@ with open('Resource/JSON/firstRun.json', 'r') as runfi:
 run_obj = json.loads(run_data)
 
 root.update()
-
 if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
     eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
                                   "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
@@ -922,7 +993,7 @@ elif disagree:
         quit()
 
 messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only." + '\n' +
-                       "Please use it accordingly!")
+                       "Please use it accordingly!" + '\n' + '\n' + "@2020 - 2021 by JueK3y")
 
 # Label
 li = ttk.Label(root, text="Post URL")
@@ -937,7 +1008,6 @@ li.grid(row=1, column=2)
 # Read URL file
 with open('Resource/JSON/URLhistory.json', 'r') as URLFi:
     data = URLFi.read()
-
 obj = json.loads(data)
 
 # Input
@@ -953,10 +1023,7 @@ OptionList = [
     "Chrome 88"
 ]
 browser_text = StringVar()
-browser_text.set(OptionList[0])
-e3 = tk.OptionMenu(root, browser_text, *OptionList)
-e3.config(width=12, font=('Helvetica', 9))
-e3.grid(row=1, column=1)
+e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110) # height=25
 
 # Read LogIn file
 with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
@@ -982,40 +1049,20 @@ def password():
         e4.configure(show="*")
 
 
-# Button hover
-def on_enter(d):
-    try:
-        if light:
-            d.widget['background'] = '#E5F1FB'  # #484644
-    except NameError:
-        if dark:
-            d.widget['background'] = '#484644'
-
-
-def on_leave(d):
-    d.widget['background'] = 'SystemButtonFace'
-
-
 # Buttons
 var = IntVar()
 bp = ttk.Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var)
 bp.grid(row=1, column=4)
 
 b1_text = tk.StringVar()
-b1 = ttk.Button(root, textvariable=b1_text, width=12, command=threading_run)
+b1 = ttk.Button(root, textvariable=b1_text, width=12, command=threading_run) # .place(x=57.5, y=60, width=100) # height=25
 b1_text.set("Run")
-b1.grid(row=2, column=1)
-# b1.bind("<Enter>", on_enter)
-# b1.bind("<Leave>", on_leave)
+b1.grid(row=2, column=1, pady=(15, 10))
 
-b2 = ttk.Button(root, text="Settings", width=12, command=threading_settings)
-b2.grid(row=2, column=2)
-# b2.bind("<Enter>", on_enter)
-# b2.bind("<Leave>", on_leave)
+b2 = ttk.Button(root, text="Settings", width=12, command=threading_settings) # .place(x=170, y=60, width=100) # height=25
+b2.grid(row=2, column=2, pady=(15, 10))
 
 b3 = ttk.Button(root, text="Exit", width=12, command=close)
-b3.grid(row=2, column=3, pady=(10, 10))
-# b3.bind("<Enter>", on_enter)
-# b3.bind("<Leave>", on_leave)
+b3.grid(row=2, column=3, pady=(15, 10))
 
 root.mainloop()
