@@ -524,7 +524,7 @@ def settings():
             with open('Resource/JSON/settings.json', 'w') as settfile:
                 json.dump(obj_set, settfile)
 
-    def s_help():
+    def not_av():
         messagebox.showwarning("In progress", "This feature is currently not available")
 
     def back():
@@ -544,7 +544,8 @@ def settings():
     ttk.Label(settingsWin, text="Comments").place(x=235)
     ttk.Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
     ttk.Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=60)
-    ttk.Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=110)
+    # ttk.Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=110)
+    ttk.Button(settingsWin, text="More Options...", command=not_av).place(x=40, y=60, width=110)
     ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=110)
 
 
