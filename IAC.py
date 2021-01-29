@@ -395,8 +395,7 @@ def settings():
     def app_light():
         if str(obj_set['lightMode']) == 'no':
             msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the program "
-                                                                                                       "must be "
-                                                                                                       "restarted.")
+                                                                                                       "is restarted.")
             if msg:
                 obj_set['lightMode'] = 'yes'
                 obj_set['darkMode'] = 'no'
@@ -404,7 +403,8 @@ def settings():
                 with open('Resource/JSON/settings.json', 'w') as settfile:
                     json.dump(obj_set, settfile)
                 settfile.close()
-                close()
+                settingsWin.destroy()
+                restart()
 
         elif str(obj_set['lightMode']) == 'yes':
             msg = messagebox.askyesno("Light Mode", "The light mode has already been activated." + '\n' + "Do you want "
@@ -413,7 +413,7 @@ def settings():
             if msg:
                 msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the "
                                                                                                            "program "
-                                                                                                           "must be "
+                                                                                                           "is "
                                                                                                            "restarted.")
                 if msg:
                     obj_set['lightMode'] = 'yes'
@@ -422,7 +422,8 @@ def settings():
                     with open('Resource/JSON/settings.json', 'w') as settfile:
                         json.dump(obj_set, settfile)
                     settfile.close()
-                    close()
+                    settingsWin.destroy()
+                    restart()
             elif not msg:
                 return
         else:
@@ -436,8 +437,7 @@ def settings():
     def app_dark():
         if str(obj_set['darkMode']) == 'no':
             msg = messagebox.askokcancel("Dark Mode",
-                                         "In order to activate the dark mode," + '\n' + "the program must be "
-                                                                                        "restarted.")
+                                         "In order to activate the dark mode," + '\n' + "the program is restarted.")
             if msg:
                 obj_set['lightMode'] = 'no'
                 obj_set['darkMode'] = 'yes'
@@ -445,7 +445,8 @@ def settings():
                 with open('Resource/JSON/settings.json', 'w') as settfile:
                     json.dump(obj_set, settfile)
                 settfile.close()
-                close()
+                settingsWin.destroy()
+                restart()
 
         elif str(obj_set['darkMode']) == 'yes':
             msg = messagebox.askyesno("Dark Mode", "The dark mode has already been activated." + '\n' + "Do you want "
@@ -453,8 +454,7 @@ def settings():
                                                                                                         "it?")
             if msg:
                 msg = messagebox.askokcancel("Dark Mode",
-                                             "In order to activate the dark mode," + '\n' + "the program must be "
-                                                                                            "restarted.")
+                                             "In order to activate the dark mode," + '\n' + "the program is restarted.")
                 if msg:
                     obj_set['lightMode'] = 'no'
                     obj_set['darkMode'] = 'yes'
@@ -462,7 +462,8 @@ def settings():
                     with open('Resource/JSON/settings.json', 'w') as settfile:
                         json.dump(obj_set, settfile)
                     settfile.close()
-                    close()
+                    settingsWin.destroy()
+                    restart()
             elif not msg:
                 return
         else:
@@ -592,6 +593,11 @@ def stop():
         return
 
 
+def restart():
+    root.destroy()
+    os.system('python ' + str(os.path.basename(__file__)))
+
+
 def check_content():
     d_Resource = pathlib.Path("Resource")
     f_icon = pathlib.Path("Resource/IAC-Icon.ico")
@@ -625,6 +631,8 @@ def check_content():
                     dow_driver()
                     exe_driver()
                     mk_files()
+                    root.destroy()
+                    os.system('python "IAC.py"')
                 else:
                     print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                     quit()
@@ -640,6 +648,8 @@ def check_content():
                 dow_driver()
                 exe_driver()
                 mk_files()
+                root.destroy()
+                os.system('python "IAC.py"')
             else:
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                 quit()
@@ -653,6 +663,8 @@ def check_content():
             dow_driver()
             exe_driver()
             mk_files()
+            root.destroy()
+            os.system('python "IAC.py"')
         else:
             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
             quit()
@@ -850,7 +862,6 @@ try:
         dark = False
         root = ThemedTk(theme="arc")
         root['background'] = '#F5F6F7'
-        screen_width, screen_height = 440, 105
         print(Colors.OKGREEN, "Using Light Mode", Colors.ENDC)
         setfi.close()
     elif str(obj['darkMode']) == "yes":
@@ -858,43 +869,31 @@ try:
         dark = True
         root = ThemedTk(theme="equilux")
         root['background'] = '#464646'
-        screen_width, screen_height = 440, 105
         print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
         setfi.close()
-    # elif str(obj['darkMode']) == "yes" and str(obj['lightMode']) == "yes":
-    #    messagebox.showerror("File corrupted", "Hm, the appearance file seems to be corrupted." + '\n' +
-    #                         "For the program to work, the file is reinstalled.")
-    #    shutil.rmtree("Resource/JSON")
-    #    mk_files()
-    # elif str(obj['darkMode']) == "" and str(obj['lightMode']) == "":
-    #    messagebox.showerror("File corrupted", "Hm, the appearance file seems to be corrupted." + '\n' +
-    #                         "For the program to work, the file is reinstalled.")
-    #    shutil.rmtree("Resource/JSON")
-    #    mk_files()
     else:
         root = ThemedTk(theme="yaru")
         light = True
         dark = False
-        screen_width, screen_height = 440, 105
         root.title("Automated Commenting")
         check_content()
 except FileNotFoundError:
-    root = tk.Tk()
+    root = ThemedTk(theme="yaru")
     light = True
     dark = False
-    screen_width, screen_height = 440, 105
     root.title("Automated Commenting")
     check_content()
 except KeyError:
     root = tk.Tk()
     light = True
     dark = False
-    screen_width, screen_height = 440, 105
     root.title("Automated Commenting")
     shutil.rmtree("Resource/JSON")
     check_content()
 
-root.geometry(str(screen_width) + "x" + str(screen_height))
+
+screen_width, screen_height = 440, 105
+root.geometry(str(screen_width) + "x" + str(screen_height))         # Error ?
 x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
 y_Top = int(root.winfo_screenheight() / 2 - screen_height / 2)
 root.geometry("+{}+{}".format(x_Left, y_Top))
@@ -994,7 +993,7 @@ elif disagree:
         quit()
 
 messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only." + '\n' +
-                       "Please use it accordingly!" + '\n' + '\n' + "@2020 - 2021 by JueK3y")
+                       "Please use it accordingly!" + '\n' + '\n' + "@2020 - %s" % (e.year) + " by JueK3y")
 
 # Label
 li = ttk.Label(root, text="Post URL")
