@@ -545,8 +545,8 @@ def settings():
     ttk.Label(settingsWin, text="Comments").place(x=235)
     ttk.Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
     ttk.Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=60)
-    # ttk.Button(settingsWin, text="Help", command=s_help).place(x=40, y=60, width=110)
-    ttk.Button(settingsWin, text="More Options...", command=not_av).place(x=40, y=60, width=110)
+    ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=60, width=110)
+    # ttk.Button(settingsWin, text="More Options...", command=not_av).place(x=40, y=60, width=110)
     ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=110)
 
 
@@ -632,7 +632,7 @@ def check_content():
                     exe_driver()
                     mk_files()
                     root.destroy()
-                    os.system('python "IAC.py"')
+                    os.system('python ' + str(os.path.basename(__file__)))
                 else:
                     print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                     quit()
@@ -649,7 +649,7 @@ def check_content():
                 exe_driver()
                 mk_files()
                 root.destroy()
-                os.system('python "IAC.py"')
+                os.system('python ' + str(os.path.basename(__file__)))
             else:
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                 quit()
@@ -664,7 +664,7 @@ def check_content():
             exe_driver()
             mk_files()
             root.destroy()
-            os.system('python "IAC.py"')
+            os.system('python ' + str(os.path.basename(__file__)))
         else:
             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
             quit()
@@ -879,12 +879,14 @@ try:
         check_content()
 except FileNotFoundError:
     root = ThemedTk(theme="yaru")
+    root.geometry("440x105")
     light = True
     dark = False
     root.title("Automated Commenting")
     check_content()
 except KeyError:
     root = tk.Tk()
+    root.geometry("440x105")
     light = True
     dark = False
     root.title("Automated Commenting")
@@ -893,7 +895,10 @@ except KeyError:
 
 
 screen_width, screen_height = 440, 105
-root.geometry(str(screen_width) + "x" + str(screen_height))         # Error ?
+try:
+    root.geometry(str(screen_width) + "x" + str(screen_height))
+except TclError:
+    print(Colors.WARNING, "This error occurs only during the first run. You can ignore it.", Colors.ENDC)
 x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
 y_Top = int(root.winfo_screenheight() / 2 - screen_height / 2)
 root.geometry("+{}+{}".format(x_Left, y_Top))
@@ -925,6 +930,12 @@ with open('Resource/JSON/firstRun.json', 'r') as runfi:
 run_obj = json.loads(run_data)
 
 root.update()
+
+#try:
+#    root.update()
+#except TclError:
+#    print(Colors.WARNING, "This error occurs only during the first run. You can ignore it. Type 2", Colors.ENDC)
+
 if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
     eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
                                   "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
