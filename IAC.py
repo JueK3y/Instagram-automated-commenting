@@ -101,9 +101,46 @@ def run():
         }
         with open('Resource/JSON/LogIn.json', 'w') as lginfi:
             json.dump(login, lginfi)
-        # check_txt()
 
-        check_comment()
+        line_count = 0
+        for line in open(comments_path):
+            li = line.strip()
+            if not li.startswith("#"):
+                # print(line.strip())
+                line_count += 1
+
+        com_time = str(round((65 * line_count) / 60))
+
+        if line_count == 0:
+            comment = tk.messagebox.askyesno('No comments',
+                                             "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
+                                                                                                              "want to "
+                                                                                                              "create "
+                                                                                                              "some "
+                                                                                                              "now?",
+                                             icon='warning')
+            if comment and pathlib.Path("Resource/txt/comments.txt").exists():
+                os.system("notepad Resource/txt/comments.txt")
+                return
+            elif comment:
+                comment_txt = open("Resource/txt/comments.txt", "a")
+                comment_txt.write(
+                    "# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
+                comment_txt.close()
+
+                os.system("notepad Resource/txt/comments.txt")
+                return
+        if line_count < 5:
+            msg = messagebox.askokcancel("Very few comments",
+                                         "There are less than 5 comments to post." + "\n" + "Do you want to "
+                                                                                            "continue?",
+                                         icon='warning')
+            if msg:
+                messagebox.showinfo("Duration", "The commenting will take an average of " + com_time + " minutes.")
+                check_comment()
+        else:
+            messagebox.showinfo("Duration", "The commenting will take an average of " + com_time + " minutes.")
+            check_comment()
 
 
 def check_comment():
@@ -139,13 +176,6 @@ def auto_comment():
         try:
             web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
             web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "IE",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
@@ -156,14 +186,6 @@ def auto_comment():
         try:
             web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
             web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "Firefox",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
-
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser." + '\n' +
@@ -177,13 +199,6 @@ def auto_comment():
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
                                    options=chr_opt)
             web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "Chrome 87",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser." + '\n' +
@@ -197,13 +212,6 @@ def auto_comment():
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
                                    options=chr_opt)
             web.maximize_window()
-
-            # Save preferred browser
-            brwco = {
-                'Browser': "Chrome 88",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
@@ -373,7 +381,7 @@ def threading_settings():
 def settings():
     settingsWin = Toplevel(root)
     settingsWin.title("Settings | Automated Commenting")
-    settingsWin.geometry('350x100'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
+    settingsWin.geometry('350x170'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
     try:
         settingsWin.iconbitmap('Resource/IAC-Icon.ico')
     except TclError:
@@ -515,12 +523,12 @@ def settings():
             return
 
     def sel_com():
-        commentsPath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
+        commentspath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
 
-        if commentsPath:
+        if commentspath:
             messagebox.showinfo("Success", "Your .txt file has been added to the comments.")
 
-            obj_set['commentsPath'] = commentsPath
+            obj_set['commentsPath'] = commentspath
 
             with open('Resource/JSON/settings.json', 'w') as settfile:
                 json.dump(obj_set, settfile)
@@ -532,22 +540,39 @@ def settings():
         settingsWin.destroy()
 
     # Content
-    ttk.Label(settingsWin, text="Appearance").place(x=65)
+    ttk.Label(settingsWin, text="Appearance").place(x=65, y=5)
     if light:
         sw_appearance = tk.StringVar(value='lightMode')
     else:
         sw_appearance = tk.StringVar(value='darkMode')
-    ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light)\
-        .place(x=35, y=20, width=70)
+    ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light) \
+        .place(x=35, y=25, width=70)
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
-        place(x=95, y=20, width=70)
+        place(x=95, y=25, width=70)
 
-    ttk.Label(settingsWin, text="Comments").place(x=235)
-    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=210, y=20, width=50)
-    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=260, y=20, width=60)
-    ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=60, width=110)
-    # ttk.Button(settingsWin, text="More Options...", command=not_av).place(x=40, y=60, width=110)
-    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=60, width=110)
+    ttk.Label(settingsWin, text="Browser").place(x=245, y=5)
+    ttk.Button(settingsWin, text="Import...", command=not_av).place(x=210, y=25, width=110)
+
+    ttk.Label(settingsWin, text="Comments").place(x=65, y=63)
+    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=40, y=83, width=50)
+    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=90, y=83, width=60)
+
+    l = ttk.Label(settingsWin, text="Average duration")
+    l.place(x=220, y=65)
+
+    def print_selection(v):
+        print("Value: " + v)
+        l.config(text='Average duration: ' + v)
+        l.place(x=210, y=65)
+
+    value1 = -10
+    value2 = 10
+
+    s = ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=value1, to=value2, length=110, command=print_selection)
+    s.place(x=210, y=90)
+
+    ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=130, width=110)
+    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=130, width=110)
 
 
 def close():
@@ -608,7 +633,6 @@ def check_content():
     f_chrome_87 = pathlib.Path("Resource/driver/chromedriver_87.exe")
     f_chrome_88 = pathlib.Path("Resource/driver/chromedriver_88.exe")
     d_JSON = pathlib.Path("Resource/JSON")
-    f_browser = pathlib.Path("Resource/JSON/Browser.json")
     f_login = pathlib.Path("Resource/JSON/LogIn.json")
     f_url = pathlib.Path("Resource/JSON/URLhistory.json")
     f_run = pathlib.Path("Resource/JSON/firstRun.json")
@@ -616,7 +640,7 @@ def check_content():
 
     if d_Resource.exists():
         if d_driver.exists() & d_JSON.exists() & d_txt.exists() & f_set.exists():
-            if f_browser.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
+            if f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
                     f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
                 print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
             else:
@@ -764,14 +788,6 @@ def exe_driver():
 
 # Make files inside JSON folder
 def mk_files():
-    # Generating Browser.json
-    # Currently not used
-    brwco = {
-        'Browser': ""
-    }
-    with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-        json.dump(brwco, BrwFi)
-
     # Generating LogIn.json
     login = {
         'Username': "",
@@ -893,7 +909,6 @@ except KeyError:
     shutil.rmtree("Resource/JSON")
     check_content()
 
-
 screen_width, screen_height = 440, 105
 try:
     root.geometry(str(screen_width) + "x" + str(screen_height))
@@ -931,9 +946,9 @@ run_obj = json.loads(run_data)
 
 root.update()
 
-#try:
+# try:
 #    root.update()
-#except TclError:
+# except TclError:
 #    print(Colors.WARNING, "This error occurs only during the first run. You can ignore it. Type 2", Colors.ENDC)
 
 if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
@@ -1034,7 +1049,7 @@ OptionList = [
     "Chrome 88"
 ]
 browser_text = StringVar()
-e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110) # height=25
+e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110)  # height=25
 
 # Read LogIn file
 with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
@@ -1066,11 +1081,13 @@ bp = ttk.Checkbutton(root, command=password, offvalue=0, onvalue=1, variable=var
 bp.grid(row=1, column=4)
 
 b1_text = tk.StringVar()
-b1 = ttk.Button(root, textvariable=b1_text, width=12, command=threading_run) # .place(x=57.5, y=60, width=100) # height=25
+b1 = ttk.Button(root, textvariable=b1_text, width=12,
+                command=threading_run)  # .place(x=57.5, y=60, width=100) # height=25
 b1_text.set("Run")
 b1.grid(row=2, column=1, pady=(15, 10))
 
-b2 = ttk.Button(root, text="Settings", width=12, command=threading_settings) # .place(x=170, y=60, width=100) # height=25
+b2 = ttk.Button(root, text="Settings", width=12,
+                command=threading_settings)  # .place(x=170, y=60, width=100) # height=25
 b2.grid(row=2, column=2, pady=(15, 10))
 
 b3 = ttk.Button(root, text="Exit", width=12, command=close)
