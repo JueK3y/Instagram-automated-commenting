@@ -55,6 +55,38 @@ def connected():
             return
 
 
+def comment_time():
+    with open('Resource/JSON/settings.json', 'r') as settfi:
+        data_sett = settfi.read()
+    obj_sett = json.loads(data_sett)
+
+    ave_time = obj_sett['Max Y'] - 20
+    com_lines = obj_sett['Comment Lines']
+
+    obj_sett['time'] = (com_lines * ave_time) / 60
+
+    with open('Resource/JSON/settings.json', 'w') as settfi:
+        json.dump(obj_sett, settfi)
+
+
+def line_count():
+    with open('Resource/JSON/settings.json', 'r') as settfi:
+        data_json = settfi.read()
+    obj_json = json.loads(data_json)
+
+    # Time for commenting
+    line_count = 0
+    for line in open(comments_path):
+        li = line.strip()
+        if not li.startswith("#"):
+            line_count += 1
+
+    obj_json['Comment Lines'] = line_count
+
+    with open('Resource/JSON/settings.json', 'w') as settfi:
+        json.dump(obj_json, settfi)
+
+
 def threading_run():
     t1 = Thread(target=run)
     t1.start()
@@ -102,16 +134,13 @@ def run():
         with open('Resource/JSON/LogIn.json', 'w') as lginfi:
             json.dump(login, lginfi)
 
-        line_count = 0
-        for line in open(comments_path):
-            li = line.strip()
-            if not li.startswith("#"):
-                # print(line.strip())
-                line_count += 1
+        line_count()
 
-        com_time = str(round((65 * line_count) / 60))
+        with open('Resource/JSON/settings.json', 'r') as settfi:
+            data_json = settfi.read()
+        obj_sett = json.loads(data_json)
 
-        if line_count == 0:
+        if obj_sett['Comment Lines'] == 0:
             comment = tk.messagebox.askyesno('No comments',
                                              "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
                                                                                                               "want to "
@@ -130,16 +159,20 @@ def run():
 
                 os.system("notepad Resource/txt/comments.txt")
                 return
-        if line_count < 5:
+            else:
+                return
+        if obj_sett['Comment Lines'] < 5:
             msg = messagebox.askokcancel("Very few comments",
                                          "There are less than 5 comments to post." + "\n" + "Do you want to "
                                                                                             "continue?",
                                          icon='warning')
             if msg:
-                messagebox.showinfo("Duration", "The commenting will take an average of " + com_time + " minutes.")
+                messagebox.showinfo("Duration", "The commenting will take an average of " +
+                                    str(round(obj_sett['Time'], 2)) + " minutes.")
                 check_comment()
         else:
-            messagebox.showinfo("Duration", "The commenting will take an average of " + com_time + " minutes.")
+            messagebox.showinfo("Duration", "The commenting will take an average of " +
+                                str(round(obj_sett['Time'], 2)) + " minutes.")
             check_comment()
 
 
@@ -169,8 +202,11 @@ def check_comment():
 def auto_comment():
     global web
 
-    b1_text.set("Stop")
-    b1["command"] = stop
+    try:
+        b1_text.set("Stop")
+        b1["command"] = stop
+    except RuntimeError:
+        quit()
 
     if browser_text.get() == 'Internet Explorer':
         try:
@@ -349,10 +385,11 @@ def auto_comment():
                     # Does post a random letter from the sentence.
                     # myline = random.choice(line.strip())
 
-                    value11 = 25
-                    value22 = 90
+                    with open('Resource/JSON/settings.json', 'r') as settfi:
+                        data_json = settfi.read()
+                    obj_set = json.loads(data_json)
 
-                    zeit = random.randint(20, 85)
+                    zeit = random.randint(20, obj_set['Max Y'])
                     print(Colors.BOLD, zeit, Colors.ENDC)
 
                     try:
@@ -549,8 +586,8 @@ def settings():
         sw_appearance = tk.StringVar(value='lightMode')
     else:
         sw_appearance = tk.StringVar(value='darkMode')
-    ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light) \
-        .place(x=35, y=25, width=70)
+    ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light). \
+        place(x=35, y=25, width=70)
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
         place(x=95, y=25, width=70)
 
@@ -561,23 +598,30 @@ def settings():
     ttk.Button(settingsWin, text="Edit", command=add_com).place(x=40, y=83, width=50)
     ttk.Button(settingsWin, text="Import", command=sel_com).place(x=90, y=83, width=60)
 
-    l = ttk.Label(settingsWin, text="Average duration")
-    l.place(x=220, y=65)
+    la = ttk.Label(settingsWin, text="Average duration")
+    la.place(x=220, y=65)
 
     def print_selection(v):
-        val = (75 * (float(v) + 1) + 105) / 60
-        l.config(text='Average duration: ' + str(val) + 'min')
-        l.place(x=205, y=65)
-        obj_set['Time'] = val
+
+        try:
+            line_count()
+        except FileNotFoundError:
+            #
+        # Check lines before this
+
+        ran_y = int((15 * (float(v) + 1) + 21) + 20)
+        obj_set['Max Y'] = str(ran_y)
+        print(ran_y)
+
+        obj_set['Time'], val = ((15 * (float(v) + 1) + 21) / 60) * float(obj_set['Comment Lines'])
+        la.config(text='Average duration: ' + str(round(val, 2)) + 'min')
+        la.place(x=180, y=65)  # 205
 
         with open('Resource/JSON/settings.json', 'w') as settfile:
             json.dump(obj_set, settfile)
 
-    value1 = 0
-    value2 = 4
-
-    ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=value1, to=value2, length=110, command=print_selection).place(
-        x=210, y=90)
+    ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=print_selection). \
+        place(x=210, y=90)
 
     ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=130, width=110)
     ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=130, width=110)
@@ -658,13 +702,17 @@ def check_content():
                 if msg_box:
                     print(Colors.BOLD, "Downloading files...", Colors.ENDC)
                     # Delete old folders
-                    shutil.rmtree("Resource")
-                    mk_folder()
-                    dow_driver()
-                    exe_driver()
-                    mk_files()
-                    root.destroy()
-                    os.system('python ' + str(os.path.basename(__file__)))
+                    try:
+                        shutil.rmtree("Resource")
+                        mk_folder()
+                        dow_driver()
+                        exe_driver()
+                        mk_files()
+                        root.destroy()
+                        os.system('python ' + str(os.path.basename(__file__)))
+                    except PermissionError:
+                        messagebox.showerror("Permission Error",
+                                             "An error occurred. Restart the program with administrator rights.")
                 else:
                     print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                     quit()
@@ -675,13 +723,18 @@ def check_content():
             if msg_box:
                 print(Colors.BOLD, "Downloading files...", Colors.ENDC)
                 # Delete old folders
-                shutil.rmtree("Resource")
-                mk_folder()
-                dow_driver()
-                exe_driver()
-                mk_files()
-                root.destroy()
-                os.system('python ' + str(os.path.basename(__file__)))
+                try:
+                    shutil.rmtree("Resource")
+                    mk_folder()
+                    dow_driver()
+                    exe_driver()
+                    mk_files()
+                    root.destroy()
+                    os.system('python ' + str(os.path.basename(__file__)))
+                except PermissionError:
+                    messagebox.showerror("Permission Error",
+                                         "An error occurred. Restart the program with administrator rights.")
+
             else:
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                 quit()
@@ -823,7 +876,9 @@ def mk_files():
     sett = {
         'commentsPath': "Resource/txt/comments.txt",
         'lightMode': "yes",
-        'darkMode': "no"
+        'darkMode': "no",
+        'Average Time': 65,
+        'Max Y': 65
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
@@ -860,6 +915,8 @@ def check_json():
         str(obj_json['commentsPath'])
         str(obj_json['lightMode'])
         str(obj_json['darkMode'])
+        str(obj_json['Average Time'])
+        str(obj_json['Max Y'])
         json_file.close()
     except KeyError:
         shutil.rmtree("Resource/JSON")
@@ -1027,7 +1084,7 @@ elif disagree:
         quit()
 
 messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only." + '\n' +
-                       "Please use it accordingly!" + '\n' + '\n' + "@2020 - %s" % (e.year) + " by JueK3y")
+                       "Please use it accordingly!" + '\n' + '\n' + "@2020 - %s" % e.year + " by JueK3y")
 
 # Label
 li = ttk.Label(root, text="Post URL")
