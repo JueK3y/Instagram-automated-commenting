@@ -348,7 +348,11 @@ def auto_comment():
 
                     # Does post a random letter from the sentence.
                     # myline = random.choice(line.strip())
-                    zeit = random.randint(25, 90)
+
+                    value11 = 25
+                    value22 = 90
+
+                    zeit = random.randint(20, 85)
                     print(Colors.BOLD, zeit, Colors.ENDC)
 
                     try:
@@ -561,15 +565,19 @@ def settings():
     l.place(x=220, y=65)
 
     def print_selection(v):
-        print("Value: " + v)
-        l.config(text='Average duration: ' + v)
-        l.place(x=210, y=65)
+        val = (75 * (float(v) + 1) + 105) / 60
+        l.config(text='Average duration: ' + str(val) + 'min')
+        l.place(x=205, y=65)
+        obj_set['Time'] = val
 
-    value1 = -10
-    value2 = 10
+        with open('Resource/JSON/settings.json', 'w') as settfile:
+            json.dump(obj_set, settfile)
 
-    s = ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=value1, to=value2, length=110, command=print_selection)
-    s.place(x=210, y=90)
+    value1 = 0
+    value2 = 4
+
+    ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=value1, to=value2, length=110, command=print_selection).place(
+        x=210, y=90)
 
     ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=130, width=110)
     ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=130, width=110)
