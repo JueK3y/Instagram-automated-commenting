@@ -226,6 +226,8 @@ def auto_comment():
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
             return
             # messagebox.showerror("Wrong browser", "IE couldn't be found. Please select another browser.")
 
@@ -237,6 +239,8 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Firefox was closed accidentally.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
             return
 
     elif browser_text.get() == 'Chrome 87':
@@ -250,6 +254,8 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Chrome was closed accidentally.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
             return
 
     elif browser_text.get() == 'Chrome 88':
@@ -263,6 +269,8 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Chrome was closed accidentally.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
             return
 
     connected()
@@ -281,6 +289,8 @@ def auto_comment():
     except WebDriverException:
         print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except RuntimeError:
         print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
@@ -302,6 +312,8 @@ def auto_comment():
     except NoSuchWindowException or WebDriverException:
         print(Colors.WARNING, NoSuchWindowException, "or", WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
@@ -321,6 +333,8 @@ def auto_comment():
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
@@ -342,10 +356,14 @@ def auto_comment():
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Error", "Something went wrong. Please restart the program.")
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
@@ -364,6 +382,8 @@ def auto_comment():
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+        b1_text.set("Run")
+        b1["command"] = threading_run
         return
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
@@ -398,9 +418,9 @@ def auto_comment():
 
                     with open('Resource/JSON/settings.json', 'r') as settfi:
                         data_json = settfi.read()
-                    obj_set = json.loads(data_json)
+                    obj_sett = json.loads(data_json)
 
-                    zeit = random.randint(20, obj_set['Max Y'])
+                    zeit = random.randint(20, obj_sett['Max Y'])
                     print(Colors.BOLD, zeit, Colors.ENDC)
 
                     try:
