@@ -606,7 +606,7 @@ def settings():
                 json.dump(obj_set, settfile)
 
     def not_av():
-        messagebox.showwarning("In progress", "This feature is currently not available")
+        messagebox.showwarning("In progress", "This feature is currently not available.")
 
     def back():
         settingsWin.destroy()
