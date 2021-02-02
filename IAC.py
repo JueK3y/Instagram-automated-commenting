@@ -55,36 +55,63 @@ def connected():
             return
 
 
-def comment_time():
-    with open('Resource/JSON/settings.json', 'r') as settfi:
-        data_sett = settfi.read()
-    obj_sett = json.loads(data_sett)
-
-    ave_time = obj_sett['Max Y'] - 20
-    com_lines = obj_sett['Comment Lines']
-
-    obj_sett['time'] = (com_lines * ave_time) / 60
-
-    with open('Resource/JSON/settings.json', 'w') as settfi:
-        json.dump(obj_sett, settfi)
-
-
 def line_count():
     with open('Resource/JSON/settings.json', 'r') as settfi:
         data_json = settfi.read()
     obj_json = json.loads(data_json)
 
     # Time for commenting
-    line_count = 0
+    line_coun = 0
     for line in open(comments_path):
         li = line.strip()
         if not li.startswith("#"):
-            line_count += 1
+            line_coun += 1
 
-    obj_json['Comment Lines'] = line_count
+    obj_json['Comment Lines'] = line_coun
+
+    print(obj_json['Comment Lines'])
 
     with open('Resource/JSON/settings.json', 'w') as settfi:
         json.dump(obj_json, settfi)
+
+
+def comment_time():
+    with open('Resource/JSON/settings.json', 'r') as settfi:
+        data_sett = settfi.read()
+    obj_sett = json.loads(data_sett)
+
+    ave_time = float(obj_sett['Max Y']) - 20
+    print(ave_time)
+    com_lines = obj_sett['Comment Lines']
+    print(com_lines)
+
+    obj_sett['Time'] = (com_lines * ave_time) / 60
+    print(obj_sett['Time'])
+
+    with open('Resource/JSON/settings.json', 'w') as settfi:
+        json.dump(obj_sett, settfi)
+
+
+def ask_file():
+    comment = tk.messagebox.askyesno('No comments',
+                                     "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
+                                                                                                      "want to "
+                                                                                                      "create "
+                                                                                                      "some now?",
+                                     icon='warning')
+    if comment and pathlib.Path("Resource/txt/comments.txt").exists():
+        os.system("notepad Resource/txt/comments.txt")
+        return
+    elif comment:
+        comment_txt = open("Resource/txt/comments.txt", "a")
+        comment_txt.write(
+            "# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
+        comment_txt.close()
+
+        os.system("notepad Resource/txt/comments.txt")
+        return
+    else:
+        return
 
 
 def threading_run():
@@ -100,24 +127,7 @@ def run():
     elif len(str(e1.get())) < 11:
         messagebox.showerror("Wrong link", "The link have to lead to an instagram post.")
     elif not pathlib.Path(comments_path).exists():
-        comment = tk.messagebox.askyesno('No comments',
-                                         "You don't have any sentences to comment on Instagram." + '\n' + "Do you "
-                                                                                                          "want to "
-                                                                                                          "create "
-                                                                                                          "some now?",
-                                         icon='warning')
-        if comment and pathlib.Path("Resource/txt/comments.txt").exists():
-            os.system("notepad Resource/txt/comments.txt")
-            return
-        elif comment:
-            comment_txt = open("Resource/txt/comments.txt", "a")
-            comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
-            comment_txt.close()
-
-            os.system("notepad Resource/txt/comments.txt")
-            return
-        else:
-            exit()
+        ask_file()
     else:
         # Save URL
         safe_url = {
@@ -135,6 +145,7 @@ def run():
             json.dump(login, lginfi)
 
         line_count()
+        comment_time()
 
         with open('Resource/JSON/settings.json', 'r') as settfi:
             data_json = settfi.read()
@@ -601,26 +612,34 @@ def settings():
     la = ttk.Label(settingsWin, text="Average duration")
     la.place(x=220, y=65)
 
-    def print_selection(v):
+    def change_max_y(v):
+
+        with open('Resource/JSON/settings.json', 'r') as settfi:
+            data_json = settfi.read()
+        obj_sett = json.loads(data_json)
 
         try:
             line_count()
+
+            print(obj_sett['Comment Lines'])
+
+            max_y = int(15 * (float(v) + 1) + 21)  # v = 3 standard
+
+            obj_sett['Max Y'] = str(max_y + 20)
+            print(obj_sett['Max Y'])
+
+            average = (max_y / 60) * float(obj_sett['Comment Lines'])
+
+            la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
+            la.place(x=205, y=65)
+
+            with open('Resource/JSON/settings.json', 'w') as settfile:
+                json.dump(obj_sett, settfile)
+
         except FileNotFoundError:
-            #
-        # Check lines before this
+            ask_file()
 
-        ran_y = int((15 * (float(v) + 1) + 21) + 20)
-        obj_set['Max Y'] = str(ran_y)
-        print(ran_y)
-
-        obj_set['Time'], val = ((15 * (float(v) + 1) + 21) / 60) * float(obj_set['Comment Lines'])
-        la.config(text='Average duration: ' + str(round(val, 2)) + 'min')
-        la.place(x=180, y=65)  # 205
-
-        with open('Resource/JSON/settings.json', 'w') as settfile:
-            json.dump(obj_set, settfile)
-
-    ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=print_selection). \
+    ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
         place(x=210, y=90)
 
     ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=130, width=110)
@@ -877,8 +896,7 @@ def mk_files():
         'commentsPath': "Resource/txt/comments.txt",
         'lightMode': "yes",
         'darkMode': "no",
-        'Average Time': 65,
-        'Max Y': 65
+        'Max Y': 86
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
@@ -915,7 +933,6 @@ def check_json():
         str(obj_json['commentsPath'])
         str(obj_json['lightMode'])
         str(obj_json['darkMode'])
-        str(obj_json['Average Time'])
         str(obj_json['Max Y'])
         json_file.close()
     except KeyError:
