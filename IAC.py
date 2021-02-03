@@ -27,6 +27,9 @@ from tkinter.filedialog import askopenfilename
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
     InvalidSessionIdException, InvalidArgumentException
+# import ctypes
+
+# ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 
 class Colors:
@@ -56,7 +59,7 @@ def connected():
 
 
 def line_count():
-    with open('Resource/JSON/settings.json', 'w') as setfi:
+    with open('Resource/JSON/settings.json', 'r') as setfi:
         data_json = setfi.read()
     obj_json = json.loads(data_json)
 
@@ -92,7 +95,8 @@ def comment_time():
     obj_sett['Time'] = (com_lines * ave_time) / 60
     print(obj_sett['Time'])
 
-    json.dump(obj_sett, settfi)
+    with open('Resource/JSON/settings.json', 'w') as settfile:
+        json.dump(obj_sett, settfile)
 
     settfi.close()
 
@@ -193,7 +197,7 @@ def eula_file():
                 file_object.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month,
                                                                                                          e.year) +
                                   ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
-                file_object.close()
+            file_object.close()
 
         else:
             print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
@@ -224,7 +228,6 @@ def run():
         }
         with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
             json.dump(safe_url, urlfi)
-
         urlfi.close()
 
         # Save user login
@@ -296,7 +299,10 @@ def check_comment():
             'First Run?': "No",
             'Agree to EULA?': "Yes"
         }
-        json.dump(first__run, runfil)
+        with open('Resource/JSON/firstRun.json', 'w') as runfile:
+            json.dump(first__run, runfile)
+        runfil.close()
+        runfile.close()
         runfil.close()
         print(Colors.BOLD, "First Run", Colors.ENDC)
         auto_comment()
@@ -319,6 +325,13 @@ def auto_comment():
         try:
             web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
             web.maximize_window()
+            # Save preferred browser
+            brwco = {
+                'Browser': "IE",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
@@ -331,6 +344,14 @@ def auto_comment():
         try:
             web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
             web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Firefox",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser." + '\n' +
@@ -346,6 +367,14 @@ def auto_comment():
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
                                    options=chr_opt)
             web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Chrome 87",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser." + '\n' +
@@ -361,6 +390,14 @@ def auto_comment():
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
                                    options=chr_opt)
             web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Chrome 87",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
@@ -517,7 +554,7 @@ def auto_comment():
                         data_json = settfi.read()
                     obj_sett = json.loads(data_json)
 
-                    zeit = random.randint(20, obj_sett['Max Y'])
+                    zeit = random.randint(20, int(obj_sett['Max Y']))
                     print(Colors.BOLD, zeit, Colors.ENDC)
 
                     try:
@@ -575,8 +612,10 @@ def settings():
                 obj_set['lightMode'] = 'yes'
                 obj_set['darkMode'] = 'no'
                 print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
-                json.dump(obj_set, setfile)
+                with open('Resource/JSON/settings.json', 'w') as settfile:
+                    json.dump(obj_set, settfile)
                 setfile.close()
+                settfile.close()
                 settingsWin.destroy()
                 restart()
 
@@ -593,8 +632,10 @@ def settings():
                     obj_set['lightMode'] = 'yes'
                     obj_set['darkMode'] = 'no'
                     print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
-                    json.dump(obj_set, setfile)
+                    with open('Resource/JSON/settings.json', 'w') as settfile:
+                        json.dump(obj_set, settfile)
                     setfile.close()
+                    settfile.close()
                     settingsWin.destroy()
                     restart()
             elif not msg:
@@ -620,8 +661,10 @@ def settings():
                 obj_set['lightMode'] = 'no'
                 obj_set['darkMode'] = 'yes'
                 print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
-                json.dump(obj_set, setfile)
+                with open('Resource/JSON/settings.json', 'w') as settfile:
+                    json.dump(obj_set, settfile)
                 setfile.close()
+                settfile.close()
                 settingsWin.destroy()
                 restart()
 
@@ -636,8 +679,10 @@ def settings():
                     obj_set['lightMode'] = 'no'
                     obj_set['darkMode'] = 'yes'
                     print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
-                    json.dump(obj_set, setfile)
+                    with open('Resource/JSON/settings.json', 'w') as settfile:
+                        json.dump(obj_set, settfile)
                     setfile.close()
+                    settfile.close()
                     settingsWin.destroy()
                     restart()
             elif not msg:
@@ -710,9 +755,11 @@ def settings():
 
             obj_set['commentsPath'] = commentspath
 
-            json.dump(obj_set, setfil)
+            with open('Resource/JSON/settings.json', 'w') as settfile:
+                json.dump(obj_set, settfile)
 
             setfil.close()
+            settfile.close()
 
     def not_av():
         messagebox.showwarning("In progress", "This feature is currently not available.")
@@ -742,27 +789,30 @@ def settings():
     la.place(x=220, y=65)
 
     def change_max_y(v):
-
-        with open('Resource/JSON/settings.json', 'r') as setfi:
-            data_json = setfi.read()
-        obj_set = json.loads(data_json)
-
         try:
             line_count()
 
-            print(obj_set['Comment Lines'])
+            with open('Resource/JSON/settings.json', 'r') as setfil:
+                data_json = setfil.read()
+            obj_sett = json.loads(data_json)
+
+            print(obj_sett['Comment Lines'])
 
             max_y = int(15 * (float(v) + 1) + 21)  # v = 3 standard
 
-            obj_set['Max Y'] = str(max_y + 20)
-            print(obj_set['Max Y'])
+            obj_sett['Max Y'] = str(max_y + 20)
+            print(obj_sett['Max Y'])
 
-            average = (max_y / 60) * float(obj_set['Comment Lines'])
+            average = (max_y / 60) * float(obj_sett['Comment Lines'])
 
             la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
             la.place(x=205, y=65)
 
-            json.dump(obj_set, setfi)
+            with open('Resource/JSON/settings.json', 'w') as settfile:
+                json.dump(obj_sett, settfile)
+
+            setfil.close()
+            settfile.close()
 
         except FileNotFoundError:
             ask_file()
@@ -1132,6 +1182,7 @@ try:
         dark = False
         root.title("Automated Commenting")
         check_content()
+    setfi.close()
 except FileNotFoundError:
     root = ThemedTk(theme="yaru")
     root.geometry("440x105")
@@ -1205,14 +1256,25 @@ e1.grid(row=0, column=1)
 
 URLFi.close()
 
-# Dropdown Menu
-OptionList = [
-    "Firefox",
-    "Chrome 87",
-    "Chrome 88"
-]
+# Read Browser file
+with open('Resource/JSON/Browser.json', 'r') as BroFi:
+    data = BroFi.read()
+obj_b = json.loads(data)
+
+try:
+    if str(obj_b['Browser']) == "Chrome 87":
+        OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Firefox"]
+    elif str(obj_b['Browser']) == "Chrome 87":
+        OptionList = ["Chrome 88", "Chrome 88", "Chrome 87", "Firefox"]
+    else:
+        OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88"]
+except FileNotFoundError:
+    OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88"]
+
 browser_text = StringVar()
 e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110)  # height=25
+
+BroFi.close()
 
 # Read LogIn file
 with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
