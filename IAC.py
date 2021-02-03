@@ -56,8 +56,8 @@ def connected():
 
 
 def line_count():
-    with open('Resource/JSON/settings.json', 'r') as settfi:
-        data_json = settfi.read()
+    with open('Resource/JSON/settings.json', 'w') as setfi:
+        data_json = setfi.read()
     obj_json = json.loads(data_json)
 
     # Time for commenting
@@ -69,10 +69,14 @@ def line_count():
 
     obj_json['Comment Lines'] = line_coun
 
+    setfi.close()
+
     print(obj_json['Comment Lines'])
 
     with open('Resource/JSON/settings.json', 'w') as settfi:
         json.dump(obj_json, settfi)
+
+    settfi.close()
 
 
 def comment_time():
@@ -88,8 +92,9 @@ def comment_time():
     obj_sett['Time'] = (com_lines * ave_time) / 60
     print(obj_sett['Time'])
 
-    with open('Resource/JSON/settings.json', 'w') as settfi:
-        json.dump(obj_sett, settfi)
+    json.dump(obj_sett, settfi)
+
+    settfi.close()
 
 
 def ask_file():
@@ -114,6 +119,90 @@ def ask_file():
         return
 
 
+def eula_file():
+    disagree = False
+
+    with open('Resource/txt/EULA.txt') as f:
+        if not ('User ' + os.getenv('username') + ' agreed to the EULA on') in f.read():
+            disagree = True
+
+    with open('Resource/JSON/firstRun.json', 'r') as runfi:
+        run_data = runfi.read()
+    run_obj = json.loads(run_data)
+
+    if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
+        eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
+                                      "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
+        if eula:
+            print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
+            first_run = {
+                'First Run?': "Yes",
+                'Agree to EULA?': "Yes"
+            }
+            with open('Resource/JSON/firstRun.json', 'w') as runfi:
+                json.dump(first_run, runfi)
+            runfi.close()
+            with open('Resource/txt/EULA.txt', 'a') as file:
+                file.write(
+                    'User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
+                    ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
+            file.close()
+
+        else:
+            print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
+            quit()
+    elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Yes":
+        eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
+                                      "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
+        if eula:
+            print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
+            first_run = {
+                'First Run?': "No",
+                'Agree to EULA?': "Yes"
+            }
+            with open('Resource/JSON/firstRun.json', 'w') as runfi:
+                json.dump(first_run, runfi)
+            runfi.close()
+            with open('Resource/txt/EULA.txt', 'a') as file:
+                file.write(
+                    'User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
+                    ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
+            file.close()
+        else:
+            print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
+            quit()
+
+    elif disagree:
+        eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
+                                      "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
+        if eula:
+            print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
+            first_run = {
+                'First Run?': "No",
+                'Agree to EULA?': "Yes"
+            }
+            with open('Resource/JSON/firstRun.json', 'w') as runfi:
+                json.dump(first_run, runfi)
+            runfi.close()
+
+            with open("Resource/txt/EULA.txt", "a+") as file_object:
+                file_object.seek(0)
+                data = file_object.read(118)
+                if len(data) > 0:
+                    file_object.write("\n")
+                file_object.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month,
+                                                                                                         e.year) +
+                                  ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
+                file_object.close()
+
+        else:
+            print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
+            quit()
+
+    f.close()
+    runfi.close()
+
+
 def threading_run():
     t1 = Thread(target=run)
     t1.start()
@@ -136,6 +225,8 @@ def run():
         with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
             json.dump(safe_url, urlfi)
 
+        urlfi.close()
+
         # Save user login
         login = {
             'Username': username_text.get(),
@@ -144,6 +235,9 @@ def run():
         with open('Resource/JSON/LogIn.json', 'w') as lginfi:
             json.dump(login, lginfi)
 
+        lginfi.close()
+
+        eula_file()
         line_count()
         comment_time()
 
@@ -186,6 +280,8 @@ def run():
                                 str(round(obj_sett['Time'], 2)) + " minutes.")
             check_comment()
 
+        settfi.close()
+
 
 def check_comment():
     global web
@@ -200,14 +296,14 @@ def check_comment():
             'First Run?': "No",
             'Agree to EULA?': "Yes"
         }
-        with open('Resource/JSON/firstRun.json', 'w') as runfil:
-            json.dump(first__run, runfil)
+        json.dump(first__run, runfil)
         runfil.close()
         print(Colors.BOLD, "First Run", Colors.ENDC)
         auto_comment()
     else:
         print(Colors.BOLD, "Another round", Colors.ENDC)
         auto_comment()
+    runfil.close()
 
 
 def auto_comment():
@@ -393,13 +489,14 @@ def auto_comment():
 
         time.sleep(10)
 
-        # Read LogIn file
         with open('Resource/JSON/settings.json', 'r') as setfil:
             data_set = setfil.read()
         obj_set = json.loads(data_set)
 
         comfi = open(str(obj_set['commentsPath'])).read().splitlines()
         print(comments_path)
+
+        setfil.close()
 
         def comment():
             # Major error?
@@ -459,20 +556,18 @@ def settings():
     except TclError:
         check_content()
 
-    with open('Resource/JSON/settings.json', 'r') as setfile:
-        data_set = setfile.read()
-    obj_set = json.loads(data_set)
-
     if light:
         settingsWin['background'] = '#F5F6F7'
-        setfi.close()
     elif dark:
         settingsWin['background'] = '#464646'
-        setfi.close()
     else:
         print("Uhh, this wasn't supposed happen.")
 
     def app_light():
+        with open('Resource/JSON/settings.json', 'r') as setfile:
+            data_set = setfile.read()
+        obj_set = json.loads(data_set)
+
         if str(obj_set['lightMode']) == 'no':
             msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the program "
                                                                                                        "is restarted.")
@@ -480,9 +575,8 @@ def settings():
                 obj_set['lightMode'] = 'yes'
                 obj_set['darkMode'] = 'no'
                 print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
-                with open('Resource/JSON/settings.json', 'w') as settfile:
-                    json.dump(obj_set, settfile)
-                settfile.close()
+                json.dump(obj_set, setfile)
+                setfile.close()
                 settingsWin.destroy()
                 restart()
 
@@ -499,9 +593,8 @@ def settings():
                     obj_set['lightMode'] = 'yes'
                     obj_set['darkMode'] = 'no'
                     print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
-                    with open('Resource/JSON/settings.json', 'w') as settfile:
-                        json.dump(obj_set, settfile)
-                    settfile.close()
+                    json.dump(obj_set, setfile)
+                    setfile.close()
                     settingsWin.destroy()
                     restart()
             elif not msg:
@@ -514,7 +607,12 @@ def settings():
                 shutil.rmtree("Resource/JSON")
                 mk_files()
 
+        setfile.close()
+
     def app_dark():
+        with open('Resource/JSON/settings.json', 'r') as setfile:
+            data_set = setfile.read()
+        obj_set = json.loads(data_set)
         if str(obj_set['darkMode']) == 'no':
             msg = messagebox.askokcancel("Dark Mode",
                                          "In order to activate the dark mode," + '\n' + "the program is restarted.")
@@ -522,9 +620,8 @@ def settings():
                 obj_set['lightMode'] = 'no'
                 obj_set['darkMode'] = 'yes'
                 print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
-                with open('Resource/JSON/settings.json', 'w') as settfile:
-                    json.dump(obj_set, settfile)
-                settfile.close()
+                json.dump(obj_set, setfile)
+                setfile.close()
                 settingsWin.destroy()
                 restart()
 
@@ -539,9 +636,8 @@ def settings():
                     obj_set['lightMode'] = 'no'
                     obj_set['darkMode'] = 'yes'
                     print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
-                    with open('Resource/JSON/settings.json', 'w') as settfile:
-                        json.dump(obj_set, settfile)
-                    settfile.close()
+                    json.dump(obj_set, setfile)
+                    setfile.close()
                     settingsWin.destroy()
                     restart()
             elif not msg:
@@ -553,15 +649,21 @@ def settings():
                 shutil.rmtree("Resource/JSON")
                 mk_files()
 
+        setfile.close()
+
     def add_com():
+        with open('Resource/JSON/settings.json', 'r') as setfil:
+            data_sett = setfil.read()
+        obj_sett = json.loads(data_sett)
+
         f_comm = pathlib.Path(comments_path)
 
-        if not f_comm.exists() or str(obj_set['commentsPath']) == "":
+        if not f_comm.exists() or str(obj_sett['commentsPath']) == "":
             if not pathlib.Path('Resource/txt/comments.txt').exists():
                 comment = tk.messagebox.askyesno('No comments', "You don't have any comments to edit." + '\n' +
                                                  "Do you want to create some now?", icon='info')
                 if comment:
-                    obj_set['commentsPath'] = 'Resource/txt/comments.txt'
+                    obj_sett['commentsPath'] = 'Resource/txt/comments.txt'
 
                     comment_txt = open("Resource/txt/comments.txt", "a")
                     comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
@@ -569,14 +671,14 @@ def settings():
                     comment_txt.close()
 
                     programName = "notepad.exe"
-                    fileName = str(obj_set['commentsPath'])
+                    fileName = str(obj_sett['commentsPath'])
                     sp.Popen([programName, fileName])
 
                     settingsWin.update()
                     root.update()
                     return
             else:
-                obj_set['commentsPath'] = 'Resource/txt/comments.txt'
+                obj_sett['commentsPath'] = 'Resource/txt/comments.txt'
 
                 programName = "notepad.exe"
                 fileName = 'Resource/txt/comments.txt'
@@ -587,12 +689,14 @@ def settings():
                 return
         else:
             programName = "notepad.exe"
-            fileName = str(obj_set['commentsPath'])
+            fileName = str(obj_sett['commentsPath'])
             sp.Popen([programName, fileName])
 
             settingsWin.update()
             root.update()
             return
+
+        setfil.close()
 
     def sel_com():
         commentspath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
@@ -600,10 +704,15 @@ def settings():
         if commentspath:
             messagebox.showinfo("Success", "Your .txt file has been added to the comments.")
 
+            with open('Resource/JSON/settings.json', 'r') as setfil:
+                data_set = setfil.read()
+            obj_set = json.loads(data_set)
+
             obj_set['commentsPath'] = commentspath
 
-            with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_set, settfile)
+            json.dump(obj_set, setfil)
+
+            setfil.close()
 
     def not_av():
         messagebox.showwarning("In progress", "This feature is currently not available.")
@@ -634,27 +743,26 @@ def settings():
 
     def change_max_y(v):
 
-        with open('Resource/JSON/settings.json', 'r') as settfi:
-            data_json = settfi.read()
-        obj_sett = json.loads(data_json)
+        with open('Resource/JSON/settings.json', 'r') as setfi:
+            data_json = setfi.read()
+        obj_set = json.loads(data_json)
 
         try:
             line_count()
 
-            print(obj_sett['Comment Lines'])
+            print(obj_set['Comment Lines'])
 
             max_y = int(15 * (float(v) + 1) + 21)  # v = 3 standard
 
-            obj_sett['Max Y'] = str(max_y + 20)
-            print(obj_sett['Max Y'])
+            obj_set['Max Y'] = str(max_y + 20)
+            print(obj_set['Max Y'])
 
-            average = (max_y / 60) * float(obj_sett['Comment Lines'])
+            average = (max_y / 60) * float(obj_set['Comment Lines'])
 
             la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
             la.place(x=205, y=65)
 
-            with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_sett, settfile)
+            json.dump(obj_set, setfi)
 
         except FileNotFoundError:
             ask_file()
@@ -793,8 +901,11 @@ def check_content():
             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
             quit()
 
+    # d_Resource.close(), f_icon.close(), d_txt.close(), f_eula.close(), d_driver.close(), f_gecko.close()
+    # f_chrome_87.close(), f_chrome_88.close(), d_JSON.close(), f_login.close(), f_url.close()
+    # f_run.close(), f_set.close()
 
-# Make folder
+
 def mk_folder():
     # Make Resource folder
     res_dir = os.getcwd()
@@ -840,18 +951,29 @@ def dow_driver():
         with open("Resource/driver/geckodriver.zip", 'wb') as gec:
             gec.write(a.content)
 
+        gec.close()
+
         with open("Resource/driver/chromedriver-87.zip", 'wb') as c87:
             c87.write(b.content)
+
+        c87.close()
 
         with open("Resource/driver/chromedriver-88.zip", 'wb') as c88:
             c88.write(c.content)
 
+        c88.close()
+
         with open("Resource/txt/EULA.txt", 'wb') as eul:
             eul.write(d.content)
+
+        eul.close()
 
         with open("Resource/IAC-Icon.ico", "wb") as ico:
             ico.write(g.content)
         root.iconbitmap('Resource/IAC-Icon.ico')
+
+        ico.close()
+
         return
 
     except requests.exceptions.ConnectionError:
@@ -864,6 +986,8 @@ def exe_driver():
     with ZipFile('Resource/driver/geckodriver.zip', 'r') as zipObj:
         zipObj.extractall('Resource/driver')
 
+    zipObj.close()
+
     with ZipFile('Resource/driver/chromedriver-87.zip', 'r') as zipObj:
         zipObj.extractall('Resource/driver')
 
@@ -872,6 +996,8 @@ def exe_driver():
 
     os.rename(old_file_name, new_file_name)
 
+    zipObj.close()
+
     with ZipFile('Resource/driver/chromedriver-88.zip', 'r') as zipObj:
         zipObj.extractall('Resource/driver')
 
@@ -879,6 +1005,8 @@ def exe_driver():
     new_file_name = "Resource/driver/chromedriver_88.exe"
 
     os.rename(old_file_name, new_file_name)
+
+    zipObj.close()
 
     os.remove("Resource/driver/geckodriver.zip")
     os.remove("Resource/driver/chromedriver-87.zip")
@@ -896,12 +1024,16 @@ def mk_files():
     with open('Resource/JSON/LogIn.json', 'w') as lginfi:
         json.dump(login, lginfi)
 
+    lginfi.close()
+
     # Generating URLhistory.json
     safe_url = {
         'Last URL': ""
     }
     with open('Resource/JSON/URLhistory.json', 'w') as urlfi:
         json.dump(safe_url, urlfi)
+
+    urlfi.close()
 
     # Generating firstRun.json
     first__run = {
@@ -910,6 +1042,8 @@ def mk_files():
     }
     with open('Resource/JSON/firstRun.json', 'w') as runfil:
         json.dump(first__run, runfil)
+
+    runfil.close()
 
     # Generating Settings.json
     sett = {
@@ -920,6 +1054,9 @@ def mk_files():
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
+
+    setfil.close()
+
     return
 
 
@@ -1036,89 +1173,11 @@ obj = json.loads(data)
 
 comments_path = str(obj['commentsPath'])
 
-disagree = False
+setfi.close()
 
-with open('Resource/txt/EULA.txt') as f:
-    if not ('User ' + os.getenv('username') + ' agreed to the EULA on') in f.read():
-        disagree = True
-
-with open('Resource/JSON/firstRun.json', 'r') as runfi:
-    run_data = runfi.read()
-run_obj = json.loads(run_data)
+eula_file()
 
 root.update()
-
-# try:
-#    root.update()
-# except TclError:
-#    print(Colors.WARNING, "This error occurs only during the first run. You can ignore it. Type 2", Colors.ENDC)
-
-if str(run_obj['First Run?']) == "Yes" and str(run_obj['Agree to EULA?']) == "No":
-    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
-                                  "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
-    if eula:
-        print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
-        first_run = {
-            'First Run?': "Yes",
-            'Agree to EULA?': "Yes"
-        }
-        with open('Resource/JSON/firstRun.json', 'w') as runfi:
-            json.dump(first_run, runfi)
-        runfi.close()
-        with open('Resource/txt/EULA.txt', 'a') as file:
-            file.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
-                       ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
-        file.close()
-
-    else:
-        print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
-        quit()
-elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Yes":
-    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
-                                  "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
-    if eula:
-        print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
-        first_run = {
-            'First Run?': "No",
-            'Agree to EULA?': "Yes"
-        }
-        with open('Resource/JSON/firstRun.json', 'w') as runfi:
-            json.dump(first_run, runfi)
-        runfi.close()
-        with open('Resource/txt/EULA.txt', 'a') as file:
-            file.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
-                       ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
-        file.close()
-    else:
-        print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
-        quit()
-
-elif disagree:
-    eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
-                                  "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
-    if eula:
-        print(Colors.OKGREEN, "Agreed to EULA", Colors.ENDC)
-        first_run = {
-            'First Run?': "No",
-            'Agree to EULA?': "Yes"
-        }
-        with open('Resource/JSON/firstRun.json', 'w') as runfi:
-            json.dump(first_run, runfi)
-        runfi.close()
-
-        with open("Resource/txt/EULA.txt", "a+") as file_object:
-            file_object.seek(0)
-            data = file_object.read(118)
-            if len(data) > 0:
-                file_object.write("\n")
-            file_object.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month,
-                                                                                                     e.year) +
-                              ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
-            file_object.close()
-
-    else:
-        print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
-        quit()
 
 messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only." + '\n' +
                        "Please use it accordingly!" + '\n' + '\n' + "@2020 - %s" % e.year + " by JueK3y")
@@ -1144,6 +1203,8 @@ e1 = ttk.Entry(root, textvariable=url_text)
 e1.insert(0, str(obj['Last URL']))
 e1.grid(row=0, column=1)
 
+URLFi.close()
+
 # Dropdown Menu
 OptionList = [
     "Firefox",
@@ -1156,7 +1217,6 @@ e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=1
 # Read LogIn file
 with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
     data = LgInFi.read()
-
 obj = json.loads(data)
 
 username_text = StringVar()
@@ -1168,6 +1228,8 @@ password_text = StringVar()
 e4 = ttk.Entry(root, textvariable=password_text, show='*')
 e4.insert(0, str(obj['Password']))
 e4.grid(row=1, column=3)
+
+LgInFi.close()
 
 
 def password():
