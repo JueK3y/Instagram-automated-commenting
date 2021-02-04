@@ -13,6 +13,8 @@ import random
 import os.path
 import pathlib
 import datetime
+import webbrowser
+
 import requests
 import tkinter as tk
 import subprocess as sp
@@ -764,6 +766,9 @@ def settings():
     def not_av():
         messagebox.showwarning("In progress", "This feature is currently not available.")
 
+    def set_help():
+        webbrowser.open_new(r"https://github.com/JueK3y/Instagram-automated-commenting/wiki/Help")
+
     def back():
         settingsWin.destroy()
 
@@ -820,7 +825,7 @@ def settings():
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
         place(x=210, y=90)
 
-    ttk.Button(settingsWin, text="Help", command=not_av).place(x=40, y=130, width=110)
+    ttk.Button(settingsWin, text="Help", command=set_help).place(x=40, y=130, width=110)
     ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=130, width=110)
 
 
@@ -1256,25 +1261,24 @@ e1.grid(row=0, column=1)
 
 URLFi.close()
 
-# Read Browser file
-with open('Resource/JSON/Browser.json', 'r') as BroFi:
-    data = BroFi.read()
-obj_b = json.loads(data)
-
 try:
+    # Read Browser file
+    with open('Resource/JSON/Browser.json', 'r') as BroFi:
+        data = BroFi.read()
+    obj_b = json.loads(data)
+
     if str(obj_b['Browser']) == "Chrome 87":
         OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Firefox"]
     elif str(obj_b['Browser']) == "Chrome 87":
         OptionList = ["Chrome 88", "Chrome 88", "Chrome 87", "Firefox"]
     else:
         OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88"]
+    BroFi.close()
 except FileNotFoundError:
     OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88"]
 
 browser_text = StringVar()
 e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110)  # height=25
-
-BroFi.close()
 
 # Read LogIn file
 with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
