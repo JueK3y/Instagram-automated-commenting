@@ -6,6 +6,7 @@ Please read Instagram's guidelines for more information.
 DO NOT indicate used program sections as your own. ©2020 - 2021 by www.github.com/JueK3y/
 """
 
+import sys
 import time
 import json
 import shutil
@@ -29,6 +30,8 @@ from tkinter.filedialog import askopenfilename
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
     InvalidSessionIdException, InvalidArgumentException
+
+
 # import ctypes
 
 # ctypes.windll.shcore.SetProcessDpiAwareness(1)
@@ -61,15 +64,15 @@ def connected():
 
 
 def line_count():
-    with open('Resource/JSON/settings.json', 'r') as setfi:
-        data_json = setfi.read()
+    with open('Resource/JSON/settings.json', 'r') as setfil:
+        data_json = setfil.read()
     obj_json = json.loads(data_json)
 
     # Time for commenting
     line_coun = 0
     for line in open(comments_path):
-        li = line.strip()
-        if not li.startswith("#"):
+        lin = line.strip()
+        if not lin.startswith("#"):
             line_coun += 1
 
     obj_json['Comment Lines'] = line_coun
@@ -193,8 +196,8 @@ def eula_file():
 
             with open("Resource/txt/EULA.txt", "a+") as file_object:
                 file_object.seek(0)
-                data = file_object.read(118)
-                if len(data) > 0:
+                data_f = file_object.read(118)
+                if len(data_f) > 0:
                     file_object.write("\n")
                 file_object.write('User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month,
                                                                                                          e.year) +
@@ -345,6 +348,7 @@ def auto_comment():
     elif browser_text.get() == 'Firefox':
         try:
             web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
+            time.sleep(5)
             web.maximize_window()
 
             # Save preferred browser
@@ -368,6 +372,7 @@ def auto_comment():
             chr_opt.add_argument("--incognito")
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_87.exe',
                                    options=chr_opt)
+            time.sleep(5)
             web.maximize_window()
 
             # Save preferred browser
@@ -391,6 +396,7 @@ def auto_comment():
             chr_opt.add_argument("--incognito")
             web = webdriver.Chrome(executable_path=os.getcwd() + '/Resource/driver/chromedriver_88.exe',
                                    options=chr_opt)
+            time.sleep(5)
             web.maximize_window()
 
             # Save preferred browser
@@ -404,6 +410,69 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Chrome was closed accidentally.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+
+    elif browser_text.get() == 'Edge 88':
+        try:
+            web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-88.exe')
+            time.sleep(5)
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Edge 88",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "Edge 88 couldn't be found. Please select another browser." + '\n' +
+                                 "It is also possible that Edge was closed accidentally.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+
+    elif browser_text.get() == 'Edge 89':
+        try:
+            web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-89.exe')
+            time.sleep(5)
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Edge 89",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "Edge 89 couldn't be found. Please select another browser." + '\n' +
+                                 "It is also possible that Edge was closed accidentally.")
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+
+    elif browser_text.get() == 'Edge 90':
+        try:
+            web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-90.exe')
+            time.sleep(5)
+            web.maximize_window()
+
+            # Save preferred browser
+            brwco = {
+                'Browser': "Edge 90",
+            }
+            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
+                json.dump(brwco, BrwFi)
+            BrwFi.close()
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "Edge 90 couldn't be found. Please select another browser." + '\n' +
+                                 "It is also possible that Edge was closed accidentally.")
             b1_text.set("Run")
             b1["command"] = threading_run
             return
@@ -699,18 +768,18 @@ def settings():
         setfile.close()
 
     def add_com():
-        with open('Resource/JSON/settings.json', 'r') as setfil:
-            data_sett = setfil.read()
-        obj_sett = json.loads(data_sett)
+        with open('Resource/JSON/settings.json', 'r') as setfile:
+            data_sett = setfile.read()
+        obj_set = json.loads(data_sett)
 
         f_comm = pathlib.Path(comments_path)
 
-        if not f_comm.exists() or str(obj_sett['commentsPath']) == "":
+        if not f_comm.exists() or str(obj_set['commentsPath']) == "":
             if not pathlib.Path('Resource/txt/comments.txt').exists():
                 comment = tk.messagebox.askyesno('No comments', "You don't have any comments to edit." + '\n' +
                                                  "Do you want to create some now?", icon='info')
                 if comment:
-                    obj_sett['commentsPath'] = 'Resource/txt/comments.txt'
+                    obj_set['commentsPath'] = 'Resource/txt/comments.txt'
 
                     comment_txt = open("Resource/txt/comments.txt", "a")
                     comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
@@ -718,14 +787,14 @@ def settings():
                     comment_txt.close()
 
                     programName = "notepad.exe"
-                    fileName = str(obj_sett['commentsPath'])
+                    fileName = str(obj_set['commentsPath'])
                     sp.Popen([programName, fileName])
 
                     settingsWin.update()
                     root.update()
                     return
             else:
-                obj_sett['commentsPath'] = 'Resource/txt/comments.txt'
+                obj_set['commentsPath'] = 'Resource/txt/comments.txt'
 
                 programName = "notepad.exe"
                 fileName = 'Resource/txt/comments.txt'
@@ -736,14 +805,14 @@ def settings():
                 return
         else:
             programName = "notepad.exe"
-            fileName = str(obj_sett['commentsPath'])
+            fileName = str(obj_set['commentsPath'])
             sp.Popen([programName, fileName])
 
             settingsWin.update()
             root.update()
             return
 
-        setfil.close()
+        setfile.close()
 
     def sel_com():
         commentspath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
@@ -751,8 +820,8 @@ def settings():
         if commentspath:
             messagebox.showinfo("Success", "Your .txt file has been added to the comments.")
 
-            with open('Resource/JSON/settings.json', 'r') as setfil:
-                data_set = setfil.read()
+            with open('Resource/JSON/settings.json', 'r') as setfile:
+                data_set = setfile.read()
             obj_set = json.loads(data_set)
 
             obj_set['commentsPath'] = commentspath
@@ -760,7 +829,7 @@ def settings():
             with open('Resource/JSON/settings.json', 'w') as settfile:
                 json.dump(obj_set, settfile)
 
-            setfil.close()
+            setfile.close()
             settfile.close()
 
     def not_av():
@@ -783,44 +852,68 @@ def settings():
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
         place(x=95, y=25, width=70)
 
-    ttk.Label(settingsWin, text="Browser").place(x=245, y=5)
-    ttk.Button(settingsWin, text="Import...", command=not_av).place(x=210, y=25, width=110)
+    ttk.Label(settingsWin, text="More Browser").place(x=230, y=5)
+    ttk.Button(settingsWin, text="Load", command=not_av).place(x=210, y=25, width=50)
+    ttk.Button(settingsWin, text="Import", command=not_av).place(x=260, y=25, width=60)
+    # ttk.Button(settingsWin, text="Import...", command=not_av).place(x=210, y=25, width=110)
 
     ttk.Label(settingsWin, text="Comments").place(x=65, y=63)
     ttk.Button(settingsWin, text="Edit", command=add_com).place(x=40, y=83, width=50)
     ttk.Button(settingsWin, text="Import", command=sel_com).place(x=90, y=83, width=60)
 
-    la = ttk.Label(settingsWin, text="Average duration")
-    la.place(x=220, y=65)
+    try:
+        with open('Resource/JSON/settings.json', 'r') as setfil:
+            data_json = setfil.read()
+        obj_sett = json.loads(data_json)
+
+        if pathlib.Path(str(obj_sett['commentsPath'])).exists():
+            la = ttk.Label(settingsWin, text='Average duration: ' + str(round((((int(obj_sett['Max Y']) - 20) / 60) *
+                                                                               float(obj_sett['Comment Lines'])), 2)) +
+                                             'min')
+
+            la.place(x=205, y=65)
+        else:
+            la = ttk.Label(settingsWin, text='Average duration')
+            la.place(x=220, y=65)
+        setfi.close()
+    except KeyError:
+        la = ttk.Label(settingsWin, text='Average duration')
+        la.place(x=220, y=65)
+
+    class ShowScale:
+        scale = 0
 
     def change_max_y(v):
         try:
             line_count()
 
-            with open('Resource/JSON/settings.json', 'r') as setfil:
-                data_json = setfil.read()
-            obj_sett = json.loads(data_json)
+            with open('Resource/JSON/settings.json', 'r') as setfile:
+                dat_json = setfile.read()
+            obj_set = json.loads(dat_json)
 
-            print(obj_sett['Comment Lines'])
+            print(obj_set['Comment Lines'])
 
             max_y = int(15 * (float(v) + 1) + 21)  # v = 3 standard
 
-            obj_sett['Max Y'] = str(max_y + 20)
-            print(obj_sett['Max Y'])
+            obj_set['Max Y'] = str(max_y + 20)
+            print(obj_set['Max Y'])
 
-            average = (max_y / 60) * float(obj_sett['Comment Lines'])
+            average = (max_y / 60) * float(obj_set['Comment Lines'])
 
             la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
             la.place(x=205, y=65)
 
             with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_sett, settfile)
+                json.dump(obj_set, settfile)
 
-            setfil.close()
+            setfile.close()
             settfile.close()
+            return
 
         except FileNotFoundError:
-            ask_file()
+            if not ShowScale.scale:
+                ask_file()
+                ShowScale.scale = 1
 
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
         place(x=210, y=90)
@@ -875,6 +968,7 @@ def stop():
 def restart():
     root.destroy()
     os.system('python ' + str(os.path.basename(__file__)))
+    os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
 
 
 def check_content():
@@ -956,10 +1050,6 @@ def check_content():
             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
             quit()
 
-    # d_Resource.close(), f_icon.close(), d_txt.close(), f_eula.close(), d_driver.close(), f_gecko.close()
-    # f_chrome_87.close(), f_chrome_88.close(), d_JSON.close(), f_login.close(), f_url.close()
-    # f_run.close(), f_set.close()
-
 
 def mk_folder():
     # Make Resource folder
@@ -993,6 +1083,9 @@ def dow_driver():
     gecko = "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-win64.zip"
     chr87 = "https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_win32.zip"
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
+    edg88 = "https://msedgedriver.azureedge.net/88.0.705.56/edgedriver_win64.zip"   # x64
+    edg89 = "https://msedgedriver.azureedge.net/89.0.774.18/edgedriver_win64.zip"   # x64
+    edg90 = "https://msedgedriver.azureedge.net/90.0.787.0/edgedriver_win64.zip"    # x64
     EULA = "https://juek3y.com/src/download/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
     icon = "https://juek3y.com/src/download/img/IAC-Icon-Ver.-2.ico"
 
@@ -1000,8 +1093,11 @@ def dow_driver():
         a = requests.get(gecko)
         b = requests.get(chr87)
         c = requests.get(chr88)
-        d = requests.get(EULA)
-        g = requests.get(icon)
+        d = requests.get(edg88)
+        ea = requests.get(edg89)
+        f = requests.get(edg90)
+        g = requests.get(EULA)
+        h = requests.get(icon)
 
         with open("Resource/driver/geckodriver.zip", 'wb') as gec:
             gec.write(a.content)
@@ -1018,13 +1114,28 @@ def dow_driver():
 
         c88.close()
 
+        with open("Resource/driver/edgedriver-x64-88.zip", 'wb') as edg88:
+            edg88.write(d.content)
+
+        edg88.close()
+
+        with open("Resource/driver/edgedriver-x64-89.zip", 'wb') as edg89:
+            edg89.write(ea.content)
+
+        edg89.close()
+
+        with open("Resource/driver/edgedriver-x64-90.zip", 'wb') as edg90:
+            edg90.write(f.content)
+
+        edg90.close()
+
         with open("Resource/txt/EULA.txt", 'wb') as eul:
-            eul.write(d.content)
+            eul.write(g.content)
 
         eul.close()
 
         with open("Resource/IAC-Icon.ico", "wb") as ico:
-            ico.write(g.content)
+            ico.write(h.content)
         root.iconbitmap('Resource/IAC-Icon.ico')
 
         ico.close()
@@ -1038,11 +1149,13 @@ def dow_driver():
 
 
 def exe_driver():
+    # Firefox
     with ZipFile('Resource/driver/geckodriver.zip', 'r') as zipObj:
         zipObj.extractall('Resource/driver')
 
     zipObj.close()
 
+    # Chrome
     with ZipFile('Resource/driver/chromedriver-87.zip', 'r') as zipObj:
         zipObj.extractall('Resource/driver')
 
@@ -1063,9 +1176,44 @@ def exe_driver():
 
     zipObj.close()
 
+    # Edge
+    with ZipFile('Resource/driver/edgedriver-x64-88.zip', 'r') as zipObj:
+        zipObj.extractall('Resource/driver')
+
+    old_file_name = "Resource/driver/msedgedriver.exe"
+    new_file_name = "Resource/driver/edgedriver-x64-88.exe"
+
+    os.rename(old_file_name, new_file_name)
+
+    zipObj.close()
+
+    with ZipFile('Resource/driver/edgedriver-x64-89.zip', 'r') as zipObj:
+        zipObj.extractall('Resource/driver')
+
+    old_file_name = "Resource/driver/msedgedriver.exe"
+    new_file_name = "Resource/driver/edgedriver-x64-89.exe"
+
+    os.rename(old_file_name, new_file_name)
+
+    zipObj.close()
+
+    with ZipFile('Resource/driver/edgedriver-x64-90.zip', 'r') as zipObj:
+        zipObj.extractall('Resource/driver')
+
+    old_file_name = "Resource/driver/msedgedriver.exe"
+    new_file_name = "Resource/driver/edgedriver-x64-90.exe"
+
+    os.rename(old_file_name, new_file_name)
+
+    zipObj.close()
+
     os.remove("Resource/driver/geckodriver.zip")
     os.remove("Resource/driver/chromedriver-87.zip")
     os.remove("Resource/driver/chromedriver-88.zip")
+    os.remove("Resource/driver/edgedriver-x64-88.zip")
+    os.remove("Resource/driver/edgedriver-x64-89.zip")
+    os.remove("Resource/driver/edgedriver-x64-90.zip")
+    shutil.rmtree("Resource/driver/Driver_Notes")
     return
 
 
@@ -1268,14 +1416,20 @@ try:
     obj_b = json.loads(data)
 
     if str(obj_b['Browser']) == "Chrome 87":
-        OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Firefox"]
+        OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90", "Firefox"]
     elif str(obj_b['Browser']) == "Chrome 87":
-        OptionList = ["Chrome 88", "Chrome 88", "Chrome 87", "Firefox"]
+        OptionList = ["Chrome 88", "Chrome 88", "Chrome 87", "Edge 90", "Edge 89", "Edge 88", "Firefox"]
+    elif str(obj_b['Browser']) == "Edge 88":
+        OptionList = ["Edge 88", "Edge 88", "Edge 89", "Edge 90", "Chrome 87", "Chrome 88", "Firefox"]
+    elif str(obj_b['Browser']) == "Edge 89":
+        OptionList = ["Edge 89", "Edge 89", "Edge 88", "Edge 90", "Chrome 87", "Chrome 88", "Firefox"]
+    elif str(obj_b['Browser']) == "Edge 90":
+        OptionList = ["Edge 90", "Edge 90", "Edge 89", "Edge 80", "Chrome 88", "Chrome 87", "Firefox"]
     else:
-        OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88"]
+        OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90"]
     BroFi.close()
 except FileNotFoundError:
-    OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88"]
+    OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90"]
 
 browser_text = StringVar()
 e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110)  # height=25
