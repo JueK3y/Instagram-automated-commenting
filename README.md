@@ -87,6 +87,11 @@ The following tools were used to develop the program:
 
 _The program was **not** built using the Instagram API._
 
+
+## Leave a ⭐
+If you liked this project, leave a star!
+<br>It would mean a lot for me :)
+
 <br>
 
 ## Legal notice
