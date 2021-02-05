@@ -1147,6 +1147,11 @@ def dow_driver():
         print(Colors.FAIL, "This is an time-out error! Please restart the program and try it again.", Colors.ENDC)
         messagebox.showerror("Time out", "Something went wrong when downloading the files. Please restart the program.")
 
+    except requests.exceptions.ChunkedEncodingError:
+        print(Colors.FAIL, requests.exceptions.ChunkedEncodingError, "for dow_driver()", Colors.ENDC)
+        print(Colors.FAIL, "This is an time-out error! Please restart the program and try it again.", Colors.ENDC)
+        messagebox.showerror("Time out", "Something went wrong when downloading the files. Please restart the program.")
+
 
 def exe_driver():
     # Firefox
