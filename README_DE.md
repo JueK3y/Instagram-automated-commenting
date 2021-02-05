@@ -62,7 +62,7 @@ Das Programm wird unter Umständen nicht für jede Hardware funktionieren.
 
 
 _Eventuell funktioniert es nicht für MacOS (OSX) und Linux,
-<br>da es unterschiede in der Kodierungsweiße gibt. Ich werde aber daran arbeiten,
+<br>da es unterschiede in der Kodierungsweise gibt. Ich werde aber daran arbeiten,
 <br>das Programm für diese Systeme zum laufen zu bekommen._
 
 
