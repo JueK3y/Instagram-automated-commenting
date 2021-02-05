@@ -65,11 +65,11 @@ _Maybe it doesn't work for MacOS (OSX) and Linux,
 <br>But I will work on getting the program to work for these systems._
 
 
-## Probleme und fehlende Features
+## Problems and missing Features
 If you encounter a problem while using IAC,
 <br>I would be very grateful if you could create an [issue](https://github.com/JueK3y/Instagram-automated-commenting/issues) for it.
 <br>This way I can keep track of all the issues that need to be fixed.
-<br> If you want, you can also look into the already existing Issues #1 and #2
+<br> If you want, you can also look into the already existing [Issues](https://github.com/JueK3y/Instagram-automated-commenting/issues).
 <br>
 <br>In addition, I have created a [wiki with a help page](https://github.com/JueK3y/Instagram-automated-commenting/wiki).
 <br>If you have problems you can also look there.
