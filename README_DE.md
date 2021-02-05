@@ -88,6 +88,11 @@ Für die Entwicklung des Programmes wurden folgende Tools benutzt:
 
 _Das Programm wurde **nicht** mit der Instagram API gebaut._
 
+
+## Leave a ⭐
+Wenn dir dieses Projekt gefällt, lass einen Stern da :)
+<br>Das würde mir sehr viel bedeuten.
+
 <br>
 
 ## Rechtliche Hinweiße
