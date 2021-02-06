@@ -646,8 +646,8 @@ def auto_comment():
                         quit()
 
         comment()
-        comment()
-        comment()
+        # comment()
+        # comment()
 
 
 def threading_settings():
