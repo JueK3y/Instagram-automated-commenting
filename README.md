@@ -23,8 +23,8 @@ Technical features:
   <br>and will only be stored on your computer
 - Frequent updates: On all problems from the
   <br>Issue Tracker is currently being worked on
-- Open Source: The authenticity and functionality of the code <br>can be verified at any time.
-  <br>can be checked at any time itself
+- Open Source: The authenticity and functionality of the code
+<br>can be verified at any time.
 - Everything in one file, which is only 15 MB in size
 - Automatic download of all required files
 
