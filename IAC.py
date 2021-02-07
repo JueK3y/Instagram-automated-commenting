@@ -658,7 +658,7 @@ def threading_settings():
 def settings():
     settingsWin = Toplevel(root)
     settingsWin.title("Settings | Automated Commenting")
-    settingsWin.geometry('350x170'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
+    settingsWin.geometry('350x250'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
     try:
         settingsWin.iconbitmap('Resource/IAC-Icon.ico')
     except TclError:
@@ -842,24 +842,24 @@ def settings():
         settingsWin.destroy()
 
     # Content
+    # First line
     ttk.Label(settingsWin, text="Appearance").place(x=65, y=5)
     if light:
         sw_appearance = tk.StringVar(value='lightMode')
     else:
         sw_appearance = tk.StringVar(value='darkMode')
     ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light). \
-        place(x=35, y=25, width=70)
+        place(x=35, y=27, width=70)
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
-        place(x=95, y=25, width=70)
+        place(x=95, y=27, width=70)
 
-    ttk.Label(settingsWin, text="More Browser").place(x=230, y=5)
-    ttk.Button(settingsWin, text="Load", command=not_av).place(x=210, y=25, width=50)
-    ttk.Button(settingsWin, text="Import", command=not_av).place(x=260, y=25, width=60)
-    # ttk.Button(settingsWin, text="Import...", command=not_av).place(x=210, y=25, width=110)
+    ttk.Label(settingsWin, text="High quality mode").place(x=220, y=5)
+    ttk.Checkbutton(settingsWin, text="Activate Mode", onvalue=1, offvalue=0, command=not_av).place(x=220, y=25)  # variable=var1
 
-    ttk.Label(settingsWin, text="Comments").place(x=65, y=63)
-    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=40, y=83, width=50)
-    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=90, y=83, width=60)
+    # Second line
+    ttk.Label(settingsWin, text="Comments").place(x=65, y=67)
+    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=40, y=90, width=50)
+    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=90, y=90, width=60)
 
     try:
         with open('Resource/JSON/settings.json', 'r') as setfil:
@@ -871,14 +871,14 @@ def settings():
                                                                                float(obj_sett['Comment Lines'])), 2)) +
                                              'min')
 
-            la.place(x=205, y=65)
+            la.place(x=205, y=67)
         else:
             la = ttk.Label(settingsWin, text='Average duration')
-            la.place(x=220, y=65)
+            la.place(x=220, y=67)
         setfi.close()
     except KeyError:
         la = ttk.Label(settingsWin, text='Average duration')
-        la.place(x=220, y=65)
+        la.place(x=220, y=67)
 
     class ShowScale:
         scale = 0
@@ -916,10 +916,26 @@ def settings():
                 ShowScale.scale = 1
 
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
-        place(x=210, y=90)
+        place(x=210, y=96)
 
-    ttk.Button(settingsWin, text="Help", command=set_help).place(x=40, y=130, width=110)
-    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=130, width=110)
+    # 3. line
+    ttk.Label(settingsWin, text="Langauge").place(x=68, y=129)
+    if light:
+        sw_appearance = tk.StringVar(value='en')
+    else:
+        sw_appearance = tk.StringVar(value='de')
+    ttk.Radiobutton(settingsWin, text="EN", variable=sw_appearance, value="en", command=not_av). \
+        place(x=45, y=153)
+    ttk.Radiobutton(settingsWin, text="DE", variable=sw_appearance, value="de", command=not_av). \
+        place(x=95, y=153)
+
+    ttk.Label(settingsWin, text="More Browser").place(x=230, y=129)
+    ttk.Button(settingsWin, text="Load", command=not_av).place(x=210, y=152, width=50)
+    ttk.Button(settingsWin, text="Import", command=not_av).place(x=260, y=152, width=60)
+
+    # 4. line
+    ttk.Button(settingsWin, text="Help", command=set_help).place(x=40, y=200, width=110)
+    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=200, width=110)
 
 
 def close():
