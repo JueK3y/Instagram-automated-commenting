@@ -1422,7 +1422,6 @@ try:
         print(Colors.OKGREEN, "Using HQ Mode", Colors.ENDC)
     setfi.close()
 except FileNotFoundError:
-    print("Error 1")
     root = ThemedTk(theme="yaru")
     root.geometry("440x105")
     light = True
@@ -1430,7 +1429,6 @@ except FileNotFoundError:
     root.title("Automated Commenting")
     check_content()
 except KeyError:
-    print("Error 2")
     root = tk.Tk()
     root.geometry("440x105")
     light = True
