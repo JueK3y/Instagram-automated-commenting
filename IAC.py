@@ -32,11 +32,6 @@ from selenium.common.exceptions import WebDriverException, NoSuchElementExceptio
     InvalidSessionIdException, InvalidArgumentException
 
 
-# import ctypes
-
-# ctypes.windll.shcore.SetProcessDpiAwareness(1)
-
-
 class Colors:
     OKGREEN = '\033[92m'
     WARNING = '\033[93m'
@@ -670,6 +665,25 @@ def settings():
         settingsWin['background'] = '#464646'
     else:
         print("Uhh, this wasn't supposed happen.")
+        restart()
+
+    def used():
+        msg = messagebox.askyesno("Already selected", "The language is already set to english." + '\n' +
+                                  "Do you want to reapply it?")
+        if msg:
+            with open('Resource/JSON/settings.json', 'r') as langfil:
+                lang_data = langfil.read()
+            lang_obj = json.loads(lang_data)
+
+            lang_obj['Lang'] = "en"
+
+            with open('Resource/JSON/settings.json', 'w') as langfi:
+                json.dump(lang_obj, langfi)
+
+            langfi.close()
+            langfil.close()
+
+            restart()
 
     def app_light():
         with open('Resource/JSON/settings.json', 'r') as setfile:
@@ -767,6 +781,35 @@ def settings():
 
         setfile.close()
 
+    def hqm():
+        with open('Resource/JSON/settings.json', 'r') as setfile:
+            data_sett = setfile.read()
+        obj_set = json.loads(data_sett)
+
+        if hqm_var == 1:
+            msg = messagebox.askokcancel("Activate HQ mode", "Use this function if the program is displayed blurred." +
+                                         '\n' + "Activation may cause elements to be moved." +
+                                         '\n' + "The program will restart itself.", icon="info")
+            if msg:
+                obj_set['HQM'] = "Activated"
+                with open('Resource/JSON/settings.json', 'w') as settfil:
+                    json.dump(obj_set, settfil)
+                setfile.close()
+                settfil.close()
+                restart()
+
+        elif hqm_var == 0:
+            msg = messagebox.askokcancel("De-activate HQ mode", "The function will be de-activated." +
+                                         '\n' + "The program will restart itself.", icon="info")
+            if msg:
+                obj_set['HQM'] = ""
+
+                with open('Resource/JSON/settings.json', 'w') as settfil:
+                    json.dump(obj_set, settfil)
+                setfile.close()
+                settfil.close()
+                restart()
+
     def add_com():
         with open('Resource/JSON/settings.json', 'r') as setfile:
             data_sett = setfile.read()
@@ -843,23 +886,54 @@ def settings():
 
     # Content
     # First line
-    ttk.Label(settingsWin, text="Appearance").place(x=65, y=5)
+    ttk.Label(settingsWin, text="Langauge").place(x=64, y=5)
+
+    with open('Resource/JSON/settings.json', 'r') as setfile:
+        data_set = setfile.read()
+    obj_set = json.loads(data_set)
+
+    if obj_set['commentsPath'] == "de":
+        lang = tk.StringVar(value='de')
+    else:
+        lang = tk.StringVar(value='en')
+    ttk.Radiobutton(settingsWin, text="EN", variable=lang, value="en", command=used). \
+        place(x=44, y=29)
+    ttk.Radiobutton(settingsWin, text="DE", variable=lang, value="de", command=not_av). \
+        place(x=94, y=29)
+
+    setfile.close()
+
+    ttk.Label(settingsWin, text="More Browser").place(x=221, y=5)
+    ttk.Button(settingsWin, text="Load", command=not_av).place(x=204, y=27, width=50)
+    ttk.Button(settingsWin, text="Import", command=not_av).place(x=254, y=27, width=60)
+
+    # Second line
+    ttk.Label(settingsWin, text="Appearance").place(x=59, y=67)
     if light:
         sw_appearance = tk.StringVar(value='lightMode')
     else:
         sw_appearance = tk.StringVar(value='darkMode')
     ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light). \
-        place(x=35, y=27, width=70)
+        place(x=34, y=91, width=70)
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
-        place(x=95, y=27, width=70)
+        place(x=94, y=91, width=70)
 
-    ttk.Label(settingsWin, text="High quality mode").place(x=220, y=5)
-    ttk.Checkbutton(settingsWin, text="Activate Mode", onvalue=1, offvalue=0, command=not_av).place(x=220, y=25)  # variable=var1
+    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=67)
+    with open('Resource/JSON/settings.json', 'r') as setfil:
+        data_json = setfil.read()
+    obj_sett = json.loads(data_json)
 
-    # Second line
-    ttk.Label(settingsWin, text="Comments").place(x=65, y=67)
-    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=40, y=90, width=50)
-    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=90, y=90, width=60)
+    if str(obj_sett['HQM']) == "Activated":
+        ttk.Checkbutton(settingsWin, text="Deactivate Mode", variable=IntVar(value=1), command=hqm).place(x=206, y=91)
+        hqm_var = 0
+    else:
+        ttk.Checkbutton(settingsWin, text="Activate Mode", command=hqm).place(x=206, y=91)
+        hqm_var = 1
+
+    # Third line
+    ttk.Label(settingsWin, text="Comments").place(x=61, y=129)
+    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=36, y=151, width=50)
+    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=86, y=151, width=60)
 
     try:
         with open('Resource/JSON/settings.json', 'r') as setfil:
@@ -868,17 +942,18 @@ def settings():
 
         if pathlib.Path(str(obj_sett['commentsPath'])).exists():
             la = ttk.Label(settingsWin, text='Average duration: ' + str(round((((int(obj_sett['Max Y']) - 20) / 60) *
-                                                                               float(obj_sett['Comment Lines'])), 2)) +
+                                                                               float(obj_sett['Comment Lines'])),
+                                                                              2)) +
                                              'min')
 
-            la.place(x=205, y=67)
+            la.place(x=200, y=129)
         else:
             la = ttk.Label(settingsWin, text='Average duration')
-            la.place(x=220, y=67)
+            la.place(x=212, y=129)
         setfi.close()
     except KeyError:
         la = ttk.Label(settingsWin, text='Average duration')
-        la.place(x=220, y=67)
+        la.place(x=212, y=129)
 
     class ShowScale:
         scale = 0
@@ -893,7 +968,7 @@ def settings():
 
             print(obj_set['Comment Lines'])
 
-            max_y = int(15 * (float(v) + 1) + 21)  # v = 3 standard
+            max_y = int(15 * (float(v) + 1) + 21)
 
             obj_set['Max Y'] = str(max_y + 20)
             print(obj_set['Max Y'])
@@ -901,7 +976,7 @@ def settings():
             average = (max_y / 60) * float(obj_set['Comment Lines'])
 
             la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
-            la.place(x=205, y=65)
+            la.place(x=200, y=129)
 
             with open('Resource/JSON/settings.json', 'w') as settfile:
                 json.dump(obj_set, settfile)
@@ -916,26 +991,11 @@ def settings():
                 ShowScale.scale = 1
 
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
-        place(x=210, y=96)
-
-    # 3. line
-    ttk.Label(settingsWin, text="Langauge").place(x=68, y=129)
-    if light:
-        sw_appearance = tk.StringVar(value='en')
-    else:
-        sw_appearance = tk.StringVar(value='de')
-    ttk.Radiobutton(settingsWin, text="EN", variable=sw_appearance, value="en", command=not_av). \
-        place(x=45, y=153)
-    ttk.Radiobutton(settingsWin, text="DE", variable=sw_appearance, value="de", command=not_av). \
-        place(x=95, y=153)
-
-    ttk.Label(settingsWin, text="More Browser").place(x=230, y=129)
-    ttk.Button(settingsWin, text="Load", command=not_av).place(x=210, y=152, width=50)
-    ttk.Button(settingsWin, text="Import", command=not_av).place(x=260, y=152, width=60)
+        place(x=207, y=158, width=110)
 
     # 4. line
-    ttk.Button(settingsWin, text="Help", command=set_help).place(x=40, y=200, width=110)
-    ttk.Button(settingsWin, text="Back", command=back).place(x=210, y=200, width=110)
+    ttk.Button(settingsWin, text="Help", command=set_help).place(x=36, y=200, width=110)
+    ttk.Button(settingsWin, text="Back", command=back).place(x=204, y=200, width=110)
 
 
 def close():
@@ -982,6 +1042,7 @@ def stop():
 
 
 def restart():
+    print(Colors.OKGREEN, "The program will restart itself", Colors.ENDC)
     root.destroy()
     os.system('python ' + str(os.path.basename(__file__)))
     os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
@@ -1013,15 +1074,13 @@ def check_content():
                                                                    "some time.")
                 if msg_box:
                     print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                    # Delete old folders
                     try:
                         shutil.rmtree("Resource")
                         mk_folder()
                         dow_driver()
                         exe_driver()
                         mk_files()
-                        root.destroy()
-                        os.system('python ' + str(os.path.basename(__file__)))
+                        restart()
                     except PermissionError:
                         messagebox.showerror("Permission Error",
                                              "An error occurred. Restart the program with administrator rights.")
@@ -1034,15 +1093,13 @@ def check_content():
                                              "Some files are being downloaded. This will take some time.")
             if msg_box:
                 print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                # Delete old folders
                 try:
                     shutil.rmtree("Resource")
                     mk_folder()
                     dow_driver()
                     exe_driver()
                     mk_files()
-                    root.destroy()
-                    os.system('python ' + str(os.path.basename(__file__)))
+                    restart()
                 except PermissionError:
                     messagebox.showerror("Permission Error",
                                          "An error occurred. Restart the program with administrator rights.")
@@ -1055,13 +1112,11 @@ def check_content():
         msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
         if msg_box:
             print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-            # Delete old folders
             mk_folder()
             dow_driver()
             exe_driver()
             mk_files()
-            root.destroy()
-            os.system('python ' + str(os.path.basename(__file__)))
+            restart()
         else:
             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
             quit()
@@ -1099,9 +1154,9 @@ def dow_driver():
     gecko = "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-win64.zip"
     chr87 = "https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_win32.zip"
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
-    edg88 = "https://msedgedriver.azureedge.net/88.0.705.56/edgedriver_win64.zip"   # x64
-    edg89 = "https://msedgedriver.azureedge.net/89.0.774.18/edgedriver_win64.zip"   # x64
-    edg90 = "https://msedgedriver.azureedge.net/90.0.787.0/edgedriver_win64.zip"    # x64
+    edg88 = "https://msedgedriver.azureedge.net/88.0.705.56/edgedriver_win64.zip"  # x64
+    edg89 = "https://msedgedriver.azureedge.net/89.0.774.18/edgedriver_win64.zip"  # x64
+    edg90 = "https://msedgedriver.azureedge.net/90.0.787.0/edgedriver_win64.zip"  # x64
     EULA = "https://juek3y.com/src/download/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
     icon = "https://juek3y.com/src/download/img/IAC-Icon-Ver.-2.ico"
 
@@ -1274,7 +1329,9 @@ def mk_files():
         'commentsPath': "Resource/txt/comments.txt",
         'lightMode': "yes",
         'darkMode': "no",
-        'Max Y': 86
+        'Max Y': 86,
+        'HQM':  "",
+        "Lang": "en"
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
@@ -1315,6 +1372,8 @@ def check_json():
         str(obj_json['lightMode'])
         str(obj_json['darkMode'])
         str(obj_json['Max Y'])
+        str(obj_json['HQM'])
+        str(obj_json['Lang'])
         json_file.close()
     except KeyError:
         shutil.rmtree("Resource/JSON")
@@ -1356,8 +1415,14 @@ try:
         dark = False
         root.title("Automated Commenting")
         check_content()
+
+    if str(obj['HQM']) == "Activated":
+        import ctypes
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)
+        print(Colors.OKGREEN, "Using HQ Mode", Colors.ENDC)
     setfi.close()
 except FileNotFoundError:
+    print("Error 1")
     root = ThemedTk(theme="yaru")
     root.geometry("440x105")
     light = True
@@ -1365,6 +1430,7 @@ except FileNotFoundError:
     root.title("Automated Commenting")
     check_content()
 except KeyError:
+    print("Error 2")
     root = tk.Tk()
     root.geometry("440x105")
     light = True
