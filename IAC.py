@@ -275,12 +275,22 @@ def run():
                                                                                             "continue?",
                                          icon='warning')
             if msg:
-                messagebox.showinfo("Duration", "The commenting will take an average of " +
-                                    str(round(obj_sett['Time'], 2)) + " minutes.")
+                msg = messagebox.askyesno("Duration", "The commenting will take an average of " +
+                                          str(round(obj_sett['Time'], 2)) + " minutes." + "\n" +
+                                          "Do you want to loop the commenting?")
+                if msg:
+                    run.loop = True
+                    print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
+
                 check_comment()
         else:
-            messagebox.showinfo("Duration", "The commenting will take an average of " +
-                                str(round(obj_sett['Time'], 2)) + " minutes.")
+            msg = messagebox.askyesno("Duration", "The commenting will take an average of " +
+                                      str(round(obj_sett['Time'], 2)) + " minutes." + "\n" +
+                                      "Do you want to loop the commenting?")
+            if msg:
+                run.loop = True
+                print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
+
             check_comment()
 
         settfi.close()
@@ -587,7 +597,7 @@ def auto_comment():
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         web.find_element_by_css_selector('.sqdOP')
-        svin = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/section/div/button')
+        svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
         svin.click()
 
         time.sleep(10)
@@ -640,9 +650,18 @@ def auto_comment():
                         # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
                         quit()
 
-        comment()
-        # comment()
-        # comment()
+        if run.loop:
+            print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
+            while True:
+                print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
+                comment()
+        else:
+            comment()
+            web.close()
+
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            messagebox.showinfo("Finished", "All comments are posted.")
 
 
 def threading_settings():
@@ -1330,7 +1349,7 @@ def mk_files():
         'lightMode': "yes",
         'darkMode': "no",
         'Max Y': 86,
-        'HQM':  "",
+        'HQM': "",
         "Lang": "en"
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
@@ -1418,6 +1437,7 @@ try:
 
     if str(obj['HQM']) == "Activated":
         import ctypes
+
         ctypes.windll.shcore.SetProcessDpiAwareness(1)
         print(Colors.OKGREEN, "Using HQ Mode", Colors.ENDC)
     setfi.close()
