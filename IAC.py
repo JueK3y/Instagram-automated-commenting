@@ -54,7 +54,7 @@ def connected():
             return
         except NameError:
             print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
-            quit()
+            sys.exit(1)
             return
 
 
@@ -154,7 +154,7 @@ def eula_file():
 
         else:
             print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
-            quit()
+            sys.exit(1)
     elif str(run_obj['First Run?']) == "No" and str(run_obj['Agree to EULA?']) != "Yes":
         eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
                                       "You can find the EULA here: juek3y.com/en/code/download/terms-of-service")
@@ -174,7 +174,7 @@ def eula_file():
             file.close()
         else:
             print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
-            quit()
+            sys.exit(1)
 
     elif disagree:
         eula = messagebox.askokcancel("Agree EULA", "Do you agree to the end user license agreement (EULA)?" + '\n' +
@@ -201,7 +201,7 @@ def eula_file():
 
         else:
             print(Colors.FAIL, "Rejected the EULA", Colors.ENDC)
-            quit()
+            sys.exit(1)
 
     f.close()
     runfi.close()
@@ -319,7 +319,7 @@ def auto_comment():
         b1_text.set("Stop")
         b1["command"] = stop
     except RuntimeError:
-        quit()
+        sys.exit(1)
 
     if browser_text.get() == 'Internet Explorer':
         try:
@@ -516,7 +516,7 @@ def auto_comment():
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-        quit()
+        sys.exit(1)
 
     try:
         comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
@@ -537,7 +537,7 @@ def auto_comment():
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-        quit()
+        sys.exit(1)
 
     try:
         alias = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[1]/div/label/input')
@@ -566,7 +566,7 @@ def auto_comment():
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-        quit()
+        sys.exit(1)
 
     try:
         web.find_element_by_css_selector('#slfErrorAlert')
@@ -577,7 +577,7 @@ def auto_comment():
         return
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-        quit()
+        sys.exit(1)
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
@@ -638,7 +638,7 @@ def auto_comment():
                     except InvalidSessionIdException:
                         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
                         # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-                        quit()
+                        sys.exit(1)
 
         comment()
         # comment()
@@ -1009,13 +1009,13 @@ def close():
             b1["command"] = threading_run
         except NameError:
             print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
-            quit()
+            sys.exit(1)
         except InvalidSessionIdException:
             print(Colors.WARNING, InvalidSessionIdException, "for close()", Colors.ENDC)
-            quit()
+            sys.exit(1)
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
-            quit()
+            sys.exit(1)
     else:
         return
 
@@ -1086,7 +1086,7 @@ def check_content():
                                              "An error occurred. Restart the program with administrator rights.")
                 else:
                     print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-                    quit()
+                    sys.exit()
         else:
             root.update()
             msg_box = messagebox.askokcancel("Creating files",
@@ -1106,7 +1106,7 @@ def check_content():
 
             else:
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-                quit()
+                sys.exit(1)
     else:
         root.update()
         msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
@@ -1119,7 +1119,7 @@ def check_content():
             restart()
         else:
             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-            quit()
+            sys.exit(1)
 
 
 def mk_folder():
