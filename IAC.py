@@ -55,7 +55,6 @@ def connected():
         except NameError:
             print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
             sys.exit(1)
-            return
 
 
 def line_count():
@@ -74,8 +73,6 @@ def line_count():
 
     setfi.close()
 
-    print(obj_json['Comment Lines'])
-
     with open('Resource/JSON/settings.json', 'w') as settfi:
         json.dump(obj_json, settfi)
 
@@ -88,12 +85,9 @@ def comment_time():
     obj_sett = json.loads(data_sett)
 
     ave_time = float(obj_sett['Max Y']) - 20
-    print(ave_time)
     com_lines = obj_sett['Comment Lines']
-    print(com_lines)
 
     obj_sett['Time'] = (com_lines * ave_time) / 60
-    print(obj_sett['Time'])
 
     with open('Resource/JSON/settings.json', 'w') as settfile:
         json.dump(obj_sett, settfile)
@@ -213,6 +207,7 @@ def threading_run():
 
 
 def run():
+    run.loop = False
     if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e2.get()) == "None":
         messagebox.showerror("Missing input", "All fields must be filled in.")
     elif len(str(e4.get())) < 6:
@@ -317,7 +312,7 @@ def check_comment():
         print(Colors.BOLD, "First Run", Colors.ENDC)
         auto_comment()
     else:
-        print(Colors.BOLD, "Another round", Colors.ENDC)
+        print(Colors.OKGREEN, "Start commenting", Colors.ENDC)
         auto_comment()
     runfil.close()
 
@@ -345,9 +340,12 @@ def auto_comment():
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
             # messagebox.showerror("Wrong browser", "IE couldn't be found. Please select another browser.")
 
     elif browser_text.get() == 'Firefox':
@@ -367,9 +365,12 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Firefox was closed accidentally.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Chrome 87':
         try:
@@ -391,9 +392,12 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Chrome was closed accidentally.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Chrome 88':
         try:
@@ -415,9 +419,12 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Chrome was closed accidentally.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 88':
         try:
@@ -436,9 +443,12 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Edge 88 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Edge was closed accidentally.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 89':
         try:
@@ -457,9 +467,12 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Edge 89 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Edge was closed accidentally.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 90':
         try:
@@ -478,9 +491,12 @@ def auto_comment():
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Edge 90 couldn't be found. Please select another browser." + '\n' +
                                  "It is also possible that Edge was closed accidentally.")
-            b1_text.set("Run")
-            b1["command"] = threading_run
-            return
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     connected()
 
@@ -492,22 +508,33 @@ def auto_comment():
                                                                                              "from the post you want "
                                                                                              "to comment.")
         web.close()
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except WebDriverException:
         print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except RuntimeError:
         print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
-        messagebox.showerror("Runtime error", "IAC was closed.", icon='warning')
-        web.close()
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            web.close()
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except InvalidSessionIdException:
+            print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "Nr. 2 for auto_comment()", Colors.ENDC)
+            sys.exit(1)
     try:
         cookies = web.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
         cookies.click()
@@ -515,15 +542,21 @@ def auto_comment():
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Wrong link", "The link does not lead (directly) to any Instagram post.")
         web.close()
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except NoSuchWindowException or WebDriverException:
         print(Colors.WARNING, NoSuchWindowException, "or", WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         sys.exit(1)
@@ -536,15 +569,21 @@ def auto_comment():
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Error", "Something went wrong. Does the link lead to a picture?")
         web.close()
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         sys.exit(1)
@@ -565,15 +604,21 @@ def auto_comment():
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Error", "Something went wrong. Please restart the program.")
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         sys.exit(1)
@@ -582,86 +627,100 @@ def auto_comment():
         web.find_element_by_css_selector('#slfErrorAlert')
         messagebox.showerror("Wrong information", "Your username and / or your password was wrong.")
         web.close()
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except InvalidSessionIdException:
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         sys.exit(1)
     except NoSuchWindowException:
         print(Colors.WARNING, NoSuchWindowException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-        b1_text.set("Run")
-        b1["command"] = threading_run
-        return
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         web.find_element_by_css_selector('.sqdOP')
-        svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
-        svin.click()
 
-        time.sleep(10)
+        try:
+            svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
+            svin.click()
 
-        with open('Resource/JSON/settings.json', 'r') as setfil:
-            data_set = setfil.read()
-        obj_set = json.loads(data_set)
+            time.sleep(10)
 
-        comfi = open(str(obj_set['commentsPath'])).read().splitlines()
-        print(comments_path)
+            with open('Resource/JSON/settings.json', 'r') as setfil:
+                data_set = setfil.read()
+            obj_set = json.loads(data_set)
 
-        setfil.close()
+            comfi = open(str(obj_set['commentsPath'])).read().splitlines()
 
-        def comment():
-            # Major error?
-            for line in comfi:
-                t = line.strip()
-                if not t.startswith("#"):
-                    print(Colors.BOLD, line.strip(), Colors.ENDC)
-                    print(comments_path)
+            setfil.close()
 
-                    # It doesn't ignore # or ""
-                    # myline = random.choice(comfi)
-                    # print(myline)
+            def comment():
+                # Major error?
+                for line in comfi:
+                    t = line.strip()
+                    if not t.startswith("#"):
+                        print(Colors.BOLD, "Posting comment: " + line.strip(), Colors.ENDC)
 
-                    # Does post a random letter from the sentence.
-                    # myline = random.choice(line.strip())
+                        # It doesn't ignore # or ""
+                        # myline = random.choice(comfi)
+                        # print(myline)
 
-                    with open('Resource/JSON/settings.json', 'r') as settfi:
-                        data_json = settfi.read()
-                    obj_sett = json.loads(data_json)
+                        # Does post a random letter from the sentence.
+                        # myline = random.choice(line.strip())
 
-                    zeit = random.randint(20, int(obj_sett['Max Y']))
-                    print(Colors.BOLD, zeit, Colors.ENDC)
+                        with open('Resource/JSON/settings.json', 'r') as settfi:
+                            data_json = settfi.read()
+                        obj_sett = json.loads(data_json)
 
-                    try:
-                        select = web.find_element_by_xpath(
-                            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                            '3]/div/form/textarea')
-                        select.click()
-                        time.sleep(1)
-                        text = web.find_element_by_css_selector('.Ypffh')
-                        # text.send_keys(myline)
-                        text.send_keys(line.strip())
-                        connected()
-                        text.send_keys(Keys.ENTER)
-                        time.sleep(zeit)
-                    except InvalidSessionIdException:
-                        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-                        # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-                        sys.exit(1)
+                        zeit = random.randint(20, int(obj_sett['Max Y']))
+                        print(Colors.BOLD, "Time for the next comment: " + str(zeit), Colors.ENDC)
 
-        if run.loop:
-            print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
-            while True:
-                print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
+                        try:
+                            select = web.find_element_by_xpath(
+                                '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
+                                '3]/div/form/textarea')
+                            select.click()
+                            time.sleep(1)
+                            text = web.find_element_by_css_selector('.Ypffh')
+                            # text.send_keys(myline)
+                            text.send_keys(line.strip())
+                            connected()
+                            text.send_keys(Keys.ENTER)
+                            time.sleep(zeit)
+                        except InvalidSessionIdException:
+                            print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+                            # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+                            sys.exit(1)
+
+            if run.loop:
+                while True:
+                    comment()
+            else:
                 comment()
-        else:
-            comment()
+                web.close()
+
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                messagebox.showinfo("Finished", "All comments are posted.")
+
+        except NoSuchElementException:
             web.close()
 
             b1_text.set("Run")
             b1["command"] = threading_run
-            messagebox.showinfo("Finished", "All comments are posted.")
+            messagebox.showerror("Slow internet connection", "Please retry! Make sure you have a good Internet "
+                                                             "connection." + "\n" + "If the error occurs again, "
+                                                                                    "please create an issue via "
+                                                                                    "'Settings -> Help'.")
 
 
 def threading_settings():
@@ -985,12 +1044,9 @@ def settings():
                 dat_json = setfile.read()
             obj_set = json.loads(dat_json)
 
-            print(obj_set['Comment Lines'])
-
             max_y = int(15 * (float(v) + 1) + 21)
 
             obj_set['Max Y'] = str(max_y + 20)
-            print(obj_set['Max Y'])
 
             average = (max_y / 60) * float(obj_set['Comment Lines'])
 
@@ -1022,10 +1078,15 @@ def close():
                                         icon='warning')
     if msg_box == 'yes':
         root.destroy()
+        exit_program = True
         try:
             web.close()
-            b1_text.set("Run")
-            b1["command"] = threading_run
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for close()", Colors.ENDC)
         except NameError:
             print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
             sys.exit(1)
@@ -1034,6 +1095,9 @@ def close():
             sys.exit(1)
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
+            sys.exit(1)
+        except TclError:
+            print(Colors.WARNING, TclError, "for close()", Colors.ENDC)
             sys.exit(1)
     else:
         return
@@ -1045,8 +1109,12 @@ def stop():
     if msg_box == 'yes':
         try:
             web.close()
-            b1_text.set("Run")
-            b1["command"] = threading_run
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for stop()", Colors.ENDC)
         except NameError:
             print(Colors.WARNING, NameError, "for stop()", Colors.ENDC)
             return
@@ -1419,14 +1487,14 @@ try:
         dark = False
         root = ThemedTk(theme="arc")
         root['background'] = '#F5F6F7'
-        print(Colors.OKGREEN, "Using Light Mode", Colors.ENDC)
+        print(Colors.BOLD, "Using Light Mode", Colors.ENDC)
         setfi.close()
     elif str(obj['darkMode']) == "yes":
         light = False
         dark = True
         root = ThemedTk(theme="equilux")
         root['background'] = '#464646'
-        print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
+        print(Colors.BOLD, "Using Dark Mode", Colors.ENDC)
         setfi.close()
     else:
         root = ThemedTk(theme="yaru")
@@ -1465,7 +1533,7 @@ except TclError:
 x_Left = int(root.winfo_screenwidth() / 2 - screen_width / 2)
 y_Top = int(root.winfo_screenheight() / 2 - screen_height / 2)
 root.geometry("+{}+{}".format(x_Left, y_Top))
-root.title("Automated Commenting"), root.wm_attributes("-topmost", 1), root.resizable(False, False)
+root.title("Automated Commenting"), root.resizable(False, False)
 try:
     root.iconbitmap('Resource/IAC-Icon.ico')
 except TclError:
