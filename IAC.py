@@ -319,36 +319,14 @@ def check_comment():
 
 def auto_comment():
     global web
-
     try:
         b1_text.set("Stop")
         b1["command"] = stop
     except RuntimeError:
         sys.exit(1)
 
-    if browser_text.get() == 'Internet Explorer':
-        try:
-            web = webdriver.Ie(executable_path=os.getcwd() + '/Resource/driver/IEDriverServer.exe')
-            web.maximize_window()
-            # Save preferred browser
-            brwco = {
-                'Browser': "IE",
-            }
-            with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
-            BrwFi.close()
-        except WebDriverException:
-            print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
-            messagebox.showerror("Browser error", "An error occurred. Please try another browser.")
-            try:
-                b1_text.set("Run")
-                b1["command"] = threading_run
-                return
-            except RuntimeError:
-                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
-            # messagebox.showerror("Wrong browser", "IE couldn't be found. Please select another browser.")
-
-    elif browser_text.get() == 'Firefox':
+    if browser_text.get() == 'Firefox':
+        print("Using Firefox")
         try:
             web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
             time.sleep(5)
@@ -373,6 +351,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Chrome 87':
+        print("Using Chrome")
         try:
             chr_opt = webdriver.ChromeOptions()
             chr_opt.add_argument("--incognito")
@@ -400,6 +379,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Chrome 88':
+        print("Using Chrome")
         try:
             chr_opt = webdriver.ChromeOptions()
             chr_opt.add_argument("--incognito")
@@ -427,6 +407,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 88':
+        print("Using Edge")
         try:
             web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-88.exe')
             time.sleep(5)
@@ -451,6 +432,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 89':
+        print("Using Edge")
         try:
             web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-89.exe')
             time.sleep(5)
@@ -475,6 +457,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 90':
+        print("Using Edge")
         try:
             web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-90.exe')
             time.sleep(5)
@@ -498,6 +481,64 @@ def auto_comment():
             except RuntimeError:
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
+    elif browser_text.get() == 'Own Browser':
+        try:
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
+            if str(driv_obj['Own Browser Name']) == "Chrome":
+                web = webdriver.Chrome(executable_path=str(driv_obj['Driver Path']))
+                time.sleep(5)
+                web.maximize_window()
+
+            elif str(driv_obj['Own Browser Name']) == "Edge":
+                web = webdriver.Edge(executable_path=str(driv_obj['Driver Path']))
+                time.sleep(5)
+                web.maximize_window()
+
+            elif str(driv_obj['Own Browser Name']) == "Firefox":
+                web = webdriver.Firefox(executable_path=str(driv_obj['Driver Path']))
+                time.sleep(5)
+                web.maximize_window()
+
+            elif str(driv_obj['Own Browser Name']) == "Internet Explorer":
+                web = webdriver.Ie(executable_path=str(driv_obj['Driver Path']))
+                time.sleep(5)
+                web.maximize_window()
+
+            elif str(driv_obj['Own Browser Name']) == "Opera":
+                web = webdriver.Opera(executable_path=str(driv_obj['Driver Path']))
+                time.sleep(5)
+                web.maximize_window()
+
+            elif str(driv_obj['Own Browser Name']) == "Safari":
+                web = webdriver.Safari(executable_path=str(driv_obj['Driver Path']))
+                time.sleep(5)
+                web.maximize_window()
+
+            DriFi.close()
+        except WebDriverException:
+            print(Colors.WARNING, WebDriverException, "for auto_comment() in 'own Browser'", Colors.ENDC)
+            messagebox.showerror("Wrong browser", "The driver you selcted couldn't be found. Please select another "
+                                                  "browser." + '\n' + "It is also possible that the Driver was closed "
+                                                                      "accidentally.")
+            try:
+                b1_text.set("Run")
+                b1["command"] = threading_run
+                return
+            except RuntimeError:
+                print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
+    else:
+        messagebox.showerror("Error occurred", "An error occurred with the browser selection." + '\n' +
+                             "Please report this issue with the title ACNBxMB and use another browser.")
+        try:
+            b1_text.set("Run")
+            b1["command"] = threading_run
+            return
+        except RuntimeError:
+            sys.exit(1)
+
     connected()
 
     try:
@@ -514,6 +555,8 @@ def auto_comment():
             return
         except RuntimeError:
             print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
+    except NameError:
+        messagebox.showerror("Browser not found", "The selected browser couldn't be found.", icon='error')
     except WebDriverException:
         print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
@@ -650,7 +693,8 @@ def auto_comment():
         web.find_element_by_css_selector('.sqdOP')
 
         try:
-            svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
+            svin = web.find_element_by_xpath(
+                '/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
             svin.click()
 
             time.sleep(10)
@@ -720,7 +764,74 @@ def auto_comment():
             messagebox.showerror("Slow internet connection", "Please retry! Make sure you have a good Internet "
                                                              "connection." + "\n" + "If the error occurs again, "
                                                                                     "please create an issue via "
-                                                                                    "'Settings -> Help'.")
+                                                                                    "'Settings -> Help' with the title "
+                                                                                    "CONOxIG-UP.")
+
+
+def sel_bro(value):
+    driver_path = askopenfilename(filetypes=(("* .exe", "*.exe"), ("All Files", "*.*")))
+
+    if driver_path:
+        messagebox.showinfo("Success", "The Driver has been added.")
+
+        with open('Resource/JSON/Browser.json', 'r') as DriFi:
+            dri_data = DriFi.read()
+        dri_obj = json.loads(dri_data)
+
+        dri_obj['Own Browser Name'] = value
+        print(value)
+        dri_obj['Driver Path'] = driver_path
+        print(driver_path)
+        dri_obj['Own Browser'] = True
+        print(value)
+
+        with open('Resource/JSON/Browser.json', 'w') as DrivFi:
+            json.dump(dri_obj, DrivFi)
+
+        DriFi.close()
+        DrivFi.close()
+
+        restart()
+
+
+def threading_browser():
+    t1 = Thread(target=import_browser)
+    t1.start()
+
+
+def import_browser():
+    msg = messagebox.askokcancel("Import webdriver",
+                                 "Here you can import the driver for your browser." + "\n" + "Use this only if you "
+                                                                                             "have experience with "
+                                                                                             "Selenium." + "\n" +
+                                 "Google 'Selenium web driver' for more information." + "\n" + "The program will "
+                                                                                               "restart afterwards.",
+                                 icon='info')
+    if msg:
+        browserWin = Toplevel(root)
+        browserWin.title("Browser selection | AC")
+        browserWin.geometry('200x120'), browserWin.wm_attributes("-topmost", 1), browserWin.resizable(False, False)
+        try:
+            browserWin.iconbitmap('Resource/IAC-Icon.ico')
+        except TclError:
+            check_content()
+
+        if light:
+            browserWin['background'] = '#F5F6F7'
+        elif dark:
+            browserWin['background'] = '#464646'
+        else:
+            print("Uhh, this wasn't supposed happen.")
+            restart()
+
+        ttk.Label(browserWin, text="Select the Browser to import").place(x=25, y=10)
+
+        List = ["Choose...", "Chrome", "Edge", "Firefox", "Internet Explorer", "Opera", "Safari"]
+
+        txt = StringVar()
+        ttk.OptionMenu(browserWin, txt, *List, command=sel_bro).place(x=50, y=40, width=110)
+
+        ttk.Button(browserWin, text="Back", command=browserWin.destroy).place(x=50, y=80, width=110)
 
 
 def threading_settings():
@@ -730,7 +841,7 @@ def threading_settings():
 
 def settings():
     settingsWin = Toplevel(root)
-    settingsWin.title("Settings | Automated Commenting")
+    settingsWin.title("Settings | AC")
     settingsWin.geometry('350x250'), settingsWin.wm_attributes("-topmost", 1), settingsWin.resizable(False, False)
     try:
         settingsWin.iconbitmap('Resource/IAC-Icon.ico')
@@ -959,9 +1070,6 @@ def settings():
     def set_help():
         webbrowser.open_new(r"https://github.com/JueK3y/Instagram-automated-commenting/wiki/Help")
 
-    def back():
-        settingsWin.destroy()
-
     # Content
     # First line
     ttk.Label(settingsWin, text="Langauge").place(x=64, y=5)
@@ -982,8 +1090,7 @@ def settings():
     setfile.close()
 
     ttk.Label(settingsWin, text="More Browser").place(x=221, y=5)
-    ttk.Button(settingsWin, text="Load", command=not_av).place(x=204, y=27, width=50)
-    ttk.Button(settingsWin, text="Import", command=not_av).place(x=254, y=27, width=60)
+    ttk.Button(settingsWin, text="Import", command=threading_browser).place(x=204, y=27, width=110)
 
     # Second line
     ttk.Label(settingsWin, text="Appearance").place(x=59, y=67)
@@ -1033,8 +1140,7 @@ def settings():
         la = ttk.Label(settingsWin, text='Average duration')
         la.place(x=212, y=129)
 
-    class ShowScale:
-        scale = 0
+    settings.scale = 0
 
     def change_max_y(v):
         try:
@@ -1061,16 +1167,16 @@ def settings():
             return
 
         except FileNotFoundError:
-            if not ShowScale.scale:
+            if not settings.scale:
                 ask_file()
-                ShowScale.scale = 1
+                settings.scale = 1
 
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
         place(x=207, y=158, width=110)
 
     # 4. line
     ttk.Button(settingsWin, text="Help", command=set_help).place(x=36, y=200, width=110)
-    ttk.Button(settingsWin, text="Back", command=back).place(x=204, y=200, width=110)
+    ttk.Button(settingsWin, text="Back", command=settingsWin.destroy).place(x=204, y=200, width=110)
 
 
 def close():
@@ -1156,7 +1262,6 @@ def check_content():
                     f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
                 print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
             else:
-                root.update()
                 msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take "
                                                                    "some time.")
                 if msg_box:
@@ -1175,7 +1280,6 @@ def check_content():
                     print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                     sys.exit()
         else:
-            root.update()
             msg_box = messagebox.askokcancel("Creating files",
                                              "Some files are being downloaded. This will take some time.")
             if msg_box:
@@ -1195,7 +1299,6 @@ def check_content():
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                 sys.exit(1)
     else:
-        root.update()
         msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
         if msg_box:
             print(Colors.BOLD, "Downloading files...", Colors.ENDC)
@@ -1411,6 +1514,17 @@ def mk_files():
 
     runfil.close()
 
+    # Generating browser.json
+    browser = {
+        'Browser': "",
+        'Driver Path': "",
+        "Own Browser": False
+    }
+    with open('Resource/JSON/Browser.json', 'w') as brofil:
+        json.dump(browser, brofil)
+
+    brofil.close()
+
     # Generating Settings.json
     sett = {
         'commentsPath': "Resource/txt/comments.txt",
@@ -1418,7 +1532,7 @@ def mk_files():
         'darkMode': "no",
         'Max Y': 86,
         'HQM': "",
-        "Lang": "en"
+        "Lang": "en",
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
@@ -1436,7 +1550,7 @@ def check_json():
         str(obj_json['First Run?'])
         str(obj_json['Agree to EULA?'])
         json_file.close()
-    except KeyError:
+    except KeyError or FileNotFoundError:
         shutil.rmtree("Resource/JSON")
         check_content()
 
@@ -1447,7 +1561,19 @@ def check_json():
         str(obj_json['Username'])
         str(obj_json['Password'])
         json_file.close()
-    except KeyError:
+    except KeyError or FileNotFoundError:
+        shutil.rmtree("Resource/JSON")
+        check_content()
+
+    try:
+        with open('Resource/JSON/Browser.json', 'r') as json_file:
+            data_json = json_file.read()
+        obj_json = json.loads(data_json)
+        str(obj_json['Browser'])
+        str(obj_json['Driver Path'])
+        str(obj_json['Own Browser'])
+        json_file.close()
+    except KeyError or FileNotFoundError:
         shutil.rmtree("Resource/JSON")
         check_content()
 
@@ -1462,7 +1588,7 @@ def check_json():
         str(obj_json['HQM'])
         str(obj_json['Lang'])
         json_file.close()
-    except KeyError:
+    except KeyError or FileNotFoundError:
         shutil.rmtree("Resource/JSON")
         check_content()
 
@@ -1472,7 +1598,7 @@ def check_json():
         obj_json = json.loads(data_json)
         str(obj_json['Last URL'])
         json_file.close()
-    except KeyError:
+    except KeyError or FileNotFoundError:
         shutil.rmtree("Resource/JSON")
         check_content()
 
@@ -1541,7 +1667,7 @@ except TclError:
 
 check_content()
 check_json()
-
+exit_program = False
 e = datetime.datetime.now()
 
 with open('Resource/JSON/settings.json', 'r') as setfi:
@@ -1588,18 +1714,23 @@ try:
         data = BroFi.read()
     obj_b = json.loads(data)
 
-    if str(obj_b['Browser']) == "Chrome 87":
-        OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90", "Firefox"]
-    elif str(obj_b['Browser']) == "Chrome 87":
-        OptionList = ["Chrome 88", "Chrome 88", "Chrome 87", "Edge 90", "Edge 89", "Edge 88", "Firefox"]
-    elif str(obj_b['Browser']) == "Edge 88":
-        OptionList = ["Edge 88", "Edge 88", "Edge 89", "Edge 90", "Chrome 87", "Chrome 88", "Firefox"]
-    elif str(obj_b['Browser']) == "Edge 89":
-        OptionList = ["Edge 89", "Edge 89", "Edge 88", "Edge 90", "Chrome 87", "Chrome 88", "Firefox"]
-    elif str(obj_b['Browser']) == "Edge 90":
-        OptionList = ["Edge 90", "Edge 90", "Edge 89", "Edge 80", "Chrome 88", "Chrome 87", "Firefox"]
+    if str(obj_b['Own Browser']):
+        OptionList = ["Own Browser", "Own Browser", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89",
+                      "Edge 90"]
     else:
-        OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90"]
+        if str(obj_b['Browser']) == "Chrome 87":
+            OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90", "Firefox"]
+        elif str(obj_b['Browser']) == "Chrome 87":
+            OptionList = ["Chrome 88", "Chrome 88", "Chrome 87", "Edge 90", "Edge 89", "Edge 88", "Firefox"]
+        elif str(obj_b['Browser']) == "Edge 88":
+            OptionList = ["Edge 88", "Edge 88", "Edge 89", "Edge 90", "Chrome 87", "Chrome 88", "Firefox"]
+        elif str(obj_b['Browser']) == "Edge 89":
+            OptionList = ["Edge 89", "Edge 89", "Edge 88", "Edge 90", "Chrome 87", "Chrome 88", "Firefox"]
+        elif str(obj_b['Browser']) == "Edge 90":
+            OptionList = ["Edge 90", "Edge 90", "Edge 89", "Edge 80", "Chrome 88", "Chrome 87", "Firefox"]
+        else:
+            OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90"]
+
     BroFi.close()
 except FileNotFoundError:
     OptionList = ["Firefox", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90"]
