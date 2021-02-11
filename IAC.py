@@ -47,7 +47,7 @@ def connected():
     except (requests.ConnectionError, requests.Timeout):
         messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
         try:
-            web.close()
+            web.close(), web.quit()
             return
         except NoSuchWindowException:
             print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
@@ -548,7 +548,7 @@ def auto_comment():
         messagebox.showerror("No valid URL", "The URL provided is not a real link." + '\n' + "Please copy the URL "
                                                                                              "from the post you want "
                                                                                              "to comment.")
-        web.close()
+        web.close(), web.quit()
         try:
             b1_text.set("Run")
             b1["command"] = threading_run
@@ -569,7 +569,7 @@ def auto_comment():
     except RuntimeError:
         print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
         try:
-            web.close()
+            web.close(), web.quit()
             b1_text.set("Run")
             b1["command"] = threading_run
             return
@@ -584,7 +584,7 @@ def auto_comment():
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Wrong link", "The link does not lead (directly) to any Instagram post.")
-        web.close()
+        web.close(), web.quit()
         try:
             b1_text.set("Run")
             b1["command"] = threading_run
@@ -611,7 +611,7 @@ def auto_comment():
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Error", "Something went wrong. Does the link lead to a picture?")
-        web.close()
+        web.close(), web.quit()
         try:
             b1_text.set("Run")
             b1["command"] = threading_run
@@ -669,7 +669,7 @@ def auto_comment():
     try:
         web.find_element_by_css_selector('#slfErrorAlert')
         messagebox.showerror("Wrong information", "Your username and / or your password was wrong.")
-        web.close()
+        web.close(), web.quit()
         try:
             b1_text.set("Run")
             b1["command"] = threading_run
@@ -750,14 +750,14 @@ def auto_comment():
                     comment()
             else:
                 comment()
-                web.close()
+                web.close(), web.quit()
 
                 b1_text.set("Run")
                 b1["command"] = threading_run
                 messagebox.showinfo("Finished", "All comments are posted.")
 
         except NoSuchElementException:
-            web.close()
+            web.close(), web.quit()
 
             b1_text.set("Run")
             b1["command"] = threading_run
@@ -1175,7 +1175,7 @@ def settings():
     ttk.Button(settingsWin, text="Back", command=settingsWin.destroy).place(x=204, y=200, width=110)
 
 
-def isBrowserAlive():
+def check_alive():
     try:
         web.current_url
         print(web.current_url)
@@ -1185,14 +1185,14 @@ def isBrowserAlive():
 
 
 def close():
-    if isBrowserAlive():
+    if check_alive():
         msg_box = tk.messagebox.askquestion('Exit Application', 'Are you sure you want to exit the application?',
                                             icon='warning')
         if msg_box == 'yes':
             root.destroy()
             exit_program = True
             try:
-                web.close()
+                web.close(), web.quit()
                 try:
                     b1_text.set("Run")
                     b1["command"] = threading_run
@@ -1222,7 +1222,7 @@ def stop():
                                         icon='warning')
     if msg_box == 'yes':
         try:
-            web.close()
+            web.close(), web.quit()
             try:
                 b1_text.set("Run")
                 b1["command"] = threading_run
@@ -1265,28 +1265,82 @@ def check_content():
     f_set = pathlib.Path("Resource/JSON/settings.json")
 
     if d_Resource.exists():
-        if d_driver.exists() & d_JSON.exists() & d_txt.exists() & f_set.exists():
-            if f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
-                    f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
-                print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
-            else:
-                msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take "
-                                                                   "some time.")
-                if msg_box:
-                    print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                    try:
-                        shutil.rmtree("Resource")
-                        mk_folder()
-                        dow_driver()
-                        exe_driver()
-                        mk_files()
-                        restart()
-                    except PermissionError:
-                        messagebox.showerror("Permission Error",
-                                             "An error occurred. Restart the program with administrator rights.")
+        if d_driver.exists():
+            if d_JSON.exists() & d_txt.exists():
+                if f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
+                        f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                    print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
                 else:
-                    print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-                    sys.exit()
+                    msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will "
+                                                                       "take some time.")
+                    if msg_box:
+                        print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                        try:
+                            shutil.rmtree("Resource")
+                            mk_folder()
+                            dow_driver()
+                            exe_driver()
+                            mk_files()
+                            restart()
+                        except PermissionError:
+                            messagebox.showerror("Permission Error",
+                                                 "Restart the program with administrator rights." + "\n" +
+                                                 "Reinstall the program if the error keeps occurring.")
+                            sys.exit(1)
+                    else:
+                        print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                        sys.exit()
+            else:
+                if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                    msg_box = messagebox.askokcancel("Creating files 2",
+                                                     "Some files are being downloaded. This will take some time.")
+                    if msg_box:
+                        print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                        try:
+                            shutil.rmtree("Resource/JSON")
+                            shutil.rmtree("Resource/txt")
+                            mk_folder_2()
+                            mk_files()
+                            restart()
+                        except FileNotFoundError:
+                            try:
+                                shutil.rmtree("Resource/JSON")
+                                mk_folder_2()
+                                mk_files()
+                                restart()
+                            except FileNotFoundError:
+                                shutil.rmtree("Resource/txt")
+                                mk_folder_2()
+                                mk_files()
+                                restart()
+                        except PermissionError:
+                            messagebox.showerror("Permission Error",
+                                                 "Restart the program with administrator rights." + "\n" +
+                                                 "Reinstall the program if the error keeps occurring.")
+                            sys.exit(1)
+                    else:
+                        print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                        sys.exit(1)
+                else:
+                    msg_box = messagebox.askokcancel("Creating files",
+                                                     "Some files are being downloaded. This will take some time.")
+                    if msg_box:
+                        print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                        try:
+                            shutil.rmtree("Resource")
+                            mk_folder()
+                            dow_driver()
+                            exe_driver()
+                            mk_files()
+                            restart()
+                        except PermissionError:
+                            messagebox.showerror("Permission Error",
+                                                 "Restart the program with administrator rights." + "\n" +
+                                                 "Reinstall the program if the error keeps occurring.")
+                            sys.exit(1)
+                    else:
+                        print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                        sys.exit(1)
         else:
             msg_box = messagebox.askokcancel("Creating files",
                                              "Some files are being downloaded. This will take some time.")
@@ -1301,8 +1355,9 @@ def check_content():
                     restart()
                 except PermissionError:
                     messagebox.showerror("Permission Error",
-                                         "An error occurred. Restart the program with administrator rights.")
-
+                                         "Restart the program with administrator rights." + "\n" +
+                                         "Reinstall the program if the error keeps occurring.")
+                    sys.exit(1)
             else:
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                 sys.exit(1)
@@ -1345,6 +1400,20 @@ def mk_folder():
     txt_path = os.path.join(txt_dir, directory_name)
     os.mkdir(txt_path)
     return
+
+
+def mk_folder_2():
+    # Make JSON folder
+    json_dir = os.getcwd() + '/Resource'
+    directory_name = "JSON"
+    json_path = os.path.join(json_dir, directory_name)
+    os.mkdir(json_path)
+
+    # Make txt folder
+    txt_dir = os.getcwd() + '/Resource'
+    directory_name = "txt"
+    txt_path = os.path.join(txt_dir, directory_name)
+    os.mkdir(txt_path)
 
 
 def dow_driver():
@@ -1558,8 +1627,10 @@ def check_json():
         str(obj_json['First Run?'])
         str(obj_json['Agree to EULA?'])
         json_file.close()
-    except KeyError or FileNotFoundError:
+    except KeyError:
         shutil.rmtree("Resource/JSON")
+        check_content()
+    except FileNotFoundError:
         check_content()
 
     try:
@@ -1569,8 +1640,10 @@ def check_json():
         str(obj_json['Username'])
         str(obj_json['Password'])
         json_file.close()
-    except KeyError or FileNotFoundError:
+    except KeyError:
         shutil.rmtree("Resource/JSON")
+        check_content()
+    except FileNotFoundError:
         check_content()
 
     try:
@@ -1581,8 +1654,10 @@ def check_json():
         str(obj_json['Driver Path'])
         str(obj_json['Own Browser Name'])
         json_file.close()
-    except KeyError or FileNotFoundError:
+    except KeyError:
         shutil.rmtree("Resource/JSON")
+        check_content()
+    except FileNotFoundError:
         check_content()
 
     try:
@@ -1596,8 +1671,10 @@ def check_json():
         str(obj_json['HQM'])
         str(obj_json['Lang'])
         json_file.close()
-    except KeyError or FileNotFoundError:
+    except KeyError:
         shutil.rmtree("Resource/JSON")
+        check_content()
+    except FileNotFoundError:
         check_content()
 
     try:
@@ -1606,8 +1683,10 @@ def check_json():
         obj_json = json.loads(data_json)
         str(obj_json['Last URL'])
         json_file.close()
-    except KeyError or FileNotFoundError:
+    except KeyError:
         shutil.rmtree("Resource/JSON")
+        check_content()
+    except FileNotFoundError:
         check_content()
 
 
