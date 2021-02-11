@@ -772,7 +772,7 @@ def sel_bro(value):
     driver_path = askopenfilename(filetypes=(("* .exe", "*.exe"), ("All Files", "*.*")))
 
     if driver_path:
-        messagebox.showinfo("Success", "The Driver has been added.")
+        messagebox.showinfo("Success", "The Driver has been added." + "\n" + "The program will restart now.")
 
         with open('Resource/JSON/Browser.json', 'r') as DriFi:
             dri_data = DriFi.read()
@@ -782,8 +782,6 @@ def sel_bro(value):
         print(value)
         dri_obj['Driver Path'] = driver_path
         print(driver_path)
-        dri_obj['Own Browser'] = True
-        print(value)
 
         with open('Resource/JSON/Browser.json', 'w') as DrivFi:
             json.dump(dri_obj, DrivFi)
@@ -804,9 +802,7 @@ def import_browser():
                                  "Here you can import the driver for your browser." + "\n" + "Use this only if you "
                                                                                              "have experience with "
                                                                                              "Selenium." + "\n" +
-                                 "Google 'Selenium web driver' for more information." + "\n" + "The program will "
-                                                                                               "restart afterwards.",
-                                 icon='info')
+                                 "Google 'Selenium web driver' for more information.", icon='info')
     if msg:
         browserWin = Toplevel(root)
         browserWin.title("Browser selection | AC")
@@ -826,7 +822,7 @@ def import_browser():
 
         ttk.Label(browserWin, text="Select the Browser to import").place(x=25, y=10)
 
-        List = ["Choose...", "Chrome", "Edge", "Firefox", "Internet Explorer", "Opera", "Safari"]
+        List = ["Choose...", "Chrome", "Edge", "Firefox", "IE", "Opera", "Safari"]
 
         txt = StringVar()
         ttk.OptionMenu(browserWin, txt, *List, command=sel_bro).place(x=50, y=40, width=110)
@@ -1179,34 +1175,46 @@ def settings():
     ttk.Button(settingsWin, text="Back", command=settingsWin.destroy).place(x=204, y=200, width=110)
 
 
+def isBrowserAlive():
+    try:
+        web.current_url
+        print(web.current_url)
+        return True
+    except NameError:
+        return False
+
+
 def close():
-    msg_box = tk.messagebox.askquestion('Exit Application', 'Are you sure you want to exit the application?',
-                                        icon='warning')
-    if msg_box == 'yes':
-        root.destroy()
-        exit_program = True
-        try:
-            web.close()
+    if isBrowserAlive():
+        msg_box = tk.messagebox.askquestion('Exit Application', 'Are you sure you want to exit the application?',
+                                            icon='warning')
+        if msg_box == 'yes':
+            root.destroy()
+            exit_program = True
             try:
-                b1_text.set("Run")
-                b1["command"] = threading_run
-                return
-            except RuntimeError:
-                print(Colors.WARNING, RuntimeError, "for close()", Colors.ENDC)
-        except NameError:
-            print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
-            sys.exit(1)
-        except InvalidSessionIdException:
-            print(Colors.WARNING, InvalidSessionIdException, "for close()", Colors.ENDC)
-            sys.exit(1)
-        except WebDriverException:
-            print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
-            sys.exit(1)
-        except TclError:
-            print(Colors.WARNING, TclError, "for close()", Colors.ENDC)
-            sys.exit(1)
+                web.close()
+                try:
+                    b1_text.set("Run")
+                    b1["command"] = threading_run
+                    return
+                except RuntimeError:
+                    print(Colors.WARNING, RuntimeError, "for close()", Colors.ENDC)
+            except NameError:
+                print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
+                sys.exit(1)
+            except InvalidSessionIdException:
+                print(Colors.WARNING, InvalidSessionIdException, "for close()", Colors.ENDC)
+                sys.exit(1)
+            except WebDriverException:
+                print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
+                sys.exit(1)
+            except TclError:
+                print(Colors.WARNING, TclError, "for close()", Colors.ENDC)
+                sys.exit(1)
+        else:
+            return
     else:
-        return
+        root.destroy()
 
 
 def stop():
@@ -1518,7 +1526,7 @@ def mk_files():
     browser = {
         'Browser': "",
         'Driver Path': "",
-        "Own Browser": False
+        "Own Browser Name": ""
     }
     with open('Resource/JSON/Browser.json', 'w') as brofil:
         json.dump(browser, brofil)
@@ -1571,7 +1579,7 @@ def check_json():
         obj_json = json.loads(data_json)
         str(obj_json['Browser'])
         str(obj_json['Driver Path'])
-        str(obj_json['Own Browser'])
+        str(obj_json['Own Browser Name'])
         json_file.close()
     except KeyError or FileNotFoundError:
         shutil.rmtree("Resource/JSON")
@@ -1714,9 +1722,9 @@ try:
         data = BroFi.read()
     obj_b = json.loads(data)
 
-    if str(obj_b['Own Browser']):
-        OptionList = ["Own Browser", "Own Browser", "Firefox", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89",
-                      "Edge 90"]
+    if str(obj_b['Own Browser Name']) != "":
+        OptionList = [str(obj_b['Own Browser Name'] + " (Own)"), str(obj_b['Own Browser Name'] + " (Own)"), "Firefox",
+                      "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90"]
     else:
         if str(obj_b['Browser']) == "Chrome 87":
             OptionList = ["Chrome 87", "Chrome 87", "Chrome 88", "Edge 88", "Edge 89", "Edge 90", "Firefox"]
