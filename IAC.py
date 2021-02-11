@@ -1298,27 +1298,9 @@ def check_content():
                         print(Colors.BOLD, "Downloading files...", Colors.ENDC)
                         try:
                             shutil.rmtree("Resource/JSON")
-                            # shutil.rmtree("Resource/txt")
                             mk_folder_2()
                             mk_files()
                             restart()
-                        except FileNotFoundError:
-                            print("error type 1")
-                            # shutil.rmtree("Resource/JSON")
-                            mk_folder_2()
-                            mk_files()
-                            restart()
-                            #try:
-                            #    shutil.rmtree("Resource/txt")
-                            #    mk_folder_2()
-                            #    mk_files()
-                            #    restart()
-                            #except FileNotFoundError:
-                            #    print("error type 2")
-                            #    shutil.rmtree("Resource/JSON")
-                            #    mk_folder_2()
-                            #    mk_files()
-                            #    restart()
                         except PermissionError:
                             messagebox.showerror("Permission Error",
                                                  "Restart the program with administrator rights." + "\n" +
@@ -1414,12 +1396,6 @@ def mk_folder_2():
     directory_name = "JSON"
     json_path = os.path.join(json_dir, directory_name)
     os.mkdir(json_path)
-
-    # Make txt folder
-    #txt_dir = os.getcwd() + '/Resource'
-    #directory_name = "txt"
-    #txt_path = os.path.join(txt_dir, directory_name)
-    #os.mkdir(txt_path)
 
 
 def dow_driver():
