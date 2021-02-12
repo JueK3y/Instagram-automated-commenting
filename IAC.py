@@ -30,6 +30,7 @@ from tkinter.filedialog import askopenfilename
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
     InvalidSessionIdException, InvalidArgumentException
+from urllib3.exceptions import MaxRetryError
 
 
 class Colors:
@@ -71,11 +72,10 @@ def line_count():
 
     obj_json['Comment Lines'] = line_coun
 
-    setfi.close()
-
     with open('Resource/JSON/settings.json', 'w') as settfi:
         json.dump(obj_json, settfi)
 
+    setfi.close()
     settfi.close()
 
 
@@ -93,6 +93,7 @@ def comment_time():
         json.dump(obj_sett, settfile)
 
     settfi.close()
+    settfile.close()
 
 
 def ask_file():
@@ -142,7 +143,7 @@ def eula_file():
             runfi.close()
             with open('Resource/txt/EULA.txt', 'a') as file:
                 file.write(
-                    'User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
+                    '\n' + 'User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
                     ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
             file.close()
 
@@ -326,19 +327,24 @@ def auto_comment():
         sys.exit(1)
 
     if browser_text.get() == 'Firefox':
-        print("Using Firefox")
+        print(Colors.BOLD, "Using Firefox")
         try:
             web = webdriver.Firefox(executable_path=os.getcwd() + '/Resource/driver/geckodriver.exe')
             time.sleep(5)
             web.maximize_window()
 
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
             # Save preferred browser
-            brwco = {
-                'Browser': "Firefox",
-            }
+            driv_obj['Browser'] = "Firefox"
+
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
+                json.dump(driv_obj, BrwFi)
             BrwFi.close()
+            DriFi.close()
+
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Firefox couldn't be found. Please select another browser." + '\n' +
@@ -351,7 +357,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Chrome 87':
-        print("Using Chrome")
+        print(Colors.BOLD, "Using Chrome", Colors.ENDC)
         try:
             chr_opt = webdriver.ChromeOptions()
             chr_opt.add_argument("--incognito")
@@ -360,13 +366,17 @@ def auto_comment():
             time.sleep(5)
             web.maximize_window()
 
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
             # Save preferred browser
-            brwco = {
-                'Browser': "Chrome 87",
-            }
+            driv_obj['Browser'] = "Chrome 87"
+
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
+                json.dump(driv_obj, BrwFi)
             BrwFi.close()
+            DriFi.close()
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 87 couldn't be found. Please select another browser." + '\n' +
@@ -379,7 +389,7 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Chrome 88':
-        print("Using Chrome")
+        print(Colors.BOLD, "Using Chrome", Colors.ENDC)
         try:
             chr_opt = webdriver.ChromeOptions()
             chr_opt.add_argument("--incognito")
@@ -388,13 +398,18 @@ def auto_comment():
             time.sleep(5)
             web.maximize_window()
 
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
             # Save preferred browser
-            brwco = {
-                'Browser': "Chrome 87",
-            }
+            driv_obj['Browser'] = "Chrome 88"
+
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
+                json.dump(driv_obj, BrwFi)
             BrwFi.close()
+            DriFi.close()
+
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Chrome 88 couldn't be found. Please select another browser." + '\n' +
@@ -407,19 +422,24 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 88':
-        print("Using Edge")
+        print(Colors.BOLD, "Using Edge", Colors.ENDC)
         try:
             web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-88.exe')
             time.sleep(5)
             web.maximize_window()
 
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
             # Save preferred browser
-            brwco = {
-                'Browser': "Edge 88",
-            }
+            driv_obj['Browser'] = "Edge 88"
+
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
+                json.dump(driv_obj, BrwFi)
             BrwFi.close()
+            DriFi.close()
+
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Edge 88 couldn't be found. Please select another browser." + '\n' +
@@ -432,19 +452,24 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 89':
-        print("Using Edge")
+        print(Colors.BOLD, "Using Edge", Colors.ENDC)
         try:
             web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-89.exe')
             time.sleep(5)
             web.maximize_window()
 
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
             # Save preferred browser
-            brwco = {
-                'Browser': "Edge 89",
-            }
+            driv_obj['Browser'] = "Edge 89"
+
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
+                json.dump(driv_obj, BrwFi)
             BrwFi.close()
+            DriFi.close()
+
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Edge 89 couldn't be found. Please select another browser." + '\n' +
@@ -457,19 +482,24 @@ def auto_comment():
                 print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
 
     elif browser_text.get() == 'Edge 90':
-        print("Using Edge")
+        print(Colors.BOLD, "Using Edge", Colors.ENDC)
         try:
             web = webdriver.Edge(executable_path=os.getcwd() + '/Resource/driver/edgedriver-x64-90.exe')
             time.sleep(5)
             web.maximize_window()
 
+            with open('Resource/JSON/Browser.json', 'r') as DriFi:
+                driv_data = DriFi.read()
+            driv_obj = json.loads(driv_data)
+
             # Save preferred browser
-            brwco = {
-                'Browser': "Edge 90",
-            }
+            driv_obj['Browser'] = "Edge 90"
+
             with open('Resource/JSON/Browser.json', 'w') as BrwFi:
-                json.dump(brwco, BrwFi)
+                json.dump(driv_obj, BrwFi)
             BrwFi.close()
+            DriFi.close()
+
         except WebDriverException:
             print(Colors.WARNING, WebDriverException, "for auto_comment()", Colors.ENDC)
             messagebox.showerror("Wrong browser", "Edge 90 couldn't be found. Please select another browser." + '\n' +
@@ -575,7 +605,7 @@ def auto_comment():
             return
         except InvalidSessionIdException:
             print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-        except RuntimeError:
+        except (RuntimeError, MaxRetryError):
             print(Colors.WARNING, RuntimeError, "Nr. 2 for auto_comment()", Colors.ENDC)
             sys.exit(1)
     try:
@@ -591,7 +621,7 @@ def auto_comment():
             return
         except RuntimeError:
             print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
-    except NoSuchWindowException or WebDriverException:
+    except (NoSuchWindowException, WebDriverException):
         print(Colors.WARNING, NoSuchWindowException, "or", WebDriverException, "for auto_comment()", Colors.ENDC)
         messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
         try:
@@ -703,47 +733,40 @@ def auto_comment():
                 data_set = setfil.read()
             obj_set = json.loads(data_set)
 
-            comfi = open(str(obj_set['commentsPath'])).read().splitlines()
+            comfi = open(str(obj_set['commentsPath'])).readlines()
 
             setfil.close()
 
             def comment():
-                # Major error?
-                for line in comfi:
-                    t = line.strip()
-                    if not t.startswith("#"):
-                        print(Colors.BOLD, "Posting comment: " + line.strip(), Colors.ENDC)
+                for _ in comfi:
+                    line = random.choice(comfi)
+                    while line.startswith('#'):
+                        line = random.choice(comfi)
 
-                        # It doesn't ignore # or ""
-                        # myline = random.choice(comfi)
-                        # print(myline)
+                    print(Colors.BOLD, "Posting comment: " + line.strip(), Colors.ENDC)
 
-                        # Does post a random letter from the sentence.
-                        # myline = random.choice(line.strip())
+                    with open('Resource/JSON/settings.json', 'r') as settfi:
+                        data_json = settfi.read()
+                    obj_sett = json.loads(data_json)
 
-                        with open('Resource/JSON/settings.json', 'r') as settfi:
-                            data_json = settfi.read()
-                        obj_sett = json.loads(data_json)
+                    zeit = random.randint(20, int(obj_sett['Max Y']))
+                    print(Colors.BOLD, "Time for the next comment: " + str(zeit), Colors.ENDC)
 
-                        zeit = random.randint(20, int(obj_sett['Max Y']))
-                        print(Colors.BOLD, "Time for the next comment: " + str(zeit), Colors.ENDC)
-
-                        try:
-                            select = web.find_element_by_xpath(
-                                '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                                '3]/div/form/textarea')
-                            select.click()
-                            time.sleep(1)
-                            text = web.find_element_by_css_selector('.Ypffh')
-                            # text.send_keys(myline)
-                            text.send_keys(line.strip())
-                            connected()
-                            text.send_keys(Keys.ENTER)
-                            time.sleep(zeit)
-                        except InvalidSessionIdException:
-                            print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-                            # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
-                            sys.exit(1)
+                    try:
+                        select = web.find_element_by_xpath(
+                            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
+                            '3]/div/form/textarea')
+                        select.click()
+                        time.sleep(1)
+                        text = web.find_element_by_css_selector('.Ypffh')
+                        text.send_keys(line.strip())
+                        connected()
+                        text.send_keys(Keys.ENTER)
+                        time.sleep(zeit)
+                    except InvalidSessionIdException:
+                        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+                        # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
+                        sys.exit(1)
 
             if run.loop:
                 while True:
@@ -817,7 +840,7 @@ def import_browser():
         elif dark:
             browserWin['background'] = '#464646'
         else:
-            print("Uhh, this wasn't supposed happen.")
+            print(Colors.FAIL, "Uhh, this wasn't supposed happen.", Colors.ENDC)
             restart()
 
         ttk.Label(browserWin, text="Select the Browser to import").place(x=25, y=10)
@@ -825,9 +848,9 @@ def import_browser():
         List = ["Choose...", "Chrome", "Edge", "Firefox", "IE", "Opera", "Safari"]
 
         txt = StringVar()
-        ttk.OptionMenu(browserWin, txt, *List, command=sel_bro).place(x=50, y=40, width=110)
+        ttk.OptionMenu(browserWin, txt, *List, command=sel_bro).place(x=45, y=40, width=110)
 
-        ttk.Button(browserWin, text="Back", command=browserWin.destroy).place(x=50, y=80, width=110)
+        ttk.Button(browserWin, text="Back", command=browserWin.destroy).place(x=45, y=80, width=110)
 
 
 def threading_settings():
@@ -849,7 +872,7 @@ def settings():
     elif dark:
         settingsWin['background'] = '#464646'
     else:
-        print("Uhh, this wasn't supposed happen.")
+        print(Colors.FAIL, "Uhh, this wasn't supposed happen.", Colors.ENDC)
         restart()
 
     def used():
@@ -1002,7 +1025,7 @@ def settings():
 
         f_comm = pathlib.Path(comments_path)
 
-        if not f_comm.exists() or str(obj_set['commentsPath']) == "":
+        if not f_comm.exists() and str(obj_set['commentsPath']) == "":
             if not pathlib.Path('Resource/txt/comments.txt').exists():
                 comment = tk.messagebox.askyesno('No comments', "You don't have any comments to edit." + '\n' +
                                                  "Do you want to create some now?", icon='info')
@@ -1177,10 +1200,9 @@ def settings():
 
 def check_alive():
     try:
-        web.current_url
-        print(web.current_url)
+        web.title
         return True
-    except NameError:
+    except (InvalidSessionIdException, MaxRetryError, NameError):
         return False
 
 
@@ -1190,31 +1212,23 @@ def close():
                                             icon='warning')
         if msg_box == 'yes':
             root.destroy()
-            exit_program = True
             try:
                 web.close(), web.quit()
-                try:
-                    b1_text.set("Run")
-                    b1["command"] = threading_run
-                    return
-                except RuntimeError:
-                    print(Colors.WARNING, RuntimeError, "for close()", Colors.ENDC)
-            except NameError:
-                print(Colors.WARNING, NameError, "for close()", Colors.ENDC)
                 sys.exit(1)
-            except InvalidSessionIdException:
-                print(Colors.WARNING, InvalidSessionIdException, "for close()", Colors.ENDC)
-                sys.exit(1)
-            except WebDriverException:
-                print(Colors.WARNING, WebDriverException, "for close()", Colors.ENDC)
-                sys.exit(1)
-            except TclError:
-                print(Colors.WARNING, TclError, "for close()", Colors.ENDC)
+                # try:
+                #     b1_text.set("Run")
+                #     b1["command"] = threading_run
+                #     return
+                # except RuntimeError:
+                #     print(Colors.WARNING, RuntimeError, "for close()", Colors.ENDC)
+            except (NameError, InvalidSessionIdException, WebDriverException, TclError):
+                print(Colors.WARNING, "An exception in close() occurred", Colors.ENDC)
                 sys.exit(1)
         else:
             return
     else:
         root.destroy()
+        sys.exit(1)
 
 
 def stop():
@@ -1229,21 +1243,15 @@ def stop():
                 return
             except RuntimeError:
                 print(Colors.WARNING, RuntimeError, "for stop()", Colors.ENDC)
-        except NameError:
-            print(Colors.WARNING, NameError, "for stop()", Colors.ENDC)
-            return
-        except InvalidSessionIdException:
-            print(Colors.WARNING, InvalidSessionIdException, "for stop()", Colors.ENDC)
-            return
-        except WebDriverException:
-            print(Colors.WARNING, WebDriverException, "for stop()", Colors.ENDC)
+        except (NameError, InvalidSessionIdException, WebDriverException):
+            print(Colors.WARNING, " An exception in stop() occurred", Colors.ENDC)
             return
     else:
         return
 
 
 def restart():
-    print(Colors.OKGREEN, "The program will restart itself", Colors.ENDC)
+    print(Colors.OKGREEN, "The program restarts now", Colors.ENDC)
     root.destroy()
     os.system('python ' + str(os.path.basename(__file__)))
     os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
@@ -1264,103 +1272,95 @@ def check_content():
     f_run = pathlib.Path("Resource/JSON/firstRun.json")
     f_set = pathlib.Path("Resource/JSON/settings.json")
 
-    if d_Resource.exists():
-        if d_driver.exists():
-            if d_JSON.exists():
-                if d_txt.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
-                        f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
-                    print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
-                else:
-                    msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will "
-                                                                       "take some time.")
-                    if msg_box:
-                        print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                        try:
+    try:
+        if d_Resource.exists():
+            if d_driver.exists():
+                if d_JSON.exists():
+                    if d_txt.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
+                            f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                        print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
+                    else:
+                        msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will "
+                                                                           "take some time.")
+                        if msg_box:
+                            print(Colors.BOLD, "Downloading files...", Colors.ENDC)
                             shutil.rmtree("Resource")
                             mk_folder()
                             dow_driver()
                             exe_driver()
                             mk_files()
                             restart()
-                        except PermissionError:
-                            messagebox.showerror("Permission Error",
-                                                 "Restart the program with administrator rights." + "\n" +
-                                                 "Reinstall the program if the error keeps occurring.")
+                            sys.exit(1)
+                        else:
+                            print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                            sys.exit()
+                else:
+                    if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                        msg_box = messagebox.askokcancel("Creating files",
+                                                         "Some files are being created. This will take some time.")
+                        if msg_box:
+                            print(Colors.BOLD, "Creating JSON files...", Colors.ENDC)
+                            try:
+                                shutil.rmtree("Resource/JSON")
+                                mk_folder_2()
+                                mk_files()
+                                restart()
+                                sys.exit(1)
+                            except FileNotFoundError:
+                                mk_folder_2()
+                                mk_files()
+                                restart()
+
+                        else:
+                            print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                             sys.exit(1)
                     else:
-                        print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-                        sys.exit()
+                        msg_box = messagebox.askokcancel("Creating files",
+                                                         "Some files are being downloaded. This will take some time.")
+                        if msg_box:
+                            print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                            shutil.rmtree("Resource")
+                            mk_folder()
+                            dow_driver()
+                            exe_driver()
+                            mk_files()
+                            restart()
+                            sys.exit(1)
+                        else:
+                            print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                            sys.exit(1)
             else:
-                if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
-                    msg_box = messagebox.askokcancel("Creating files 2",
-                                                     "Some files are being downloaded. This will take some time.")
-                    if msg_box:
-                        print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                        try:
-                            shutil.rmtree("Resource/JSON")
-                            mk_folder_2()
-                            mk_files()
-                            restart()
-                        except PermissionError:
-                            messagebox.showerror("Permission Error",
-                                                 "Restart the program with administrator rights." + "\n" +
-                                                 "Reinstall the program if the error keeps occurring.")
-                            sys.exit(1)
-                    else:
-                        print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-                        sys.exit(1)
-                else:
-                    msg_box = messagebox.askokcancel("Creating files",
-                                                     "Some files are being downloaded. This will take some time.")
-                    if msg_box:
-                        print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                        try:
-                            shutil.rmtree("Resource")
-                            mk_folder()
-                            dow_driver()
-                            exe_driver()
-                            mk_files()
-                            restart()
-                        except PermissionError:
-                            messagebox.showerror("Permission Error",
-                                                 "Restart the program with administrator rights." + "\n" +
-                                                 "Reinstall the program if the error keeps occurring.")
-                            sys.exit(1)
-                    else:
-                        print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-                        sys.exit(1)
-        else:
-            msg_box = messagebox.askokcancel("Creating files",
-                                             "Some files are being downloaded. This will take some time.")
-            if msg_box:
-                print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-                try:
+                msg_box = messagebox.askokcancel("Creating files",
+                                                 "Some files are being downloaded. This will take some time.")
+                if msg_box:
+                    print(Colors.BOLD, "Downloading files...", Colors.ENDC)
                     shutil.rmtree("Resource")
                     mk_folder()
                     dow_driver()
                     exe_driver()
                     mk_files()
                     restart()
-                except PermissionError:
-                    messagebox.showerror("Permission Error",
-                                         "Restart the program with administrator rights." + "\n" +
-                                         "Reinstall the program if the error keeps occurring.")
                     sys.exit(1)
+                else:
+                    print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
+                    sys.exit(1)
+        else:
+            msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
+            if msg_box:
+                print(Colors.BOLD, "Downloading files...", Colors.ENDC)
+                mk_folder()
+                dow_driver()
+                exe_driver()
+                mk_files()
+                restart()
             else:
                 print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                 sys.exit(1)
-    else:
-        msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
-        if msg_box:
-            print(Colors.BOLD, "Downloading files...", Colors.ENDC)
-            mk_folder()
-            dow_driver()
-            exe_driver()
-            mk_files()
-            restart()
-        else:
-            print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
-            sys.exit(1)
+
+    except PermissionError:
+        messagebox.showerror("Permission Error",
+                             "Restart the program with administrator rights." + "\n" +
+                             "Reinstall the program if the error keeps occurring.")
 
 
 def mk_folder():
@@ -1462,13 +1462,8 @@ def dow_driver():
 
         return
 
-    except requests.exceptions.ConnectionError:
-        print(Colors.FAIL, requests.exceptions.ConnectionError, "for dow_driver()", Colors.ENDC)
-        print(Colors.FAIL, "This is an time-out error! Please restart the program and try it again.", Colors.ENDC)
-        messagebox.showerror("Time out", "Something went wrong when downloading the files. Please restart the program.")
-
-    except requests.exceptions.ChunkedEncodingError:
-        print(Colors.FAIL, requests.exceptions.ChunkedEncodingError, "for dow_driver()", Colors.ENDC)
+    except (requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError):
+        print(Colors.FAIL, "An exception in dow_driver() occurred", Colors.ENDC)
         print(Colors.FAIL, "This is an time-out error! Please restart the program and try it again.", Colors.ENDC)
         messagebox.showerror("Time out", "Something went wrong when downloading the files. Please restart the program.")
 
@@ -1610,6 +1605,7 @@ def check_json():
         str(obj_json['Agree to EULA?'])
         json_file.close()
     except KeyError:
+        print(Colors.WARNING, "firstRun file error", Colors.ENDC)
         shutil.rmtree("Resource/JSON")
         check_content()
     except FileNotFoundError:
@@ -1623,6 +1619,7 @@ def check_json():
         str(obj_json['Password'])
         json_file.close()
     except KeyError:
+        print(Colors.WARNING, "LogIn file error", Colors.ENDC)
         shutil.rmtree("Resource/JSON")
         check_content()
     except FileNotFoundError:
@@ -1637,6 +1634,7 @@ def check_json():
         str(obj_json['Own Browser Name'])
         json_file.close()
     except KeyError:
+        print(Colors.WARNING, "Browser file error", Colors.ENDC)
         shutil.rmtree("Resource/JSON")
         check_content()
     except FileNotFoundError:
@@ -1654,6 +1652,7 @@ def check_json():
         str(obj_json['Lang'])
         json_file.close()
     except KeyError:
+        print(Colors.WARNING, "settings file error", Colors.ENDC)
         shutil.rmtree("Resource/JSON")
         check_content()
     except FileNotFoundError:
@@ -1666,6 +1665,7 @@ def check_json():
         str(obj_json['Last URL'])
         json_file.close()
     except KeyError:
+        print(Colors.WARNING, "URLhistory file error", Colors.ENDC)
         shutil.rmtree("Resource/JSON")
         check_content()
     except FileNotFoundError:
