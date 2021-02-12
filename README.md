@@ -46,7 +46,7 @@ Technical features:
       - Next to the name of your browser you should see the version.
       - Under Chromium based browsers (like Chrome or Brave)
         <br>you can also enter "chrome://version" in the search field.
-    - You can also use your own browser.<br>To do this, read the item _"Customization for your browser"_.
+    - You can also use your own browser.<br>To do this, read the item _["Customization for your browser"](https://github.com/JueK3y/Instagram-automated-commenting/blob/main/README.md#customization-for-your-browser)_.
 4. Now you can go to "Run".
 5. You will then be prompted to enter sentences which you want to comment.
    <br>You also have the option to import an already existing .txt file with comments.
@@ -57,7 +57,7 @@ _(*) Your data will not be uploaded anywhere, they are stored only on your compu
 
 ## Customization for your browser
 _Note: Only do this if you have experience with Selenium.
-<br>You can't break anything, but it might simply not work._
+You can't break anything, but it might simply not work._
 <br>It is possible to use the program with the following browsers:
 - Chrome _(version 87 & 88 already installed with)_
 - Edge _(x64 version 88 - 90 already installed)_
