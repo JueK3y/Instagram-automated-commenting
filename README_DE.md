@@ -13,19 +13,20 @@ IAC ist ein Bot, welcher automatisch unter vorgegebenen Instagram Posts zufälli
 - Hauptfunktion: Automatisches Kommentieren in zufälliger Reihenfolge
 - GUI: Visuell ansprechbare GUI mit Hell- und Dunkelmodus
 - Große Auswahl: Angepasst auf 6 verschieden Browser und Versionen
+- Importiere ganz einfach den Treiber für den Browser deiner Wahl
 - Einmal alle Daten eingegeben ist es sofort und dauerhaft nutzbar
 - Einfaches importieren und bearbeiten der eigenen Kommentare
-- Entscheide selber, wie lange der Bot kommentieren soll
-- Umfangreiche Help-Seite, welches bei jedem Problem weiterhelfen soll
+- Entscheide selber, wie lange der Bot kommentieren soll (und ob er überhaupt aufhören soll)
+- Umfangreiche Help-Seite, welche bei jedem Problem weiterhelfen soll
 
 Technische Besonderheiten:
 - Datensicherheit: Deine Daten werden unter keinen Umständen
   <br>hochgeladen und sind einzig und allein auf deinem Computer gespeichert
-- Häufige Updates: An allen Problemen aus dem
-  <br>IssueTracker wird aktuell gearbeitet
+- Regelmäßige Updates: An allen Problemen aus dem
+  <br>[IssueTracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) wird aktuell gearbeitet
 - Open Source: Die Echtheit und Funktionsweiße des Codes
   <br>kann jederzeit selber überprüft werden
-- Alles in einer Datei, welche nur 15 MB groß ist
+- Alles in einer Datei, welche unter 15 MB groß ist
 - Automatischer Download aller benötigten Dateien
 
 ...und das alles kostenlos
@@ -34,11 +35,10 @@ Technische Besonderheiten:
 ## So funktioniert es
 1. Du gibst beim ersten Start deine Login-Daten von Instagram ein _(*)_
 2. Danach kopierst den Post Link, welchen du kommentieren willst und fügst ihn in das Textfeld "Post URL" ein
-3. Danach wählst du den Browser aus, welchen du benutzt. Du hast dafür 4 Möglichkeiten:
+3. Danach wählst du den Browser aus, welchen du benutzt. Du hast dafür mehrere Möglichkeiten:
     - Firefox
     - Chrome (Version 87, 88)
     - Edge (x64-Version 88 - 90)
-    - (Safari - kommt bald)
    - So überprüfst du die Version deines Browsers:
       - Öffne deinen bevorzugten Browser
       - Oben rechts in der Ecke findest du 3 Punkte / Striche
@@ -46,12 +46,34 @@ Technische Besonderheiten:
       - Dort sollte neben dem Namen deines Browsers die jeweilige Version stehen.
       - Unter auf Chromium basierend Browser (so wie Chrome oder Brave)
         <br>kannst du auch "chrome://version" in das Suchfeld eingeben
+    - Du kannst auch deinen eigenen Browser benutzen. Lies dir dazu den Punkt _"Anpassung für deinen Browser"_ durch.
 4. Jetzt kannst du auf "Run" gehen.
 5. Du wirst dann aufgefordert, Sätze einzugeben, welche du kommentieren willst.
    <br>Du hast auch die Möglichkeit, eine bereits vorhanden .txt Datei mit Kommentaren zu importieren.
    <br>Dafür gehst du auf "Settings" und importierst unter dem Punkt "Comments" deine Kommentare.
 
 _(*) Deine Daten werden nirgends hochgeladen, sie werden nur auf deinem Computer gespeichert und sind für niemanden einsehbar._
+
+
+## Anpassung für deinen Browser
+_Anmerkung: Mache das nur, wenn du Erfahrung mit Selenium hast.
+<br>Du kannst zwar nichts kaputt machen, aber es könnte ganz simpel nicht funktionieren._
+<br>Es ist möglich das Progamm mit den folgende Browsern zu benutzen:
+- Chrome _(Version 87 & 88 bereits mit installiert)_
+- Edge _(x64-Version 88 - 90 bereits mit installiert)_
+- Firefox _(Version 86 bereits mit installiert)_
+- Internet Explorer
+- Opera
+- Safari
+- Browser, welche auf die Technologie<br>der aufgezählten Browser aufbauen (z.B. Chromium Browser)
+
+Um diese Browser zu benutzen, brauchst den jeweiligen Treiber.
+<br>Mit einer schnellen Google Suche nach "Selenium Driver (dein Browser)" solltest du ihn gefunden haben.
+<br>Bei Safari ist der Treiber bereits mitinstalliert. Suche ihn also in dem Dateipfad von Safari.
+<br>Wenn der Treiber heruntergeladen wurde, kannst du das Programm starten
+<br>und über _"Settings -> More Browser"_ den Treiber importieren.
+<br>Bitte wähle den zum Treiber dazugehörigen Browser aus.
+<br>Nach einem Neustart des Programmes kann der eigene Browser als "Own Browser" benutzt werden.
 
 
 ## Funktioniert für:
