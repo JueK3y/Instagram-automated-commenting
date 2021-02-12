@@ -13,19 +13,20 @@ IAC is a bot which automatically comments randomly under given Instagram posts.
 - Main function: Automatic commenting in random order
 - GUI: Good looking GUI with light and dark mode
 - Wide choice: Adapted to 6 different browsers and versions
+- Simply import the driver for the browser of your choice
 - Once all data is entered it is immediately and permanently usable
 - Easily import and edit your own comments
-- Decide for yourself how long the bot should comment
+- Decide for yourself how long the bot should comment<be>(and whether it should stop at all)
 - Extensive help page, which is supposed to help with every problem
 
 Technical features:
 - Data security: Your data will not be uploaded under any circumstances
   <br>and will only be stored on your computer
 - Frequent updates: On all problems from the
-  <br>Issue Tracker is currently being worked on
+  <br>[Issue Tracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) is currently being worked on
 - Open Source: The authenticity and functionality of the code
 <br>can be verified at any time.
-- Everything in one file, which is only 15 MB in size
+- All in one file, which is under 15 MB in size
 - Automatic download of all required files
 
 ...and all this for free
@@ -34,24 +35,45 @@ Technical features:
 ## How it works:
 1. At the first start you enter your login data from Instagram _(*)_.
 2. Then copy the post link you want to comment on and paste it into the text field "Post URL".
-3. After that you choose the browser you use. You have 4 possibilities:
+3. After that you choose the browser you use. You have several options:
     - Firefox
     - Chrome (version 87, 88)
     - Edge (x64 version 88 - 90)
-    - (Safari - coming soon)
-   - Here's how to check your browser version:
+    - Here's how to check your browser version:
       - Open your favorite browser
       - In the top right corner you will find 3 dots / dashes
       - Click on these dots / dashes and go to settings or info.
       - Next to the name of your browser you should see the version.
       - Under Chromium based browsers (like Chrome or Brave)
         <br>you can also enter "chrome://version" in the search field.
+    - You can also use your own browser.<br>To do this, read the item _"Customization for your browser"_.
 4. Now you can go to "Run".
 5. You will then be prompted to enter sentences which you want to comment.
    <br>You also have the option to import an already existing .txt file with comments.
    <br>For this you go to "Settings" and import your comments under the label "Comments".
 
 _(*) Your data will not be uploaded anywhere, they are stored only on your computer and are not visible to anyone._
+
+
+## Customization for your browser
+_Note: Only do this if you have experience with Selenium.
+<br>You can't break anything, but it might simply not work._
+<br>It is possible to use the program with the following browsers:
+- Chrome _(version 87 & 88 already installed with)_
+- Edge _(x64 version 88 - 90 already installed)_
+- Firefox _(version 86 already installed)_
+- Internet Explorer
+- Opera
+- Safari
+- Browsers, which build on the technology<br>of the listed browsers (e.g. Chromium Browser).
+
+To use these browsers, you need the respective driver.
+<br>With a quick Google search for "Selenium Driver (your browser)" you should have found it.
+<br>Safari already has the driver installed. So look for it in the file path of Safari.
+<br>When the driver has been downloaded, you can start the program.
+<br>and import the driver via _"Settings -> More Browser"_.
+<br>Please select the browser that belongs to the driver.
+<br>After restarting the program, your own browser can be used as "Own Browser".
 
 
 ## Works for:
