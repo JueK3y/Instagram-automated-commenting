@@ -59,7 +59,7 @@ _(*) Your data will not be uploaded anywhere, they are stored only on your compu
 _Note: Only do this if you have experience with Selenium.
 You can't break anything, but it might simply not work._
 <br>It is possible to use the program with the following browsers:
-- Chrome _(version 87 & 88 already installed with)_
+- Chrome _(version 87 & 88 already installed)_
 - Edge _(x64 version 88 - 90 already installed)_
 - Firefox _(version 86 already installed)_
 - Internet Explorer
