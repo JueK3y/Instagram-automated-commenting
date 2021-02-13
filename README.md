@@ -70,7 +70,7 @@ You can't break anything, but it might simply not work._
 To use these browsers, you need the respective driver.
 <br>With a quick Google search for "Selenium Driver (your browser)" you should have found it.
 <br>Safari already has the driver installed. So look for it in the file path of Safari.
-<br>When the driver has been downloaded, you can start the program.
+<br>When the driver has been downloaded, you can start the program
 <br>and import the driver via _"Settings -> More Browser"_.
 <br>Please select the browser that belongs to the driver.
 <br>After restarting the program, your own browser can be used as "Own Browser".
