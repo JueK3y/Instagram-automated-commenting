@@ -143,7 +143,8 @@ def eula_file():
             runfi.close()
             with open('Resource/txt/EULA.txt', 'a') as file:
                 file.write(
-                    '\n' + 'User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (e.day, e.month, e.year) +
+                    '\n' + 'User ' + os.getenv('username') + ' agreed to the EULA on %s/%s/%s' % (
+                        e.day, e.month, e.year) +
                     ' at %s:%s:%s.' % (e.hour, e.minute, e.second))
             file.close()
 
@@ -894,25 +895,25 @@ def settings():
             restart()
 
     def app_light():
-        with open('Resource/JSON/settings.json', 'r') as setfile:
-            data_set = setfile.read()
-        obj_set = json.loads(data_set)
+        with open('Resource/JSON/settings.json', 'r') as settingfile:
+            data_sett = settingfile.read()
+        obj_setti = json.loads(data_sett)
 
-        if str(obj_set['lightMode']) == 'no':
+        if str(obj_setti['lightMode']) == 'no':
             msg = messagebox.askokcancel("Light Mode", "In order to activate the light mode," + '\n' + "the program "
                                                                                                        "is restarted.")
             if msg:
-                obj_set['lightMode'] = 'yes'
-                obj_set['darkMode'] = 'no'
+                obj_setti['lightMode'] = 'yes'
+                obj_setti['darkMode'] = 'no'
                 print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
                 with open('Resource/JSON/settings.json', 'w') as settfile:
-                    json.dump(obj_set, settfile)
-                setfile.close()
+                    json.dump(obj_setti, settfile)
+                settingfile.close()
                 settfile.close()
                 settingsWin.destroy()
                 restart()
 
-        elif str(obj_set['lightMode']) == 'yes':
+        elif str(obj_setti['lightMode']) == 'yes':
             msg = messagebox.askyesno("Light Mode", "The light mode has already been activated." + '\n' + "Do you want "
                                                                                                           "to reapply "
                                                                                                           "it?")
@@ -922,12 +923,12 @@ def settings():
                                                                                                            "is "
                                                                                                            "restarted.")
                 if msg:
-                    obj_set['lightMode'] = 'yes'
-                    obj_set['darkMode'] = 'no'
+                    obj_setti['lightMode'] = 'yes'
+                    obj_setti['darkMode'] = 'no'
                     print(Colors.OKGREEN, "Using light Mode", Colors.ENDC)
                     with open('Resource/JSON/settings.json', 'w') as settfile:
-                        json.dump(obj_set, settfile)
-                    setfile.close()
+                        json.dump(obj_setti, settfile)
+                    settingfile.close()
                     settfile.close()
                     settingsWin.destroy()
                     restart()
@@ -941,27 +942,27 @@ def settings():
                 shutil.rmtree("Resource/JSON")
                 mk_files()
 
-        setfile.close()
+        settingfile.close()
 
     def app_dark():
-        with open('Resource/JSON/settings.json', 'r') as setfile:
-            data_set = setfile.read()
-        obj_set = json.loads(data_set)
-        if str(obj_set['darkMode']) == 'no':
+        with open('Resource/JSON/settings.json', 'r') as settingfile:
+            data_sett = settingfile.read()
+        obj_setti = json.loads(data_sett)
+        if str(obj_setti['darkMode']) == 'no':
             msg = messagebox.askokcancel("Dark Mode",
                                          "In order to activate the dark mode," + '\n' + "the program is restarted.")
             if msg:
-                obj_set['lightMode'] = 'no'
-                obj_set['darkMode'] = 'yes'
+                obj_setti['lightMode'] = 'no'
+                obj_setti['darkMode'] = 'yes'
                 print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
                 with open('Resource/JSON/settings.json', 'w') as settfile:
-                    json.dump(obj_set, settfile)
-                setfile.close()
+                    json.dump(obj_setti, settfile)
+                settingfile.close()
                 settfile.close()
                 settingsWin.destroy()
                 restart()
 
-        elif str(obj_set['darkMode']) == 'yes':
+        elif str(obj_setti['darkMode']) == 'yes':
             msg = messagebox.askyesno("Dark Mode", "The dark mode has already been activated." + '\n' + "Do you want "
                                                                                                         "to reapply "
                                                                                                         "it?")
@@ -969,12 +970,12 @@ def settings():
                 msg = messagebox.askokcancel("Dark Mode",
                                              "In order to activate the dark mode," + '\n' + "the program is restarted.")
                 if msg:
-                    obj_set['lightMode'] = 'no'
-                    obj_set['darkMode'] = 'yes'
+                    obj_setti['lightMode'] = 'no'
+                    obj_setti['darkMode'] = 'yes'
                     print(Colors.OKGREEN, "Using Dark Mode", Colors.ENDC)
                     with open('Resource/JSON/settings.json', 'w') as settfile:
-                        json.dump(obj_set, settfile)
-                    setfile.close()
+                        json.dump(obj_setti, settfile)
+                    settingfile.close()
                     settfile.close()
                     settingsWin.destroy()
                     restart()
@@ -987,22 +988,22 @@ def settings():
                 shutil.rmtree("Resource/JSON")
                 mk_files()
 
-        setfile.close()
+        settingfile.close()
 
     def hqm():
-        with open('Resource/JSON/settings.json', 'r') as setfile:
+        with open('Resource/JSON/settings.json', 'r') as settingfile:
             data_sett = setfile.read()
-        obj_set = json.loads(data_sett)
+        obj_setti = json.loads(data_sett)
 
         if hqm_var == 1:
             msg = messagebox.askokcancel("Activate HQ mode", "Use this function if the program is displayed blurred." +
                                          '\n' + "Activation may cause elements to be moved." +
                                          '\n' + "The program will restart itself.", icon="info")
             if msg:
-                obj_set['HQM'] = "Activated"
+                obj_setti['HQM'] = "Activated"
                 with open('Resource/JSON/settings.json', 'w') as settfil:
-                    json.dump(obj_set, settfil)
-                setfile.close()
+                    json.dump(obj_setti, settfil)
+                settingfile.close()
                 settfil.close()
                 restart()
 
@@ -1010,27 +1011,27 @@ def settings():
             msg = messagebox.askokcancel("De-activate HQ mode", "The function will be de-activated." +
                                          '\n' + "The program will restart itself.", icon="info")
             if msg:
-                obj_set['HQM'] = ""
+                obj_setti['HQM'] = ""
 
                 with open('Resource/JSON/settings.json', 'w') as settfil:
-                    json.dump(obj_set, settfil)
-                setfile.close()
+                    json.dump(obj_setti, settfil)
+                settingfile.close()
                 settfil.close()
                 restart()
 
     def add_com():
-        with open('Resource/JSON/settings.json', 'r') as setfile:
-            data_sett = setfile.read()
-        obj_set = json.loads(data_sett)
+        with open('Resource/JSON/settings.json', 'r') as settingfile:
+            data_sett = settingfile.read()
+        obj_setti = json.loads(data_sett)
 
         f_comm = pathlib.Path(comments_path)
 
-        if not f_comm.exists() and str(obj_set['commentsPath']) == "":
+        if not f_comm.exists() and str(obj_setti['commentsPath']) == "":
             if not pathlib.Path('Resource/txt/comments.txt').exists():
                 comment = tk.messagebox.askyesno('No comments', "You don't have any comments to edit." + '\n' +
                                                  "Do you want to create some now?", icon='info')
                 if comment:
-                    obj_set['commentsPath'] = 'Resource/txt/comments.txt'
+                    obj_setti['commentsPath'] = 'Resource/txt/comments.txt'
 
                     comment_txt = open("Resource/txt/comments.txt", "a")
                     comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
@@ -1038,14 +1039,14 @@ def settings():
                     comment_txt.close()
 
                     programName = "notepad.exe"
-                    fileName = str(obj_set['commentsPath'])
+                    fileName = str(obj_setti['commentsPath'])
                     sp.Popen([programName, fileName])
 
                     settingsWin.update()
                     root.update()
                     return
             else:
-                obj_set['commentsPath'] = 'Resource/txt/comments.txt'
+                obj_setti['commentsPath'] = 'Resource/txt/comments.txt'
 
                 programName = "notepad.exe"
                 fileName = 'Resource/txt/comments.txt'
@@ -1056,14 +1057,14 @@ def settings():
                 return
         else:
             programName = "notepad.exe"
-            fileName = str(obj_set['commentsPath'])
+            fileName = str(obj_setti['commentsPath'])
             sp.Popen([programName, fileName])
 
             settingsWin.update()
             root.update()
             return
 
-        setfile.close()
+        settingfile.close()
 
     def sel_com():
         commentspath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
@@ -1071,16 +1072,16 @@ def settings():
         if commentspath:
             messagebox.showinfo("Success", "Your .txt file has been added to the comments.")
 
-            with open('Resource/JSON/settings.json', 'r') as setfile:
-                data_set = setfile.read()
-            obj_set = json.loads(data_set)
+            with open('Resource/JSON/settings.json', 'r') as settingfile:
+                data_sett = settingfile.read()
+            obj_setti = json.loads(data_sett)
 
-            obj_set['commentsPath'] = commentspath
+            obj_setti['commentsPath'] = commentspath
 
             with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_set, settfile)
+                json.dump(obj_setti, settfile)
 
-            setfile.close()
+            settingfile.close()
             settfile.close()
 
     def not_av():
@@ -1165,23 +1166,23 @@ def settings():
         try:
             line_count()
 
-            with open('Resource/JSON/settings.json', 'r') as setfile:
-                dat_json = setfile.read()
-            obj_set = json.loads(dat_json)
+            with open('Resource/JSON/settings.json', 'r') as settingfile:
+                dat_json = settingfile.read()
+            obj_setting = json.loads(dat_json)
 
             max_y = int(15 * (float(v) + 1) + 21)
 
-            obj_set['Max Y'] = str(max_y + 20)
+            obj_setting['Max Y'] = str(max_y + 20)
 
-            average = (max_y / 60) * float(obj_set['Comment Lines'])
+            average = (max_y / 60) * float(obj_setting['Comment Lines'])
 
             la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
             la.place(x=200, y=129)
 
             with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_set, settfile)
+                json.dump(obj_setting, settfile)
 
-            setfile.close()
+            settingfile.close()
             settfile.close()
             return
 
@@ -1277,7 +1278,8 @@ def check_content():
             if d_driver.exists():
                 if d_JSON.exists():
                     if d_txt.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
-                            f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                            f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.\
+                            exists():
                         print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
                     else:
                         msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will "
@@ -1295,7 +1297,8 @@ def check_content():
                             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                             sys.exit()
                 else:
-                    if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.exists():
+                    if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.\
+                            exists():
                         msg_box = messagebox.askokcancel("Creating files",
                                                          "Some files are being created. This will take some time.")
                         if msg_box:
@@ -1345,7 +1348,8 @@ def check_content():
                     print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                     sys.exit(1)
         else:
-            msg_box = messagebox.askokcancel("Creating files", "Some files are being downloaded. This will take some time.")
+            msg_box = messagebox.askokcancel("Creating files",
+                                             "Some files are being downloaded. This will take some time.")
             if msg_box:
                 print(Colors.BOLD, "Downloading files...", Colors.ENDC)
                 mk_folder()
@@ -1410,14 +1414,23 @@ def dow_driver():
     icon = "https://juek3y.com/src/download/img/IAC-Icon-Ver.-2.ico"
 
     try:
+        root.update()
         a = requests.get(gecko)
+        root.update()
         b = requests.get(chr87)
+        root.update()
         c = requests.get(chr88)
+        root.update()
         d = requests.get(edg88)
+        root.update()
         ea = requests.get(edg89)
+        root.update()
         f = requests.get(edg90)
+        root.update()
         g = requests.get(EULA)
+        root.update()
         h = requests.get(icon)
+        root.update()
 
         with open("Resource/driver/geckodriver.zip", 'wb') as gec:
             gec.write(a.content)
