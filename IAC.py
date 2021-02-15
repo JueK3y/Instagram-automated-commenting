@@ -109,7 +109,7 @@ def ask_file():
     elif comment:
         comment_txt = open("Resource/txt/comments.txt", "a")
         comment_txt.write(
-            "# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
+            "! Write only one comment per line. Comments with '!' at the beginning will be ignored.")
         comment_txt.close()
 
         os.system("notepad Resource/txt/comments.txt")
@@ -209,7 +209,17 @@ def threading_run():
 
 
 def run():
-    run.loop = False
+    with open('Resource/JSON/settings.json', 'r') as settingfile:
+        data_sett = settingfile.read()
+    obj_setti = json.loads(data_sett)
+
+    if str(obj_setti['Looping comments?']):
+        run.loop = True
+    else:
+        run.loop = False
+
+    settingfile.close()
+
     if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e2.get()) == "None":
         messagebox.showerror("Missing input", "All fields must be filled in.")
     elif len(str(e4.get())) < 6:
@@ -259,7 +269,7 @@ def run():
             elif comment:
                 comment_txt = open("Resource/txt/comments.txt", "a")
                 comment_txt.write(
-                    "# Write only one comment per line. Comments with '#' at the beginning will be ignored.")
+                    "! Write only one comment per line. Comments with '!' at the beginning will be ignored.")
                 comment_txt.close()
 
                 os.system("notepad Resource/txt/comments.txt")
@@ -272,23 +282,12 @@ def run():
                                                                                             "continue?",
                                          icon='warning')
             if msg:
-                msg = messagebox.askyesno("Duration", "The commenting will take an average of " +
-                                          str(round(obj_sett['Time'], 2)) + " minutes." + "\n" +
-                                          "Do you want to loop the commenting?")
-                if msg:
-                    run.loop = True
-                    print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
-
                 check_comment()
         else:
-            msg = messagebox.askyesno("Duration", "The commenting will take an average of " +
-                                      str(round(obj_sett['Time'], 2)) + " minutes." + "\n" +
-                                      "Do you want to loop the commenting?")
+            msg = messagebox.askokcancel("Duration", "The commenting will take an average of " +
+                                         str(round(obj_sett['Time'], 2)) + " minutes.")
             if msg:
-                run.loop = True
-                print(Colors.OKGREEN, "Looping comments", Colors.ENDC)
-
-            check_comment()
+                check_comment()
 
         settfi.close()
 
@@ -741,7 +740,7 @@ def auto_comment():
             def comment():
                 for _ in comfi:
                     line = random.choice(comfi)
-                    while line.startswith('#'):
+                    while line.startswith('!'):
                         line = random.choice(comfi)
 
                     print(Colors.BOLD, "Posting comment: " + line.strip(), Colors.ENDC)
@@ -766,7 +765,6 @@ def auto_comment():
                         time.sleep(zeit)
                     except InvalidSessionIdException:
                         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-                        # messagebox.showerror("Browser closed", "Action cancelled by user.", icon='warning')
                         sys.exit(1)
 
             if run.loop:
@@ -868,6 +866,8 @@ def settings():
     except TclError:
         check_content()
 
+    settings.scale = 0
+
     if light:
         settingsWin['background'] = '#F5F6F7'
     elif dark:
@@ -875,24 +875,6 @@ def settings():
     else:
         print(Colors.FAIL, "Uhh, this wasn't supposed happen.", Colors.ENDC)
         restart()
-
-    def used():
-        msg = messagebox.askyesno("Already selected", "The language is already set to english." + '\n' +
-                                  "Do you want to reapply it?")
-        if msg:
-            with open('Resource/JSON/settings.json', 'r') as langfil:
-                lang_data = langfil.read()
-            lang_obj = json.loads(lang_data)
-
-            lang_obj['Lang'] = "en"
-
-            with open('Resource/JSON/settings.json', 'w') as langfi:
-                json.dump(lang_obj, langfi)
-
-            langfi.close()
-            langfil.close()
-
-            restart()
 
     def app_light():
         with open('Resource/JSON/settings.json', 'r') as settingfile:
@@ -992,7 +974,7 @@ def settings():
 
     def hqm():
         with open('Resource/JSON/settings.json', 'r') as settingfile:
-            data_sett = setfile.read()
+            data_sett = settingfile.read()
         obj_setti = json.loads(data_sett)
 
         if hqm_var == 1:
@@ -1019,7 +1001,66 @@ def settings():
                 settfil.close()
                 restart()
 
-    def add_com():
+    def change_max_y(v):
+        try:
+            line_count()
+
+            with open('Resource/JSON/settings.json', 'r') as settingfile:
+                dat_json = settingfile.read()
+            obj_setting = json.loads(dat_json)
+
+            max_y = int(15 * (float(v) + 1) + 21)
+
+            obj_setting['Max Y'] = str(max_y + 20)
+
+            average = (max_y / 60) * float(obj_setting['Comment Lines'])
+
+            la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
+            la.place(x=24, y=67)
+
+            with open('Resource/JSON/settings.json', 'w') as settfile:
+                json.dump(obj_setting, settfile)
+
+            settingfile.close()
+            settfile.close()
+            return
+
+        except FileNotFoundError:
+            if not settings.scale:
+                ask_file()
+                settings.scale = 1
+
+    def loop_com():
+        with open('Resource/JSON/settings.json', 'r') as settingfile:
+            data_sett = settingfile.read()
+        obj_setti = json.loads(data_sett)
+
+        if loop_var == 1:
+            msg = messagebox.askokcancel("Looping comments", "This function repeats your sentences when the program "
+                                                             "reaches the end of the file." +
+                                         '\n' + "You can stop commenting at any time by clicking 'Stop'." +
+                                         '\n' + "The program restarts itself now.", icon="info")
+            if msg:
+                obj_setti['Looping comments?'] = True
+                with open('Resource/JSON/settings.json', 'w') as settfil:
+                    json.dump(obj_setti, settfil)
+                settingfile.close()
+                settfil.close()
+                restart()
+
+        elif loop_var == 0:
+            msg = messagebox.askokcancel("De-activate Repeating", "Your comments will no longer be repeated." +
+                                         '\n' + "The program restarts itself now.", icon="info")
+            if msg:
+                obj_setti['Looping comments?'] = ""
+
+                with open('Resource/JSON/settings.json', 'w') as settfil:
+                    json.dump(obj_setti, settfil)
+                settingfile.close()
+                settfil.close()
+                restart()
+
+    def edit_com():
         with open('Resource/JSON/settings.json', 'r') as settingfile:
             data_sett = settingfile.read()
         obj_setti = json.loads(data_sett)
@@ -1034,7 +1075,7 @@ def settings():
                     obj_setti['commentsPath'] = 'Resource/txt/comments.txt'
 
                     comment_txt = open("Resource/txt/comments.txt", "a")
-                    comment_txt.write("# Write only one comment per line. Comments with '#' at the beginning will be "
+                    comment_txt.write("! Write only one comment per line. Comments with '!' at the beginning will be "
                                       "ignored.")
                     comment_txt.close()
 
@@ -1066,7 +1107,7 @@ def settings():
 
         settingfile.close()
 
-    def sel_com():
+    def import_com():
         commentspath = askopenfilename(filetypes=(("* .txt", "*.txt"), ("All Files", "*.*")))
 
         if commentspath:
@@ -1084,62 +1125,37 @@ def settings():
             settingfile.close()
             settfile.close()
 
-    def not_av():
-        messagebox.showwarning("In progress", "This feature is currently not available.")
-
     def set_help():
         webbrowser.open_new(r"https://github.com/JueK3y/Instagram-automated-commenting/wiki/Help")
 
     # Content
-    # First line
-    ttk.Label(settingsWin, text="Langauge").place(x=64, y=5)
-
-    with open('Resource/JSON/settings.json', 'r') as setfile:
-        data_set = setfile.read()
-    obj_set = json.loads(data_set)
-
-    if obj_set['commentsPath'] == "de":
-        lang = tk.StringVar(value='de')
-    else:
-        lang = tk.StringVar(value='en')
-    ttk.Radiobutton(settingsWin, text="EN", variable=lang, value="en", command=used). \
-        place(x=44, y=29)
-    ttk.Radiobutton(settingsWin, text="DE", variable=lang, value="de", command=not_av). \
-        place(x=94, y=29)
-
-    setfile.close()
-
-    ttk.Label(settingsWin, text="More Browser").place(x=61, y=129)
-    ttk.Button(settingsWin, text="Import", command=threading_browser).place(x=36, y=151, width=110)
-
-    # Second line
-    ttk.Label(settingsWin, text="Appearance").place(x=59, y=5)  # y = 67
+    # 1. line
+    ttk.Label(settingsWin, text="Appearance").place(x=59, y=5)
     if light:
         sw_appearance = tk.StringVar(value='lightMode')
     else:
         sw_appearance = tk.StringVar(value='darkMode')
     ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light). \
-        place(x=34, y=29, width=70)  # y = 91
+        place(x=34, y=29, width=70)
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
-        place(x=94, y=29, width=70)  # y = 91
+        place(x=94, y=29, width=70)
 
-    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=5)  # y = 67
+    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=5)
+
     with open('Resource/JSON/settings.json', 'r') as setfil:
         data_json = setfil.read()
     obj_sett = json.loads(data_json)
 
     if str(obj_sett['HQM']) == "Activated":
-        ttk.Checkbutton(settingsWin, text="Deactivate Mode", variable=IntVar(value=1), command=hqm).place(x=206, y=27)  # y = 91
+        ttk.Checkbutton(settingsWin, text="HQ Mode activated", variable=IntVar(value=1), command=hqm).place(x=203, y=30)
         hqm_var = 0
     else:
-        ttk.Checkbutton(settingsWin, text="Activate Mode", command=hqm).place(x=206, y=27)   # y = 91
+        ttk.Checkbutton(settingsWin, text="Activate HQM?", command=hqm).place(x=201, y=30)
         hqm_var = 1
 
-    # Third line
-    ttk.Label(settingsWin, text="Comments").place(x=61, y=67)  # y =129
-    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=36, y=91, width=50)  # y = 151
-    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=86, y=91, width=60)
+    setfil.close()
 
+    # 2. Lines
     try:
         with open('Resource/JSON/settings.json', 'r') as setfil:
             data_json = setfil.read()
@@ -1148,66 +1164,43 @@ def settings():
         if pathlib.Path(str(obj_sett['commentsPath'])).exists():
             la = ttk.Label(settingsWin, text='Average duration: ' + str(round((((int(obj_sett['Max Y']) - 20) / 60) *
                                                                                float(obj_sett['Comment Lines'])),
-                                                                              2)) +
-                                             'min')
+                                                                              2)) + 'min')
 
-            la.place(x=200, y=67)
+            la.place(x=24, y=67)
         else:
             la = ttk.Label(settingsWin, text='Average duration')
-            la.place(x=212, y=67)
+            la.place(x=45, y=67)
         setfi.close()
     except KeyError:
         la = ttk.Label(settingsWin, text='Average duration')
-        la.place(x=212, y=67)  # y = 129
-
-    settings.scale = 0
-
-    def change_max_y(v):
-        try:
-            line_count()
-
-            with open('Resource/JSON/settings.json', 'r') as settingfile:
-                dat_json = settingfile.read()
-            obj_setting = json.loads(dat_json)
-
-            max_y = int(15 * (float(v) + 1) + 21)
-
-            obj_setting['Max Y'] = str(max_y + 20)
-
-            average = (max_y / 60) * float(obj_setting['Comment Lines'])
-
-            la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
-            la.place(x=200, y=129)
-
-            with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_setting, settfile)
-
-            settingfile.close()
-            settfile.close()
-            return
-
-        except FileNotFoundError:
-            if not settings.scale:
-                ask_file()
-                settings.scale = 1
+        la.place(x=45, y=67)
 
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
-        place(x=207, y=97, width=110)  # y = 158
+        place(x=39, y=98, width=110)
 
-    # 3. Lines
-    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=129)
+    ttk.Label(settingsWin, text="Loop comments").place(x=214, y=67)
+
     with open('Resource/JSON/settings.json', 'r') as setfil:
         data_json = setfil.read()
     obj_sett = json.loads(data_json)
 
-    if str(obj_sett['HQM']) == "Activated":
-        ttk.Checkbutton(settingsWin, text="Stop Looping", variable=IntVar(value=1), command=hqm).place(x=206, y=158)
-        hqm_var = 0
+    if str(obj_sett['Looping comments?']):
+        ttk.Checkbutton(settingsWin, text="Looping comments", variable=IntVar(value=1), command=loop_com).place(x=201,
+                                                                                                                y=92)
+        loop_var = 0
     else:
-        ttk.Checkbutton(settingsWin, text="Loop comments", command=hqm).place(x=206, y=158)
-        hqm_var = 1
+        ttk.Checkbutton(settingsWin, text="Repeat comments?", command=loop_com).place(x=201, y=92)
+        loop_var = 1
 
-    # 4. line
+    # 3. Line
+    ttk.Label(settingsWin, text="Comments").place(x=61, y=129)
+    ttk.Button(settingsWin, text="Edit", command=edit_com).place(x=36, y=151, width=50)
+    ttk.Button(settingsWin, text="Import", command=import_com).place(x=86, y=151, width=60)
+
+    ttk.Label(settingsWin, text="More Browser").place(x=221, y=129)
+    ttk.Button(settingsWin, text="Import", command=threading_browser).place(x=204, y=151, width=110)
+
+    # 4. Line
     ttk.Button(settingsWin, text="Help", command=set_help).place(x=36, y=200, width=110)
     ttk.Button(settingsWin, text="Back", command=settingsWin.destroy).place(x=204, y=200, width=110)
 
@@ -1229,12 +1222,6 @@ def close():
             try:
                 web.close(), web.quit()
                 sys.exit(1)
-                # try:
-                #     b1_text.set("Run")
-                #     b1["command"] = threading_run
-                #     return
-                # except RuntimeError:
-                #     print(Colors.WARNING, RuntimeError, "for close()", Colors.ENDC)
             except (NameError, InvalidSessionIdException, WebDriverException, TclError):
                 print(Colors.WARNING, "An exception in close() occurred", Colors.ENDC)
                 sys.exit(1)
@@ -1291,7 +1278,7 @@ def check_content():
             if d_driver.exists():
                 if d_JSON.exists():
                     if d_txt.exists() & f_run.exists() & f_login.exists() & f_url.exists() & f_set.exists() & \
-                            f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.\
+                            f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon. \
                             exists():
                         print(Colors.OKGREEN, "All files are downloaded", Colors.ENDC)
                     else:
@@ -1310,7 +1297,7 @@ def check_content():
                             print(Colors.BOLD, "Download canceled by user", Colors.ENDC)
                             sys.exit()
                 else:
-                    if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon.\
+                    if f_gecko.exists() & f_chrome_87.exists() & f_chrome_88.exists() & f_eula.exists() & f_icon. \
                             exists():
                         msg_box = messagebox.askokcancel("Creating files",
                                                          "Some files are being created. This will take some time.")
@@ -1612,7 +1599,7 @@ def mk_files():
         'darkMode': "no",
         'Max Y': 86,
         'HQM': "",
-        "Lang": "en",
+        "Looping comments?": ""
     }
     with open('Resource/JSON/settings.json', 'w') as setfil:
         json.dump(sett, setfil)
@@ -1675,7 +1662,7 @@ def check_json():
         str(obj_json['darkMode'])
         str(obj_json['Max Y'])
         str(obj_json['HQM'])
-        str(obj_json['Lang'])
+        str(obj_json['Looping comments?'])
         json_file.close()
     except KeyError:
         print(Colors.WARNING, "settings file error", Colors.ENDC)
