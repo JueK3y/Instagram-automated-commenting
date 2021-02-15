@@ -1109,36 +1109,36 @@ def settings():
 
     setfile.close()
 
-    ttk.Label(settingsWin, text="More Browser").place(x=221, y=5)
-    ttk.Button(settingsWin, text="Import", command=threading_browser).place(x=204, y=27, width=110)
+    ttk.Label(settingsWin, text="More Browser").place(x=61, y=129)
+    ttk.Button(settingsWin, text="Import", command=threading_browser).place(x=36, y=151, width=110)
 
     # Second line
-    ttk.Label(settingsWin, text="Appearance").place(x=59, y=67)
+    ttk.Label(settingsWin, text="Appearance").place(x=59, y=5)  # y = 67
     if light:
         sw_appearance = tk.StringVar(value='lightMode')
     else:
         sw_appearance = tk.StringVar(value='darkMode')
     ttk.Radiobutton(settingsWin, text="Light", variable=sw_appearance, value="lightMode", command=app_light). \
-        place(x=34, y=91, width=70)
+        place(x=34, y=29, width=70)  # y = 91
     ttk.Radiobutton(settingsWin, text="Dark", variable=sw_appearance, value="darkMode", command=app_dark). \
-        place(x=94, y=91, width=70)
+        place(x=94, y=29, width=70)  # y = 91
 
-    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=67)
+    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=5)  # y = 67
     with open('Resource/JSON/settings.json', 'r') as setfil:
         data_json = setfil.read()
     obj_sett = json.loads(data_json)
 
     if str(obj_sett['HQM']) == "Activated":
-        ttk.Checkbutton(settingsWin, text="Deactivate Mode", variable=IntVar(value=1), command=hqm).place(x=206, y=91)
+        ttk.Checkbutton(settingsWin, text="Deactivate Mode", variable=IntVar(value=1), command=hqm).place(x=206, y=27)  # y = 91
         hqm_var = 0
     else:
-        ttk.Checkbutton(settingsWin, text="Activate Mode", command=hqm).place(x=206, y=91)
+        ttk.Checkbutton(settingsWin, text="Activate Mode", command=hqm).place(x=206, y=27)   # y = 91
         hqm_var = 1
 
     # Third line
-    ttk.Label(settingsWin, text="Comments").place(x=61, y=129)
-    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=36, y=151, width=50)
-    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=86, y=151, width=60)
+    ttk.Label(settingsWin, text="Comments").place(x=61, y=67)  # y =129
+    ttk.Button(settingsWin, text="Edit", command=add_com).place(x=36, y=91, width=50)  # y = 151
+    ttk.Button(settingsWin, text="Import", command=sel_com).place(x=86, y=91, width=60)
 
     try:
         with open('Resource/JSON/settings.json', 'r') as setfil:
@@ -1151,14 +1151,14 @@ def settings():
                                                                               2)) +
                                              'min')
 
-            la.place(x=200, y=129)
+            la.place(x=200, y=67)
         else:
             la = ttk.Label(settingsWin, text='Average duration')
-            la.place(x=212, y=129)
+            la.place(x=212, y=67)
         setfi.close()
     except KeyError:
         la = ttk.Label(settingsWin, text='Average duration')
-        la.place(x=212, y=129)
+        la.place(x=212, y=67)  # y = 129
 
     settings.scale = 0
 
@@ -1192,7 +1192,20 @@ def settings():
                 settings.scale = 1
 
     ttk.Scale(settingsWin, orient=tk.HORIZONTAL, from_=0, to=4, length=110, command=change_max_y). \
-        place(x=207, y=158, width=110)
+        place(x=207, y=97, width=110)  # y = 158
+
+    # 3. Lines
+    ttk.Label(settingsWin, text="High quality mode").place(x=208, y=129)
+    with open('Resource/JSON/settings.json', 'r') as setfil:
+        data_json = setfil.read()
+    obj_sett = json.loads(data_json)
+
+    if str(obj_sett['HQM']) == "Activated":
+        ttk.Checkbutton(settingsWin, text="Stop Looping", variable=IntVar(value=1), command=hqm).place(x=206, y=158)
+        hqm_var = 0
+    else:
+        ttk.Checkbutton(settingsWin, text="Loop comments", command=hqm).place(x=206, y=158)
+        hqm_var = 1
 
     # 4. line
     ttk.Button(settingsWin, text="Help", command=set_help).place(x=36, y=200, width=110)
