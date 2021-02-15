@@ -1161,7 +1161,7 @@ def settings():
             data_json = setfil.read()
         obj_sett = json.loads(data_json)
 
-        if pathlib.Path(str(obj_sett['commentsPath'])).exists():
+        if pathlib.Path(str(obj_sett['commentsPath'])).exists() and not str(obj_sett['Looping comments?']):
             la = ttk.Label(settingsWin, text='Average duration: ' + str(round((((int(obj_sett['Max Y']) - 20) / 60) *
                                                                                float(obj_sett['Comment Lines'])),
                                                                               2)) + 'min')
