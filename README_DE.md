@@ -110,6 +110,12 @@ Für die Entwicklung des Programmes wurden folgende Tools benutzt:
 
 _Das Programm wurde **nicht** mit der Instagram API gebaut._
 
+## Setze das Projekt fort
+Du bist als Programmierer interessiert, das Projekt weiterzuführen / weiter zu entwickeln oder eigene Funktionen hinzuzufügen?
+<br>Grundsätzliche ist die Bearbeitung und Verteilung des Codes in der [EULA](https://github.com/JueK3y/Instagram-automated-commenting/wiki/EULA) untersagt.
+<br>Du kannst mir aber [eine Anfrage](https://juek3y.com/de/contact/business) für den Zweck der Weiterentwicklung schicken und
+<br>ich werde dir eine abgeänderte Bearbeitungs- und Verteilungserlaubnis zuteilen
+<br>(falls der Verwendungszweck nicht gegen bestimmte Richtlinien verstößt).
 
 ## Leave a ⭐
 Wenn dir dieses Projekt gefällt, lass einen Stern da :)
