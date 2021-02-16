@@ -26,7 +26,7 @@ Technische Besonderheiten:
   <br>[IssueTracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) wird aktuell gearbeitet
 - Open Source: Die Echtheit und Funktionsweiße des Codes
   <br>kann jederzeit selber überprüft werden
-- Alles in einer Datei, welche unter 15 MB groß ist
+- Alles in einer Datei, welche unter 20 MB groß ist
 - Automatischer Download aller benötigten Dateien
 
 ...und das alles kostenlos
