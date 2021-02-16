@@ -30,6 +30,7 @@ from tkinter.filedialog import askopenfilename
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException, NoSuchElementException, NoSuchWindowException, \
     InvalidSessionIdException, InvalidArgumentException
+from urllib3 import HTTPConnectionPool
 from urllib3.exceptions import MaxRetryError
 
 
@@ -65,7 +66,7 @@ def line_count():
 
     # Time for commenting
     line_coun = 0
-    for line in open(comments_path):
+    for line in open(str(obj_json['commentsPath'])):
         lin = line.strip()
         if not lin.startswith("#"):
             line_coun += 1
@@ -213,22 +214,26 @@ def run():
         data_sett = settingfile.read()
     obj_setti = json.loads(data_sett)
 
-    if str(obj_setti['Looping comments?']):
-        run.loop = True
-    else:
-        run.loop = False
-
-    settingfile.close()
-
     if str(e1.get()) == "" or str(e2.get()) == "" or str(e4.get()) == "" or str(e2.get()) == "None":
         messagebox.showerror("Missing input", "All fields must be filled in.")
+        settingfile.close()
     elif len(str(e4.get())) < 6:
         messagebox.showerror("Incorrect password", "Your password can't be that short.")
+        settingfile.close()
     elif len(str(e1.get())) < 11:
         messagebox.showerror("Wrong link", "The link have to lead to an instagram post.")
-    elif not pathlib.Path(comments_path).exists():
+        settingfile.close()
+    elif not pathlib.Path(str(obj_setti['commentsPath'])).exists():
         ask_file()
+        settingfile.close()
     else:
+        if str(obj_setti['Looping comments?']):
+            run.loop = True
+        else:
+            run.loop = False
+
+        settingfile.close()
+
         # Save URL
         safe_url = {
             'Last URL': url_text.get(),
@@ -279,14 +284,16 @@ def run():
         if obj_sett['Comment Lines'] < 5:
             msg = messagebox.askokcancel("Very few comments",
                                          "There are less than 5 comments to post." + "\n" + "Do you want to "
-                                                                                            "continue?",
-                                         icon='warning')
+                                                                                            "continue?", icon='warning')
             if msg:
                 check_comment()
         else:
-            msg = messagebox.askokcancel("Duration", "The commenting will take an average of " +
-                                         str(round(obj_sett['Time'], 2)) + " minutes.")
-            if msg:
+            if not run.loop:
+                msg = messagebox.askokcancel("Duration", "The commenting will take an average of " +
+                                             str(round(obj_sett['Time'], 2)) + " minutes.")
+                if msg:
+                    check_comment()
+            else:
                 check_comment()
 
         settfi.close()
@@ -737,35 +744,46 @@ def auto_comment():
 
             setfil.close()
 
+            run.last_comment = 0
+
             def comment():
-                for _ in comfi:
-                    line = random.choice(comfi)
-                    while line.startswith('!'):
+                try:
+                    for _ in comfi:
                         line = random.choice(comfi)
+                        if line.strip() == run.last_comment:
+                            line = random.choice(comfi)
+                        while line.startswith('!'):
+                            line = random.choice(comfi)
+                            if line.strip() == run.last_comment:
+                                line = random.choice(comfi)
 
-                    print(Colors.BOLD, "Posting comment: " + line.strip(), Colors.ENDC)
+                        print(Colors.BOLD, "Posting comment: " + line.strip(), Colors.ENDC)
 
-                    with open('Resource/JSON/settings.json', 'r') as settfi:
-                        data_json = settfi.read()
-                    obj_sett = json.loads(data_json)
+                        with open('Resource/JSON/settings.json', 'r') as settfi:
+                            data_json = settfi.read()
+                        obj_sett = json.loads(data_json)
 
-                    zeit = random.randint(20, int(obj_sett['Max Y']))
-                    print(Colors.BOLD, "Time for the next comment: " + str(zeit), Colors.ENDC)
+                        zeit = random.randint(20, int(obj_sett['Max Y']))
+                        print(Colors.BOLD, "Time for the next comment: " + str(zeit), Colors.ENDC)
 
-                    try:
-                        select = web.find_element_by_xpath(
-                            '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                            '3]/div/form/textarea')
-                        select.click()
-                        time.sleep(1)
-                        text = web.find_element_by_css_selector('.Ypffh')
-                        text.send_keys(line.strip())
-                        connected()
-                        text.send_keys(Keys.ENTER)
-                        time.sleep(zeit)
-                    except InvalidSessionIdException:
-                        print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
-                        sys.exit(1)
+                        try:
+                            select = web.find_element_by_xpath(
+                                '//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
+                                '3]/div/form/textarea')
+                            select.click()
+                            time.sleep(1)
+                            text = web.find_element_by_css_selector('.Ypffh')
+                            text.send_keys(line.strip())
+                            run.last_comment = line.strip()
+                            connected()
+                            text.send_keys(Keys.ENTER)
+                            time.sleep(zeit)
+                        except InvalidSessionIdException:
+                            print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
+                            sys.exit(1)
+                except (HTTPConnectionPool, TypeError):
+                    print(Colors.WARNING, " Exception in auto_comment()", Colors.ENDC)
+                    sys.exit(1)
 
             if run.loop:
                 while True:
@@ -1009,20 +1027,26 @@ def settings():
                 dat_json = settingfile.read()
             obj_setting = json.loads(dat_json)
 
-            max_y = int(15 * (float(v) + 1) + 21)
+            if str(obj_setting['Looping comments?']):
+                if not settings.scale:
+                    messagebox.showinfo("", "The 'Looping Comments' mode has been activated." + "\n" +
+                                        "You can only set the average time when this mode is deactivated.")
+                    settings.scale = 1
+            else:
+                max_y = int(15 * (float(v) + 1) + 21)
 
-            obj_setting['Max Y'] = str(max_y + 20)
+                obj_setting['Max Y'] = str(max_y + 20)
 
-            average = (max_y / 60) * float(obj_setting['Comment Lines'])
+                average = (max_y / 60) * float(obj_setting['Comment Lines'])
 
-            la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
-            la.place(x=24, y=67)
+                la.config(text='Average duration: ' + str(round(average, 2)) + 'min')
+                la.place(x=24, y=67)
 
-            with open('Resource/JSON/settings.json', 'w') as settfile:
-                json.dump(obj_setting, settfile)
+                with open('Resource/JSON/settings.json', 'w') as settfile:
+                    json.dump(obj_setting, settfile)
 
-            settingfile.close()
-            settfile.close()
+                settingfile.close()
+                settfile.close()
             return
 
         except FileNotFoundError:
@@ -1065,9 +1089,9 @@ def settings():
             data_sett = settingfile.read()
         obj_setti = json.loads(data_sett)
 
-        f_comm = pathlib.Path(comments_path)
+        f_comm = pathlib.Path(str(obj_setti['commentsPath']))
 
-        if not f_comm.exists() and str(obj_setti['commentsPath']) == "":
+        if not f_comm.exists():
             if not pathlib.Path('Resource/txt/comments.txt').exists():
                 comment = tk.messagebox.askyesno('No comments', "You don't have any comments to edit." + '\n' +
                                                  "Do you want to create some now?", icon='info')
@@ -1150,7 +1174,7 @@ def settings():
         ttk.Checkbutton(settingsWin, text="HQ Mode activated", variable=IntVar(value=1), command=hqm).place(x=203, y=30)
         hqm_var = 0
     else:
-        ttk.Checkbutton(settingsWin, text="Activate HQM?", command=hqm).place(x=201, y=30)
+        ttk.Checkbutton(settingsWin, text="Activate HQM", command=hqm).place(x=201, y=30)
         hqm_var = 1
 
     setfil.close()
@@ -1189,7 +1213,7 @@ def settings():
                                                                                                                 y=92)
         loop_var = 0
     else:
-        ttk.Checkbutton(settingsWin, text="Repeat comments?", command=loop_com).place(x=201, y=92)
+        ttk.Checkbutton(settingsWin, text="Repeat comments", command=loop_com).place(x=201, y=92)
         loop_var = 1
 
     # 3. Line
@@ -1407,13 +1431,14 @@ def dow_driver():
     gecko = "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-win64.zip"
     chr87 = "https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_win32.zip"
     chr88 = "https://chromedriver.storage.googleapis.com/88.0.4324.27/chromedriver_win32.zip"
-    edg88 = "https://msedgedriver.azureedge.net/88.0.705.56/edgedriver_win64.zip"  # x64
-    edg89 = "https://msedgedriver.azureedge.net/89.0.774.18/edgedriver_win64.zip"  # x64
-    edg90 = "https://msedgedriver.azureedge.net/90.0.787.0/edgedriver_win64.zip"  # x64
+    edg88 = "https://msedgedriver.azureedge.net/88.0.705.56/edgedriver_win64.zip"
+    edg89 = "https://msedgedriver.azureedge.net/89.0.774.18/edgedriver_win64.zip"
+    edg90 = "https://msedgedriver.azureedge.net/90.0.787.0/edgedriver_win64.zip"
     EULA = "https://juek3y.com/src/download/txt/End%20User%20License%20Agreement%20for%20IAC.txt"
     icon = "https://juek3y.com/src/download/img/IAC-Icon-Ver.-2.ico"
 
     try:
+        tk.Label(root, text="Downloading files...").place(x=160, y=35)
         root.update()
         a = requests.get(gecko)
         root.update()
@@ -1581,7 +1606,7 @@ def mk_files():
 
     runfil.close()
 
-    # Generating browser.json
+    # Generating Browser.json
     browser = {
         'Browser': "",
         'Driver Path': "",
@@ -1752,14 +1777,6 @@ check_json()
 exit_program = False
 e = datetime.datetime.now()
 
-with open('Resource/JSON/settings.json', 'r') as setfi:
-    data = setfi.read()
-obj = json.loads(data)
-
-comments_path = str(obj['commentsPath'])
-
-setfi.close()
-
 eula_file()
 
 root.update()
@@ -1777,7 +1794,6 @@ li.grid(row=1, column=0)
 li = ttk.Label(root, text="Password")
 li.grid(row=1, column=2)
 
-# Read URL file
 with open('Resource/JSON/URLhistory.json', 'r') as URLFi:
     data = URLFi.read()
 obj = json.loads(data)
@@ -1791,7 +1807,6 @@ e1.grid(row=0, column=1)
 URLFi.close()
 
 try:
-    # Read Browser file
     with open('Resource/JSON/Browser.json', 'r') as BroFi:
         data = BroFi.read()
     obj_b = json.loads(data)
@@ -1820,7 +1835,6 @@ except FileNotFoundError:
 browser_text = StringVar()
 e3 = ttk.OptionMenu(root, browser_text, *OptionList).place(x=48, y=23.5, width=110)  # height=25
 
-# Read LogIn file
 with open('Resource/JSON/LogIn.json', 'r') as LgInFi:
     data = LgInFi.read()
 obj = json.loads(data)
