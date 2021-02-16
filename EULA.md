@@ -1,5 +1,4 @@
 ### Instagram automated commenting Release v0.9.0 - v1.1.0
-
 <br>Copyright (c) 2020 - 2021 JueK3y
                             <br>
                             <br>
@@ -13,7 +12,7 @@
                             <br>
                             <br>By receiving, opening the file package, and/or using Instagram automated commenting Release v0.9.0 - v1.4.0("Software") containing this software, you agree that this End User User License Agreement(EULA) is a legally binding and valid contract and agree to be bound by it. You agree to abide by the intellectual property laws and all of the terms and conditions of this Agreement.
                             <br>
-                            <br>Unless you have a different license agreement signed by JueK3y your use of Instagram automated commenting Release v0.9.0 - v1.4.0 indicates your acceptance of this license agreement and warranty.
+                            <br>Unless you have a different license agreement signed by JueK3y ¹ your use of Instagram automated commenting Release v0.9.0 - v1.4.0 indicates your acceptance of this license agreement and warranty.
                             <br>
                             <br>Subject to the terms of this Agreement, JueK3y grants to you a limited, non-exclusive, non-transferable license, without right to sub-license, to use Instagram automated commenting Release v0.9.0 - v1.4.0 in accordance with this Agreement and any other written agreement with JueK3y. JueK3y does not transfer the title of Instagram automated commenting Release v0.9.0 - v1.4.0 to you; the license granted to you is not a sale. This agreement is a binding legal agreement between JueK3y and the purchasers or users of Instagram automated commenting Release v0.9.0 - v1.4.0.
                             <br>
@@ -85,7 +84,7 @@
                             <br>
                             <br>You agree that JueK3y may collect and use information gathered in any manner as part of the product support services provided to you, if any, related to Instagram automated commenting Release v0.9.0 - v1.4.0. JueK3y may also use this information to provide notices to you which may be of use or interest to you. 
                             <br>
-                            <br>Important note: Specific to the current versions of Instagram automated commenting (v0.9.0 - v1.4.*), no data is collected and provided to JueK3y for improvement purposes. Also for further versions the following applies: Personal data such as the LogIn data and the Post URL will only be stored on the user's computer and will under no circumstances be uploaded or shared with third parties.
+                            <br>Important note: Specific to the current versions of Instagram automated commenting (v0.9.0 - v1.4.x), no data is collected and provided to JueK3y for improvement purposes. Also for further versions the following applies: Personal data such as the LogIn data and the Post URL will only be stored on the user's computer and will under no circumstances be uploaded or shared with third parties.
                             <br>
                             <br>
                             <br>6. LEGAL NOTICE
@@ -93,6 +92,6 @@
                             <br>Any use beyond personal use is only allowed with permission of the creator of this program (JueK3y). DO NOT modify and reupload the program. DO NOT indicate used program sections as your own.
                             <br>
                             <br>
-                            <br>(*) Note: This is the latest version of the EULA. Any old EULA issued for the program will lose its effect. Only the latest version is legally binding. The latest version is valid for release v.0.9.0 - v.1.4.* (* stands for all further sub-releases) and was last updated on 16.02.2021.
+                            <br>¹ Note: This is the latest version of the EULA. Any old EULA issued for the program will lose its effect. Only the latest version is legally binding. The latest version is valid for release v.0.9.0 - v.1.4.x (x stands for all further sub-releases) and was last updated on 16.02.2021.
 
 ###### _See https://juek3y.com/en/code/download/terms-of-service for the web-version._
