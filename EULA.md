@@ -95,4 +95,4 @@
                             <br>
                             <br>(*) Note: This is the latest version of the EULA. Any old EULA issued for the program will lose its effect. Only the latest version is legally binding. The latest version is valid for release v.0.9.0 - v.1.4.* (* stands for all further sub-releases) and was last updated on 16.02.2021.
 
-###### _See https://juek3y.com/de/code/download/terms-of-service for the web-version._
+###### _See https://juek3y.com/en/code/download/terms-of-service for the web-version._
