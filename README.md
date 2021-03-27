@@ -137,6 +137,13 @@ _There is a [EULA](EULA.md) for IAC. Please read it carefully before using the p
 <br>By downloading and using the program you automatically accept the EULA.
 <br>Violations of the EULA can and will be legally punished._
 
+
+### Disclaimer
+_The program has been carefully created and often tested. Nevertheless, damage may occur.
+<br>I as the author am not responsible for any possible damage caused by the program.
+<br>The respective user is liable for himself, even if the respective Instagram account is blocked due to the use of the program._
+
+
 _@2020 - 2021 by [JueK3y](https://juek3y.com)_
 
 ###### _DO NOT modify and reupload the program.<br>DO NOT indicate used program sections as your own._
