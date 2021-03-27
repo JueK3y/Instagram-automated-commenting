@@ -47,16 +47,19 @@ def connected():
     try:
         requests.get('https://instagram.com', timeout=timeout)
     except (requests.ConnectionError, requests.Timeout):
-        messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
         try:
-            web.close(), web.quit()
-            return
-        except NoSuchWindowException:
-            print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
-            return
-        except NameError:
-            print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
-            sys.exit(1)
+            requests.get('https://google.com', timeout=timeout)
+        except (requests.ConnectionError, requests.Timeout):
+            messagebox.showerror("Internet is gone", "You don't have a working internet connection.")
+            try:
+                web.close(), web.quit()
+                return
+            except NoSuchWindowException:
+                print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
+                return
+            except NameError:
+                print(Colors.WARNING, NoSuchWindowException, "for connected()", Colors.ENDC)
+                sys.exit(1)
 
 
 def line_count():
@@ -730,8 +733,8 @@ def auto_comment():
         web.find_element_by_css_selector('.sqdOP')
 
         try:
-            svin = web.find_element_by_xpath(
-                '/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea')
+            svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div/div/div/button')
+            print(Colors.OKGREEN, "Found target", Colors.ENDC)
             svin.click()
 
             time.sleep(10)
@@ -797,15 +800,18 @@ def auto_comment():
                 messagebox.showinfo("Finished", "All comments are posted.")
 
         except NoSuchElementException:
-            web.close(), web.quit()
-
+            # web.close(), web.quit()
+            print(Colors.FAIL, NoSuchElementException, "for auto_comment()", Colors.ENDC)
+            print(Colors.FAIL, "Please report this error here: "
+                               "https://github.com/JueK3y/Instagram-automated-commenting/issues/new. Error Code: "
+                               "ERR_IG_COM_ISS", Colors.ENDC)
             b1_text.set("Run")
             b1["command"] = threading_run
             messagebox.showerror("Slow internet connection", "Please retry! Make sure you have a good Internet "
                                                              "connection." + "\n" + "If the error occurs again, "
                                                                                     "please create an issue via "
                                                                                     "'Settings -> Help' with the title "
-                                                                                    "CONOxIG-UP.")
+                                                                                    "ERR_IG_COM_ISS.")
 
 
 def sel_bro(value):
@@ -1781,8 +1787,11 @@ eula_file()
 
 root.update()
 
-messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only." + '\n' +
-                       "Please use it accordingly!" + '\n' + '\n' + "@2020 - %s" % e.year + " by JueK3y")
+add_msg = "\nIf something is not working correctly for you, please report it under Settings --> Help.\n"
+
+messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only.\nPlease "
+                                                   "use it accordingly!" + '\n' + add_msg + "\n\n@2020 - %s" % e.year +
+                                                   " by JueK3y")
 
 # Label
 li = ttk.Label(root, text="Post URL")
