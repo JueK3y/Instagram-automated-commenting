@@ -26,7 +26,7 @@ Technical features:
   <br>[Issue Tracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) is currently being worked on
 - Open Source: The authenticity and functionality of the code
 <br>can be verified at any time.
-- All in one file, which is under 20 MB in size
+- All in one file, which is under 15 MB in size
 - Automatic download of all required files
 
 ...and all this for free
