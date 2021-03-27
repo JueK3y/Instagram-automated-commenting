@@ -131,14 +131,15 @@ _Dieses Programm wurde für Bildungszwecke geschrieben und dafür verwendet werd
 
 _Bitte ließ dir für mehr Informationen die [Richtlinien von Instagram](https://help.instagram.com/477434105621119/Instagram) durch._
 
-_Das Programm wurde sorgfältig erstellt und oft getestet. Trotzdem kann es zu schäden kommen.
-<br>Ich als Autor trage keine Schuld an möglichen Schäden, die das Programm verursacht.
-<br>Der jeweilige Benutzer haftet für sich selber, auch bei Sperrung des jeweiligen Instagram Accounts aufgrund der Nutzung des Programmes._
-
 ### EULA & Urheberrecht
 _Für IAC liegt eine [EULA](EULA.md) vor. Bitte ließ sie dir vor der Benutzung des Programmes genau durch.
 <br>Mit dem Herunterladen und der Benutzung des Programmes akzeptierst du automatisch die EULA.
 <br>Verstöße gegen die EULA können und werden rechtlich geahndet._
+
+### Haftungsauschschluss
+_Das Programm wurde sorgfältig erstellt und oft getestet. Trotzdem kann es zu schäden kommen.
+<br>Ich als Autor trage keine Schuld an möglichen Schäden, die das Programm verursacht.
+<br>Der jeweilige Benutzer haftet für sich selber, auch bei Sperrung des jeweiligen Instagram Accounts aufgrund der Nutzung des Programmes._
 
 _@2020 - 2021 by [JueK3y](https://juek3y.com)_
 
