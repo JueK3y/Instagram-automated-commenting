@@ -125,9 +125,9 @@ Wenn dir dieses Projekt gefällt, lass einen Stern da :)
 
 ## Rechtliche Hinweiße
 ### (Offiziel) nur für Bildungszwecke
-_This programme is written and may only be used for educational purposes!
-<br>Using it for real purposes violates the Instagram guidelines!
-<br>Consequences are, for example, the blocking of the Instagram account._
+_Dieses Programm ist geschrieben und darf nur zu Bildungszwecken verwendet werden!
+<br>Die Verwendung für reale Zwecke verstößt gegen die Instagram-Richtlinien!
+<br>Folgen sind z.B. die Sperrung des Instagram-Accounts._
 
 _Bitte ließ dir für mehr Informationen die [Richtlinien von Instagram](https://help.instagram.com/477434105621119/Instagram) durch._
 
