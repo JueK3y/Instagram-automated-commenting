@@ -16,7 +16,7 @@ IAC is a bot which automatically comments randomly under given Instagram posts.
 - Simply import the driver for the browser of your choice
 - Once all data is entered it is immediately and permanently usable
 - Easily import and edit your own comments
-- Decide for yourself how long the bot should comment<be>(and whether it should stop at all)
+- Decide for yourself how long the bot should comment<br>(and whether it should stop at all)
 - Extensive help page, which is supposed to help with every problem
 
 Technical features:
