@@ -3,5 +3,6 @@
 /Resource/
 /src/
 /testlab/
+/output/
 geckodriver.log
 IGACB.py

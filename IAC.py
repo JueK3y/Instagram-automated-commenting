@@ -644,9 +644,11 @@ def auto_comment():
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         sys.exit(1)
 
+    # Search for LogIn Button
+    time.sleep(1)
     try:
-        comment = web.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div[1]/article/div[3]/section['
-                                            '1]/span[2]/button')
+        comment = web.find_element_by_xpath('/html/body/div[1]/section/nav/div[2]/div/div/div[3]/div/div/div/div/div[3]/div[1]/a')
+
         comment.click()
     except NoSuchElementException:
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
@@ -671,16 +673,19 @@ def auto_comment():
         print(Colors.WARNING, InvalidSessionIdException, "for auto_comment()", Colors.ENDC)
         sys.exit(1)
 
+    # Enters LogIn Data
     try:
-        alias = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[1]/div/label/input')
+        time.sleep(1)
+        print(Colors.BOLD, "Searching for LogIn field.", Colors.BOLD)
+        alias = web.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input')
         alias.send_keys(username_text.get())
 
-        pw = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[2]/div/label/input')
+        pw = web.find_element_by_xpath('//*[@id="loginForm"]/div/div[2]/div/label/input')
         pw.send_keys(password_text.get())
 
         connected()
 
-        login = web.find_element_by_xpath('//*[@id="loginForm"]/div[1]/div[3]/button')
+        login = web.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button')
         login.click()
 
         time.sleep(5)
@@ -729,15 +734,19 @@ def auto_comment():
         except RuntimeError:
             print(Colors.WARNING, RuntimeError, "for auto_comment()", Colors.ENDC)
     except NoSuchElementException:
+        web.get(url_text.get())
+
         print(Colors.WARNING, NoSuchElementException, "for auto_comment()", Colors.ENDC)
         web.find_element_by_css_selector('.sqdOP')
 
+        # Search for comment field
         try:
-            svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div/div/div/button')
+            time.sleep(1)
+            svin = web.find_element_by_xpath('/html/body/div[1]/section/main/div/div/article/div[3]/section[3]/div/form/textarea')
             print(Colors.OKGREEN, "Found target", Colors.ENDC)
             svin.click()
 
-            time.sleep(10)
+            time.sleep(1)
 
             with open('Resource/JSON/settings.json', 'r') as setfil:
                 data_set = setfil.read()
