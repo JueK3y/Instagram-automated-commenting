@@ -17,9 +17,6 @@ html {
     background: #fff;
     overflow: hidden;
     
-    .small-title {
-      font-size: var(--small-text);
-    }
     .medium-title {
       font-size: var(--medium-text);
     }
@@ -34,7 +31,7 @@ html {
     }
     .big-form {
       width: 450px;
-      height: 35.5px;
+      height: 34px;
     }
 
     .medium-form, .big-form {
@@ -45,7 +42,7 @@ html {
       transition: .2s ease-out;
       &:hover {
         background-color: #E7E7E7;
-        border-bottom: 1.5px solid  #444444;
+        border-bottom-color: #444444;
         transition: .2s ease-out;
       }
     }
@@ -64,6 +61,12 @@ html {
       border-color: black;
       #top-bar {
         display: flex;
+        #logo {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
       }
       #nav-content {
         display: contents;
@@ -81,22 +84,44 @@ html {
       display: flex;
       justify-content: center;
       align-items: center;
-      #post-url {
-      }
+      margin-top: 75px;
       #login-data {
         display: flex;
+        padding-top: 15px;
+        input {
+          margin-top: -10px;
+        }
         #password {
           margin-left: 45px;
         }
       }
       #additional-settings {
+        padding-top: 20px;
+        padding-bottom: 20px;
         #details {
           display: flex;
           justify-content: center;
           align-items: center;
+          cursor: pointer;
+          .line {
+            width: 100%;
+            height: 1px;
+            background: #C0C0C0;
+          }
+          #small-detail-title {
+            width: 100%;
+            font-size: 12px;
+            color: #C0C0C0;
+            padding-left: 12px;
+          }
         }
         #a-d-content {
           display: flex;
+          padding-top: 10px;
+          padding-bottom: 15px;
+          #save-local {
+            padding-top: 6px;
+          }
           #edit-comments {
             margin-left: 58px;
             #edit-button {
@@ -118,6 +143,19 @@ html {
         display: flex;
         justify-content: center;
         align-items: center;
+        #start button, #stop button {
+          width: 100px;
+          height: 35px;
+          border: 1px solid black;
+        }
+        #start-btn {
+          margin-right: 30px;
+          background: #CBFFD0;
+        }
+        #stop-btn {
+          margin-left: 30px;
+          background: #ffcbcb;
+        }
       }
     }
 

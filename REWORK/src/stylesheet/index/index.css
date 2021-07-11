@@ -17,9 +17,6 @@ html body {
   background: #fff;
   overflow: hidden;
 }
-html body .small-title {
-  font-size: var(--small-text);
-}
 html body .medium-title {
   font-size: var(--medium-text);
 }
@@ -33,7 +30,7 @@ html body .medium-form {
 }
 html body .big-form {
   width: 450px;
-  height: 35.5px;
+  height: 34px;
 }
 html body .medium-form, html body .big-form {
   font-size: var(--small-text);
@@ -45,7 +42,7 @@ html body .medium-form, html body .big-form {
 }
 html body .medium-form:hover, html body .big-form:hover {
   background-color: #E7E7E7;
-  border-bottom: 1.5px solid #444444;
+  border-bottom-color: #444444;
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
 }
@@ -65,6 +62,18 @@ html body nav #top-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+html body nav #top-bar #logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 html body nav #nav-content {
   display: contents;
@@ -87,14 +96,23 @@ html body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 75px;
 }
 html body main #login-data {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding-top: 15px;
+}
+html body main #login-data input {
+  margin-top: -10px;
 }
 html body main #login-data #password {
   margin-left: 45px;
+}
+html body main #additional-settings {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 html body main #additional-settings #details {
   display: -webkit-box;
@@ -106,11 +124,28 @@ html body main #additional-settings #details {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
+}
+html body main #additional-settings #details .line {
+  width: 100%;
+  height: 1px;
+  background: #C0C0C0;
+}
+html body main #additional-settings #details #small-detail-title {
+  width: 100%;
+  font-size: 12px;
+  color: #C0C0C0;
+  padding-left: 12px;
 }
 html body main #additional-settings #a-d-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+html body main #additional-settings #a-d-content #save-local {
+  padding-top: 6px;
 }
 html body main #additional-settings #a-d-content #edit-comments {
   margin-left: 58px;
@@ -139,5 +174,18 @@ html body main #start-stop {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+html body main #start-stop #start button, html body main #start-stop #stop button {
+  width: 100px;
+  height: 35px;
+  border: 1px solid black;
+}
+html body main #start-stop #start-btn {
+  margin-right: 30px;
+  background: #CBFFD0;
+}
+html body main #start-stop #stop-btn {
+  margin-left: 30px;
+  background: #ffcbcb;
 }
 /*# sourceMappingURL=index.css.map */
