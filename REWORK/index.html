@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="src/stylesheet/index/index.min.css">
+    <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
+    <title>Instagram Automated Commenting</title>
+  </head>
+  <body>
+    <nav>
+      <div id="top-bar">
+        <div id="burger">
+          <input type="checkbox" id="burger-input" class="hidden">
+          <label for="burger-input" id="burger-btn">
+            <i></i>
+            <i></i>
+            <i></i>
+          </label>
+        </div>
+        <h2 id="logo" class="big-title">Instagram Automated Commenting</h2>
+        <div id="signal">
+          <i id="signal-line"></i>
+          <a href="" id="signal-img"><img src="src/img/icons/signal.png" alt="Image of the signal icon"></a>
+        </div>
+      </div>
+      <ul id="nav-content">
+        <li><a href="" id="settings"><img src="src/img/icons/settings.png" alt="Image of the settings icon"></a></li>
+        <li><a href="" id="theme"><img src="src/img/icons/moon.png" alt="Image of the moon for changing to dark mode"></a></li>
+        <li><a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"></a></li>
+        <li><a href="" id="info bottom"><img src="src/img/icons/info.png" alt="Image of the info icon"></a></li>
+      </ul>
+    </nav>
+    <main>
+      <form>
+        <div id="account-details">
+          <div id="post-url">
+
+            <label for="big-form" class="title">
+              <h2 class="big-title">Instagram Post URL
+                <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein.">
+                  <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                </span>
+              </h2>
+            </label>
+            <input type="text" class="big-form" placeholder="https://www.instagram.com/p/CHTs3o7geLp">
+
+          </div>
+          <div id="login-data">
+            <div id="username">
+
+              <label for="username-form" class="title">
+                <h2 class="big-title">Benutzername
+                  <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein.">
+                    <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                  </span>
+                </h2>
+              </label>
+              <input type="text" id="username-form" class="medium-form" placeholder="_.person_mit.langem-namen._">
+
+            </div>
+            <div id="password">
+
+              <label for="password-form" class="title">
+                <h2 class="big-title">Passwort
+                  <span class="hint--right" aria-label="Passwort vergessen? Besuche www.instagram.com/accounts/password/reset">
+                    <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                  </span>
+                </h2>
+              </label>
+              <input type="text" id="password-form" class="medium-form" placeholder="******************************">
+
+            </div>
+          </div>
+        </div>
+        <div id="additional-settings">
+          <div id="details">
+
+            <i class="line"></i>
+            <p id="small-title">Erweiterte Einstellungen</p>
+            <i class="line"></i>
+
+          </div>
+          <div id="a-d-content">
+            <div id="save-local">
+  
+              <input type="checkbox" name="save-local" class="save-profile">
+              <label for="save-local" class="save-profile medium-title">Profil lokal speichern
+                <span class="hint--right hint--medium" aria-label="Die Anmeldedaten werden lokal abgespeichert, damit du nächstes Mal direkt loslegen kannst.">
+                  <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                </span>
+              </label>
+  
+            </div>
+            <div id="edit-comments">
+  
+              <input type="button" value="Kommentare editieren" id="edit-button">
+  
+            </div>
+          </div>
+        </div>
+        <div id="start-stop">
+          <div id="start">
+
+            <input type="button" value="Starten" id="start-btn">
+
+          </div>
+          <div id="stop">
+
+            <input type="button" value="Stoppen" id="stop-btn">
+
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

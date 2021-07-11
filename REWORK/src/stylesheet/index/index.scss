@@ -1,0 +1,127 @@
+:root {
+  --small-text: 14px;
+  --medium-text: 16px;
+  --big-text: 18px;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  
+  body {
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(31, 31, 31);
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow: hidden;
+    
+    .small-title {
+      font-size: var(--small-text);
+    }
+    .medium-title {
+      font-size: var(--medium-text);
+    }
+    .big-title {
+      font-size: var(--big-text);
+      font-weight: normal;
+    }
+    
+    .medium-form {
+      width: 200px;
+      height: 34px;
+    }
+    .big-form {
+      width: 450px;
+      height: 35.5px;
+    }
+
+    .medium-form, .big-form {
+      font-size: var(--small-text);
+      border: none;
+      border-bottom: 1.5px solid #C0C0C0;
+      background-color: #EEEEEE;
+      transition: .2s ease-out;
+      &:hover {
+        background-color: #E7E7E7;
+        border-bottom: 1.5px solid  #444444;
+        transition: .2s ease-out;
+      }
+    }
+
+    .help {
+      width: 12px;
+      height: 12px;
+      opacity: .65;
+      margin-left: 5px;  
+    }
+    
+    nav {
+      width: 100%;
+      height: 97px;
+      background: white;
+      border-color: black;
+      #top-bar {
+        display: flex;
+      }
+      #nav-content {
+        display: contents;
+        list-style: none;
+        transition: .2s;
+        li a:hover {
+          opacity: .7;
+          transition: .2s;
+        }
+      }
+
+    }
+    
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      #post-url {
+      }
+      #login-data {
+        display: flex;
+        #password {
+          margin-left: 45px;
+        }
+      }
+      #additional-settings {
+        #details {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #a-d-content {
+          display: flex;
+          #edit-comments {
+            margin-left: 58px;
+            #edit-button {
+              width: 200px;
+              height: 35px;
+              background: none;
+              border: 1px solid black;
+              transition: .2s;
+              &:hover {
+                color: white;
+                background-color: black;
+                transition: .2s;
+              }
+            }
+          }
+        }
+      }
+      #start-stop {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+  }
+  
+}
+
