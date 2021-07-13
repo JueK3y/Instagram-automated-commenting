@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="src/stylesheet/index/index.min.css">
     <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
+    <script src="src/js/lib/jquery.min.js"></script>
+    <script async src="src/js/cursor.js"></script>
+    <script defer src="src/js/index.js"></script>
     <title>Instagram Automated Commenting</title>
   </head>
   <body>
     <nav>
       <div id="top-bar">
         <div id="burger">
+          <i id="big-line"></i>
           <input type="checkbox" id="burger-input" class="hidden">
           <label for="burger-input" id="burger-btn">
             <i></i>
@@ -17,18 +21,17 @@
             <i></i>
           </label>
         </div>
-        <h2 id="logo" class="big-title">Instagram Automated Commenting</h2>
+        <h2 id="logo" class="big-title">IAC</h2>
         <div id="signal">
-          <i id="signal-line"></i>
           <a href="" id="signal-img"><img src="src/img/icons/signal.png" alt="Image of the signal icon"></a>
         </div>
       </div>
-      <ul id="nav-content">
-        <li><a href="" id="settings"><img src="src/img/icons/settings.png" alt="Image of the settings icon"></a></li>
-        <li><a href="" id="theme"><img src="src/img/icons/moon.png" alt="Image of the moon for changing to dark mode"></a></li>
-        <li><a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"></a></li>
-        <li><a href="" id="info bottom"><img src="src/img/icons/info.png" alt="Image of the info icon"></a></li>
-      </ul>
+      <div id="side-bar">
+        <a href="" id="settings"><img src="src/img/icons/settings.svg" alt="Image of the settings icon"></a>
+        <a href="" id="theme"><img src="src/img/icons/moon.png" alt="Image of the moon for changing to dark mode"></a>
+        <a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"></a>
+        <a href="" id="info bottom"><img src="src/img/icons/info.svg" alt="Image of the info icon"></a>
+      </div>
     </nav>
     <main>
       <form>
@@ -36,7 +39,7 @@
           <div id="post-url">
 
             <label for="big-form" class="title">
-              <h2 class="big-title">Instagram Post URL
+              <h2 class="big-title">IG Post URL
                 <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein.">
                   <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
                 </span>
@@ -83,8 +86,8 @@
           <div id="a-d-content">
             <div id="save-local">
   
-              <input type="checkbox" name="save-local" class="save-profile">
-              <label for="save-local" class="save-profile medium-title">Profil lokal speichern
+              <input type="checkbox" name="save-local" id="save-profile">
+              <label for="save-profile" class="medium-title">Profil lokal speichern
                 <span class="hint--right hint--medium" aria-label="Die Anmeldedaten werden lokal abgespeichert, damit du nächstes Mal direkt loslegen kannst.">
                   <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
                 </span>
@@ -112,5 +115,6 @@
         </div>
       </form>
     </main>
+    <div class="small-cursor"></div>
   </body>
 </html>
