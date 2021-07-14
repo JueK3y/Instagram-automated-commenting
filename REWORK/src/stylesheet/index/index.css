@@ -42,11 +42,11 @@ html body .small-cursor {
   right: -20px;
   width: 20px;
   height: 20px;
+  border: 1.5px solid white;
   border-radius: 50%;
   pointer-events: none;
   z-index: 999;
   background-color: none;
-  border: 1.5px solid white;
   mix-blend-mode: difference;
   -webkit-transition-duration: 300ms;
           transition-duration: 300ms;
@@ -102,16 +102,24 @@ html body nav #top-bar {
   border-bottom: 1px solid var(--line-color);
 }
 html body nav #top-bar #burger {
-  width: 64px;
+  width: 67px;
   height: 60px;
 }
 html body nav #top-bar #burger #big-line {
   position: absolute;
+  top: 61px;
+  left: 0px;
+  width: 1px;
+  height: calc(100vh - 61px);
+  background: var(--text-color);
+  opacity: 0;
+}
+html body nav #top-bar #burger #small-line {
+  position: absolute;
   left: 60px;
   width: 1px;
-  height: 100vh;
-  color: black;
-  background: black;
+  height: 60px;
+  background: var(--text-color);
 }
 html body nav #top-bar #burger label {
   cursor: pointer;
@@ -161,12 +169,12 @@ html body nav #top-bar #signal a {
   right: 12.5px;
 }
 html body nav #side-bar {
+  opacity: 0;
   width: 45px;
   height: 100vh;
-  background: var(--background-color);
   position: absolute;
-  top: 75px;
-  left: 15px;
+  top: 60px;
+  left: -60px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -175,9 +183,12 @@ html body nav #side-bar a:hover {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
+html body nav #side-bar a img {
+  padding-top: 20px;
+}
 html body nav #side-bar #info {
   position: absolute;
-  bottom: 90px;
+  bottom: 80px;
   left: 0px;
 }
 html body main {
