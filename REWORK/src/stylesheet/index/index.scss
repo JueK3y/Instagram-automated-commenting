@@ -38,16 +38,15 @@ html {
 
     .small-cursor {
       position: fixed;
+      z-index: 1;
       bottom: -20px;
       right: -20px;
-      width: 20px;
-      height: 20px;
-      border: 1.5px solid white;
+      width: 60px;
+      height: 60px;
+      background-color: #c4f5c9;
+      filter: blur(5px);
       border-radius: 50%;
       pointer-events: none;
-      z-index: 999;
-      background-color: none;
-      mix-blend-mode: difference;
       transition-duration: 300ms;
       transition-timing-function: ease-out;
     }
@@ -92,12 +91,14 @@ html {
     
     nav {
       width: 100%;
-      background: white;
       border-color: var(--text-color);
       #top-bar {
+        position: relative;
+        z-index: 3;
         display: flex;
         height: 60px;
         border-bottom: 1px solid var(--line-color);
+        background-color: var(--background-color);
         #burger {
           width: 67px;
           height: 60px;
@@ -161,12 +162,15 @@ html {
         }
       }
       #side-bar {
+        position: relative;
+        z-index: 2;
         opacity: 0;
-        width: 45px;
+        width: 60px;
         height: 100vh;
         position: absolute;
         top: 60px;
         left: -60px;
+        background-color: var(--background-color);
         transition: .2s;
         a {
           &:hover {
@@ -174,6 +178,7 @@ html {
             transition: .2s;
           }
           img {
+            padding-left: 15px;
             padding-top: 20px;
           }
         } 

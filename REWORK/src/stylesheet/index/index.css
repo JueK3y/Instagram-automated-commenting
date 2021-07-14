@@ -38,16 +38,16 @@ html body .hidden {
 }
 html body .small-cursor {
   position: fixed;
+  z-index: 1;
   bottom: -20px;
   right: -20px;
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid white;
+  width: 60px;
+  height: 60px;
+  background-color: #c4f5c9;
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 999;
-  background-color: none;
-  mix-blend-mode: difference;
   -webkit-transition-duration: 300ms;
           transition-duration: 300ms;
   -webkit-transition-timing-function: ease-out;
@@ -91,15 +91,17 @@ html body .help {
 }
 html body nav {
   width: 100%;
-  background: white;
   border-color: var(--text-color);
 }
 html body nav #top-bar {
+  position: relative;
+  z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   height: 60px;
   border-bottom: 1px solid var(--line-color);
+  background-color: var(--background-color);
 }
 html body nav #top-bar #burger {
   width: 67px;
@@ -169,12 +171,15 @@ html body nav #top-bar #signal a {
   right: 12.5px;
 }
 html body nav #side-bar {
+  position: relative;
+  z-index: 2;
   opacity: 0;
-  width: 45px;
+  width: 60px;
   height: 100vh;
   position: absolute;
   top: 60px;
   left: -60px;
+  background-color: var(--background-color);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -184,6 +189,7 @@ html body nav #side-bar a:hover {
   transition: 0.2s;
 }
 html body nav #side-bar a img {
+  padding-left: 15px;
   padding-top: 20px;
 }
 html body nav #side-bar #info {
