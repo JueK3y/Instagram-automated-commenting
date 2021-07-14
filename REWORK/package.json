@@ -1,23 +1,23 @@
 {
-    "name": "iac-rework",
-    "version": "0.8.1",
-    "description": "A new development from IAC under the name IAC 2.0",
-    "main": "main.js",
-    "scripts": {
-      "start": "electron .",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
-    "keywords": [
-      "IAC",
-      "Instagram",
-      "Automated",
-      "Commenting",
-      "Bot"
-    ],
-    "author": "JueK3y",
-    "license": "EULA",
-    "devDependencies": {
-      "electron": "^13.1.6"
-    }
+  "name": "iac-rework",
+  "version": "0.8.1",
+  "description": "A new development from IAC under the name IAC 2.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
+  "keywords": [
+    "IAC",
+    "Instagram",
+    "Automated",
+    "Commenting",
+    "Bot"
+  ],
+  "author": "JueK3y",
+  "license": "EULA",
+  "devDependencies": {
+    "electron": "^13.1.6"
   }
+}

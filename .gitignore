@@ -1,8 +1,7 @@
 /.idea/
 /__pycache__/
-/Resource/
 /src/
-/testlab/
 /output/
+/REWORK/node_modules/
 geckodriver.log
 IGACB.py
