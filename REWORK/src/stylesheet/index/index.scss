@@ -10,6 +10,8 @@
   ::selection {
     color: var(--text-color);
     background: rgb(238, 252, 222);
+    text-shadow: 5px 5px #558ABB;
+    text-decoration: underline overline #FF3028;
   }
 }
 
@@ -32,23 +34,46 @@ html {
       height: 30px;
     }
     
+    #top-bar, #side-bar, input, button {
+      position: relative;
+      z-index: 2;
+      background-color: var(--background-color);
+    }
+
+    #details, #save-local, h2, img {
+      position: relative;
+      z-index: 3;
+    }
+    
+    #big-title {
+      position: relative;
+      z-index: 1;
+    }
+
     .hidden {
       display: none;
+    }
+
+    
+    @keyframes round {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(365deg); }
+      
     }
 
     .small-cursor {
       position: fixed;
       z-index: 1;
-      bottom: -20px;
-      right: -20px;
-      width: 60px;
-      height: 60px;
-      background-color: #c4f5c9;
-      filter: blur(5px);
+      top: -150px;
+      left: 45%;
+      width: 170px;
+      height: 150px;
+      background: linear-gradient(90deg, rgba(196,245,201,1) 28%, rgba(196,232,245,1) 100%);
+      filter: blur(50px);
       border-radius: 50%;
       pointer-events: none;
-      transition-duration: 300ms;
-      transition-timing-function: ease-out;
+      transition: 1s ease-out;
+      animation: round 10s ease-in-out infinite;
     }
     
     .medium-title {
@@ -85,7 +110,6 @@ html {
     .help {
       width: 12px;
       height: 12px;
-      opacity: .65;
       margin-left: 5px;  
     }
     
@@ -93,12 +117,10 @@ html {
       width: 100%;
       border-color: var(--text-color);
       #top-bar {
-        position: relative;
         z-index: 3;
         display: flex;
         height: 60px;
         border-bottom: 1px solid var(--line-color);
-        background-color: var(--background-color);
         #burger {
           width: 67px;
           height: 60px;
@@ -162,15 +184,12 @@ html {
         }
       }
       #side-bar {
-        position: relative;
-        z-index: 2;
         opacity: 0;
         width: 60px;
         height: 100vh;
         position: absolute;
         top: 60px;
         left: -60px;
-        background-color: var(--background-color);
         transition: .2s;
         a {
           &:hover {
@@ -305,4 +324,3 @@ html {
   }
   
 }
-
