@@ -81,8 +81,8 @@ html body .small-cursor {
   left: 45%;
   width: 170px;
   height: 150px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(28%, #c4f5c9), to(#c4e8f5));
-  background: linear-gradient(90deg, #c4f5c9 28%, #c4e8f5 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(28%, #fa709a), to(#fee140));
+  background: linear-gradient(90deg, #fa709a 28%, #fee140 100%);
   -webkit-filter: blur(50px);
           filter: blur(50px);
   border-radius: 50%;
