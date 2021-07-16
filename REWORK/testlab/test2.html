@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <style>
+        html {
+            width: 100vw;
+            height: 100vh;
+            font-size: 28px;
+        }
+    </style>
+    <script>
+    function getSelectionText() {
+
+        var text = "";
+        if (window.getSelection) {
+            text = window.getSelection().toString();   
+        }
+        return text;
+    }
+    
+
+    document.onmouseup = document.onkeyup = document.onselectionchange = function() {
+      document.getElementById("sel").value = getSelectionText();
+    };
+    </script>
+    
+    <textarea id="sel" rows="3" cols="50"></textarea>
+    <p>Please select some text.</p>
+
+</body>
+
+</html>

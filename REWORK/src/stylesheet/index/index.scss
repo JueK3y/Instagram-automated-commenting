@@ -8,9 +8,7 @@
   --background-color: #fefefe;
 
   ::selection {
-    color: var(--text-color);
     background: rgb(238, 252, 222);
-    text-shadow: 5px 5px #558ABB;
     text-decoration: underline overline #FF3028;
   }
 }
@@ -24,6 +22,7 @@ html {
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--text-color);
     background: var(--background-color);
+    text-decoration: underline overline transparent;
     margin: auto;
     width: 100%;
     height: 100%;
@@ -34,20 +33,10 @@ html {
       height: 30px;
     }
     
-    #top-bar, #side-bar, input, button {
+    #top-bar, #side-bar {
       position: relative;
       z-index: 2;
       background-color: var(--background-color);
-    }
-
-    #details, #save-local, h2, img {
-      position: relative;
-      z-index: 3;
-    }
-    
-    #big-title {
-      position: relative;
-      z-index: 1;
     }
 
     .hidden {
@@ -56,8 +45,25 @@ html {
 
     
     @keyframes round {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(365deg); }
+      0% { 
+        transform: rotate(0deg); 
+        border-radius: 50%;
+        width: 170px;
+        height: 150px;
+        // background: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%); 
+      }
+      50% {
+        border-radius: 40%;
+        width: 140px;
+        height: 120px;
+      }
+      100% {
+         border-radius: 50%;
+         width: 170px;
+         height: 150px;
+         transform: rotate(365deg); 
+         // background: linear-gradient(90deg, rgb(196,245,201)28%, rgb(196,232,245) 100%); 
+      }
       
     }
 
@@ -73,7 +79,7 @@ html {
       border-radius: 50%;
       pointer-events: none;
       transition: 1s ease-out;
-      animation: round 10s ease-in-out infinite;
+      animation: round 25s cubic-bezier(0.68,-0.55,0.27,1.55) infinite;
     }
     
     .medium-title {
@@ -214,6 +220,18 @@ html {
       justify-content: center;
       align-items: center;
       margin-top: 75px;
+      margin-left: calc(50% - 275px);
+      padding-bottom: 20px;
+
+      width: 550px;
+      height: 420px;
+
+      backdrop-filter: blur(75px);
+      border-radius: 2px;
+
+      position: relative;
+      z-index: 3;
+
       #post-url {
         input {
           margin-top: -8px;
