@@ -7,6 +7,8 @@
   --line-color: #5E5E5E;
   --background-color: #fefefe;
 
+  --main-color: #F3F3F3;
+
   ::selection {
     background: rgb(238, 252, 222);
     text-decoration: underline overline #FF3028;
@@ -113,59 +115,88 @@ html {
       margin-left: 5px;  
     }
     
-    header #drag-region {
-      width: 100%;
-      height: 50px;
-      -ms-overflow-style: scrollbar;
-      -webkit-app-region: drag;
-      background-color: #F3F3F3;
-      #window-title {
-        position: relative;
-        top: 10px;
-        left: 10px;
-      }
-      #window-controls {
-        display: flex;
+    header {
+      #drag-region {
         position: absolute;
-        top: 10px;
-        right: 0;
-        .button {
-          width: 48px;
-          height: 32px;
-          img {
-            width: 16px;
-            height: 16px;
+        top: 0;
+        z-index: 5;
+        width: 100%;
+        height: 50px;
+        -ms-overflow-style: scrollbar;
+        -webkit-app-region: drag;
+        background-color: var(--main-color);
+        #window-title {
+          position: relative;
+          top: 10px;
+          left: 10px;
+        }
+        #window-controls {
+          -webkit-app-region: no-drag;
+          display: flex;
+          position: absolute;
+          top: 0;
+          right: 0;
+          .button {
+            width: 60px;
+            height: 50px;
+            border: none;
+            img {
+              width: 12px;
+              height: 12px;
+            }
+          }
+          #minBtn, #maxBtn, #restoreBtn {
+            &:hover {
+              background-color: rgb(204, 204, 204);
+            }
+          }
+          #closeBtn:hover {
+            background-color: rgb(255, 89, 89);
+          }
+          #maxBtn {
+            display: none;
           }
         }
       }
     }
 
     nav {
-      width: 100%;
-      border-color: var(--text-color);
       #side-bar {
         position: absolute;
         z-index: 2;
-        background-color: var(--background-color);
-        width: 60px;
+        background-color: var(--main-color);
+        width: 200px;
         height: 100vh;
-        top: 60px;
-        left: 60px;
+        top: 50px;
+        left: 0;
         transition: .2s;
         a {
+          display: flex;
+          padding-top: 20px;
+          color: var(--text-color);
+          text-decoration: none;
+          transition: .2s;
           &:hover {
             opacity: .7;
             transition: .2s;
           }
+          p {
+            position: absolute;
+            margin-top: 3px;
+            margin-left: 60px;
+          }
           img {
             padding-left: 15px;
-            padding-top: 20px;
           }
         }
         #wifi {
           position: absolute;
           bottom: 140px;
           left: 0px;
+          width: 100%;
+          height: 50px;
+          color: rgb(49, 170, 49);
+          border-bottom: 1px solid black;
         } 
         #settings {
           position: absolute;

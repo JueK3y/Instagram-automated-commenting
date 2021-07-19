@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="src/stylesheet/index/index.min.css">
     <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
     <!-- JS -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="src/js/lib/jquery.min.js"></script>
     <script defer src="src/js/cursor.js"></script>  <!-- Doesnt work? -->
     <script defer src="src/js/index.js"></script>
     <script defer src="titleBar.js"></script>
+    <script>if (window.module) module = window.module;</script>
     <title>Instagram Automated Commenting</title>
   </head>
   <body>
@@ -45,12 +47,12 @@
     </header>
     <nav>
       <div id="side-bar">
-        <a href="" id="comment"><img src="src/img/icons/run.png" alt="Image of the run icon"></a>
-        <a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"></a>
-        <a href="" id="theme"><img src="src/img/icons/theme.png" alt="Image of the moon for changing the color theme"></a>
-        <a href="" id="help"><img src="src/img/icons/help.png" alt="Image of the help icon"></a>
-        <a href="" id="wifi"><img src="src/img/icons/wifi-good.png" alt="Image of the wifi icon"></a>
-        <a href="" id="settings"><img src="src/img/icons/settings.svg" alt="Image of the settings icon"></a>
+        <a href="" id="comment active"><img src="src/img/icons/run.png" alt="Image of the run icon"><p>Kommentieren</p></a>
+        <a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"><p>Benutzerprofil</p></a>
+        <a href="" id="theme"><img src="src/img/icons/theme.png" alt="Image of the moon for changing the color theme"><p>Dunkles Design</p></a>
+        <a href="" id="help"><img src="src/img/icons/help.png" alt="Image of the help icon"><p>Hilfe</p></a>
+        <a href="" id="wifi"><img src="src/img/icons/wifi-good.png" alt="Image of the wifi icon"><p>21,6 mbit/s</p></a>
+        <a href="" id="settings"><img src="src/img/icons/settings.svg" alt="Image of the settings icon"><p>Einstellungen</p></a>
       </div>
     </nav>
     <main>

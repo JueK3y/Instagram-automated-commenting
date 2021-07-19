@@ -8,8 +8,8 @@ const createWindow = () => {
     titleBarStyle: 'customButtonsOnHover',
     frame: false,
     autoHideMenuBar: true,
-    minWidth: 500,
-    minHeight: 500,
+    minWidth: 1000,
+    minHeight: 600,
     icon: __dirname + '/src/img/IAC-icon.ico',
     webPreferences: {
       nodeIntegration: true,
