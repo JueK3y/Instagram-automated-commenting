@@ -9,33 +9,48 @@
     <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
     <!-- JS -->
     <script src="src/js/lib/jquery.min.js"></script>
-    <script async src="src/js/cursor.js"></script>
+    <script defer src="src/js/cursor.js"></script>  <!-- Doesnt work? -->
     <script defer src="src/js/index.js"></script>
+    <script defer src="titleBar.js"></script>
     <title>Instagram Automated Commenting</title>
   </head>
   <body>
-    <nav>
-      <div id="top-bar">
-        <div id="burger">
-          <i id="big-line"></i>
-          <input type="checkbox" id="burger-input" class="hidden">
-          <label for="burger-input" id="burger-btn">
-            <i></i>
-            <i></i>
-            <i></i>
-          </label>
-          <i id="small-line"></i>
+    <header id="titlebar">
+      <div id="drag-region">
+
+        <div id="window-title">
+          <span>Instagram Automated Commenting</span>
         </div>
-        <h2 id="logo" class="big-title">Instagram Automated Commenting</h2>
-        <div id="signal">
-          <a href="" id="signal-img"><img src="src/img/icons/signal.png" alt="Image of the signal icon"></a>
+        
+        <div id="window-controls">      
+
+          <button class="button" id="minBtn" title="Minimieren">
+            <img class="icon" src="src/img/icons/win-min.png" draggable="false" />
+          </button>
+    
+          <button class="button" id="maxBtn" title="Maximieren">
+            <img class="icon" src="src/img/icons/win-max.png" draggable="false" />
+          </button>
+    
+          <button class="button" id="restoreBtn" title="Verkleinern">
+            <img class="icon" src="src/img/icons/win-restore.png" draggable="false" />
+          </button>
+    
+          <button class="button" id="closeBtn" title="Schließen">
+            <img class="icon" src="src/img/icons/win-close.png" draggable="false" />
+          </button>
+    
         </div>
       </div>
+    </header>
+    <nav>
       <div id="side-bar">
-        <a href="" id="settings"><img src="src/img/icons/settings.svg" alt="Image of the settings icon"></a>
-        <a href="" id="theme"><img src="src/img/icons/moon.png" alt="Image of the moon for changing to dark mode"></a>
+        <a href="" id="comment"><img src="src/img/icons/run.png" alt="Image of the run icon"></a>
         <a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"></a>
-        <a href="" id="info"><img src="src/img/icons/info.svg" alt="Image of the info icon"></a>
+        <a href="" id="theme"><img src="src/img/icons/theme.png" alt="Image of the moon for changing the color theme"></a>
+        <a href="" id="help"><img src="src/img/icons/help.png" alt="Image of the help icon"></a>
+        <a href="" id="wifi"><img src="src/img/icons/wifi-good.png" alt="Image of the wifi icon"></a>
+        <a href="" id="settings"><img src="src/img/icons/settings.svg" alt="Image of the settings icon"></a>
       </div>
     </nav>
     <main>
@@ -46,7 +61,7 @@
             <label for="big-form" class="title">
               <h2 class="big-title">Instagram Post URL
                 <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein.">
-                  <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                  <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
                 </span>
               </h2>
             </label>
@@ -59,7 +74,7 @@
               <label for="username-form" class="title">
                 <h2 class="big-title">Benutzername
                   <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein.">
-                    <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                    <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
                   </span>
                 </h2>
               </label>
@@ -71,7 +86,7 @@
               <label for="password-form" class="title">
                 <h2 class="big-title">Passwort
                   <span class="hint--right" aria-label="Passwort vergessen? Besuche www.instagram.com/accounts/password/reset">
-                    <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                    <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
                   </span>
                 </h2>
               </label>
@@ -94,7 +109,7 @@
               <input type="checkbox" name="save-local" id="save-profile">
               <label for="save-profile" class="medium-title">Profil lokal speichern
                 <span class="hint--right hint--medium" aria-label="Die Anmeldedaten werden lokal abgespeichert, damit du nächstes Mal direkt loslegen kannst.">
-                  <img src="src/img/icons/help.png" alt="Image of the help icon" class="help">
+                  <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
                 </span>
               </label>
   

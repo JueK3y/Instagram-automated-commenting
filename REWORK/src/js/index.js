@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#burger-input").click(function(){
         if($(this).is(":checked")){
             $("#side-bar").animate({left: '0px', opacity: '1'});
@@ -9,4 +9,4 @@ $(document).ready(function(){
             $("#big-line").animate({left: '0px', opacity: '0'}, 'slow');
         }
     });
-});
+});*/

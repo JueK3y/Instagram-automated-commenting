@@ -19,5 +19,6 @@
   "license": "EULA",
   "devDependencies": {
     "electron": "^13.1.6"
-  }
+  },
+  "dependencies": {}
 }

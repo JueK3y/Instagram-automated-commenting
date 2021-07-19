@@ -1,22 +1,48 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const ipc = ipcMain
 
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1440,
-    height: 1024,
+    titleBarStyle: 'customButtonsOnHover',
+    frame: false,
+    autoHideMenuBar: true,
+    minWidth: 500,
+    minHeight: 500,
     icon: __dirname + '/src/img/IAC-icon.ico',
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   });
+  mainWindow.maximize();
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  ipc.on('minApp', () => {
+    mainWindow.minimize()
+  })
+
+  ipc.on('maxApp', () => {
+    mainWindow.maximize()
+    mainWindow.webContents.send('isMaximized')
+  })
+
+  ipc.on('restoreApp', () => {
+    mainWindow.restore()
+    mainWindow.webContents.send('isRestored')
+  })
+
+  ipc.on('closeApp', () => {
+    mainWindow.close()
+  })
+
 };
 
 // This method will be called when Electron has finished
