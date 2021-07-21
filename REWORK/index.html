@@ -27,19 +27,19 @@
         <div id="window-controls">      
 
           <button class="button" id="minBtn" title="Minimieren">
-            <img class="icon" src="src/img/icons/win-min.png" draggable="false" />
+            <img class="icon" src="src/img/icons/win-min.svg" draggable="false" />
           </button>
     
           <button class="button" id="maxBtn" title="Maximieren">
-            <img class="icon" src="src/img/icons/win-max.png" draggable="false" />
+            <img class="icon" src="src/img/icons/win-max.svg" draggable="false" />
           </button>
     
           <button class="button" id="restoreBtn" title="Verkleinern">
-            <img class="icon" src="src/img/icons/win-restore.png" draggable="false" />
+            <img class="icon" src="src/img/icons/win-restore.svg" draggable="false" />
           </button>
     
           <button class="button" id="closeBtn" title="Schließen">
-            <img class="icon" src="src/img/icons/win-close.png" draggable="false" />
+            <img class="icon" src="src/img/icons/win-close.svg" draggable="false" />
           </button>
     
         </div>
@@ -47,12 +47,30 @@
     </header>
     <nav>
       <div id="side-bar">
-        <a href="" id="comment active"><img src="src/img/icons/run.png" alt="Image of the run icon"><p>Kommentieren</p></a>
-        <a href="" id="profile"><img src="src/img/icons/profile.png" alt="Image of the profile icon"><p>Benutzerprofil</p></a>
-        <a href="" id="theme"><img src="src/img/icons/theme.png" alt="Image of the moon for changing the color theme"><p>Dunkles Design</p></a>
-        <a href="" id="help"><img src="src/img/icons/help.png" alt="Image of the help icon"><p>Hilfe</p></a>
-        <a href="" id="wifi"><img src="src/img/icons/wifi-good.png" alt="Image of the wifi icon"><p>21,6 mbit/s</p></a>
-        <a href="" id="settings"><img src="src/img/icons/settings.svg" alt="Image of the settings icon"><p>Einstellungen</p></a>
+        <a href="" id="comment" class="active">
+          <img src="src/img/icons/run.svg" alt="Image of the run icon">
+          <p>Kommentieren</p>
+        </a>
+        <a href="" id="profile">
+          <img src="src/img/icons/profile.svg" alt="Image of the profile icon">
+          <p>Benutzerprofil</p>
+        </a>
+        <a href="" id="theme">
+          <img src="src/img/icons/theme.svg" alt="Image of the moon for changing the color theme">
+          <p>Dunkles Design</p>
+        </a>
+        <a href="" id="help">
+          <img src="src/img/icons/help.svg" alt="Image of the help icon">
+          <p>Hilfe</p>
+        </a>
+        <a href="" id="wifi">
+          <img src="src/img/icons/wifi-good.svg" alt="Image of the wifi icon">
+          <p>21,6 mbit/s</p>
+        </a>
+        <a href="" id="settings">
+          <img src="src/img/icons/settings.svg" alt="Image of the settings icon">
+          <p>Einstellungen</p>
+        </a>
       </div>
     </nav>
     <main>
@@ -63,11 +81,11 @@
             <label for="big-form" class="title">
               <h2 class="big-title">Instagram Post URL
                 <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein.">
-                  <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
+                  <img src="src/img/icons/help-small.svg" alt="Image of the help icon" class="help">
                 </span>
               </h2>
             </label>
-            <input type="text" class="big-form" placeholder="https://www.instagram.com/p/CHTs3o7geLp">
+            <input type="url" class="big-form" placeholder="https://www.instagram.com/p/CHTs3o7geLp" minlength="16" required>
 
           </div>
           <div id="login-data">
@@ -76,11 +94,11 @@
               <label for="username-form" class="title">
                 <h2 class="big-title">Benutzername
                   <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein.">
-                    <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
+                    <img src="src/img/icons/help-small.svg" alt="Image of the help icon" class="help">
                   </span>
                 </h2>
               </label>
-              <input type="text" id="username-form" class="medium-form" placeholder="_.person_mit.langem-namen._">
+              <input type="text" id="username-form" class="medium-form" placeholder="_.person_mit.langem-namen._" maxlength="30" required>
 
             </div>
             <div id="password">
@@ -88,11 +106,14 @@
               <label for="password-form" class="title">
                 <h2 class="big-title">Passwort
                   <span class="hint--right" aria-label="Passwort vergessen? Besuche www.instagram.com/accounts/password/reset">
-                    <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
+                    <img src="src/img/icons/help-small.svg" alt="Image of the help icon" class="help">
                   </span>
                 </h2>
-              </label>
-              <input type="text" id="password-form" class="medium-form" placeholder="******************************">
+              </label>       
+
+              <input type="password" id="password-form" class="medium-form" placeholder="••••••••••••••••••••••••••••••" required>
+              <label for="toggle" id="togglePW"></label>
+              <input type="checkbox" id="toggle" onclick="togglePassword()">
 
             </div>
           </div>
@@ -111,7 +132,7 @@
               <input type="checkbox" name="save-local" id="save-profile">
               <label for="save-profile" class="medium-title">Profil lokal speichern
                 <span class="hint--right hint--medium" aria-label="Die Anmeldedaten werden lokal abgespeichert, damit du nächstes Mal direkt loslegen kannst.">
-                  <img src="src/img/icons/help-small.png" alt="Image of the help icon" class="help">
+                  <img src="src/img/icons/help-small.svg" alt="Image of the help icon" class="help">
                 </span>
               </label>
   
@@ -125,7 +146,7 @@
         </details>
         <div id="start-stop">
           <div id="start">
-
+            
             <button id="start-btn">Starten</button>
 
           </div>
