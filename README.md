@@ -2,6 +2,8 @@
 
 ###### _Falsche Sprache? [Klicke hier](README_DE.md) für das deutsche ReadMe._
 
+###### _Note: IAC is currently being redeveloped, so some info is no longer up to date. In the next release the information will be updated as well._
+
 ## About IAC
 IAC is a bot which automatically comments randomly under given Instagram posts.
 <br>The duration of the commenting is freely adjustable in the GUI.
