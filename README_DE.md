@@ -6,7 +6,7 @@
 IAC ist ein Bot, welcher automatisch unter vorgegebenen Instagram Posts zufällig kommentiert.
 <br>Dabei ist die Dauer des Kommentierens in der GUI frei einstellbar.
 <br>Vorgefertigte Kommentare sind einfach importierbar und können jederzeit bearbeitet werden.
-<br>Das Programm eignet sich besonders für Gewinnspiele, welche einen zum wiederholten kommentieren auffordern.
+<br>Das Programm eignet sich besonders für Gewinnspiele, welche einen zum wiederholten Kommentieren auffordern.
 
 
 ## Features
