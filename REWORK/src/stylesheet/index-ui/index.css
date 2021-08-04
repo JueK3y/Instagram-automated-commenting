@@ -1,39 +1,32 @@
 * {
-  --small-text: 14px;
-  --medium-text: 16px;
-  --big-text: 18px;
+  --background-color: #F3F3F3;
+  --main-color: #F9F9F9;
+  --border-color: #DFDFDF;
   --text-color: #101113;
-  --line-color: #5E5E5E;
-  --background-color: #fefefe;
-  --main-color: #F3F3F3;
-}
-* ::-moz-selection {
-  background: #eefcde;
-}
-* ::selection {
-  background: #eefcde;
+  --img-size: 20px;
+  --font-size: 16px;
 }
 
 html {
-  width: 100vw;
-  height: 100vh;
-  background: var(--background-color);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 html body {
   font-family: "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: var(--text-color);
   background: var(--background-color);
-  margin: auto;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
 }
 html body img {
-  width: 30px;
-  height: 30px;
+  width: var(--img-size);
+  height: var(--img-size);
 }
-html body .hidden {
-  display: none;
+html body a {
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
 }
 @-webkit-keyframes round {
   0% {
@@ -79,15 +72,15 @@ html body .hidden {
 }
 html body .small-cursor {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: -150px;
   left: 45%;
   width: 170px;
   height: 150px;
   background: -webkit-gradient(linear, left top, right top, color-stop(28%, #fa709a), to(#fee140));
   background: linear-gradient(90deg, #fa709a 28%, #fee140 100%);
-  -webkit-filter: blur(50px);
-          filter: blur(50px);
+  -webkit-filter: blur(85px);
+          filter: blur(85px);
   border-radius: 50%;
   pointer-events: none;
   -webkit-transition: 1s ease-out;
@@ -136,23 +129,29 @@ html body .medium-form:focus, html body .big-form:focus {
 html body .help {
   width: 12px;
   height: 12px;
-  margin-left: 5px;
   cursor: pointer;
+}
+html body .hidden {
+  display: none;
 }
 html body header #drag-region {
   position: absolute;
   top: 0;
-  z-index: 5;
+  left: 0;
   width: 100%;
   height: 35px;
   -ms-overflow-style: scrollbar;
   -webkit-app-region: drag;
-  background-color: var(--main-color);
 }
-html body header #drag-region #window-title {
-  position: relative;
-  top: 10px;
-  left: 10px;
+html body header #drag-region #window-title img {
+  position: absolute;
+  top: 7px;
+  left: 16px;
+}
+html body header #drag-region #window-title span {
+  position: absolute;
+  top: 7.5px;
+  left: 50px;
   font-size: 14px;
 }
 html body header #drag-region #window-controls {
@@ -169,7 +168,7 @@ html body header #drag-region #window-controls .button {
   height: 35px;
   border: none;
 }
-html body header #drag-region #window-controls .button img {
+html body header #drag-region #window-controls .button .icon {
   width: 12px;
   height: 12px;
 }
@@ -184,23 +183,19 @@ html body header #drag-region #window-controls #maxBtn {
 }
 html body nav #side-bar {
   position: absolute;
-  z-index: 2;
   top: 35px;
   left: 0;
-  width: 320px;
+  width: 326px;
   height: 100vh;
-  background-color: var(--main-color);
-  border-right: 1px solid #DFDFDF;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  font-size: var(--font-size);
 }
 html body nav #side-bar a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding-top: 20px;
-  color: var(--text-color);
-  text-decoration: none;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -219,7 +214,7 @@ html body nav #side-bar a img {
 }
 html body nav #side-bar footer #wifi {
   position: absolute;
-  bottom: 140px;
+  bottom: 105px;
   left: 0px;
   width: 100%;
   height: 50px;
@@ -233,62 +228,62 @@ html body nav #side-bar footer #settings {
   height: 50px;
   border-top: 1px solid #DFDFDF;
 }
-html body #main-content {
-  position: absolute;
-  top: 36px;
-  left: 321px;
-  border: 1px solid blue;
-  border-top-left-radius: 5px;
-}
-html body #main-content main {
+html body main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  left: 312px;
+  top: 27px;
+  width: calc(100vw - 320px);
+  height: calc(100vh - 35px);
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-left: calc(50% - 275px);
-  padding-bottom: 20px;
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  border-top-left-radius: 10px;
+  background-color: var(--main-color);
+}
+html body main form {
   width: 550px;
   height: 420px;
   -webkit-backdrop-filter: blur(75px);
           backdrop-filter: blur(75px);
-  border-radius: 2px;
-  position: relative;
-  z-index: 3;
+  z-index: 4;
 }
-html body #main-content main #post-url input {
+html body main form #post-url input {
   margin-top: -8px;
 }
-html body #main-content main #login-data {
+html body main form #login-data {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding-top: 15px;
 }
-html body #main-content main #login-data input {
+html body main form #login-data input {
   margin-top: -8px;
 }
-html body #main-content main #login-data #password {
+html body main form #login-data #password {
   margin-left: 39px;
 }
-html body #main-content main #login-data #password #togglePW {
+html body main form #login-data #password #togglePW {
   width: 12px;
   height: auto;
   cursor: pointer;
   background: url("/src/img/icons/eye.png");
 }
-html body #main-content main #login-data #password #toggle {
+html body main form #login-data #password #toggle {
   display: none;
 }
-html body #main-content main #additional-settings {
+html body main form #additional-settings {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-html body #main-content main #additional-settings[open] summary ~ * {
+html body main form #additional-settings[open] summary ~ * {
   -webkit-animation: sweep 0.3s ease-in-out;
           animation: sweep 0.3s ease-in-out;
 }
@@ -320,7 +315,7 @@ html body #main-content main #additional-settings[open] summary ~ * {
             transform: translateY(0);
   }
 }
-html body #main-content main #additional-settings #details {
+html body main form #additional-settings #details {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -332,38 +327,38 @@ html body #main-content main #additional-settings #details {
           align-items: center;
   cursor: pointer;
 }
-html body #main-content main #additional-settings #details .line {
+html body main form #additional-settings #details .line {
   width: 100%;
   height: 1px;
   background: #C0C0C0;
 }
-html body #main-content main #additional-settings #details .line:last-child {
+html body main form #additional-settings #details .line:last-child {
   margin-right: 0.5px;
 }
-html body #main-content main #additional-settings #details #small-detail-title {
+html body main form #additional-settings #details #small-detail-title {
   width: 100%;
   font-size: 12px;
   color: #C0C0C0;
   padding-left: 12px;
 }
-html body #main-content main #additional-settings #a-d-content {
+html body main form #additional-settings #a-d-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding-top: 10px;
   padding-bottom: 15px;
 }
-html body #main-content main #additional-settings #a-d-content #save-local {
+html body main form #additional-settings #a-d-content #save-local {
   padding-top: 6px;
   cursor: pointer;
 }
-html body #main-content main #additional-settings #a-d-content #save-local input, html body #main-content main #additional-settings #a-d-content #save-local label {
+html body main form #additional-settings #a-d-content #save-local input, html body main form #additional-settings #a-d-content #save-local label {
   cursor: pointer;
 }
-html body #main-content main #additional-settings #a-d-content #edit-comments {
+html body main form #additional-settings #a-d-content #edit-comments {
   margin-left: 58px;
 }
-html body #main-content main #additional-settings #a-d-content #edit-comments #edit-button {
+html body main form #additional-settings #a-d-content #edit-comments #edit-button {
   width: 180px;
   height: 35px;
   cursor: pointer;
@@ -374,17 +369,17 @@ html body #main-content main #additional-settings #a-d-content #edit-comments #e
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #additional-settings #a-d-content #edit-comments #edit-button:hover {
+html body main form #additional-settings #a-d-content #edit-comments #edit-button:hover {
   background-color: #f7f7f7;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #additional-settings #a-d-content #edit-comments #edit-button:active {
+html body main form #additional-settings #a-d-content #edit-comments #edit-button:active {
   background-color: #eeeeee;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #start-stop {
+html body main form #start-stop {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -396,12 +391,12 @@ html body #main-content main #start-stop {
           align-items: center;
   margin-top: 1px;
 }
-html body #main-content main #start-stop #start button, html body #main-content main #start-stop #stop button {
+html body main form #start-stop #start button, html body main form #start-stop #stop button {
   width: 120px;
   height: 35px;
   cursor: pointer;
 }
-html body #main-content main #start-stop #start-btn {
+html body main form #start-stop #start-btn {
   position: relative;
   margin-right: 30px;
   color: #fff;
@@ -412,7 +407,7 @@ html body #main-content main #start-stop #start-btn {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #start-stop #start-btn::after {
+html body main form #start-stop #start-btn::after {
   position: absolute;
   top: -1px;
   bottom: -1px;
@@ -424,17 +419,17 @@ html body #main-content main #start-stop #start-btn::after {
   z-index: -1;
   border-radius: 5px;
 }
-html body #main-content main #start-stop #start-btn:hover {
+html body main form #start-stop #start-btn:hover {
   background-color: #016dd1;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #start-stop #start-btn:active {
+html body main form #start-stop #start-btn:active {
   background-color: #0076e4;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #start-stop #stop-btn {
+html body main form #start-stop #stop-btn {
   position: relative;
   margin-left: 30px;
   color: #000;
@@ -445,7 +440,7 @@ html body #main-content main #start-stop #stop-btn {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #start-stop #stop-btn::after {
+html body main form #start-stop #stop-btn::after {
   position: absolute;
   top: -1px;
   bottom: -1px;
@@ -457,14 +452,22 @@ html body #main-content main #start-stop #stop-btn::after {
   z-index: -1;
   border-radius: 5px;
 }
-html body #main-content main #start-stop #stop-btn:hover {
+html body main form #start-stop #stop-btn:hover {
   background-color: #f7f7f7;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #main-content main #start-stop #stop-btn:active {
+html body main form #start-stop #stop-btn:active {
   background-color: #eeeeee;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+html body #legal-note {
+  position: absolute;
+  z-index: 5;
+  bottom: 30px;
+  right: 60px;
+  color: #032031;
+  font-size: 20px;
 }
 /*# sourceMappingURL=index.css.map */

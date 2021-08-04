@@ -11,7 +11,6 @@
 
   ::selection {
     background: rgb(238, 252, 222);
-    text-decoration: underline overline #FF3028;
   }
 }
 
@@ -24,7 +23,6 @@ html {
     font-family: 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--text-color);
     background: var(--background-color);
-    text-decoration: underline overline transparent;
     margin: auto;
     width: 100%;
     height: 100%;
@@ -120,6 +118,7 @@ html {
       width: 12px;
       height: 12px;
       margin-left: 5px;  
+      cursor: pointer;
     }
     
     header {
@@ -129,6 +128,7 @@ html {
         z-index: 5;
         width: 100%;
         height: 35px;
+        
         -ms-overflow-style: scrollbar;
         -webkit-app-region: drag;
         background-color: var(--main-color);
@@ -172,11 +172,12 @@ html {
       #side-bar {
         position: absolute;
         z-index: 2;
-        background-color: var(--main-color);
-        width: 200px;
-        height: 100vh;
         top: 35px;
         left: 0;
+        width: 320px;
+        height: 100vh;
+        background-color: var(--main-color);
+        border-right: 1px solid #DFDFDF;
         transition: .2s;
         a {
           display: flex;
@@ -197,191 +198,204 @@ html {
             padding-left: 15px;
           }
         }
-        #wifi {
-          position: absolute;
-          bottom: 140px;
-          left: 0px;
-          width: 100%;
-          height: 50px;
-          color: rgb(49, 170, 49);
-          border-bottom: 1px solid black;
-        } 
-        #settings {
-          position: absolute;
-          bottom: 80px;
-          left: 0px;
+        footer {
+          #wifi {
+            position: absolute;
+            bottom: 140px;
+            left: 0px;
+            width: 100%;
+            height: 50px;
+            color: rgb(49, 170, 49);
+          } 
+          #settings {
+            position: absolute;
+            bottom: 35px;
+            left: 0px;
+            width: 100%;
+            height: 50px;
+            border-top: 1px solid #DFDFDF;
+          }
         }
       }
     }
     
-    main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 75px;
-      margin-left: calc(50% - 275px);
-      padding-bottom: 20px;
-
-      width: 550px;
-      height: 420px;
-
-      backdrop-filter: blur(75px);
-      border-radius: 2px;
-
-      position: relative;
-      z-index: 3;
-
-      #post-url {
-        input {
-          margin-top: -8px;
-        }
-      }
-      #login-data {
+    #main-content {
+      position: absolute;
+      top: 36px;
+      left: 321px;
+      border: 1px solid blue; 
+      border-top-left-radius: 5px;
+      main {
         display: flex;
-        padding-top: 15px;
-        input {
-          margin-top: -8px;
-        }
-        #password {
-          margin-left: 39px;
-          #togglePW {
-            width: 12px;
-            height: auto;
-            cursor: pointer;
-            background: url('/src/img/icons/eye.png');
-          }
-          #toggle {
-            display: none;
-          }
-        }
-      }
-      #additional-settings {
-        padding-top: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-left: calc(50% - 275px);
         padding-bottom: 20px;
-        &[open] summary ~ * {
-          animation: sweep .3s ease-in-out;
+  
+        width: 550px;
+        height: 420px;
+  
+        backdrop-filter: blur(75px);
+        border-radius: 2px;
+  
+        position: relative;
+        z-index: 3;
+  
+        #post-url {
+          input {
+            margin-top: -8px;
+          }
         }
-        @keyframes sweep {
-          0%    { opacity: 0; transform: translateY(-3px) }
-          90%   { opacity: 1; }
-          100%  { transform: translateY(0) }
-        }
-        #details {
+        #login-data {
           display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          .line {
-            width: 100%;
-            height: 1px;
-            background: #C0C0C0;
-            &:last-child {
-              margin-right: 0.5px; // Doesnt work
+          padding-top: 15px;
+          input {
+            margin-top: -8px;
+          }
+          #password {
+            margin-left: 39px;
+            #togglePW {
+              width: 12px;
+              height: auto;
+              cursor: pointer;
+              background: url('/src/img/icons/eye.png');
+            }
+            #toggle {
+              display: none;
             }
           }
-          #small-detail-title {
-            width: 100%;
-            font-size: 12px;
-            color: #C0C0C0;
-            padding-left: 12px;
-          }
         }
-        #a-d-content {
-          display: flex;
-          padding-top: 10px;
-          padding-bottom: 15px;
-          #save-local {
-            padding-top: 6px;
+        #additional-settings {
+          padding-top: 20px;
+          padding-bottom: 20px;
+          &[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+          }
+          @keyframes sweep {
+            0%    { opacity: 0; transform: translateY(-3px) }
+            90%   { opacity: 1; }
+            100%  { transform: translateY(0) }
+          }
+          #details {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            input, label {
-              cursor: pointer;
+            .line {
+              width: 100%;
+              height: 1px;
+              background: #C0C0C0;
+              &:last-child {
+                margin-right: 0.5px; // Doesnt work
+              }
+            }
+            #small-detail-title {
+              width: 100%;
+              font-size: 12px;
+              color: #C0C0C0;
+              padding-left: 12px;
             }
           }
-          #edit-comments {
-            margin-left: 58px;
-            #edit-button {
-              width: 200px;
-              height: 35px;
+          #a-d-content {
+            display: flex;
+            padding-top: 10px;
+            padding-bottom: 15px;
+            #save-local {
+              padding-top: 6px;
               cursor: pointer;
-              background: none;
-              border: 1px solid var(--text-color);
-              transition: .2s;
-              &:hover {
-                color: var(--background-color);
-                background-color: var(--text-color);
+              input, label {
+                cursor: pointer;
+              }
+            }
+            #edit-comments {
+              margin-left: 58px;
+              #edit-button {
+                width: 180px;
+                height: 35px;
+                cursor: pointer;
+                color: #000;
+                background: rgb(254, 254, 254);
+                border: 1px solid #e9e9e9;
+                border-radius: 5px;
                 transition: .2s;
+                &:hover {
+                  background-color: rgb(247, 247, 247);
+                  transition: .2s;
+                }
+                &:active {
+                  background-color: rgb(238, 238, 238);
+                  transition: .2s;
+                }
               }
             }
           }
         }
-      }
-      #start-stop {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 1px;
-        #start button, #stop button {
-          width: 120px;
-          height: 32px;
-          cursor: pointer;
-        }
-        #start-btn {
-          position: relative;
-          margin-right: 30px;
-          color: #fff;
-          background: #005FB8;
-          border: 1px solid transparent;
-          border-radius: 5px;
-          background-clip: padding-box;
-          transition: .2s;
-          &::after {
-            position: absolute;
-            top: -1px; bottom: -1px;
-            left: -1px; right: -1px;
-            background: linear-gradient(180deg, #0069B8 90%, #013681 100%);
-            content: '';
-            z-index: -1;
+        #start-stop {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 1px;
+          #start button, #stop button {
+            width: 120px;
+            height: 35px;
+            cursor: pointer;
+          }
+          #start-btn {
+            position: relative;
+            margin-right: 30px;
+            color: #fff;
+            background: #005FB8;
+            border: 1px solid transparent;
             border-radius: 5px;
-          }
-          &:hover {
-            background-color: #016dd1;
+            background-clip: padding-box;
             transition: .2s;
+            &::after {
+              position: absolute;
+              top: -1px; bottom: -1px;
+              left: -1px; right: -1px;
+              background: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+              content: '';
+              z-index: -1;
+              border-radius: 5px;
+            }
+            &:hover {
+              background-color: #016dd1;
+              transition: .2s;
+            }
+            &:active {
+              background-color: #0076e4;
+              transition: .2s;
+            }
           }
-          &:active {
-            background-color: #0076e4;
-            transition: .2s;
-          }
-        }
-        #stop-btn {
-          position: relative;
-          margin-left: 30px;
-          color: #000;
-          background: rgb(254, 254, 254);
-          border: 1px solid transparent;
-          border-radius: 5px;
-          background-clip: padding-box;
-          transition: .2s;
-          &::after {
-            position: absolute;
-            top: -1px; bottom: -1px;
-            left: -1px; right: -1px;
-            background: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
-            content: '';
-            z-index: -1;
+          #stop-btn {
+            position: relative;
+            margin-left: 30px;
+            color: #000;
+            background: rgb(254, 254, 254);
+            border: 1px solid transparent;
             border-radius: 5px;
-          }
-          &:hover {
-            background-color: rgb(247, 247, 247);
+            background-clip: padding-box;
             transition: .2s;
-          }
-          &:active {
-            background-color: rgb(238, 238, 238);
-            transition: .2s;
+            &::after {
+              position: absolute;
+              top: -1px; bottom: -1px;
+              left: -1px; right: -1px;
+              background: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+              content: '';
+              z-index: -1;
+              border-radius: 5px;
+            }
+            &:hover {
+              background-color: rgb(247, 247, 247);
+              transition: .2s;
+            }
+            &:active {
+              background-color: rgb(238, 238, 238);
+              transition: .2s;
+            }
           }
         }
       }
     }
-
   }
-  
 }

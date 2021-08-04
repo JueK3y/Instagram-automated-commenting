@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
     <!-- CSS -->
-    <link rel="stylesheet" href="src/stylesheet/index/index.min.css">
+    <link rel="stylesheet" href="src/stylesheet/index-ui/index.min.css">
     <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
     <!-- JS -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -21,6 +21,7 @@
       <div id="drag-region">
 
         <div id="window-title">
+          <img src="src/img/IAC-Icon.ico" alt="The icon of IAC">
           <span>Instagram Automated Commenting</span>
         </div>
         
@@ -63,14 +64,16 @@
           <img src="src/img/icons/help.svg" alt="Image of the help icon">
           <p>Hilfe</p>
         </a>
-        <a href="" id="wifi">
-          <img src="src/img/icons/wifi-good.svg" alt="Image of the wifi icon">
-          <p>21,6 mbit/s</p>
-        </a>
-        <a href="" id="settings">
-          <img src="src/img/icons/settings.svg" alt="Image of the settings icon">
-          <p>Einstellungen</p>
-        </a>
+        <footer>
+          <a href="" id="wifi">
+            <img src="src/img/icons/wifi-good.svg" alt="Image of the wifi icon">
+            <p>21,6 mbit/s</p>
+          </a>
+          <a href="" id="settings">
+            <img src="src/img/icons/settings.svg" alt="Image of the settings icon">
+            <p>Einstellungen</p>
+          </a>
+        </footer>
       </div>
     </nav>
     <main>
@@ -158,6 +161,7 @@
         </div>
       </form>
     </main>
+    <p id="legal-note">Not the final version - Work in progress</p>
     <div class="small-cursor"></div>
   </body>
 </html>
