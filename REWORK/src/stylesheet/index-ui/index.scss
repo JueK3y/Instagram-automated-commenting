@@ -90,6 +90,7 @@ html {
         border-bottom: 1.5px solid #757575;
         border-radius: 5px;
         transition: .2s;
+        font-size: 14px;
         &:hover {
             background-color: #ffffff;
             border-bottom: 1.5px solid #005FB8;
@@ -239,7 +240,7 @@ html {
                         margin-top: -8px;
                     }
                     #password {
-                        margin-left: 39px;
+                        margin-left: 30px;
                         #togglePW {
                             width: 12px;
                             height: auto;
