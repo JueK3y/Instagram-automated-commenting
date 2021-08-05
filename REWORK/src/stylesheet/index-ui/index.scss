@@ -3,9 +3,14 @@
   --main-color: #F9F9F9;
   --border-color: #DFDFDF;
   --text-color: #101113;
+  --hover-color: #DFDFDF:
 
   --img-size: 20px;
-  --font-size: 16px;
+  --font-size: 14px;
+
+  ::selection {
+    background: rgb(161, 200, 250);
+  }
 }
 
 html {
@@ -67,40 +72,40 @@ html {
             animation: round 25s cubic-bezier(0.68,-0.55,0.27,1.55) infinite;
         }
         .medium-title {
-        font-size: var(--medium-text);
+            font-size: var(--medium-text);
         }
         .big-title {
-        font-size: var(--big-text);
-        font-weight: normal;
+            font-size: var(--big-text);
+            font-weight: normal;
         }
         .medium-form {
-        width: 210px;
-        height: 30px;
+            width: 200px;
+            height: 30px;
         }
         .big-form {
-        width: 460px;
-        height: 30px;
+            width: 460px;
+            height: 30px;
         }
         .medium-form, .big-form {
-        padding-left: 5px;
-        font-size: var(--small-text);
-        background-color: #fefefefe;
-        border: none;
-        border: 1px solid #ebebeb;
-        border-bottom: 1.5px solid #757575;
-        border-radius: 5px;
-        transition: .2s;
-        font-size: 14px;
-        &:hover {
-            background-color: #ffffff;
-            border-bottom: 1.5px solid #005FB8;
+            padding-left: 5px;
+            font-size: var(--small-text);
+            background-color: #fefefefe;
+            border: none;
+            border: 1px solid #ebebeb;
+            border-bottom: 1.5px solid #757575;
+            border-radius: 5px;
             transition: .2s;
-        }
-        &:focus {
-            background-color: #ffffff;
-            border-bottom: 1.5px solid #005FB8;
-            transition: .2s;
-        }
+            font-size: 14px;
+            &:hover {
+                background-color: #ffffff;
+                border-bottom: 1.5px solid #005FB8;
+                transition: .2s;
+            }
+            &:focus {
+                background-color: #ffffff;
+                border-bottom: 1.5px solid #005FB8;
+                transition: .2s;
+            }
         }
         .help {
             width: 12px;
@@ -116,22 +121,20 @@ html {
               position: absolute;
               top: 0;
               left: 0;
-              width: 100%;
-              height: 35px;
-              
+              width: 100%;              
               -ms-overflow-style: scrollbar;
               -webkit-app-region: drag;
               #window-title {
                 img {
                     position: absolute;
-                    top: 7px;
+                    top: 6.5px;
                     left: 16px;
                 }
                 span {
                     position: absolute;
-                    top: 7.5px;
+                    top: 9px;
                     left: 50px;
-                    font-size: 14px;
+                    font-size: 12px;
                 }
               }
               #window-controls {
@@ -141,12 +144,12 @@ html {
                 top: 0;
                 right: 0;
                 .button {
-                  width: 50px;
+                  width: 46px;
                   height: 35px;
                   border: none;
                   .icon {
-                    width: 12px;
-                    height: 12px;
+                    width: 10px;
+                    height: 10px;
                   }
                 }
                 #minBtn:hover, #maxBtn:hover, #restoreBtn:hover {
@@ -166,27 +169,35 @@ html {
               position: absolute;
               top: 35px;
               left: 0;
-              width: 326px;
+              width: 320px;
               height: 100vh;
               transition: .2s;
               font-size: var(--font-size);
+              .active {
+                background-color: var(--border-color);
+              }
               a {
                 display: flex;
-                padding-top: 20px;
+                padding-top: 10px;
+                margin-left: 10px;
+                padding-bottom: 10px;
+                margin-right: 5px;
                 transition: .2s;
+                border-radius: 5px;
                 &:hover {
-                  opacity: .7;
-                  transition: .2s;
+                    background-color: var(--border-color);
+                    transition: .2s;
                 }
                 p {
-                  position: absolute;
-                  margin-top: 3px;
-                  margin-left: 60px;
+                    position: absolute;
+                    margin-top: 3px;
+                    margin-left: 60px;
                 }
                 img {
-                  padding-left: 15px;
+                    padding-left: 15px;
                 }
               }
+
               footer {
                 #wifi {
                   position: absolute;
@@ -210,10 +221,10 @@ html {
         main {
             display: flex;
             position: relative;
+            top: 23px;
             left: 312px;
-            top: 27px;
-            width: calc(100vw - 320px);
-            height: calc(100vh - 35px);
+            width: calc(100vw - 312px);
+            height: calc(100vh - 23px);
             justify-content: center;
             align-items: center;
             
@@ -223,7 +234,7 @@ html {
 
             background-color: var(--main-color);
             form {
-                width: 550px;
+                width: 467px;
                 height: 420px;
                 backdrop-filter: blur(75px);
                 z-index: 4;
@@ -240,7 +251,7 @@ html {
                         margin-top: -8px;
                     }
                     #password {
-                        margin-left: 30px;
+                        margin-left: 50px;
                         #togglePW {
                             width: 12px;
                             height: auto;

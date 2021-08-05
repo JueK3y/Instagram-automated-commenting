@@ -1,5 +1,6 @@
 {
   "name": "iac-rework",
+  "productName": "Instagram Automated Commenting 2.0",
   "version": "0.8.1",
   "description": "A new development from IAC under the name IAC 2.0",
   "main": "main.js",

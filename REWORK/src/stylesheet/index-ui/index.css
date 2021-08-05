@@ -3,8 +3,15 @@
   --main-color: #F9F9F9;
   --border-color: #DFDFDF;
   --text-color: #101113;
+  --hover-color: #DFDFDF:
   --img-size: 20px;
-  --font-size: 16px;
+  --font-size: 14px;
+}
+* ::-moz-selection {
+  background: #a1c8fa;
+}
+* ::selection {
+  background: #a1c8fa;
 }
 
 html {
@@ -96,7 +103,7 @@ html body .big-title {
   font-weight: normal;
 }
 html body .medium-form {
-  width: 210px;
+  width: 200px;
   height: 30px;
 }
 html body .big-form {
@@ -140,20 +147,19 @@ html body header #drag-region {
   top: 0;
   left: 0;
   width: 100%;
-  height: 35px;
   -ms-overflow-style: scrollbar;
   -webkit-app-region: drag;
 }
 html body header #drag-region #window-title img {
   position: absolute;
-  top: 7px;
+  top: 6.5px;
   left: 16px;
 }
 html body header #drag-region #window-title span {
   position: absolute;
-  top: 7.5px;
+  top: 9px;
   left: 50px;
-  font-size: 14px;
+  font-size: 12px;
 }
 html body header #drag-region #window-controls {
   -webkit-app-region: no-drag;
@@ -165,13 +171,13 @@ html body header #drag-region #window-controls {
   right: 0;
 }
 html body header #drag-region #window-controls .button {
-  width: 50px;
+  width: 46px;
   height: 35px;
   border: none;
 }
 html body header #drag-region #window-controls .button .icon {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 html body header #drag-region #window-controls #minBtn:hover, html body header #drag-region #window-controls #maxBtn:hover, html body header #drag-region #window-controls #restoreBtn:hover {
   background-color: #cccccc;
@@ -186,22 +192,29 @@ html body nav #side-bar {
   position: absolute;
   top: 35px;
   left: 0;
-  width: 326px;
+  width: 320px;
   height: 100vh;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   font-size: var(--font-size);
 }
+html body nav #side-bar .active {
+  background-color: var(--border-color);
+}
 html body nav #side-bar a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 20px;
+  padding-top: 10px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  margin-right: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  border-radius: 5px;
 }
 html body nav #side-bar a:hover {
-  opacity: 0.7;
+  background-color: var(--border-color);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -234,10 +247,10 @@ html body main {
   display: -ms-flexbox;
   display: flex;
   position: relative;
+  top: 23px;
   left: 312px;
-  top: 27px;
-  width: calc(100vw - 320px);
-  height: calc(100vh - 35px);
+  width: calc(100vw - 312px);
+  height: calc(100vh - 23px);
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -250,7 +263,7 @@ html body main {
   background-color: var(--main-color);
 }
 html body main form {
-  width: 550px;
+  width: 467px;
   height: 420px;
   -webkit-backdrop-filter: blur(75px);
           backdrop-filter: blur(75px);
@@ -269,7 +282,7 @@ html body main form #login-data input {
   margin-top: -8px;
 }
 html body main form #login-data #password {
-  margin-left: 30px;
+  margin-left: 50px;
 }
 html body main form #login-data #password #togglePW {
   width: 12px;
