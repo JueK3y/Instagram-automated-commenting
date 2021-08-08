@@ -119,13 +119,13 @@ html body .medium-form, html body .big-form {
   border: 1px solid #ebebeb;
   border-bottom: 1.5px solid #757575;
   border-radius: 5px;
+  font-size: 14px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  font-size: 14px;
 }
 html body .medium-form:hover, html body .big-form:hover {
   background-color: #ffffff;
-  border-bottom: 1.5px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -299,9 +299,12 @@ html body main form #login-data #password {
   margin-left: 50px;
 }
 html body main form #login-data #password #togglePW {
+  position: absolute;
+  right: 20px;
   width: 12px;
   height: auto;
   cursor: pointer;
+  opacity: 0.7;
 }
 html body main form #login-data #password #toggle {
   display: none;

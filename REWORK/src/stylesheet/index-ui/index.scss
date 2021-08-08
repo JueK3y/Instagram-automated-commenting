@@ -95,11 +95,11 @@ html {
             border: 1px solid #ebebeb;
             border-bottom: 1.5px solid #757575;
             border-radius: 5px;
-            transition: .2s;
             font-size: 14px;
+            transition: .2s;
             &:hover {
                 background-color: #ffffff;
-                border-bottom: 1.5px solid var(--blue);
+                border-bottom: 2px solid var(--blue);
                 transition: .2s;
             }
             &:focus {
@@ -266,9 +266,12 @@ html {
                     #password {
                         margin-left: 50px;
                         #togglePW {
+                            position: absolute;
+                            right: 20px;
                             width: 12px;
                             height: auto;
                             cursor: pointer;
+                            opacity: .7;
                         }
                         #toggle {
                             display: none;

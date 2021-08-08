@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0"
-    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElN
-RQflBxULLSPRop9QAAAEMElEQVR42u2bzW+URRzHP7LbbWNfoF4kkGjZg3DBIm3SYukS9CQkBIRA
-SU2ABAymqZVo4tWLMSGC4Y8wetFIAmJBJBwgEAIUbm0CHERtgba8tJbYbvGAlZlnd7rPvDzPYJzv
-XHaTmd9+P/PMM/N75pmFoKCgoKCgoKD/r15wHC/DKlbxGsvJU0sjtcAk40xygyEGucYARd/Q5bWU
-DznKfZ5UKOP8QC9LfNsVVUM3/cxUtC6WGU7QTbVv61BLH7e1rItlhM9o8Gc+ywHuGZufK3fpI+vD
-fiuXrM3PlWt0pGs+xxFmY5rL0UieNnbxOSeYUNSa5TC5tOzntfpeVhUdfMnvZWtepCkN++sZ1xoe
-5ZThHX4uU3eMQtL23+Wx5vhWq53+ktpTbE7S/h7N2X5+AIBt/FqyQuxOrvf17VcCgHq+LkFI5Cqs
-Z8poioyjvZHYU+7vhbzmrasHAJ2R+GNuZ6ScxaIVVysjk+sFqtwBHDG2Hx8AVkauwiFX9tfGXnXt
-AKBTuheKtLuwn2XAwr4eAOyT2l53keYdsLKvC0BkUu21tV9nnTDrql5a2u7woh3AJ5b29QFgu9T+
-Ixv7NYq8MVkAOCW0v23z4PmetX0zgDYpQpc5QL8nAPhFiHDc1P5So+TNDcAGIcI0i9UVF8wTZBsZ
-U3ZrnWT4389ZtpoBvO3NPszwjfDtLZMQGeP808UQgk4hxui8Ha1QqxP75gA5aQdjtaqamux14592
-o784F8eNGmCFZwC4Inxerg+gbJKaBu0Amnz7lwCW6QMs9O1fWAnmcaMGqPftn0dx3KgB6nz7twX4
-j0gNMOHbmtTrj1SV1ADKJqlJfPn0UB/ggW//UhJtAHDLt39p8bqpDzCIb4kASjfPM4CYgQ7pN2/x
-nk5PClHe0A/g+4GmEO+BRj2Eipw1/nEX2iJ8PsOsPgCc9mg/y057J0s8bqtslLZVXjbth5+8AZwR
-IhwztQ/dngDapQg7zAFq+M0LwGmhvdXmLnzsAaBLat9nYx9quZsyQIN01UdsX3BAX8oA30qte2zt
-Q4arKQLsl9pedrO9/GZqr1nXRV6ztrmwD3A4FYDmyKHNg67sQ46LiQM084fU7rzLowbQxFiiAOsi
-vX+PV1zaBygkeNxmfyT2n6x1bR9gcyIHnhoiE+cTZtiUhH2A3c6PnHWVJCvT7ErK/tOroDuQ1OqQ
-cp65wZNY78+poHk7l1OWjVLC/OzWTWTsR/UqF4wBchT4iuGyNc+7n3lUquIQxZgAOV4izxr28AUn
-pZ0GsRQ56Hber6wWi8UtWq6yJl3zT5WhlzvW5kfo8XgigGreLzl7G78M86l9vu8CYic/aq4Q0xyn
-63n4C8ozLaaH7xmtaH2U7/jAfKMkKtd/w1pA8z9/w1pGA4uoAya4zwNuMcQgA1xX77IFBQUFBQUF
-BQXp6W9b4IM+o/TyKAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0yMVQxMTo0NTozNSswMzow
-MPO1j7AAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMjFUMTE6NDU6MzUrMDM6MDCC6DcMAAAA
-AElFTkSuQmCC" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg   viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>ic_fluent_dark_theme_24_regular</title>
+    <desc>Created with Sketch.</desc>
+    <g id="🔍-Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_fluent_dark_theme_24_regular" fill="#212121" fill-rule="nonzero">
+            <path d="M12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 Z M12,20.5 L12,3.5 C16.6944204,3.5 20.5,7.30557963 20.5,12 C20.5,16.6944204 16.6944204,20.5 12,20.5 Z" id="🎨-Color"></path>
+        </g>
+    </g>
 </svg>
