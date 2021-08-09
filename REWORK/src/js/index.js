@@ -33,8 +33,12 @@ var changeColor = document.getElementById("wifi")
 var changeImg = document.getElementById("wifi-img")
 
 window.setInterval(function() {
-  var text = Math.floor(Math.random() * 25)
-  if (text <= 5) {
+  var text = Math.floor(Math.random() *25)
+  if (text == 0) {
+    changeColor.style.background = "#FDE7E9"
+    changeImg.src = "/src/img/icons/wifi/wifi-zero.svg"
+  }
+  else if (text <= 5) {
     changeColor.style.background = "#FDE7E9"
     changeImg.src = "/src/img/icons/wifi/wifi-bad.svg"
   }
