@@ -154,12 +154,12 @@ html body header #drag-region {
 html body header #drag-region #window-title img {
   position: absolute;
   top: 6.5px;
-  left: 16px;
+  left: 18px;
 }
 html body header #drag-region #window-title span {
   position: absolute;
   top: 9px;
-  left: 50px;
+  left: 55px;
   font-size: 12px;
 }
 html body header #drag-region #window-controls {
@@ -199,14 +199,23 @@ html body nav #side-bar {
   transition: 0.2s;
   font-size: var(--font-size);
 }
-html body nav #side-bar .active {
+html body nav #side-bar #active {
   background-color: var(--border-color);
 }
-html body nav #side-bar .active .line {
+html body nav #side-bar #active:active {
+  background-color: var(--active-color);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body nav #side-bar #active .line {
+  margin-top: 1.5px;
   width: 3px;
   height: 16px;
-  border-radius: 35%;
+  border-radius: 2px;
   background-color: var(--blue);
+}
+html body nav #side-bar #active img {
+  margin-left: -3px;
 }
 html body nav #side-bar #upper-content a {
   margin-left: 5px;
@@ -233,28 +242,37 @@ html body nav #side-bar a:active {
   transition: 0.2s;
 }
 html body nav #side-bar a img {
-  padding-left: 10px;
+  padding-left: 13.5px;
 }
 html body nav #side-bar a p {
   position: absolute;
-  margin-top: 3px;
-  margin-left: 60px;
+  margin-top: 0;
+  margin-left: 50px;
 }
 html body nav #side-bar footer #wifi {
   position: absolute;
   bottom: 85px;
-  left: 0px;
   width: 100%;
   height: 30px;
-  color: #31aa31;
 }
-html body nav #side-bar footer #settings {
+html body nav #side-bar footer #wifi img {
+  margin-left: 4px;
+}
+html body nav #side-bar footer #wifi p {
+  left: 5px;
+}
+html body nav #side-bar footer .settings {
   position: absolute;
   bottom: 35px;
-  left: 0px;
   width: 100%;
   height: 30px;
   border-top: 1px solid #DFDFDF;
+}
+html body nav #side-bar footer .settings img {
+  margin-left: 4px;
+}
+html body nav #side-bar footer .settings p {
+  left: 5px;
 }
 html body main {
   display: -webkit-box;
