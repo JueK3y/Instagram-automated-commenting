@@ -10,8 +10,9 @@
     <!-- JS -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="src/js/lib/jquery.min.js"></script>
-    <script defer src="src/js/cursor.js"></script>  <!-- Doesnt work? -->
+    <script defer src="src/js/cursor.js"></script>
     <script defer src="src/js/index.js"></script>
+    <script defer src="src/js/nav.js"></script>
     <script defer src="titleBar.js"></script>
     <script>if (window.module) module = window.module;</script>
     <title>Instagram Automated Commenting</title>
@@ -107,7 +108,7 @@
                   </span>
                 </h2>
               </label>
-              <input type="text" id="username-form" class="medium-form" placeholder="_.person_mit.langem-namen._" maxlength="30" required>
+              <input type="text" id="username-form" class="medium-form" placeholder="someones_username_i_guess" maxlength="30" required>
 
             </div>
             <div id="password">
@@ -120,9 +121,9 @@
                 </h2>
               </label>       
 
-              <input type="password" id="password-form" class="medium-form" placeholder="••••••••••••••••••••••••••••••" required>
-              <label for="toggle" id="togglePW"><img src="src/img/icons/eye.svg" alt="" srcset=""></label>
-              <input type="checkbox" id="toggle" onclick="togglePassword()">
+              <input type="password" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" required>
+              <label for="toggle" id="togglePW"><img src="src/img/icons/eye.svg" alt="Toggle Icon for password" id="togglePwImage"></label>
+              <input type="checkbox" id="toggle" onclick="passwordToggle()">
 
             </div>
           </div>

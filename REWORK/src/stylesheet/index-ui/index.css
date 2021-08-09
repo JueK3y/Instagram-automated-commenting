@@ -286,7 +286,7 @@ html body main {
   position: relative;
   top: 23px;
   left: 312px;
-  width: calc(100vw - 312px);
+  width: 100vw;
   height: calc(100vh - 23px);
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -302,6 +302,7 @@ html body main {
 html body main form {
   width: 467px;
   height: 420px;
+  margin-left: -533px;
   -webkit-backdrop-filter: blur(75px);
           backdrop-filter: blur(75px);
   z-index: 4;

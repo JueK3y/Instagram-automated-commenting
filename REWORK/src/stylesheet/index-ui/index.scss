@@ -258,7 +258,7 @@
               position: relative;
               top: 23px;
               left: 312px;
-              width: calc(100vw - 312px);
+              width: 100vw;
               height: calc(100vh - 23px);
               justify-content: center;
               align-items: center;
@@ -271,6 +271,7 @@
               form {
                   width: 467px;
                   height: 420px;
+                  margin-left: -533px;
                   backdrop-filter: blur(75px);
                   z-index: 4;
   
