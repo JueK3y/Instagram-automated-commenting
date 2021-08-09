@@ -256,9 +256,11 @@ html body nav #side-bar footer #wifi {
   height: 30px;
 }
 html body nav #side-bar footer #wifi img {
+  margin-top: 5px;
   margin-left: 4px;
 }
 html body nav #side-bar footer #wifi p {
+  margin-top: 5px;
   left: 5px;
 }
 html body nav #side-bar footer .settings {
@@ -269,9 +271,11 @@ html body nav #side-bar footer .settings {
   border-top: 1px solid #DFDFDF;
 }
 html body nav #side-bar footer .settings img {
+  margin-top: 5px;
   margin-left: 4px;
 }
 html body nav #side-bar footer .settings p {
+  margin-top: 5px;
   left: 5px;
 }
 html body main {

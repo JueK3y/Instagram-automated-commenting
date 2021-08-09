@@ -221,29 +221,33 @@
   
                 footer {
                   #wifi {
-                      position: absolute;
-                      bottom: 85px;
-                      width: 100%;
-                      height: 30px;
-                      img {
-                        margin-left: 4px;
-                      }
-                      p {
-                          left: 5px;
-                      }
+                        position: absolute;
+                        bottom: 85px;
+                        width: 100%;
+                        height: 30px;
+                        img {
+                            margin-top: 5px;
+                            margin-left: 4px;
+                        }
+                        p {
+                            margin-top: 5px;
+                            left: 5px;
+                        }
                   } 
                   .settings {
-                      position: absolute;
-                      bottom: 35px;
-                      width: 100%;
-                      height: 30px;
-                      border-top: 1px solid #DFDFDF;
-                      img {
-                          margin-left: 4px;
-                      }
-                      p {
-                          left: 5px;
-                      }
+                        position: absolute;
+                        bottom: 35px;
+                        width: 100%;
+                        height: 30px;
+                        border-top: 1px solid #DFDFDF;
+                        img {
+                            margin-top: 5px;
+                            margin-left: 4px;
+                        }
+                        p {
+                            margin-top: 5px;
+                            left: 5px;
+                        }
                   }
                 }
               }
