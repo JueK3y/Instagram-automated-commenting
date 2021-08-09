@@ -3,7 +3,7 @@ slideIn = false
 $(document).ready(function() {
     $("#active").click(function() {
       if (slideIn == false) {
-        $("main").css('width', '100vw').css('width', '-=35px')
+        $("main").css('width', '100vw')
         $("main").animate({left: '45px'})
         setTimeout(function() {
           $("#side-bar").css('width', '55px')
@@ -20,7 +20,7 @@ $(document).ready(function() {
         }, 50)
         $("main").animate({left: '312px'})
         setTimeout(function() {
-          $("main").css('width', '100vw').css('width', '-=312px')
+          $("main").css('width', '100vw')
         }, 400)
         slideIn = false
       }
@@ -36,19 +36,19 @@ window.setInterval(function() {
   var text = Math.floor(Math.random() *25)
   if (text == 0) {
     changeColor.style.background = "#FDE7E9"
-    changeImg.src = "/src/img/icons/wifi/wifi-zero.svg"
+    changeImg.src = "src/img/icons/wifi/wifi-zero.svg"
   }
   else if (text <= 5) {
     changeColor.style.background = "#FDE7E9"
-    changeImg.src = "/src/img/icons/wifi/wifi-bad.svg"
+    changeImg.src = "src/img/icons/wifi/wifi-bad.svg"
   }
   else if (text <= 15) {
     changeColor.style.background = "#FFF4CE"
-    changeImg.src = "/src/img/icons/wifi/wifi-okay.svg"
+    changeImg.src = "src/img/icons/wifi/wifi-okay.svg"
   }
   else if (text > 15) {
     changeColor.style.background = "none"
-    changeImg.src = "/src/img/icons/wifi/wifi-good.svg"
+    changeImg.src = "src/img/icons/wifi/wifi-good.svg"
   }
   elem.innerHTML = text;
-}, 2000);
+}, 1500);
