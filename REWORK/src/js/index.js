@@ -4,10 +4,10 @@ const pwImage = document.getElementById("togglePwImage")
 function passwordToggle() {
   if (document.getElementById("toggle").checked) {
     password.type = "text"
-    pwImage.src = "src/img/icons/eye-hidden.svg"
+    pwImage.src = "src/img/icons/light/eye-hidden.svg"
   }
   else {
     password.type = "password"
-    pwImage.src = "src/img/icons/eye.svg"
+    pwImage.src = "src/img/icons/light/eye.svg"
   }
 }

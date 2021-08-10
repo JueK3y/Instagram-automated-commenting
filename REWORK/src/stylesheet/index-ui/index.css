@@ -25,6 +25,11 @@ html body {
   font-family: "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: var(--text-color);
   background: var(--background-color);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-user-drag: none;
   overflow: hidden;
 }
 html body img {
@@ -105,19 +110,18 @@ html body .big-title {
 }
 html body .medium-form {
   width: 200px;
-  height: 30px;
 }
 html body .big-form {
   width: 460px;
-  height: 30px;
 }
 html body .medium-form, html body .big-form {
+  height: 30px;
   padding-left: 5px;
   font-size: var(--small-text);
   background-color: #fefefefe;
   border: none;
   border: 1px solid #ebebeb;
-  border-bottom: 1.5px solid #757575;
+  border-bottom: 1px solid #757575;
   border-radius: 5px;
   font-size: 14px;
   -webkit-transition: 0.2s;
@@ -125,13 +129,14 @@ html body .medium-form, html body .big-form {
 }
 html body .medium-form:hover, html body .big-form:hover {
   background-color: #ffffff;
-  border-bottom: 2px solid var(--blue);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .medium-form:focus, html body .big-form:focus {
+  outline: none;
+  height: 28.8px;
   background-color: #ffffff;
-  border-bottom: 1.5px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -300,44 +305,51 @@ html body main {
   background-color: var(--main-color);
 }
 html body main form {
-  width: 467px;
+  width: 550px;
   height: 420px;
   margin-left: -533px;
+  padding-left: 100px;
+  border-radius: 5px;
   -webkit-backdrop-filter: blur(75px);
           backdrop-filter: blur(75px);
   z-index: 4;
 }
-html body main form #post-url input {
+html body main form #main-content {
+  margin-top: 40px;
+  width: 469px;
+  height: 332px;
+}
+html body main form #main-content #post-url input {
   margin-top: -8px;
 }
-html body main form #login-data {
+html body main form #main-content #login-data {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding-top: 15px;
 }
-html body main form #login-data input {
+html body main form #main-content #login-data input {
   margin-top: -8px;
 }
-html body main form #login-data #password {
-  margin-left: 50px;
+html body main form #main-content #login-data #password {
+  margin-left: 51px;
 }
-html body main form #login-data #password #togglePW {
+html body main form #main-content #login-data #password #togglePW {
   position: absolute;
-  right: 20px;
+  right: 100px;
   width: 12px;
   height: auto;
   cursor: pointer;
   opacity: 0.7;
 }
-html body main form #login-data #password #toggle {
+html body main form #main-content #login-data #password #toggle {
   display: none;
 }
-html body main form #additional-settings {
+html body main form #main-content #additional-settings {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-html body main form #additional-settings[open] summary ~ * {
+html body main form #main-content #additional-settings[open] summary ~ * {
   -webkit-animation: sweep 0.3s ease-in-out;
           animation: sweep 0.3s ease-in-out;
 }
@@ -369,7 +381,7 @@ html body main form #additional-settings[open] summary ~ * {
             transform: translateY(0);
   }
 }
-html body main form #additional-settings #details {
+html body main form #main-content #additional-settings #details {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -381,38 +393,38 @@ html body main form #additional-settings #details {
           align-items: center;
   cursor: pointer;
 }
-html body main form #additional-settings #details .line {
+html body main form #main-content #additional-settings #details .line {
   width: 100%;
   height: 1px;
   background: #C0C0C0;
 }
-html body main form #additional-settings #details .line:last-child {
+html body main form #main-content #additional-settings #details .line:last-child {
   margin-right: 0.5px;
 }
-html body main form #additional-settings #details #small-detail-title {
+html body main form #main-content #additional-settings #details #small-detail-title {
   width: 100%;
   font-size: 12px;
   color: #C0C0C0;
   padding-left: 12px;
 }
-html body main form #additional-settings #a-d-content {
+html body main form #main-content #additional-settings #a-d-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding-top: 10px;
   padding-bottom: 15px;
 }
-html body main form #additional-settings #a-d-content #save-local {
+html body main form #main-content #additional-settings #a-d-content #save-local {
   padding-top: 6px;
   cursor: pointer;
 }
-html body main form #additional-settings #a-d-content #save-local input, html body main form #additional-settings #a-d-content #save-local label {
+html body main form #main-content #additional-settings #a-d-content #save-local input, html body main form #main-content #additional-settings #a-d-content #save-local label {
   cursor: pointer;
 }
-html body main form #additional-settings #a-d-content #edit-comments {
+html body main form #main-content #additional-settings #a-d-content #edit-comments {
   margin-left: 58px;
 }
-html body main form #additional-settings #a-d-content #edit-comments #edit-button {
+html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button {
   width: 180px;
   height: 35px;
   cursor: pointer;
@@ -423,17 +435,17 @@ html body main form #additional-settings #a-d-content #edit-comments #edit-butto
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #additional-settings #a-d-content #edit-comments #edit-button:hover {
+html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:hover {
   background-color: #f7f7f7;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #additional-settings #a-d-content #edit-comments #edit-button:active {
+html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:active {
   background-color: #eeeeee;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #start-stop {
+html body main form #main-content #start-stop {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -445,12 +457,12 @@ html body main form #start-stop {
           align-items: center;
   margin-top: 1px;
 }
-html body main form #start-stop #start button, html body main form #start-stop #stop button {
+html body main form #main-content #start-stop #start button, html body main form #main-content #start-stop #stop button {
   width: 120px;
   height: 35px;
   cursor: pointer;
 }
-html body main form #start-stop #start-btn {
+html body main form #main-content #start-stop #start-btn {
   position: relative;
   margin-right: 30px;
   color: #fff;
@@ -461,7 +473,7 @@ html body main form #start-stop #start-btn {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #start-stop #start-btn::after {
+html body main form #main-content #start-stop #start-btn::after {
   position: absolute;
   top: -1px;
   bottom: -1px;
@@ -473,17 +485,17 @@ html body main form #start-stop #start-btn::after {
   z-index: -1;
   border-radius: 5px;
 }
-html body main form #start-stop #start-btn:hover {
+html body main form #main-content #start-stop #start-btn:hover {
   background-color: #016dd1;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #start-stop #start-btn:active {
+html body main form #main-content #start-stop #start-btn:active {
   background-color: #0076e4;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #start-stop #stop-btn {
+html body main form #main-content #start-stop #stop-btn {
   position: relative;
   margin-left: 30px;
   color: #000;
@@ -494,7 +506,7 @@ html body main form #start-stop #stop-btn {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #start-stop #stop-btn::after {
+html body main form #main-content #start-stop #stop-btn::after {
   position: absolute;
   top: -1px;
   bottom: -1px;
@@ -506,12 +518,12 @@ html body main form #start-stop #stop-btn::after {
   z-index: -1;
   border-radius: 5px;
 }
-html body main form #start-stop #stop-btn:hover {
+html body main form #main-content #start-stop #stop-btn:hover {
   background-color: #f7f7f7;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #start-stop #stop-btn:active {
+html body main form #main-content #start-stop #stop-btn:active {
   background-color: #eeeeee;
   -webkit-transition: 0.2s;
   transition: 0.2s;

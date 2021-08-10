@@ -175,7 +175,7 @@ html body main form #login-data #password #togglePW {
   width: 12px;
   height: auto;
   cursor: pointer;
-  background: url("/src/img/icons/eye.png");
+  background: url("/src/img/icons/light/eye.png");
 }
 html body main form #login-data #password #toggle {
   display: none;
