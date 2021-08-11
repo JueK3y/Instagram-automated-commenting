@@ -10,6 +10,7 @@
     <!-- JS -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="src/js/lib/jquery.min.js"></script>
+    <script defer src="src/js/theme.js"></script>
     <script defer src="src/js/cursor.js"></script>
     <script defer src="src/js/index.js"></script>
     <script defer src="src/js/nav.js"></script>
@@ -29,19 +30,19 @@
         <div id="window-controls">      
 
           <button class="button" id="minBtn" title="Minimieren">
-            <img class="icon" src="src/img/icons/light/win-min.svg" draggable="false" />
+            <img class="icon" id="minBtnIcon" src="src/img/icons/light/win-min.svg" draggable="false" />
           </button>
     
           <button class="button" id="maxBtn" title="Maximieren">
-            <img class="icon" src="src/img/icons/light/win-max.svg" draggable="false" />
+            <img class="icon" id="maxBtnIcon" src="src/img/icons/light/win-max.svg" draggable="false" />
           </button>
     
           <button class="button" id="restoreBtn" title="Verkleinern">
-            <img class="icon" src="src/img/icons/light/win-restore.svg" draggable="false" />
+            <img class="icon" id="restoreBtnIcon" src="src/img/icons/light/win-restore.svg" draggable="false" />
           </button>
     
           <button class="button" id="closeBtn" title="Schließen">
-            <img class="icon" src="src/img/icons/light/win-close.svg" draggable="false" />
+            <img class="icon" id="closeBtnIcon" src="src/img/icons/light/win-close.svg" draggable="false" />
           </button>
     
         </div>
@@ -52,22 +53,27 @@
         <div id="upper-content">
           <a class="comment" id="active">
             <i class="line"></i>
-            <img src="src/img/icons/light/run.svg" alt="Image of the run icon">
+            <img id="runIcon" src="src/img/icons/light/run.svg" alt="Image of the run icon">
             <p class="navText">Kommentieren</p>
           </a>
           <a href="" class="profile">
             <i class="line"></i>
-            <img src="src/img/icons/light/profile.svg" alt="Image of the profile icon">
+            <img id="profileIcon" src="src/img/icons/light/profile.svg" alt="Image of the profile icon">
             <p class="navText">Benutzerprofil</p>
           </a>
-          <a id="theme">
+          <a id="theme-to-dark">
             <i class="line"></i>
-            <img src="src/img/icons/light/theme.svg" alt="Image of the moon for changing the color theme">
+            <img id="themeIcon" src="src/img/icons/light/theme.svg" alt="Image of the moon for changing the color theme">
             <p class="navText">Dunkles Design</p>
+          </a>
+          <a id="theme-to-light">
+            <i class="line"></i>
+            <img id="themeIcon" src="src/img/icons/dark/theme.svg" alt="Image of the moon for changing the color theme">
+            <p class="navText">Helles Design</p>
           </a>
           <a href="" class="help-tab">
             <i class="line"></i>
-            <img src="src/img/icons/light/help.svg" alt="Image of the help icon">
+            <img id="helpIcon" src="src/img/icons/light/help.svg" alt="Image of the help icon">
             <p class="navText">Hilfe</p>
           </a>
         </div>
@@ -77,7 +83,7 @@
             <p class="navText"><span id="changeText">- -</span> mb/s</p>
           </a>
           <a href="" class="settings">
-            <img src="src/img/icons/light/settings.svg" alt="Image of the settings icon">
+            <img id="settingsIcon" src="src/img/icons/light/settings.svg" alt="Image of the settings icon">
             <p class="navText">Einstellungen</p>
           </a>
         </footer>

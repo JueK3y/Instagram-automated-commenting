@@ -1,19 +1,86 @@
-* {
+.light {
     --background-color: #F3F3F3;
     --main-color: #F9F9F9;
     --border-color: #DFDFDF;
-    --text-color: #101113;
+
+    --text-color: #000000;
+    --text-note-color: #001224;
+
+    // Input
+    --input-bg-color: #fefefefe;
+    --input-border-color: #ebebeb;
+    --input-border-bot-color: #757575;
+    --input-bg-hover-color: #ffffff;
+
+    // Button
+    --text-main-button: #FFFFFF;
+    --bg-main-button: #005FB8;
+    --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+    --bg-hover-main-button: #016dd1;
+    --bg-active-main-button: #0076e4;
+
+    --text-sec-button: #000000;
+    --bg-sec-button: rgb(254, 254, 254);
+    --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+    --bg-hover-sec-button: rgb(247, 247, 247);
+    --bg-active-sec-button: rgb(238, 238, 238);
+
     --active-color: #cecece;
-    --blue: #005FB8;
   
     --img-size: 20px;
     --font-size: 14px;
+
+    --window-control-hover: rgb(213, 219, 223);
+    --window-close-hover: rgb(255, 89, 89);
+
+    --mouse-color: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);
   
     ::selection {
       background: rgb(161, 200, 250);
     }
 }
+
+.dark {
+    --background-color: #1C1C1C;
+    --main-color: #202020;
+    --border-color: #303030;
+    --active-color: rgb(53, 53, 53);
+    
+    --text-color: #FFFFFF;
+    --text-note-color: #9facbb;
+
+    // Input
+    --input-bg-color: #fefefefe;
+    --input-border-color: #ebebeb;
+    --input-border-bot-color: #757575;
+    --input-bg-hover-color: #ffffff;
+
+    // Button
+    --text-main-button: #000000;
+    --bg-main-button: #60CDFF;
+    --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+    --bg-hover-main-button: #016dd1;
+    --bg-active-main-button: #0076e4;
+
+    --text-sec-button: #FFFFFF;
+    --bg-sec-button: #2a2a2a;
+    --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+    --bg-hover-sec-button: rgb(247, 247, 247);
+    --bg-active-sec-button: rgb(238, 238, 238);
   
+    --img-size: 20px;
+    --font-size: 14px;
+  
+    --window-control-hover: rgb(64, 67, 70);
+    --window-close-hover: rgb(194, 43, 43);
+    
+    --mouse-color: linear-gradient(90deg, rgba(196,245,201, 0.6)28%, rgba(196,232,245, 0.6) 100%);
+
+    ::selection {
+      background: rgb(161, 200, 250);
+    }
+}
+
 html {
     width: 100%;
     height: 100%;
@@ -42,7 +109,6 @@ html {
                 border-radius: 50%;
                 width: 170px;
                 height: 150px;
-                // background: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%); 
             }
             50% {
                 border-radius: 40%;
@@ -54,7 +120,6 @@ html {
                 width: 170px;
                 height: 150px;
                 transform: rotate(365deg); 
-                // background: linear-gradient(90deg, rgb(196,245,201)28%, rgb(196,232,245) 100%); 
             }
             
         }
@@ -66,7 +131,7 @@ html {
             left: 45%;
             width: 170px;
             height: 150px;
-            background: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);  // green: rgba(196,245,201,1), blue : rgba(196,232,245,1) 
+            background: var(--mouse-color);
             filter: blur(85px);
             border-radius: 50%;
             pointer-events: none;
@@ -90,22 +155,23 @@ html {
             height: 30px;
             padding-left: 5px;
             font-size: var(--small-text);
-            background-color: #fefefefe;
+            background-color: var(--input-bg-color);
             border: none;
-            border: 1px solid #ebebeb;
-            border-bottom: 1px solid #757575;
+            border: 1px solid var(--input-border-color);
+            border-bottom: 1px solid var(--input-border-bot-color);
             border-radius: 5px;
             font-size: 14px;
             transition: .2s;
             &:hover {
-                background-color: #ffffff;
+                background-color: var(--input-bg-hover-color);
+                border-bottom: 1px solid var(--bg-main-button);
                 transition: .2s;
             }
             &:focus {
                 outline: none;
                 height: 28.8px;
-                background-color: #ffffff;
-                border-bottom: 2px solid var(--blue);
+                background-color: var(--input-bg-hover-color);
+                border-bottom: 2px solid var(--bg-main-button);
                 transition: .2s;
             }
         }
@@ -142,7 +208,6 @@ html {
                 }
                 #window-controls {
                     -webkit-app-region: no-drag;
-
                     display: flex;
                     position: absolute;
                     top: 0;
@@ -151,16 +216,17 @@ html {
                         width: 46px;
                         height: 32px;
                         border: none;
-                    .icon {
-                        width: 10px;
-                        height: 10px;
-                    }
+                        background-color: transparent;
+                        .icon {
+                            width: 10px;
+                            height: 10px;
+                        }
                     }
                     #minBtn:hover, #maxBtn:hover, #restoreBtn:hover {
-                        background-color: rgb(204, 204, 204);
+                        background-color: var(--window-control-hover);
                     }
                     #closeBtn:hover {
-                        background-color: rgb(255, 89, 89);
+                        background-color: var(--window-close-hover);
                     }
                     #maxBtn {
                         display: none;
@@ -188,7 +254,7 @@ html {
                         width: 3px;
                         height: 16px;
                         border-radius: 2px;
-                        background-color: var(--blue);
+                        background-color: var(--bg-main-button);
                     }
                     img {
                         margin-left: -3px;
@@ -242,7 +308,7 @@ html {
                         bottom: 35px;
                         width: 100%;
                         height: 30px;
-                        border-top: 1px solid #DFDFDF;
+                        border-top: 1px solid var(--border-color);
                         img {
                             margin-top: 5px;
                             margin-left: 4px;
@@ -298,6 +364,7 @@ html {
                             margin-left: 51px;
                             #togglePW {
                                 position: absolute;
+                                margin-top: 3px;
                                 right: 100px;
                                 width: 12px;
                                 height: auto;
@@ -328,15 +395,12 @@ html {
                             .line {
                                 width: 100%;
                                 height: 1px;
-                                background: #C0C0C0;
-                                &:last-child {
-                                    margin-right: 0.5px; // Doesnt work
-                                }
+                                background: var(--border-color);
                             }
                             #small-detail-title {
                             width: 100%;
                             font-size: 12px;
-                            color: #C0C0C0;
+                            color: var(--text-note-color);
                             padding-left: 12px;
                             }
                         }
@@ -357,17 +421,17 @@ html {
                                     width: 180px;
                                     height: 35px;
                                     cursor: pointer;
-                                    color: #000;
-                                    background: rgb(254, 254, 254);
-                                    border: 1px solid #e9e9e9;
+                                    color: var(--text-sec-button);
+                                    background: var(--bg-sec-button);
+                                    border: 1px solid #e9e9e9;          //////////////////////////
                                     border-radius: 5px;
                                     transition: .2s;
                                     &:hover {
-                                        background-color: rgb(247, 247, 247);
+                                        background-color: var(--bg-hover-sec-button);
                                         transition: .2s;
                                     }
                                     &:active {
-                                        background-color: rgb(238, 238, 238);
+                                        background-color: var(--bg-active-sec-button);
                                         transition: .2s;
                                     }
                                 }
@@ -387,8 +451,8 @@ html {
                         #start-btn {
                             position: relative;
                             margin-right: 30px;
-                            color: #fff;
-                            background: var(--blue);
+                            color: var(--text-main-button);
+                            background: var(--bg-main-button);
                             border: 1px solid transparent;
                             border-radius: 5px;
                             background-clip: padding-box;
@@ -397,25 +461,25 @@ html {
                                 position: absolute;
                                 top: -1px; bottom: -1px;
                                 left: -1px; right: -1px;
-                                background: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+                                background: var(--bg-after-main-button);
                                 content: '';
                                 z-index: -1;
                                 border-radius: 5px;
                             }
                             &:hover {
-                                background-color: #016dd1;
+                                background-color: var(--bg-hover-main-button);
                                 transition: .2s;
                             }
                             &:active {
-                                background-color: #0076e4;
+                                background-color: var(--bg-active-main-button);
                                 transition: .2s;
                             }
                         }
                         #stop-btn {
                             position: relative;
                             margin-left: 30px;
-                            color: #000;
-                            background: rgb(254, 254, 254);
+                            color: var(--text-sec-button);
+                            background: var(--bg-sec-button);
                             border: 1px solid transparent;
                             border-radius: 5px;
                             background-clip: padding-box;
@@ -424,17 +488,17 @@ html {
                                 position: absolute;
                                 top: -1px; bottom: -1px;
                                 left: -1px; right: -1px;
-                                background: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+                                background: var(--bg-after-sec-button);
                                 content: '';
                                 z-index: -1;
                                 border-radius: 5px;
                             }
                             &:hover {
-                                background-color: rgb(247, 247, 247);
+                                background-color: var(--bg-hover-sec-button);
                                 transition: .2s;
                             }
                             &:active {
-                                background-color: rgb(238, 238, 238);
+                                background-color: var(--bg-active-sec-button);
                                 transition: .2s;
                             }
                         }
@@ -447,7 +511,7 @@ html {
             z-index: 5;
             bottom: 30px;
             right: 60px;
-            color: #001224;
+            color: var(--text-note-color);
             font-size: 20px;
         }
     }

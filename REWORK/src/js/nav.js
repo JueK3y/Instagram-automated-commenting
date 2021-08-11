@@ -26,36 +26,38 @@ $(document).ready(function() {
 })
 
 
-var elem = document.getElementById("changeText")
-var changeColor = document.getElementById("wifi")
-var changeImg = document.getElementById("wifi-img")
+
+const elem = document.getElementById("changeText")
+const changeColor = document.getElementById("wifi")
+const changeImg = document.getElementById("wifi-img")
 
 window.setInterval(function() {
+  const light = document.body.classList.contains("light")
   var text = Math.floor(Math.random() *25)
   if (text == 0) {
-    changeColor.style.color = "#C42B1C"
-    changeColor.style.background = "#FDE7E9"
-    changeImg.src = "src/img/icons/light/wifi/wifi-zero-colored.svg"
+    changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
+    changeColor.style.background = (light) ? '#FDE7E9':'#442726'
+    changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
   }
   else if (text <= 1) {
-    changeColor.style.color = "#C42B1C"
+    changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
-    changeImg.src = "src/img/icons/light/wifi/wifi-one-colored.svg"
+    changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
   }
   else if (text <= 5) {
-    changeColor.style.color = "#C42B1C"
+    changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
-    changeImg.src = "src/img/icons/light/wifi/wifi-bad-colored.svg"
+    changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
   }
   else if (text <= 15) {
-    changeColor.style.color = "#9D5D00"
+    changeColor.style.color = (light) ? '#9D5D00':'#FCE100'
     changeColor.style.background = "none"
-    changeImg.src = "src/img/icons/light/wifi/wifi-okay-colored.svg"
+    changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
   }
   else if (text > 15) {
-    changeColor.style.color = "black"
+    changeColor.style.color = (light) ? '#000000':'#FFFFFF'
     changeColor.style.background = "none"
-    changeImg.src = "src/img/icons/light/wifi/wifi-good.svg"
+    changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
   }
   elem.innerHTML = text;
 }, 1500);

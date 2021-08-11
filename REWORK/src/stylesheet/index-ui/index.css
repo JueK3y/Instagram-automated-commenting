@@ -1,17 +1,68 @@
-* {
+.light {
   --background-color: #F3F3F3;
   --main-color: #F9F9F9;
   --border-color: #DFDFDF;
-  --text-color: #101113;
+  --text-color: #000000;
+  --text-note-color: #001224;
+  --input-bg-color: #fefefefe;
+  --input-border-color: #ebebeb;
+  --input-border-bot-color: #757575;
+  --input-bg-hover-color: #ffffff;
+  --text-main-button: #FFFFFF;
+  --bg-main-button: #005FB8;
+  --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+  --bg-hover-main-button: #016dd1;
+  --bg-active-main-button: #0076e4;
+  --text-sec-button: #000000;
+  --bg-sec-button: rgb(254, 254, 254);
+  --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+  --bg-hover-sec-button: rgb(247, 247, 247);
+  --bg-active-sec-button: rgb(238, 238, 238);
   --active-color: #cecece;
-  --blue: #005FB8;
   --img-size: 20px;
   --font-size: 14px;
+  --window-control-hover: rgb(213, 219, 223);
+  --window-close-hover: rgb(255, 89, 89);
+  --mouse-color: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);
 }
-* ::-moz-selection {
+.light ::-moz-selection {
   background: #a1c8fa;
 }
-* ::selection {
+.light ::selection {
+  background: #a1c8fa;
+}
+
+.dark {
+  --background-color: #1C1C1C;
+  --main-color: #202020;
+  --border-color: #303030;
+  --active-color: rgb(53, 53, 53);
+  --text-color: #FFFFFF;
+  --text-note-color: #9facbb;
+  --input-bg-color: #fefefefe;
+  --input-border-color: #ebebeb;
+  --input-border-bot-color: #757575;
+  --input-bg-hover-color: #ffffff;
+  --text-main-button: #000000;
+  --bg-main-button: #60CDFF;
+  --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+  --bg-hover-main-button: #016dd1;
+  --bg-active-main-button: #0076e4;
+  --text-sec-button: #FFFFFF;
+  --bg-sec-button: #2a2a2a;
+  --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+  --bg-hover-sec-button: rgb(247, 247, 247);
+  --bg-active-sec-button: rgb(238, 238, 238);
+  --img-size: 20px;
+  --font-size: 14px;
+  --window-control-hover: rgb(64, 67, 70);
+  --window-close-hover: rgb(194, 43, 43);
+  --mouse-color: linear-gradient(90deg, rgba(196,245,201, 0.6)28%, rgba(196,232,245, 0.6) 100%);
+}
+.dark ::-moz-selection {
+  background: #a1c8fa;
+}
+.dark ::selection {
   background: #a1c8fa;
 }
 
@@ -90,8 +141,7 @@ html body .small-cursor {
   left: 45%;
   width: 170px;
   height: 150px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(28%, #fa709a), to(#fee140));
-  background: linear-gradient(90deg, #fa709a 28%, #fee140 100%);
+  background: var(--mouse-color);
   -webkit-filter: blur(85px);
           filter: blur(85px);
   border-radius: 50%;
@@ -118,25 +168,26 @@ html body .medium-form, html body .big-form {
   height: 30px;
   padding-left: 5px;
   font-size: var(--small-text);
-  background-color: #fefefefe;
+  background-color: var(--input-bg-color);
   border: none;
-  border: 1px solid #ebebeb;
-  border-bottom: 1px solid #757575;
+  border: 1px solid var(--input-border-color);
+  border-bottom: 1px solid var(--input-border-bot-color);
   border-radius: 5px;
   font-size: 14px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .medium-form:hover, html body .big-form:hover {
-  background-color: #ffffff;
+  background-color: var(--input-bg-hover-color);
+  border-bottom: 1px solid var(--bg-main-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .medium-form:focus, html body .big-form:focus {
   outline: none;
   height: 28.8px;
-  background-color: #ffffff;
-  border-bottom: 2px solid var(--blue);
+  background-color: var(--input-bg-hover-color);
+  border-bottom: 2px solid var(--bg-main-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -181,16 +232,17 @@ html body header #drag-region #window-controls .button {
   width: 46px;
   height: 32px;
   border: none;
+  background-color: transparent;
 }
 html body header #drag-region #window-controls .button .icon {
   width: 10px;
   height: 10px;
 }
 html body header #drag-region #window-controls #minBtn:hover, html body header #drag-region #window-controls #maxBtn:hover, html body header #drag-region #window-controls #restoreBtn:hover {
-  background-color: #cccccc;
+  background-color: var(--window-control-hover);
 }
 html body header #drag-region #window-controls #closeBtn:hover {
-  background-color: #ff5959;
+  background-color: var(--window-close-hover);
 }
 html body header #drag-region #window-controls #maxBtn {
   display: none;
@@ -218,7 +270,7 @@ html body nav #side-bar #active .line {
   width: 3px;
   height: 16px;
   border-radius: 2px;
-  background-color: var(--blue);
+  background-color: var(--bg-main-button);
 }
 html body nav #side-bar #active img {
   margin-left: -3px;
@@ -274,7 +326,7 @@ html body nav #side-bar footer .settings {
   bottom: 35px;
   width: 100%;
   height: 30px;
-  border-top: 1px solid #DFDFDF;
+  border-top: 1px solid var(--border-color);
 }
 html body nav #side-bar footer .settings img {
   margin-top: 5px;
@@ -336,6 +388,7 @@ html body main form #main-content #login-data #password {
 }
 html body main form #main-content #login-data #password #togglePW {
   position: absolute;
+  margin-top: 3px;
   right: 100px;
   width: 12px;
   height: auto;
@@ -396,15 +449,12 @@ html body main form #main-content #additional-settings #details {
 html body main form #main-content #additional-settings #details .line {
   width: 100%;
   height: 1px;
-  background: #C0C0C0;
-}
-html body main form #main-content #additional-settings #details .line:last-child {
-  margin-right: 0.5px;
+  background: var(--border-color);
 }
 html body main form #main-content #additional-settings #details #small-detail-title {
   width: 100%;
   font-size: 12px;
-  color: #C0C0C0;
+  color: var(--text-note-color);
   padding-left: 12px;
 }
 html body main form #main-content #additional-settings #a-d-content {
@@ -428,20 +478,20 @@ html body main form #main-content #additional-settings #a-d-content #edit-commen
   width: 180px;
   height: 35px;
   cursor: pointer;
-  color: #000;
-  background: #fefefe;
+  color: var(--text-sec-button);
+  background: var(--bg-sec-button);
   border: 1px solid #e9e9e9;
   border-radius: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:hover {
-  background-color: #f7f7f7;
+  background-color: var(--bg-hover-sec-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:active {
-  background-color: #eeeeee;
+  background-color: var(--bg-active-sec-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -465,8 +515,8 @@ html body main form #main-content #start-stop #start button, html body main form
 html body main form #main-content #start-stop #start-btn {
   position: relative;
   margin-right: 30px;
-  color: #fff;
-  background: var(--blue);
+  color: var(--text-main-button);
+  background: var(--bg-main-button);
   border: 1px solid transparent;
   border-radius: 5px;
   background-clip: padding-box;
@@ -479,27 +529,26 @@ html body main form #main-content #start-stop #start-btn::after {
   bottom: -1px;
   left: -1px;
   right: -1px;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, #0069B8), to(#013681));
-  background: linear-gradient(180deg, #0069B8 90%, #013681 100%);
+  background: var(--bg-after-main-button);
   content: "";
   z-index: -1;
   border-radius: 5px;
 }
 html body main form #main-content #start-stop #start-btn:hover {
-  background-color: #016dd1;
+  background-color: var(--bg-hover-main-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #start-btn:active {
-  background-color: #0076e4;
+  background-color: var(--bg-active-main-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #stop-btn {
   position: relative;
   margin-left: 30px;
-  color: #000;
-  background: #fefefe;
+  color: var(--text-sec-button);
+  background: var(--bg-sec-button);
   border: 1px solid transparent;
   border-radius: 5px;
   background-clip: padding-box;
@@ -512,19 +561,18 @@ html body main form #main-content #start-stop #stop-btn::after {
   bottom: -1px;
   left: -1px;
   right: -1px;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, #e9e9e9), to(#d3d3d3));
-  background: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
+  background: var(--bg-after-sec-button);
   content: "";
   z-index: -1;
   border-radius: 5px;
 }
 html body main form #main-content #start-stop #stop-btn:hover {
-  background-color: #f7f7f7;
+  background-color: var(--bg-hover-sec-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #stop-btn:active {
-  background-color: #eeeeee;
+  background-color: var(--bg-active-sec-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -533,7 +581,7 @@ html body #legal-note {
   z-index: 5;
   bottom: 30px;
   right: 60px;
-  color: #001224;
+  color: var(--text-note-color);
   font-size: 20px;
 }
 /*# sourceMappingURL=index.css.map */
