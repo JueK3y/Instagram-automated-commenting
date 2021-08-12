@@ -15,6 +15,9 @@ const body = document.body;
 
 const theme = localStorage.getItem("theme");
 
+// Index
+const togglePw = document.getElementById("togglePwImage")
+
 
 function lightIcon() {
     minBtnIcon.src = "src/img/icons/light/win-min.svg";
@@ -30,6 +33,15 @@ function lightIcon() {
 
     themeToDark.style.display = "flex"
     themeToLight.style.display = "none"
+
+    try {
+        if (document.getElementById("toggle").checked) {
+            togglePw.src = "src/img/icons/light/eye-hidden.svg"
+        }
+        else { togglePw.src = "src/img/icons/light/eye.svg" }
+        $('.info').prop('src', 'src/img/icons/light/info-small.svg')
+    }
+    catch(err) {}
 }
 
 function darkIcon() {
@@ -46,6 +58,15 @@ function darkIcon() {
 
     themeToDark.style.display = "none"
     themeToLight.style.display = "flex"
+
+    try {
+        if (document.getElementById("toggle").checked) {
+            togglePw.src = "src/img/icons/dark/eye-hidden.svg"
+        }
+        else { togglePw.src = "src/img/icons/dark/eye.svg" }
+        $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
+    }
+    catch(err) {}
 }
 
 if (theme) {

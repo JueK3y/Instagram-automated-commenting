@@ -1,25 +1,63 @@
 slideIn = false
+
+const navPos = localStorage.getItem("navPos");
+
+if (navPos) {
+  $("#side-bar").css('z-index', 0);
+  setTimeout(function() {
+    $("main").animate({left: '47px'})
+    $("form").animate({marginLeft: '0px'})
+    setTimeout(function() {
+      $("#side-bar").css('width', '55px')
+    }, 180)
+    setTimeout(function() {
+      $(".second-text").css('display', 'none');
+    }, 260)
+    setTimeout(function() {
+      $(".navText").css('display', 'none');
+      $("#side-bar").css('z-index', 3);
+    }, 370)
+  }, 70)
+  slideIn = true
+}
+
  
 $(document).ready(function() {
     $("#active").click(function() {
       if (slideIn == false) {
-        $("main").animate({left: '45px'})
-        $("form").animate({marginLeft: '0px'})
+        $("#side-bar").css('z-index', 0);
         setTimeout(function() {
-          $("#side-bar").css('width', '55px')
-        }, 280)
-        setTimeout(function() {
-          $(".navText").css('display', 'none');
-        }, 500)
+          $("main").animate({left: '47px'})
+          $("form").animate({marginLeft: '0px'})
+          setTimeout(function() {
+            $("#side-bar").css('width', '55px')
+          }, 180)
+          setTimeout(function() {
+            $(".second-text").css('display', 'none');
+          }, 260)
+          setTimeout(function() {
+            $(".navText").css('display', 'none');
+            $("#side-bar").css('z-index', 3);
+          }, 370)
+        }, 70)
+        localStorage.setItem("navPos", "in")
         slideIn = true
       }
       else if (slideIn) {
-        $("#side-bar").css('width', '320px')
+        $("#side-bar").css('z-index', 0);
         setTimeout(function() {
+          $("#side-bar").css('width', '320px')
           $(".navText").css('display', 'block');
-        }, 50)
-        $("main").animate({left: '312px'})
-        $("form").animate({marginLeft: '-533px'})
+          setTimeout(function() {
+            $(".second-text").css('display', 'contents');
+          }, 50)
+          $("main").animate({left: '312px'})
+          $("form").animate({marginLeft: '-533px'})
+          setTimeout(function() {
+            $("#side-bar").css('z-index', 3);
+          }, 400)
+        }, 120)
+        localStorage.removeItem("navPos")
         slideIn = false
       }
     })

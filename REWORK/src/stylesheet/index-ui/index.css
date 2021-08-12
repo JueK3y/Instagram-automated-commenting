@@ -1,71 +1,3 @@
-.light {
-  --background-color: #F3F3F3;
-  --main-color: #F9F9F9;
-  --border-color: #DFDFDF;
-  --text-color: #000000;
-  --text-note-color: #001224;
-  --input-bg-color: #fefefefe;
-  --input-border-color: #ebebeb;
-  --input-border-bot-color: #757575;
-  --input-bg-hover-color: #ffffff;
-  --text-main-button: #FFFFFF;
-  --bg-main-button: #005FB8;
-  --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
-  --bg-hover-main-button: #016dd1;
-  --bg-active-main-button: #0076e4;
-  --text-sec-button: #000000;
-  --bg-sec-button: rgb(254, 254, 254);
-  --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
-  --bg-hover-sec-button: rgb(247, 247, 247);
-  --bg-active-sec-button: rgb(238, 238, 238);
-  --active-color: #cecece;
-  --img-size: 20px;
-  --font-size: 14px;
-  --window-control-hover: rgb(213, 219, 223);
-  --window-close-hover: rgb(255, 89, 89);
-  --mouse-color: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);
-}
-.light ::-moz-selection {
-  background: #a1c8fa;
-}
-.light ::selection {
-  background: #a1c8fa;
-}
-
-.dark {
-  --background-color: #1C1C1C;
-  --main-color: #202020;
-  --border-color: #303030;
-  --active-color: rgb(53, 53, 53);
-  --text-color: #FFFFFF;
-  --text-note-color: #9facbb;
-  --input-bg-color: #fefefefe;
-  --input-border-color: #ebebeb;
-  --input-border-bot-color: #757575;
-  --input-bg-hover-color: #ffffff;
-  --text-main-button: #000000;
-  --bg-main-button: #60CDFF;
-  --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
-  --bg-hover-main-button: #016dd1;
-  --bg-active-main-button: #0076e4;
-  --text-sec-button: #FFFFFF;
-  --bg-sec-button: #2a2a2a;
-  --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
-  --bg-hover-sec-button: rgb(247, 247, 247);
-  --bg-active-sec-button: rgb(238, 238, 238);
-  --img-size: 20px;
-  --font-size: 14px;
-  --window-control-hover: rgb(64, 67, 70);
-  --window-close-hover: rgb(194, 43, 43);
-  --mouse-color: linear-gradient(90deg, rgba(196,245,201, 0.6)28%, rgba(196,232,245, 0.6) 100%);
-}
-.dark ::-moz-selection {
-  background: #a1c8fa;
-}
-.dark ::selection {
-  background: #a1c8fa;
-}
-
 html {
   width: 100%;
   height: 100%;
@@ -191,9 +123,9 @@ html body .medium-form:focus, html body .big-form:focus {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body .help {
-  width: 12px;
-  height: 12px;
+html body .info {
+  width: 11px;
+  height: 11px;
   cursor: pointer;
 }
 html body .hidden {
@@ -204,7 +136,10 @@ html body header #drag-region {
   top: 0;
   left: 0;
   width: 100%;
-  height: 35px;
+  height: 31px;
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  z-index: 3;
   -ms-overflow-style: scrollbar;
   -webkit-app-region: drag;
 }
@@ -249,13 +184,17 @@ html body header #drag-region #window-controls #maxBtn {
 }
 html body nav #side-bar {
   position: absolute;
-  top: 35px;
+  padding-top: 4px;
+  top: 31px;
   left: 0;
   width: 320px;
   height: 100vh;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   font-size: var(--font-size);
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  z-index: 3;
 }
 html body nav #side-bar #active {
   background-color: var(--border-color);
@@ -290,7 +229,7 @@ html body nav #side-bar a {
   transition: 0.2s;
 }
 html body nav #side-bar a:hover {
-  background-color: var(--border-color);
+  background-color: var(--hover-color);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
