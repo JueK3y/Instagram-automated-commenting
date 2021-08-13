@@ -16,6 +16,7 @@ const body = document.body;
 const theme = localStorage.getItem("theme");
 
 // Index
+const clear = document.getElementById("error-icon-img")
 const togglePw = document.getElementById("togglePwImage")
 
 
@@ -40,6 +41,8 @@ function lightIcon() {
         }
         else { togglePw.src = "src/img/icons/light/eye.svg" }
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
+        $('.clearIcon').prop('src', 'src/img/icons/light/clear.svg')
+        clear.src = "src/img/icons/dark/clear.svg"
     }
     catch(err) {}
 }
@@ -65,6 +68,8 @@ function darkIcon() {
         }
         else { togglePw.src = "src/img/icons/dark/eye.svg" }
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
+        $('.clearIcon').prop('src', 'src/img/icons/dark/clear.svg')
+        clear.src = "src/img/icons/light/clear-dark.svg"
     }
     catch(err) {}
 }

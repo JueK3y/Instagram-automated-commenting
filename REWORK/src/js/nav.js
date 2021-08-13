@@ -65,37 +65,81 @@ $(document).ready(function() {
 
 
 
+
 const elem = document.getElementById("changeText")
 const changeColor = document.getElementById("wifi")
 const changeImg = document.getElementById("wifi-img")
 
+
+/* const randomNumber = 13
+
+var min = randomNumber - 2
+var max = randomNumber + 2
+
+function getRandomNumber(min, max) { 
+  var randomNumber = Math.floor(Math.random() * (max - min) + min)
+  return randomNumber
+} 
+
+alert(getRandomNumber(11, 15)) */
+
+
+var counter = 0
+var counterDisplay = 0
+showMessage = true
+
+$("#error-hide").click(function() {
+  showMessage = false
+  $("#error-banner").fadeOut(170)
+})
+
+$("#error-close").click(function() {
+  $("#error-banner").fadeOut(170)
+})
+
 window.setInterval(function() {
   const light = document.body.classList.contains("light")
-  var text = Math.floor(Math.random() *25)
-  if (text == 0) {
+  var randomNumber = Math.floor(Math.random() * 25)
+  if (randomNumber == 0) {
+    counter += 1
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
+    if (counter == 3 && showMessage) {
+      $("#error-banner").fadeIn(350)
+      counterDisplay += 1
+      if (counterDisplay == 3) {
+        $("#error-hide").css('display', 'block')
+      }
+    }
   }
-  else if (text <= 1) {
+  else if (randomNumber <= 1) {
+    counter = 0
+    $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
   }
-  else if (text <= 5) {
+  else if (randomNumber <= 5) {
+    counter = 0
+    $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
   }
-  else if (text <= 15) {
+  else if (randomNumber <= 15) {
+    counter = 0
+    $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#9D5D00':'#FCE100'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
   }
-  else if (text > 15) {
+  else if (randomNumber > 15) {
+    counter = 0
+    $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#000000':'#FFFFFF'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
   }
-  elem.innerHTML = text;
-}, 1500);
+  elem.innerHTML = randomNumber;
+}, 1250);

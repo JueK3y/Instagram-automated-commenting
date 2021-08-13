@@ -103,7 +103,8 @@
                   </span>
                 </h2>
               </label>
-              <input type="url" class="big-form" placeholder="https://www.instagram.com/p/soMepiCTUrE" minlength="16" required>
+              <input type="url" class="big-form" id="url-input" placeholder="https://www.instagram.com/p/soMepiCTUrE" minlength="16" autocomplete="off" required>
+              <button type="button" id="clearButton" title="Eingabe löschen"><img src="src/img/icons/light/clear.svg" class="clearIcon" alt="The icon of the clear button"></button>
 
             </div>
             <div id="login-data">
@@ -116,7 +117,7 @@
                     </span>
                   </h2>
                 </label>
-                <input type="text" id="username-form" class="medium-form" placeholder="someones_username_i_guess" maxlength="30" required>
+                <input type="text" id="username-form" class="medium-form" placeholder="someones_username_i_guess" maxlength="30" autocomplete="off" required>
 
               </div>
               <div id="password">
@@ -129,9 +130,9 @@
                   </h2>
                 </label>       
 
-                <input type="password" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" required>
+                <input type="password" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" autocomplete="off" required>
                 <label for="toggle" id="togglePW"><img src="src/img/icons/light/eye.svg" alt="Toggle Icon for password" id="togglePwImage"></label>
-                <input type="checkbox" id="toggle" onclick="passwordToggle()">
+                <input type="checkbox" id="toggle" class="hidden" onclick="passwordToggle()">
 
               </div>
             </div>
@@ -177,6 +178,15 @@
         </div>
       </form>
     </main>
+    <div id="error-banner">
+      <div id="error-content">
+        <div id="error-icon"><img id="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
+        <div id="error-title">Kein Internet</div>
+        <div id="error-info">Überprüfe deine Internet-Verbindung.</div>
+        <button id="error-hide" title="Stelle diese Nachricht ab">Deaktivieren</button>
+        <div id="error-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
+      </div>
+    </div>
     <p id="legal-note">Not the final version - Work in progress</p>
     <div class="small-cursor"></div>
   </body>

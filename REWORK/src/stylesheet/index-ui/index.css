@@ -98,7 +98,8 @@ html body .big-form {
 }
 html body .medium-form, html body .big-form {
   height: 30px;
-  padding-left: 5px;
+  padding-left: 7px;
+  color: var(--input-color);
   font-size: var(--small-text);
   background-color: var(--input-bg-color);
   border: none;
@@ -110,22 +111,27 @@ html body .medium-form, html body .big-form {
   transition: 0.2s;
 }
 html body .medium-form:hover, html body .big-form:hover {
+  color: var(--input-hover-color);
   background-color: var(--input-bg-hover-color);
-  border-bottom: 1px solid var(--bg-main-button);
+  border: 1px solid var(--input-border-color);
+  border-bottom: 1px solid var(--input-border-bot-hover-color);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body .medium-form:focus, html body .big-form:focus {
+html body .medium-form:active, html body .medium-form:focus, html body .big-form:active, html body .big-form:focus {
   outline: none;
-  height: 28.8px;
-  background-color: var(--input-bg-hover-color);
-  border-bottom: 2px solid var(--bg-main-button);
+  height: 28px;
+  padding-top: 2px;
+  background-color: var(--input-bg-active-color);
+  border: 1px solid var(--input-border-active-color);
+  border-bottom: 2px solid var(--input-border-bot-active-color);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .info {
   width: 11px;
   height: 11px;
+  margin-left: 3px;
   cursor: pointer;
 }
 html body .hidden {
@@ -310,8 +316,50 @@ html body main form #main-content {
   width: 469px;
   height: 332px;
 }
-html body main form #main-content #post-url input {
+html body main form #main-content #post-url #url-input {
   margin-top: -8px;
+}
+html body main form #main-content #post-url #url-input:-moz-placeholder-shown + #clearButton {
+  opacity: 0;
+  pointer-events: none;
+}
+html body main form #main-content #post-url #url-input:-ms-input-placeholder + #clearButton {
+  opacity: 0;
+  pointer-events: none;
+}
+html body main form #main-content #post-url #url-input:placeholder-shown + #clearButton {
+  opacity: 0;
+  pointer-events: none;
+}
+html body main form #main-content #post-url #clearButton {
+  position: absolute;
+  display: block;
+  border: none;
+  outline: none;
+  background: none;
+  margin-top: -29.5px;
+  margin-left: 436px;
+  width: 28px;
+  height: 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main form #main-content #post-url #clearButton:hover {
+  background-color: var(--input-cross);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main form #main-content #post-url #clearButton:active {
+  opacity: 0.8;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main form #main-content #post-url #clearButton img {
+  margin-top: 3px;
+  width: 12px;
+  height: 12px;
 }
 html body main form #main-content #login-data {
   display: -webkit-box;
@@ -323,19 +371,48 @@ html body main form #main-content #login-data input {
   margin-top: -8px;
 }
 html body main form #main-content #login-data #password {
-  margin-left: 51px;
+  margin-left: 49px;
+}
+html body main form #main-content #login-data #password #password-form:-moz-placeholder-shown + #togglePW {
+  opacity: 0;
+  pointer-events: none;
+}
+html body main form #main-content #login-data #password #password-form:-ms-input-placeholder + #togglePW {
+  opacity: 0;
+  pointer-events: none;
+}
+html body main form #main-content #login-data #password #password-form:placeholder-shown + #togglePW {
+  opacity: 0;
+  pointer-events: none;
 }
 html body main form #main-content #login-data #password #togglePW {
   position: absolute;
-  margin-top: 3px;
-  right: 100px;
-  width: 12px;
-  height: auto;
+  display: block;
+  border: none;
+  outline: none;
+  background: none;
+  margin-top: -29.5px;
+  margin-left: 176px;
+  width: 28px;
+  height: 24px;
+  border-radius: 5px;
   cursor: pointer;
-  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
-html body main form #main-content #login-data #password #toggle {
-  display: none;
+html body main form #main-content #login-data #password #togglePW:hover {
+  background-color: var(--input-cross);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main form #main-content #login-data #password #togglePW:active {
+  opacity: 0.8;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main form #main-content #login-data #password #togglePW #togglePwImage {
+  margin-top: 2px;
+  margin-left: 4px;
 }
 html body main form #main-content #additional-settings {
   padding-top: 20px;
@@ -419,7 +496,7 @@ html body main form #main-content #additional-settings #a-d-content #edit-commen
   cursor: pointer;
   color: var(--text-sec-button);
   background: var(--bg-sec-button);
-  border: 1px solid #e9e9e9;
+  border: 1px solid var(--bg-border-button);
   border-radius: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -430,6 +507,7 @@ html body main form #main-content #additional-settings #a-d-content #edit-commen
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:active {
+  color: var(--active-sec-button-color);
   background-color: var(--bg-active-sec-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -479,6 +557,7 @@ html body main form #main-content #start-stop #start-btn:hover {
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #start-btn:active {
+  color: var(--active-main-button-color);
   background-color: var(--bg-active-main-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -511,9 +590,91 @@ html body main form #main-content #start-stop #stop-btn:hover {
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #stop-btn:active {
+  color: var(--active-sec-button-color);
   background-color: var(--bg-active-sec-button);
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+html body #error-banner {
+  display: none;
+  position: absolute;
+  z-index: 5;
+  top: 60px;
+  left: calc(50vw - 230px);
+  width: 600px;
+  height: 46px;
+  font-size: 14px;
+  border-radius: 3px;
+  background-color: var(--error-banner-bg);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+html body #error-banner #error-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 13px;
+  margin-left: 15px;
+  width: 570px;
+}
+html body #error-banner #error-content #error-icon {
+  margin-top: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--error-banner-icon);
+}
+html body #error-banner #error-content #error-icon img {
+  width: 8px;
+  height: 8px;
+  margin-bottom: 4px;
+  margin-left: 3px;
+}
+html body #error-banner #error-content #error-title {
+  margin-left: 13px;
+  font-weight: 500;
+}
+html body #error-banner #error-content #error-info {
+  margin-left: 12px;
+}
+html body #error-banner #error-content #error-hide {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 50px;
+  width: 100px;
+  height: 30px;
+  border: none;
+  outline: none;
+  background: none;
+  border-radius: 2px;
+  color: var(--text-color);
+  background-color: var(--error-banner-button);
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body #error-banner #error-content #error-hide:hover {
+  opacity: 0.9;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body #error-banner #error-content #error-hide:active {
+  opacity: 0.75;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body #error-banner #error-content #error-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+html body #error-banner #error-content #error-close img {
+  width: 14px;
+  height: 14px;
 }
 html body #legal-note {
   position: absolute;
