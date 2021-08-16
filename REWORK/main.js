@@ -7,9 +7,10 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     titleBarStyle: 'customButtonsOnHover',
     frame: false,
+    show: false,
     autoHideMenuBar: true,
-    minWidth: 1000,
-    minHeight: 600,
+    minWidth: 1185,
+    minHeight: 700,
     icon: __dirname + '/src/img/IAC-icon.ico',
     webPreferences: {
       nodeIntegration: true,
@@ -17,9 +18,18 @@ const createWindow = () => {
     }
   });
   mainWindow.maximize();
+  
+  mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.show()
+  })
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+  mainWindow.webContents.on('new-window', function (e, url) {
+    e.preventDefault()
+    require('electron').shell.openExternal(url)
+  })
 
 
   // Open the DevTools.

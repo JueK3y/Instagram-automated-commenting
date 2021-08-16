@@ -1,7 +1,15 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = require("electron")
 const maxBtn = document.getElementById('maxBtn')
 const restoreBtn = document.getElementById('restoreBtn')
 const ipc = ipcRenderer
+
+/*var win = remote.BrowserWindow.getFocusedWindow()
+if(win.isFullScreen()) {
+    alert("Test1")
+}
+else if(win.isMaximized()) {
+    alert("Test2")
+}*/
 
 minBtn.addEventListener('click', () => {
     ipc.send('minApp')

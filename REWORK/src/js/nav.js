@@ -3,21 +3,11 @@ slideIn = false
 const navPos = localStorage.getItem("navPos");
 
 if (navPos) {
-  $("#side-bar").css('z-index', 0);
-  setTimeout(function() {
-    $("main").animate({left: '47px'})
-    $("form").animate({marginLeft: '0px'})
-    setTimeout(function() {
-      $("#side-bar").css('width', '55px')
-    }, 180)
-    setTimeout(function() {
-      $(".second-text").css('display', 'none');
-    }, 260)
-    setTimeout(function() {
-      $(".navText").css('display', 'none');
-      $("#side-bar").css('z-index', 3);
-    }, 370)
-  }, 70)
+  $("main").css('left', '47px')
+  $("#side-bar").css('width', '55px')
+  $("form").css('margin-left', '0px')
+  $(".second-text").css('display', 'none');
+  $(".navText").css('display', 'none');
   slideIn = true
 }
 
