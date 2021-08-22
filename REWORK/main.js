@@ -1,36 +1,49 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const windowStateKeeper = require('electron-window-state')
 const path = require('path');
 const ipc = ipcMain
 
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    titleBarStyle: 'customButtonsOnHover',
-    frame: false,
-    show: false,
-    autoHideMenuBar: true,
-    minWidth: 1185,
-    minHeight: 700,
-    icon: __dirname + '/src/img/IAC-icon.ico',
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
-  mainWindow.maximize();
-  
-  mainWindow.webContents.on('did-finish-load', function() {
-    mainWindow.show()
+  const mainWindowState = windowStateKeeper({
+    defaultWidth: 1200,
+    defaultHeight: 800
   })
 
-  // and load the index.html of the app.
+  const mainWindow = new BrowserWindow({
+      x: mainWindowState.x,
+      y: mainWindowState.y,
+      width: mainWindowState.width,
+      height: mainWindowState.height,      
+      titleBarStyle: 'customButtonsOnHover',
+      minWidth: 1185,
+      minHeight: 700,
+      frame: false,
+      show: false,
+      transparent: true,
+      autoHideMenuBar: true,
+      icon: __dirname + '/src/img/IAC-icon.ico',
+      title: 'Instagram Automated Commenting',
+      backgroundColor: '#202020',
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false
+      }
+  })
+  
+  // And load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+  mainWindow.on('ready-to-show', function() {
+    mainWindowState.manage(mainWindow)
+    mainWindow.show()
+    mainWindow.focus()
+  })
 
   mainWindow.webContents.on('new-window', function (e, url) {
     e.preventDefault()
     require('electron').shell.openExternal(url)
   })
-
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
@@ -53,7 +66,7 @@ const createWindow = () => {
     mainWindow.close()
   })
 
-};
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

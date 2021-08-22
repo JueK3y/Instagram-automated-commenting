@@ -20,6 +20,7 @@
     <title>Instagram Automated Commenting</title>
   </head>
   <body>
+    <div id="test">
     <header id="titlebar">
       <div id="drag-region">
 
@@ -103,7 +104,7 @@
                   </span>
                 </h2>
               </label>
-              <input type="url" class="big-form" id="url-input" placeholder="https://www.instagram.com/p/soMepiCTUrE" minlength="16" autocomplete="off" required>
+              <input type="url" title="" class="big-form" id="url-input" placeholder="https://www.instagram.com/p/soMepiCTUrE" minlength="16" autocomplete="off" required>
               <button type="button" id="clearButton" title="Eingabe löschen"><img src="src/img/icons/light/clear.svg" class="clearIcon" alt="The icon of the clear button"></button>
 
             </div>
@@ -117,7 +118,7 @@
                     </span>
                   </h2>
                 </label>
-                <input type="text" id="username-form" class="medium-form" placeholder="someones_username_i_guess" maxlength="30" autocomplete="off" required>
+                <input type="text" title="" id="username-form" class="medium-form" placeholder="someones_username_i_guess" maxlength="30" autocomplete="off" required>
 
               </div>
               <div id="password">
@@ -126,12 +127,11 @@
                   <h2 class="big-title">Passwort
                     <span class="hint--right" aria-label="Setze mit einem Klick dein Instagram Passwort zurück">
                       <a href="https://instagram.com/accounts/password/reset" target="_blank"><img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info"></a>
-                      <!-- Target="_blank" für WebDemo-->
                     </span>
                   </h2>
                 </label>       
 
-                <input type="password" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" autocomplete="off" required>
+                <input type="password" title="" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" autocomplete="off" required>
                 <label for="toggle" id="togglePW"><img src="src/img/icons/light/eye.svg" alt="Toggle Icon for password" id="togglePwImage"></label>
                 <input type="checkbox" id="toggle" class="hidden" onclick="passwordToggle()">
 
@@ -190,5 +190,6 @@
     </div>
     <p id="legal-note">Not the final version - Work in progress</p>
     <div class="small-cursor"></div>
+  </div>
   </body>
 </html>

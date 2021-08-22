@@ -29,6 +29,7 @@ maxBtn.addEventListener('click', () => {
 ipc.on('isRestored', () => {
     maxBtn.style.display = 'block'
     restoreBtn.style.display = 'none'
+    alert("Restore app")
 })
 
 restoreBtn.addEventListener('click', () => {
