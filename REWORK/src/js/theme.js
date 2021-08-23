@@ -16,7 +16,9 @@ const body = document.body;
 const theme = localStorage.getItem("theme");
 
 // Index
-const clear = document.getElementById("error-icon-img")
+const infoIcon = document.getElementById("info-icon-img")
+const warningIcon = document.getElementById("warning-icon-img")
+const errorIcon = document.getElementById("error-icon-img")
 const togglePw = document.getElementById("togglePwImage")
 
 
@@ -35,14 +37,19 @@ function lightIcon() {
     themeToDark.style.display = "flex"
     themeToLight.style.display = "none"
 
+    ////// Banner
+    infoIcon.src = "src/img/icons/dark/note-info.svg"
+    warningIcon.src = "src/img/icons/dark/note-important.svg"
+    errorIcon.src = "src/img/icons/dark/clear.svg"
+    $('.clearIcon').prop('src', 'src/img/icons/light/clear.svg')
+
     try {
         if (document.getElementById("toggle").checked) {
             togglePw.src = "src/img/icons/light/eye-hidden.svg"
         }
         else { togglePw.src = "src/img/icons/light/eye.svg" }
+        $('#save-profile:checked + label::before').css('background-image', 'url("/src/img/icons/dark/accept.svg")')
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
-        $('.clearIcon').prop('src', 'src/img/icons/light/clear.svg')
-        clear.src = "src/img/icons/dark/clear.svg"
     }
     catch(err) {}
 }
@@ -62,14 +69,19 @@ function darkIcon() {
     themeToDark.style.display = "none"
     themeToLight.style.display = "flex"
 
+    ////// Banner
+    infoIcon.src = "src/img/icons/light/note-info.svg"
+    warningIcon.src = "src/img/icons/light/note-important.svg"
+    errorIcon.src = "src/img/icons/light/clear-dark.svg"
+    $('.clearIcon').prop('src', 'src/img/icons/dark/clear.svg')
+
     try {
         if (document.getElementById("toggle").checked) {
             togglePw.src = "src/img/icons/dark/eye-hidden.svg"
         }
         else { togglePw.src = "src/img/icons/dark/eye.svg" }
+        $('#save-profile:checked + label::before').css('background-image', 'url("/src/img/icons/light/accept.svg")')
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
-        $('.clearIcon').prop('src', 'src/img/icons/dark/clear.svg')
-        clear.src = "src/img/icons/light/clear-dark.svg"
     }
     catch(err) {}
 }

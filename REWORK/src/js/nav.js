@@ -1,3 +1,5 @@
+////// Navigation Sliding Animation
+
 slideIn = false
 
 const navPos = localStorage.getItem("navPos");
@@ -54,25 +56,24 @@ $(document).ready(function() {
 })
 
 
+////// Banner
 
+$("#info-close").click(function() {
+  $("#info-banner").fadeOut(170)
+})
+$("#warning-close").click(function() {
+  $("#warning-banner").fadeOut(170)
+})
+$("#error-close").click(function() {
+  $("#error-banner").fadeOut(170)
+})
+
+
+////// WIFI Signal Updater
 
 const elem = document.getElementById("changeText")
 const changeColor = document.getElementById("wifi")
 const changeImg = document.getElementById("wifi-img")
-
-
-/* const randomNumber = 13
-
-var min = randomNumber - 2
-var max = randomNumber + 2
-
-function getRandomNumber(min, max) { 
-  var randomNumber = Math.floor(Math.random() * (max - min) + min)
-  return randomNumber
-} 
-
-alert(getRandomNumber(11, 15)) */
-
 
 var counter = 0
 var counterDisplay = 0
@@ -83,14 +84,12 @@ $("#error-hide").click(function() {
   $("#error-banner").fadeOut(170)
 })
 
-$("#error-close").click(function() {
-  $("#error-banner").fadeOut(170)
-})
+
 
 window.setInterval(function() {
   const light = document.body.classList.contains("light")
-  var randomNumber = Math.floor(Math.random() * 25)
-  if (randomNumber == 0) {
+  var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
+  if (internetSpeed == 0) {
     counter += 1
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
@@ -103,33 +102,33 @@ window.setInterval(function() {
       }
     }
   }
-  else if (randomNumber <= 1) {
+  else if (internetSpeed <= 1) {
     counter = 0
     $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
   }
-  else if (randomNumber <= 5) {
+  else if (internetSpeed <= 5) {
     counter = 0
     $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
   }
-  else if (randomNumber <= 15) {
+  else if (internetSpeed <= 15) {
     counter = 0
     $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#9D5D00':'#FCE100'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
   }
-  else if (randomNumber > 15) {
+  else if (internetSpeed > 15) {
     counter = 0
     $("#error-banner").fadeOut()
     changeColor.style.color = (light) ? '#000000':'#FFFFFF'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
   }
-  elem.innerHTML = randomNumber;
+  elem.innerHTML = internetSpeed;
 }, 1250);

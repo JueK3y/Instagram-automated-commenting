@@ -40,7 +40,16 @@
     --active-sec-button-color: var(--text-color);
 
     --bg-border-button: #dbdbdb;
-  
+    
+    /* Checkbox */
+    --checkbox-border: rgba(0,0,0,0.4458);
+    --checkbox-bg: rgba(0,0,0, 0.0241);
+    --checkbox-hover: rgba(0,0,0, 0.0578);
+    --checkbox-active: rgba(0,0,0, 0.0924);
+    --checkbox-check-hover: rgba(0,95,184,0.9);
+    --checkbox-check-active: rgba(0,95,184,0.8);
+
+
     --img-size: 20px;
     --font-size: 14px;
 
@@ -48,6 +57,14 @@
     --window-close-hover: rgb(255, 89, 89);
 
     --mouse-color: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);
+    
+    /* Note Banner */
+    --info-banner-bg: none;
+    --info-banner-icon: var(--bg-main-button);
+    --info-banner-border: #ececec;
+
+    --warning-banner-bg: #FFF4CE;
+    --warning-banner-icon: #9D5D00;
 
     --error-banner-bg: #fde7e9e7;
     --error-banner-icon: #C42B1C;
@@ -55,7 +72,7 @@
 }
 
 .light ::selection {
-    background: rgb(161, 200, 250);
+    background: rgb(181, 210, 247);
   }
 
 .dark {
@@ -100,6 +117,14 @@
     --active-sec-button-color: #d0d0d0;
 
     --bg-border-button: #2c2c2c;
+    
+    /* Checkbox */
+    --checkbox-border: #989898;
+    --checkbox-bg: rgba(0,0,0, 0.0241);
+    --checkbox-hover: #262626;
+    --checkbox-active: rgba(0,0,0, 0.0924);
+    --checkbox-check-hover: var(--bg-hover-main-button);
+    --checkbox-check-active: var(--bg-active-main-button);
   
     --img-size: 20px;
     --font-size: 14px;
@@ -109,11 +134,19 @@
     
     --mouse-color: linear-gradient(90deg, rgba(164, 223, 170, 0.6)28%, rgba(107, 193, 224, 0.6) 100%);
     
+    /* Note Banner */
+    --info-banner-bg: #232627;
+    --info-banner-icon: #60cdff;
+    --info-banner-border: var(--info-banner-bg);
+
+    --warning-banner-bg: #433519;
+    --warning-banner-icon: #fce100;
+
     --error-banner-bg: #442726bd;
     --error-banner-icon: #FF99A4;
     --error-banner-button: #573434bd;
 }
 
 .dark ::selection {
-    background: rgb(79, 105, 139);
+    background: rgb(48, 92, 150);
 }
