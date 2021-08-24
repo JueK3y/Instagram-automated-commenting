@@ -486,10 +486,10 @@ html body main form #main-content #additional-settings #a-d-content {
   padding-top: 10px;
   padding-bottom: 15px;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light, html body main form #main-content #additional-settings #a-d-content .save-profile-dark {
   -webkit-appearance: none;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile + label::before {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark + label::before {
   display: block;
   position: relative;
   margin-top: 3px;
@@ -504,33 +504,38 @@ html body main form #main-content #additional-settings #a-d-content #save-profil
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile:hover + label::before {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:hover + label::before {
   background-color: var(--checkbox-hover);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile:active + label::before {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light:active + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:active + label::before {
   background-color: var(--checkbox-active);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile:checked + label::before {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked + label::before {
   border: 1px solid var(--bg-main-button);
   background-color: var(--bg-main-button);
-  background-image: url("/src/img/icons/dark/accept.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 10px 10px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile:checked:hover + label::before {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked + label::before {
+  background-image: url("/src/img/icons/dark/accept.svg");
+}
+html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked + label::before {
+  background-image: url("/src/img/icons/light/accept.svg");
+}
+html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked:hover + label::before {
   border: 1px solid var(--checkbox-check-hover);
   background-color: var(--checkbox-check-hover);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body main form #main-content #additional-settings #a-d-content #save-profile:active:hover + label::before {
+html body main form #main-content #additional-settings #a-d-content .save-profile-light:active:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:active:hover + label::before {
   border: 1px solid var(--checkbox-check-active);
   background-color: var(--checkbox-check-active);
   -webkit-transition: 0.2s;

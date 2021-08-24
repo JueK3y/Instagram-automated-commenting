@@ -20,6 +20,7 @@ const infoIcon = document.getElementById("info-icon-img")
 const warningIcon = document.getElementById("warning-icon-img")
 const errorIcon = document.getElementById("error-icon-img")
 const togglePw = document.getElementById("togglePwImage")
+const checkboxToggle = document.getElementById("save-profile")
 
 
 function lightIcon() {
@@ -48,6 +49,10 @@ function lightIcon() {
             togglePw.src = "src/img/icons/light/eye-hidden.svg"
         }
         else { togglePw.src = "src/img/icons/light/eye.svg" }
+        if (checkboxToggle.classList.contains('save-profile-dark')) {
+            checkboxToggle.classList.remove('save-profile-dark')
+            checkboxToggle.classList.add('save-profile-light')
+        }
         $('#save-profile:checked + label::before').css('background-image', 'url("/src/img/icons/dark/accept.svg")')
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
     }
@@ -80,6 +85,10 @@ function darkIcon() {
             togglePw.src = "src/img/icons/dark/eye-hidden.svg"
         }
         else { togglePw.src = "src/img/icons/dark/eye.svg" }
+        if (checkboxToggle.classList.contains('save-profile-light')) {
+            checkboxToggle.classList.remove('save-profile-light')
+            checkboxToggle.classList.add('save-profile-dark')
+        }
         $('#save-profile:checked + label::before').css('background-image', 'url("/src/img/icons/light/accept.svg")')
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
     }

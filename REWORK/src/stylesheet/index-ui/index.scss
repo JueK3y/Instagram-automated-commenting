@@ -390,10 +390,10 @@ html {
                             display: flex;
                             padding-top: 10px;
                             padding-bottom: 15px;
-                            #save-profile {
+                            .save-profile-light, .save-profile-dark {
                                 -webkit-appearance: none;
                             }
-                            #save-profile + label::before {
+                            .save-profile-light + label::before, .save-profile-dark + label::before {
                                 display: block;
                                 position: relative;
                                 margin-top: 3px;
@@ -407,29 +407,34 @@ html {
                                 background-color: var(--checkbox-bg);
                                 transition: .2s;
                             }
-                            #save-profile:hover + label::before {
+                            .save-profile-light:hover + label::before, .save-profile-dark:hover + label::before {
                                 background-color: var(--checkbox-hover);
                                 transition: .2s;
                             }
-                            #save-profile:active + label::before {
+                            .save-profile-light:active + label::before, .save-profile-dark:active + label::before {
                                 background-color: var(--checkbox-active);
                                 transition: .2s;
                             }
-                            #save-profile:checked + label::before {
+                            .save-profile-light:checked + label::before, .save-profile-dark:checked + label::before {
                                 border: 1px solid var(--bg-main-button);
                                 background-color: var(--bg-main-button);
-                                background-image: url('/src/img/icons/dark/accept.svg');
                                 background-repeat: no-repeat;
                                 background-position: center;
                                 background-size: 10px 10px;
                                 transition: .2s;
                             }
-                            #save-profile:checked:hover + label::before {
+                            .save-profile-light:checked + label::before {
+                                background-image: url('/src/img/icons/dark/accept.svg');
+                            }
+                            .save-profile-dark:checked + label::before {
+                                background-image: url('/src/img/icons/light/accept.svg');
+                            }
+                            .save-profile-light:checked:hover + label::before, .save-profile-dark:checked:hover + label::before {
                                 border: 1px solid var(--checkbox-check-hover);
                                 background-color: var(--checkbox-check-hover);
                                 transition: .2s;
                             }
-                            #save-profile:active:hover + label::before {
+                            .save-profile-light:active:hover + label::before, .save-profile-dark:active:hover + label::before {
                                 border: 1px solid var(--checkbox-check-active);
                                 background-color: var(--checkbox-check-active);
                                 transition: .2s;
