@@ -72,8 +72,12 @@ $('#start-btn').click(function() {
     showBanner('warning', 'Keine URL', 'Bitte gib ein Password ein.', 'true')
     password.focus()
   }
+  else if (password.value.length < 5) {
+    showBanner('warning', 'Passwort zu kurz', 'Sicher, dass das Passwort richtig ist?', 'true')
+  }
   else {
     validate = true
+    hideBanner('warning')
   }
   if (validate) {
     $('#stop-btn').css('display', 'block')

@@ -25,3 +25,7 @@ function showBanner(type, title, message, hide) {
         }, 5000)
     }
 }
+
+function hideBanner(type) {
+    $('#'+type+'-banner').fadeOut(250)
+}
