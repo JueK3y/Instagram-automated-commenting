@@ -657,7 +657,7 @@ html body main form #main-content #start-stop #stop-btn:active {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #info-banner {
+html body #info-banner, html body #warning-banner, html body #error-banner {
   display: none;
   position: absolute;
   z-index: 5;
@@ -666,147 +666,67 @@ html body #info-banner {
   width: 600px;
   height: 46px;
   font-size: 14px;
-  border: 1px solid var(--info-banner-border);
   border-radius: 3px;
-  background: var(--info-banner-bg);
   -webkit-backdrop-filter: blur(50px);
           backdrop-filter: blur(50px);
 }
-html body #info-banner #info-content {
+html body #info-banner #info-content, html body #info-banner #warning-content, html body #info-banner #error-content, html body #warning-banner #info-content, html body #warning-banner #warning-content, html body #warning-banner #error-content, html body #error-banner #info-content, html body #error-banner #warning-content, html body #error-banner #error-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-top: 13px;
   margin-left: 15px;
   width: 570px;
+}
+html body #info-banner #info-content #info-icon, html body #info-banner #info-content #warning-icon, html body #info-banner #info-content #error-icon, html body #info-banner #warning-content #info-icon, html body #info-banner #warning-content #warning-icon, html body #info-banner #warning-content #error-icon, html body #info-banner #error-content #info-icon, html body #info-banner #error-content #warning-icon, html body #info-banner #error-content #error-icon, html body #warning-banner #info-content #info-icon, html body #warning-banner #info-content #warning-icon, html body #warning-banner #info-content #error-icon, html body #warning-banner #warning-content #info-icon, html body #warning-banner #warning-content #warning-icon, html body #warning-banner #warning-content #error-icon, html body #warning-banner #error-content #info-icon, html body #warning-banner #error-content #warning-icon, html body #warning-banner #error-content #error-icon, html body #error-banner #info-content #info-icon, html body #error-banner #info-content #warning-icon, html body #error-banner #info-content #error-icon, html body #error-banner #warning-content #info-icon, html body #error-banner #warning-content #warning-icon, html body #error-banner #warning-content #error-icon, html body #error-banner #error-content #info-icon, html body #error-banner #error-content #warning-icon, html body #error-banner #error-content #error-icon {
+  margin-top: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+html body #info-banner #info-content #info-icon img, html body #info-banner #info-content #warning-icon img, html body #info-banner #info-content #error-icon img, html body #info-banner #warning-content #info-icon img, html body #info-banner #warning-content #warning-icon img, html body #info-banner #warning-content #error-icon img, html body #info-banner #error-content #info-icon img, html body #info-banner #error-content #warning-icon img, html body #info-banner #error-content #error-icon img, html body #warning-banner #info-content #info-icon img, html body #warning-banner #info-content #warning-icon img, html body #warning-banner #info-content #error-icon img, html body #warning-banner #warning-content #info-icon img, html body #warning-banner #warning-content #warning-icon img, html body #warning-banner #warning-content #error-icon img, html body #warning-banner #error-content #info-icon img, html body #warning-banner #error-content #warning-icon img, html body #warning-banner #error-content #error-icon img, html body #error-banner #info-content #info-icon img, html body #error-banner #info-content #warning-icon img, html body #error-banner #info-content #error-icon img, html body #error-banner #warning-content #info-icon img, html body #error-banner #warning-content #warning-icon img, html body #error-banner #warning-content #error-icon img, html body #error-banner #error-content #info-icon img, html body #error-banner #error-content #warning-icon img, html body #error-banner #error-content #error-icon img {
+  width: 8px;
+  height: 8px;
+  margin-bottom: 4px;
+  margin-left: 3px;
+}
+html body #info-banner #info-content #info-title, html body #info-banner #info-content #warning-title, html body #info-banner #info-content #error-title, html body #info-banner #warning-content #info-title, html body #info-banner #warning-content #warning-title, html body #info-banner #warning-content #error-title, html body #info-banner #error-content #info-title, html body #info-banner #error-content #warning-title, html body #info-banner #error-content #error-title, html body #warning-banner #info-content #info-title, html body #warning-banner #info-content #warning-title, html body #warning-banner #info-content #error-title, html body #warning-banner #warning-content #info-title, html body #warning-banner #warning-content #warning-title, html body #warning-banner #warning-content #error-title, html body #warning-banner #error-content #info-title, html body #warning-banner #error-content #warning-title, html body #warning-banner #error-content #error-title, html body #error-banner #info-content #info-title, html body #error-banner #info-content #warning-title, html body #error-banner #info-content #error-title, html body #error-banner #warning-content #info-title, html body #error-banner #warning-content #warning-title, html body #error-banner #warning-content #error-title, html body #error-banner #error-content #info-title, html body #error-banner #error-content #warning-title, html body #error-banner #error-content #error-title {
+  margin-left: 13px;
+  font-weight: 500;
+}
+html body #info-banner #info-content #info-info, html body #info-banner #info-content #warning-info, html body #info-banner #info-content #error-info, html body #info-banner #warning-content #info-info, html body #info-banner #warning-content #warning-info, html body #info-banner #warning-content #error-info, html body #info-banner #error-content #info-info, html body #info-banner #error-content #warning-info, html body #info-banner #error-content #error-info, html body #warning-banner #info-content #info-info, html body #warning-banner #info-content #warning-info, html body #warning-banner #info-content #error-info, html body #warning-banner #warning-content #info-info, html body #warning-banner #warning-content #warning-info, html body #warning-banner #warning-content #error-info, html body #warning-banner #error-content #info-info, html body #warning-banner #error-content #warning-info, html body #warning-banner #error-content #error-info, html body #error-banner #info-content #info-info, html body #error-banner #info-content #warning-info, html body #error-banner #info-content #error-info, html body #error-banner #warning-content #info-info, html body #error-banner #warning-content #warning-info, html body #error-banner #warning-content #error-info, html body #error-banner #error-content #info-info, html body #error-banner #error-content #warning-info, html body #error-banner #error-content #error-info {
+  margin-left: 12px;
+}
+html body #info-banner #info-content #info-close, html body #info-banner #info-content #warning-close, html body #info-banner #info-content #error-close, html body #info-banner #warning-content #info-close, html body #info-banner #warning-content #warning-close, html body #info-banner #warning-content #error-close, html body #info-banner #error-content #info-close, html body #info-banner #error-content #warning-close, html body #info-banner #error-content #error-close, html body #warning-banner #info-content #info-close, html body #warning-banner #info-content #warning-close, html body #warning-banner #info-content #error-close, html body #warning-banner #warning-content #info-close, html body #warning-banner #warning-content #warning-close, html body #warning-banner #warning-content #error-close, html body #warning-banner #error-content #info-close, html body #warning-banner #error-content #warning-close, html body #warning-banner #error-content #error-close, html body #error-banner #info-content #info-close, html body #error-banner #info-content #warning-close, html body #error-banner #info-content #error-close, html body #error-banner #warning-content #info-close, html body #error-banner #warning-content #warning-close, html body #error-banner #warning-content #error-close, html body #error-banner #error-content #info-close, html body #error-banner #error-content #warning-close, html body #error-banner #error-content #error-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+html body #info-banner #info-content #info-close img, html body #info-banner #info-content #warning-close img, html body #info-banner #info-content #error-close img, html body #info-banner #warning-content #info-close img, html body #info-banner #warning-content #warning-close img, html body #info-banner #warning-content #error-close img, html body #info-banner #error-content #info-close img, html body #info-banner #error-content #warning-close img, html body #info-banner #error-content #error-close img, html body #warning-banner #info-content #info-close img, html body #warning-banner #info-content #warning-close img, html body #warning-banner #info-content #error-close img, html body #warning-banner #warning-content #info-close img, html body #warning-banner #warning-content #warning-close img, html body #warning-banner #warning-content #error-close img, html body #warning-banner #error-content #info-close img, html body #warning-banner #error-content #warning-close img, html body #warning-banner #error-content #error-close img, html body #error-banner #info-content #info-close img, html body #error-banner #info-content #warning-close img, html body #error-banner #info-content #error-close img, html body #error-banner #warning-content #info-close img, html body #error-banner #warning-content #warning-close img, html body #error-banner #warning-content #error-close img, html body #error-banner #error-content #info-close img, html body #error-banner #error-content #warning-close img, html body #error-banner #error-content #error-close img {
+  width: 14px;
+  height: 14px;
+}
+html body #info-banner {
+  border: 1px solid var(--info-banner-border);
+  background: var(--info-banner-bg);
 }
 html body #info-banner #info-content #info-icon {
-  margin-top: 3px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
   background-color: var(--info-banner-icon);
 }
-html body #info-banner #info-content #info-icon img {
-  width: 8px;
-  height: 8px;
-  margin-bottom: 4px;
-  margin-left: 3px;
-}
-html body #info-banner #info-content #info-title {
-  margin-left: 13px;
-  font-weight: 500;
-}
-html body #info-banner #info-content #info-info {
-  margin-left: 12px;
-}
-html body #info-banner #info-content #info-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-html body #info-banner #info-content #info-close img {
-  width: 14px;
-  height: 14px;
-}
 html body #warning-banner {
-  display: none;
-  position: absolute;
-  z-index: 5;
-  top: 60px;
-  left: calc(50vw - 240px);
-  width: 600px;
-  height: 46px;
-  font-size: 14px;
-  border-radius: 3px;
   background: var(--warning-banner-bg);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-}
-html body #warning-banner #warning-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 13px;
-  margin-left: 15px;
-  width: 570px;
 }
 html body #warning-banner #warning-content #warning-icon {
-  margin-top: 3px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
   background-color: var(--warning-banner-icon);
 }
-html body #warning-banner #warning-content #warning-icon img {
-  width: 8px;
-  height: 8px;
-  margin-bottom: 4px;
-  margin-left: 3px;
-}
-html body #warning-banner #warning-content #warning-title {
-  margin-left: 13px;
-  font-weight: 500;
-}
-html body #warning-banner #warning-content #warning-info {
-  margin-left: 12px;
-}
-html body #warning-banner #warning-content #warning-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-html body #warning-banner #warning-content #warning-close img {
-  width: 14px;
-  height: 14px;
-}
 html body #error-banner {
-  display: none;
-  position: absolute;
-  z-index: 5;
-  top: 60px;
-  left: calc(50vw - 240px);
-  width: 600px;
-  height: 46px;
-  font-size: 14px;
-  border-radius: 3px;
   background-color: var(--error-banner-bg);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-}
-html body #error-banner #error-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 13px;
-  margin-left: 15px;
-  width: 570px;
 }
 html body #error-banner #error-content #error-icon {
-  margin-top: 3px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
   background-color: var(--error-banner-icon);
-}
-html body #error-banner #error-content #error-icon img {
-  width: 8px;
-  height: 8px;
-  margin-bottom: 4px;
-  margin-left: 3px;
-}
-html body #error-banner #error-content #error-title {
-  margin-left: 13px;
-  font-weight: 500;
-}
-html body #error-banner #error-content #error-info {
-  margin-left: 12px;
 }
 html body #error-banner #error-content #error-hide {
   display: none;
@@ -834,18 +754,6 @@ html body #error-banner #error-content #error-hide:active {
   opacity: 0.75;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-}
-html body #error-banner #error-content #error-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-html body #error-banner #error-content #error-close img {
-  width: 14px;
-  height: 14px;
 }
 html body #legal-note {
   position: absolute;

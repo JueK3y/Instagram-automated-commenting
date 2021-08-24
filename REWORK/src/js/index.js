@@ -60,20 +60,23 @@ $('#start-btn').click(function() {
   }
   else if (urlInput.value.length < 16) {
     showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', 'true')
+    urlInput.focus()
   }
   else if (! urlInput.value.includes('instagram.')) {                                                               // Change this value if needed
     showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', 'true')
+    urlInput.focus()
   }
   else if (username.value == "") {
-    showBanner('warning', 'Keine URL', 'Bitte gib den Benutzername an.', 'true')
+    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', 'true')
     username.focus()
   }
   else if (password.value == "") {
-    showBanner('warning', 'Keine URL', 'Bitte gib ein Password ein.', 'true')
+    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', 'true')
     password.focus()
   }
   else if (password.value.length < 5) {
-    showBanner('warning', 'Passwort zu kurz', 'Sicher, dass das Passwort richtig ist?', 'true')
+    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', 'true')
+    password.focus()
   }
   else {
     validate = true

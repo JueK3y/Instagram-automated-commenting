@@ -27,5 +27,12 @@ function showBanner(type, title, message, hide) {
 }
 
 function hideBanner(type) {
-    $('#'+type+'-banner').fadeOut(250)
+    if (type == "all") {
+        $('#info-banner').fadeOut(250)
+        $('#warning-banner').fadeOut(250)
+        $('#error-banner').fadeOut(250)
+    }
+    else {
+        $('#'+type+'-banner').fadeOut(250)
+    }
 }
