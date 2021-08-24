@@ -53,7 +53,7 @@ function lightIcon() {
             checkboxToggle.classList.remove('save-profile-dark')
             checkboxToggle.classList.add('save-profile-light')
         }
-        $('#save-profile:checked + label::before').css('background-image', 'url("/src/img/icons/dark/accept.svg")')
+        $('#save-profile:checked + label::before').css('background-image', 'url("src/img/icons/dark/accept.svg")')
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
     }
     catch(err) {}
@@ -89,7 +89,7 @@ function darkIcon() {
             checkboxToggle.classList.remove('save-profile-light')
             checkboxToggle.classList.add('save-profile-dark')
         }
-        $('#save-profile:checked + label::before').css('background-image', 'url("/src/img/icons/light/accept.svg")')
+        $('#save-profile:checked + label::before').css('background-image', 'url("src/img/icons/light/accept.svg")')
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
     }
     catch(err) {}

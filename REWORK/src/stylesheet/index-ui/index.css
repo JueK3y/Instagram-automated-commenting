@@ -524,10 +524,10 @@ html body main form #main-content #additional-settings #a-d-content .save-profil
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked + label::before {
-  background-image: url("/src/img/icons/dark/accept.svg");
+  background-image: url("icons/accept-dark.svg");
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked + label::before {
-  background-image: url("/src/img/icons/light/accept.svg");
+  background-image: url("icons/accept-light.svg");
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked:hover + label::before {
   border: 1px solid var(--checkbox-check-hover);
@@ -661,7 +661,7 @@ html body #info-banner, html body #warning-banner, html body #error-banner {
   display: none;
   position: absolute;
   z-index: 5;
-  top: 60px;
+  top: 80px;
   left: calc(50vw - 240px);
   width: 600px;
   height: 46px;
