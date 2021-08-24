@@ -45,10 +45,42 @@ if (programStopped) {                   // Same as above
 
 
 // ONLY FOR DEMO VERSION
+validate = false
+
+const urlInput = document.getElementById('url-input')
+const username = document.getElementById('username-form')
+
 $('#start-btn').click(function() {
-  $('#stop-btn').css('display', 'block')
+  /* if (urlInput == "" && username == "" && passwordValue == "") {
+    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.')
+  }
+  else */ if (urlInput.value == "") {
+    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', 'true')
+    urlInput.focus()
+  }
+  else if (urlInput.value.length < 16) {
+    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', 'true')
+  }
+  else if (! urlInput.value.includes('instagram.')) {                                                               // Change this value if needed
+    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', 'true')
+  }
+  else if (username.value == "") {
+    showBanner('warning', 'Keine URL', 'Bitte gib den Benutzername an.', 'true')
+    username.focus()
+  }
+  else if (password.value == "") {
+    showBanner('warning', 'Keine URL', 'Bitte gib ein Password ein.', 'true')
+    password.focus()
+  }
+  else {
+    validate = true
+  }
+  if (validate) {
+    $('#stop-btn').css('display', 'block')
+  }
 });
 
 $('#stop-btn').click(function() {
   $('#stop-btn').css('display', 'none')
 });
+

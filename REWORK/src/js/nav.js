@@ -56,19 +56,6 @@ $(document).ready(function() {
 })
 
 
-////// Banner
-
-$("#info-close").click(function() {
-  $("#info-banner").fadeOut(170)
-})
-$("#warning-close").click(function() {
-  $("#warning-banner").fadeOut(170)
-})
-$("#error-close").click(function() {
-  $("#error-banner").fadeOut(170)
-})
-
-
 ////// WIFI Signal Updater
 
 const elem = document.getElementById("changeText")
@@ -85,7 +72,6 @@ $("#error-hide").click(function() {
 })
 
 
-
 window.setInterval(function() {
   const light = document.body.classList.contains("light")
   var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
@@ -95,7 +81,7 @@ window.setInterval(function() {
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
     if (counter == 3 && showMessage) {
-      $("#error-banner").fadeIn(350)
+      showBanner('error', 'Kein Internet', 'Überprüfe deine Internet-Verbindung.', 'false')
       counterDisplay += 1
       if (counterDisplay == 3) {
         $("#error-hide").css('display', 'block')
