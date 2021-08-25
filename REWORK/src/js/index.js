@@ -51,31 +51,31 @@ const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
 
 $('#start-btn').click(function() {
-  /* if (urlInput == "" && username == "" && passwordValue == "") {
-    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.')
+  if (urlInput.value == "" && username.value == "" && password.value == "") {
+    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', true)
   }
-  else */ if (urlInput.value == "") {
-    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', 'true')
+  else if (urlInput.value == "") {
+    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', true)
     urlInput.focus()
   }
   else if (urlInput.value.length < 16) {
-    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', 'true')
+    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', true)
     urlInput.focus()
   }
   else if (! urlInput.value.includes('instagram.')) {                                                               // Change this value if needed
-    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', 'true')
+    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', true)
     urlInput.focus()
   }
   else if (username.value == "") {
-    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', 'true')
+    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', true)
     username.focus()
   }
   else if (password.value == "") {
-    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', 'true')
+    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', true)
     password.focus()
   }
   else if (password.value.length < 5) {
-    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', 'true')
+    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', true)
     password.focus()
   }
   else {

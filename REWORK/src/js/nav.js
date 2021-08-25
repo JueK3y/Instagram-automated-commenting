@@ -81,7 +81,7 @@ window.setInterval(function() {
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
     if (counter == 3 && showMessage) {
-      showBanner('error', 'Kein Internet', 'Überprüfe deine Internet-Verbindung.', 'false')
+      $("#error-banner-wifi").fadeIn()
       counterDisplay += 1
       if (counterDisplay == 3) {
         $("#error-hide").css('display', 'block')
@@ -90,28 +90,28 @@ window.setInterval(function() {
   }
   else if (internetSpeed <= 1) {
     counter = 0
-    $("#error-banner").fadeOut()
+    $("#error-banner-wifi").fadeOut()
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
   }
   else if (internetSpeed <= 5) {
     counter = 0
-    $("#error-banner").fadeOut()
+    $("#error-banner-wifi").fadeOut()
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
   }
   else if (internetSpeed <= 15) {
     counter = 0
-    $("#error-banner").fadeOut()
+    $("#error-banner-wifi").fadeOut()
     changeColor.style.color = (light) ? '#9D5D00':'#FCE100'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
   }
   else if (internetSpeed > 15) {
     counter = 0
-    $("#error-banner").fadeOut()
+    $("#error-banner-wifi").fadeOut()
     changeColor.style.color = (light) ? '#000000':'#FFFFFF'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"

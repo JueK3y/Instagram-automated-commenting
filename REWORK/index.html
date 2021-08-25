@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
     <!-- CSS -->
-    <link rel="stylesheet" href="src/stylesheet/color.css">
-    <link rel="stylesheet" href="src/stylesheet/index-ui/index.css">
+    <link rel="stylesheet" href="src/stylesheet/main/color.css">
+    <link rel="stylesheet" href="src/stylesheet/main/main/main.css">
+    <link rel="stylesheet" href="src/stylesheet/index/index.min.css">
     <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
     <!-- JS -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -180,29 +181,38 @@
         </div>
       </form>
     </main>
-    <div id="info-banner">
-      <div id="info-content">
+    <div id="info-banner" class="banner">
+      <div class="banner-content">
         <div id="info-icon"><img id="info-icon-img" src="src/img/icons/dark/note-info.svg" alt="Icon of the info banner"></div>
-        <div id="info-title">Information</div>
-        <div id="info-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-        <div id="info-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the info banner"></div>
+        <div id="info-title" class="banner-title">Information</div>
+        <div id="info-info" class="banner-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+        <div id="info-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the info banner"></div>
       </div>
     </div>
-    <div id="warning-banner">
-      <div id="warning-content">
+    <div id="warning-banner" class="banner">
+      <div class="banner-content">
         <div id="warning-icon"><img id="warning-icon-img" src="src/img/icons/dark/note-important.svg" alt="Icon of the warning banner"></div>
-        <div id="warning-title">Warnung</div>
-        <div id="warning-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-        <div id="warning-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the warning banner"></div>
+        <div id="warning-title" class="banner-title">Warnung</div>
+        <div id="warning-info" class="banner-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+        <div id="warning-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the warning banner"></div>
       </div>
     </div>
-    <div id="error-banner">
-      <div id="error-content">
+    <div id="error-banner" class="banner">
+      <div class="banner-content">
         <div id="error-icon"><img id="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
-        <div id="error-title">Fehler</div>
-        <div id="error-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+        <div id="error-title" class="banner-title">Fehler</div>
+        <div id="error-info" class="banner-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
         <button id="error-hide" title="Stelle diese Nachricht ab">Deaktivieren</button>
-        <div id="error-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
+        <div id="error-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
+      </div>
+    </div>
+    <div id="error-banner-wifi" class="banner">
+      <div class="banner-content">
+        <div id="error-icon-wifi"><img id="error-icon-img-wifi" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
+        <div id="error-title-wifi" class="banner-title">Kein Internet</div>
+        <div id="error-info-wifi" class="banner-info">Überprüfe deine Internet-Verbindung.</div>
+        <button id="error-hide-wifi" title="Stelle diese Nachricht ab">Deaktivieren</button>
+        <div id="error-close-wifi" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
       </div>
     </div>
     <p id="legal-note">Work in progress - © 2021 by JueK3y</p>

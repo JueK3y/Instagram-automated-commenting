@@ -26,7 +26,7 @@ function showBanner(type, title, message, hide) {
     }
 }
 
-function hideBanner(type) {
+function hideBanner(type, key) {
     if (type == "all") {
         $('#info-banner').fadeOut(250)
         $('#warning-banner').fadeOut(250)
