@@ -259,7 +259,7 @@ html body {
             margin-top: 13px;
             margin-left: 15px;
             width: 570px;
-            #info-icon, #warning-icon, #error-icon {
+            .banner-icon {
                 margin-top: 3px;
                 width: 14px;
                 height: 14px;
@@ -307,32 +307,38 @@ html body {
     }
     #error-banner {
         background-color: var(--error-banner-bg);
-            #error-icon {
-                background-color: var(--error-banner-icon);
-            }
-            #error-hide {
-                display: none;
-                position: absolute;
-                top: 8px;
-                right: 50px;
-                width: 100px;
-                height: 30px;
-                border: none;
-                outline: none;
-                background: none;
-                border-radius: 2px;
-                color: var(--text-color);
-                background-color: var(--error-banner-button);
-                cursor: pointer;
+        #error-icon {
+            background-color: var(--error-banner-icon);
+        }
+    }
+    #error-banner-wifi {
+        background-color: var(--error-banner-bg);
+        #error-icon-wifi {
+            background-color: var(--error-banner-icon);
+        }
+        #error-hide {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 50px;
+            width: 100px;
+            height: 30px;
+            border: none;
+            outline: none;
+            background: none;
+            border-radius: 2px;
+            color: var(--text-color);
+            background-color: var(--error-banner-button);
+            cursor: pointer;
+            transition: .2s;
+            &:hover {
+                opacity: .9;
                 transition: .2s;
-                &:hover {
-                    opacity: .9;
-                    transition: .2s;
-                }
-                &:active {
-                    opacity: .75;
-                    transition: .2s;
-                }
             }
+            &:active {
+                opacity: .75;
+                transition: .2s;
+            }
+        }
     }
 }

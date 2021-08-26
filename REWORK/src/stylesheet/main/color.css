@@ -6,8 +6,8 @@
     --nav-selected: rgba(100, 100, 100, 0.1);
     --nav-selected-active: rgba(150, 150, 150, 0.25);
     
-    --nav-hyperlink: rgba(100, 100, 100, 0.15);
-    --nav-hyperlink-active: rgba(150, 150, 150, 0.25);
+    --nav-hyperlink: var(--nav-selected);
+    --nav-hyperlink-active: var(--nav-selected-active);
 
 
     --text-color: #000000;
@@ -88,8 +88,8 @@
     --nav-selected: rgba(255, 255, 255, 0.1);
     --nav-selected-active: rgba(255, 255, 255, 0.12);
     
-    --nav-hyperlink: rgba(177, 177, 177, 0.12);
-    --nav-hyperlink-active: rgba(255, 255, 255, 0.12);
+    --nav-hyperlink: var(--nav-selected);
+    --nav-hyperlink-active: var(--nav-selected-active);
     
     --text-color: #FFFFFF;
     --text-note-color: #9facbb;

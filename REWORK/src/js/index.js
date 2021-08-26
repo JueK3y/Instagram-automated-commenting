@@ -43,6 +43,8 @@ if (programStopped) {                   // Same as above
   $('#stop-btn').fadeOut()
 } */
 
+errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short',]
+
 
 // ONLY FOR DEMO VERSION
 validate = false
@@ -52,35 +54,42 @@ const username = document.getElementById('username-form')
 
 $('#start-btn').click(function() {
   if (urlInput.value == "" && username.value == "" && password.value == "") {
-    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', true)
+    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', 'form-empty', true)
   }
   else if (urlInput.value == "") {
-    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', true)
+    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', 'url-empty', true)
     urlInput.focus()
   }
   else if (urlInput.value.length < 16) {
-    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', true)
+    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', 'url-too-short', true)
     urlInput.focus()
   }
   else if (! urlInput.value.includes('instagram.')) {                                                               // Change this value if needed
-    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', true)
+    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', 'wrong-url', true)
     urlInput.focus()
   }
   else if (username.value == "") {
-    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', true)
+    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', 'username-empty', true)
+    username.focus()
+  }
+  else if (username.value.includes('@') || username.value.includes(':') || username.value.includes('©') || username.value.includes('<') || username.value.includes('>') || username.value.includes('€') || username.value.includes('#') || username.value.includes('+') || username.value.includes("'") || username.value.includes('*') || username.value.includes('~')) {
+    showBanner('warning', 'Falscher Eingabe', 'Dein Benutzername kann keine Sonderzeichen beinhalten.', 'wrong-username', true)
     username.focus()
   }
   else if (password.value == "") {
-    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', true)
+    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', 'password-empty', true)
     password.focus()
   }
   else if (password.value.length < 5) {
-    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', true)
+    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', 'password-too-short', true)
     password.focus()
   }
   else {
     validate = true
-    hideBanner('warning')
+    for (let i = 0; i < errorCode.length; i++) {
+      alert(errorCode[i])
+      hideBanner(errorCode[i])
+    }
   }
   if (validate) {
     $('#stop-btn').css('display', 'block')

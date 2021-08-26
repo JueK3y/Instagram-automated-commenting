@@ -65,16 +65,27 @@ const changeImg = document.getElementById("wifi-img")
 var counter = 0
 var counterDisplay = 0
 showMessage = true
+notConnected = false                                                       // notConnected check from API
+
 
 $("#error-hide").click(function() {
   showMessage = false
-  $("#error-banner").fadeOut(170)
+  $("#error-banner").fadeOut()
 })
 
 
 window.setInterval(function() {
   const light = document.body.classList.contains("light")
   var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
+  if (notConnected) {                                                     // notConnected check from API
+    changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
+    changeColor.style.background = (light) ? '#FDE7E9':'#442726'
+    changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
+    showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung', 'wifi-not-connected', false)           // needs to be checked
+  }
+  else {
+    hideBanner('', 'wifi-not-connected')
+  }
   if (internetSpeed == 0) {
     counter += 1
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'

@@ -18,7 +18,6 @@ const theme = localStorage.getItem("theme");
 // Index
 const infoIcon = document.getElementById("info-icon-img")
 const warningIcon = document.getElementById("warning-icon-img")
-const errorIcon = document.getElementById("error-icon-img")
 const togglePw = document.getElementById("togglePwImage")
 const checkboxToggle = document.getElementById("save-profile")
 
@@ -41,7 +40,7 @@ function lightIcon() {
     ////// Banner
     infoIcon.src = "src/img/icons/dark/note-info.svg"
     warningIcon.src = "src/img/icons/dark/note-important.svg"
-    errorIcon.src = "src/img/icons/dark/clear.svg"
+    $('.error-icon-img').prop('src', 'src/img/icons/dark/clear.svg')
     $('.clearIcon').prop('src', 'src/img/icons/light/clear.svg')
 
     try {
@@ -53,7 +52,6 @@ function lightIcon() {
             checkboxToggle.classList.remove('save-profile-dark')
             checkboxToggle.classList.add('save-profile-light')
         }
-        $('#save-profile:checked + label::before').css('background-image', 'url("src/img/icons/dark/accept.svg")')
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
     }
     catch(err) {}
@@ -77,7 +75,7 @@ function darkIcon() {
     ////// Banner
     infoIcon.src = "src/img/icons/light/note-info.svg"
     warningIcon.src = "src/img/icons/light/note-important.svg"
-    errorIcon.src = "src/img/icons/light/clear-dark.svg"
+    $('.error-icon-img').prop('src', 'src/img/icons/light/clear-dark.svg')
     $('.clearIcon').prop('src', 'src/img/icons/dark/clear.svg')
 
     try {
@@ -89,7 +87,6 @@ function darkIcon() {
             checkboxToggle.classList.remove('save-profile-light')
             checkboxToggle.classList.add('save-profile-dark')
         }
-        $('#save-profile:checked + label::before').css('background-image', 'url("src/img/icons/light/accept.svg")')
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
     }
     catch(err) {}

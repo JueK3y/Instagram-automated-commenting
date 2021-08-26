@@ -298,13 +298,13 @@ html body .banner .banner-content {
   margin-left: 15px;
   width: 570px;
 }
-html body .banner .banner-content #info-icon, html body .banner .banner-content #warning-icon, html body .banner .banner-content #error-icon {
+html body .banner .banner-content .banner-icon {
   margin-top: 3px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
 }
-html body .banner .banner-content #info-icon img, html body .banner .banner-content #warning-icon img, html body .banner .banner-content #error-icon img {
+html body .banner .banner-content .banner-icon img {
   width: 8px;
   height: 8px;
   margin-bottom: 4px;
@@ -348,7 +348,13 @@ html body #error-banner {
 html body #error-banner #error-icon {
   background-color: var(--error-banner-icon);
 }
-html body #error-banner #error-hide {
+html body #error-banner-wifi {
+  background-color: var(--error-banner-bg);
+}
+html body #error-banner-wifi #error-icon-wifi {
+  background-color: var(--error-banner-icon);
+}
+html body #error-banner-wifi #error-hide {
   display: none;
   position: absolute;
   top: 8px;
@@ -365,12 +371,12 @@ html body #error-banner #error-hide {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #error-banner #error-hide:hover {
+html body #error-banner-wifi #error-hide:hover {
   opacity: 0.9;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-html body #error-banner #error-hide:active {
+html body #error-banner-wifi #error-hide:active {
   opacity: 0.75;
   -webkit-transition: 0.2s;
   transition: 0.2s;

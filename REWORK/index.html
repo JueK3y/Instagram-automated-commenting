@@ -101,13 +101,13 @@
 
               <label for="big-form" class="title">
                 <h2 class="big-title">Instagram Post URL
-                  <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein.">
+                  <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein." tabindex="-1">
                     <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
                   </span>
                 </h2>
               </label>
               <input type="url" title="" class="big-form" id="url-input" placeholder="https://www.instagram.com/p/soMepiCTUrE" minlength="16" autocomplete="off" required>
-              <button type="button" id="clearButton" title="Eingabe löschen"><img src="src/img/icons/light/clear.svg" class="clearIcon" alt="The icon of the clear button"></button>
+              <button type="button" id="clearButton" title="Eingabe löschen" tabindex="-1"><img src="src/img/icons/light/clear.svg" class="clearIcon" alt="The icon of the clear button"></button>
 
             </div>
             <div id="login-data">
@@ -115,7 +115,7 @@
 
                 <label for="username-form" class="title">
                   <h2 class="big-title">Benutzername
-                    <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein.">
+                    <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein." tabindex="-1">
                       <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
                     </span>
                   </h2>
@@ -128,14 +128,14 @@
                 <label for="password-form" class="title">
                   <h2 class="big-title">Passwort
                     <span class="hint--right" aria-label="Setze mit einem Klick dein Instagram Passwort zurück">
-                      <a href="https://instagram.com/accounts/password/reset" target="_blank"><img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info"></a>
+                      <a href="https://instagram.com/accounts/password/reset" target="_blank" tabindex="-1"><img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info"></a>
                     </span>
                   </h2>
                 </label>       
 
                 <input type="password" title="" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" autocomplete="off" required>
                 <label for="toggle" id="togglePW"><img src="src/img/icons/light/eye.svg" alt="Toggle Icon for password" id="togglePwImage"></label>
-                <input type="checkbox" id="toggle" class="hidden" onclick="passwordToggle()">
+                <input type="checkbox" id="toggle" class="hidden" onclick="passwordToggle()" tabindex="-1">
 
               </div>
             </div>
@@ -183,7 +183,7 @@
     </main>
     <div id="info-banner" class="banner">
       <div class="banner-content">
-        <div id="info-icon"><img id="info-icon-img" src="src/img/icons/dark/note-info.svg" alt="Icon of the info banner"></div>
+        <div id="info-icon" class="banner-icon"><img id="info-icon-img" src="src/img/icons/dark/note-info.svg" alt="Icon of the info banner"></div>
         <div id="info-title" class="banner-title">Information</div>
         <div id="info-info" class="banner-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
         <div id="info-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the info banner"></div>
@@ -191,7 +191,7 @@
     </div>
     <div id="warning-banner" class="banner">
       <div class="banner-content">
-        <div id="warning-icon"><img id="warning-icon-img" src="src/img/icons/dark/note-important.svg" alt="Icon of the warning banner"></div>
+        <div id="warning-icon" class="banner-icon"><img id="warning-icon-img" src="src/img/icons/dark/note-important.svg" alt="Icon of the warning banner"></div>
         <div id="warning-title" class="banner-title">Warnung</div>
         <div id="warning-info" class="banner-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
         <div id="warning-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the warning banner"></div>
@@ -199,19 +199,18 @@
     </div>
     <div id="error-banner" class="banner">
       <div class="banner-content">
-        <div id="error-icon"><img id="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
+        <div id="error-icon" class="banner-icon"><img class="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
         <div id="error-title" class="banner-title">Fehler</div>
         <div id="error-info" class="banner-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-        <button id="error-hide" title="Stelle diese Nachricht ab">Deaktivieren</button>
         <div id="error-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
       </div>
     </div>
     <div id="error-banner-wifi" class="banner">
       <div class="banner-content">
-        <div id="error-icon-wifi"><img id="error-icon-img-wifi" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
+        <div id="error-icon-wifi" class="banner-icon"><img class="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
         <div id="error-title-wifi" class="banner-title">Kein Internet</div>
         <div id="error-info-wifi" class="banner-info">Überprüfe deine Internet-Verbindung.</div>
-        <button id="error-hide-wifi" title="Stelle diese Nachricht ab">Deaktivieren</button>
+        <button id="error-hide" title="Stelle diese Nachricht ab">Deaktivieren</button>
         <div id="error-close-wifi" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
       </div>
     </div>
