@@ -199,10 +199,10 @@ html body nav #side-bar {
   z-index: 3;
 }
 html body nav #side-bar #active {
-  background-color: var(--border-color);
+  background-color: var(--nav-selected);
 }
 html body nav #side-bar #active:active {
-  background-color: var(--active-color);
+  background-color: var(--nav-selected-active);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -231,12 +231,12 @@ html body nav #side-bar a {
   transition: 0.2s;
 }
 html body nav #side-bar a:hover {
-  background-color: var(--hover-color);
+  background-color: var(--nav-hyperlink);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body nav #side-bar a:active {
-  background-color: var(--active-color);
+  background-color: var(--nav-hyperlink-active);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }

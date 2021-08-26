@@ -166,9 +166,9 @@ html body {
             backdrop-filter: blur(100px);
             z-index: 3;
             #active {
-                background-color: var(--border-color);
+                background-color: var(--nav-selected);
                 &:active {
-                    background-color: var(--active-color);
+                    background-color: var(--nav-selected-active);
                     transition: .2s;
                 }
                 .line {
@@ -193,11 +193,11 @@ html body {
                 padding-bottom: 10px;
                 transition: .2s;
                 &:hover {
-                    background-color: var(--hover-color);
+                    background-color: var(--nav-hyperlink);
                     transition: .2s;
                 }
                 &:active {
-                    background-color: var(--active-color);
+                    background-color: var(--nav-hyperlink-active);
                     transition: .2s;
                 }
                 img {

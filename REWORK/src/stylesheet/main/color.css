@@ -2,8 +2,13 @@
     --background-color: #F3F3F3;
     --main-color: #F9F9F9;
     --border-color: #DFDFDF;
-    --active-color: #cececeb9;
-    --hover-color: #dfdfdfb9;
+
+    --nav-selected: rgba(100, 100, 100, 0.1);
+    --nav-selected-active: rgba(150, 150, 150, 0.25);
+    
+    --nav-hyperlink: rgba(100, 100, 100, 0.15);
+    --nav-hyperlink-active: rgba(150, 150, 150, 0.25);
+
 
     --text-color: #000000;
     --text-note-color: #001224;
@@ -79,8 +84,12 @@
     --background-color: #1C1C1C;
     --main-color: #202020;
     --border-color: #303030;
-    --active-color: #353535b9;
-    --hover-color: #303030b9;
+
+    --nav-selected: rgba(255, 255, 255, 0.1);
+    --nav-selected-active: rgba(255, 255, 255, 0.12);
+    
+    --nav-hyperlink: rgba(177, 177, 177, 0.12);
+    --nav-hyperlink-active: rgba(255, 255, 255, 0.12);
     
     --text-color: #FFFFFF;
     --text-note-color: #9facbb;
