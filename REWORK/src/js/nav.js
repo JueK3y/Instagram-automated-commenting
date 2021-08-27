@@ -14,45 +14,43 @@ if (navPos) {
 }
 
  
-$(document).ready(function() {
-    $("#active").click(function() {
-      if (slideIn == false) {
-        $("#side-bar").css('z-index', 0);
-        setTimeout(function() {
-          $("main").animate({left: '47px'})
-          $("form").animate({marginLeft: '0px'})
-          setTimeout(function() {
-            $("#side-bar").css('width', '55px')
-          }, 180)
-          setTimeout(function() {
-            $(".second-text").css('display', 'none');
-          }, 260)
-          setTimeout(function() {
-            $(".navText").css('display', 'none');
-            $("#side-bar").css('z-index', 3);
-          }, 370)
-        }, 70)
-        localStorage.setItem("navPos", "in")
-        slideIn = true
-      }
-      else if (slideIn) {
-        $("#side-bar").css('z-index', 0);
-        setTimeout(function() {
-          $("#side-bar").css('width', '320px')
-          $(".navText").css('display', 'block');
-          setTimeout(function() {
-            $(".second-text").css('display', 'contents');
-          }, 50)
-          $("main").animate({left: '312px'})
-          $("form").animate({marginLeft: '-533px'})
-          setTimeout(function() {
-            $("#side-bar").css('z-index', 3);
-          }, 400)
-        }, 120)
-        localStorage.removeItem("navPos")
-        slideIn = false
-      }
-    })
+$("#active").click(function() {
+  if (slideIn == false) {
+    $("#side-bar").css('z-index', 0);
+    setTimeout(function() {
+      $("main").animate({left: '47px'})
+      $("form").animate({marginLeft: '0px'})
+      setTimeout(function() {
+        $("#side-bar").css('width', '55px')
+      }, 180)
+      setTimeout(function() {
+        $(".second-text").css('display', 'none');
+      }, 260)
+      setTimeout(function() {
+        $(".navText").css('display', 'none');
+        $("#side-bar").css('z-index', 3);
+      }, 370)
+    }, 70)
+    localStorage.setItem("navPos", "in")
+    slideIn = true
+  }
+  else if (slideIn) {
+    $("#side-bar").css('z-index', 0);
+    setTimeout(function() {
+      $("#side-bar").css('width', '320px')
+      $(".navText").css('display', 'block');
+      setTimeout(function() {
+        $(".second-text").css('display', 'contents');
+      }, 80)
+      $("main").animate({left: '312px'})
+      $("form").animate({marginLeft: '-533px'})
+      setTimeout(function() {
+        $("#side-bar").css('z-index', 3);
+      }, 400)
+    }, 120)
+    localStorage.removeItem("navPos")
+    slideIn = false
+  }
 })
 
 
@@ -81,10 +79,11 @@ window.setInterval(function() {
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
-    showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung', 'wifi-not-connected', false)           // needs to be checked
+    showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung', 'wifi-not-connected', false)
   }
-  else {
-    hideBanner('', 'wifi-not-connected')
+  else if ($('.wifi-not-connected')[0]) {
+    hideBanner('wifi-not-connected')
+    console.warn("wifi-not-connected banner exists. Removing it.")
   }
   if (internetSpeed == 0) {
     counter += 1

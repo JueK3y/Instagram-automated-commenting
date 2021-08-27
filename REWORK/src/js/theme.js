@@ -10,6 +10,7 @@ const profileIcon = document.getElementById("profileIcon");
 const helpIcon = document.getElementById("helpIcon");
 const wifiIcon = document.getElementById("wifi-img");
 const settingsIcon = document.getElementById("settingsIcon");
+const changeColorWIFI = document.getElementById("wifi")
 
 const body = document.body;
 
@@ -36,6 +37,9 @@ function lightIcon() {
 
     themeToDark.style.display = "flex"
     themeToLight.style.display = "none"
+
+    changeColorWIFI.style.color = '#000000'
+    changeColorWIFI.style.background = "none"
 
     ////// Banner
     infoIcon.src = "src/img/icons/dark/note-info.svg"
@@ -71,6 +75,9 @@ function darkIcon() {
 
     themeToDark.style.display = "none"
     themeToLight.style.display = "flex"
+
+    changeColorWIFI.style.color = '#FFFFFF'
+    changeColorWIFI.style.background = "none"
 
     ////// Banner
     infoIcon.src = "src/img/icons/light/note-info.svg"

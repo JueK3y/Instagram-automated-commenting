@@ -28,21 +28,22 @@ function showBanner(type, title, message, key, hide) {
     if (hide) {
         timeoutHandle = window.setTimeout( () => {
             $('#'+type+'-banner').fadeOut(350)
+            $('#'+type+'-banner').removeClass(key)
         }, 5000)
     }
 }
 
-function hideBanner(type, key) {
-    if (type == "" && key == "") {
+function hideBanner(type) {
+    if (type == undefined) {
         $('#info-banner').fadeOut(250)
         $('#warning-banner').fadeOut(250)
         $('#error-banner').fadeOut(250)
     }
-    else if (type == "" && ! key == "") {
-        $('.' + key).fadeOut(250)
-        $('.'+key).removeClass(key)
+    else if (type == "info" || type == "warning" || type == "error") {
+        $('#'+type+'-banner').fadeOut(250)
     }
     else {
-        $('#'+type+'-banner').fadeOut(250)
+        $('.' + type).fadeOut(250)
+        $('.'+type).removeClass(type)
     }
 }

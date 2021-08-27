@@ -43,7 +43,36 @@ if (programStopped) {                   // Same as above
   $('#stop-btn').fadeOut()
 } */
 
-errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short',]
+errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
+specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß']
+function specialCharCheck(checkVar) {
+  for (let i = 0; i < specialChar.length; i++) {
+    if (checkVar == specialChar[i]) {
+      return true
+    }
+  }
+}
+
+function formError(type) {
+  if (type == undefined) {
+    urlInput.classList.add('wrong-form')
+    username.classList.add('wrong-form')
+    password.classList.add('wrong-form')
+    urlInput.focus()
+    setTimeout(() => {
+      urlInput.classList.remove('wrong-form')
+      username.classList.remove('wrong-form')
+      password.classList.remove('wrong-form')
+    }, 1300)
+  }
+  else {
+    type.classList.add('wrong-form')
+    type.focus()
+    setTimeout(() => {
+      type.classList.remove('wrong-form')
+    }, 1300)
+  }
+}
 
 
 // ONLY FOR DEMO VERSION
@@ -53,44 +82,52 @@ const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
 
 $('#start-btn').click(function() {
+  hideBanner("error")                                                                                                            // Looks weird for the same error
   if (urlInput.value == "" && username.value == "" && password.value == "") {
-    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', 'form-empty', true)
+    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
+    formError()
   }
   else if (urlInput.value == "") {
-    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', 'url-empty', true)
-    urlInput.focus()
+    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', errorCode[1], true)
+    formError(urlInput)
   }
   else if (urlInput.value.length < 16) {
-    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', 'url-too-short', true)
-    urlInput.focus()
+    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', errorCode[2], true)
+    formError(urlInput)
   }
-  else if (! urlInput.value.includes('instagram.')) {                                                               // Change this value if needed
-    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', 'wrong-url', true)
-    urlInput.focus()
+  else if (! urlInput.value.includes('instagram.')) {                                                                       // Change this value if needed
+    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
+    formError(urlInput)
   }
   else if (username.value == "") {
-    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', 'username-empty', true)
-    username.focus()
+    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', errorCode[4], true)
+    formError(username)
   }
-  else if (username.value.includes('@') || username.value.includes(':') || username.value.includes('©') || username.value.includes('<') || username.value.includes('>') || username.value.includes('€') || username.value.includes('#') || username.value.includes('+') || username.value.includes("'") || username.value.includes('*') || username.value.includes('~')) {
-    showBanner('warning', 'Falscher Eingabe', 'Dein Benutzername kann keine Sonderzeichen beinhalten.', 'wrong-username', true)
-    username.focus()
+  else if (specialCharCheck(username.value)) {
+    showBanner('warning', 'Falscher Eingabe', 'Dein Benutzername kann keine Sonderzeichen beinhalten.', errorCode[5], true)
+    formError(username)
   }
   else if (password.value == "") {
-    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', 'password-empty', true)
-    password.focus()
+    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', errorCode[6], true)
+    formError(password)
   }
   else if (password.value.length < 5) {
-    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', 'password-too-short', true)
-    password.focus()
+    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', errorCode[7], true)
+    formError(password)
   }
   else {
     validate = true
     for (let i = 0; i < errorCode.length; i++) {
-      alert(errorCode[i])
-      hideBanner(errorCode[i])
+      if ($('.' + errorCode[i])[0]) {
+        hideBanner(errorCode[i])
+        console.warn(errorCode[i] + " banner exists. Removing it.")                                         // Only for DEV-Mode
+      }
+      else {
+        console.log(errorCode[i] + " couldn't be found. Good!")                                             // Only for DEV-Mode
+      }
     }
   }
+
   if (validate) {
     $('#stop-btn').css('display', 'block')
   }
@@ -99,4 +136,3 @@ $('#start-btn').click(function() {
 $('#stop-btn').click(function() {
   $('#stop-btn').css('display', 'none')
 });
-

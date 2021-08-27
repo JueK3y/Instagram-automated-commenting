@@ -54,6 +54,9 @@ html body {
         font-size: var(--big-text);
         font-weight: normal;
     }
+    .wrong-form {
+        border: 1px solid var(--error-banner-icon) !important;
+    }
     .medium-form {
         width: 190px;
         padding-right: 10px;
