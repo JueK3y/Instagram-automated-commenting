@@ -7,7 +7,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="src/stylesheet/main/color.css">
     <link rel="stylesheet" href="src/stylesheet/main/main/main.css">
-    <link rel="stylesheet" href="src/stylesheet/index/index.min.css">
+    <link rel="stylesheet" href="src/stylesheet/settings/settings.min.css">
     <link rel="stylesheet" href="src/stylesheet/lib/hint.min.css">
     <!-- JS -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -28,7 +28,7 @@
 
         <div id="window-title">
           <img src="src/img/IAC-Icon.ico" alt="The icon of IAC">
-          <span id="win-title-text">Instagram Automated Commenting</span>
+          <span>Instagram Automated Commenting</span>
         </div>
         
         <div id="window-controls">      
@@ -55,7 +55,7 @@
     <nav>
       <div id="side-bar">
         <div id="upper-content">
-          <a class="comment" id="active">
+          <a href="index.html" class="comment">
             <i class="line"></i>
             <img id="runIcon" src="src/img/icons/light/run.svg" alt="Image of the run icon">
             <p class="navText">Kommentieren</p>
@@ -86,12 +86,16 @@
             <img id="wifi-img" src="src/img/icons/light/wifi/wifi-good.svg" alt="Image of the wifi icon">
             <p class="navText"><span id="changeText">- -</span> <span class="second-text">mb/s</span></p>
           </a>
-          <a href="settings.html" class="settings">
+          <a class="settings" id="active">
+            <i class="line"></i>
             <img id="settingsIcon" src="src/img/icons/light/settings.svg" alt="Image of the settings icon">
             <p class="navText">Einstellungen</p>
           </a>
         </footer>
-        <!-- <div id="settings-container">
+      </div>
+    </nav>
+    <main>
+      <div id="settings-container">
           <div id="settings-content">
             <a id="change-language"><img src="src/img/icons/light/translate.svg" alt="Icon of the translate symbol"></a>
             <a id="notification"><img src="src/img/icons/light/alert.svg" alt="Icon of a bell"></a>
@@ -99,98 +103,8 @@
             <a id="developer"><img src="src/img/icons/light/code.svg" alt="Icon of the code symbol"></a>
             <a id="report-bug"><img src="src/img/icons/light/bug.svg" alt="Icon of a bug"></a>
             <a id="about"><img src="src/img/icons/light/info.svg" alt="Icon of an info symbol"></a>
-            <a id="more-settings"><img src="src/img/icons/light/more.svg" alt="Icon of three dots"></a>
-          </div> -->
-        </div>
-      </div>
-    </nav>
-    <main>
-      <form>
-        <div id="main-content">
-          <div id="account-details">
-            <div id="post-url">
-
-              <label for="big-form" class="title">
-                <h2 class="big-title">Instagram Post URL
-                  <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein." tabindex="-1">
-                    <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
-                  </span>
-                </h2>
-              </label>
-              <input type="url" title="" class="big-form" id="url-input" placeholder="https://www.instagram.com/p/soMepiCTUrE" minlength="16" autocomplete="off" required>
-              <button type="button" id="clearButton" title="Eingabe löschen" tabindex="-1"><img src="src/img/icons/light/clear.svg" class="clearIcon" alt="The icon of the clear button"></button>
-
-            </div>
-            <div id="login-data">
-              <div id="username">
-
-                <label for="username-form" class="title">
-                  <h2 class="big-title">Benutzername
-                    <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein." tabindex="-1">
-                      <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
-                    </span>
-                  </h2>
-                </label>
-                <input type="text" title="" id="username-form" class="medium-form" placeholder="john_doe_on_instagram" maxlength="30" autocomplete="off" required>
-
-              </div>
-              <div id="password">
-
-                <label for="password-form" class="title">
-                  <h2 class="big-title">Passwort
-                    <span class="hint--right" aria-label="Setze mit einem Klick dein Instagram Passwort zurück">
-                      <a href="https://instagram.com/accounts/password/reset" target="_blank" tabindex="-1"><img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info"></a>
-                    </span>
-                  </h2>
-                </label>       
-
-                <input type="password" title="" id="password-form" class="medium-form" placeholder="•••••••••••••••••••••" autocomplete="off" required>
-                <label for="toggle" id="togglePW"><img src="src/img/icons/light/eye.svg" alt="Toggle Icon for password" id="togglePwImage"></label>
-                <input type="checkbox" id="toggle" class="hidden" onclick="passwordToggle()" tabindex="-1">
-
-              </div>
-            </div>
-          </div>
-          <details id="additional-settings">
-            <summary id="details">
-
-              <i class="line"></i>
-              <p id="small-detail-title">Erweiterte Einstellungen</p>
-              <i class="line"></i>
-
-            </summary>
-            <div id="a-d-content">
-              <div id="save-local">
-    
-                <input type="checkbox" name="save-local" id="save-profile" class="save-profile-light">
-                <label for="save-profile" class="medium-title">Profil lokal speichern
-                  <span class="hint--right hint--medium" aria-label="Die Anmeldedaten werden lokal abgespeichert, damit du nächstes Mal direkt loslegen kannst.">
-                    <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
-                  </span>
-                </label>
-    
-              </div>
-              <div id="edit-comments">
-    
-                <input type="button" value="Kommentare editieren" id="edit-button">
-    
-              </div>
-            </div>
-          </details>
-          <div id="start-stop">
-            <div id="start">
-              
-              <button type="button" id="start-btn" href="#">Starten</button>
-
-            </div>
-            <div id="stop">
-
-              <button type="button" id="stop-btn">Stoppen</button>
-
-            </div>
           </div>
         </div>
-      </form>
     </main>
     <div id="info-banner" class="banner">
       <div class="banner-content">

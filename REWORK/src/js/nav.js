@@ -10,6 +10,7 @@ if (navPos) {
   $("form").css('margin-left', '0px')
   $(".second-text").css('display', 'none');
   $(".navText").css('display', 'none');
+  $('#win-title-text').text('IAC 2.0').fadeIn()
   slideIn = true
 }
 
@@ -30,6 +31,9 @@ $("#active").click(function() {
         $(".navText").css('display', 'none');
         $("#side-bar").css('z-index', 3);
       }, 370)
+      $('#win-title-text').fadeOut(350, function() {
+        $(this).text('IAC 2.0').fadeIn(150);
+      });
     }, 70)
     localStorage.setItem("navPos", "in")
     slideIn = true
@@ -48,6 +52,9 @@ $("#active").click(function() {
         $("#side-bar").css('z-index', 3);
       }, 400)
     }, 120)
+    $('#win-title-text').fadeOut(350, function() {
+      $(this).text('Instagram Automated Commenting').fadeIn(150);
+    });
     localStorage.removeItem("navPos")
     slideIn = false
   }

@@ -212,7 +212,6 @@ html body {
                     margin-left: 50px;
                 }
             }
-
             footer {
                 #wifi {
                     position: absolute;
@@ -243,7 +242,19 @@ html body {
                         left: 5px;
                     }
                 }
-            }
+            }/*
+            #settings-container {
+                position: absolute;
+                bottom: 50px;
+                left: 320px;
+                width: 100%;
+                #settings-content {
+                    background-color: rgb(216, 177, 177);
+                    a {
+                        display: inline;
+                    }
+                }
+            } */
         }
     }
     .banner {

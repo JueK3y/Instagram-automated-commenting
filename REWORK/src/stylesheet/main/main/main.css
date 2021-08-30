@@ -200,6 +200,19 @@ html body nav #side-bar {
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   z-index: 3;
+  /*
+  #settings-container {
+      position: absolute;
+      bottom: 50px;
+      left: 320px;
+      width: 100%;
+      #settings-content {
+          background-color: rgb(216, 177, 177);
+          a {
+              display: inline;
+          }
+      }
+  } */
 }
 html body nav #side-bar #active {
   background-color: var(--nav-selected);
