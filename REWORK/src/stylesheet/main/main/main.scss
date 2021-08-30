@@ -218,6 +218,7 @@ html body {
                     bottom: 85px;
                     width: 100%;
                     height: 30px;
+                    border-bottom: 1px solid var(--border-color);
                     img {
                         margin-top: 5px;
                         margin-left: 4px;
@@ -230,9 +231,10 @@ html body {
                 .settings {
                     position: absolute;
                     bottom: 35px;
-                    width: 100%;
+                    width: 310px;
                     height: 30px;
-                    border-top: 1px solid var(--border-color);
+                    margin-left: 5px;
+                    border-radius: 5px;
                     img {
                         margin-top: 5px;
                         margin-left: 4px;

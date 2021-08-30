@@ -269,6 +269,7 @@ html body nav #side-bar footer #wifi {
   bottom: 85px;
   width: 100%;
   height: 30px;
+  border-bottom: 1px solid var(--border-color);
 }
 html body nav #side-bar footer #wifi img {
   margin-top: 5px;
@@ -281,9 +282,10 @@ html body nav #side-bar footer #wifi p {
 html body nav #side-bar footer .settings {
   position: absolute;
   bottom: 35px;
-  width: 100%;
+  width: 310px;
   height: 30px;
-  border-top: 1px solid var(--border-color);
+  margin-left: 5px;
+  border-radius: 5px;
 }
 html body nav #side-bar footer .settings img {
   margin-top: 5px;

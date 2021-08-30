@@ -4,6 +4,9 @@ html {
     margin: 0;
     padding: 0;
     body {
+        nav footer #wifi {
+            border: none !important;
+        }
         main {
             display: flex;
             position: relative;
