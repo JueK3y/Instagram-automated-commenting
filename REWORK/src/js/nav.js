@@ -7,6 +7,8 @@ const navPos = localStorage.getItem("navPos");
 if (navPos) {
   $("main").css('left', '47px')
   $("#side-bar").css('width', '55px')
+  $("#wifi").css('width', '45px')
+  $(".settings").css('width', '45px')
   $("form").css('margin-left', '0px')
   $(".second-text").css('display', 'none');
   $(".navText").css('display', 'none');
@@ -23,6 +25,8 @@ $("#active").click(function() {
       $("form").animate({marginLeft: '0px'})
       setTimeout(function() {
         $("#side-bar").css('width', '55px')
+        $("#wifi").css('width', '45px')
+        $(".settings").css('width', '45px')
       }, 180)
       setTimeout(function() {
         $(".second-text").css('display', 'none');
@@ -42,6 +46,8 @@ $("#active").click(function() {
     $("#side-bar").css('z-index', 0);
     setTimeout(function() {
       $("#side-bar").css('width', '320px')
+      $("#wifi").css('width', '310px')
+      $(".settings").css('width', '310px')
       $(".navText").css('display', 'block');
       setTimeout(function() {
         $(".second-text").css('display', 'contents');

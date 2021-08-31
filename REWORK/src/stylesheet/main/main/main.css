@@ -232,17 +232,15 @@ html body nav #side-bar #active .line {
 html body nav #side-bar #active img {
   margin-left: -3px;
 }
-html body nav #side-bar #upper-content a {
-  margin-left: 5px;
-  margin-right: 5px;
-  border-radius: 5px;
-}
 html body nav #side-bar a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: 5px;
+  margin-right: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-radius: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -267,33 +265,31 @@ html body nav #side-bar a p {
 html body nav #side-bar footer #wifi {
   position: absolute;
   bottom: 85px;
-  width: 100%;
+  width: 310px;
   height: 30px;
   border-bottom: 1px solid var(--border-color);
 }
 html body nav #side-bar footer #wifi img {
   margin-top: 5px;
-  margin-left: 4px;
+  margin-left: -1px;
 }
 html body nav #side-bar footer #wifi p {
   margin-top: 5px;
-  left: 5px;
+  left: 0;
 }
 html body nav #side-bar footer .settings {
   position: absolute;
   bottom: 35px;
   width: 310px;
   height: 30px;
-  margin-left: 5px;
-  border-radius: 5px;
 }
 html body nav #side-bar footer .settings img {
   margin-top: 5px;
-  margin-left: 4px;
+  margin-left: -1px;
 }
 html body nav #side-bar footer .settings p {
   margin-top: 5px;
-  left: 5px;
+  left: 0;
 }
 html body .banner {
   display: none;
