@@ -79,13 +79,13 @@ showMessage = true
 notConnected = false                                                       // notConnected check from API
 
 
-$("#error-hide").click(function() {
+$("#error-hide").click(() => {
   showMessage = false
   $("#error-banner").fadeOut()
 })
 
 
-window.setInterval(function() {
+window.setInterval(() => {
   const light = document.body.classList.contains("light")
   var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
   if (notConnected) {                                                     // notConnected check from API

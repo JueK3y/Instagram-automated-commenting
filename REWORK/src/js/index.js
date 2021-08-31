@@ -1,3 +1,19 @@
+////// Active line change
+
+
+
+if (document.getElementsByClassName('profile').classList.contains('active')) {      // Doesnt work
+  alert("Test")
+}
+else {
+  $('.profile').click(() => {
+    $('#active').removeAttr('id')
+    $('.profile').attr('id', 'active')
+  })  
+}
+
+
+
 ////// URL Clear Buttton
 $('#clearButton').click(function() {
   $('#url-input').val('')
