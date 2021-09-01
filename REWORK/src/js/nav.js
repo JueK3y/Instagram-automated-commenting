@@ -16,54 +16,55 @@ if (navPos) {
   slideIn = true
 }
 
- 
-$("#active").click(function() {
-  if (slideIn == false) {
-    $("#side-bar").css('z-index', 0);
-    setTimeout(function() {
-      $("main").animate({left: '47px'})
-      $("form").animate({marginLeft: '0px'})
+$(document).ready(function() {
+  $(document).on('click', '#active', function() {
+    if (slideIn == false) {
+      $("#side-bar").css('z-index', 0);
       setTimeout(function() {
-        $("#side-bar").css('width', '55px')
-        $("#wifi").css('width', '45px')
-        $(".settings").css('width', '45px')
-      }, 180)
+        $("main").animate({left: '47px'})
+        $("form").animate({marginLeft: '0px'})
+        setTimeout(function() {
+          $("#side-bar").css('width', '55px')
+          $("#wifi").css('width', '45px')
+          $(".settings").css('width', '45px')
+        }, 180)
+        setTimeout(function() {
+          $(".second-text").css('display', 'none');
+        }, 260)
+        setTimeout(function() {
+          $(".navText").css('display', 'none');
+          $("#side-bar").css('z-index', 3);
+        }, 370)
+        $('#win-title-text').fadeOut(350, function() {
+          $(this).text('IAC 2.0').fadeIn(150);
+        });
+      }, 70)
+      localStorage.setItem("navPos", "in")
+      slideIn = true
+    }
+    else if (slideIn) {
+      $("#side-bar").css('z-index', 0);
       setTimeout(function() {
-        $(".second-text").css('display', 'none');
-      }, 260)
-      setTimeout(function() {
-        $(".navText").css('display', 'none');
-        $("#side-bar").css('z-index', 3);
-      }, 370)
+        $("#side-bar").css('width', '320px')
+        $("#wifi").css('width', '310px')
+        $(".settings").css('width', '310px')
+        $(".navText").css('display', 'block');
+        setTimeout(function() {
+          $(".second-text").css('display', 'contents');
+        }, 80)
+        $("main").animate({left: '312px'})
+        $("form").animate({marginLeft: '-533px'})
+        setTimeout(function() {
+          $("#side-bar").css('z-index', 3);
+        }, 400)
+      }, 120)
       $('#win-title-text').fadeOut(350, function() {
-        $(this).text('IAC 2.0').fadeIn(150);
+        $(this).text('Instagram Automated Commenting').fadeIn(150);
       });
-    }, 70)
-    localStorage.setItem("navPos", "in")
-    slideIn = true
-  }
-  else if (slideIn) {
-    $("#side-bar").css('z-index', 0);
-    setTimeout(function() {
-      $("#side-bar").css('width', '320px')
-      $("#wifi").css('width', '310px')
-      $(".settings").css('width', '310px')
-      $(".navText").css('display', 'block');
-      setTimeout(function() {
-        $(".second-text").css('display', 'contents');
-      }, 80)
-      $("main").animate({left: '312px'})
-      $("form").animate({marginLeft: '-533px'})
-      setTimeout(function() {
-        $("#side-bar").css('z-index', 3);
-      }, 400)
-    }, 120)
-    $('#win-title-text').fadeOut(350, function() {
-      $(this).text('Instagram Automated Commenting').fadeIn(150);
-    });
-    localStorage.removeItem("navPos")
-    slideIn = false
-  }
+      localStorage.removeItem("navPos")
+      slideIn = false
+    }
+  })
 })
 
 

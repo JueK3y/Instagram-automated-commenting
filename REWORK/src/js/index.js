@@ -1,16 +1,21 @@
 ////// Active line change
 
-
-
-if (document.getElementsByClassName('profile').classList.contains('active')) {      // Doesnt work
-  alert("Test")
-}
-else {
-  $('.profile').click(() => {
+$('.profile').click(() => {
+  if (! $('#active').hasClass('profile')) {
+    $('.line').animate({height: '55px', marginBottom: '-55px', opacity: '0.7'}, 250)
     $('#active').removeAttr('id')
     $('.profile').attr('id', 'active')
-  })  
-}
+    $('.line').css('margin-top', '-38px')
+    $('.line').animate({marginTop: '1.5px', height: '16px', opacity: '1'}, 200)
+  }
+}) 
+
+$('.comment').click(() => {                         // Needs to be animated too
+  if (! $('#active').hasClass('comment')) {
+    $('#active').removeAttr('id')
+    $('.comment').attr('id', 'active')
+  }
+}) 
 
 
 
