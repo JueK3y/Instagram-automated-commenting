@@ -35,7 +35,7 @@ $(document).ready(function() {
           $(".navText").css('display', 'none');
           $("#side-bar").css('z-index', 3);
         }, 370)
-        $('#win-title-text').fadeOut(350, function() {
+        $('#win-title-text').fadeOut(300, function() {
           $(this).text('IAC 2.0').fadeIn(150);
         });
       }, 70)
@@ -58,7 +58,7 @@ $(document).ready(function() {
           $("#side-bar").css('z-index', 3);
         }, 400)
       }, 120)
-      $('#win-title-text').fadeOut(350, function() {
+      $('#win-title-text').fadeOut(300, function() {
         $(this).text('Instagram Automated Commenting').fadeIn(150);
       });
       localStorage.removeItem("navPos")
