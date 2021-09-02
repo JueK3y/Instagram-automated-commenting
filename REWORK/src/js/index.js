@@ -1,7 +1,28 @@
 ////// Active line change
 
+$('.comment').click(() => {
+  if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
+    $('.line').animate({marginTop: '-38px', height: '55px'}, 200)
+    setTimeout(() => {
+      $('#active').removeAttr('id')
+      $('.comment').attr('id', 'active')
+      $('.line').css('margin-top', '1.5px')   
+      $('.line').animate({height: '16px'}, 200)
+    }, 220)
+  }
+  else if (! $('#active').hasClass('comment') && $('#active').hasClass('settings')) {
+    $('.line').animate({marginTop: '-40px', height: '40px', opacity: '0'}, 300)
+    setTimeout(() => {
+      $('#active').removeAttr('id')
+      $('.comment').attr('id', 'active')
+      $('.line').css('margin-top', '1.5px')   
+      $('.line').animate({height: '16px', opacity: '1'}, 250)
+    }, 320)
+  }
+}) 
+
 $('.profile').click(() => {
-  if (! $('#active').hasClass('profile')) {
+  if (! $('#active').hasClass('profile') && $('#active').hasClass('comment')) {
     $('.line').animate({height: '55px', marginBottom: '-55px'}, 200)
     setTimeout(() => {
       $('#active').removeAttr('id')
@@ -10,17 +31,35 @@ $('.profile').click(() => {
       $('.line').animate({marginTop: '1.5px', height: '16px'}, 200)
     }, 1)
   }
-}) 
-
-$('.comment').click(() => {
-  if (! $('#active').hasClass('comment')) {
-    $('.line').animate({marginTop: '-38px', height: '55px'}, 200)
+  else if (! $('#active').hasClass('profile') && $('#active').hasClass('settings')) {
+    $('.line').animate({marginTop: '-40px', height: '40px', opacity: '0'}, 300)
     setTimeout(() => {
       $('#active').removeAttr('id')
-      $('.comment').attr('id', 'active')
+      $('.profile').attr('id', 'active')
       $('.line').css('margin-top', '1.5px')   
-      $('.line').animate({height: '16px'}, 200)
-    }, 230)
+      $('.line').animate({height: '16px', opacity: '1'}, 250)
+    }, 320)
+  }
+}) 
+
+$('.settings').click(() => {
+  if (! $('#active').hasClass('settings') && $('#active').hasClass('comment')) {
+    $('.line').animate({height: '40px', marginBottom: '-40px', opacity: '0'}, 250)
+    setTimeout(() => {
+      $('#active').removeAttr('id')
+      $('.settings').attr('id', 'active')
+      $('.line').css('margin-top', '-38px')
+      $('.line').animate({marginTop: '5px', height: '19px', opacity: '1'}, 300)
+    }, 270)
+  }
+  else if (! $('#active').hasClass('settings') && $('#active').hasClass('profile')) {
+    $('.line').animate({height: '40px', marginBottom: '-40px', opacity: '0'}, 250)
+    setTimeout(() => {
+      $('#active').removeAttr('id')
+      $('.settings').attr('id', 'active')
+      $('.line').css('margin-top', '-38px')
+      $('.line').animate({marginTop: '5px', height: '19px', opacity: '1'}, 300)
+    }, 270)
   }
 }) 
 
