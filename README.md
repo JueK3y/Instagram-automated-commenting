@@ -2,9 +2,25 @@
 
 ###### _Falsche Sprache? [Klicke hier](README_DE.md) für das deutsche ReadMe._
 
-###### _Note: IAC is currently being redeveloped, so some info is no longer up to date. In the next release the information will be updated as well._
 
-## About IAC
+## Announcement: New development of IAC
+IAC 2.0 is a complete revision of IAC.
+Although the basic functions remain the same, much has changed:
+- Modern, fresh UI in Windows 11 style
+  - (For the first time) animations, including micro-animations
+  - Improved light/dark mode
+- Creation of different profiles
+- Revised help page
+- Improved internet speed check
+- Improved information, warning and error display
+- Revised settings options
+- Web demo (mainly for the UI)
+
+Stay tuned for the release of IAC 2.0.
+
+###### _Release date of IAC 2.0 is currently not known. As always, there will be some pre-releases before the final release, but these may not contain all the features mentioned._
+
+## About IAC (the old one)
 IAC is a bot which automatically comments randomly under given Instagram posts.
 <br>The duration of the commenting is freely adjustable in the GUI.
 <br>Pre-made comments are easy to import and can be edited at any time.
