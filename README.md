@@ -7,8 +7,6 @@
 IAC 2.0 is a complete revision of IAC.
 Although the basic functions remain the same, much has changed:
 - Modern, fresh UI in Windows 11 style
-  - (For the first time) animations, including micro-animations
-  - Improved light/dark mode
 - Creation of different profiles
 - Revised help page
 - Improved internet speed check
