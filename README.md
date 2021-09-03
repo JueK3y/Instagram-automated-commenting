@@ -16,7 +16,7 @@ Although the basic functions remain the same, much has changed:
 
 Stay tuned for the release of IAC 2.0.
 
-###### _Release date of IAC 2.0 is currently not known. As always, there will be some pre-releases before the final release, but these may not contain all the features mentioned._
+###### _Release date of IAC 2.0 is currently not known. As always, there will be some pre-releases before the final release, but these may not contain all the features mentioned. Information in the following sections may not apply to IAC 2.0. This will be updated for the release of IAC 2.0._
 
 ## About IAC (the old one)
 IAC is a bot which automatically comments randomly under given Instagram posts.
