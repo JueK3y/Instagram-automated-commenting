@@ -2,7 +2,21 @@
 
 ###### _Wrong language? [Click here](README.md) for the english ReadMe_
 
-###### _Anmerkung: IAC wird zurzeit neu entwickelt, weshalb einige Infos nicht mehr aktuell sind. Beim nächsten Release werden die Informationen auch geupdatet._
+## Ankündigung: Neu-Entwicklung von IAC
+IAC 2.0 ist eine vollständige Überarbeitung von IAC. Obwohl die Grundfunktionen gleich bleiben, hat sich vieles geändert:
+
+- Moderne, frische UI im Windows 11 Stil
+- Erstellung von verschiedenen Profilen
+- Überarbeitete Hilfeseite
+- Verbesserte Überprüfung der Internetgeschwindigkeit
+- Verbesserte Anzeige von Informationen, Warnungen und Fehlern
+- Überarbeitete Einstellungsoptionen
+- Web-Demo (hauptsächlich für die Benutzeroberfläche)
+
+
+Bleib dran für die Veröffentlichung von IAC 2.0.
+
+###### _Das Veröffentlichungsdatum von IAC 2.0 ist derzeit noch nicht bekannt. Wie immer wird es vor dem endgültigen Release einige Pre-Releases geben, die aber möglicherweise nicht alle genannten Funktionen enthalten. Die Informationen in den folgenden Abschnitten gelten möglicherweise nicht für die IAC 2.0. Sie werden bei der Veröffentlichung von IAC 2.0 aktualisiert._
 
 
 ## Über IAC
