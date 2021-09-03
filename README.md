@@ -134,7 +134,7 @@ You are interested as a programmer to continue / further develop the project or 
 
 
 ## Leave a ⭐
-If you liked this project, leave a star!
+If you like this project, leave a star!
 <br>It would mean a lot for me :)
 
 <br>
