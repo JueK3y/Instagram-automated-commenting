@@ -243,5 +243,6 @@ $('#start-btn').click(function() {
 });
 
 $('#stop-btn').click(function() {
+  validate = false
   $('#stop-btn').css('display', 'none')
 });
