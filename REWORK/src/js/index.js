@@ -156,7 +156,7 @@ errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-
 specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß']
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
-    if (checkVar == specialChar[i]) {
+    if (checkVar.includes(specialChar[i])) {
       return true
     }
   }
