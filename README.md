@@ -137,6 +137,11 @@ You are interested as a programmer to continue / further develop the project or 
 If you like this project, leave a star!
 <br>It would mean a lot for me :)
 
+
+##Support financially
+You want to support the project?
+<br>Then you can do that as a GitHub sponsor or [buy me a sandwich](https://www.buymeacoffee.com/juek3y) 🌮
+
 <br>
 
 ## Legal notice
