@@ -24,6 +24,36 @@ html body main {
   border-top-left-radius: 10px;
   background-color: var(--main-color);
 }
+html body main #profile-container {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 320px;
+  width: 200px;
+}
+html body main #settings-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 100vw;
+  height: 100vh;
+}
+html body main #settings-container #settings-content {
+  display: block;
+  width: 75px;
+  text-align: center;
+  background-color: rgba(173, 240, 182, 0.7);
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+}
+html body main #settings-container #settings-content a:first-child {
+  margin-top: 25px;
+}
+html body main #settings-container #settings-content a {
+  margin-bottom: 15px;
+  display: block;
+}
 html body main form {
   width: 550px;
   height: 420px;

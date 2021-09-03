@@ -19,6 +19,35 @@ html {
             border-top-left-radius: 10px;
 
             background-color: var(--main-color);
+            #profile-container {
+                display: none;
+                position: absolute;
+                top: 50px;
+                left: 320px;
+                width: 200px;
+            }
+            #settings-container {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 100px;
+                width: 100vw;
+                height: 100vh;
+                #settings-content {
+                    display: block;
+                    width: 75px;
+                    text-align: center;
+                    background-color: rgba(173, 240, 182, 0.7);
+                    backdrop-filter: blur(100px);
+                    a:first-child {
+                        margin-top: 25px;
+                    }
+                    a {
+                        margin-bottom: 15px;
+                        display: block;
+                    }
+                }
+            }
             form {
                 width: 550px;
                 height: 420px;
