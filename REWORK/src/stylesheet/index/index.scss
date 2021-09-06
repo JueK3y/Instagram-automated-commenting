@@ -20,21 +20,26 @@ html {
 
             background-color: var(--main-color);
             #profile-container {
-                display: none;
+                display: flex;
                 position: absolute;
+                opacity: 0;
+                text-align: center;
                 top: 50px;
                 left: 320px;
                 width: 200px;
             }
             #settings-container {
-                display: none;
+                display: flex;
                 position: absolute;
+                opacity: 0;
+                text-align: center;
                 top: 0;
                 left: 100px;
                 width: 100vw;
                 height: 100vh;
                 #settings-content {
                     display: block;
+                    list-style: none;
                     width: 75px;
                     text-align: center;
                     background-color: rgba(173, 240, 182, 0.7);

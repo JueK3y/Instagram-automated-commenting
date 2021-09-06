@@ -25,15 +25,23 @@ html body main {
   background-color: var(--main-color);
 }
 html body main #profile-container {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: absolute;
+  opacity: 0;
+  text-align: center;
   top: 50px;
   left: 320px;
   width: 200px;
 }
 html body main #settings-container {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: absolute;
+  opacity: 0;
+  text-align: center;
   top: 0;
   left: 100px;
   width: 100vw;
@@ -41,6 +49,7 @@ html body main #settings-container {
 }
 html body main #settings-container #settings-content {
   display: block;
+  list-style: none;
   width: 75px;
   text-align: center;
   background-color: rgba(173, 240, 182, 0.7);
