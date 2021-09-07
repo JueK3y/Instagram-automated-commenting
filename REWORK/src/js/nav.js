@@ -1,4 +1,4 @@
-////// Active line change#
+////// Active line change
 
 function showContent(type, time) {                  
   if (type == 'comment') {
@@ -101,7 +101,7 @@ $('.helpNav').click(() => {
       $('.line').css('margin-top', '1.5px')   
       $('.line').animate({height: '16px', opacity: '1'}, 250)
     }, 320)
-    showContent('help', 320)
+    showContent('helpNav', 320)
   }
 }) 
 

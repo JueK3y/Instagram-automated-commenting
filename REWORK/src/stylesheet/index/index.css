@@ -25,9 +25,7 @@ html body main {
   background-color: var(--main-color);
 }
 html body main #profile-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
   position: absolute;
   opacity: 0;
   text-align: center;
@@ -36,32 +34,49 @@ html body main #profile-container {
   width: 200px;
 }
 html body main #settings-container {
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+  height: 50px;
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  background: #f3f3f33a;
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 3;
+  opacity: 0;
+}
+html body main #settings-container #settings-content {
+  list-style: none;
+}
+html body main #settings-container #settings-content li {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  bottom: 10px;
+}
+html body main #settings-container #settings-content li a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
-  opacity: 0;
-  text-align: center;
-  top: 0;
-  left: 100px;
-  width: 100vw;
-  height: 100vh;
+  margin-right: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
-html body main #settings-container #settings-content {
-  display: block;
-  list-style: none;
-  width: 75px;
-  text-align: center;
-  background-color: rgba(173, 240, 182, 0.7);
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+html body main #settings-container #settings-content li a:hover {
+  background-color: var(--nav-hyperlink);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
-html body main #settings-container #settings-content a:first-child {
-  margin-top: 25px;
-}
-html body main #settings-container #settings-content a {
-  margin-bottom: 15px;
-  display: block;
+html body main #settings-container #settings-content li a:active {
+  background-color: var(--nav-hyperlink-active);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 html body main form {
   width: 550px;
