@@ -30,11 +30,10 @@ html {
             }
             #settings-container {
                 position: absolute;
-                bottom: 9px;
+                bottom: 13px;
                 left: 0;
                 height: 50px;
                 backdrop-filter: blur(100px);
-                background: var(--background-color);
                 border: 1px solid var(--border-color);
                 border-left: none;
                 border-top-right-radius: 10px;
@@ -62,6 +61,55 @@ html {
                                 transition: .2s;
                             }
                         }
+                        #change-language #set-lang-text {
+                            display: none;
+                        }
+                        #change-language:hover #set-lang-text {
+                            display: block;
+                        }
+                        
+                        #notification #set-note-text {
+                            display: none;
+                        }
+                        #notification:hover #set-note-text {
+                            display: block;
+                        }
+                        
+                        #contact #set-cont-text {
+                            display: none;
+                        }
+                        #contact:hover #set-cont-text {
+                            display: block;
+                        }
+                        
+                        #developer #set-dev-text {
+                            display: none;
+                        }
+                        #developer:hover #set-dev-text {
+                            display: block;
+                        }
+                        
+                        #report-bug #set-bug-text {
+                            display: none;
+                        }
+                        #report-bug:hover #set-bug-text {
+                            display: block;
+                        }
+                        
+                        #about #set-abo-text {
+                            display: none;
+                        }
+                        #about:hover #set-abo-text {
+                            display: block;
+                        }
+                        
+                        #more-settings #set-more-text {
+                            display: none;
+                        }
+                        #more-settings:hover #set-more-text {
+                            display: block;
+                        }
+                        
                     }
                 }
             }

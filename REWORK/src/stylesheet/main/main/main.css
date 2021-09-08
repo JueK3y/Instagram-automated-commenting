@@ -251,7 +251,7 @@ html body nav #side-bar a p {
 }
 html body nav #side-bar footer #wifi {
   position: absolute;
-  bottom: 85px;
+  bottom: 90px;
   width: 310px;
   height: 30px;
   border-bottom: 1px solid var(--border-color);
@@ -266,7 +266,7 @@ html body nav #side-bar footer #wifi p {
 }
 html body nav #side-bar footer .settings {
   position: absolute;
-  bottom: 35px;
+  bottom: 40px;
   width: 310px;
   height: 30px;
 }
