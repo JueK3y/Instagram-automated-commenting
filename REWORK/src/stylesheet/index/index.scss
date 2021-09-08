@@ -30,9 +30,9 @@ html {
             }
             #settings-container {
                 position: absolute;
-                bottom: 13px;
+                bottom: 14px;
                 left: 0;
-                height: 50px;
+                height: 49px;
                 backdrop-filter: blur(100px);
                 border: 1px solid var(--border-color);
                 border-left: none;
@@ -60,6 +60,13 @@ html {
                                 background-color: var(--nav-hyperlink-active);
                                 transition: .2s;
                             }
+                        }
+                        p {
+                            position: relative;
+                            bottom: -18px;
+                            left: 10px;
+                            margin-top: -20px;
+                            margin-right: 10px;
                         }
                         #change-language #set-lang-text {
                             display: none;

@@ -35,9 +35,9 @@ html body main #profile-container {
 }
 html body main #settings-container {
   position: absolute;
-  bottom: 13px;
+  bottom: 14px;
   left: 0;
-  height: 50px;
+  height: 49px;
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   border: 1px solid var(--border-color);
@@ -76,6 +76,13 @@ html body main #settings-container #settings-content li a:active {
   background-color: var(--nav-hyperlink-active);
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+html body main #settings-container #settings-content li p {
+  position: relative;
+  bottom: -18px;
+  left: 10px;
+  margin-top: -20px;
+  margin-right: 10px;
 }
 html body main #settings-container #settings-content li #change-language #set-lang-text {
   display: none;
