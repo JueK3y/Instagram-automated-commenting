@@ -22,6 +22,15 @@ const warningIcon = document.getElementById("warning-icon-img")
 const togglePw = document.getElementById("togglePwImage")
 const checkboxToggle = document.getElementById("save-profile")
 
+// Settings - Nav
+const setLang = document.getElementById("set-lang")
+const setNote = document.getElementById("set-note")
+const setCont = document.getElementById("set-cont")
+const setDev = document.getElementById("set-dev")
+const setBug = document.getElementById("set-bug")
+const setAbo = document.getElementById("set-abo")
+const setMore = document.getElementById("set-more")
+
 
 function lightIcon() {
     minBtnIcon.src = "src/img/icons/light/win-min.svg";
@@ -40,6 +49,14 @@ function lightIcon() {
 
     changeColorWIFI.style.color = '#000000'
     changeColorWIFI.style.background = "none"
+
+    setLang.src = "src/img/icons/light/translate.svg"
+    setNote.src = "src/img/icons/light/alert.svg"
+    setCont.src = "src/img/icons/light/mail.svg"
+    setDev.src = "src/img/icons/light/code.svg"
+    setBug.src = "src/img/icons/light/bug.svg"
+    setAbo.src = "src/img/icons/light/info.svg"
+    setMore.src = "src/img/icons/light/more.svg"
 
     ////// Banner
     infoIcon.src = "src/img/icons/dark/note-info.svg"
@@ -78,6 +95,14 @@ function darkIcon() {
 
     changeColorWIFI.style.color = '#FFFFFF'
     changeColorWIFI.style.background = "none"
+
+    setLang.src = "src/img/icons/dark/translate.svg"
+    setNote.src = "src/img/icons/dark/alert.svg"
+    setCont.src = "src/img/icons/dark/mail.svg"
+    setDev.src = "src/img/icons/dark/code.svg"
+    setBug.src = "src/img/icons/dark/bug.svg"
+    setAbo.src = "src/img/icons/dark/info.svg"
+    setMore.src = "src/img/icons/dark/more.svg"
 
     ////// Banner
     infoIcon.src = "src/img/icons/light/note-info.svg"

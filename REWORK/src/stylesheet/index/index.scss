@@ -34,7 +34,7 @@ html {
                 left: 0;
                 height: 50px;
                 backdrop-filter: blur(100px);
-                background: #f3f3f33a;
+                background: var(--background-color);
                 border: 1px solid var(--border-color);
                 border-left: none;
                 border-top-right-radius: 10px;
