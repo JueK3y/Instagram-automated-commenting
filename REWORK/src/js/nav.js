@@ -226,7 +226,7 @@ if (profileThree.innerText.length > 16) {
 
 ////// Update checker
 
-updateOnline = false                                                        // API checks for an update
+updateOnline = false                                                          // API checks for an update
 
 const update = document.getElementById('update')
 const download = document.getElementById('download')
@@ -241,6 +241,12 @@ $(document).ready(function() {                                                //
       update.style.display = 'none'
       document.getElementById('updateInfo').style.display = 'block'
     }, 3001)
+  })                                                                          
+  $(document).on('click', '#download', function() {                           // Download and install update
+    // Install update
+    download.style.display = 'none '
+    update.style.display = ''
+    document.getElementById('updateInfo').style.display = 'none'
   })
 })
 
