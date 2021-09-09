@@ -240,6 +240,7 @@ $(document).ready(function() {                                                //
       download.style.display = ''
       update.style.display = 'none'
       document.getElementById('updateInfo').style.display = 'block'
+      document.getElementById('set-up').style.transform = 'rotate(0deg)'
     }, 3001)
   })                                                                          
   $(document).on('click', '#download', function() {                           // Download and install update
