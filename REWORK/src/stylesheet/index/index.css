@@ -209,12 +209,6 @@ html body main #settings-container #settings-content li #update #set-up-text {
 html body main #settings-container #settings-content li #update:hover #set-up-text {
   display: block;
 }
-html body main #settings-container #settings-content li #update:hover img {
-  -webkit-transition: 2s ease-in-out;
-  transition: 2s ease-in-out;
-  -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-}
 html body main #settings-container #settings-content li #download #set-dow-text {
   display: none;
 }

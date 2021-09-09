@@ -8,7 +8,8 @@ const closeBtnIcon = document.getElementById("closeBtnIcon");
 const runIcon = document.getElementById("runIcon");
 const wifiIcon = document.getElementById("wifi-img");
 const settingsIcon = document.getElementById("settingsIcon");
-const changeColorWIFI = document.getElementById("wifi")
+const settingsIconNote = document.getElementById("settingsIconNote");
+const changeColorWIFI = document.getElementById("wifi");
 
 const body = document.body;
 
@@ -44,6 +45,7 @@ function lightIcon() {
     $('.helpIcon').prop('src', 'src/img/icons/light/help.svg')
     wifiIcon.src = "src/img/icons/light/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/light/settings.svg";
+    settingsIconNote.src = "src/img/icons/light/settings-note.svg"
 
     themeToDark.style.display = "flex"
     themeToLight.style.display = "none"
@@ -93,6 +95,7 @@ function darkIcon() {
     $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
     wifiIcon.src = "src/img/icons/dark/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/dark/settings.svg";
+    settingsIconNote.src = "src/img/icons/dark/settings-note.svg"
 
     themeToDark.style.display = "none"
     themeToLight.style.display = "flex"

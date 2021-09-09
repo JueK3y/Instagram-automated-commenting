@@ -226,17 +226,34 @@ if (profileThree.innerText.length > 16) {
 
 ////// Update checker
 
-updateOnline = false                                                     // API checks for an update
+updateOnline = false                                                        // API checks for an update
+
+const update = document.getElementById('update')
+const download = document.getElementById('download')
+
+$(document).ready(function() {                                                // Check for update
+  $(document).on('click', '#update', function() {
+    document.getElementById('set-up').style.transition = '3s linear'
+    document.getElementById('set-up').style.transform = 'rotate(720deg)'
+    // For demo purpose
+    setTimeout(() => {
+      download.style.display = ''
+      update.style.display = 'none'
+      document.getElementById('updateInfo').style.display = 'block'
+    }, 3001)
+  })
+})
 
 if (updateOnline) {
-  document.getElementById('download').style.display = ''
-  document.getElementById('update').style.display = 'none'
+  download.style.display = ''
+  update.style.display = 'none'
+  document.getElementById('updateInfo').style.display = 'block'
 }
 else {
-  document.getElementById('download').style.display = 'none'
-  document.getElementById('update').style.display = ''
+  download.style.display = 'none'
+  update.style.display = ''
+  document.getElementById('updateInfo').style.display = 'none'
 }
-
 
 
 ////// WIFI Signal Updater
