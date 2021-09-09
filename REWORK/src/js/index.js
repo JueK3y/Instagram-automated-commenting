@@ -104,7 +104,7 @@ $('#start-btn').click(function() {
     formError(username)
   }
   else if (specialCharCheck(username.value)) {
-    showBanner('warning', 'Falscher Eingabe', 'Dein Benutzername kann keine Sonderzeichen beinhalten.', errorCode[5], true)
+    showBanner('warning', 'Falsche Eingabe', 'Der Benutzername kann keine Sonderzeichen enthalten.', errorCode[5], true)
     formError(username)
   }
   else if (password.value == "") {

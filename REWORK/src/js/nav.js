@@ -3,30 +3,30 @@
 function showContent(type, time) {                  
   if (type == 'comment') {
     setTimeout(() => {
-      $('#profile-container').animate({opacity: '0'})
-      $('#help-container').animate({opacity: '0'})
-      $('#settings-container').animate({opacity: '0'})
+      $('#profile-container').fadeOut(150)
+      $('#help-container').fadeOut(150)
+      $('#settings-container').fadeOut(150)
     }, time)
   }
   else if (type == 'profile') {
     setTimeout(() => {
-      $('#profile-container').animate({opacity: '1'})
-      $('#help-container').animate({opacity: '0'})
-      $('#settings-container').animate({opacity: '0'})
+      $('#profile-container').fadeIn(150)
+      $('#help-container').fadeOut(150)
+      $('#settings-container').fadeOut(150)
     }, time)
   }
   else if (type == 'helpNav') {
     setTimeout(() => {
-      $('#profile-container').animate({opacity: '0'})
-      $('#help-container').animate({opacity: '1'})
-      $('#settings-container').animate({opacity: '0'})
+      $('#profile-container').fadeOut(150)
+      $('#help-container').fadeIn(150)
+      $('#settings-container').fadeOut(150)
     }, time)
   }
   else if (type == 'settings') {
     setTimeout(() => {
-      $('#profile-container').animate({opacity: '0'})
-      $('#help-container').animate({opacity: '0'})
-      $('#settings-container').animate({opacity: '1'})
+      $('#profile-container').fadeOut(150)
+      $('#help-container').fadeOut(150)
+      $('#settings-container').fadeIn(150)
     }, time)
   }
 }
@@ -57,12 +57,12 @@ function lineAnimation2(type, marPx, heiPx) {
 // Comment 
 $('.comment').click(() => {
   if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
-    $('.line').animate({marginTop: '-38px', height: '55px'}, 200)
+    $('.line').animate({marginTop: '-38px', height: '55px'}, 150)
     setTimeout(() => {
       $('#active').removeAttr('id')
       $('.comment').attr('id', 'active')
       $('.line').css('margin-top', '1.5px')   
-      $('.line').animate({height: '16px'}, 200)
+      $('.line').animate({height: '16px'}, 150)
     }, 220)
   }
   else if (! $('#active').hasClass('comment') && ($('#active').hasClass('helpNav') || $('#active').hasClass('settings'))) {
@@ -74,14 +74,14 @@ $('.comment').click(() => {
 // Profile 
 $('.profile').click(() => {
   if (! $('#active').hasClass('profile') && $('#active').hasClass('comment')) {
-    $('.line').animate({height: '55px', marginBottom: '-55px'}, 200)
+    $('.line').animate({height: '55px', marginBottom: '-55px'}, 150)
     setTimeout(() => {
       $('#active').removeAttr('id')
       $('.profile').attr('id', 'active')
       $('.line').css('margin-top', '-38px')
-      $('.line').animate({marginTop: '1.5px', height: '16px'}, 200)
+      $('.line').animate({marginTop: '1.5px', height: '16px'}, 150)
     }, 1)
-    showContent('profile', 200)
+    showContent('profile', 150)
   }
   else if (! $('#active').hasClass('profile') && ($('#active').hasClass('helpNav')) || $('#active').hasClass('settings')) {
     lineAnimation1('profile', 320)
@@ -224,6 +224,20 @@ if (profileThree.innerText.length > 16) {
 } 
 
 
+////// Update checker
+
+updateOnline = false                                                     // API checks for an update
+
+if (updateOnline) {
+  document.getElementById('download').style.display = ''
+  document.getElementById('update').style.display = 'none'
+}
+else {
+  document.getElementById('download').style.display = 'none'
+  document.getElementById('update').style.display = ''
+}
+
+
 
 ////// WIFI Signal Updater
 
@@ -286,7 +300,7 @@ window.setInterval(() => {
   else if (internetSpeed <= 15) {
     counter = 0
     $("#error-banner-wifi").fadeOut()
-    changeColor.style.color = (light) ? '#9D5D00':'#FCE100'
+    changeColor.style.color = (light) ? '#9D5D00':'#FCE150'
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
   }

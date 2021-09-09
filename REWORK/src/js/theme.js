@@ -23,12 +23,14 @@ const checkboxToggle = document.getElementById("save-profile")
 const addIcon = document.getElementById('addIcon')
 
 // Settings - Nav
+const helpBug = document.getElementById("help-bug")
+const helpInfo = document.getElementById("help-info")
 const setLang = document.getElementById("set-lang")
 const setNote = document.getElementById("set-note")
 const setComm = document.getElementById("set-comm")
 const setDev = document.getElementById("set-dev")
-const helpBug = document.getElementById("help-bug")
-const helpInfo = document.getElementById("help-info")
+const setUp = document.getElementById("set-up")
+const setDow = document.getElementById("set-dow")
 
 
 function lightIcon() {
@@ -56,6 +58,8 @@ function lightIcon() {
     setNote.src = "src/img/icons/light/alert.svg"
     setComm.src = "src/img/icons/light/comment-settings.svg"
     setDev.src = "src/img/icons/light/code.svg"
+    setUp.src = "src/img/icons/light/update.svg"
+    setDow.src = "src/img/icons/light/download.svg"
     $('.moreIcon').prop('src', 'src/img/icons/light/more.svg')
 
     ////// Banner
@@ -103,6 +107,8 @@ function darkIcon() {
     setNote.src = "src/img/icons/dark/alert.svg"
     setComm.src = "src/img/icons/dark/comment-settings.svg"
     setDev.src = "src/img/icons/dark/code.svg"
+    setUp.src = "src/img/icons/dark/update.svg"
+    setDow.src = "src/img/icons/dark/download.svg"
     $('.moreIcon').prop('src', 'src/img/icons/dark/more.svg')
 
 

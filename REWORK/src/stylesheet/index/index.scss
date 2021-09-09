@@ -31,7 +31,7 @@ html {
                 border-top-right-radius: 10px;
                 border-bottom-right-radius: 10px;
                 z-index: 3;
-                opacity: 0;
+                display: none;
                 #profile-content {
                     list-style: none;
                     li {
@@ -75,7 +75,7 @@ html {
                 border-top-right-radius: 10px;
                 border-bottom-right-radius: 10px;
                 z-index: 3;
-                opacity: 0;
+                display: none;
                 #help-content {
                     list-style: none;
                     li {
@@ -118,7 +118,7 @@ html {
                 border-top-right-radius: 10px;
                 border-bottom-right-radius: 10px;
                 z-index: 3;
-                opacity: 0;
+                display: none;
                 #settings-content {
                     list-style: none;
                     li {
@@ -173,6 +173,25 @@ html {
                         }
                         #developer:hover #set-dev-text {
                             display: block;
+                        }
+                        
+                        #update #set-up-text {
+                            display: none;
+                        }
+                        #update:hover #set-up-text {
+                            display: block;
+                        }
+                        #update:hover img {
+                            transition: 2s ease-in-out;
+                            transform: rotate(360deg);
+                        }
+                        
+                        #download #set-dow-text {
+                            display: none;
+                        }
+                        #download:hover #set-dow-text {
+                            display: block;
+                            color: var(--bg-main-button);
                         }
                         
                         #more-settings #set-more-text {

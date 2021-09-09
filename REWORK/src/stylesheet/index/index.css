@@ -37,7 +37,7 @@ html body main #profile-container {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 3;
-  opacity: 0;
+  display: none;
 }
 html body main #profile-container #profile-content {
   list-style: none;
@@ -89,7 +89,7 @@ html body main #help-container {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 3;
-  opacity: 0;
+  display: none;
 }
 html body main #help-container #help-content {
   list-style: none;
@@ -140,7 +140,7 @@ html body main #settings-container {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 3;
-  opacity: 0;
+  display: none;
 }
 html body main #settings-container #settings-content {
   list-style: none;
@@ -202,6 +202,25 @@ html body main #settings-container #settings-content li #developer #set-dev-text
 }
 html body main #settings-container #settings-content li #developer:hover #set-dev-text {
   display: block;
+}
+html body main #settings-container #settings-content li #update #set-up-text {
+  display: none;
+}
+html body main #settings-container #settings-content li #update:hover #set-up-text {
+  display: block;
+}
+html body main #settings-container #settings-content li #update:hover img {
+  -webkit-transition: 2s ease-in-out;
+  transition: 2s ease-in-out;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+html body main #settings-container #settings-content li #download #set-dow-text {
+  display: none;
+}
+html body main #settings-container #settings-content li #download:hover #set-dow-text {
+  display: block;
+  color: var(--bg-main-button);
 }
 html body main #settings-container #settings-content li #more-settings #set-more-text {
   display: none;
