@@ -25,13 +25,108 @@ html body main {
   background-color: var(--main-color);
 }
 html body main #profile-container {
-  display: block;
   position: absolute;
+  top: 15px;
+  left: 0;
+  width: 201px;
+  height: 170px;
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 3;
   opacity: 0;
-  text-align: center;
-  top: 50px;
-  left: 320px;
-  width: 200px;
+}
+html body main #profile-container #profile-content {
+  list-style: none;
+}
+html body main #profile-container #profile-content li {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  bottom: 11px;
+}
+html body main #profile-container #profile-content li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main #profile-container #profile-content li a:hover {
+  background-color: var(--nav-hyperlink);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main #profile-container #profile-content li a:active {
+  background-color: var(--nav-hyperlink-active);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main #profile-container #profile-content li p {
+  position: relative;
+  bottom: -18px;
+  left: 10px;
+  margin-top: -20px;
+  margin-right: 10px;
+}
+html body main #help-container {
+  position: absolute;
+  top: 77px;
+  left: 0;
+  width: 201px;
+  height: 130px;
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 3;
+  opacity: 0;
+}
+html body main #help-container #help-content {
+  list-style: none;
+}
+html body main #help-container #help-content li {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  bottom: 11px;
+}
+html body main #help-container #help-content li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main #help-container #help-content li a:hover {
+  background-color: var(--nav-hyperlink);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main #help-container #help-content li a:active {
+  background-color: var(--nav-hyperlink-active);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+html body main #help-container #help-content li p {
+  position: relative;
+  bottom: -18px;
+  left: 10px;
+  margin-top: -20px;
+  margin-right: 10px;
 }
 html body main #settings-container {
   position: absolute;
@@ -55,7 +150,7 @@ html body main #settings-container #settings-content li {
   display: -ms-inline-flexbox;
   display: inline-flex;
   position: relative;
-  bottom: 10px;
+  bottom: 11px;
 }
 html body main #settings-container #settings-content li a {
   display: -webkit-box;
@@ -96,28 +191,16 @@ html body main #settings-container #settings-content li #notification #set-note-
 html body main #settings-container #settings-content li #notification:hover #set-note-text {
   display: block;
 }
-html body main #settings-container #settings-content li #contact #set-cont-text {
+html body main #settings-container #settings-content li #comment-settings #set-comm-text {
   display: none;
 }
-html body main #settings-container #settings-content li #contact:hover #set-cont-text {
+html body main #settings-container #settings-content li #comment-settings:hover #set-comm-text {
   display: block;
 }
 html body main #settings-container #settings-content li #developer #set-dev-text {
   display: none;
 }
 html body main #settings-container #settings-content li #developer:hover #set-dev-text {
-  display: block;
-}
-html body main #settings-container #settings-content li #report-bug #set-bug-text {
-  display: none;
-}
-html body main #settings-container #settings-content li #report-bug:hover #set-bug-text {
-  display: block;
-}
-html body main #settings-container #settings-content li #about #set-abo-text {
-  display: none;
-}
-html body main #settings-container #settings-content li #about:hover #set-abo-text {
   display: block;
 }
 html body main #settings-container #settings-content li #more-settings #set-more-text {

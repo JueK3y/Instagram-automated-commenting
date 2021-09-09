@@ -6,8 +6,6 @@ const maxBtnIcon = document.getElementById("maxBtnIcon");
 const restoreBtnIcon = document.getElementById("restoreBtnIcon");
 const closeBtnIcon = document.getElementById("closeBtnIcon");
 const runIcon = document.getElementById("runIcon");
-const profileIcon = document.getElementById("profileIcon");
-const helpIcon = document.getElementById("helpIcon");
 const wifiIcon = document.getElementById("wifi-img");
 const settingsIcon = document.getElementById("settingsIcon");
 const changeColorWIFI = document.getElementById("wifi")
@@ -22,14 +20,15 @@ const warningIcon = document.getElementById("warning-icon-img")
 const togglePw = document.getElementById("togglePwImage")
 const checkboxToggle = document.getElementById("save-profile")
 
+const addIcon = document.getElementById('addIcon')
+
 // Settings - Nav
 const setLang = document.getElementById("set-lang")
 const setNote = document.getElementById("set-note")
-const setCont = document.getElementById("set-cont")
+const setComm = document.getElementById("set-comm")
 const setDev = document.getElementById("set-dev")
-const setBug = document.getElementById("set-bug")
-const setAbo = document.getElementById("set-abo")
-const setMore = document.getElementById("set-more")
+const helpBug = document.getElementById("help-bug")
+const helpInfo = document.getElementById("help-info")
 
 
 function lightIcon() {
@@ -39,8 +38,8 @@ function lightIcon() {
 
     closeBtnIcon.src = "src/img/icons/light/win-close.svg";
     runIcon.src = "src/img/icons/light/run.svg";
-    profileIcon.src = "src/img/icons/light/profile.svg";
-    helpIcon.src = "src/img/icons/light/help.svg";
+    $('.profileIcon').prop('src', 'src/img/icons/light/profile.svg')
+    $('.helpIcon').prop('src', 'src/img/icons/light/help.svg')
     wifiIcon.src = "src/img/icons/light/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/light/settings.svg";
 
@@ -50,13 +49,14 @@ function lightIcon() {
     changeColorWIFI.style.color = '#000000'
     changeColorWIFI.style.background = "none"
 
+    addIcon.src = "src/img/icons/light/add.svg"
+    helpBug.src = "src/img/icons/light/bug.svg"
+    helpInfo.src = "src/img/icons/light/info.svg"
     setLang.src = "src/img/icons/light/translate.svg"
     setNote.src = "src/img/icons/light/alert.svg"
-    setCont.src = "src/img/icons/light/mail.svg"
+    setComm.src = "src/img/icons/light/comment-settings.svg"
     setDev.src = "src/img/icons/light/code.svg"
-    setBug.src = "src/img/icons/light/bug.svg"
-    setAbo.src = "src/img/icons/light/info.svg"
-    setMore.src = "src/img/icons/light/more.svg"
+    $('.moreIcon').prop('src', 'src/img/icons/light/more.svg')
 
     ////// Banner
     infoIcon.src = "src/img/icons/dark/note-info.svg"
@@ -85,8 +85,8 @@ function darkIcon() {
 
     closeBtnIcon.src = "src/img/icons/dark/win-close.svg";
     runIcon.src = "src/img/icons/dark/run.svg";
-    profileIcon.src = "src/img/icons/dark/profile.svg";
-    helpIcon.src = "src/img/icons/dark/help.svg";
+    $('.profileIcon').prop('src', 'src/img/icons/dark/profile.svg')
+    $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
     wifiIcon.src = "src/img/icons/dark/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/dark/settings.svg";
 
@@ -96,13 +96,15 @@ function darkIcon() {
     changeColorWIFI.style.color = '#FFFFFF'
     changeColorWIFI.style.background = "none"
 
+    addIcon.src = "src/img/icons/dark/add.svg"
+    helpBug.src = "src/img/icons/dark/bug.svg"
+    helpInfo.src = "src/img/icons/dark/info.svg"
     setLang.src = "src/img/icons/dark/translate.svg"
     setNote.src = "src/img/icons/dark/alert.svg"
-    setCont.src = "src/img/icons/dark/mail.svg"
+    setComm.src = "src/img/icons/dark/comment-settings.svg"
     setDev.src = "src/img/icons/dark/code.svg"
-    setBug.src = "src/img/icons/dark/bug.svg"
-    setAbo.src = "src/img/icons/dark/info.svg"
-    setMore.src = "src/img/icons/dark/more.svg"
+    $('.moreIcon').prop('src', 'src/img/icons/dark/more.svg')
+
 
     ////// Banner
     infoIcon.src = "src/img/icons/light/note-info.svg"

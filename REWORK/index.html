@@ -62,7 +62,7 @@
           </a>
           <a class="profile">
             <i class="line"></i>
-            <img id="profileIcon" src="src/img/icons/light/profile.svg" alt="Image of the profile icon">
+            <img class="profileIcon" src="src/img/icons/light/profile.svg" alt="Image of the profile icon">
             <p class="navText">Benutzerprofil</p>
           </a>
           <a id="theme-to-dark">
@@ -76,7 +76,7 @@
           </a>
           <a class="helpNav">
             <i class="line"></i>
-            <img id="helpIcon" src="src/img/icons/light/help.svg" alt="Image of the help icon">
+            <img class="helpIcon" src="src/img/icons/light/help.svg" alt="Image of the help icon">
             <p class="navText">Hilfe</p>
           </a>
         </div>
@@ -95,42 +95,73 @@
     </nav>
     <main>
       <div id="profile-container">
-          <div class="container-blob"></div> 
-          <ul id="profile-content">
-            <li>
-              <a id="profile-1">
-                <img src="src/img/icons/light/profile.svg" alt="Image of the profile icon"> 
-                <p>Profil 1</p> 
-              </a>
-            </li>
-            <li>
-              <a id="profile-2">
-                <img src="src/img/icons/light/profile.svg" alt="Image of the profile icon">  
-                <p>Profil 2 mit langem Namen</p>
-              </a>
-            </li>
-            <li>
-              <a id="profile-3">
-                <img src="src/img/icons/light/profile.svg" alt="Image of the profile icon">  
-                <p>Profil 3</p>
-              </a>
-            </li>
-            <li>
-              <a id="profile-3">
-                <img src="src/img/icons/light/more.svg" alt="Image of three dots">  
-                <p>Mehr anzeigen</p>
-              </a>
-            </li>
-          </div>
-        </div>
+        <div class="container-blob"></div> 
+        <ul id="profile-content">
+          <li>
+            <a id="profile-1">
+              <img class="profileIcon" src="src/img/icons/light/profile.svg" alt="Image of the profile icon"> 
+              <p id="profile-1-name">Profil 1</p> 
+            </a>
+          </li>
+          <li>
+            <a id="profile-2">
+              <img class="profileIcon" src="src/img/icons/light/profile.svg" alt="Image of the profile icon"> 
+              <p id="profile-2-name">Profil 2 mit langen Namen</p> 
+            </a>
+          </li>
+          <li>
+            <a id="profile-3">
+              <img class="profileIcon" src="src/img/icons/light/profile.svg" alt="Image of the profile icon">  
+              <p id="profile-3-name">Profil 3</p>
+            </a>
+          </li>
+          <li>
+            <a id="more-profile">
+              <img class="moreIcon" src="src/img/icons/light/more.svg" alt="Image of three dots">  
+              <p>Mehr anzeigen</p>
+            </a>
+          </li>
+          <li>
+            <a id="add-profile">
+              <img id="addIcon" src="src/img/icons/light/add.svg" alt="Image of a plus symbol">  
+              <p>Hinzufügen</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div id="help-container">
+        <div class="container-blob"></div> 
+        <ul id="help-content">
+          <li>
+            <a id="report-bug">
+              <img id="help-bug" src="src/img/icons/light/bug.svg" alt="Icon of a bug">
+              <p id="help-bug-text">Fehler melden</p>
+            </a>
+          </li>
+          <li>
+            <a id="info">
+              <img id="help-info" src="src/img/icons/light/info.svg" alt="Icon of an info symbol">
+              <p id="help-info-text">Info</p>
+            </a>
+          </li>
+          <li>
+            <a id="help-page">
+              <img class="helpIcon" src="src/img/icons/light/help.svg" alt="Image of the help icon"> 
+              <p id="help-text">Hilfe</p> 
+            </a>
+          </li>
+        </ul>
+      </div>
 
       <div id="settings-container">
         <div class="container-blob"></div> 
         <ul id="settings-content">
           <li>
-            <a id="change-language">
-              <img id="set-lang" src="src/img/icons/light/translate.svg" alt="Icon of the translate symbol">
-              <p id="set-lang-text">Sprache ändern</p>
+            <a id="comment-settings">
+              <img id="set-comm" src="src/img/icons/light/comment-settings.svg" alt="Icon of the comment settings">
+              <p id="set-comm-text">Kommentar-Einstellungen</p>
             </a>
           </li>
           <li>
@@ -140,9 +171,9 @@
             </a>
           </li>
           <li>
-            <a id="contact">
-              <img id="set-cont" src="src/img/icons/light/mail.svg" alt="Icon of the mail symbol">
-              <p id="set-cont-text">Kontakt</p>
+            <a id="change-language">
+              <img id="set-lang" src="src/img/icons/light/translate.svg" alt="Icon of the translate symbol">
+              <p id="set-lang-text">Sprache ändern</p>
             </a>
           </li>
           <li>
@@ -152,24 +183,12 @@
             </a>
           </li>
           <li>
-            <a id="report-bug">
-              <img id="set-bug" src="src/img/icons/light/bug.svg" alt="Icon of a bug">
-              <p id="set-bug-text">Fehler melden</p>
-            </a>
-          </li>
-          <li>
-            <a id="about">
-              <img id="set-abo" src="src/img/icons/light/info.svg" alt="Icon of an info symbol">
-              <p id="set-abo-text">Info</p>
-            </a>
-          </li>
-          <li>
             <a id="more-settings">
-              <img id="set-more" src="src/img/icons/light/more.svg" alt="Icon of three dots">
+              <img class="moreIcon" src="src/img/icons/light/more.svg" alt="Icon of three dots">
               <p id="set-more-text">Mehr Einstellungen</p>
             </a>
           </li>
-        </div>
+        </ul>
       </div>
       <form>
         <div id="main-content">

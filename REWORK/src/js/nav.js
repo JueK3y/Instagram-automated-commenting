@@ -193,6 +193,38 @@ $(document).ready(function() {
 })
 
 
+
+////// Profile content updatder
+
+threeOrMore = true                                                            // API checks if there are more than 3 profiles
+
+if (threeOrMore) {
+  document.getElementById('more-profile').style.display = ''
+  document.getElementById('add-profile').style.display = 'none'
+}
+else {
+  document.getElementById('more-profile').style.display = 'none'
+  document.getElementById('add-profile').style.display = ''
+}
+
+const profileOne = document.getElementById('profile-1-name')
+const profileTwo = document.getElementById('profile-2-name') 
+const profileThree = document.getElementById('profile-3-name') 
+
+if (profileOne.innerText.length > 16) {
+  profileOne.innerText = profileOne.innerText.substring(0, 14) + " ..."
+} 
+
+if (profileTwo.innerText.length > 16) {
+  profileTwo.innerText = profileTwo.innerHTML.substring(0, 14) + " ..."
+} 
+
+if (profileThree.innerText.length > 16) {
+  profileThree.innerText = profileThree.innerHTML.substring(0, 14) + " ..."
+} 
+
+
+
 ////// WIFI Signal Updater
 
 const elem = document.getElementById("changeText")
