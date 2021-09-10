@@ -74,7 +74,7 @@ html {
                 border-left: none;
                 border-top-right-radius: 10px;
                 border-bottom-right-radius: 10px;
-                z-index: 3;
+                z-index: 5;
                 display: none;
                 #help-content {
                     list-style: none;
@@ -184,6 +184,17 @@ html {
                         #update:hover #set-up-text {
                             display: block;
                         }
+
+                        #update-failed {
+                            display: none;
+                            #set-up-text-failed {
+                                display: none;
+                                color: var(--error-banner-icon);
+                            }
+                            &:hover #set-up-text-failed {
+                                display: block;
+                            }
+                        }                        
                         
                         #download #set-dow-text {
                             display: none;

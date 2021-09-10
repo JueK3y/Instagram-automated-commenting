@@ -88,7 +88,7 @@ html body main #help-container {
   border-left: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  z-index: 3;
+  z-index: 5;
   display: none;
 }
 html body main #help-container #help-content {
@@ -210,6 +210,16 @@ html body main #settings-container #settings-content li #update #set-up-text {
   display: none;
 }
 html body main #settings-container #settings-content li #update:hover #set-up-text {
+  display: block;
+}
+html body main #settings-container #settings-content li #update-failed {
+  display: none;
+}
+html body main #settings-container #settings-content li #update-failed #set-up-text-failed {
+  display: none;
+  color: var(--error-banner-icon);
+}
+html body main #settings-container #settings-content li #update-failed:hover #set-up-text-failed {
   display: block;
 }
 html body main #settings-container #settings-content li #download #set-dow-text {

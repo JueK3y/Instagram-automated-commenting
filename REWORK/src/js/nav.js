@@ -234,8 +234,6 @@ if (profileThree.innerText.length > 16) {
 ////// Notificiation changer
 const notification = localStorage.getItem("notification");
 
-
-
 if (notification) {
   if (notification == "noteOn") {
     document.getElementById('set-note-on').style.display = 'block'
@@ -318,46 +316,6 @@ $(document).ready(function() {                                                  
 })
 
 
-
-////// Update checker
-
-updateOnline = false                                                          // API checks for an update
-
-const update = document.getElementById('update')
-const download = document.getElementById('download')
-
-$(document).ready(function() {                                                // Check for update
-  $(document).on('click', '#update', function() {
-    document.getElementById('set-up').style.transition = '3s linear'
-    document.getElementById('set-up').style.transform = 'rotate(720deg)'
-    // For demo purpose
-    setTimeout(() => {
-      download.style.display = ''
-      update.style.display = 'none'
-      document.getElementById('updateInfo').style.display = 'block'
-      document.getElementById('set-up').style.transform = 'rotate(0deg)'
-    }, 3001)
-  })                                                                          
-  $(document).on('click', '#download', function() {                           // Download and install update
-    // Install update
-    download.style.display = 'none '
-    update.style.display = ''
-    document.getElementById('updateInfo').style.display = 'none'
-  })
-})
-
-if (updateOnline) {
-  download.style.display = ''
-  update.style.display = 'none'
-  document.getElementById('updateInfo').style.display = 'block'
-}
-else {
-  download.style.display = 'none'
-  update.style.display = ''
-  document.getElementById('updateInfo').style.display = 'none'
-}
-
-
 ////// WIFI Signal Updater
 
 const elem = document.getElementById("changeText")
@@ -383,7 +341,7 @@ window.setInterval(() => {
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
-    showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung', 'wifi-not-connected', false)
+    showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
   }
   else if ($('.wifi-not-connected')[0]) {
     hideBanner('wifi-not-connected')
@@ -398,7 +356,7 @@ window.setInterval(() => {
       $("#error-banner-wifi").fadeIn()
       counterDisplay += 1
       if (counterDisplay == 3) {
-        $("#error-hide").css('display', 'block')
+        document.getElementById("error-hide").style.display = "block"
       }
     }
   }
@@ -432,3 +390,57 @@ window.setInterval(() => {
   }
   elem.innerHTML = internetSpeed;
 }, 1250);
+
+
+
+
+////// Update checker
+
+updateOnline = false                                                          // API checks for an update
+
+const update = document.getElementById('update')
+const updateFailed = document.getElementById('update-failed')
+const download = document.getElementById('download')
+const updateIcon = document.getElementById('set-up')
+const updateInfo = document.getElementById('updateInfo')
+
+$(document).ready(function() {                                                // Check for update
+  $(document).on('click', '#update', function() {
+    updateIcon.style.transition = '3s linear'
+    updateIcon.style.transform = 'rotate(720deg)'
+    setTimeout(() => {
+      if (counterDisplay == 3 || notConnected) {
+        update.style.display = 'none'
+        updateFailed.style.display = 'inherit'
+        setTimeout(() => {
+          update.style.display = 'inherit'
+          updateFailed.style.display = 'none'
+        }, 3000)
+      }
+      else {
+        // For demo purpose
+          download.style.display = ''
+          update.style.display = 'none'
+      }
+      updateInfo.style.display = 'block'
+      updateIcon.style.transform = 'rotate(0deg)'
+    }, 3001)
+  })                                                                          
+  $(document).on('click', '#download', function() {                           // Download and install update
+    // Install update
+    download.style.display = 'none '
+    update.style.display = ''
+    updateInfo.style.display = 'none'
+  })
+})
+
+if (updateOnline) {
+  download.style.display = ''
+  update.style.display = 'none'
+  updateInfo.style.display = 'block'
+}
+else {
+  download.style.display = 'none'
+  update.style.display = ''
+  updateInfo.style.display = 'none'
+}
