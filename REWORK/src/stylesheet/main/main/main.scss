@@ -168,6 +168,14 @@ html body {
             font-size: var(--font-size);
             backdrop-filter: blur(100px);
             z-index: 3;
+            .comment {
+                #runIcon {
+                    display: block;
+                }
+                #stopIcon {
+                    display: none;
+                }
+            }
             #active {
                 background-color: var(--nav-selected);
                 &:active {

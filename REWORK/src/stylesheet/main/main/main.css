@@ -201,6 +201,12 @@ html body nav #side-bar {
           backdrop-filter: blur(100px);
   z-index: 3;
 }
+html body nav #side-bar .comment #runIcon {
+  display: block;
+}
+html body nav #side-bar .comment #stopIcon {
+  display: none;
+}
 html body nav #side-bar #active {
   background-color: var(--nav-selected);
 }

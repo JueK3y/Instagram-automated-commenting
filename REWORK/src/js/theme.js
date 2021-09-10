@@ -6,6 +6,7 @@ const maxBtnIcon = document.getElementById("maxBtnIcon");
 const restoreBtnIcon = document.getElementById("restoreBtnIcon");
 const closeBtnIcon = document.getElementById("closeBtnIcon");
 const runIcon = document.getElementById("runIcon");
+const stopIcon = document.getElementById("stopIcon");
 const wifiIcon = document.getElementById("wifi-img");
 const settingsIcon = document.getElementById("settingsIcon");
 const changeColorWIFI = document.getElementById("wifi")
@@ -42,6 +43,7 @@ function lightIcon() {
 
     closeBtnIcon.src = "src/img/icons/light/win-close.svg";
     runIcon.src = "src/img/icons/light/run.svg";
+    stopIcon.src = "src/img/icons/light/stop.svg";
     $('.profileIcon').prop('src', 'src/img/icons/light/profile.svg')
     $('.helpIcon').prop('src', 'src/img/icons/light/help.svg')
     wifiIcon.src = "src/img/icons/light/wifi/wifi-good.svg";
@@ -93,6 +95,7 @@ function darkIcon() {
 
     closeBtnIcon.src = "src/img/icons/dark/win-close.svg";
     runIcon.src = "src/img/icons/dark/run.svg";
+    stopIcon.src = "src/img/icons/dark/stop.svg";
     $('.profileIcon').prop('src', 'src/img/icons/dark/profile.svg')
     $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
     wifiIcon.src = "src/img/icons/dark/wifi/wifi-good.svg";

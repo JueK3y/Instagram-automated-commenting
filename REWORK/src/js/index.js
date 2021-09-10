@@ -129,11 +129,15 @@ $('#start-btn').click(function() {
   }
 
   if (validate) {
-    $('#stop-btn').css('display', 'block')
+    document.getElementById("stop-btn").style.display = "block"
+    document.getElementById("stopIcon").style.display = "block"
+    document.getElementById("runIcon").style.display = "none"
   }
 });
 
 $('#stop-btn').click(function() {
   validate = false
-  $('#stop-btn').css('display', 'none')
+  document.getElementById("stop-btn").style.display = "none"
+  document.getElementById("stopIcon").style.display = "none"
+  document.getElementById("runIcon").style.display = "block"
 });
