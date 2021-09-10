@@ -128,6 +128,12 @@ html body main #help-container #help-content li p {
   margin-top: -20px;
   margin-right: 10px;
 }
+html body main #help-container #help-content li #help-page #open-external {
+  position: relative;
+  top: 3px;
+  left: 52px;
+  margin-right: 52px;
+}
 html body main #settings-container {
   position: absolute;
   bottom: 14px;

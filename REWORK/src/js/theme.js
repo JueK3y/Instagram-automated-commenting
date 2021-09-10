@@ -58,6 +58,7 @@ function lightIcon() {
     addIcon.src = "src/img/icons/light/add.svg"
     helpBug.src = "src/img/icons/light/bug.svg"
     helpInfo.src = "src/img/icons/light/info.svg"
+    $('.openExternal').prop('src', 'src/img/icons/light/open-external.svg')
     setLang.src = "src/img/icons/light/translate.svg"
     setNoteOn.src = "src/img/icons/light/alert.svg"
     setNoteUrg.src = "src/img/icons/light/alert-urgent.svg"
@@ -110,6 +111,7 @@ function darkIcon() {
     addIcon.src = "src/img/icons/dark/add.svg"
     helpBug.src = "src/img/icons/dark/bug.svg"
     helpInfo.src = "src/img/icons/dark/info.svg"
+    $('.openExternal').prop('src', 'src/img/icons/dark/open-external.svg')
     setLang.src = "src/img/icons/dark/translate.svg"
     setNoteOn.src = "src/img/icons/dark/alert.svg"
     setNoteUrg.src = "src/img/icons/dark/alert-urgent.svg"
