@@ -26,11 +26,13 @@ const addIcon = document.getElementById('addIcon')
 const helpBug = document.getElementById("help-bug")
 const helpInfo = document.getElementById("help-info")
 const setLang = document.getElementById("set-lang")
-const setNote = document.getElementById("set-note")
-const setComm = document.getElementById("set-comm")
-const setDev = document.getElementById("set-dev")
+const setNoteOn = document.getElementById("set-note-on")
+const setNoteUrg = document.getElementById("set-note-urgent")
+const setNoteOff = document.getElementById("set-note-off")
 const setUp = document.getElementById("set-up")
 const setDow = document.getElementById("set-dow")
+const setComm = document.getElementById("set-comm")
+const setDev = document.getElementById("set-dev")
 
 
 function lightIcon() {
@@ -55,7 +57,9 @@ function lightIcon() {
     helpBug.src = "src/img/icons/light/bug.svg"
     helpInfo.src = "src/img/icons/light/info.svg"
     setLang.src = "src/img/icons/light/translate.svg"
-    setNote.src = "src/img/icons/light/alert.svg"
+    setNoteOn.src = "src/img/icons/light/alert.svg"
+    setNoteUrg.src = "src/img/icons/light/alert-urgent.svg"
+    setNoteOff.src = "src/img/icons/light/alert-off.svg"
     setComm.src = "src/img/icons/light/comment-settings.svg"
     setDev.src = "src/img/icons/light/code.svg"
     setUp.src = "src/img/icons/light/update.svg"
@@ -104,7 +108,9 @@ function darkIcon() {
     helpBug.src = "src/img/icons/dark/bug.svg"
     helpInfo.src = "src/img/icons/dark/info.svg"
     setLang.src = "src/img/icons/dark/translate.svg"
-    setNote.src = "src/img/icons/dark/alert.svg"
+    setNoteOn.src = "src/img/icons/dark/alert.svg"
+    setNoteUrg.src = "src/img/icons/dark/alert-urgent.svg"
+    setNoteOff.src = "src/img/icons/dark/alert-off.svg"
     setComm.src = "src/img/icons/dark/comment-settings.svg"
     setDev.src = "src/img/icons/dark/code.svg"
     setUp.src = "src/img/icons/dark/update.svg"

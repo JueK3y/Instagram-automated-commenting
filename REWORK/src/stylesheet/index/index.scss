@@ -153,26 +153,23 @@ html {
                         #change-language:hover #set-lang-text {
                             display: block;
                         }
-                        
-                        #notification #set-note-text {
-                            display: none;
-                        }
-                        #notification:hover #set-note-text {
-                            display: block;
-                        }
-                        
-                        #comment-settings #set-comm-text {
-                            display: none;
-                        }
-                        #comment-settings:hover #set-comm-text {
-                            display: block;
-                        }
-                        
-                        #developer #set-dev-text {
-                            display: none;
-                        }
-                        #developer:hover #set-dev-text {
-                            display: block;
+
+                        #notification {
+                            #set-note-on {
+                                display: block;
+                            }
+                            #set-note-urgent {
+                                display: none;
+                            }
+                            #set-note-off {
+                                display: none;
+                            }
+                            #set-note-text {
+                                display: none;
+                            }
+                            &:hover #set-note-text {
+                                display: block;
+                            }
                         }
                         
                         #update #set-up-text {
@@ -188,6 +185,20 @@ html {
                         #download:hover #set-dow-text {
                             display: block;
                             color: var(--bg-main-button);
+                        }
+                        
+                        #comment-settings #set-comm-text {
+                            display: none;
+                        }
+                        #comment-settings:hover #set-comm-text {
+                            display: block;
+                        }
+                        
+                        #developer #set-dev-text {
+                            display: none;
+                        }
+                        #developer:hover #set-dev-text {
+                            display: block;
                         }
                         
                         #more-settings #set-more-text {

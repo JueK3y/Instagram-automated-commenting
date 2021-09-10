@@ -185,22 +185,19 @@ html body main #settings-container #settings-content li #change-language #set-la
 html body main #settings-container #settings-content li #change-language:hover #set-lang-text {
   display: block;
 }
+html body main #settings-container #settings-content li #notification #set-note-on {
+  display: block;
+}
+html body main #settings-container #settings-content li #notification #set-note-urgent {
+  display: none;
+}
+html body main #settings-container #settings-content li #notification #set-note-off {
+  display: none;
+}
 html body main #settings-container #settings-content li #notification #set-note-text {
   display: none;
 }
 html body main #settings-container #settings-content li #notification:hover #set-note-text {
-  display: block;
-}
-html body main #settings-container #settings-content li #comment-settings #set-comm-text {
-  display: none;
-}
-html body main #settings-container #settings-content li #comment-settings:hover #set-comm-text {
-  display: block;
-}
-html body main #settings-container #settings-content li #developer #set-dev-text {
-  display: none;
-}
-html body main #settings-container #settings-content li #developer:hover #set-dev-text {
   display: block;
 }
 html body main #settings-container #settings-content li #update #set-up-text {
@@ -215,6 +212,18 @@ html body main #settings-container #settings-content li #download #set-dow-text 
 html body main #settings-container #settings-content li #download:hover #set-dow-text {
   display: block;
   color: var(--bg-main-button);
+}
+html body main #settings-container #settings-content li #comment-settings #set-comm-text {
+  display: none;
+}
+html body main #settings-container #settings-content li #comment-settings:hover #set-comm-text {
+  display: block;
+}
+html body main #settings-container #settings-content li #developer #set-dev-text {
+  display: none;
+}
+html body main #settings-container #settings-content li #developer:hover #set-dev-text {
+  display: block;
 }
 html body main #settings-container #settings-content li #more-settings #set-more-text {
   display: none;

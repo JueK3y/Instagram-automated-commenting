@@ -54,6 +54,12 @@ function lineAnimation2(type, marPx, heiPx) {
   showContent(type, 270)
 }
 
+
+// ESC Button
+$(document).on('keyup', function(e) {
+  if (e.key == "Escape" && ! $('#active').hasClass('comment')) $('.comment').click()
+});
+
 // Comment 
 $('.comment').click(() => {
   if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
@@ -222,6 +228,95 @@ if (profileTwo.innerText.length > 16) {
 if (profileThree.innerText.length > 16) {
   profileThree.innerText = profileThree.innerHTML.substring(0, 14) + " ..."
 } 
+
+
+
+////// Notificiation changer
+const notification = localStorage.getItem("notification");
+
+
+
+if (notification) {
+  if (notification == "noteOn") {
+    document.getElementById('set-note-on').style.display = 'block'
+    document.getElementById('set-note-urgent').style.display = 'none'
+    document.getElementById('set-note-off').style.display = 'none'
+    document.getElementById('notification-text').innerText = 'Alle'
+    
+    noteOn = true
+    noteUrgent = false
+    noteOff = false
+  }
+  else if (notification == "noteUrgent") {
+    document.getElementById('set-note-on').style.display = 'none'
+    document.getElementById('set-note-urgent').style.display = 'block'
+    document.getElementById('set-note-off').style.display = 'none'
+    document.getElementById('notification-text').innerText = "Wichtig"
+          
+    noteOn = false
+    noteUrgent = true
+    noteOff = false
+  }
+  else if (notification == "noteOff") {
+    document.getElementById('set-note-on').style.display = 'none'
+    document.getElementById('set-note-urgent').style.display = 'none'
+    document.getElementById('set-note-off').style.display = 'block'
+    document.getElementById('notification-text').innerText = 'Aus'
+          
+    noteOn = false
+    noteUrgent = false
+    noteOff = true
+  }
+}
+else {
+  noteOn = true
+  noteUrgent = false
+  noteOff = false
+}
+
+$(document).ready(function() {                                                    // Send notification state to API
+  $(document).on('click', '#notification', function() {
+    if (noteOn) {
+      document.getElementById('set-note-on').style.display = 'none'
+      document.getElementById('set-note-urgent').style.display = 'block'
+      document.getElementById('set-note-off').style.display = 'none'
+      document.getElementById('notification-text').innerText = "Wichtig"
+            
+      noteOn = false
+      noteUrgent = true
+      noteOff = false
+      
+      localStorage.setItem("notification", "noteUrgent")
+    }
+    else if (noteUrgent) {
+      document.getElementById('set-note-on').style.display = 'none'
+      document.getElementById('set-note-urgent').style.display = 'none'
+      document.getElementById('set-note-off').style.display = 'block'
+      document.getElementById('notification-text').innerText = 'Aus'
+            
+      noteOn = false
+      noteUrgent = false
+      noteOff = true
+
+      localStorage.setItem("notification", "noteOff")
+    }
+    else if (noteOff) {
+      document.getElementById('set-note-on').style.display = 'block'
+      document.getElementById('set-note-urgent').style.display = 'none'
+      document.getElementById('set-note-off').style.display = 'none'
+      document.getElementById('notification-text').innerText = 'Alle'
+      
+      noteOn = true
+      noteUrgent = false
+      noteOff = false
+
+      
+      localStorage.setItem("notification", "noteOn")
+    }
+
+  })
+})
+
 
 
 ////// Update checker

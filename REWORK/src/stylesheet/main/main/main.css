@@ -219,6 +219,9 @@ html body nav #side-bar #active .line {
 html body nav #side-bar #active img {
   margin-left: -3px;
 }
+html body nav #side-bar #active #settingsIcon {
+  margin-left: -4px;
+}
 html body nav #side-bar a {
   display: -webkit-box;
   display: -ms-flexbox;
