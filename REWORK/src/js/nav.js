@@ -348,15 +348,19 @@ $(document).ready(function() {                                                //
       }
     }, 3001)
   })                                                                          
-  $(document).on('click', '#download', function() {                           // Download and install update
+  $(document).on('click', '#download', function() {                             // Download and install update
     if (counterDisplay == 3 || notConnected) {
       noteMessage("Aktualisierung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
     }
     else {
       // Install update
-      download.style.display = 'none '
-      update.style.display = ''
-      updateInfo.style.display = 'none'
+      downloadSuccess = true                                                     // API check if download was successfull
+      if (downloadSuccess) {
+        showBanner('info', 'Update heruntergeladen', 'IAC wird jetzt geupdatet und wird ggfl. neugestartet.', 'install-update', true)
+        download.style.display = 'none '
+        update.style.display = ''
+        updateInfo.style.display = 'none'
+      }
     }
   })
 })
