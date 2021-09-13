@@ -36,7 +36,7 @@ html body main #profile-container {
   border-left: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  z-index: 3;
+  z-index: 5;
   display: none;
 }
 html body main #profile-container #profile-content {

@@ -231,91 +231,6 @@ if (profileThree.innerText.length > 16) {
 
 
 
-////// Notificiation changer
-const notification = localStorage.getItem("notification");
-
-if (notification) {
-  if (notification == "noteOn") {
-    document.getElementById('set-note-on').style.display = 'block'
-    document.getElementById('set-note-urgent').style.display = 'none'
-    document.getElementById('set-note-off').style.display = 'none'
-    document.getElementById('notification-text').innerText = 'Alle'
-    
-    noteOn = true
-    noteUrgent = false
-    noteOff = false
-  }
-  else if (notification == "noteUrgent") {
-    document.getElementById('set-note-on').style.display = 'none'
-    document.getElementById('set-note-urgent').style.display = 'block'
-    document.getElementById('set-note-off').style.display = 'none'
-    document.getElementById('notification-text').innerText = "Wichtig"
-          
-    noteOn = false
-    noteUrgent = true
-    noteOff = false
-  }
-  else if (notification == "noteOff") {
-    document.getElementById('set-note-on').style.display = 'none'
-    document.getElementById('set-note-urgent').style.display = 'none'
-    document.getElementById('set-note-off').style.display = 'block'
-    document.getElementById('notification-text').innerText = 'Aus'
-          
-    noteOn = false
-    noteUrgent = false
-    noteOff = true
-  }
-}
-else {
-  noteOn = true
-  noteUrgent = false
-  noteOff = false
-}
-
-$(document).ready(function() {                                                    // Send notification state to API
-  $(document).on('click', '#notification', function() {
-    if (noteOn) {
-      document.getElementById('set-note-on').style.display = 'none'
-      document.getElementById('set-note-urgent').style.display = 'block'
-      document.getElementById('set-note-off').style.display = 'none'
-      document.getElementById('notification-text').innerText = "Wichtig"
-            
-      noteOn = false
-      noteUrgent = true
-      noteOff = false
-      
-      localStorage.setItem("notification", "noteUrgent")
-    }
-    else if (noteUrgent) {
-      document.getElementById('set-note-on').style.display = 'none'
-      document.getElementById('set-note-urgent').style.display = 'none'
-      document.getElementById('set-note-off').style.display = 'block'
-      document.getElementById('notification-text').innerText = 'Aus'
-            
-      noteOn = false
-      noteUrgent = false
-      noteOff = true
-
-      localStorage.setItem("notification", "noteOff")
-    }
-    else if (noteOff) {
-      document.getElementById('set-note-on').style.display = 'block'
-      document.getElementById('set-note-urgent').style.display = 'none'
-      document.getElementById('set-note-off').style.display = 'none'
-      document.getElementById('notification-text').innerText = 'Alle'
-      
-      noteOn = true
-      noteUrgent = false
-      noteOff = false
-
-      
-      localStorage.setItem("notification", "noteOn")
-    }
-
-  })
-})
-
-
 ////// WIFI Signal Updater
 
 const elem = document.getElementById("changeText")
@@ -342,6 +257,7 @@ window.setInterval(() => {
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
     showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
+    // noteMessage("WLAN deaktiviert", "Für IAC 2.0 brauchst du eine aktive Internetverbindung")  // Spams the note center
   }
   else if ($('.wifi-not-connected')[0]) {
     hideBanner('wifi-not-connected')
@@ -404,6 +320,8 @@ const download = document.getElementById('download')
 const updateIcon = document.getElementById('set-up')
 const updateInfo = document.getElementById('updateInfo')
 
+newVersion = true                                                             // Check from API
+
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {
     updateIcon.style.transition = '3s linear'
@@ -412,25 +330,34 @@ $(document).ready(function() {                                                //
       if (counterDisplay == 3 || notConnected) {
         update.style.display = 'none'
         updateFailed.style.display = 'inherit'
+        noteMessage("Aktualisierung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
         setTimeout(() => {
           update.style.display = 'inherit'
           updateFailed.style.display = 'none'
         }, 3000)
       }
       else {
-        // For demo purpose
+        // Check for new version
+        if (newVersion) {
           download.style.display = ''
           update.style.display = 'none'
+          updateInfo.style.display = 'block'
+          updateIcon.style.transform = 'rotate(0deg)'
+          noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
+        }
       }
-      updateInfo.style.display = 'block'
-      updateIcon.style.transform = 'rotate(0deg)'
     }, 3001)
   })                                                                          
   $(document).on('click', '#download', function() {                           // Download and install update
-    // Install update
-    download.style.display = 'none '
-    update.style.display = ''
-    updateInfo.style.display = 'none'
+    if (counterDisplay == 3 || notConnected) {
+      noteMessage("Aktualisierung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
+    }
+    else {
+      // Install update
+      download.style.display = 'none '
+      update.style.display = ''
+      updateInfo.style.display = 'none'
+    }
   })
 })
 
