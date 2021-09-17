@@ -151,79 +151,101 @@ html {
                             margin-top: -20px;
                             margin-right: 10px;
                         }
-                        #change-language #set-lang-text {
-                            display: none;
-                        }
-                        #change-language:hover #set-lang-text {
-                            display: block;
-                        }
-
-                        #notification {
-                            #set-note-on {
-                                display: block;
-                            }
-                            #set-note-urgent {
-                                display: none;
-                            }
-                            #set-note-off {
-                                display: none;
-                            }
-                            #set-note-text {
-                                display: none;
-                            }
-                            &:hover #set-note-text {
-                                display: block;
-                            }
-                        }
-                        
-                        #update #set-up-text {
-                            display: none;
-                        }
-                        #update:hover #set-up-text {
-                            display: block;
-                        }
-
-                        #update-failed {
-                            display: none;
-                            #set-up-text-failed {
-                                display: none;
-                                color: var(--error-banner-icon);
-                            }
-                            &:hover #set-up-text-failed {
-                                display: block;
-                            }
-                        }                        
-                        
-                        #download #set-dow-text {
-                            display: none;
-                        }
-                        #download:hover #set-dow-text {
-                            display: block;
-                            color: var(--bg-main-button);
-                        }
-                        
-                        #comment-settings #set-comm-text {
-                            display: none;
-                        }
-                        #comment-settings:hover #set-comm-text {
-                            display: block;
-                        }
-                        
-                        #developer #set-dev-text {
-                            display: none;
-                        }
-                        #developer:hover #set-dev-text {
-                            display: block;
-                        }
-                        
-                        #more-settings #set-more-text {
-                            display: none;
-                        }
-                        #more-settings:hover #set-more-text {
-                            display: block;
-                        }
-                        
                     }
+                    #change-language #set-lang-text {
+                        display: none;
+                    }
+                    #change-language:hover #set-lang-text {
+                        display: block;
+                    }
+
+                    #notification {
+                        #set-note-on {
+                            display: block;
+                        }
+                        #set-note-urgent {
+                            display: none;
+                        }
+                        #set-note-off {
+                            display: none;
+                        }
+                        #set-note-text {
+                            display: none;
+                        }
+                        &:hover #set-note-text {
+                            display: block;
+                        }
+                    }
+                    
+                    #update #set-up-text {
+                        display: none;
+                    }
+                    #update:hover #set-up-text {
+                        display: block;
+                    }
+
+                    #update-failed {
+                        display: none;
+                        #set-up-text-failed {
+                            display: none;
+                            color: var(--error-banner-icon);
+                        }
+                        &:hover #set-up-text-failed {
+                            display: block;
+                        }
+                    }   
+
+                    #update-none {
+                        display: none;
+                        #set-up-text-none {
+                            display: none;
+                            color: var(--error-banner-icon);                        // Replace with success color
+                        }
+                        &:hover #set-up-text-none {
+                            display: block;
+                        }
+                    }                        
+                    
+                    #download #set-dow-text {
+                        display: none;
+                    }
+                    #download:hover #set-dow-text {
+                        display: block;
+                        color: var(--bg-main-button);
+                    }
+
+                    #download-failed {
+                        display: none;
+                        #set-dow-text-failed {
+                            display: none;
+                            color: var(--error-banner-icon);
+                        }
+                        &:hover #set-dow-text-failed {
+                            display: block;
+                        }
+                    }  
+                    
+                    #comment-settings #set-comm-text {
+                        display: none;
+                    }
+                    #comment-settings:hover #set-comm-text {
+                        display: block;
+                    }
+                    
+                    #developer #set-dev-text {
+                        display: none;
+                    }
+                    #developer:hover #set-dev-text {
+                        display: block;
+                    }
+                    
+                    #more-settings #set-more-text {
+                        display: none;
+                    }
+                    #more-settings:hover #set-more-text {
+                        display: block;
+                    }
+                    
                 }
             }
             form {

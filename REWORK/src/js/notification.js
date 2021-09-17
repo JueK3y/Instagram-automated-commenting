@@ -1,9 +1,7 @@
-try {
-  const notifier = require('node-notifier')
-}
-catch(err) {
-  console.warn("The notification center can't be used in the WebDemo.")
-}
+const notifier = require('node-notifier')
+
+// console.warn("The notification center can't be used in the WebDemo.")
+
 
 const notification = localStorage.getItem("notification");
 

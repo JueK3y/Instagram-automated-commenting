@@ -1,9 +1,6 @@
-try {
-    const { ipcRenderer } = require("electron")
-}
-catch(err) {
-    console.warn("The window controls doesn't work in the WebDemo.")
-}
+const { ipcRenderer } = require("electron")
+
+// console.warn("The window controls doesn't work in the WebDemo.")
 
 const maxBtn = document.getElementById('maxBtn')
 const restoreBtn = document.getElementById('restoreBtn')

@@ -296,7 +296,6 @@ var counterDisplay = 0
 showMessage = true
 notConnected = false                                                       // notConnected check from API
 
-
 $("#error-hide").click(() => {
   showMessage = false
   $("#error-banner").fadeOut()
@@ -366,15 +365,17 @@ window.setInterval(() => {
 
 ////// Update checker
 
-updateOnline = false                                                          // API checks for an update
+updateOnline = false                                                          // API checks in background for an update
 
 const update = document.getElementById('update')
 const updateFailed = document.getElementById('update-failed')
+const noUpdate = document.getElementById('update-none')
 const download = document.getElementById('download')
+const downloadFailed = document.getElementById('download-failed')
 const updateIcon = document.getElementById('set-up')
 const updateInfo = document.getElementById('updateInfo')
 
-newVersion = true                                                             // Check from API
+newVersion = true                                                             // Update Check onclick from API
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {
@@ -383,11 +384,12 @@ $(document).ready(function() {                                                //
     setTimeout(() => {
       if (counterDisplay == 3 || notConnected) {
         update.style.display = 'none'
-        updateFailed.style.display = 'inherit'
+        updateFailed.style.display = 'inline-block'
         noteMessage("Überprüfung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
         setTimeout(() => {
-          update.style.display = 'inherit'
+          update.style.display = 'inline-block'
           updateFailed.style.display = 'none'
+          updateIcon.style.transform = 'rotate(0deg)'
         }, 3000)
       }
       else {
@@ -397,7 +399,20 @@ $(document).ready(function() {                                                //
           update.style.display = 'none'
           updateInfo.style.display = 'block'
           updateIcon.style.transform = 'rotate(0deg)'
+          showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'no-update-found', true)
           noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
+        }
+        else {
+          noUpdate.style.display = 'inline-block'
+          update.style.display = 'none'
+          updateInfo.style.display = 'block'
+          updateIcon.style.transform = 'rotate(0deg)'
+          showBanner('info', 'Aktuelleste Version', 'Kein Update gefunden. IAC ist auf dem neusten Stand.', 'no-update-found', true)
+          setTimeout(() => {
+            noUpdate.style.display = 'none '
+            update.style.display = ''
+            updateInfo.style.display = 'none'
+          }, 3000)
         }
       }
     }, 3001)
@@ -405,6 +420,13 @@ $(document).ready(function() {                                                //
   $(document).on('click', '#download', function() {                             // Download and install update
     if (counterDisplay == 3 || notConnected) {
       noteMessage("Download fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
+      download.style.display = 'none '
+      downloadFailed.style.display = 'inline-block'
+      setTimeout(() => {
+        downloadFailed.style.display = 'none '
+        update.style.display = ''
+        updateInfo.style.display = 'none'
+      }, 3000)
     }
     else {
       // Install update
@@ -414,6 +436,17 @@ $(document).ready(function() {                                                //
         download.style.display = 'none '
         update.style.display = ''
         updateInfo.style.display = 'none'
+      }
+      else {
+        showBanner('error', 'Fehlgeschlagen', 'Die neuste Version konnte nicht heruntergeladen werden.', 'install-update-failed', true)
+        noteMessage("Herunterladen fehlgeschlagen", "Die neuste Version konnte nicht heruntergeladen werden. Probiere es manuell.", true)
+        download.style.display = 'none '
+        downloadFailed.style.display = 'inline-block'
+        setTimeout(() => {
+          downloadFailed.style.display = 'none '
+          update.style.display = ''
+          updateInfo.style.display = 'none'
+        }, 3000)
       }
     }
   })
