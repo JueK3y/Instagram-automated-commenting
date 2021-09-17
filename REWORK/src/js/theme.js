@@ -54,8 +54,7 @@ function lightIcon() {
 
     changeColorWIFI.style.color = '#000000'
     changeColorWIFI.style.background = "none"
-
-    addIcon.src = "src/img/icons/light/add.svg"
+    
     helpBug.src = "src/img/icons/light/bug.svg"
     helpInfo.src = "src/img/icons/light/info.svg"
     $('.openExternal').prop('src', 'src/img/icons/light/open-external.svg')
@@ -85,6 +84,7 @@ function lightIcon() {
             checkboxToggle.classList.add('save-profile-light')
         }
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
+        addIcon.src = "src/img/icons/light/add.svg"
     }
     catch(err) {}
 }
@@ -108,7 +108,6 @@ function darkIcon() {
     changeColorWIFI.style.color = '#FFFFFF'
     changeColorWIFI.style.background = "none"
 
-    addIcon.src = "src/img/icons/dark/add.svg"
     helpBug.src = "src/img/icons/dark/bug.svg"
     helpInfo.src = "src/img/icons/dark/info.svg"
     $('.openExternal').prop('src', 'src/img/icons/dark/open-external.svg')
@@ -139,6 +138,7 @@ function darkIcon() {
             checkboxToggle.classList.add('save-profile-dark')
         }
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
+        addIcon.src = "src/img/icons/dark/add.svg"
     }
     catch(err) {}
 }

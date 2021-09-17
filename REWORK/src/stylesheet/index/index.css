@@ -28,14 +28,14 @@ html body main #profile-container {
   position: absolute;
   top: 15px;
   left: 0;
-  width: 201px;
-  height: 170px;
+  width: 210px;
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   border: 1px solid var(--border-color);
   border-left: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  overflow: hidden;
   z-index: 5;
   display: none;
 }
@@ -47,7 +47,6 @@ html body main #profile-container #profile-content li {
   display: -ms-inline-flexbox;
   display: inline-flex;
   position: relative;
-  bottom: 11px;
 }
 html body main #profile-container #profile-content li a {
   display: -webkit-box;
@@ -78,10 +77,10 @@ html body main #profile-container #profile-content li p {
 }
 html body main #help-container {
   position: absolute;
-  top: 77px;
+  top: 67px;
   left: 0;
-  width: 201px;
-  height: 130px;
+  width: 205px;
+  height: 148px;
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   border: 1px solid var(--border-color);
@@ -99,7 +98,6 @@ html body main #help-container #help-content li {
   display: -ms-inline-flexbox;
   display: inline-flex;
   position: relative;
-  bottom: 11px;
 }
 html body main #help-container #help-content li a {
   display: -webkit-box;

@@ -201,22 +201,76 @@ $(document).ready(function() {
 
 
 ////// Profile content updatder
-
-threeOrMore = true                                                            // API checks if there are more than 3 profiles
-
-if (threeOrMore) {
-  document.getElementById('more-profile').style.display = ''
-  document.getElementById('add-profile').style.display = 'none'
-}
-else {
-  document.getElementById('more-profile').style.display = 'none'
-  document.getElementById('add-profile').style.display = ''
-}
+threeOrMore = true                                                                       // API checks if there are more than 3 profiles
 
 const profileOne = document.getElementById('profile-1-name')
 const profileTwo = document.getElementById('profile-2-name') 
 const profileThree = document.getElementById('profile-3-name') 
 
+const showMore = document.getElementById('more-profile').style
+const addProfile = document.getElementById('add-profile').style
+
+
+$(document).ready(function() {
+  $(document).on('click', '#add-profile', function() {
+    document.getElementById("profile-container").style.top  = "15px"
+    if (profileOne.innerText == "") {
+      document.getElementById('profile-1').style.display = 'flex'
+      profileOne.innerText = "Profil"
+    }
+    else if (profileTwo.innerText == "") {
+      document.getElementById('profile-2').style.display = ''
+      profileTwo.innerText = "Profil"
+    }
+    else if (profileThree.innerText == "") {
+      document.getElementById('profile-3').style.display = ''
+      profileThree.innerText = "Profil"
+      showMore.display = ''
+      addProfile.display = 'none'
+    }
+  })
+})
+
+
+profileOneName = ""                                                              // Get Name from JSON / API
+profileTwoName = ""
+profileThreeName = ""
+
+
+// Set profile names
+profileOne.innerText = profileOneName
+profileTwo.innerText = profileTwoName
+profileThree.innerText = profileThreeName
+
+// Check for profiles
+if (profileOne.innerText == "") {
+  document.getElementById('profile-1').style.display = 'none'
+  threeOrMore = false
+}
+if (profileTwo.innerText == "") {
+  document.getElementById('profile-2').style.display = 'none'
+  threeOrMore = false
+}
+if (profileThree.innerText == "") {
+  document.getElementById('profile-3').style.display = 'none'
+  threeOrMore = false
+}
+if (profileOne.innerText == "" && profileTwo.innerText == "" && profileThree.innerText == "") {
+  document.getElementById("profile-container").style.top  = "27px"
+
+}
+                                      
+// Display more / add button
+if (threeOrMore) {
+  showMore.display = ''
+  addProfile.display = 'none'
+}
+else {
+  showMore.display = 'none'
+  addProfile.display = ''
+}
+
+// Length Check
 if (profileOne.innerText.length > 16) {
   profileOne.innerText = profileOne.innerText.substring(0, 14) + " ..."
 } 
@@ -330,7 +384,7 @@ $(document).ready(function() {                                                //
       if (counterDisplay == 3 || notConnected) {
         update.style.display = 'none'
         updateFailed.style.display = 'inherit'
-        noteMessage("Aktualisierung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
+        noteMessage("Überprüfung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
         setTimeout(() => {
           update.style.display = 'inherit'
           updateFailed.style.display = 'none'
@@ -350,7 +404,7 @@ $(document).ready(function() {                                                //
   })                                                                          
   $(document).on('click', '#download', function() {                             // Download and install update
     if (counterDisplay == 3 || notConnected) {
-      noteMessage("Aktualisierung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
+      noteMessage("Download fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
     }
     else {
       // Install update

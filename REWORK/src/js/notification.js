@@ -1,4 +1,9 @@
-const notifier = require('node-notifier')
+try {
+  const notifier = require('node-notifier')
+}
+catch(err) {
+  console.warn("The notification center can't be used in the WebDemo.")
+}
 
 const notification = localStorage.getItem("notification");
 
@@ -71,7 +76,6 @@ $(document).ready(function() {                                                  
     }
   })
 })
-
 
 
 function noteMessage(titleMsg, messageMsg, importantType) {
