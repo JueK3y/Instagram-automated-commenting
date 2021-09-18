@@ -76,19 +76,19 @@ $(document).ready(function() {                                                  
 })
 
 
-function noteMessage(titleMsg, messageMsg, importantType) {
+function noteMessage(messageTitle, messageText, importantType) {
     if (noteOn) {
         notifier.notify({
-          title: titleMsg,
-          message: messageMsg,
+          title: messageTitle,
+          message: messageText,
           icon: 'src/img/IAC-Icon.ico',
           appID: 'Instagram Autoamted Commenting'
         })
     }
     else if (noteUrgent && importantType) {
         notifier.notify({
-          title: titleMsg,
-          message: messageMsg,
+          title: messageTitle,
+          message: messageText,
           icon: 'src/img/IAC-Icon.ico',
           appID: 'Instagram Autoamted Commenting'
         })
