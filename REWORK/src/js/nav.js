@@ -373,7 +373,7 @@ const noUpdate = document.getElementById('update-none')
 const download = document.getElementById('download')
 const downloadFailed = document.getElementById('download-failed')
 const updateIcon = document.getElementById('set-up')
-const updateInfo = document.getElementById('updateInfo')
+const settingsUpdateIcon = document.getElementById('settingsUpdateIcon')
 
 newVersion = true                                                             // Update Check onclick from API
 
@@ -397,7 +397,8 @@ $(document).ready(function() {                                                //
         if (newVersion) {
           download.style.display = ''
           update.style.display = 'none'
-          updateInfo.style.display = 'block'
+          settingsIcon.style.display = 'none'
+          settingsUpdateIcon.style.display = 'inline-block'
           updateIcon.style.transform = 'rotate(0deg)'
           showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'no-update-found', true)
           noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
@@ -405,13 +406,15 @@ $(document).ready(function() {                                                //
         else {
           noUpdate.style.display = 'inline-block'
           update.style.display = 'none'
-          updateInfo.style.display = 'block'
+          settingsIcon.style.display = 'none'
+          settingsUpdateIcon.style.display = 'inline-block'
           updateIcon.style.transform = 'rotate(0deg)'
           showBanner('info', 'Aktuelleste Version', 'Kein Update gefunden. IAC ist auf dem neusten Stand.', 'no-update-found', true)
           setTimeout(() => {
             noUpdate.style.display = 'none '
             update.style.display = ''
-            updateInfo.style.display = 'none'
+            settingsIcon.style.display = 'inline-block'
+            settingsUpdateIcon.style.display = 'none'
           }, 3000)
         }
       }
@@ -425,7 +428,8 @@ $(document).ready(function() {                                                //
       setTimeout(() => {
         downloadFailed.style.display = 'none '
         update.style.display = ''
-        updateInfo.style.display = 'none'
+        settingsIcon.style.display = 'inline-block'
+        settingsUpdateIcon.style.display = 'none'
       }, 3000)
     }
     else {
@@ -435,7 +439,8 @@ $(document).ready(function() {                                                //
         showBanner('info', 'Update heruntergeladen', 'IAC wird jetzt geupdatet und wird ggfl. neugestartet.', 'install-update', true)
         download.style.display = 'none '
         update.style.display = ''
-        updateInfo.style.display = 'none'
+        settingsIcon.style.display = 'inline-block'
+        settingsUpdateIcon.style.display = 'none'
       }
       else {
         showBanner('error', 'Fehlgeschlagen', 'Die neuste Version konnte nicht heruntergeladen werden.', 'install-update-failed', true)
@@ -445,7 +450,8 @@ $(document).ready(function() {                                                //
         setTimeout(() => {
           downloadFailed.style.display = 'none '
           update.style.display = ''
-          updateInfo.style.display = 'none'
+          settingsIcon.style.display = 'inline-block'
+          settingsUpdateIcon.style.display = 'none'
         }, 3000)
       }
     }
@@ -455,10 +461,12 @@ $(document).ready(function() {                                                //
 if (updateOnline) {
   download.style.display = ''
   update.style.display = 'none'
-  updateInfo.style.display = 'block'
+  settingsIcon.style.display = 'inline-block'
+  settingsUpdateIcon.style.display = 'none'
 }
 else {
   download.style.display = 'none'
   update.style.display = ''
-  updateInfo.style.display = 'none'
+  settingsIcon.style.display = 'inline-block'
+  settingsUpdateIcon.style.display = 'none'
 }
