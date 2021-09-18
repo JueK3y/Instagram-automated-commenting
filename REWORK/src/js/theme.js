@@ -9,6 +9,7 @@ const runIcon = document.getElementById("runIcon");
 const stopIcon = document.getElementById("stopIcon");
 const wifiIcon = document.getElementById("wifi-img");
 const settingsIcon = document.getElementById("settingsIcon");
+const settingsUpdateIcon = document.getElementById("settingsUpdateIcon");
 const changeColorWIFI = document.getElementById("wifi")
 
 const body = document.body;
@@ -31,7 +32,10 @@ const setNoteOn = document.getElementById("set-note-on")
 const setNoteUrg = document.getElementById("set-note-urgent")
 const setNoteOff = document.getElementById("set-note-off")
 const setUp = document.getElementById("set-up")
+const setUpFailed = document.getElementById("set-up-failed")
+const setUpNone = document.getElementById("set-up-none")
 const setDow = document.getElementById("set-dow")
+const setDowFailed = document.getElementById("set-dow-failed")
 const setComm = document.getElementById("set-comm")
 const setDev = document.getElementById("set-dev")
 
@@ -48,6 +52,7 @@ function lightIcon() {
     $('.helpIcon').prop('src', 'src/img/icons/light/help.svg')
     wifiIcon.src = "src/img/icons/light/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/light/settings.svg";
+    settingsUpdateIcon.src = "src/img/icons/light/settings-update.svg";
 
     themeToDark.style.display = "flex"
     themeToLight.style.display = "none"
@@ -65,7 +70,10 @@ function lightIcon() {
     setComm.src = "src/img/icons/light/comment-settings.svg"
     setDev.src = "src/img/icons/light/code.svg"
     setUp.src = "src/img/icons/light/update.svg"
+    setUpFailed.src = "src/img/icons/light/update-fail.svg"
+    setUpNone.src = "src/img/icons/light/update-none.svg"
     setDow.src = "src/img/icons/light/download.svg"
+    setDowFailed.src = "src/img/icons/light/download-fail.svg"
     $('.moreIcon').prop('src', 'src/img/icons/light/more.svg')
 
     ////// Banner
@@ -101,6 +109,7 @@ function darkIcon() {
     $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
     wifiIcon.src = "src/img/icons/dark/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/dark/settings.svg";
+    settingsUpdateIcon.src = "src/img/icons/dark/settings-update.svg";
 
     themeToDark.style.display = "none"
     themeToLight.style.display = "flex"
@@ -118,7 +127,10 @@ function darkIcon() {
     setComm.src = "src/img/icons/dark/comment-settings.svg"
     setDev.src = "src/img/icons/dark/code.svg"
     setUp.src = "src/img/icons/dark/update.svg"
+    setUpFailed.src = "src/img/icons/dark/update-fail.svg"
+    setUpNone.src = "src/img/icons/dark/update-none.svg"
     setDow.src = "src/img/icons/dark/download.svg"
+    setDowFailed.src = "src/img/icons/dark/download-fail.svg"
     $('.moreIcon').prop('src', 'src/img/icons/dark/more.svg')
 
 

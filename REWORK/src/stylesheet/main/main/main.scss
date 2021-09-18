@@ -197,7 +197,7 @@ html body {
                 img {
                     margin-left: -3px;
                 }
-                #settingsIcon {
+                #settingsIcon, #settingsUpdateIcon {
                     margin-left: -4px;
                 }
             }
@@ -253,6 +253,7 @@ html body {
                     }
                     #settingsUpdateIcon {
                         display: none;
+                        margin-left: -1px;
                     }
                     p {
                         margin-top: 5px;

@@ -225,7 +225,7 @@ html body main #settings-container #settings-content #update-none {
 }
 html body main #settings-container #settings-content #update-none #set-up-text-none {
   display: none;
-  color: var(--error-banner-icon);
+  color: var(--success-color);
 }
 html body main #settings-container #settings-content #update-none:hover #set-up-text-none {
   display: block;

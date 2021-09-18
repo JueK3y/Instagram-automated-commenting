@@ -201,7 +201,7 @@ $(document).ready(function() {
 
 
 ////// Profile content updatder
-threeOrMore = true                                                                       // API checks if there are more than 3 profiles
+threeOrMore = false                                                                       // API checks if there are more than 3 profiles
 
 const profileOne = document.getElementById('profile-1-name')
 const profileTwo = document.getElementById('profile-2-name') 
@@ -373,9 +373,8 @@ const noUpdate = document.getElementById('update-none')
 const download = document.getElementById('download')
 const downloadFailed = document.getElementById('download-failed')
 const updateIcon = document.getElementById('set-up')
-const settingsUpdateIcon = document.getElementById('settingsUpdateIcon')
 
-newVersion = true                                                             // Update Check onclick from API
+newVersion = false                                                             // Update Check onclick from API
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {

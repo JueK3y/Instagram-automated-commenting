@@ -199,7 +199,7 @@ html {
                         display: none;
                         #set-up-text-none {
                             display: none;
-                            color: var(--error-banner-icon);                        // Replace with success color
+                            color: var(--success-color); 
                         }
                         &:hover #set-up-text-none {
                             display: block;

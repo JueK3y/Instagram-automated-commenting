@@ -230,7 +230,7 @@ html body nav #side-bar #active .line {
 html body nav #side-bar #active img {
   margin-left: -3px;
 }
-html body nav #side-bar #active #settingsIcon {
+html body nav #side-bar #active #settingsIcon, html body nav #side-bar #active #settingsUpdateIcon {
   margin-left: -4px;
 }
 html body nav #side-bar a {
@@ -290,6 +290,7 @@ html body nav #side-bar footer .settings img {
 }
 html body nav #side-bar footer .settings #settingsUpdateIcon {
   display: none;
+  margin-left: -1px;
 }
 html body nav #side-bar footer .settings p {
   margin-top: 5px;

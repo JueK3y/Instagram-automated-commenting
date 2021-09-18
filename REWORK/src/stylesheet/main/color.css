@@ -64,6 +64,8 @@
     --mouse-color: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);
     
     /* Note Banner */
+    --success-color: #0F7B0F;
+
     --info-banner-bg: rgba(255, 255, 255, 0.1);
     --info-banner-icon: var(--bg-main-button);
     --info-banner-border: #ececec;
@@ -144,6 +146,8 @@
     --mouse-color: linear-gradient(90deg, rgba(164, 223, 170, 0.6)28%, rgba(107, 193, 224, 0.6) 100%);
     
     /* Note Banner */
+    --success-color: #6CCB5F;
+
     --info-banner-bg: #2326278f;
     --info-banner-icon: #60cdff;
     --info-banner-border: #2a2e30;
