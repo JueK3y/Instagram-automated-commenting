@@ -374,7 +374,7 @@ const download = document.getElementById('download')
 const downloadFailed = document.getElementById('download-failed')
 const updateIcon = document.getElementById('set-up')
 
-newVersion = false                                                             // Update Check onclick from API
+newVersion = true                                                             // Update Check onclick from API
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {

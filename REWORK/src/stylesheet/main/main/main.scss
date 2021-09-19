@@ -2,12 +2,14 @@ html body {
     font-family: 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--text-color);
     background: var(--background-color);
-    user-select: none;
-    -webkit-user-drag: none;
     overflow: hidden;
     img {
         width: var(--img-size);
         height: var(--img-size);
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-app-region: no-drag;
     }
     a {
         color: var(--text-color);

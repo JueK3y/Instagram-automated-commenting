@@ -78,6 +78,9 @@ function formError(type) {
 // ONLY FOR DEMO VERSION
 validate = false
 
+checkClick = 0
+botStart = false
+
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
 
@@ -132,11 +135,14 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("stopIcon").style.display = "block"
     document.getElementById("runIcon").style.display = "none"
+    botStart = true                                                                                        // Pass value to API, then start commenting
   }
 });
 
 $('#stop-btn').click(function() {
   validate = false
+  botStart = false
+  checkClick = 0
   document.getElementById("stop-btn").style.display = "none"
   document.getElementById("stopIcon").style.display = "none"
   document.getElementById("runIcon").style.display = "block"

@@ -39,7 +39,17 @@ restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
 })
 
-
 closeBtn.addEventListener('click', () => {
-    ipc.send('closeApp')
+    if (botStart) {
+        if (checkClick == 1) {
+            ipc.send('closeApp')
+        }
+        else {
+            showBanner('warning', 'IAC kommentiert', 'Sicher, dass du das Kommentieren abbrechen willst?', 'close-while-commenting', true)
+            checkClick++
+        }
+    }
+    else {
+        ipc.send('closeApp')
+    }
 })
