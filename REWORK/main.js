@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, powerSaveBlocker } = require('electron');
+const { app, BrowserWindow, ipcMain, powerSaveBlocker, session } = require('electron');
 const windowStateKeeper = require('electron-window-state')
 const path = require('path');
 const ipc = ipcMain
@@ -26,8 +26,9 @@ const createWindow = () => {
       title: 'Instagram Automated Commenting',
       backgroundColor: '#202020',
       webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false
+        // sandbox: true,                         // Problems with require
+        nodeIntegration: true,                    // Can this be disabled in the finale release?
+        contextIsolation: false                   // Same for here?
       }
   })
   
@@ -46,7 +47,7 @@ const createWindow = () => {
   })
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   var sleepID = undefined
 
@@ -89,6 +90,18 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+        responseHeaders: Object.assign ({
+            'Content-Security-Policy': [
+              // Not secure at all and needs to be re-written
+              "default-src 'unsafe-inline' 'self'",
+              "style-src 'unsafe-inline' 'self'",
+              "script-src 'unsafe-inline' 'self'"
+            ]
+        }, details.responseHeaders)
+    })
+  })
   createWindow();
 })
 
