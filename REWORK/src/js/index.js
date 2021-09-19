@@ -139,6 +139,8 @@ $('#start-btn').click(function() {
   }
 });
 
+
+
 $('#stop-btn').click(function() {
   validate = false
   botStart = false

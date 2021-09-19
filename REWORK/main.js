@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, powerSaveBlocker } = require('electron');
 const windowStateKeeper = require('electron-window-state')
 const path = require('path');
 const ipc = ipcMain
@@ -48,6 +48,21 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
+  const id = undefined
+
+
+  ipc.on('preventSleep', () => {
+    id = powerSaveBlocker.start('prevent-display-sleep')
+  })
+
+  ipc.on('stopPrevent', () => {
+    powerSaveBlocker.stop(powerSaveBlocker.start('prevent-display-sleep'))
+  })
+
+  if (mainWindow.isMinimized()) {
+    mainWindow.restore()
+  }
+
   ipc.on('minApp', () => {
     mainWindow.minimize()
   })
@@ -68,10 +83,14 @@ const createWindow = () => {
 
 }
 
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
