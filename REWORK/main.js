@@ -48,15 +48,15 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
-  const id = undefined
+  var sleepID = undefined
 
 
   ipc.on('preventSleep', () => {
-    id = powerSaveBlocker.start('prevent-display-sleep')
+    sleepID = powerSaveBlocker.start('prevent-display-sleep')
   })
 
   ipc.on('stopPrevent', () => {
-    powerSaveBlocker.stop(powerSaveBlocker.start('prevent-display-sleep'))
+    powerSaveBlocker.stop(sleepID)
   })
 
   if (mainWindow.isMinimized()) {

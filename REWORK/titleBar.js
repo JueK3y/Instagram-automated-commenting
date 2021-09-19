@@ -16,12 +16,14 @@ else if(win.isMaximized()) {
     alert("Test2")
 } */
 
-if (botStart) {                                                                             //////  NOT FUNCTIONAL
-    preventStart.addEventListener('click', () => {
-        console.log("Testj12391242141")
-        ipc.send('preventSleep')
-    })
-}
+
+preventStart.addEventListener('click', () => {
+    setTimeout(() => {
+        if (botStart) {
+            ipc.send('preventSleep')
+        }
+    }, 10)
+})
 
 stopPrevent.addEventListener('click', () => {
     ipc.send('stopPrevent')
