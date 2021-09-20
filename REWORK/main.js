@@ -47,10 +47,10 @@ const createWindow = () => {
   })
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
 
   var sleepID = undefined
-
 
   ipc.on('preventSleep', () => {
     sleepID = powerSaveBlocker.start('prevent-display-sleep')
@@ -95,9 +95,9 @@ app.on('ready', () => {
         responseHeaders: Object.assign ({
             'Content-Security-Policy': [
               // Not secure at all and needs to be re-written
-              "default-src 'unsafe-inline' 'self'",
+              "default-src 'unsafe-eval' 'unsafe-inline' 'self'",
               "style-src 'unsafe-inline' 'self'",
-              "script-src 'unsafe-inline' 'self'"
+              "script-src 'unsafe-eval' 'unsafe-inline' 'self'"
             ]
         }, details.responseHeaders)
     })

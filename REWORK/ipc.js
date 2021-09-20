@@ -1,5 +1,10 @@
 const { ipcRenderer } = require("electron")
 
+/*async function fileSelected(e) {
+    const loadedFilePath = e.target.files[0]?.path
+    let data = await window.electron.ipcRenderer.invoke('read-file', loadedFilePath)
+}*/
+
 // console.warn("The window controls doesn't work in the WebDemo.")
 
 const maxBtn = document.getElementById('maxBtn')
