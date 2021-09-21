@@ -15,8 +15,7 @@ body:
     options:
       - label: Yes, it refers to a problem.
       - label: No, not related.
-  validations:
-    required: true
+        required: true
  
 - type: textarea
   attributes:
