@@ -8,14 +8,13 @@ body:
     value: |
       Please make sure to [search for existing feature requests](https://github.com/JueK3y/Instagram-automated-commenting/issues?q=is%3Aopen+is%3Aissue+label%3AEnhancement) and [check the FAQ](https://github.com/JueK3y/Instagram-automated-commenting/wiki/FAQ) before filing a new one!
  
-- type: input
+ - type: checkboxes
   attributes:
-    label: Specification
-    placeholder: "Windows Version 20H2, IAC 2.0.1"
-    description: |
-      Please specify which `OS` you are using (with version number), which `browser (with version number)` and which `version of IAC` you are using.
-
-      If your IAC version is 2.0.1 or newer, you do not need to specify your browser.
+    label: Related to a problem
+    description: Does your feature request refer to a problem?
+    options:
+      - label: Yes, it refers to a problem.
+      - label: No, not related.
   validations:
     required: true
 
