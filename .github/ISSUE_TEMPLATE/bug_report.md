@@ -1,8 +1,8 @@
 ---
 name: Bug report 🐛
 about: Report errors or unexpected behavior
-Labels: Bug, New request
-Assignees: JueK3y-Prv
+labels: Bug, New request
+assignees: JueK3y-Prv
 ---
 
 ### Description
