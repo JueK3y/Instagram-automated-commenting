@@ -1,6 +1,6 @@
 ---
-name: Bug report 🐛
-about: Report errors or unexpected behavior
+Name: Bug report 🐛
+About: Report errors or unexpected behavior
 Labels: Bug, New request
 Assignees: JueK3y-Prv
 ---
