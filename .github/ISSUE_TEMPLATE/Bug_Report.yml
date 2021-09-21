@@ -1,5 +1,7 @@
 name: "Bug report 🐛"
 description: Report errors or unexpected behavior
+labels: Bug, New request
+assignees: JueK3y-Prv
 body:
 - type: markdown
   attributes:
