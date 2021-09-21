@@ -1,13 +1,13 @@
-name: "Bug report 🐛"
-description: Report errors or unexpected behavior
-labels: Bug, New request
+name: "Feature request 🚀"
+description: Suggest an idea for this project
+labels: Enhancement, New request
 assignees: JueK3y-Prv
 body:
 - type: markdown
   attributes:
     value: |
-      Please make sure to [search for existing issues](https://github.com/JueK3y/Instagram-automated-commenting/issues) and [check the FAQ](https://github.com/JueK3y/Instagram-automated-commenting/wiki/FAQ) before filing a new one!
-
+      Please make sure to [search for existing feature requests](https://github.com/JueK3y/Instagram-automated-commenting/issues?q=is%3Aopen+is%3Aissue+label%3AEnhancement) and [check the FAQ](https://github.com/JueK3y/Instagram-automated-commenting/wiki/FAQ) before filing a new one!
+ 
 - type: input
   attributes:
     label: Specification
