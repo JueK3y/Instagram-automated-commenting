@@ -11,7 +11,7 @@ body:
 - type: input
   attributes:
     label: Specification
-    placeholder: "Version 1.4.3"
+    placeholder: "Windows Version 20H2, IAC 2.0.1"
     description: |
       Please specify which `OS` you are using (with version number), which `browser (with version number)` and which `version of IAC` you are using.
 
