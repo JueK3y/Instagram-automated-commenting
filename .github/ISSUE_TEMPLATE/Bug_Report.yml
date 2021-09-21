@@ -1,0 +1,41 @@
+name: "Bug report 🐛"
+description: Report errors or unexpected behavior
+body:
+- type: markdown
+  attributes:
+    value: |
+      Please make sure to [search for existing issues](https://github.com/JueK3y/Instagram-automated-commenting/issues) and [check the FAQ](https://github.com/JueK3y/Instagram-automated-commenting/wiki/FAQ) before filing a new one!
+
+- type: input
+  attributes:
+    label: Specification
+    placeholder: "Version 1.4.3"
+    description: |
+      Please specify which `OS` you are using (with version number), which `browser (with version number)` and which `version of IAC` you are using.
+
+      If your IAC version is 2.0.1 or newer, you do not need to specify your browser.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Steps to reproduce
+    description: Tell us the steps required to trigger your bug.
+    placeholder: 1. Go to '...', 2. Click on '....', 3. Scroll down to '....', 4. See error
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Expected Behavior
+    description: If you want to include screenshots, paste them into the markdown editor below.
+    placeholder: A clear and concise description of what you expected to happen.
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: Actual Behavior
+    placeholder: What happened instead?
+  validations:
+    required: true
