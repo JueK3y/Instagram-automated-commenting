@@ -11,12 +11,9 @@ body:
 - type: checkboxes
   attributes:
     label: Related to a problem
-    description: Does your feature request refer to a problem?
+    description: Click the checkbox if the extension is referred to a problem
     options:
-      - label: Yes, it refers to a problem.
-      - label: No, not related.
-  validations:
-    required: true
+      - label: The feature request is related to a problem.
  
 - type: textarea
   attributes:
