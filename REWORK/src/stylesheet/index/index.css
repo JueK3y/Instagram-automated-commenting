@@ -23,6 +23,16 @@ html body main {
   border-left: 1px solid var(--border-color);
   border-top-left-radius: 10px;
   background-color: var(--main-color);
+  /* .container-blob {
+      position: absolute;
+      background-color: #ffcc80;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      bottom: 0;
+      left: 0;
+      transform: translateX(-50%);
+  } */
 }
 html body main #profile-container {
   position: absolute;
