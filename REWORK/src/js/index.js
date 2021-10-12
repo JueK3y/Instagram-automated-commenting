@@ -149,3 +149,19 @@ $('#stop-btn').click(function() {
   document.getElementById("stopIcon").style.display = "none"
   document.getElementById("runIcon").style.display = "block"
 });
+
+////// Profile Dropdown
+$(document).ready(function() {
+  $(document).on('click', '#profileDropdownContent', function(event) {
+    const clickedProfile = event.target.id                                                                // Pass ID to API and give username and password
+    username.value = clickedProfile + ' username'                                                         // Get Name for ID from API
+    password.value = clickedProfile + ' password'                                                         // Get Password for ID from API
+  })
+  $(document).on('click', '#profile-content', function(event) {
+    if (! event.target.id == '') {
+      const clickedProfile = event.target.id                                                                // Pass ID to API and give username and password
+      username.value = clickedProfile + ' username'                                                         // Get Name for ID from API
+      password.value = clickedProfile + ' password'                                                         // Get Password for ID from API
+    }
+  })
+})
