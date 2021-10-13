@@ -151,14 +151,14 @@ $('#stop-btn').click(function() {
 
 ////// Profile Dropdown
 $(document).ready(function() {
-  $(document).on('click', '#profileDropdownContent', function(event) {
-    const clickedProfile = event.target.id                                                                // Pass ID to API and give username and password
+  $(document).on('click', '#profileDropdownContent', function(e) {
+    const clickedProfile = e.target.id                                                                // Pass ID to API and give username and password
     username.value = clickedProfile + ' username'                                                         // Get Name for ID from API
     password.value = clickedProfile + ' password'                                                         // Get Password for ID from API
   })
-  $(document).on('click', '#profile-content', function(event) {
-    if (! event.target.id == '') {
-      const clickedProfile = event.target.id                                                              // Pass ID to API and give username and password
+  $(document).on('click', '#profile-content', function(e) {
+    if (! e.target.id == '') {
+      const clickedProfile = e.target.id                                                              // Pass ID to API and give username and password
       username.value = clickedProfile + ' username'                                                       // Get Name for ID from API
       password.value = clickedProfile + ' password'                                                       // Get Password for ID from API
     }

@@ -61,6 +61,8 @@
     --window-control-hover: rgba(168, 168, 168, 0.35);
     --window-close-hover: rgb(255, 89, 89);
 
+    --dropdown-bg: var(--background-color);
+
     --mouse-color: linear-gradient(90deg, rgb(250, 112, 154)28%, rgb(254, 225, 64) 100%);
     
     /* Note Banner */
@@ -142,6 +144,8 @@
   
     --window-control-hover: rgb(64, 67, 70);
     --window-close-hover: rgb(194, 43, 43);
+
+    --dropdown-bg: var(--input-bg-color);
     
     --mouse-color: linear-gradient(90deg, rgba(164, 223, 170, 0.6)28%, rgba(107, 193, 224, 0.6) 100%);
     
