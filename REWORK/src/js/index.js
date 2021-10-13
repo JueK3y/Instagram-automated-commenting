@@ -164,3 +164,16 @@ $(document).ready(function() {
     }
   })
 })
+
+// Image color changer
+username.addEventListener('focus', function() {
+  document.getElementById('profileDropdownImage').style.display = 'block'
+  document.getElementById('profileDropdownImageNoFocus').style.display = 'none'
+}, false);
+
+username.addEventListener('blur', function() {
+  if (username.value == '') {
+    document.getElementById('profileDropdownImage').style.display = 'none'
+    document.getElementById('profileDropdownImageNoFocus').style.display = 'block'
+  }
+}, false); 

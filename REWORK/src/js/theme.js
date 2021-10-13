@@ -22,6 +22,7 @@ const warningIcon = document.getElementById("warning-icon-img")
 const togglePw = document.getElementById("togglePwImage")
 const checkboxToggle = document.getElementById("save-profile")
 const profileDropdown = document.getElementById("profileDropdownImage")
+const profileDropdownNoFocus = document.getElementById("profileDropdownImageNoFocus")
 
 const addIcon = document.getElementById('addIcon')
 
@@ -95,6 +96,7 @@ function lightIcon() {
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
         addIcon.src = "src/img/icons/light/add.svg"
         profileDropdown.src = "src/img/icons/light/show-more.svg"
+        profileDropdownNoFocus.src = "src/img/icons/light/show-more-grey.svg"
     }
     catch(err) {}
 }
@@ -154,6 +156,7 @@ function darkIcon() {
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
         addIcon.src = "src/img/icons/dark/add.svg"
         profileDropdown.src = "src/img/icons/dark/show-more.svg"
+        profileDropdownNoFocus.src = "src/img/icons/dark/show-more-grey.svg"
     }
     catch(err) {}
 }
