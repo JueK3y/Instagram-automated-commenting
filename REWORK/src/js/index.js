@@ -139,8 +139,6 @@ $('#start-btn').click(function() {
   }
 });
 
-
-
 $('#stop-btn').click(function() {
   validate = false
   botStart = false
@@ -149,6 +147,7 @@ $('#stop-btn').click(function() {
   document.getElementById("stopIcon").style.display = "none"
   document.getElementById("runIcon").style.display = "block"
 });
+
 
 ////// Profile Dropdown
 $(document).ready(function() {
@@ -159,9 +158,9 @@ $(document).ready(function() {
   })
   $(document).on('click', '#profile-content', function(event) {
     if (! event.target.id == '') {
-      const clickedProfile = event.target.id                                                                // Pass ID to API and give username and password
-      username.value = clickedProfile + ' username'                                                         // Get Name for ID from API
-      password.value = clickedProfile + ' password'                                                         // Get Password for ID from API
+      const clickedProfile = event.target.id                                                              // Pass ID to API and give username and password
+      username.value = clickedProfile + ' username'                                                       // Get Name for ID from API
+      password.value = clickedProfile + ' password'                                                       // Get Password for ID from API
     }
   })
 })
