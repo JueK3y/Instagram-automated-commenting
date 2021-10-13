@@ -60,6 +60,20 @@ $(document).on('keyup', function(e) {
   if (e.key == "Escape" && ! $('#active').hasClass('comment')) $('.comment').click()
 });
 
+$(document).ready(function() {
+  $("body").click(function(e) {
+    if ($('#active').hasClass('profile')) {
+      if (! $(e.target).closest("#profile-container").length && ! $(e.target).closest("#test").length) $('.comment').click()
+    }
+    if ($('#active').hasClass('helpNav')) {
+      if (! $(e.target).closest("#help-container").length && ! $(e.target).closest("#test").length) $('.comment').click()
+    }
+    if ($('#active').hasClass('settings')) {
+      if (! $(e.target).closest("#settings-container").length && ! $(e.target).closest("#test").length) $('.comment').click()
+    }
+  })
+})
+
 // Comment 
 $('.comment').click(() => {
   if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
