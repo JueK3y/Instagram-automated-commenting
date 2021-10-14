@@ -1,3 +1,15 @@
+////// Change close image on hover
+
+document.getElementById('closeBtn').addEventListener('mouseover', function() {
+  document.getElementById('closeBtnIcon').src = 'src/img/icons/dark/win-close.svg'
+})
+document.getElementById('closeBtn').addEventListener('mouseout', function() {
+  if (body.classList.contains('light')) {
+    document.getElementById('closeBtnIcon').src = 'src/img/icons/light/win-close.svg'
+  }
+})
+
+
 ////// Active line change
 
 function showContent(type, time) {                  
