@@ -150,30 +150,37 @@ $('#stop-btn').click(function() {
 
 
 ////// Profile Dropdown
+const prDdImage = document.getElementById('profileDropdownImage');
+const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
+
 $(document).ready(function() {
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = e.target.id                                                                // Pass ID to API and give username and password
     username.value = clickedProfile + ' username'                                                         // Get Name for ID from API
     password.value = clickedProfile + ' password'                                                         // Get Password for ID from API
+    prDdImage.style.display = 'block'
+    prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
     if (! e.target.id == '') {
       const clickedProfile = e.target.id                                                              // Pass ID to API and give username and password
       username.value = clickedProfile + ' username'                                                       // Get Name for ID from API
       password.value = clickedProfile + ' password'                                                       // Get Password for ID from API
+      prDdImage.style.display = 'block'
+      prDdImgBlur.style.display = 'none'
     }
   })
 })
 
 // Image color changer
 username.addEventListener('focus', function() {
-  document.getElementById('profileDropdownImage').style.display = 'block'
-  document.getElementById('profileDropdownImageNoFocus').style.display = 'none'
+  prDdImage.style.display = 'block'
+  prDdImgBlur.style.display = 'none'
 }, false);
 
 username.addEventListener('blur', function() {
   if (username.value == '') {
-    document.getElementById('profileDropdownImage').style.display = 'none'
-    document.getElementById('profileDropdownImageNoFocus').style.display = 'block'
+    prDdImage.style.display = 'none'
+    prDdImgBlur.style.display = 'block'
   }
 }, false); 
