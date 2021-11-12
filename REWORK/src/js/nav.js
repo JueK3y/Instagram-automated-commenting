@@ -67,21 +67,31 @@ function lineAnimation2(type, marPx, heiPx) {
 }
 
 
-// ESC Button
-$(document).on('keyup', function(e) {
-  if (e.key == "Escape" && ! $('#active').hasClass('comment')) $('.comment').click()
-});
+////// ESC Button
+$(document).ready(() => {
+  var locked = false
+  $(document).on('keyup', (e) => {
+    if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
+      if (locked) return
+      locked = true
 
-$(document).ready(function() {
+      $('.comment').click()
+      setTimeout(() => { locked = false }, 350)
+    }
+  })
+})
+
+
+$(document).ready(() => {                                               // Must be modified so that button click also has a timeout
   $("body").click(function(e) {
     if ($('#active').hasClass('profile')) {
-      if (! $(e.target).closest("#profile-container").length && ! $(e.target).closest("#test").length) $('.comment').click()
+      if (! $(e.target).closest("#profile-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
     }
     if ($('#active').hasClass('helpNav')) {
-      if (! $(e.target).closest("#help-container").length && ! $(e.target).closest("#test").length) $('.comment').click()
+      if (! $(e.target).closest("#help-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
     }
     if ($('#active').hasClass('settings')) {
-      if (! $(e.target).closest("#settings-container").length && ! $(e.target).closest("#test").length) $('.comment').click()
+      if (! $(e.target).closest("#settings-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
     }
   })
 })
@@ -159,7 +169,7 @@ $('.settings').click(() => {
 
 slideIn = false
 
-const navPos = localStorage.getItem("navPos");
+const navPos = localStorage.getItem("navPos")
 
 if (navPos) {
   $("main").css('left', '47px')
@@ -167,8 +177,8 @@ if (navPos) {
   $("#wifi").css('width', '45px')
   $(".settings").css('width', '45px')
   $("form").css('margin-left', '0px')
-  $(".second-text").css('display', 'none');
-  $(".navText").css('display', 'none');
+  $(".second-text").css('display', 'none')
+  $(".navText").css('display', 'none')
   $('#win-title-text').text('IAC 2.0').fadeIn()
   slideIn = true
 }
@@ -176,7 +186,7 @@ if (navPos) {
 $(document).ready(function() {
   $(document).on('click', '#active', function() {
     if (slideIn == false) {
-      $("#side-bar").css('z-index', 0);
+      $("#side-bar").css('z-index', 0)
       setTimeout(function() {
         $("main").animate({left: '47px'})
         $("form").animate({marginLeft: '0px'})
@@ -186,38 +196,38 @@ $(document).ready(function() {
           $(".settings").css('width', '45px')
         }, 180)
         setTimeout(function() {
-          $(".second-text").css('display', 'none');
+          $(".second-text").css('display', 'none')
         }, 260)
         setTimeout(function() {
-          $(".navText").css('display', 'none');
-          $("#side-bar").css('z-index', 3);
+          $(".navText").css('display', 'none')
+          $("#side-bar").css('z-index', 3)
         }, 370)
         $('#win-title-text').fadeOut(300, function() {
-          $(this).text('IAC 2.0').fadeIn(150);
-        });
+          $(this).text('IAC 2.0').fadeIn(150)
+        })
       }, 70)
       localStorage.setItem("navPos", "in")
       slideIn = true
     }
     else if (slideIn) {
-      $("#side-bar").css('z-index', 0);
+      $("#side-bar").css('z-index', 0)
       setTimeout(function() {
         $("#side-bar").css('width', '320px')
         $("#wifi").css('width', '310px')
         $(".settings").css('width', '310px')
-        $(".navText").css('display', 'block');
+        $(".navText").css('display', 'block')
         setTimeout(function() {
-          $(".second-text").css('display', 'contents');
+          $(".second-text").css('display', 'contents')
         }, 80)
         $("main").animate({left: '312px'})
         $("form").animate({marginLeft: '-533px'})
         setTimeout(function() {
-          $("#side-bar").css('z-index', 3);
+          $("#side-bar").css('z-index', 3)
         }, 400)
       }, 120)
       $('#win-title-text').fadeOut(300, function() {
-        $(this).text('Instagram Automated Commenting').fadeIn(150);
-      });
+        $(this).text('Instagram Automated Commenting').fadeIn(150)
+      })
       localStorage.removeItem("navPos")
       slideIn = false
     }
@@ -383,8 +393,8 @@ window.setInterval(() => {
     changeColor.style.background = "none"
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
   }
-  elem.innerHTML = internetSpeed;
-}, 1250);
+  elem.innerHTML = internetSpeed
+}, 1250)
 
 
 
@@ -425,7 +435,7 @@ $(document).ready(function() {                                                //
           settingsIcon.style.display = 'none'
           settingsUpdateIcon.style.display = 'inline-block'
           updateIcon.style.transform = 'rotate(0deg)'
-          showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'no-update-found', true)
+          showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'update-found-search', true)
           noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
         }
         else {
@@ -470,7 +480,7 @@ $(document).ready(function() {                                                //
       else {
         showBanner('error', 'Fehlgeschlagen', 'Die neuste Version konnte nicht heruntergeladen werden.', 'install-update-failed', true)
         noteMessage("Herunterladen fehlgeschlagen", "Die neuste Version konnte nicht heruntergeladen werden. Probiere es manuell.", true)
-        download.style.display = 'none '
+        download.style.display = 'none'
         downloadFailed.style.display = 'inline-block'
         setTimeout(() => {
           downloadFailed.style.display = 'none '
@@ -486,8 +496,10 @@ $(document).ready(function() {                                                //
 if (updateOnline) {
   download.style.display = ''
   update.style.display = 'none'
-  settingsIcon.style.display = 'inline-block'
-  settingsUpdateIcon.style.display = 'none'
+  settingsIcon.style.display = 'none'
+  settingsUpdateIcon.style.display = 'inline-block'
+  showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'update-found-auto', true)
+  noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
 }
 else {
   download.style.display = 'none'
