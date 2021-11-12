@@ -729,4 +729,12 @@ html body #legal-note {
   color: var(--text-note-color);
   font-size: 20px;
 }
+html body #legal-note a {
+  color: var(--text-note-color);
+  text-decoration: underline;
+  -webkit-text-decoration-style: wavy;
+          text-decoration-style: wavy;
+  -webkit-text-decoration-color: var(--selection-bg-color);
+          text-decoration-color: var(--selection-bg-color);
+}
 /*# sourceMappingURL=index.css.map */
