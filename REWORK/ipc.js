@@ -34,11 +34,12 @@ stopPrevent.addEventListener('click', () => {
     ipc.send('stopPrevent')
 })
 
+// Minimize 
 minBtn.addEventListener('click', () => {
     ipc.send('minApp')
 })
 
-
+// Maximize
 ipc.on('isMaximized', () => {
     maxBtn.style.display = 'none'
     restoreBtn.style.display = 'block'
@@ -48,7 +49,7 @@ maxBtn.addEventListener('click', () => {
     ipc.send('maxApp')
 })
 
-
+// Restore
 ipc.on('isRestored', () => {
     maxBtn.style.display = 'block'
     restoreBtn.style.display = 'none'
@@ -58,6 +59,7 @@ restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
 })
 
+// Close
 closeBtn.addEventListener('click', () => {
     if (botStart) {
         if (checkClick == 1) {

@@ -74,7 +74,7 @@ const createWindow = () => {
   })
 
   ipc.on('restoreApp', () => {
-    mainWindow.restore()
+    mainWindow.unmaximize()
     mainWindow.webContents.send('isRestored')
   })
 
