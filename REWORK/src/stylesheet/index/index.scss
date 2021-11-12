@@ -631,6 +631,12 @@ html {
             right: 60px;
             color: var(--text-note-color);
             font-size: 20px;
+            a {
+                color: var(--text-note-color);
+                text-decoration: underline;
+                text-decoration-style: wavy;
+                text-decoration-color: var(--selection-bg-color);
+            }
         }
     }
 }
