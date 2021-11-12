@@ -2,7 +2,7 @@
 $('#clearButton').click(function() {
   $('#url-input').val('')
   $('#url-input').focus()
-});
+})
 
 ////// Password Toggle Button
 const password = document.getElementById("password-form")
@@ -84,6 +84,12 @@ botStart = false
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
 
+
+$(document).on('keyup', function(e) {
+  if (e.key == "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) $('#start-btn').click()
+})
+
+
 $('#start-btn').click(function() {
   hideBanner("error")                                                                                                            // Looks weird for the same error
   if (urlInput.value == "" && username.value == "" && password.value == "") {
@@ -137,7 +143,7 @@ $('#start-btn').click(function() {
     document.getElementById("runIcon").style.display = "none"
     botStart = true                                                                                        // Pass value to API, then start commenting
   }
-});
+})
 
 $('#stop-btn').click(function() {
   validate = false
@@ -146,11 +152,11 @@ $('#stop-btn').click(function() {
   document.getElementById("stop-btn").style.display = "none"
   document.getElementById("stopIcon").style.display = "none"
   document.getElementById("runIcon").style.display = "block"
-});
+})
 
 
 ////// Profile Dropdown
-const prDdImage = document.getElementById('profileDropdownImage');
+const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
 $(document).ready(function() {
@@ -176,11 +182,11 @@ $(document).ready(function() {
 username.addEventListener('focus', function() {
   prDdImage.style.display = 'block'
   prDdImgBlur.style.display = 'none'
-}, false);
+}, false)
 
 username.addEventListener('blur', function() {
   if (username.value == '') {
     prDdImage.style.display = 'none'
     prDdImgBlur.style.display = 'block'
   }
-}, false); 
+}, false)
