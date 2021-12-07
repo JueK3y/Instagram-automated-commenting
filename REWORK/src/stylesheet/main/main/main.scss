@@ -35,6 +35,9 @@ html body {
             transform: rotate(365deg); 
         }
     }
+    .no-select {
+        user-select: none !important;
+    }
     .small-cursor {
         position: fixed;
         z-index: 2;

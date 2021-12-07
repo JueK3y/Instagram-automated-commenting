@@ -29,7 +29,7 @@
 
         <div id="window-title">
           <img src="src/img/IAC-Icon.ico" alt="The icon of IAC">
-          <span id="win-title-text">Instagram Automated Commenting</span>
+          <span id="win-title-text" class="no-select">Instagram Automated Commenting</span>
         </div>
         
         <div id="window-controls">      
@@ -53,7 +53,7 @@
         </div>
       </div>
     </header>
-    <nav id="nav-bar">
+    <nav id="nav-bar" class="no-select">
       <div id="side-bar">
         <div id="upper-content">
           <a class="comment" id="active">
@@ -97,7 +97,7 @@
       </div>
     </nav>
     <main>
-      <div id="profile-container">
+      <div id="profile-container" class="no-select">
         <div class="container-blob"></div> 
         <ul id="profile-content">
           <li id="profile-1">
@@ -132,7 +132,7 @@
           </li>
         </ul>
       </div>
-      <div id="help-container">
+      <div id="help-container" class="no-select">
         <div class="container-blob"></div> 
         <ul id="help-content">
           <li>
@@ -157,7 +157,7 @@
         </ul>
       </div>
 
-      <div id="settings-container">
+      <div id="settings-container" class="no-select">
         <div class="container-blob"></div> 
         <ul id="settings-content">
           <li id="change-language">
@@ -229,7 +229,7 @@
           <div id="account-details">
             <div id="post-url">
 
-              <label for="big-form" class="title">
+              <label for="big-form" class="title no-select">
                 <h2 class="big-title">Instagram Post URL
                   <span class="hint--right" aria-label="Kopiere die URL des Instagram Posts und füge sie hier ein." tabindex="-1">
                     <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
@@ -243,7 +243,7 @@
             <div id="login-data">
               <div id="username">
 
-                <label for="username-form" class="title">
+                <label for="username-form" class="title no-select">
                   <h2 class="big-title">Benutzername
                     <span class="hint--right" aria-label="Gib den Benutzername (d)eines Instagram Kontos ein." tabindex="-1">
                       <img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info">
@@ -252,7 +252,7 @@
                 </label>
 
                 <input type="text" title="" id="username-form" class="medium-form" placeholder="john_doe_on_instagram" maxlength="30" autocomplete="off" required>
-                <div id="profileDropdown" tabindex="-1">
+                <div id="profileDropdown" class="no-select" tabindex="-1">
                   <div id="profileDropdownMain">
                     <button id="profileDropdownButton" type="button">
                       <img src="src/img/icons/light/show-more.svg" alt="Icon of an arrow facing downwards" id="profileDropdownImage" class="profileDropdownImage">
@@ -269,7 +269,7 @@
               </div>
               <div id="password">
 
-                <label for="password-form" class="title">
+                <label for="password-form" class="title no-select">
                   <h2 class="big-title">Passwort
                     <span class="hint--right" aria-label="Setze mit einem Klick dein Instagram Passwort zurück.">
                       <a href="https://instagram.com/accounts/password/reset" target="_blank" tabindex="-1"><img src="src/img/icons/light/info-small.svg" alt="Image of the help icon" class="info"></a>
@@ -284,7 +284,7 @@
               </div>
             </div>
           </div>
-          <details id="additional-settings">
+          <details id="additional-settings" class="no-select">
             <summary id="details">
 
               <i class="line-additional"></i>
@@ -292,7 +292,7 @@
               <i class="line-additional"></i>
 
             </summary>
-            <div id="a-d-content">
+            <div id="a-d-content" class="no-select">
               <div id="save-local">
     
                 <input type="checkbox" name="save-local" id="save-profile" class="save-profile-light">
@@ -310,7 +310,7 @@
               </div>
             </div>
           </details>
-          <div id="start-stop">
+          <div id="start-stop" class="no-select">
             <div id="start">
               
               <button type="button" id="start-btn" href="#">Starten</button>
@@ -325,7 +325,7 @@
         </div>
       </form>
     </main>
-    <div id="info-banner" class="banner">
+    <div id="info-banner" class="banner no-select">
       <div class="banner-content">
         <div id="info-icon" class="banner-icon"><img id="info-icon-img" src="src/img/icons/dark/note-info.svg" alt="Icon of the info banner"></div>
         <div id="info-title" class="banner-title">Information</div>
@@ -333,7 +333,7 @@
         <div id="info-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the info banner"></div>
       </div>
     </div>
-    <div id="warning-banner" class="banner">
+    <div id="warning-banner" class="banner no-select">
       <div class="banner-content">
         <div id="warning-icon" class="banner-icon"><img id="warning-icon-img" src="src/img/icons/dark/note-important.svg" alt="Icon of the warning banner"></div>
         <div id="warning-title" class="banner-title">Warnung</div>
@@ -341,7 +341,7 @@
         <div id="warning-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for the warning banner"></div>
       </div>
     </div>
-    <div id="error-banner" class="banner">
+    <div id="error-banner" class="banner no-select">
       <div class="banner-content">
         <div id="error-icon" class="banner-icon"><img class="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
         <div id="error-title" class="banner-title">Fehler</div>
@@ -349,7 +349,7 @@
         <div id="error-close" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
       </div>
     </div>
-    <div id="error-banner-wifi" class="banner">
+    <div id="error-banner-wifi" class="banner no-select">
       <div class="banner-content">
         <div id="error-icon-wifi" class="banner-icon"><img class="error-icon-img" src="src/img/icons/dark/clear.svg" alt="Error icon"></div>
         <div id="error-title-wifi" class="banner-title">Langsames Internet</div>
@@ -358,7 +358,7 @@
         <div id="error-close-wifi" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
       </div>
     </div>
-    <p id="legal-note">Work in progress - &copy; 2021 by <a href="https://www.juek3y.com/">JueK3y</a></p>
+    <p id="legal-note" class="no-select">Work in progress - &copy; 2021 by <a href="https://www.juek3y.com/">JueK3y</a></p>
     <div class="small-cursor"></div>
   </body>
 </html>

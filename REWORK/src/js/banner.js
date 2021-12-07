@@ -44,7 +44,7 @@ function showBanner(type, title, message, key, hide) {
     if (hide) {
         timeoutHandle = window.setTimeout(() => {
             hoverCheck(type, key)
-        }, 5000)
+        }, 5000)            // Needs to be checked
     }
 }
 
