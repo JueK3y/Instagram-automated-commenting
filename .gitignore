@@ -4,5 +4,6 @@
 /output/
 /REWORK/node_modules/
 REWORK/package-lock.json
+REWORK/src/py/__pycache__/
 geckodriver.log
 IGACB.py
