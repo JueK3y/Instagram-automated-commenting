@@ -105,6 +105,14 @@ html body {
         margin-left: 3px;
         cursor: pointer;
     }
+    .editProfile {
+        margin-left: 30px;
+        .editProfileIcon {          // -- Looks ugly -- //
+            width: 13px;
+            height: 13px;
+            opacity: .65;
+        }
+    }
     .openExternal {
         width: 13px;
         height: 13px;
