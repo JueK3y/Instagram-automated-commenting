@@ -43,8 +43,8 @@ if (programStopped) {                   // Same as above
   $('#stop-btn').fadeOut()
 } */
 
-errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
-specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß']
+const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
+const specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß']
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
     if (checkVar.includes(specialChar[i])) {
@@ -76,10 +76,10 @@ function formError(type) {
 
 
 // ONLY FOR DEMO VERSION
-validate = false
+var validate = false
 
-checkClick = 0
-botStart = false
+var checkClick = 0                                    // -- Whats the purpose of checkClick -- //
+var botStart = false
 
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
@@ -91,7 +91,7 @@ $(document).on('keyup', function(e) {
 
 
 $('#start-btn').click(function() {
-  hideBanner("error")                                                                                                            // Looks weird for the same error
+  hideBanner("error")                                                                                                            // -- Looks weird for the same error -- //
   if (urlInput.value == "" && username.value == "" && password.value == "") {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
     formError()
@@ -141,7 +141,9 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("stopIcon").style.display = "block"
     document.getElementById("runIcon").style.display = "none"
+    createBrowserWindow(urlInput.value)
     botStart = true                                                                                        // Pass value to API, then start commenting
+    // manager.Manager.startLogic()
   }
 })
 

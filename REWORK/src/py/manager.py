@@ -7,8 +7,6 @@ Copyright © 2020 - 2021 by JueK3y (www.github.com/JueK3y/)
 '''
 from login import Login
 
-import sys
-
 class Manager:
     def startLogic():                                           # -- startLogic will be executed when HTML Start Button is pushed --
         print("This is the start of IAC 2.0.")
@@ -26,8 +24,7 @@ class Manager:
         print("Get LogIn-Data")
 
     def storeLogIn():
-        # saveLogin is an attribute form JS
-        saveLogin = True
+        saveLogin = True                                        # -- saveLogin is an attribute form JS --
         if (saveLogin):
             Login.store()
 
@@ -40,6 +37,4 @@ class Manager:
 
 
 Manager.startLogic()
-
-sys.stdout.flush()
 

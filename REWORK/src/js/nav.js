@@ -82,7 +82,7 @@ $(document).ready(() => {
 })
 
 
-$(document).ready(() => {                                               // Must be modified so that button click also has a timeout
+$(document).ready(() => {                                               // -- Must be modified so that button click also has a timeout -- //
   $("body").click(function(e) {
     if ($('#active').hasClass('profile')) {
       if (! $(e.target).closest("#profile-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
@@ -346,7 +346,7 @@ window.setInterval(() => {
     changeColor.style.background = (light) ? '#FDE7E9':'#442726'
     changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
     showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
-    // noteMessage("WLAN deaktiviert", "Für IAC 2.0 brauchst du eine aktive Internetverbindung")  // Spams the note center
+    // noteMessage("WLAN deaktiviert", "Für IAC 2.0 brauchst du eine aktive Internetverbindung")  // -- Spams the note center -- //
   }
   else if ($('.wifi-not-connected')[0]) {
     hideBanner('wifi-not-connected')
@@ -360,6 +360,7 @@ window.setInterval(() => {
     if (counter == 3 && showMessage) {
       $("#error-banner-wifi").fadeIn()
       counterDisplay += 1
+      // noteMessage("Langsames Internet", "Ein langsames Netzwerk könnte IAC beeinträchtigen.")  // -- Spams the note center -- //
       if (counterDisplay == 3) {
         document.getElementById("error-hide").style.display = "block"
       }

@@ -34,6 +34,7 @@ function hoverCheck(type, key) {
 var timeoutHandle
 
 function showBanner(type, title, message, key, hide) {
+    // -- If other banner already exists, add margin here -- //
     window.clearTimeout(timeoutHandle)
     $('#'+type+'-banner').fadeIn(150)
     document.getElementById(type+'-title').innerHTML = title
