@@ -12,23 +12,22 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-from get import Getter
-from credentials import Login
-from automation import Logic
+class Getter:
+    # -- Get data from the GUI --
+    def getURL():
+        Getter.URL = "https://instagram.com/test"
+        print("Get Instagram URL: " + Getter.URL)
 
-class Manager:
-    def startLogic():                                           # -- startLogic will be executed when HTML Start Button is pushed --
-        print("\nThis is the start of IAC 2.0.")
-        Getter.getURL()
-        Getter.getLogIn()
-        Getter.getSaveCredentials()
-        Getter.getComments()
-        if(Getter.saveLogin):
-            Login.store(Getter.username, Getter.password)
-        Logic.checkDriver()
-        Logic.mainLogic()
+    def getLogIn():
+        Getter.username = "test"
+        Getter.password = "foo"
+        print("\nGet Login Data:\nBenutzername: " + Getter.username + "\nPasswort: " + Getter.password + "\n")
 
 
-Manager.startLogic()
-print("\n--- End of Python Code ---\n")
+    def getSaveCredentials():
+        print("Get saveProfile boolean")
+        Getter.saveLogin = True                                        # -- saveLogin is an attribute form JS --
+
+    def getComments():
+        print("Get comments")
 
