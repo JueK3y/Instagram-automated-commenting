@@ -44,7 +44,7 @@ if (programStopped) {                   // Same as above
 } */
 
 const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
-const specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß']
+const specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
     if (checkVar.includes(specialChar[i])) {
@@ -79,7 +79,6 @@ function formError(type) {
 var validate = false
 
 var checkClick = 0                                    // -- Whats the purpose of checkClick -- //
-var botStart = false
 
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
@@ -141,15 +140,12 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("stopIcon").style.display = "block"
     document.getElementById("runIcon").style.display = "none"
-    createBrowserWindow(urlInput.value)
-    botStart = true                                                                                        // Pass value to API, then start commenting
-    // manager.Manager.startLogic()
+    logicStart(urlInput.value, username.value, password.value, document.getElementById("save-profile").checked)
   }
 })
 
 $('#stop-btn').click(function() {
   validate = false
-  botStart = false
   checkClick = 0
   document.getElementById("stop-btn").style.display = "none"
   document.getElementById("stopIcon").style.display = "none"

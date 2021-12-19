@@ -12,7 +12,12 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
+import keyring
+
 class Login:
     def store(username, password):
+        keyring.set_password('IAC 2.0', username, password)
         print("\nSaving LogIn Data:\nBenutzername: " + username + "\nPasswort: " + password + "\n")
+        # password2 = keyring.get_password('IAC 2.0', username)
+        # print(password2)
 

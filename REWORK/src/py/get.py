@@ -12,21 +12,22 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
+import sys
 class Getter:
     # -- Get data from the GUI --
     def getURL():
-        Getter.URL = "https://instagram.com/test"
+        Getter.URL = sys.argv[1]
         print("Get Instagram URL: " + Getter.URL)
 
     def getLogIn():
-        Getter.username = "test"
-        Getter.password = "foo"
+        Getter.username = sys.argv[2]
+        Getter.password = sys.argv[3]
         print("\nGet Login Data:\nBenutzername: " + Getter.username + "\nPasswort: " + Getter.password + "\n")
 
 
     def getSaveCredentials():
-        print("Get saveProfile boolean")
-        Getter.saveLogin = True                                        # -- saveLogin is an attribute form JS --
+        Getter.saveLogin = sys.argv[4]                               # -- saveLogin is an attribute from JS --
+        print("Get saveProfile boolean: " + Getter.saveLogin)
 
     def getComments():
         print("Get comments")

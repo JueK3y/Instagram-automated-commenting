@@ -24,7 +24,7 @@ else if(win.isMaximized()) {
 
 preventStart.addEventListener('click', () => {
     setTimeout(() => {
-        if (botStart) {
+        if (validate) {
             ipc.send('preventSleep')
         }
     }, 10)
@@ -61,7 +61,7 @@ restoreBtn.addEventListener('click', () => {
 
 // Close
 closeBtn.addEventListener('click', () => {
-    if (botStart) {
+    if (validate) {
         if (checkClick == 1) {
             ipc.send('closeApp')
         }

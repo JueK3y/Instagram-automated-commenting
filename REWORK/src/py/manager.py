@@ -11,7 +11,9 @@
 # │ Copyright © 2020 - 2021 by JueK3y (Julian Kennedy)                      │
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
+# -*- coding: utf-8 -*-
 
+import sys
 from get import Getter
 from credentials import Login
 from automation import Logic
@@ -23,7 +25,7 @@ class Manager:
         Getter.getLogIn()
         Getter.getSaveCredentials()
         Getter.getComments()
-        if(Getter.saveLogin):
+        if(Getter.saveLogin == "true"):
             Login.store(Getter.username, Getter.password)
         Logic.checkDriver()
         Logic.mainLogic()
@@ -31,4 +33,6 @@ class Manager:
 
 Manager.startLogic()
 print("\n--- End of Python Code ---\n")
+
+sys.stdout.flush()
 
