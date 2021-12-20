@@ -23,7 +23,7 @@ class Profile:
     
     def editID(oldID, username):
         update = {
-            "U-3": {
+            "uid-003": {
                 "name": username,
                 "updated": {
                     "date": date.today().strftime("%d-%m-%Y"),
@@ -39,7 +39,7 @@ class Profile:
 
     def create(username, pinned):
         user = {
-            "U-1": {
+            "uid-001": {
                 "username": username,
                 "nickname": username,
                 "pinned": pinned,
