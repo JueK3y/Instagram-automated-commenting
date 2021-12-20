@@ -1,14 +1,16 @@
 {
-    "1-U": {
-        "username": "profile-1-uidsername",
-        "nickname": "profile-1-uidsername",
-        "pinned": false,
-        "created": {
-            "date": "20-12-2021",
-            "time": "20:34:52"
-        },
-        "verified": {
-            "checked": false
+    "uID": {
+        "uid-001": {
+            "username": "Testperson",
+            "nickname": "Testperson",
+            "pinned": false,
+            "created": {
+                "date": "20-12-2021",
+                "time": "21:13:39"
+            },
+            "verified": {
+                "checked": false
+            }
         }
     }
 }

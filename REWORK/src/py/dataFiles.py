@@ -66,3 +66,11 @@ class ID:
         for json_dict in json_file:
             json_dict.pop("name", None)
         print(json.dumps(json_file, indent=4))
+
+f = open(idPath)
+data = json.load(f)
+
+for i in data['uID']['uid-001']:
+    print(i)
+
+f.close()

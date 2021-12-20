@@ -39,16 +39,18 @@ class Profile:
 
     def create(username, pinned):
         user = {
-            "uid-001": {
-                "username": username,
-                "nickname": username,
-                "pinned": pinned,
-                "created": {
-                    "date": date.today().strftime("%d-%m-%Y"),
-                    "time": datetime.now().strftime("%H:%M:%S")
-                },
-                "verified": {
-                    "checked": False
+            "uID": {
+                "uid-001": {
+                    "username": username,
+                    "nickname": username,
+                    "pinned": pinned,
+                    "created": {
+                        "date": date.today().strftime("%d-%m-%Y"),
+                        "time": datetime.now().strftime("%H:%M:%S")
+                    },
+                    "verified": {
+                        "checked": False
+                    }
                 }
             }
         }
