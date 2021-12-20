@@ -67,10 +67,17 @@ class ID:
             json_dict.pop("name", None)
         print(json.dumps(json_file, indent=4))
 
-f = open(idPath)
-data = json.load(f)
+    def getData():
+        f = open(idPath)
+        data = json.load(f)
 
-for i in data['uID']['uid-001']:
-    print(i)
+        for i in data['uID']:
+            uID = i
+            username = data['uID'][i]['username']
+            nickname = data['uID'][i]['nickname']
+            pinned = data['uID'][i]['pinned']
+            print(uID, username, nickname, pinned)
 
-f.close()
+        f.close()
+
+ID.getData()

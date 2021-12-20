@@ -19,7 +19,7 @@ from credentials import Login
 
 class Profile:
     def show():
-        print("This shows all profile data needed.")
+        ID.getData()
     
     def editID(oldID, username):
         update = {

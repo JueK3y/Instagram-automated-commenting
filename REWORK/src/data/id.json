@@ -11,6 +11,18 @@
             "verified": {
                 "checked": false
             }
+        },
+        "uid-002": {
+            "username": "Person2",
+            "nickname": "NeuePerson",
+            "pinned": true,
+            "created": {
+                "date": "20-12-2021",
+                "time": "21:13:39"
+            },
+            "verified": {
+                "checked": false
+            }
         }
     }
 }
