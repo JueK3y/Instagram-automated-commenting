@@ -2,19 +2,15 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Since the project is being completely reworked, no security issues from versions older than 1.4.x will be fixed.
+<br>**Use of the unsupported versions is at your own risk despite known security issues.**
 
 | Version | Supported          |
 | ------- | ------------------ |
 | 2.x.x   | :white_check_mark: |
-| 1.4.x   | :x:                |
 | < 1.4   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Currently, the contact form for security issues is being expanded.
+<br>If you want to report a security issue, please [create a new issue ticket](https://github.com/JueK3y/Instagram-automated-commenting/issues/new).
