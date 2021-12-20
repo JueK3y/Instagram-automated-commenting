@@ -13,19 +13,49 @@
 # └─────────────────────────────────────────────────────────────────────────┘
 
 import sys
-import speedtest  
+from datetime import date, datetime
+from dataFiles import ID
+from credentials import Login
 
-class WiFi:
-    def checkConnection():
-        connected = True        # -- For checking if pc is connected to wifi
-        if connected:
-            WiFi.checkSpeed()
-        else:
-            print("PC is not connected to any network")
+class Profile:
+    def show():
+        print("This shows all profile data needed.")
+    
+    def editID(oldID, username):
+        update = {
+            "U-3": {
+                "name": username,
+                "updated": {
+                    "date": date.today().strftime("%d-%m-%Y"),
+                    "time": datetime.now().strftime("%H:%M:%S")
+                }
+            }
+        }
 
-    def checkSpeed():
-        st = speedtest.Speedtest()
-        download = st.download()
-        print('Download speed: ' + str(download))
+        ID.editFile(update)
+    
+    def editPw(username, password):
+        Login.store(username, password)
+
+    def create(username, pinned):
+        user = {
+            "U-3": {
+                "name": username,
+                "pinned": pinned,
+                "created": {
+                    "date": date.today().strftime("%d-%m-%Y"),
+                    "time": datetime.now().strftime("%H:%M:%S")
+                },
+                "verified": {
+                    "checked": False
+                }
+            }
+        }
+
+        ID.editFile(user)
+
+    def delete(uID):        # -- Get Hash / Username from JS / GUI --
+        Login.delete(uID)
+        ID.deleteObject(uID)
 
 sys.stdout.flush()

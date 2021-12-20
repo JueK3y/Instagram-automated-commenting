@@ -1,5 +1,22 @@
-function logicStart(url, uID, pw, cSave) {
+// Will be executed when the program is started
+startPython(2)      // Check for update
+startPython(3)      // Show all profiles
 
+function startPython(ID) {
+    let {PythonShell} = require('python-shell')
+
+    let options = {
+        scriptPath: './src/py',
+        args: [ID]
+    }
+
+    PythonShell.run('manager.py', options, function(err, results) {
+        if(err) throw err;
+        console.log('results: %j', results)
+    })
+}
+
+function mainLogic(ID, url, uID, pw, cSave) {
     let {PythonShell} = require('python-shell')
 
     let options = {
@@ -11,19 +28,4 @@ function logicStart(url, uID, pw, cSave) {
         if(err) throw err;
         console.log('results: %j', results)
     })
-    
-    /*var python = require("python-shell")
-    var pythonShell = new python.PythonShell('./src/py/manager.py')
-
-    pythonShell.on('message', function (message) {
-        console.log(message)
-    })
-
-    pythonShell.end(function (err) {
-        if (err) {
-            throw err;
-        }
-
-        console.log('Finished')
-    }) */
 }

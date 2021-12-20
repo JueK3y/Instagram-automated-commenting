@@ -13,19 +13,23 @@
 # └─────────────────────────────────────────────────────────────────────────┘
 
 import sys
-import speedtest  
+from get import GetterGUI
+from credentials import Login
+from automation import Logic
 
-class WiFi:
-    def checkConnection():
-        connected = True        # -- For checking if pc is connected to wifi
-        if connected:
-            WiFi.checkSpeed()
-        else:
-            print("PC is not connected to any network")
+class Manager:
+    def startLogic():                                           # -- startLogic will be executed when HTML Start Button is pushed --
+        print("\nThis is the start of IAC 2.0.")
+        GetterGUI.getURL()
+        GetterGUI.getLogIn()
+        GetterGUI.getSaveCredentials()
+        GetterGUI.getComments()
+        if GetterGUI.saveLogin == "true":
+            Login.store(GetterGUI.username, GetterGUI.password)
+        Logic.checkDriver()
+        Logic.mainLogic()
 
-    def checkSpeed():
-        st = speedtest.Speedtest()
-        download = st.download()
-        print('Download speed: ' + str(download))
+print("\n--- End of Python Code ---\n")
 
 sys.stdout.flush()
+

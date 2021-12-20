@@ -340,6 +340,7 @@ $("#error-hide").click(() => {
 
 window.setInterval(() => {
   const light = document.body.classList.contains("light")
+  startPython(1) 
   var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
   if (notConnected) {                                                     // notConnected check from API
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
@@ -415,6 +416,7 @@ newVersion = true                                                             //
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {
+    startPython(2)
     updateIcon.style.transition = '3s linear'
     updateIcon.style.transform = 'rotate(720deg)'
     setTimeout(() => {

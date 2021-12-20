@@ -14,25 +14,26 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from get import Getter
-from credentials import Login
-from automation import Logic
+from wifiSpeed import WiFi
+from update import Update
+from profile import Profile
+from mainLogic import Manager
+from dataFiles import Comment
 
-class Manager:
-    def startLogic():                                           # -- startLogic will be executed when HTML Start Button is pushed --
-        print("\nThis is the start of IAC 2.0.")
-        Getter.getURL()
-        Getter.getLogIn()
-        Getter.getSaveCredentials()
-        Getter.getComments()
-        if(Getter.saveLogin == "true"):
-            Login.store(Getter.username, Getter.password)
-        Logic.checkDriver()
-        Logic.mainLogic()
-
-
-Manager.startLogic()
-print("\n--- End of Python Code ---\n")
+if sys.argv[1] == 1:
+    WiFi.checkConnection()
+elif sys.argv[1] == 2:
+    Update.checkUpdate()
+elif sys.argv[1] == 3:
+    Profile.show()
+elif sys.argv[1] == 4:
+    Manager.startLogic()
+elif sys.argv[1] == 5:
+    Comment.openFile()
+elif sys.argv[1] == 6:
+    print("")
+elif sys.argv[1] == 7:
+    print("")
 
 sys.stdout.flush()
 

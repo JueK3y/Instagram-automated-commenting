@@ -12,20 +12,56 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-import sys
-import speedtest  
+import os
+import json
+import subprocess
 
-class WiFi:
-    def checkConnection():
-        connected = True        # -- For checking if pc is connected to wifi
-        if connected:
-            WiFi.checkSpeed()
+commentPath = "./src/data/comments.txt"
+idPath = "./src/data/id.json"
+
+
+def checkFolder():
+    if not os.path.isdir('./src/data'):
+        os.mkdir('./src/data')
+
+
+class Comment:
+    def checkFile():
+        if not os.path.exists(commentPath):
+            checkFolder()
+            Comment.makeFile()
+            Comment.fileEmpty = True
+
+    def openFile():
+        if os.path.exists(commentPath):
+            Comment.openEditor()
         else:
-            print("PC is not connected to any network")
+            checkFolder()
+            Comment.makeFile()
+            Comment.openEditor()
 
-    def checkSpeed():
-        st = speedtest.Speedtest()
-        download = st.download()
-        print('Download speed: ' + str(download))
+    def openEditor():
+        programName = "notepad.exe"
+        fileName = commentPath
+        subprocess.Popen([programName, fileName])
+    
+    def makeFile():
+            commentFile = open(commentPath, "a")
+            commentFile.write("! Write only one comment per line. Comments with '!' at the beginning will be ignored.")
+            commentFile.close()
 
-sys.stdout.flush()
+
+class ID:    
+    def editFile(data):
+        if not os.path.exists(idPath):
+            checkFolder()
+        with open(idPath, 'w', encoding='utf-8') as eF:                                          # -!- Overwrites all existing content -!-
+            json.dump(data, eF, ensure_ascii=False, indent=4)
+        eF.close()
+
+    def deleteObject(earse):                # -!- Doesn't work yet -!-
+        json_file = json.load(open(idPath))
+
+        for json_dict in json_file:
+            json_dict.pop("name", None)
+        print(json.dumps(json_file, indent=4))

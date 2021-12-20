@@ -18,4 +18,5 @@ class Logic:
 
     def mainLogic():
         print("This is the mainLogic function. It runs all selenium checks and input types.")
+        print("This uses selenium headless browser or urllib for filling out automatically.")
 

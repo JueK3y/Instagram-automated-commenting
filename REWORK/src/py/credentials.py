@@ -14,10 +14,21 @@
 
 import keyring
 
+service = 'IAC 2.0'
 class Login:
     def store(username, password):
-        keyring.set_password('IAC 2.0', username, password)
+        keyring.set_password(service, username, password)
         print("\nSaving LogIn Data:\nBenutzername: " + username + "\nPasswort: " + password + "\n")
-        # password2 = keyring.get_password('IAC 2.0', username)
-        # print(password2)
+    
+    def get(username):
+        password = keyring.get_password(service, username)
+        print(password)
+
+    def editID(oldUsername, username):
+        password = keyring.get_password(service, oldUsername)
+        keyring.set_password(service, username, password)
+        Login.delete(oldUsername)
+
+    def delete(username):
+        keyring.delete_password(service, username)
 

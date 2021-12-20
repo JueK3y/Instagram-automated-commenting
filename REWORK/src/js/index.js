@@ -103,7 +103,7 @@ $('#start-btn').click(function() {
     showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', errorCode[2], true)
     formError(urlInput)
   }
-  else if (! urlInput.value.includes('instagram.')) {                                                                       // Change this value if needed
+  else if (! urlInput.value.includes('instagram.')) {                                                                             // -- Change this value if needed -- //
     showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
     formError(urlInput)
   }
@@ -140,7 +140,7 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("stopIcon").style.display = "block"
     document.getElementById("runIcon").style.display = "none"
-    logicStart(urlInput.value, username.value, password.value, document.getElementById("save-profile").checked)
+    mainLogic(4, urlInput.value, username.value, password.value, document.getElementById("save-profile").checked)
   }
 })
 
@@ -152,6 +152,10 @@ $('#stop-btn').click(function() {
   document.getElementById("runIcon").style.display = "block"
 })
 
+////// Edit comments
+$('#edit-button').click(function() {
+  startPython(5)
+})
 
 ////// Profile Dropdown
 const prDdImage = document.getElementById('profileDropdownImage')

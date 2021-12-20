@@ -1,0 +1,13 @@
+{
+    "U-1": {
+        "name": "Test-Person",
+        "pinned": true,
+        "created": {
+            "date": "20-12-2021",
+            "time": "12:29:31"
+        },
+        "verified": {
+            "checked": false
+        }
+    }
+}

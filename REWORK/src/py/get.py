@@ -13,22 +13,31 @@
 # └─────────────────────────────────────────────────────────────────────────┘
 
 import sys
-class Getter:
+import json
+from dataFiles import Comment
+class GetterGUI:
     # -- Get data from the GUI --
     def getURL():
-        Getter.URL = sys.argv[1]
-        print("Get Instagram URL: " + Getter.URL)
+        GetterGUI.URL = sys.argv[2]
+        print("Get Instagram URL: " + GetterGUI.URL)
 
     def getLogIn():
-        Getter.username = sys.argv[2]
-        Getter.password = sys.argv[3]
-        print("\nGet Login Data:\nBenutzername: " + Getter.username + "\nPasswort: " + Getter.password + "\n")
-
+        GetterGUI.username = sys.argv[3]
+        GetterGUI.password = sys.argv[4]
+        print("\nGet Login Data:\nBenutzername: " + GetterGUI.username + "\nPasswort: " + GetterGUI.password + "\n")
 
     def getSaveCredentials():
-        Getter.saveLogin = sys.argv[4]                               # -- saveLogin is an attribute from JS --
-        print("Get saveProfile boolean: " + Getter.saveLogin)
+        GetterGUI.saveLogin = sys.argv[5]                               # -- saveLogin is an attribute from JS --
+        print("Get saveProfile boolean: " + GetterGUI.saveLogin)
 
     def getComments():
-        print("Get comments")
+        Comment.checkFile()
+        if Comment.fileEmpty:
+            print("Pop-up warning that comment file is empty ")
 
+class GetterJSON:
+    def getID():
+        f = open('./src/py/id.py', 'r')
+        db = json.load(f)
+
+        print(db['teacher_db'][0]['name'])

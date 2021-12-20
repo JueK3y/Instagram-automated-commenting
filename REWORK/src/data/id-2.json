@@ -1,0 +1,29 @@
+{
+    "U-1": {
+        "name": "Test-Profile",
+        "pinned": false,
+        "created": {
+            "date": "20-12-2020",
+            "time": ""
+        },
+        "updated": {
+            "date": "20-12-2020",
+            "time": ""
+        },
+        "verified": {
+            "checked": true,
+            "correct": true
+        }
+    },
+    "U-2": {
+        "name": "OtherProfile",
+        "pinned": false,
+        "created": {
+            "date": "18-12-2020",
+            "time": ""
+        },
+        "verified": {
+            "checked": false
+        }
+    }
+}
