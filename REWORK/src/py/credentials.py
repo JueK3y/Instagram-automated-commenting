@@ -29,6 +29,9 @@ class Login:
         keyring.set_password(service, username, password)
         Login.delete(oldUsername)
 
+    def editPW(username, password):
+        Login.delete(username)
+        Login.store(username, password)
+
     def delete(username):
         keyring.delete_password(service, username)
-

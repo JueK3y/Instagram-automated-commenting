@@ -12,10 +12,10 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-import sys
 from get import GetterGUI
 from credentials import Login
 from automation import Logic
+from profile import Profile
 
 class Manager:
     def startLogic():                                           # -- startLogic will be executed when HTML Start Button is pushed --
@@ -26,10 +26,6 @@ class Manager:
         GetterGUI.getComments()
         if GetterGUI.saveLogin == "true":
             Login.store(GetterGUI.username, GetterGUI.password)
+            Profile.create(GetterGUI.username, False)
         Logic.checkDriver()
         Logic.mainLogic()
-
-print("\n--- End of Python Code ---\n")
-
-sys.stdout.flush()
-

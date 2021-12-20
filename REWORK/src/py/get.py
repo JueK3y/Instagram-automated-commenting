@@ -27,13 +27,11 @@ class GetterGUI:
         print("\nGet Login Data:\nBenutzername: " + GetterGUI.username + "\nPasswort: " + GetterGUI.password + "\n")
 
     def getSaveCredentials():
-        GetterGUI.saveLogin = sys.argv[5]                               # -- saveLogin is an attribute from JS --
+        GetterGUI.saveLogin = sys.argv[5]
         print("Get saveProfile boolean: " + GetterGUI.saveLogin)
 
     def getComments():
         Comment.checkFile()
-        if Comment.fileEmpty:
-            print("Pop-up warning that comment file is empty ")
 
 class GetterJSON:
     def getID():

@@ -39,8 +39,9 @@ class Profile:
 
     def create(username, pinned):
         user = {
-            "U-3": {
-                "name": username,
+            "U-1": {
+                "username": username,
+                "nickname": username,
                 "pinned": pinned,
                 "created": {
                     "date": date.today().strftime("%d-%m-%Y"),

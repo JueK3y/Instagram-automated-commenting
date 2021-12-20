@@ -21,7 +21,7 @@ function mainLogic(ID, url, uID, pw, cSave) {
 
     let options = {
         scriptPath: './src/py',
-        args: [url, uID, pw, cSave]
+        args: [ID, url, uID, pw, cSave]
     }
 
     PythonShell.run('manager.py', options, function(err, results) {

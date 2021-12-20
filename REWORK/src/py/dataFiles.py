@@ -18,6 +18,7 @@ import subprocess
 
 commentPath = "./src/data/comments.txt"
 idPath = "./src/data/id.json"
+fileEmpty = None
 
 
 def checkFolder():
@@ -30,7 +31,7 @@ class Comment:
         if not os.path.exists(commentPath):
             checkFolder()
             Comment.makeFile()
-            Comment.fileEmpty = True
+            print("Pop-up warning that comment file is empty.")
 
     def openFile():
         if os.path.exists(commentPath):

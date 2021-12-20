@@ -13,7 +13,7 @@
 # └─────────────────────────────────────────────────────────────────────────┘
 
 import sys
-import speedtest  
+import speedtest
 
 class WiFi:
     def checkConnection():
@@ -26,6 +26,6 @@ class WiFi:
     def checkSpeed():
         st = speedtest.Speedtest()
         download = st.download()
-        print('Download speed: ' + str(download))
+        print('Download speed: ' + str(round(download/1024/1024)))
 
 sys.stdout.flush()

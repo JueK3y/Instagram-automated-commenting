@@ -1,10 +1,11 @@
 {
     "U-1": {
-        "name": "Test-Person",
-        "pinned": true,
+        "username": "profile-1-uidsername",
+        "nickname": "profile-1-uidsername",
+        "pinned": false,
         "created": {
             "date": "20-12-2021",
-            "time": "12:29:31"
+            "time": "20:34:52"
         },
         "verified": {
             "checked": false

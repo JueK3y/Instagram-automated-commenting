@@ -20,20 +20,18 @@ from profile import Profile
 from mainLogic import Manager
 from dataFiles import Comment
 
-if sys.argv[1] == 1:
+if sys.argv[1] == "1":
     WiFi.checkConnection()
-elif sys.argv[1] == 2:
+elif sys.argv[1] == "2":
     Update.checkUpdate()
-elif sys.argv[1] == 3:
+elif sys.argv[1] == "3":
     Profile.show()
-elif sys.argv[1] == 4:
+elif sys.argv[1] == "4":
     Manager.startLogic()
-elif sys.argv[1] == 5:
+elif sys.argv[1] == "5":
     Comment.openFile()
-elif sys.argv[1] == 6:
-    print("")
-elif sys.argv[1] == 7:
-    print("")
+else:
+    print("Weird")
 
 sys.stdout.flush()
 

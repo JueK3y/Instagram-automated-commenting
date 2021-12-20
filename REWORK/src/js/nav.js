@@ -340,7 +340,7 @@ $("#error-hide").click(() => {
 
 window.setInterval(() => {
   const light = document.body.classList.contains("light")
-  startPython(1) 
+  // startPython(1) 
   var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
   if (notConnected) {                                                     // notConnected check from API
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
