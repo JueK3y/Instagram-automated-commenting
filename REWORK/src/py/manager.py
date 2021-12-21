@@ -25,7 +25,7 @@ if sys.argv[1] == "1":
 elif sys.argv[1] == "2":
     Update.checkUpdate()
 elif sys.argv[1] == "3":
-    Profile.show()
+    Profile.get()
 elif sys.argv[1] == "4":
     Manager.startLogic()
 elif sys.argv[1] == "5":

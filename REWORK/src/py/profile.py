@@ -12,12 +12,11 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-from datetime import date, datetime
 from dataFiles import ID
 from credentials import Login
 
 class Profile:
-    def show():
+    def get():
         ID.getData()
         print("Show all existing profiles")
     
