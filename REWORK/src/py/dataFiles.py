@@ -15,16 +15,15 @@
 import os
 import json
 import subprocess
+from datetime import date, datetime
+from credentials import Login
 
 commentPath = "./src/data/comments.txt"
 idPath = "./src/data/id.json"
-fileEmpty = None
-
 
 def checkFolder():
     if not os.path.isdir('./src/data'):
         os.mkdir('./src/data')
-
 
 class Comment:
     def checkFile():
@@ -51,21 +50,20 @@ class Comment:
             commentFile.write("! Write only one comment per line. Comments with '!' at the beginning will be ignored.")
             commentFile.close()
 
-
 class ID:    
-    def editFile(data):
+    def checkFile():
         if not os.path.exists(idPath):
             checkFolder()
-        with open(idPath, 'w', encoding='utf-8') as eF:                                          # -!- Overwrites all existing content -!-
-            json.dump(data, eF, ensure_ascii=False, indent=4)
-        eF.close()
+            ID.makeFile()
+        
+    def makeFile():
+        data = {
+            "uID": {
 
-    def deleteObject(earse):                # -!- Doesn't work yet -!-
-        json_file = json.load(open(idPath))
-
-        for json_dict in json_file:
-            json_dict.pop("name", None)
-        print(json.dumps(json_file, indent=4))
+            }
+        }
+        with open(idPath, 'w') as f:
+            json.dump(data, f)
 
     def getData():
         f = open(idPath)
@@ -76,8 +74,48 @@ class ID:
             username = data['uID'][i]['username']
             nickname = data['uID'][i]['nickname']
             pinned = data['uID'][i]['pinned']
-            print(uID, username, nickname, pinned)
+            print("uID: " + uID, "Username: " + username, "Nickname: " + nickname, "Pinned: " + str(pinned))
+            Login.get(username)
 
-        f.close()
+    def addUpdate(uID, username, nickname, pinned):
+        ID.checkFile()
+        if nickname == None:
+            nickname = username
 
-ID.getData()
+        user = {
+            uID: {
+                "username": username,
+                "nickname": nickname,
+                "pinned": pinned,
+                "created": {
+                    "date": date.today().strftime("%d-%m-%Y"),
+                    "time": datetime.now().strftime("%H:%M:%S")
+                },
+                "verified": {
+                    "checked": False,
+                    "working": False,
+                    # Checked: False = Color Grey
+                    # Checked: True, Working: False = Color Red
+                    # Checked: True, Working: True = Color Green
+                }
+            }
+        }
+
+        with open(idPath, 'r+') as addFile:
+            j = json.load(addFile)
+
+            for k, v in user.items():
+                j['uID'][k] = v
+            addFile.seek(0)
+
+            json.dump(j, addFile, indent=4)
+    
+
+    def deleteObject():                # -!- Doesn't work yet -!-
+        with open(idPath, 'r+') as delFile:
+            data = json.load(delFile)
+        
+            for json_dict in data:
+                json_dict.pop("uid-004", None)
+            
+            json.dump(data, delFile, indent=4)

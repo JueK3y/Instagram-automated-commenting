@@ -12,7 +12,6 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-import sys
 from datetime import date, datetime
 from dataFiles import ID
 from credentials import Login
@@ -20,45 +19,25 @@ from credentials import Login
 class Profile:
     def show():
         ID.getData()
+        print("Show all existing profiles")
     
-    def editID(oldID, username):
-        update = {
-            "uid-003": {
-                "name": username,
-                "updated": {
-                    "date": date.today().strftime("%d-%m-%Y"),
-                    "time": datetime.now().strftime("%H:%M:%S")
-                }
-            }
-        }
-
-        ID.editFile(update)
-    
-    def editPw(username, password):
+    def create(username, password, pinned):
+        # -!- uID needs to be created -!-
+        # -!- Check if username profile already exists -!-
+        uID = username
+        nickname = username
+        ID.addUpdate(uID, username, nickname, pinned)
         Login.store(username, password)
 
-    def create(username, pinned):
-        user = {
-            "uID": {
-                "uid-001": {
-                    "username": username,
-                    "nickname": username,
-                    "pinned": pinned,
-                    "created": {
-                        "date": date.today().strftime("%d-%m-%Y"),
-                        "time": datetime.now().strftime("%H:%M:%S")
-                    },
-                    "verified": {
-                        "checked": False
-                    }
-                }
-            }
-        }
-
-        ID.editFile(user)
+    def editUN(oldUN, uID, newUN, nickname, pinned):
+        # -!- Check if username profile already exists -!-
+        ID.addUpdate(uID, newUN, nickname, pinned)
+        Login.editID(oldUN, newUN)
+    
+    def editPW(username, password):
+        Login.editPW(username, password)
+        print("")
 
     def delete(uID):        # -- Get Hash / Username from JS / GUI --
-        Login.delete(uID)
+        # Login.delete(uID)
         ID.deleteObject(uID)
-
-sys.stdout.flush()

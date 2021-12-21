@@ -1,27 +1,42 @@
 {
     "uID": {
-        "uid-001": {
-            "username": "Testperson",
-            "nickname": "Testperson",
-            "pinned": false,
-            "created": {
-                "date": "20-12-2021",
-                "time": "21:13:39"
-            },
-            "verified": {
-                "checked": false
-            }
-        },
-        "uid-002": {
-            "username": "Person2",
-            "nickname": "NeuePerson",
+        "uID-Name-1": {
+            "username": "uID-Name-1",
+            "nickname": "uID-Name-1",
             "pinned": true,
             "created": {
-                "date": "20-12-2021",
-                "time": "21:13:39"
+                "date": "21-12-2021",
+                "time": "13:53:47"
             },
             "verified": {
-                "checked": false
+                "checked": false,
+                "working": false
+            }
+        },
+        "uID-Name-2": {
+            "username": "uID-Name-2",
+            "nickname": "uID-Name-2",
+            "pinned": true,
+            "created": {
+                "date": "21-12-2021",
+                "time": "13:54:12"
+            },
+            "verified": {
+                "checked": false,
+                "working": false
+            }
+        },
+        "uID-Name-3": {
+            "username": "Test-Person",
+            "nickname": "uID-Name-3",
+            "pinned": false,
+            "created": {
+                "date": "21-12-2021",
+                "time": "14:02:32"
+            },
+            "verified": {
+                "checked": false,
+                "working": false
             }
         }
     }

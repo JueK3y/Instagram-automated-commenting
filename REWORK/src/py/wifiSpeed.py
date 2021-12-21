@@ -12,7 +12,6 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-import sys
 import speedtest
 
 class WiFi:
@@ -27,5 +26,3 @@ class WiFi:
         st = speedtest.Speedtest()
         download = st.download()
         print('Download speed: ' + str(round(download/1024/1024)))
-
-sys.stdout.flush()
