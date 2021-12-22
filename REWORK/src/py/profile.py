@@ -16,6 +16,7 @@ from dataFiles import ID
 from credentials import Login
 
 class Profile:
+    # -!- What to do with uID's? Replace it with username?
     def get():
         ID.getData()
         print("Show all existing profiles")
@@ -37,6 +38,6 @@ class Profile:
         Login.editPW(username, password)
         print("")
 
-    def delete(uID, username):        # -- Get Hash / Username from JS / GUI --
+    def delete(uID, username):
         Login.delete(username)
         ID.deleteObject(uID)
