@@ -108,7 +108,6 @@ class ID:
 
             for k, v in user.items():
                 j['uID'][k] = v
-                # JSONdata[uid][uID-Name] = user.data
             addFile.seek(0)
 
             json.dump(j, addFile, indent=4)
