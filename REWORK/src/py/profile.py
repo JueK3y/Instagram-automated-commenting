@@ -20,16 +20,16 @@ class Profile:
         ID.getData()
         print("Show all existing profiles")
     
-    def create(username, password, pinned):
+    def create(uID, username, password, pinned):
         # -!- uID needs to be created -!-
         # -!- Check if username profile already exists -!-
-        uID = username
         nickname = username
         ID.addUpdate(uID, username, nickname, pinned)
         Login.store(username, password)
 
-    def editUN(oldUN, uID, newUN, nickname, pinned):
-        # -!- Check if username profile already exists -!-
+    def editUN(oldUN, uID, newUN, pinned):
+        # -!- Check if new username profile already exists -!-
+        nickname = newUN
         ID.addUpdate(uID, newUN, nickname, pinned)
         Login.editID(oldUN, newUN)
     
@@ -37,6 +37,6 @@ class Profile:
         Login.editPW(username, password)
         print("")
 
-    def delete(uID):        # -- Get Hash / Username from JS / GUI --
-        # Login.delete(uID)
+    def delete(uID, username):        # -- Get Hash / Username from JS / GUI --
+        Login.delete(username)
         ID.deleteObject(uID)

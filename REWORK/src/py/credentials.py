@@ -25,9 +25,12 @@ class Login:
         print("Passowrod: " + password)
 
     def editID(oldUsername, username):
-        password = keyring.get_password(service, oldUsername)
-        keyring.set_password(service, username, password)
-        Login.delete(oldUsername)
+        try:
+            password = keyring.get_password(service, oldUsername)
+            keyring.set_password(service, username, password)
+            Login.delete(oldUsername)
+        except keyring.errors.PasswordDeleteError:
+            print("Old username couldn't be found. Please create a new profile.")
 
     def editPW(username, password):
         Login.delete(username)

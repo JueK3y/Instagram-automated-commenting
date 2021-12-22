@@ -55,6 +55,7 @@ class ID:
         if not os.path.exists(idPath):
             checkFolder()
             ID.makeFile()
+            print("Created file")
         
     def makeFile():
         data = {
@@ -66,6 +67,7 @@ class ID:
             json.dump(data, f)
 
     def getData():
+        ID.checkFile()
         f = open(idPath)
         data = json.load(f)
 
@@ -106,16 +108,17 @@ class ID:
 
             for k, v in user.items():
                 j['uID'][k] = v
+                # JSONdata[uid][uID-Name] = user.data
             addFile.seek(0)
 
             json.dump(j, addFile, indent=4)
     
 
-    def deleteObject():                # -!- Doesn't work yet -!-
-        with open(idPath, 'r+') as delFile:
-            data = json.load(delFile)
-        
-            for json_dict in data:
-                json_dict.pop("uid-004", None)
-            
-            json.dump(data, delFile, indent=4)
+    def deleteObject(earse):
+        with open(idPath, 'r+') as delObj:
+            j = json.load(delObj)
+
+            del j["uID"][earse]
+
+        with open(idPath, "w") as jsonFile:
+            json.dump(j, jsonFile, indent=4)
