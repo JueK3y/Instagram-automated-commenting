@@ -1,3 +1,6 @@
+// Kann vereinfacht werden - alle Bilder automatisch verändern (pfad/dark-light/icon)
+// Alle anderen Bilder mit .no-change nicht ändern
+
 const themeToDark = document.getElementById("theme-to-dark");
 const themeToLight = document.getElementById("theme-to-light");
 
@@ -51,6 +54,7 @@ function lightIcon() {
     runIcon.src = "src/img/icons/light/run.svg";
     stopIcon.src = "src/img/icons/light/stop.svg";
     $('.profileIcon').prop('src', 'src/img/icons/light/profile.svg')
+    $('.editProfileIcon').prop('src', 'src/img/icons/light/delete.svg')
     $('.helpIcon').prop('src', 'src/img/icons/light/help.svg')
     wifiIcon.src = "src/img/icons/light/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/light/settings.svg";
@@ -110,6 +114,7 @@ function darkIcon() {
     runIcon.src = "src/img/icons/dark/run.svg";
     stopIcon.src = "src/img/icons/dark/stop.svg";
     $('.profileIcon').prop('src', 'src/img/icons/dark/profile.svg')
+    $('.editProfileIcon').prop('src', 'src/img/icons/dark/delete.svg')
     $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
     wifiIcon.src = "src/img/icons/dark/wifi/wifi-good.svg";
     settingsIcon.src = "src/img/icons/dark/settings.svg";
