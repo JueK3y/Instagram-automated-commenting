@@ -21,23 +21,22 @@ class Profile:
         ID.getData()
         print("Show all existing profiles")
     
-    def create(uID, username, password, pinned):
+    def create(username, nickname, password, pinned):
         # -!- uID needs to be created -!-
         # -!- Check if username profile already exists -!-
-        nickname = username
-        ID.addUpdate(uID, username, nickname, pinned)
+        ID.addUpdate(username, nickname, pinned)
         Login.store(username, password)
 
-    def editUN(oldUN, uID, newUN, pinned):
+    def editUN(oldUN, newUN, pinned):
         # -!- Check if new username profile already exists -!-
-        nickname = newUN
-        ID.addUpdate(uID, newUN, nickname, pinned)
+        ID.addUpdate(newUN, None, pinned)
         Login.editID(oldUN, newUN)
+        ID.deleteObject(oldUN)
     
     def editPW(username, password):
         Login.editPW(username, password)
         print("")
 
-    def delete(uID, username):
+    def delete(username):
         Login.delete(username)
-        ID.deleteObject(uID)
+        ID.deleteObject(username)

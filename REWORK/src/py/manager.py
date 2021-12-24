@@ -31,9 +31,9 @@ elif sys.argv[1] == "4":
 elif sys.argv[1] == "5":
     Comment.openFile()
 elif sys.argv[1] == "6":
-    Profile.create(sys.argv[2], sys.argv[3], sys.argv[4])
+    Profile.create(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
 elif sys.argv[1] == "7":
-    Profile.editUN(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
+    Profile.editUN(sys.argv[2], sys.argv[3], sys.argv[4])
 elif sys.argv[1] == "8":
     Profile.editPW(sys.argv[2], sys.argv[3])
 elif sys.argv[1] == "9":

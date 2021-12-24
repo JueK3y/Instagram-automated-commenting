@@ -16,12 +16,12 @@ function startPython(ID) {
     })
 }
 
-function mainLogic(ID, url, uID, pw, cSave) {
+function mainLogic(ID, url, username, password, cSave) {
     let {PythonShell} = require('python-shell')
 
     let options = {
         scriptPath: './src/py',
-        args: [ID, url, uID, pw, cSave]
+        args: [ID, url, username, password, cSave]
     }
 
     PythonShell.run('manager.py', options, function(err, results) {

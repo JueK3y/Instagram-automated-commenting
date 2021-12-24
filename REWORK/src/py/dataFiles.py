@@ -68,6 +68,7 @@ class ID:
 
     def getData():
         ID.checkFile()
+
         f = open(idPath)
         data = json.load(f)
 
@@ -75,19 +76,21 @@ class ID:
             uID = i
             username = data['uID'][i]['username']
             nickname = data['uID'][i]['nickname']
+            userID = data['uID'][i]['userID']
             pinned = data['uID'][i]['pinned']
-            print("uID: " + uID, "Username: " + username, "Nickname: " + nickname, "Pinned: " + str(pinned))
+            print("uID: " + uID, "Username: " + username, "Nickname: " + nickname, "User ID: " + userID, "Pinned: " + str(pinned))
             Login.get(username)
 
-    def addUpdate(uID, username, nickname, pinned):
+    def addUpdate(username, nickname, pinned):
         ID.checkFile()
         if nickname == None:
             nickname = username
 
         user = {
-            uID: {
+            username: {
                 "username": username,
                 "nickname": nickname,
+                "userID": "Test-User-ID",        # This creates and ID / hash 
                 "pinned": pinned,
                 "created": {
                     "date": date.today().strftime("%d-%m-%Y"),

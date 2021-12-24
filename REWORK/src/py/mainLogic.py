@@ -25,6 +25,6 @@ class Manager:
         GetterGUI.getSaveCredentials()
         GetterGUI.getComments()
         if GetterGUI.saveLogin == "true":
-            Profile.create(GetterGUI.username, GetterGUI.password, False)
+            Profile.create(GetterGUI.username, None, GetterGUI.password, False)
         Logic.checkDriver()
         Logic.mainLogic()
