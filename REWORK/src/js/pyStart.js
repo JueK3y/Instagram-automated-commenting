@@ -16,6 +16,20 @@ function startPython(ID) {
     })
 }
 
+function getPassword(ID, username) {
+    let {PythonShell} = require('python-shell')
+
+    let options = {
+        scriptPath: './src/py',
+        args: [ID, username]
+    }
+
+    PythonShell.run('manager.py', options, function(err, results) {
+        if(err) throw err;
+        console.log('results: %j', results)
+    })
+}
+
 function mainLogic(ID, url, username, password, cSave) {
     let {PythonShell} = require('python-shell')
 

@@ -19,6 +19,7 @@ from update import Update
 from profile import Profile
 from mainLogic import Manager
 from dataFiles import Comment
+from credentials import Login
 
 if sys.argv[1] == "1":
     WiFi.checkConnection()
@@ -38,6 +39,8 @@ elif sys.argv[1] == "8":
     Profile.editPW(sys.argv[2], sys.argv[3])
 elif sys.argv[1] == "9":
     Profile.delete(sys.argv[2])
+elif sys.argv[1] == "10":
+    Login.get(sys.argv[2])
 else:
     print("Huh, weird")
 

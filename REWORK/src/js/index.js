@@ -163,9 +163,12 @@ const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
 $(document).ready(function() {
   $(document).on('click', '#profileDropdownContent', function(e) {
-    const clickedProfile = e.target.id                                                                // Pass ID to API and give username and password
-    username.value = clickedProfile + ' username'                                                         // Get Name for ID from API
-    password.value = clickedProfile + ' password'                                                         // Get Password for ID from API
+    pw = getPassword(10, username.value)
+    const clickedProfile = e.target.id.slice(4)                                                       // Pass ID to API and give username and password
+    //const test = e.target.classList
+    //console.log(test.slice(4))
+    username.value = clickedProfile                                                                       // Get Name for ID from API
+    password.value = pw                                                                                   // Get Password for ID from API
     prDdImage.style.display = 'block'
     prDdImgBlur.style.display = 'none'
   })

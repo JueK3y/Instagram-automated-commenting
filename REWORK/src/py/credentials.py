@@ -22,7 +22,7 @@ class Login:
     
     def get(username):
         password = keyring.get_password(service, username)
-        print("Passowrod: " + password)
+        print("Password: " + str(password))
 
     def editID(oldUsername, username):
         try:
