@@ -1,3 +1,5 @@
+const { systemPreferences } = require("electron")
+
 ////// URL Clear Buttton
 $('#clearButton').click(function() {
   $('#url-input').val('')
@@ -163,20 +165,19 @@ const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
 $(document).ready(function() {
   $(document).on('click', '#profileDropdownContent', function(e) {
-    pw = getPassword(10, username.value)
-    const clickedProfile = e.target.id.slice(4)                                                       // Pass ID to API and give username and password
-    //const test = e.target.classList
-    //console.log(test.slice(4))
+    const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
     username.value = clickedProfile                                                                       // Get Name for ID from API
+    const pw = getPassword(10, username.value)
     password.value = pw                                                                                   // Get Password for ID from API
     prDdImage.style.display = 'block'
     prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
     if (! e.target.id == '') {
-      const clickedProfile = e.target.id                                                              // Pass ID to API and give username and password
-      username.value = clickedProfile + ' username'                                                       // Get Name for ID from API
-      password.value = clickedProfile + ' password'                                                       // Get Password for ID from API
+      const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
+      username.value = clickedProfile                                                                       // Get Name for ID from API
+      const pw = getPassword(10, username.value)
+      password.value = pw                                                                                   // Get Password for ID from API
       prDdImage.style.display = 'block'
       prDdImgBlur.style.display = 'none'
     }

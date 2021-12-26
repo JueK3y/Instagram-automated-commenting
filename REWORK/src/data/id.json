@@ -1,13 +1,13 @@
 {
     "uID": {
-        "TESTrson": {
-            "username": "TESTrson",
-            "nickname": "TESTrson",
+        "profile-1": {
+            "username": "profile-1",
+            "nickname": "TEST",
             "userID": "Test-User-ID",
             "pinned": false,
             "created": {
-                "date": "24-12-2021",
-                "time": "09:42:43"
+                "date": "26-12-2021",
+                "time": "19:13:27"
             },
             "verified": {
                 "checked": false,
