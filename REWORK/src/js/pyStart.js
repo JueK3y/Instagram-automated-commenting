@@ -12,6 +12,9 @@ function checkArg(ID, results) {
             setUpdateBoolean()
         }
     }
+    else if (ID == "3") {
+        // Replace uid-profile-1 with uid-username
+    }
 }
 
 function startPython(ID) {

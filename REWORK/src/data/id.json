@@ -13,6 +13,20 @@
                 "checked": false,
                 "working": false
             }
+        },
+        "TEST": {
+            "username": "TEST",
+            "nickname": "TEST",
+            "userID": "Test-User-ID",
+            "pinned": false,
+            "created": {
+                "date": "27-12-2021",
+                "time": "19:43:22"
+            },
+            "verified": {
+                "checked": false,
+                "working": false
+            }
         }
     }
 }
