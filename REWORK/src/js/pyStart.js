@@ -4,11 +4,12 @@ startPython(3)      // Show all profiles
 
 function checkArg(ID, results) {
     if (ID == "1") {
+        console.log(results)
         // Display updated wifi speed
     }
     else if (ID == "2") {
         if (results == "True") {
-            setBoolean()
+            setUpdateBoolean()
         }
     }
 }

@@ -1,5 +1,5 @@
 
 class Update:
     def checkUpdate():
-        newUpdate = True
+        newUpdate = False
         print(newUpdate)

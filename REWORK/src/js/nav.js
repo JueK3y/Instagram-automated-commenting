@@ -404,7 +404,7 @@ window.setInterval(() => {
 ////// Update checker
 var updateOnline
 
-function setBoolean() {
+function setUpdateBoolean() {
   updateOnline = true
 }
 

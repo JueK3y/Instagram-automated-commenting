@@ -25,4 +25,4 @@ class WiFi:
     def checkSpeed():
         st = speedtest.Speedtest()
         download = st.download()
-        print('Download speed: ' + str(round(download/1024/1024)))
+        print(str(round(download/1024/1024)))
