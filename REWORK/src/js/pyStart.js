@@ -2,6 +2,17 @@
 startPython(2)      // Check for update
 startPython(3)      // Show all profiles
 
+function checkArg(ID, results) {
+    if (ID == "1") {
+        // Display updated wifi speed
+    }
+    else if (ID == "2") {
+        if (results == "True") {
+            setBoolean()
+        }
+    }
+}
+
 function startPython(ID) {
     let {PythonShell} = require('python-shell')
 
@@ -13,6 +24,7 @@ function startPython(ID) {
     PythonShell.run('manager.py', options, function(err, results) {
         if(err) throw err;
         console.log('results: %j', results)
+        checkArg(ID, results)
     })
 }
 
@@ -26,7 +38,7 @@ function getPassword(ID, username) {
 
     PythonShell.run('manager.py', options, function(err, results) {
         if(err) throw err;
-        console.log('results: %j', results)
+        document.getElementById("password-form").value = results
     })
 }
 

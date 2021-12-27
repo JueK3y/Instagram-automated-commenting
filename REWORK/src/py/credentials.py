@@ -11,7 +11,7 @@
 # │ Copyright © 2020 - 2021 by JueK3y (Julian Kennedy)                      │
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
-
+import sys
 import keyring
 
 service = 'IAC 2.0'
@@ -22,7 +22,7 @@ class Login:
     
     def get(username):
         password = keyring.get_password(service, username)
-        print("Password: " + str(password))
+        print(password)
 
     def editID(oldUsername, username):
         try:

@@ -167,8 +167,7 @@ $(document).ready(function() {
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
     username.value = clickedProfile                                                                       // Get Name for ID from API
-    const pw = getPassword(10, username.value)
-    password.value = pw                                                                                   // Get Password for ID from API
+    getPassword(10, username.value)
     prDdImage.style.display = 'block'
     prDdImgBlur.style.display = 'none'
   })
@@ -176,8 +175,7 @@ $(document).ready(function() {
     if (! e.target.id == '') {
       const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
       username.value = clickedProfile                                                                       // Get Name for ID from API
-      const pw = getPassword(10, username.value)
-      password.value = pw                                                                                   // Get Password for ID from API
+      getPassword(10, username.value)
       prDdImage.style.display = 'block'
       prDdImgBlur.style.display = 'none'
     }

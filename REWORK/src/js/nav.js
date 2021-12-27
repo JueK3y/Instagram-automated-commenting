@@ -402,8 +402,11 @@ window.setInterval(() => {
 
 
 ////// Update checker
+var updateOnline
 
-updateOnline = false                                                          // API checks in background for an update
+function setBoolean() {
+  updateOnline = true
+}
 
 const update = document.getElementById('update')
 const updateFailed = document.getElementById('update-failed')
@@ -411,8 +414,6 @@ const noUpdate = document.getElementById('update-none')
 const download = document.getElementById('download')
 const downloadFailed = document.getElementById('download-failed')
 const updateIcon = document.getElementById('set-up')
-
-newVersion = true                                                             // Update Check onclick from API
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {
@@ -432,7 +433,7 @@ $(document).ready(function() {                                                //
       }
       else {
         // Check for new version
-        if (newVersion) {
+        if (updateOnline) {
           download.style.display = ''
           update.style.display = 'none'
           settingsIcon.style.display = 'none'
@@ -496,17 +497,19 @@ $(document).ready(function() {                                                //
   })
 })
 
-if (updateOnline) {
-  download.style.display = ''
-  update.style.display = 'none'
-  settingsIcon.style.display = 'none'
-  settingsUpdateIcon.style.display = 'inline-block'
-  showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'update-found-auto', true)
-  noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
-}
-else {
-  download.style.display = 'none'
-  update.style.display = ''
-  settingsIcon.style.display = 'inline-block'
-  settingsUpdateIcon.style.display = 'none'
-}
+setTimeout(() => {
+  if (updateOnline) {
+    download.style.display = ''
+    update.style.display = 'none'
+    settingsIcon.style.display = 'none'
+    settingsUpdateIcon.style.display = 'inline-block'
+    showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'update-found-auto', true)
+    noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
+  }
+  else {
+    download.style.display = 'none'
+    update.style.display = ''
+    settingsIcon.style.display = 'inline-block'
+    settingsUpdateIcon.style.display = 'none'
+  }
+}, 5000)
