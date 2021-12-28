@@ -18,8 +18,8 @@ from credentials import Login
 class Profile:
     # -!- What to do with uID's? Replace it with username?
     def get():
-        ID.getData()
-        print("Show all existing profiles")
+        ID.getUsername()
+        # ID.getData()
     
     def create(username, nickname, password, pinned):
         # -!- uID needs to be created -!-

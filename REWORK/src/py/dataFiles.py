@@ -81,6 +81,16 @@ class ID:
             print("uID: " + uID, "Username: " + username, "Nickname: " + nickname, "User ID: " + userID, "Pinned: " + str(pinned))
             Login.get(username)
 
+    def getUsername():
+        ID.checkFile()
+
+        f = open(idPath)
+        data = json.load(f)
+
+        for i in data['uID']:
+            username = data['uID'][i]['username']
+            print(username)
+
     def addUpdate(username, nickname, pinned):
         ID.checkFile()
         if nickname == None:
