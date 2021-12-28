@@ -237,6 +237,12 @@ $(document).ready(function() {
 
 
 ////// Profile content updatder
+/*for (let i = 0; i < results.length; i++) {
+  console.log(results[i])
+  $('.uid-profile-'+(i+1)).text(results[i])
+  $('.uid-profile-'+(i+1)).removeClass('uid-profile-'+(i+1)).addClass('uid-'+results[i])
+}*/
+
 threeOrMore = false                                                                       // API checks if there are more than 3 profiles
 
 const profileOne = document.getElementById('profile-1-name')

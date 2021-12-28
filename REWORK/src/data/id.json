@@ -41,6 +41,20 @@
                 "checked": false,
                 "working": false
             }
+        },
+        "TESTPERSON": {
+            "username": "TESTPERSON",
+            "nickname": "TESTPERSON",
+            "userID": "Test-User-ID",
+            "pinned": false,
+            "created": {
+                "date": "28-12-2021",
+                "time": "16:45:31"
+            },
+            "verified": {
+                "checked": false,
+                "working": false
+            }
         }
     }
 }
