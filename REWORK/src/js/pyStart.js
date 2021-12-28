@@ -14,11 +14,11 @@ function manager(ID, results) {
     }
     else if (ID == "3") {
         // Replace uid-profile-1 with uid-username
-        for (let i = 0; i < results.length; i++) {
+        /*for (let i = 0; i < results.length; i++) {
             console.log(results[i])
             $('.uid-profile-'+(i+1)).text(results[i])
             $('.uid-profile-'+(i+1)).removeClass('uid-profile-'+(i+1)).addClass('uid-'+results[i])
-        }
+        }*/
     }
 }
 

@@ -55,6 +55,20 @@
                 "checked": false,
                 "working": false
             }
+        },
+        "Username": {
+            "username": "Username",
+            "nickname": "Username",
+            "userID": "Test-User-ID",
+            "pinned": false,
+            "created": {
+                "date": "28-12-2021",
+                "time": "19:08:10"
+            },
+            "verified": {
+                "checked": false,
+                "working": false
+            }
         }
     }
 }
