@@ -162,7 +162,7 @@ $('#edit-button').click(function() {
   openComments()
 })
 
-////// Profile Dropdown
+////// Profile Dropdown 
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
