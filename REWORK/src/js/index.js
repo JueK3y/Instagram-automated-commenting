@@ -159,7 +159,7 @@ $('#stop-btn').click(function() {
 
 ////// Edit comments
 $('#edit-button').click(function() {
-  startPython(5)
+  openComments()
 })
 
 ////// Profile Dropdown

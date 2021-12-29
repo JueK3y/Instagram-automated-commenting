@@ -1,3 +1,5 @@
+const { shell } = require('electron')
+const path = require('path')
 const Store = require('electron-store')
 
 var today = new Date()
@@ -44,4 +46,9 @@ function updateUser(username, nickname, pinned, checked, working) {
 // Deletes user data
 function deleteUser(username) {
     store.delete(username)
+}
+
+function openComments() {
+    // -!- Path needs to be changed to users roaming folder
+    shell.openPath(path.join(__dirname + './src/data/', 'comments.txt'))
 }
