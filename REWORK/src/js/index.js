@@ -143,7 +143,6 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("stopIcon").style.display = "block"
     document.getElementById("runIcon").style.display = "none"
-    // mainLogic(4, urlInput.value, username.value, password.value, document.getElementById("save-profile").checked)
     // -!- Check if saveProfile is checked -!-
     // updateUser(username.value)
     setPassword(username.value, password.value)

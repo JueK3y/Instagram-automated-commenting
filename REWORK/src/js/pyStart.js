@@ -1,6 +1,5 @@
 // Will be executed when the program is started
 startPython(2)      // Check for update
-startPython(3)      // Show all profiles
 
 function manager(ID, results) {
     if (ID == "1") {
@@ -11,14 +10,6 @@ function manager(ID, results) {
         if (results == "True") {
             setUpdateBoolean()
         }
-    }
-    else if (ID == "3") {
-        // Replace uid-profile-1 with uid-username
-        /*for (let i = 0; i < results.length; i++) {
-            console.log(results[i])
-            $('.uid-profile-'+(i+1)).text(results[i])
-            $('.uid-profile-'+(i+1)).removeClass('uid-profile-'+(i+1)).addClass('uid-'+results[i])
-        }*/
     }
 }
 
@@ -51,7 +42,7 @@ function startPython(ID) {
     })
 }*/
 
-function mainLogic(ID, url, username, password, cSave) {
+/*function mainLogic(ID, url, username, password, cSave) {
     let {PythonShell} = require('python-shell')
 
     let options = {
@@ -63,4 +54,4 @@ function mainLogic(ID, url, username, password, cSave) {
         if(err) throw err;
         console.log('results: %j', results)
     })
-}
+}*/
