@@ -17,17 +17,10 @@ function displayUsername() {
     })
 }
 
-function getUsername() {
-    const search = keytar.findCredentials(service)
-    search.then((result) => {
-        usrnme = Object.values(result[0])[0]
-    })
-}
-
 function getPassword(username) {
     const password = keytar.getPassword(service, username)
-    password.then((result) => {
-        console.log(result)
+    return password.then((result) => {
+        return result
     })
 }
 

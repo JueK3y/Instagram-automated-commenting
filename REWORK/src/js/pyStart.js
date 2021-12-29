@@ -37,7 +37,7 @@ function startPython(ID) {
     })
 }
 
-function getPassword(ID, username) {
+/*function getPassword(ID, username) {
     let {PythonShell} = require('python-shell')
 
     let options = {
@@ -49,7 +49,7 @@ function getPassword(ID, username) {
         if(err) throw err;
         document.getElementById("password-form").value = results
     })
-}
+}*/
 
 function mainLogic(ID, url, username, password, cSave) {
     let {PythonShell} = require('python-shell')

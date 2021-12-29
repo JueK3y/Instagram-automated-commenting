@@ -80,11 +80,12 @@ function formError(type) {
 // ONLY FOR DEMO VERSION
 var validate = false
 
-var checkClick = 0                                    // -- Whats the purpose of checkClick -- //
+var checkClick = 0                                    // -- Is checkClick for de-activating display timeout? -- //
 
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
 
+urlInput.focus()
 
 $(document).on('keyup', function(e) {
   if (e.key == "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) $('#start-btn').click()
@@ -142,10 +143,10 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("stopIcon").style.display = "block"
     document.getElementById("runIcon").style.display = "none"
-    mainLogic(4, urlInput.value, username.value, password.value, document.getElementById("save-profile").checked)
+    // mainLogic(4, urlInput.value, username.value, password.value, document.getElementById("save-profile").checked)
     // -!- Check if saveProfile is checked -!-
-    updateUser(username.value)
-    setPassword(username.value, toString(password.value))
+    // updateUser(username.value)
+    setPassword(username.value, password.value)
   }
 })
 
@@ -170,7 +171,7 @@ $(document).ready(function() {
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
     username.value = clickedProfile                                                                       // Get Name for ID from API
-    getPassword(10, username.value)
+    getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
     prDdImage.style.display = 'block'
     prDdImgBlur.style.display = 'none'
   })
@@ -178,7 +179,7 @@ $(document).ready(function() {
     if (! e.target.id == '') {
       const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
       username.value = clickedProfile                                                                       // Get Name for ID from API
-      getPassword(10, username.value)
+      getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
       prDdImage.style.display = 'block'
       prDdImgBlur.style.display = 'none'
     }
