@@ -49,6 +49,7 @@ function deleteUser(username) {
 }
 
 function openComments() {
-    // -!- Path needs to be changed to users roaming folder
+    // -!- Path needs to be changed to users roaming folder -!- //
+    // -!- What happens if file doesn't exists? Need to be created and written -!- //
     shell.openPath(path.join(__dirname + './src/data/', 'comments.txt'))
 }

@@ -237,9 +237,21 @@ $(document).ready(function() {
 
 
 ////// Profile content updatder
-displayUsername()
+fourOrMore = false
 
-threeOrMore = false                                                                       // API checks if there are more than 3 profiles
+displayUsername().then(result => {
+  for (let i = 0; i < result.length; i++) {
+      let usrnme = Object.values(result[i])[0]
+      $('.uid-profile-'+(i+1)).text(usrnme)
+      $('.uid-profile-'+(i+1)).removeClass('uid-profile-'+(i+1)).addClass('uid-'+usrnme)
+      // -!- Displays only the first username in Nav dropdown -!- //
+      if (i >= 4) {
+        fourOrMore = true
+        // -!- Doesn't work yet -!- //
+      }
+  }
+})
+
 
 const profileOne = document.getElementById('profile-1-name')
 const profileTwo = document.getElementById('profile-2-name') 
@@ -250,6 +262,19 @@ const addProfile = document.getElementById('add-profile').style
 
 
 $(document).ready(function() {
+  setTimeout(() => {
+    if (profileOne.innerText != "") {
+      document.getElementById('profile-1').style.display = 'flex'
+    }
+    if (profileTwo.innerText != "") {
+      document.getElementById('profile-2').style.display = ''
+    }
+    if (profileThree.innerText != "") {
+      document.getElementById('profile-3').style.display = ''
+      showMore.display = ''
+      addProfile.display = 'none'
+    }
+  }, 100)
   $(document).on('click', '#add-profile', function() {
     document.getElementById("profile-container").style.top  = "15px"
     if (profileOne.innerText == "") {
@@ -283,15 +308,15 @@ profileThree.innerText = profileThreeName
 // Check for profiles
 if (profileOne.innerText == "") {
   document.getElementById('profile-1').style.display = 'none'
-  threeOrMore = false
+  fourOrMore = false
 }
 if (profileTwo.innerText == "") {
   document.getElementById('profile-2').style.display = 'none'
-  threeOrMore = false
+  fourOrMore = false
 }
 if (profileThree.innerText == "") {
   document.getElementById('profile-3').style.display = 'none'
-  threeOrMore = false
+  fourOrMore = false
 }
 if (profileOne.innerText == "" && profileTwo.innerText == "" && profileThree.innerText == "") {
   document.getElementById("profile-container").style.top  = "27px"
@@ -299,7 +324,7 @@ if (profileOne.innerText == "" && profileTwo.innerText == "" && profileThree.inn
 }
                                       
 // Display more / add button
-if (threeOrMore) {
+if (fourOrMore) {
   showMore.display = ''
   addProfile.display = 'none'
 }

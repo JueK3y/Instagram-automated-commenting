@@ -8,12 +8,8 @@ function setPassword(username, password) {
 
 function displayUsername() {
     const search = keytar.findCredentials(service)
-    search.then((result) => {
-        for (let i = 0; i < result.length; i++) {
-            usrnme = Object.values(result[i])[0]
-            $('.uid-profile-'+(i+1)).text(usrnme)
-            $('.uid-profile-'+(i+1)).removeClass('uid-profile-'+(i+1)).addClass('uid-'+usrnme)
-        }
+    return search.then((result) => {
+        return result
     })
 }
 
