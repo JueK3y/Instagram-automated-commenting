@@ -175,8 +175,8 @@ $(document).ready(function() {
     prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
-    if (! e.target.id == '') {
-      const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
+    if (e.target.id == 'profile-1-content' || e.target.id == 'profile-2-content' || e.target.id == 'profile-3-content') {
+      const clickedProfile = String(document.getElementById(e.target.id).querySelector('p').classList).slice(4)
       username.value = clickedProfile                                                                       // Get Name for ID from API
       getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
       prDdImage.style.display = 'block'

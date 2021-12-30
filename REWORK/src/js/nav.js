@@ -352,6 +352,8 @@ $(document).ready(function() {
   })
 })
 
+// -!- Simplify ??? -!- //
+
 const deleteHover1 = document.getElementById("delete-1")
 const deleteIcon1 = document.getElementById("deleteIcon-1")
 const deleteHover2 = document.getElementById("delete-2")
