@@ -346,6 +346,26 @@ if (profileThree.innerText.length > 16) {
   profileThree.innerText = profileThree.innerHTML.substring(0, 14) + " ..."
 } 
 
+$(document).ready(function() {
+  $(document).on('hover', '#add-profile', function() {
+    document.getElementById().src = "src/img/icons/" + document.body.classList + "/delete-red.svg"
+  })
+})
+
+const deleteHover1 = document.getElementById("delete-1")
+const deleteIcon1 = document.getElementById("deleteIcon-1")
+const deleteHover2 = document.getElementById("delete-2")
+const deleteIcon2 = document.getElementById("deleteIcon-2")
+const deleteHover3 = document.getElementById("delete-3")
+const deleteIcon3 = document.getElementById("deleteIcon-3")
+
+deleteHover1.onmouseover = () => { deleteIcon1.src = "src/img/icons/" + document.body.classList + "/delete-red.svg" }
+deleteHover1.onmouseleave = () => { deleteIcon1.src = "src/img/icons/" + document.body.classList + "/delete.svg" }
+deleteHover2.onmouseover = () => { deleteIcon2.src = "src/img/icons/" + document.body.classList + "/delete-red.svg" }
+deleteHover2.onmouseleave = () => { deleteIcon2.src = "src/img/icons/" + document.body.classList + "/delete.svg" }
+deleteHover3.onmouseover = () => { deleteIcon3.src = "src/img/icons/" + document.body.classList + "/delete-red.svg" }
+deleteHover3.onmouseleave = () => { deleteIcon3.src = "src/img/icons/" + document.body.classList + "/delete.svg" }
+
 
 
 ////// WIFI Signal Updater

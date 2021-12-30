@@ -105,12 +105,18 @@ html body {
         margin-left: 3px;
         cursor: pointer;
     }
-    .editProfile {
+    .deleteProfile {
         margin-left: 30px;
-        .editProfileIcon {          // -- Looks ugly -- //
+        transition: .2s;
+        .deleteProfileIcon {
+            margin-top: 3px;
             width: 13px;
             height: 13px;
             opacity: .65;
+        }
+        &:hover .deleteProfileIcon {
+            opacity: .9;
+            transition: .2s;
         }
     }
     .openExternal {

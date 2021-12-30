@@ -1,4 +1,4 @@
-const IDs = ["minBtnIcon", "maxBtnIcon", "restoreBtnIcon", "closeBtnIcon", "runIcon", "stopIcon", "wifi-img", "settingsIcon", "settingsUpdateIcon", "help-bug", "help-info", "set-lang", "set-note-on", "set-note-urgent", "set-note-off", "set-up", "set-up-failed", "set-up-none", "set-dow", "set-dow-failed", "set-comm", "set-dev", "addIcon", "profileDropdownImage", "profileDropdownImageNoFocus"]
+const IDs = ["minBtnIcon", "maxBtnIcon", "restoreBtnIcon", "closeBtnIcon", "runIcon", "stopIcon", "wifi-img", "settingsIcon", "settingsUpdateIcon", "help-bug", "help-info", "set-lang", "set-note-on", "set-note-urgent", "set-note-off", "set-up", "set-up-failed", "set-up-none", "set-dow", "set-dow-failed", "set-comm", "set-dev", "addIcon", "profileDropdownImage", "profileDropdownImageNoFocus", "deleteIcon-1", "deleteIcon-2", "deleteIcon-3"]
 
 const themeToDark = document.getElementById("theme-to-dark")
 const themeToLight = document.getElementById("theme-to-light")
@@ -20,7 +20,7 @@ function lightIcon() {
     }
 
     $('.profileIcon').prop('src', 'src/img/icons/light/profile.svg')
-    $('.editProfileIcon').prop('src', 'src/img/icons/light/delete.svg')
+    $('.deleteProfileIcon').prop('src', 'src/img/icons/light/delete.svg')
     $('.helpIcon').prop('src', 'src/img/icons/light/help.svg')
 
     themeToDark.style.display = "flex"
@@ -56,7 +56,7 @@ function darkIcon() {
     }
     
     $('.profileIcon').prop('src', 'src/img/icons/dark/profile.svg')
-    $('.editProfileIcon').prop('src', 'src/img/icons/dark/delete.svg')
+    $('.deleteProfileIcon').prop('src', 'src/img/icons/dark/delete.svg')
     $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
 
     themeToDark.style.display = "none"
