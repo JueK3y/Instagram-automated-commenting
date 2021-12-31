@@ -162,6 +162,7 @@ $('#edit-button').click(function() {
   openComments()
 })
 
+
 ////// Profile Dropdown 
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
@@ -175,12 +176,30 @@ $(document).ready(function() {
     prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
-    if (e.target.id == 'profile-1-content' || e.target.id == 'profile-2-content' || e.target.id == 'profile-3-content') {
-      const clickedProfile = String(document.getElementById(e.target.id).querySelector('p').classList).slice(4)
-      username.value = clickedProfile                                                                       // Get Name for ID from API
-      getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
-      prDdImage.style.display = 'block'
-      prDdImgBlur.style.display = 'none'
+    var target = e.target.id;    
+    console.log(target)
+    for(let i = 0; i < 4; i++) {
+      if (target == 'profile-'+i+'-content') {
+        const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
+        username.value = clickedProfile                                                                       // Get Name for ID from API
+        getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+        prDdImage.style.display = 'block'
+        prDdImgBlur.style.display = 'none'
+      }
+      else if (target == 'profile-'+i+'-img') {
+        const clickedProfile = String(document.getElementById(target).nextElementSibling.classList).slice(4)
+        username.value = clickedProfile                                                                       // Get Name for ID from API
+        getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+        prDdImage.style.display = 'block'
+        prDdImgBlur.style.display = 'none'
+      }
+      else if (target == 'profile-'+i+'-name') {
+        const clickedProfile = String(document.getElementById(target).classList).slice(4)
+        username.value = clickedProfile                                                                       // Get Name for ID from API
+        getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+        prDdImage.style.display = 'block'
+        prDdImgBlur.style.display = 'none'
+      }
     }
   })
 })
