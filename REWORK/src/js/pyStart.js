@@ -1,15 +1,7 @@
-// Will be executed when the program is started
-startPython(2)      // Check for update
-
 function manager(ID, results) {
     if (ID == "1") {
         console.log(results)
         // Display updated wifi speed
-    }
-    else if (ID == "2") {
-        if (results == "True") {
-            setUpdateBoolean()
-        }
     }
 }
 

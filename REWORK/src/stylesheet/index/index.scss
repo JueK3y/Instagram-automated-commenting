@@ -377,11 +377,11 @@ html {
                                     a:first-child {
                                         margin-top: 5px;
                                     }
-                                    a:nth-child(3) {
+                                    a:last-child {
                                         margin-bottom: 5px;
                                     }
                                     a {
-                                        display: flex;
+                                        display: none;
                                         margin-right: 5px;
                                         padding: 10px;
                                         margin-left: 5px;

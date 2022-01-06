@@ -237,25 +237,26 @@ $(document).ready(function() {
 
 
 ////// Profile content updatder
-fourOrMore = false
+let fourOrMore
+
 
 displayUsername().then(result => {
+  if (result.length == 0) {
+    document.getElementById('profileDropdown').style.display = 'none'
+  }
+  else if (result.length >= 4) {
+    fourOrMore = true
+  }
   for (let i = 0; i < result.length; i++) {
-      let usrnme = Object.values(result[i])[0]
-      $('.uid-profile-'+(i+1)).text(usrnme)
-      $('.uid-profile-'+(i+1)).removeClass('uid-profile-'+(i+1)).addClass('uid-'+usrnme)
-      // -!- Displays only the first username in Nav dropdown -!- //
-      if (i >= 4) {
-        fourOrMore = true
-        // -!- Doesn't work yet -!- //
-      }
+    let usrnme = Object.values(result[i])[0]
+    $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass('uid-profile-'+(i+1)).addClass('uid-'+usrnme)
   }
 })
 
 
-const profileOne = document.getElementById('profile-1-name')
-const profileTwo = document.getElementById('profile-2-name') 
-const profileThree = document.getElementById('profile-3-name') 
+const profile1 = document.getElementById('profile-1-name')
+const profile2 = document.getElementById('profile-2-name') 
+const profile3 = document.getElementById('profile-3-name') 
 
 const showMore = document.getElementById('more-profile').style
 const addProfile = document.getElementById('add-profile').style
@@ -263,31 +264,48 @@ const addProfile = document.getElementById('add-profile').style
 
 $(document).ready(function() {
   setTimeout(() => {
-    if (profileOne.innerText != "") {
+    // -!- Simplify? -!- //
+    if (profile1.innerText != "") {
       document.getElementById('profile-1').style.display = 'flex'
     }
-    if (profileTwo.innerText != "") {
+    else {
+      document.getElementById('profile-1').style.display = 'none'
+      fourOrMore = false
+    }
+    if (profile2.innerText != "") {
       document.getElementById('profile-2').style.display = ''
     }
-    if (profileThree.innerText != "") {
+    else {
+      document.getElementById('profile-2').style.display = 'none'
+      fourOrMore = false
+    }
+    if (profile3.innerText != "") {
       document.getElementById('profile-3').style.display = ''
       showMore.display = ''
       addProfile.display = 'none'
     }
+    else {
+      document.getElementById('profile-3').style.display = 'none'
+      fourOrMore = false
+    }
+    if (profile1.innerText == "" && profile2.innerText == "" && profile3.innerText == "") {
+      document.getElementById("profile-container").style.top  = "27px"
+    
+    }
   }, 100)
   $(document).on('click', '#add-profile', function() {
     document.getElementById("profile-container").style.top  = "15px"
-    if (profileOne.innerText == "") {
+    if (profile1.innerText == "") {
       document.getElementById('profile-1').style.display = 'flex'
-      profileOne.innerText = "Profil"
+      profile1.innerText = "Profil"
     }
-    else if (profileTwo.innerText == "") {
+    else if (profile2.innerText == "") {
       document.getElementById('profile-2').style.display = ''
-      profileTwo.innerText = "Profil"
+      profile2.innerText = "Profil"
     }
-    else if (profileThree.innerText == "") {
+    else if (profile3.innerText == "") {
       document.getElementById('profile-3').style.display = ''
-      profileThree.innerText = "Profil"
+      profile3.innerText = "Profil"
       showMore.display = ''
       addProfile.display = 'none'
     }
@@ -295,33 +313,18 @@ $(document).ready(function() {
 })
 
 
-profileOneName = ""                                                              // Get Name from JSON / API
-profileTwoName = ""
-profileThreeName = ""
+// -!- Simplify -!- //
+let profile1Name = ""                                                              // Get Name from JSON / API
+let profile2Name = ""
+let profile3Name = ""
 
 
 // Set profile names
-profileOne.innerText = profileOneName
-profileTwo.innerText = profileTwoName
-profileThree.innerText = profileThreeName
+profile1.innerText = profile1Name
+profile2.innerText = profile2Name
+profile3.innerText = profile3Name
 
-// Check for profiles
-if (profileOne.innerText == "") {
-  document.getElementById('profile-1').style.display = 'none'
-  fourOrMore = false
-}
-if (profileTwo.innerText == "") {
-  document.getElementById('profile-2').style.display = 'none'
-  fourOrMore = false
-}
-if (profileThree.innerText == "") {
-  document.getElementById('profile-3').style.display = 'none'
-  fourOrMore = false
-}
-if (profileOne.innerText == "" && profileTwo.innerText == "" && profileThree.innerText == "") {
-  document.getElementById("profile-container").style.top  = "27px"
 
-}
                                       
 // Display more / add button
 if (fourOrMore) {
@@ -334,16 +337,16 @@ else {
 }
 
 // Length Check
-if (profileOne.innerText.length > 16) {
-  profileOne.innerText = profileOne.innerText.substring(0, 14) + " ..."
+if (profile1.innerText.length > 16) {
+  profile1.innerText = profile1.innerText.substring(0, 14) + " ..."
 } 
 
-if (profileTwo.innerText.length > 16) {
-  profileTwo.innerText = profileTwo.innerHTML.substring(0, 14) + " ..."
+if (profile2.innerText.length > 16) {
+  profile2.innerText = profile2.innerHTML.substring(0, 14) + " ..."
 } 
 
-if (profileThree.innerText.length > 16) {
-  profileThree.innerText = profileThree.innerHTML.substring(0, 14) + " ..."
+if (profile3.innerText.length > 16) {
+  profile3.innerText = profile3.innerHTML.substring(0, 14) + " ..."
 } 
 
 $(document).ready(function() {

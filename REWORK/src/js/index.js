@@ -1,5 +1,3 @@
-const { systemPreferences } = require("electron")
-
 ////// URL Clear Buttton
 $('#clearButton').click(function() {
   $('#url-input').val('')

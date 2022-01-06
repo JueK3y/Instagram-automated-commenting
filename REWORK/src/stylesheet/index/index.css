@@ -409,13 +409,11 @@ html body main form #main-content #login-data #username #profileDropdown #profil
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a:first-child {
   margin-top: 5px;
 }
-html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a:nth-child(3) {
+html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a:last-child {
   margin-bottom: 5px;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   margin-right: 5px;
   padding: 10px;
   margin-left: 5px;

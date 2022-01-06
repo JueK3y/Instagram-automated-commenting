@@ -15,7 +15,6 @@
 
 import sys
 from wifiSpeed import WiFi
-from update import Update
 from profile import Profile
 from mainLogic import Manager
 from dataFiles import Comment
@@ -23,8 +22,6 @@ from credentials import Login
 
 if sys.argv[1] == "1":
     WiFi.checkConnection()
-elif sys.argv[1] == "2":
-    Update.checkUpdate()
 elif sys.argv[1] == "3":
     Profile.get()
 elif sys.argv[1] == "4":
