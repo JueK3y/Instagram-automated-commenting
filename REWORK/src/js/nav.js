@@ -244,6 +244,9 @@ displayUsername().then(result => {
   if (result.length == 0) {
     document.getElementById('profileDropdown').style.display = 'none'
   }
+  else if (result.length == 1 || result.length == 2) {
+    $('.uid-profile-'+(result.length)).css('margin-bottom', '5px')
+  }
   else if (result.length >= 4) {
     fourOrMore = true
   }

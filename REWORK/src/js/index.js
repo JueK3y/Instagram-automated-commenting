@@ -174,8 +174,7 @@ $(document).ready(function() {
     prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
-    var target = e.target.id;    
-    console.log(target)
+    var target = e.target.id;   
     for(let i = 0; i < 4; i++) {
       if (target == 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
