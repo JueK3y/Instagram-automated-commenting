@@ -175,6 +175,7 @@ $(document).ready(function() {
   })
   $(document).on('click', '#profile-content', function(e) {
     var target = e.target.id;   
+    console.log(target)
     for(let i = 0; i <= 3; i++) {
       if (target == 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
@@ -196,6 +197,16 @@ $(document).ready(function() {
         getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
+      }
+      else if (target == 'delete-'+i) {
+        const deleteProfile = String(document.getElementById(target).previousElementSibling.querySelector('p').classList).slice(4)
+        alert(deleteProfile)
+        // deletePassword(deleteProfile)
+      }
+      else if (target == 'deleteIcon-'+i) {
+        const deleteProfile = String(document.getElementById(target).parentElement.previousElementSibling.querySelector('p').classList).slice(4)
+        alert(deleteProfile)
+        // deletePassword(deleteProfile)
       }
     }
   })

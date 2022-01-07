@@ -43,7 +43,7 @@ function showContent(type, time) {
   }
 }
 
-// Functions for later improvement
+// -!- Functions for later improvement -!- //
 function lineAnimation1(type, time) {
   $('.line').animate({marginTop: '-40px', height: '40px', opacity: '0'}, 300)
   setTimeout(() => {
@@ -82,7 +82,7 @@ $(document).ready(() => {
 })
 
 
-$(document).ready(() => {                                               // -- Must be modified so that button click also has a timeout -- //
+$(document).ready(() => {                                               // -!- Must be modified so that button click also has a timeout -!- //
   $("body").click(function(e) {
     if ($('#active').hasClass('profile')) {
       if (! $(e.target).closest("#profile-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
@@ -352,7 +352,8 @@ setTimeout(() => {
   if (profile3.innerText.length > 6) {
     profile3.innerText = profile3.innerHTML.substring(0, 4) + ' ...'
   }
-}, 1000)
+}, 300)
+// -!- Doesnt work always -!- //
 
 $(document).ready(function() {
   $(document).on('hover', '#add-profile', function() {
