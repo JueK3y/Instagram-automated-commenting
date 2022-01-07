@@ -339,18 +339,20 @@ else {
   addProfile.display = ''
 }
 
-// Length Check
-if (profile1.innerText.length > 16) {
-  profile1.innerText = profile1.innerText.substring(0, 14) + " ..."
-} 
-
-if (profile2.innerText.length > 16) {
-  profile2.innerText = profile2.innerHTML.substring(0, 14) + " ..."
-} 
-
-if (profile3.innerText.length > 16) {
-  profile3.innerText = profile3.innerHTML.substring(0, 14) + " ..."
-} 
+setTimeout(() => {
+  // Length Check
+  if (profile1.innerText.length > 6) {
+    profile1.innerText = profile1.innerText.substring(0, 4) + ' ...'
+  } 
+  
+  if (profile2.innerText.length > 6) {
+    profile2.innerText = profile2.innerHTML.substring(0, 4) + ' ...'
+  }
+  
+  if (profile3.innerText.length > 6) {
+    profile3.innerText = profile3.innerHTML.substring(0, 4) + ' ...'
+  }
+}, 1000)
 
 $(document).ready(function() {
   $(document).on('hover', '#add-profile', function() {
