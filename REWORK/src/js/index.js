@@ -199,14 +199,32 @@ $(document).ready(function() {
         prDdImgBlur.style.display = 'none'
       }
       else if (target == 'delete-'+i) {
-        const deleteProfile = String(document.getElementById(target).previousElementSibling.querySelector('p').classList).slice(4)
-        alert(deleteProfile)
-        // deletePassword(deleteProfile)
+        const deleteUser = String(document.getElementById(target).previousElementSibling.querySelector('p').classList).slice(4)
+        const deleteProfile = String(document.getElementById(target).previousElementSibling.parentElement.id)
+        document.getElementById(deleteProfile).remove()
+        $('.uid-'+deleteUser).remove()
+        $('<a>', {
+          class: 'uid-'+deleteProfile,
+          text: deleteProfile.replace('profile-', 'Profil ')        // -!- Better fix needed -!- //
+        }).appendTo('#profileDropdownContent')
+        if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
+          document.getElementById('profileDropdown').style.display = 'none'
+        }
+        deletePassword(deleteUser)
       }
       else if (target == 'deleteIcon-'+i) {
-        const deleteProfile = String(document.getElementById(target).parentElement.previousElementSibling.querySelector('p').classList).slice(4)
-        alert(deleteProfile)
-        // deletePassword(deleteProfile)
+        const deleteUser = String(document.getElementById(target).parentElement.previousElementSibling.querySelector('p').classList).slice(4)
+        const deleteProfile = String(document.getElementById(target).parentElement.previousElementSibling.parentElement.id)
+        document.getElementById(deleteProfile).remove()
+        $('.uid-'+deleteUser).remove()
+        $('<a>', {
+          class: 'uid-'+deleteProfile,
+          text: deleteProfile.replace('profile-', 'Profil ')        // -!- Better fix needed -!- //
+        }).appendTo('#profileDropdownContent')
+        if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
+          document.getElementById('profileDropdown').style.display = 'none'
+        }
+        deletePassword(deleteUser)
       }
     }
   })
