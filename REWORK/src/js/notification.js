@@ -85,7 +85,7 @@ function noteMessage(messageTitle, messageText, importantType) {
           actions: undefined, // String | Array<String>. Action label or list of labels in case of dropdown
         },
         function (error) {
-          console.log(error);    // -!- Replace with log -!- //
+          console.error(error)    // -!- Replace with log -!- //
         })
     }
     else if (noteUrgent && importantType) {
@@ -96,7 +96,7 @@ function noteMessage(messageTitle, messageText, importantType) {
           appID: 'Instagram Autoamted Commenting'
         },
         function (error) {
-          console.log(error);    // -!- Replace with log -!- //
+          console.error(error)    // -!- Replace with log -!- //
         })
     }
 }
