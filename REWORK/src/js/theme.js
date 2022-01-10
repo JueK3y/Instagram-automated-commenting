@@ -86,25 +86,26 @@ function darkIcon() {
     }
     catch(err) {}
 }
-
-if (theme) {
-    body.classList.add(theme);
-    if (body.classList.contains("dark")) {
+setTimeout(() => {
+    if (theme) {
+        body.classList.add(theme);
+        if (body.classList.contains("dark")) {
+            darkIcon()
+        }
+        else {
+            lightIcon()
+        }
+    }
+    else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        body.classList.add("dark")
         darkIcon()
     }
     else {
+        body.classList.add("light")
         lightIcon()
     }
-}
-else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    body.classList.add("dark")
-    darkIcon()
-}
-else {
-    body.classList.add("light")
-    lightIcon()
-}
-
+}, 100)
+    
 // Button Event Handlers
 themeToDark.onclick = () => {
     localStorage.setItem("theme", "dark")
