@@ -14,25 +14,11 @@ function startPython(ID) {
     }
 
     PythonShell.run('manager.py', options, function(err, results) {
-        if(err) throw err;
+        if(err) throw err
         console.log('Results: ', results)
         manager(ID, results)
     })
 }
-
-/*function getPassword(ID, username) {
-    let {PythonShell} = require('python-shell')
-
-    let options = {
-        scriptPath: './src/py',
-        args: [ID, username]
-    }
-
-    PythonShell.run('manager.py', options, function(err, results) {
-        if(err) throw err;
-        document.getElementById("password-form").value = results
-    })
-}*/
 
 /*function mainLogic(ID, url, username, password, cSave) {
     let {PythonShell} = require('python-shell')
@@ -43,7 +29,7 @@ function startPython(ID) {
     }
 
     PythonShell.run('manager.py', options, function(err, results) {
-        if(err) throw err;
-        console.log('results: %j', results)
+        if(err) throw err
+        console.log('Results: ', results)
     })
 }*/
