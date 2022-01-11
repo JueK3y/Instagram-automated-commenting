@@ -1,11 +1,17 @@
 const NetworkSpeed = require('network-speed')
-const testNetworkSpeed = new NetworkSpeed()
 
 async function getNetworkDownloadSpeed() {
-  const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000'
-  const fileSizeInBytes = 500000
-  const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes)
-  console.log(speed)
+  try {
+    const testNetworkSpeed = new NetworkSpeed()
+    const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000'
+    const fileSizeInBytes = 500000
+    const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes)
+    return speed
+  }
+  catch(error) {
+    logging(err, error)
+    return false
+  }
 }
 
 /*getNetworkUploadSpeed();
