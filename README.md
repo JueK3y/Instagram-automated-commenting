@@ -126,11 +126,11 @@ The following tools were used to develop the program:
 _The program was **not** built using the Instagram API._
 
 
-## Continue this project
-You are interested as a programmer to continue / further develop the project or add your own functions?
-<br>In principle, editing and distribution of the code is prohibited in the [EULA](https://github.com/JueK3y/Instagram-automated-commenting/wiki/EULA).
-<br>However, you can [send me a request](https://juek3y.com/de/contact/business) for the purpose of further development and
-<br>I will grant you a modified editing and distribution permission (if the intended use does not violate certain guidelines).
+## <s>Continue this project</s>
+<s>You are interested as a programmer to continue / further develop the project or add your own functions?
+<br>In principle, editing and distribution of the code is prohibited in the [EULA](#).
+<br>However, you can [send me a request](#) for the purpose of further development and
+<br>I will grant you a modified editing and distribution permission (if the intended use does not violate certain guidelines).</s>
 
 
 ## Leave a ⭐
