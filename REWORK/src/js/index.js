@@ -143,10 +143,10 @@ $('#start-btn').click(function() {
     for (let i = 0; i < errorCode.length; i++) {
       if ($('.' + errorCode[i])[0]) {
         hideBanner(errorCode[i])
-        console.warn(errorCode[i] + " banner exists. Removing it.")                                         // Only for DEV-Mode
+        logging(warn, errorCode[i] + " banner exists. Removing it.")
       }
       else {
-        console.log(errorCode[i] + " couldn't be found. Good!")                                             // Only for DEV-Mode
+        logging(info, errorCode[i] + " couldn't be found. Good!")
       }
     }
   }
@@ -189,7 +189,6 @@ $(document).ready(function() {
   })
   $(document).on('click', '#profile-content', function(e) {
     var target = e.target.id;   
-    console.log(target)
     for(let i = 0; i <= 3; i++) {
       if (target == 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)

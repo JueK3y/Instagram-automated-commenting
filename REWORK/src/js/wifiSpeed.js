@@ -1,7 +1,5 @@
-const NetworkSpeed = require('network-speed');  // ES5
-const testNetworkSpeed = new NetworkSpeed();
-
-getNetworkDownloadSpeed()
+const NetworkSpeed = require('network-speed')
+const testNetworkSpeed = new NetworkSpeed()
 
 async function getNetworkDownloadSpeed() {
   const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000'

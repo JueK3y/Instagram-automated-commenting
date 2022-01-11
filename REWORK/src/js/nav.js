@@ -406,7 +406,7 @@ const changeImg = document.getElementById("wifi-img")
 var counter = 0
 var counterDisplay = 0
 showMessage = true
-notConnected = false                                                       // notConnected check from API
+notConnected = false                                                       // notConnected check from API, is deleted in production
 
 $("#error-hide").click(() => {
   showMessage = false
@@ -427,7 +427,7 @@ window.setInterval(() => {
   }
   else if ($('.wifi-not-connected')[0]) {
     hideBanner('wifi-not-connected')
-    console.warn("wifi-not-connected banner exists. Removing it.")
+    logging(warn, "wifi-not-connected banner exists. Removing it.")
   }
   if (internetSpeed == 0) {
     counter += 1
