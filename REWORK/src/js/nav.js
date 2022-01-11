@@ -1,5 +1,18 @@
-////// Change close image on hover
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │ Instagram Automated Commenting 2.0                                      │
+// ├─────────────────────────────────────────────────────────────────────────┤
+// │ DO NOT indicate used program sections as your own.                      │
+// │ DO NOT sell the software to other people under your name.               │
+// │ Before further development and sale,                                    │
+// │ a written agreement must be made with the manufacturer (JueK3y).        │
+// │ In the event of possible damage, the user alone is liable,              │
+// │ the manufacturer (JueK3y) withdraws from any legal responsibility.      │
+// ├─────────────────────────────────────────────────────────────────────────┤
+// │ Copyright © 2020 - 2021 by JueK3y (Julian Kennedy)                      │
+// | https://github.com/JueK3y/Instagram-automated-commenting                │
+// └─────────────────────────────────────────────────────────────────────────┘
 
+////// Change close image on hover
 document.getElementById('closeBtn').addEventListener('mouseover', function() {
   document.getElementById('closeBtnIcon').src = 'src/img/icons/dark/win-close.svg'
 })
@@ -361,9 +374,14 @@ $(document).ready(function() {
   })
 })
 
+for(let i = 1; i <= 3; i++) {
+  document.getElementById('delete-'+(i)).onmouseover = () => { document.getElementById('deleteIcon-' + i).src = 'src/img/icons/' + document.body.classList + '/delete-red.svg' }
+  document.getElementById('delete-'+(i)).onmouseleave = () => { document.getElementById('deleteIcon-' + i).src = 'src/img/icons/' + document.body.classList + '/delete.svg' }
+}
+
 // -!- Simplify ??? -!- //
 
-const deleteHover1 = document.getElementById("delete-1")
+/* const deleteHover1 = document.getElementById("delete-1")
 const deleteIcon1 = document.getElementById("deleteIcon-1")
 const deleteHover2 = document.getElementById("delete-2")
 const deleteIcon2 = document.getElementById("deleteIcon-2")
@@ -375,7 +393,7 @@ deleteHover1.onmouseleave = () => { deleteIcon1.src = "src/img/icons/" + documen
 deleteHover2.onmouseover = () => { deleteIcon2.src = "src/img/icons/" + document.body.classList + "/delete-red.svg" }
 deleteHover2.onmouseleave = () => { deleteIcon2.src = "src/img/icons/" + document.body.classList + "/delete.svg" }
 deleteHover3.onmouseover = () => { deleteIcon3.src = "src/img/icons/" + document.body.classList + "/delete-red.svg" }
-deleteHover3.onmouseleave = () => { deleteIcon3.src = "src/img/icons/" + document.body.classList + "/delete.svg" }
+deleteHover3.onmouseleave = () => { deleteIcon3.src = "src/img/icons/" + document.body.classList + "/delete.svg" } */
 
 
 
@@ -398,7 +416,7 @@ $("#error-hide").click(() => {
 
 window.setInterval(() => {
   const light = document.body.classList.contains("light")
-  // startPython(1) 
+  getNetworkDownloadSpeed()                                               // -!- Function needs to be tested -!- //
   var internetSpeed = Math.floor(Math.random() * 25)                      // Is replaced with the API output
   if (notConnected) {                                                     // notConnected check from API
     changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'

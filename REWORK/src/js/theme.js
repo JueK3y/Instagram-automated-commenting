@@ -104,7 +104,7 @@ setTimeout(() => {
         body.classList.add("light")
         lightIcon()
     }
-}, 100)
+}, 250)
     
 // Button Event Handlers
 themeToDark.onclick = () => {

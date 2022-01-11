@@ -26,9 +26,9 @@ const createWindow = () => {
       title: 'Instagram Automated Commenting',
       backgroundColor: '#202020',
       webPreferences: {
-        // sandbox: true,                         // Problems with require
-        nodeIntegration: true,                    // Can this be disabled in the finale release?
-        contextIsolation: false                   // Same for here?
+        // sandbox: true,                         // -!- Problems with require -!- //
+        nodeIntegration: true,                    // -!- Can this be disabled in the finale release? -!- //
+        contextIsolation: false                   // -!- Same for here? -!- //
       }
   })
   
