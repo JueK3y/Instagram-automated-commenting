@@ -1,10 +1,3 @@
-function manager(ID, results) {
-    if (ID == "1") {
-        console.log(results)
-        // Display updated wifi speed
-    }
-}
-
 function startPython(ID) {
     let {PythonShell} = require('python-shell')
 

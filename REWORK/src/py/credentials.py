@@ -15,26 +15,10 @@ import sys
 import keyring
 
 service = 'IAC 2.0'
-class Login:
-    def store(username, password):
-        keyring.set_password(service, username, password)
-        print("\nSaving LogIn Data:\nBenutzername: " + username + "\nPasswort: " + password + "\n")
-    
+class Login:    
     def get(username):
         password = keyring.get_password(service, username)
         print(password)
-
-    def editID(oldUsername, username):
-        try:
-            password = keyring.get_password(service, oldUsername)
-            keyring.set_password(service, username, password)
-            Login.delete(oldUsername)
-        except keyring.errors.PasswordDeleteError:
-            print("Old username couldn't be found. Please create a new profile.")
-
-    def editPW(username, password):
-        Login.delete(username)
-        Login.store(username, password)
 
     def delete(username):
         keyring.delete_password(service, username)

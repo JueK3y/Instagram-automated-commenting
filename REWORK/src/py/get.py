@@ -14,24 +14,6 @@
 
 import sys
 import json
-from dataFiles import Comment
-class GetterGUI:
-    # -- Get data from the GUI --
-    def getURL():
-        GetterGUI.URL = sys.argv[2]
-        print("Get Instagram URL: " + GetterGUI.URL)
-
-    def getLogIn():
-        GetterGUI.username = sys.argv[3]
-        GetterGUI.password = sys.argv[4]
-        print("\nGet Login Data:\nBenutzername: " + GetterGUI.username + "\nPasswort: " + GetterGUI.password + "\n")
-
-    def getSaveCredentials():
-        GetterGUI.saveLogin = sys.argv[5]
-        print("Get saveProfile boolean: " + GetterGUI.saveLogin)
-
-    def getComments():
-        Comment.checkFile()
 
 class GetterJSON:
     def getID():

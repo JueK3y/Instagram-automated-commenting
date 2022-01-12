@@ -533,7 +533,7 @@ const updateIcon = document.getElementById('set-up')
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {
-    startPython(2)
+    // Check for update here
     updateIcon.style.transition = '3s linear'
     updateIcon.style.transform = 'rotate(720deg)'
     setTimeout(() => {

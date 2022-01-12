@@ -16,26 +16,9 @@ from dataFiles import ID
 from credentials import Login
 
 class Profile:
-    # -!- What to do with uID's? Replace it with username?
     def get():
         ID.getUsername()
         # ID.getData()
-    
-    def create(username, nickname, password, pinned):
-        # -!- uID needs to be created -!-
-        # -!- Check if username profile already exists -!-
-        ID.addUpdate(username, nickname, pinned)
-        Login.store(username, password)
-
-    def editUN(oldUN, newUN, pinned):
-        # -!- Check if new username profile already exists -!-
-        ID.addUpdate(newUN, None, pinned)
-        Login.editID(oldUN, newUN)
-        ID.deleteObject(oldUN)
-    
-    def editPW(username, password):
-        Login.editPW(username, password)
-        print("")
 
     def delete(username):
         Login.delete(username)

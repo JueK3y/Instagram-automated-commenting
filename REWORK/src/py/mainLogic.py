@@ -12,7 +12,6 @@
 # | https://github.com/JueK3y/Instagram-automated-commenting                │
 # └─────────────────────────────────────────────────────────────────────────┘
 
-from get import GetterGUI
 from credentials import Login
 from automation import Logic
 from profile import Profile
@@ -20,11 +19,5 @@ from profile import Profile
 class Manager:
     def startLogic():                                           # -- startLogic will be executed when HTML Start Button is pushed --
         print("\nThis is the start of IAC 2.0.")
-        GetterGUI.getURL()
-        GetterGUI.getLogIn()
-        GetterGUI.getSaveCredentials()
-        GetterGUI.getComments()
-        if GetterGUI.saveLogin == "true":
-            Profile.create(GetterGUI.username, None, GetterGUI.password, False)
         Logic.checkDriver()
         Logic.mainLogic()
