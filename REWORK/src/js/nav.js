@@ -238,7 +238,7 @@ $(document).ready(function() {
       }, 70)
       localStorage.setItem("navPos", "in")
       slideIn = true
-      setTimeout(() => { locked = false }, 370)
+      setTimeout(() => { locked = false }, 500)
     }
     else if (slideIn) {
       if (locked) return
@@ -263,7 +263,7 @@ $(document).ready(function() {
       })
       localStorage.removeItem("navPos")
       slideIn = false
-      setTimeout(() => { locked = false }, 400)
+      setTimeout(() => { locked = false }, 500)
     }
   })
 })
