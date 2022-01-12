@@ -1,5 +1,7 @@
 const log = require('electron-log')
 
+logging('info', '--- This is the start of IAC 2.0 ---')
+
 function logging(type, message) {
     type = type.toLowerCase()
     if (type == 'info') {
