@@ -24,7 +24,6 @@ document.getElementById('closeBtn').addEventListener('mouseout', function() {
 
 
 ////// Active line change
-
 function showContent(type, time) {                  
   if (type == 'comment') {
     setTimeout(() => {
@@ -179,8 +178,7 @@ $('.settings').click(() => {
 
 
 ////// Navigation Sliding Animation
-
-slideIn = false
+var slideIn = false
 
 const navPos = localStorage.getItem("navPos")
 
@@ -196,9 +194,28 @@ if (navPos) {
   slideIn = true
 }
 
+
+$(document).ready(() => {
+  var locked = false
+
+  $(document).on('keyup', (e) => {
+    if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
+      if (locked) return
+      locked = true
+
+      $('.comment').click()
+      setTimeout(() => { locked = false }, 350)
+    }
+  })
+
+})
+
 $(document).ready(function() {
+  var locked = false
   $(document).on('click', '#active', function() {
     if (slideIn == false) {
+      if (locked) return
+      locked = true
       $("#side-bar").css('z-index', 0)
       setTimeout(function() {
         $("main").animate({left: '47px'})
@@ -221,8 +238,11 @@ $(document).ready(function() {
       }, 70)
       localStorage.setItem("navPos", "in")
       slideIn = true
+      setTimeout(() => { locked = false }, 370)
     }
     else if (slideIn) {
+      if (locked) return
+      locked = true
       $("#side-bar").css('z-index', 0)
       setTimeout(function() {
         $("#side-bar").css('width', '320px')
@@ -243,15 +263,14 @@ $(document).ready(function() {
       })
       localStorage.removeItem("navPos")
       slideIn = false
+      setTimeout(() => { locked = false }, 400)
     }
   })
 })
 
 
-
 ////// Profile content updatder
 let fourOrMore
-
 
 displayUsername().then(result => {
   if (result.length == 0) {
@@ -339,12 +358,10 @@ let profile1Name = ""                                                           
 let profile2Name = ""
 let profile3Name = ""
 
-
 // Set profile names
 profile1.innerText = profile1Name
 profile2.innerText = profile2Name
 profile3.innerText = profile3Name
-
 
                                       
 // Display more / add button
