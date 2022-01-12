@@ -418,51 +418,53 @@ window.setInterval(() => {
       showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
       // noteMessage("WLAN deaktiviert", "Für IAC 2.0 brauchst du eine aktive Internetverbindung")  // -- Spams the note center -- //
     }
-    else if ($('.wifi-not-connected')[0]) {
-      hideBanner('wifi-not-connected')
-      logging(warn, "wifi-not-connected banner exists. Removing it.")
-    }
-    else if (internetSpeed == 0) {
-      counter += 1
-      changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
-      changeColor.style.background = (light) ? '#FDE7E9':'#442726'
-      changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
-      if (counter == 3 && showMessage) {
-        $("#error-banner-wifi").fadeIn()
-        counterDisplay += 1
-        // noteMessage("Langsames Internet", "Ein langsames Netzwerk könnte IAC beeinträchtigen.")  // -- Spams the note center -- //
-        if (counterDisplay == 3) {
-          document.getElementById("error-hide").style.display = "block"
+    else {
+      if ($('.wifi-not-connected')[0]) {
+        hideBanner('wifi-not-connected')
+        logging(warn, "wifi-not-connected banner exists. Removing it.")
+      }
+      if (internetSpeed == 0) {
+        counter += 1
+        changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
+        changeColor.style.background = (light) ? '#FDE7E9':'#442726'
+        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
+        if (counter == 3 && showMessage) {
+          $("#error-banner-wifi").fadeIn()
+          counterDisplay += 1
+          // noteMessage("Langsames Internet", "Ein langsames Netzwerk könnte IAC beeinträchtigen.")  // -- Spams the note center -- //
+          if (counterDisplay == 3) {
+            document.getElementById("error-hide").style.display = "block"
+          }
         }
       }
-    }
-    else if (internetSpeed <= 1) {
-      counter = 0
-      $("#error-banner-wifi").fadeOut()
-      changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
-      changeColor.style.background = "none"
-      changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
-    }
-    else if (internetSpeed <= 5) {
-      counter = 0
-      $("#error-banner-wifi").fadeOut()
-      changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
-      changeColor.style.background = "none"
-      changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
-    }
-    else if (internetSpeed <= 10) {
-      counter = 0
-      $("#error-banner-wifi").fadeOut()
-      changeColor.style.color = (light) ? '#9D5D00':'#FCE150'
-      changeColor.style.background = "none"
-      changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
-    }
-    else if (internetSpeed > 10) {
-      counter = 0
-      $("#error-banner-wifi").fadeOut()
-      changeColor.style.color = (light) ? '#000000':'#FFFFFF'
-      changeColor.style.background = "none"
-      changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
+      else if (internetSpeed <= 1) {
+        counter = 0
+        $("#error-banner-wifi").fadeOut()
+        changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
+        changeColor.style.background = "none"
+        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
+      }
+      else if (internetSpeed <= 5) {
+        counter = 0
+        $("#error-banner-wifi").fadeOut()
+        changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
+        changeColor.style.background = "none"
+        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
+      }
+      else if (internetSpeed <= 10) {
+        counter = 0
+        $("#error-banner-wifi").fadeOut()
+        changeColor.style.color = (light) ? '#9D5D00':'#FCE150'
+        changeColor.style.background = "none"
+        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
+      }
+      else if (internetSpeed > 10) {
+        counter = 0
+        $("#error-banner-wifi").fadeOut()
+        changeColor.style.color = (light) ? '#000000':'#FFFFFF'
+        changeColor.style.background = "none"
+        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
+      }
     }
     elem.innerHTML = internetSpeed
   })
