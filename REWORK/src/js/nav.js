@@ -86,9 +86,8 @@ $(document).ready(() => {
     if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
       if (locked) return
       locked = true
-
       $('.comment').click()
-      setTimeout(() => { locked = false }, 350)
+      setTimeout(() => { locked = false }, 4000)
     }
   })
 })
@@ -109,72 +108,100 @@ $(document).ready(() => {                                               // -!- M
 })
 
 // Comment 
-$('.comment').click(() => {
-  if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
-    $('.line').animate({marginTop: '-38px', height: '55px'}, 150)
-    setTimeout(() => {
-      $('#active').removeAttr('id')
-      $('.comment').attr('id', 'active')
-      $('.line').css('margin-top', '1.5px')   
-      $('.line').animate({height: '16px'}, 150)
-    }, 220)
-  }
-  else if (! $('#active').hasClass('comment') && ($('#active').hasClass('helpNav') || $('#active').hasClass('settings'))) {
-    lineAnimation1('comment', 300)
-  }
-  showContent('comment', 220)
-}) 
-
-// Profile 
-$('.profile').click(() => {
-  if (! $('#active').hasClass('profile') && $('#active').hasClass('comment')) {
-    $('.line').animate({height: '55px', marginBottom: '-55px'}, 150)
-    setTimeout(() => {
-      $('#active').removeAttr('id')
-      $('.profile').attr('id', 'active')
-      $('.line').css('margin-top', '-38px')
-      $('.line').animate({marginTop: '1.5px', height: '16px'}, 150)
-    }, 1)
-    showContent('profile', 150)
-  }
-  else if (! $('#active').hasClass('profile') && ($('#active').hasClass('helpNav')) || $('#active').hasClass('settings')) {
-    lineAnimation1('profile', 320)
-  }
-}) 
-
-// Help 
-$('.helpNav').click(() => {
-  if (! $('#active').hasClass('helpNav') && ($('#active').hasClass('comment')) || $('#active').hasClass('profile')) {
-    lineAnimation2('helpNav', 1.5, 16)
-  }
-  else if (! $('#active').hasClass('helpNav') && $('#active').hasClass('settings')) {
-    $('.line').animate({marginTop: '-40px', height: '40px', opacity: '0'}, 300)
-    setTimeout(() => {
-      $('#active').removeAttr('id')
-      $('.helpNav').attr('id', 'active')
-      $('.line').css('margin-top', '1.5px')   
-      $('.line').animate({height: '16px', opacity: '1'}, 250)
-    }, 320)
-    showContent('helpNav', 320)
-  }
-}) 
-
-// Settings 
-$('.settings').click(() => {
-  if (! $('#active').hasClass('settings') && $('#active').hasClass('comment')) {
-    $('.line').animate({height: '40px', marginBottom: '-40px', opacity: '0'}, 250)
-    setTimeout(() => {
-      $('#active').removeAttr('id')
-      $('.settings').attr('id', 'active')
-      $('.line').css('margin-top', '-38px')
-      $('.line').animate({marginTop: '5px', height: '19px', opacity: '1'}, 300)
-    }, 270)
-    showContent('settings', 270)
-  }
-  else if (! $('#active').hasClass('settings') && ($('#active').hasClass('profile') || $('#active').hasClass('helpNav'))) {
-    lineAnimation2('settings', 5, 19)
-  }
-}) 
+$(document).ready(() => {
+  var locked = false
+  $('.comment').click(() => {
+    if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
+      if (locked) return
+      locked = true
+      $('.line').animate({marginTop: '-38px', height: '55px'}, 150)
+      setTimeout(() => {
+        $('#active').removeAttr('id')
+        $('.comment').attr('id', 'active')
+        $('.line').css('margin-top', '1.5px')   
+        $('.line').animate({height: '16px'}, 150)
+      }, 220)
+      setTimeout(() => { locked = false }, 150)
+    }
+    else if (! $('#active').hasClass('comment') && ($('#active').hasClass('helpNav') || $('#active').hasClass('settings'))) {
+      if (locked) return
+      locked = true
+      lineAnimation1('comment', 300)
+      setTimeout(() => { locked = false }, 300)
+    }
+    showContent('comment', 220)
+  }) 
+  
+  // Profile 
+  $('.profile').click(() => {
+    if (! $('#active').hasClass('profile') && $('#active').hasClass('comment')) {
+      if (locked) return
+      locked = true
+      $('.line').animate({height: '55px', marginBottom: '-55px'}, 150)
+      setTimeout(() => {
+        $('#active').removeAttr('id')
+        $('.profile').attr('id', 'active')
+        $('.line').css('margin-top', '-38px')
+        $('.line').animate({marginTop: '1.5px', height: '16px'}, 150)
+      }, 1)
+      setTimeout(() => { locked = false }, 350)
+      showContent('profile', 375)
+    }
+    else if (! $('#active').hasClass('profile') && ($('#active').hasClass('helpNav')) || $('#active').hasClass('settings')) {
+      if (locked) return
+      locked = true
+      lineAnimation1('profile', 320)
+      setTimeout(() => { locked = false }, 320)
+    }
+  }) 
+  
+  // Help 
+  $('.helpNav').click(() => {
+    if (! $('#active').hasClass('helpNav') && ($('#active').hasClass('comment')) || $('#active').hasClass('profile')) {
+      if (locked) return
+      locked = true
+      lineAnimation2('helpNav', 1.5, 16)
+      setTimeout(() => { locked = false }, 500)
+    }
+    else if (! $('#active').hasClass('helpNav') && $('#active').hasClass('settings')) {
+      if (locked) return
+      locked = true
+      $('.line').animate({marginTop: '-40px', height: '40px', opacity: '0'}, 300)
+      setTimeout(() => {
+        $('#active').removeAttr('id')
+        $('.helpNav').attr('id', 'active')
+        $('.line').css('margin-top', '1.5px')   
+        $('.line').animate({height: '16px', opacity: '1'}, 250)
+        setTimeout(() => { locked = false }, 270)
+      }, 320)
+      showContent('helpNav', 320)
+    }
+  }) 
+  
+  // Settings 
+  $('.settings').click(() => {
+    if (! $('#active').hasClass('settings') && $('#active').hasClass('comment')) {
+      if (locked) return
+      locked = true
+      $('.line').animate({height: '40px', marginBottom: '-40px', opacity: '0'}, 250)
+      setTimeout(() => {
+        $('#active').removeAttr('id')
+        $('.settings').attr('id', 'active')
+        $('.line').css('margin-top', '-38px')
+        $('.line').animate({marginTop: '5px', height: '19px', opacity: '1'}, 300)
+      }, 270)
+      setTimeout(() => { locked = false }, 270)
+      showContent('settings', 270)
+    }
+    else if (! $('#active').hasClass('settings') && ($('#active').hasClass('profile') || $('#active').hasClass('helpNav'))) {
+      if (locked) return
+      locked = true
+      lineAnimation2('settings', 5, 19)
+      setTimeout(() => { locked = false }, 600)
+      // -!- Thats... a long time -!- //
+    }
+  })
+})
 
 
 ////// Navigation Sliding Animation
