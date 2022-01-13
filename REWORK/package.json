@@ -25,6 +25,7 @@
     "electron-log": "^4.4.4",
     "electron-store": "^8.0.1",
     "electron-window-state": "^5.0.3",
+    "is-online": "^9.0.1",
     "keytar": "^7.7.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.0",

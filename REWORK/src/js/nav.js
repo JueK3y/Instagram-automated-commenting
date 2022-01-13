@@ -438,6 +438,7 @@ var counter = 0
 var counterDisplay = 0
 showMessage = true
 var notConnected
+var internetSpeed
 
 $("#error-hide").click(() => {
   showMessage = false
@@ -453,7 +454,8 @@ window.setInterval(() => {
       internetSpeed = '- -'
     }
     else {
-      var internetSpeed = result['mbps']
+      notConnected = false
+      internetSpeed = result['mbps']
     }
     if (notConnected) {                                                     // notConnected check from API
       changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'

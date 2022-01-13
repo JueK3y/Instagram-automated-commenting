@@ -1,15 +1,15 @@
+const isOnline = require('is-online')
 const NetworkSpeed = require('network-speed')
 
 async function getNetworkDownloadSpeed() {
-  try {
+  if (await isOnline()) {
     const testNetworkSpeed = new NetworkSpeed()
     const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000'
     const fileSizeInBytes = 500000
     const speed = await testNetworkSpeed.checkDownloadSpeed(baseUrl, fileSizeInBytes)
     return speed
   }
-  catch(error) {
-    logging(err, error)
+  else {
     return false
   }
 }
