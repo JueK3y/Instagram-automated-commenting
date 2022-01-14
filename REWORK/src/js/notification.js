@@ -81,8 +81,7 @@ function noteMessage(messageTitle, messageText, importantType) {
           title: messageTitle,
           message: messageText,
           icon: 'src/img/IAC-Icon.ico',
-          appID: 'Instagram Autoamted Commenting',
-          actions: undefined, // String | Array<String>. Action label or list of labels in case of dropdown
+          appID: 'Instagram Autoamted Commenting'
         },
         function (error) {
           devLog('err', error)

@@ -145,9 +145,6 @@ $('#start-btn').click(function() {
         hideBanner(errorCode[i])
         devLog('warn', errorCode[i] + " banner exists. Removing it.")
       }
-      else {
-        devLog('info', errorCode[i] + " couldn't be found. Good!")
-      }
     }
   }
 
