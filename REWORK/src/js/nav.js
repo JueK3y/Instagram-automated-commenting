@@ -467,7 +467,7 @@ window.setInterval(() => {
     else {
       if ($('.wifi-not-connected')[0]) {
         hideBanner('wifi-not-connected')
-        logging(warn, "wifi-not-connected banner exists. Removing it.")
+        devLog('warn', "wifi-not-connected banner exists. Removing it.")
       }
       if (internetSpeed == 0) {
         counter += 1

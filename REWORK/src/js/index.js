@@ -143,10 +143,10 @@ $('#start-btn').click(function() {
     for (let i = 0; i < errorCode.length; i++) {
       if ($('.' + errorCode[i])[0]) {
         hideBanner(errorCode[i])
-        logging(warn, errorCode[i] + " banner exists. Removing it.")
+        devLog('warn', errorCode[i] + " banner exists. Removing it.")
       }
       else {
-        logging(info, errorCode[i] + " couldn't be found. Good!")
+        devLog('info', errorCode[i] + " couldn't be found. Good!")
       }
     }
   }
