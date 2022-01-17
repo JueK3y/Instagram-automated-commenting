@@ -401,29 +401,22 @@ else {
   addProfile.display = ''
 }
 
-setTimeout(() => {
   // Length Check
-  if (profile1.innerText.length > 6) {
-    profile1.innerText = profile1.innerText.substring(0, 4) + ' ...'
+setTimeout(() => {
+  if (profile1.innerText.length > 7) {
+    profile1.innerText = profile1.innerText.substring(0, 4) + '...'
   } 
   
-  if (profile2.innerText.length > 6) {
-    profile2.innerText = profile2.innerHTML.substring(0, 4) + ' ...'
+  if (profile2.innerText.length > 7) {
+    profile2.innerText = profile2.innerHTML.substring(0, 4) + '...'
   }
   
-  if (profile3.innerText.length > 6) {
-    profile3.innerText = profile3.innerHTML.substring(0, 4) + ' ...'
+  if (profile3.innerText.length > 7) {
+    profile3.innerText = profile3.innerHTML.substring(0, 4) + '...'
   }
 }, 300)
-// -!- Doesnt work always -!- //
 
-$(document).ready(function() {
-  $(document).on('hover', '#add-profile', function() {
-    document.getElementById().src = "src/img/icons/" + document.body.classList + "/delete-red.svg"
-  })
-})
-
-for(let i = 1; i <= 3; i++) {
+for (let i = 1; i <= 3; i++) {
   document.getElementById('delete-'+(i)).onmouseover = () => { document.getElementById('deleteIcon-' + i).src = 'src/img/icons/' + document.body.classList + '/delete-red.svg' }
   document.getElementById('delete-'+(i)).onmouseleave = () => { document.getElementById('deleteIcon-' + i).src = 'src/img/icons/' + document.body.classList + '/delete.svg' }
 }
