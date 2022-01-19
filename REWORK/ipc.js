@@ -10,6 +10,7 @@ const { ipcRenderer } = require("electron")
 const maxBtn = document.getElementById('maxBtn')
 const restoreBtn = document.getElementById('restoreBtn')
 const preventStart = document.getElementById('start-btn')
+const pauseButton = document.getElementById('pause-btn')
 const stopPrevent = document.getElementById('stop-btn')
 const ipc = ipcRenderer
 
@@ -30,6 +31,14 @@ preventStart.addEventListener('click', () => {
     }, 10)
 })
 
+pauseButton.addEventListener('click', () => {
+    ipc.send('stopPrevent')
+})
+
+stopPrevent.addEventListener('click', () => {
+    ipc.send('stopPrevent')
+})
+
 // Close
 closeBtn.addEventListener('click', () => {
     if (validate) {
@@ -44,10 +53,6 @@ closeBtn.addEventListener('click', () => {
     else {
         ipc.send('closeApp')
     }
-})
-
-stopPrevent.addEventListener('click', () => {
-    ipc.send('stopPrevent')
 })
 
 // Minimize 
