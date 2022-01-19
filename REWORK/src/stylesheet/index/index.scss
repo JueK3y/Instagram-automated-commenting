@@ -558,12 +558,41 @@ html {
                         justify-content: center;
                         align-items: center;
                         margin-top: 1px;
-                        #start button, #stop button {
+                        #start button, #pause button, #stop button {
                             width: 120px;
                             height: 35px;
                             cursor: pointer;
                         }
                         #start-btn {
+                            position: relative;
+                            margin-right: 30px;
+                            color: var(--text-main-button);
+                            background: var(--bg-main-button);
+                            border: 1px solid transparent;
+                            border-radius: 5px;
+                            background-clip: padding-box;
+                            transition: .2s;
+                            &::after {
+                                position: absolute;
+                                top: -1px; bottom: -1px;
+                                left: -1px; right: -1px;
+                                background: var(--bg-after-main-button);
+                                content: '';
+                                z-index: -1;
+                                border-radius: 5px;
+                            }
+                            &:hover {
+                                background-color: var(--bg-hover-main-button);
+                                transition: .2s;
+                            }
+                            &:active {
+                                color: var(--active-main-button-color);
+                                background-color: var(--bg-active-main-button);
+                                transition: .2s;
+                            }
+                        }
+                        #pause-btn {
+                            display: none;
                             position: relative;
                             margin-right: 30px;
                             color: var(--text-main-button);

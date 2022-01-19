@@ -193,10 +193,13 @@ html body {
             backdrop-filter: blur(100px);
             z-index: 3;
             .comment {
-                #runIcon {
+                #idleIcon {
                     display: block;
                 }
-                #stopIcon {
+                #runIcon {
+                    display: none;
+                }
+                #pauseIcon {
                     display: none;
                 }
             }

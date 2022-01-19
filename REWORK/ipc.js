@@ -30,6 +30,22 @@ preventStart.addEventListener('click', () => {
     }, 10)
 })
 
+// Close
+closeBtn.addEventListener('click', () => {
+    if (validate) {
+        if (checkClick == 1) {
+            ipc.send('closeApp')
+        }
+        else {
+            showBanner('warning', 'IAC kommentiert', 'Sicher, dass du das Kommentieren abbrechen willst?', 'close-while-commenting', true)
+            checkClick++
+        }
+    }
+    else {
+        ipc.send('closeApp')
+    }
+})
+
 stopPrevent.addEventListener('click', () => {
     ipc.send('stopPrevent')
 })
@@ -57,20 +73,4 @@ ipc.on('isRestored', () => {
 
 restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
-})
-
-// Close
-closeBtn.addEventListener('click', () => {
-    if (validate) {
-        if (checkClick == 1) {
-            ipc.send('closeApp')
-        }
-        else {
-            showBanner('warning', 'IAC kommentiert', 'Sicher, dass du das Kommentieren abbrechen willst?', 'close-while-commenting', true)
-            checkClick++
-        }
-    }
-    else {
-        ipc.send('closeApp')
-    }
 })

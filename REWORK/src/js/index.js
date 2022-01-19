@@ -103,8 +103,17 @@ $(document).on('keyup', function(e) {
   if (e.key == "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) $('#start-btn').click()
 })
 
+let pause = false
 
 $('#start-btn').click(function() {
+  if (pause) {
+    checkClick = 0
+    pause = false
+    document.getElementById("pause-btn").style.display = "block"
+    document.getElementById("runIcon").style.display = "block"
+    document.getElementById("pauseIcon").style.display = "none"
+    document.getElementById("stop-btn").style.display = "none"
+  }
   hideBanner("error")                                                                                                            // -- Looks weird for the same error -- //
   if (urlInput.value == "" && username.value == "" && password.value == "") {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
@@ -149,21 +158,37 @@ $('#start-btn').click(function() {
   }
 
   if (validate) {
+    document.getElementById("start-btn").style.display = "none"
+    document.getElementById("pause-btn").style.display = "block"
     document.getElementById("stop-btn").style.display = "block"
-    document.getElementById("stopIcon").style.display = "block"
-    document.getElementById("runIcon").style.display = "none"
+    document.getElementById("idleIcon").style.display = "none"
+    document.getElementById("runIcon").style.display = "block"
     // -!- Check if saveProfile is checked -!-
     // updateUser(username.value)
     setPassword(username.value, password.value)
   }
 })
 
+$('#pause-btn').click(function() {
+  checkClick = 0
+  pause = true
+  document.getElementById("start-btn").style.display = "block"
+  document.getElementById("pause-btn").style.display = "none"
+  document.getElementById("stop-btn").style.display = "block"
+  document.getElementById("runIcon").style.display = "none"
+  document.getElementById("pauseIcon").style.display = "block"
+  // -!- API pauses commenting -!- //
+})
+
 $('#stop-btn').click(function() {
   validate = false
-  checkClick = 0
+  checkClick = 1
+  document.getElementById("start-btn").style.display = "block"
+  document.getElementById("pause-btn").style.display = "none"
   document.getElementById("stop-btn").style.display = "none"
-  document.getElementById("stopIcon").style.display = "none"
-  document.getElementById("runIcon").style.display = "block"
+  document.getElementById("idleIcon").style.display = "block"
+  document.getElementById("runIcon").style.display = "none"
+  document.getElementById("pauseIcon").style.display = "none"
 })
 
 ////// Edit comments

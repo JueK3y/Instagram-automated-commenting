@@ -21,8 +21,7 @@ html body a {
 }
 @-webkit-keyframes round {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
     border-radius: 50%;
     width: 170px;
     height: 150px;
@@ -36,14 +35,12 @@ html body a {
     border-radius: 50%;
     width: 170px;
     height: 150px;
-    -webkit-transform: rotate(365deg);
-            transform: rotate(365deg);
+    transform: rotate(365deg);
   }
 }
 @keyframes round {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
     border-radius: 50%;
     width: 170px;
     height: 150px;
@@ -57,8 +54,7 @@ html body a {
     border-radius: 50%;
     width: 170px;
     height: 150px;
-    -webkit-transform: rotate(365deg);
-            transform: rotate(365deg);
+    transform: rotate(365deg);
   }
 }
 html body .no-select {
@@ -75,11 +71,9 @@ html body .small-cursor {
   width: 170px;
   height: 150px;
   background: var(--mouse-color);
-  -webkit-filter: blur(85px);
-          filter: blur(85px);
+  filter: blur(85px);
   border-radius: 50%;
   pointer-events: none;
-  -webkit-transition: 1s ease-out;
   transition: 1s ease-out;
   -webkit-animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
           animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
@@ -113,7 +107,6 @@ html body .medium-form, html body .big-form {
   border-bottom: 1px solid var(--input-border-bot-color);
   border-radius: 5px;
   font-size: 14px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .medium-form:hover, html body .big-form:hover {
@@ -121,7 +114,6 @@ html body .medium-form:hover, html body .big-form:hover {
   background-color: var(--input-bg-hover-color);
   border: 1px solid var(--input-border-color);
   border-bottom: 1px solid var(--input-border-bot-hover-color);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .medium-form:active, html body .medium-form:focus, html body .big-form:active, html body .big-form:focus {
@@ -131,7 +123,6 @@ html body .medium-form:active, html body .medium-form:focus, html body .big-form
   background-color: var(--input-bg-active-color);
   border: 1px solid var(--input-border-active-color);
   border-bottom: 2px solid var(--input-border-bot-active-color);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .info {
@@ -142,7 +133,6 @@ html body .info {
 }
 html body .deleteProfile {
   margin-left: 30px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .deleteProfile .deleteProfileIcon {
@@ -153,7 +143,6 @@ html body .deleteProfile .deleteProfileIcon {
 }
 html body .deleteProfile:hover .deleteProfileIcon {
   opacity: 0.9;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body .openExternal {
@@ -189,8 +178,6 @@ html body header #drag-region #window-title span {
 }
 html body header #drag-region #window-controls {
   -webkit-app-region: no-drag;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: absolute;
   top: 0;
@@ -222,17 +209,19 @@ html body nav #side-bar {
   left: 0;
   width: 320px;
   height: 100vh;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   font-size: var(--font-size);
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   z-index: 3;
 }
-html body nav #side-bar .comment #runIcon {
+html body nav #side-bar .comment #idleIcon {
   display: block;
 }
-html body nav #side-bar .comment #stopIcon {
+html body nav #side-bar .comment #runIcon {
+  display: none;
+}
+html body nav #side-bar .comment #pauseIcon {
   display: none;
 }
 html body nav #side-bar #active {
@@ -240,7 +229,6 @@ html body nav #side-bar #active {
 }
 html body nav #side-bar #active:active {
   background-color: var(--nav-selected-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body nav #side-bar #active .line {
@@ -257,25 +245,20 @@ html body nav #side-bar #active #settingsIcon, html body nav #side-bar #active #
   margin-left: -4px;
 }
 html body nav #side-bar a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-left: 5px;
   margin-right: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body nav #side-bar a:hover {
   background-color: var(--nav-hyperlink);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body nav #side-bar a:active {
   background-color: var(--nav-hyperlink-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body nav #side-bar a img {
@@ -333,8 +316,6 @@ html body .banner {
           backdrop-filter: blur(50px);
 }
 html body .banner .banner-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-top: 13px;
   margin-left: 15px;
@@ -410,17 +391,14 @@ html body #error-banner-wifi #error-hide {
   color: var(--text-color);
   background-color: var(--error-banner-button);
   cursor: pointer;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body #error-banner-wifi #error-hide:hover {
   opacity: 0.9;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body #error-banner-wifi #error-hide:active {
   opacity: 0.75;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 /*# sourceMappingURL=main.css.map */
