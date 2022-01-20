@@ -166,6 +166,7 @@ $('#start-btn').click(function() {
     // -!- Check if saveProfile is checked -!-
     // updateUser(username.value)
     setPassword(username.value, password.value)
+    checkClick = 0
   }
 })
 
@@ -183,6 +184,7 @@ $('#pause-btn').click(function() {
 $('#stop-btn').click(function() {
   validate = false
   checkClick = 1
+  hideBanner('close-while-commenting')
   document.getElementById("start-btn").style.display = "block"
   document.getElementById("pause-btn").style.display = "none"
   document.getElementById("stop-btn").style.display = "none"
@@ -245,6 +247,10 @@ $(document).ready(function() {
         if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
           document.getElementById('profileDropdown').style.display = 'none'
         }
+        document.getElementById('more-profile').style.display = 'none'
+        document.getElementById('add-profile').style.display = 'block'
+        index = userProfile.indexOf(deleteUser)
+        userProfile.splice(index, 1)
         deletePassword(deleteUser)
       }
       else if (target == 'deleteIcon-'+i) {
@@ -259,6 +265,10 @@ $(document).ready(function() {
         if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
           document.getElementById('profileDropdown').style.display = 'none'
         }
+        document.getElementById('more-profile').style.display = 'none'
+        document.getElementById('add-profile').style.display = 'block'
+        index = userProfile.indexOf(deleteUser)
+        userProfile.splice(index, 1)
         deletePassword(deleteUser)
       }
     }
@@ -277,3 +287,17 @@ username.addEventListener('blur', function() {
     prDdImgBlur.style.display = 'block'
   }
 }, false)
+
+
+////// Serach function
+$(document).on('keyup', '#username-form', function() {;
+  let filter = document.getElementById('username-form').value.toUpperCase();
+  for (let i = 0; i < userProfile.length; i++) {
+    if (userProfile[i].toUpperCase().indexOf(filter) > -1) {
+      console.log("123")
+    }
+    else {
+      console.log("Test123")
+    }
+  }
+})

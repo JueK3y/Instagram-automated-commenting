@@ -298,6 +298,7 @@ $(document).ready(function() {
 
 ////// Profile content updatder
 let fourOrMore
+let userProfile = []
 
 displayUsername().then(result => {
   if (result.length == 0) {
@@ -312,9 +313,10 @@ displayUsername().then(result => {
   for (let i = 0; i < result.length; i++) {
     let usrnme = Object.values(result[i])[0]
     $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass().addClass('uid-'+usrnme)
+    userProfile.push(usrnme)
+    console.log(userProfile[i])
   }
 })
-
 
 const profile1 = document.getElementById('profile-1-name')
 const profile2 = document.getElementById('profile-2-name') 
@@ -357,7 +359,7 @@ $(document).ready(function() {
   }, 100)
   $(document).on('click', '#add-profile', function() {
     // -!- Needs to be locked / fixed before release -!- //
-    document.getElementById("profile-container").style.top  = "15px"
+    /*document.getElementById("profile-container").style.top  = "15px"
     if (profile1.innerText == "") {
       document.getElementById('profile-1').style.display = 'flex'
       profile1.innerText = "Profil"
@@ -371,12 +373,11 @@ $(document).ready(function() {
       profile3.innerText = "Profil"
       showMore.display = ''
       addProfile.display = 'none'
-    }
+    }*/
   })
   $(document).on('click', '#more-profile', function() {
     // -!- Needs to be locked / added before release -!- //
     // Directs to profile page
-    alert("This feature is currently locked. It will be available soon.")
   })
 })
 
