@@ -323,5 +323,5 @@ $(document).on('blur', '#username-form', () => {
   })
   setTimeout(() => {
     document.getElementById('searchProfileContent').style.display = 'none'
-  }, 150)
+  }, 200)
 })
