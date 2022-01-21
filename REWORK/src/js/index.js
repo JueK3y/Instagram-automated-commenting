@@ -288,16 +288,22 @@ username.addEventListener('blur', function() {
   }
 }, false)
 
-
+var desktop = ["Test", "Testperson", "Person", "Jungetest"]
+// userProfile
 ////// Serach function
-$(document).on('keyup', '#username-form', function() {;
-  let filter = document.getElementById('username-form').value.toUpperCase();
-  for (let i = 0; i < userProfile.length; i++) {
-    if (userProfile[i].toUpperCase().indexOf(filter) > -1) {
-      console.log("123")
+$(document).on('keyup', '#username-form', function() {
+  let filter = document.getElementById('username-form').value.toUpperCase()
+  for (let i = 0; i < desktop.length; i++) {
+    if (desktop[i].toUpperCase().indexOf(filter) > -1) {
+      if (document.getElementsByClassName('uid-'+desktop[i]).length == 0) {
+        $('<a>', {
+          class: 'uid-'+desktop[i],
+          text: desktop[i]
+        }).appendTo('#searchProfileContent')
+      }
     }
     else {
-      console.log("Test123")
+      $('.uid-'+desktop[i]).remove()
     }
   }
 })
