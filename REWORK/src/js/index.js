@@ -22,8 +22,8 @@ $('#clearButton').click(function() {
 const password = document.getElementById("password-form")
 const pwImage = document.getElementById("togglePwImage")
 
-function passwordToggle() {
-  if (document.getElementById("toggle").checked) {
+$('#toggle').on('click', () => {
+  if (document.getElementById('toggle').checked) {
     password.type = "text"
     password.focus()
     pwImage.src = "src/img/icons/" + document.body.classList + "/eye-hidden.svg"
@@ -33,7 +33,7 @@ function passwordToggle() {
     password.focus()
     pwImage.src = "src/img/icons/" + document.body.classList + "/eye.svg"
   }
-}
+})
 
 ////// Stop Button toggle
 
@@ -191,11 +191,6 @@ $('#stop-btn').click(function() {
   document.getElementById("idleIcon").style.display = "block"
   document.getElementById("runIcon").style.display = "none"
   document.getElementById("pauseIcon").style.display = "none"
-})
-
-////// Edit comments
-$('#edit-button').click(function() {
-  openComments()
 })
 
 

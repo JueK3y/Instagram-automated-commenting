@@ -79,3 +79,10 @@ ipc.on('isRestored', () => {
 restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
 })
+
+// Blur password
+ipc.on('blurPw', () => {
+    document.getElementById('toggle').checked = false
+    document.getElementById("password-form").type = "password"
+    document.getElementById("togglePwImage").src = "src/img/icons/" + document.body.classList + "/eye.svg"
+})

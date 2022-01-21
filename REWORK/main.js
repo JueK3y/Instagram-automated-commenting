@@ -50,6 +50,10 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools();
 
 
+  mainWindow.on('blur', () => {
+    mainWindow.webContents.send('blurPw')
+  })
+
   var sleepID = undefined
 
   ipc.on('preventSleep', () => {
