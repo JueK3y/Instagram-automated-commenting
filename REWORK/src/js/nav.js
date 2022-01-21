@@ -610,7 +610,7 @@ $(document).ready(function() {                                                //
 
 setTimeout(() => {
   if (updateOnline) {
-    download.style.display = ''
+    download.style.display = 'inline-block'
     update.style.display = 'none'
     settingsIcon.style.display = 'none'
     settingsUpdateIcon.style.display = 'inline-block'
@@ -618,9 +618,9 @@ setTimeout(() => {
     noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
   }
   else {
-    download.style.display = 'none'
+    download.style.display = 'none'       // -!- Needed? -!- //
     update.style.display = ''
     settingsIcon.style.display = 'inline-block'
     settingsUpdateIcon.style.display = 'none'
   }
-}, 5000)
+}, 3500)

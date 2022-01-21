@@ -5,23 +5,12 @@ const { ipcRenderer } = require("electron")
     let data = await window.electron.ipcRenderer.invoke('read-file', loadedFilePath)
 }*/
 
-// console.warn("The window controls doesn't work in the WebDemo.")
-
 const maxBtn = document.getElementById('maxBtn')
 const restoreBtn = document.getElementById('restoreBtn')
 const preventStart = document.getElementById('start-btn')
 const pauseButton = document.getElementById('pause-btn')
 const stopPrevent = document.getElementById('stop-btn')
 const ipc = ipcRenderer
-
-/* var win = BrowserWindow.getFocusedWindow()
-if(win.isFullScreen()) {
-    alert("Test1")
-}
-else if(win.isMaximized()) {
-    alert("Test2")
-} */
-
 
 preventStart.addEventListener('click', () => {
     setTimeout(() => {

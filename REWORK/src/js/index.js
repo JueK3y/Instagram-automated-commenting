@@ -318,5 +318,5 @@ $(document).on('blur', '#username-form', () => {
   })
   setTimeout(() => {
     document.getElementById('searchProfileContent').style.display = 'none'
-  }, 200)
+  }, 250)
 })
