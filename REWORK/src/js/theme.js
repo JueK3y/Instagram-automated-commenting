@@ -47,14 +47,14 @@ function lightIcon() {
         }
         $('.info').prop('src', 'src/img/icons/light/info-small.svg')
     }
-    catch(err) {}
+    catch (err) { }
 }
 
 function darkIcon() {
     for (let i = 0; i < IDs.length; i++) {
         document.getElementById(IDs[i]).src = document.getElementById(IDs[i]).currentSrc.replace("light", "dark")
     }
-    
+
     $('.profileIcon').prop('src', 'src/img/icons/dark/profile.svg')
     $('.deleteProfileIcon').prop('src', 'src/img/icons/dark/delete.svg')
     $('.helpIcon').prop('src', 'src/img/icons/dark/help.svg')
@@ -84,28 +84,26 @@ function darkIcon() {
         }
         $('.info').prop('src', 'src/img/icons/dark/info-small.svg')
     }
-    catch(err) {}
+    catch (err) { }
 }
-setTimeout(() => {
-    if (theme) {
-        body.classList.add(theme);
-        if (body.classList.contains("dark")) {
-            darkIcon()
-        }
-        else {
-            lightIcon()
-        }
-    }
-    else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        body.classList.add("dark")
+if (theme) {
+    body.classList.add(theme);
+    if (body.classList.contains("dark")) {
         darkIcon()
     }
     else {
-        body.classList.add("light")
         lightIcon()
     }
-}, 250)
-    
+}
+else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    body.classList.add("dark")
+    darkIcon()
+}
+else {
+    body.classList.add("light")
+    lightIcon()
+}
+
 // Button Event Handlers
 themeToDark.onclick = () => {
     localStorage.setItem("theme", "dark")

@@ -314,7 +314,6 @@ displayUsername().then(result => {
     let usrnme = Object.values(result[i])[0]
     $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass().addClass('uid-'+usrnme)
     userProfile.push(usrnme)
-    console.log(userProfile[i])
   }
 })
 
