@@ -412,7 +412,7 @@ html {
                                 height: 10px;
                                 width: 20px;
                                 #searchProfileContent {
-                                    display: block;
+                                    display: none;
                                     position: absolute;
                                     width: 204px;
                                     margin-left: 1px;                               
@@ -429,7 +429,7 @@ html {
                                         margin-bottom: 5px;
                                     }
                                     a {
-                                        display: none;
+                                        display: flex;
                                         margin-right: 5px;
                                         padding: 10px;
                                         margin-left: 5px;

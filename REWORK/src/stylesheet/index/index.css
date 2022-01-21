@@ -5,20 +5,14 @@ html {
   padding: 0;
 }
 html body main {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   top: 23px;
   left: 312px;
   width: 100vw;
   height: calc(100vh - 23px);
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   border-top: 1px solid var(--border-color);
   border-left: 1px solid var(--border-color);
   border-top-left-radius: 10px;
@@ -53,29 +47,22 @@ html body main #profile-container #profile-content {
   list-style: none;
 }
 html body main #profile-container #profile-content li {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   position: relative;
 }
 html body main #profile-container #profile-content li a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-right: 5px;
   padding: 10px;
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #profile-container #profile-content li a:hover {
   background-color: var(--nav-hyperlink);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #profile-container #profile-content li a:active {
   background-color: var(--nav-hyperlink-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #profile-container #profile-content li p {
@@ -107,29 +94,22 @@ html body main #help-container #help-content {
   list-style: none;
 }
 html body main #help-container #help-content li {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   position: relative;
 }
 html body main #help-container #help-content li a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-right: 5px;
   padding: 10px;
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #help-container #help-content li a:hover {
   background-color: var(--nav-hyperlink);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #help-container #help-content li a:active {
   background-color: var(--nav-hyperlink-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #help-container #help-content li p {
@@ -163,30 +143,23 @@ html body main #settings-container #settings-content {
   list-style: none;
 }
 html body main #settings-container #settings-content li {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   position: relative;
   bottom: 11px;
 }
 html body main #settings-container #settings-content li a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-right: 5px;
   padding: 10px;
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #settings-container #settings-content li a:hover {
   background-color: var(--nav-hyperlink);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #settings-container #settings-content li a:active {
   background-color: var(--nav-hyperlink-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main #settings-container #settings-content li p {
@@ -320,17 +293,14 @@ html body main form #main-content #post-url #clearButton {
   height: 24px;
   border-radius: 5px;
   cursor: pointer;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #post-url #clearButton:hover {
   background-color: var(--input-cross);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #post-url #clearButton:active {
   opacity: 0.8;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #post-url #clearButton img {
@@ -339,8 +309,6 @@ html body main form #main-content #post-url #clearButton img {
   height: 12px;
 }
 html body main form #main-content #login-data {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   padding-top: 15px;
 }
@@ -373,17 +341,14 @@ html body main form #main-content #login-data #username #profileDropdown #profil
   height: 24px;
   border-radius: 5px;
   cursor: pointer;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownMain #profileDropdownButton:hover {
   background-color: var(--input-cross);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownMain #profileDropdownButton:active {
   opacity: 0.8;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownMain #profileDropdownButton .profileDropdownImage {
@@ -408,8 +373,7 @@ html body main form #main-content #login-data #username #profileDropdown #profil
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   border-radius: 5px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a:first-child {
@@ -424,17 +388,14 @@ html body main form #main-content #login-data #username #profileDropdown #profil
   padding: 10px;
   margin-left: 5px;
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a:hover {
   background-color: var(--nav-hyperlink);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #profileDropdown #profileDropdownContent a:active {
   background-color: var(--nav-hyperlink-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #profileDropdown:hover #profileDropdownContent {
@@ -446,7 +407,7 @@ html body main form #main-content #login-data #username #searchProfile {
   width: 20px;
 }
 html body main form #main-content #login-data #username #searchProfile #searchProfileContent {
-  display: block;
+  display: none;
   position: absolute;
   width: 204px;
   margin-left: 1px;
@@ -455,8 +416,7 @@ html body main form #main-content #login-data #username #searchProfile #searchPr
   -webkit-backdrop-filter: blur(100px);
           backdrop-filter: blur(100px);
   border-radius: 5px;
-  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
 html body main form #main-content #login-data #username #searchProfile #searchProfileContent a:first-child {
@@ -466,22 +426,19 @@ html body main form #main-content #login-data #username #searchProfile #searchPr
   margin-bottom: 5px;
 }
 html body main form #main-content #login-data #username #searchProfile #searchProfileContent a {
-  display: none;
+  display: flex;
   margin-right: 5px;
   padding: 10px;
   margin-left: 5px;
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #searchProfile #searchProfileContent a:hover {
   background-color: var(--nav-hyperlink);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #searchProfile #searchProfileContent a:active {
   background-color: var(--nav-hyperlink-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #username #searchProfile:hover #searchProfileContent {
@@ -518,17 +475,14 @@ html body main form #main-content #login-data #password #togglePW {
   height: 24px;
   border-radius: 5px;
   cursor: pointer;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #password #togglePW:hover {
   background-color: var(--input-cross);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #password #togglePW:active {
   opacity: 0.8;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #login-data #password #togglePW #togglePwImage {
@@ -546,41 +500,31 @@ html body main form #main-content #additional-settings[open] summary ~ * {
 @-webkit-keyframes sweep {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-3px);
-            transform: translateY(-3px);
+    transform: translateY(-3px);
   }
   90% {
     opacity: 1;
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 @keyframes sweep {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-3px);
-            transform: translateY(-3px);
+    transform: translateY(-3px);
   }
   90% {
     opacity: 1;
   }
   100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 html body main form #main-content #additional-settings #details {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 html body main form #main-content #additional-settings #details .line-additional {
@@ -595,8 +539,6 @@ html body main form #main-content #additional-settings #details #small-detail-ti
   padding-left: 12px;
 }
 html body main form #main-content #additional-settings #a-d-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   padding-top: 10px;
   padding-bottom: 15px;
@@ -616,17 +558,14 @@ html body main form #main-content #additional-settings #a-d-content .save-profil
   border: 1px solid var(--checkbox-border);
   border-radius: 4px;
   background-color: var(--checkbox-bg);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:hover + label::before {
   background-color: var(--checkbox-hover);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:active + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:active + label::before {
   background-color: var(--checkbox-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked + label::before {
@@ -635,7 +574,6 @@ html body main form #main-content #additional-settings #a-d-content .save-profil
   background-repeat: no-repeat;
   background-position: center;
   background-size: 10px 10px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked + label::before {
@@ -647,13 +585,11 @@ html body main form #main-content #additional-settings #a-d-content .save-profil
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:checked:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:checked:hover + label::before {
   border: 1px solid var(--checkbox-check-hover);
   background-color: var(--checkbox-check-hover);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content .save-profile-light:active:hover + label::before, html body main form #main-content #additional-settings #a-d-content .save-profile-dark:active:hover + label::before {
   border: 1px solid var(--checkbox-check-active);
   background-color: var(--checkbox-check-active);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content #save-local {
@@ -674,30 +610,21 @@ html body main form #main-content #additional-settings #a-d-content #edit-commen
   background: var(--bg-sec-button);
   border: 1px solid var(--bg-border-button);
   border-radius: 5px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:hover {
   background-color: var(--bg-hover-sec-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #additional-settings #a-d-content #edit-comments #edit-button:active {
   color: var(--active-sec-button-color);
   background-color: var(--bg-active-sec-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   margin-top: 1px;
 }
 html body main form #main-content #start-stop #start button, html body main form #main-content #start-stop #pause button, html body main form #main-content #start-stop #stop button {
@@ -713,7 +640,6 @@ html body main form #main-content #start-stop #start-btn {
   border: 1px solid transparent;
   border-radius: 5px;
   background-clip: padding-box;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #start-btn::after {
@@ -729,13 +655,11 @@ html body main form #main-content #start-stop #start-btn::after {
 }
 html body main form #main-content #start-stop #start-btn:hover {
   background-color: var(--bg-hover-main-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #start-btn:active {
   color: var(--active-main-button-color);
   background-color: var(--bg-active-main-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #pause-btn {
@@ -747,7 +671,6 @@ html body main form #main-content #start-stop #pause-btn {
   border: 1px solid transparent;
   border-radius: 5px;
   background-clip: padding-box;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #pause-btn::after {
@@ -763,13 +686,11 @@ html body main form #main-content #start-stop #pause-btn::after {
 }
 html body main form #main-content #start-stop #pause-btn:hover {
   background-color: var(--bg-hover-main-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #pause-btn:active {
   color: var(--active-main-button-color);
   background-color: var(--bg-active-main-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #stop-btn {
@@ -781,7 +702,6 @@ html body main form #main-content #start-stop #stop-btn {
   border: 1px solid transparent;
   border-radius: 5px;
   background-clip: padding-box;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #stop-btn::after {
@@ -797,13 +717,11 @@ html body main form #main-content #start-stop #stop-btn::after {
 }
 html body main form #main-content #start-stop #stop-btn:hover {
   background-color: var(--bg-hover-sec-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body main form #main-content #start-stop #stop-btn:active {
   color: var(--active-sec-button-color);
   background-color: var(--bg-active-sec-button);
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 html body #legal-note {

@@ -203,7 +203,7 @@ $('#edit-button').click(function() {
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
-$(document).ready(function() {
+$(document).ready(() => {
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
     username.value = clickedProfile                                                                       // Get Name for ID from API
@@ -212,7 +212,7 @@ $(document).ready(function() {
     prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
-    var target = e.target.id;   
+    var target = e.target.id
     for(let i = 0; i <= 3; i++) {
       if (target == 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
@@ -288,22 +288,40 @@ username.addEventListener('blur', function() {
   }
 }, false)
 
-var desktop = ["Test", "Testperson", "Person", "Jungetest"]
-// userProfile
 ////// Serach function
-$(document).on('keyup', '#username-form', function() {
-  let filter = document.getElementById('username-form').value.toUpperCase()
-  for (let i = 0; i < desktop.length; i++) {
-    if (desktop[i].toUpperCase().indexOf(filter) > -1) {
-      if (document.getElementsByClassName('uid-'+desktop[i]).length == 0) {
-        $('<a>', {
-          class: 'uid-'+desktop[i],
-          text: desktop[i]
-        }).appendTo('#searchProfileContent')
+$(document).on('focus', '#username-form', () => {
+  $(document).on('keyup', '#username-form', () => {
+    document.getElementById('searchProfileContent').style.display = 'block'
+    let filter = document.getElementById('username-form').value.toUpperCase()
+    for (let i = 0; i < userProfile.length; i++) {
+      if (userProfile[i].toUpperCase().indexOf(filter) > -1) {
+        if (document.getElementById('uid-'+userProfile[i]) != 0) {
+          $('<a>', {
+            id: 'uid-'+userProfile[i],
+            text: userProfile[i]
+          }).appendTo('#searchProfileContent')
+        }
+      }
+      else {
+        $('#uid-'+userProfile[i]).remove()
       }
     }
-    else {
-      $('.uid-'+desktop[i]).remove()
+  })
+})
+
+$(document).on('blur', '#username-form', () => {
+  $(document).on('click', '#searchProfileContent', (e) => {
+    var target = e.target.id
+    if (target != 'searchProfileContent') {
+      const clickedProfile = String(target).slice(4)
+      username.value = clickedProfile                                                                       // Get Name for ID from API
+      getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+      prDdImage.style.display = 'block'
+      prDdImgBlur.style.display = 'none'
+      document.getElementById('searchProfileContent').style.display = 'none'
     }
-  }
+  })
+  setTimeout(() => {
+    document.getElementById('searchProfileContent').style.display = 'none'
+  }, 150)
 })
