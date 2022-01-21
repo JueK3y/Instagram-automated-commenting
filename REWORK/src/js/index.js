@@ -289,7 +289,7 @@ $(document).on('focus', '#username-form', () => {
     document.getElementById('searchProfileContent').style.display = 'block'
     let filter = document.getElementById('username-form').value.toUpperCase()
     for (let i = 0; i < userProfile.length; i++) {
-      if (userProfile[i].toUpperCase().indexOf(filter) > -1) {
+      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter != "") {
         if (document.getElementById('uid-'+userProfile[i]) != 0) {
           $('<a>', {
             id: 'uid-'+userProfile[i],
