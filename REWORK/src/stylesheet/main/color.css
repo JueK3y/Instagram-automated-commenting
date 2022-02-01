@@ -10,6 +10,7 @@
     --nav-hyperlink: var(--nav-selected);
     --nav-hyperlink-active: var(--nav-selected-active);
 
+    --svg-base-color: #212121;
 
     --text-color: #000000;
     --text-note-color: #001224;
@@ -106,6 +107,8 @@
     
     --nav-hyperlink: var(--nav-selected);
     --nav-hyperlink-active: var(--nav-selected-active);
+    
+    --svg-base-color: #F0F0F0;
     
     --text-color: #FFFFFF;
     --text-note-color: #9facbb;

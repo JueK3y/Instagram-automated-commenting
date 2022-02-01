@@ -4,7 +4,7 @@ html body {
   background: var(--background-color);
   overflow: hidden;
 }
-html body img {
+html body img, html body svg {
   width: var(--img-size);
   height: var(--img-size);
   user-select: none;
@@ -214,7 +214,7 @@ html body nav #side-bar #active .line {
 html body nav #side-bar #active img {
   margin-left: -3px;
 }
-html body nav #side-bar #active #settingsIcon, html body nav #side-bar #active #settingsUpdateIcon {
+html body nav #side-bar #active #settingsIcon {
   margin-left: -4px;
 }
 html body nav #side-bar a {
@@ -269,7 +269,14 @@ html body nav #side-bar footer .settings img {
 }
 html body nav #side-bar footer .settings #settingsUpdateIcon {
   display: none;
-  margin-left: -1px;
+  margin-top: 4px;
+  margin-left: 12.5px;
+}
+html body nav #side-bar footer .settings #settingsUpdateIcon .st0 {
+  fill: var(--svg-base-color);
+}
+html body nav #side-bar footer .settings #settingsUpdateIcon .st1 {
+  fill: var(--accent-default);
 }
 html body nav #side-bar footer .settings p {
   margin-top: 5px;

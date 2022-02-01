@@ -3,7 +3,7 @@ html body {
     color: var(--text-color);
     background: var(--background-color);
     overflow: hidden;
-    img {
+    img, svg {
         width: var(--img-size);
         height: var(--img-size);
         user-select: none;
@@ -219,7 +219,7 @@ html body {
                 img {
                     margin-left: -3px;
                 }
-                #settingsIcon, #settingsUpdateIcon {
+                #settingsIcon {
                     margin-left: -4px;
                 }
             }
@@ -275,7 +275,14 @@ html body {
                     }
                     #settingsUpdateIcon {
                         display: none;
-                        margin-left: -1px;
+                        margin-top: 4px;
+                        margin-left: 12.5px;
+                        .st0 {
+                            fill: var(--svg-base-color);
+                        }
+                        .st1 {
+                            fill: var(--accent-default);
+                        }
                     }
                     p {
                         margin-top: 5px;

@@ -1,4 +1,4 @@
-const IDs = ["minBtnIcon", "maxBtnIcon", "restoreBtnIcon", "closeBtnIcon", "idleIcon", "runIcon", "pauseIcon", "wifi-img", "settingsIcon", "settingsUpdateIcon", "help-bug", "help-info", "set-lang", "set-note-on", "set-note-urgent", "set-note-off", "set-up", "set-up-failed", "set-up-none", "set-dow", "set-dow-failed", "set-comm", "set-dev", "addIcon", "profileDropdownImage", "profileDropdownImageNoFocus", "deleteIcon-1", "deleteIcon-2", "deleteIcon-3"]
+const IDs = ["minBtnIcon", "maxBtnIcon", "restoreBtnIcon", "closeBtnIcon", "idleIcon", "runIcon", "pauseIcon", "wifi-img", "settingsIcon", "help-bug", "help-info", "set-lang", "set-note-on", "set-note-urgent", "set-note-off", "set-up", "set-up-failed", "set-up-none", "set-dow", "set-dow-failed", "set-comm", "set-dev", "addIcon", "profileDropdownImage", "profileDropdownImageNoFocus", "deleteIcon-1", "deleteIcon-2", "deleteIcon-3"]
 
 const themeToDark = document.getElementById("theme-to-dark")
 const themeToLight = document.getElementById("theme-to-light")
