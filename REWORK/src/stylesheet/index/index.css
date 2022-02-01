@@ -33,8 +33,7 @@ html body main #profile-container {
   top: 15px;
   left: 0;
   width: 210px;
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   border: 1px solid var(--border-color);
   border-left: none;
   border-top-right-radius: 10px;
@@ -81,8 +80,7 @@ html body main #help-container {
   left: 0;
   width: 205px;
   height: 148px;
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   border: 1px solid var(--border-color);
   border-left: none;
   border-top-right-radius: 10px;
@@ -130,8 +128,7 @@ html body main #settings-container {
   bottom: 14px;
   left: 0;
   height: 49px;
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   border: 1px solid var(--border-color);
   border-left: none;
   border-top-right-radius: 10px;
@@ -219,7 +216,10 @@ html body main #settings-container #settings-content #update-none:hover #set-up-
 html body main #settings-container #settings-content #download, html body main #settings-container #settings-content #download #set-dow-text {
   display: none;
 }
-html body main #settings-container #settings-content #download:hover #set-dow-text {
+html body main #settings-container #settings-content #download a #set-dow path {
+  fill: var(--accent-default);
+}
+html body main #settings-container #settings-content #download a:hover #set-dow-text {
   display: block;
   color: var(--bg-main-button);
 }
@@ -257,8 +257,7 @@ html body main form {
   margin-left: -533px;
   padding-left: 100px;
   border-radius: 5px;
-  -webkit-backdrop-filter: blur(75px);
-          backdrop-filter: blur(75px);
+  backdrop-filter: blur(75px);
   z-index: 4;
 }
 html body main form #main-content {
@@ -268,14 +267,6 @@ html body main form #main-content {
 }
 html body main form #main-content #post-url #url-input {
   margin-top: -8px;
-}
-html body main form #main-content #post-url #url-input:-moz-placeholder-shown + #clearButton {
-  opacity: 0;
-  pointer-events: none;
-}
-html body main form #main-content #post-url #url-input:-ms-input-placeholder + #clearButton {
-  opacity: 0;
-  pointer-events: none;
 }
 html body main form #main-content #post-url #url-input:placeholder-shown + #clearButton {
   opacity: 0;
@@ -370,8 +361,7 @@ html body main form #main-content #login-data #username #profileDropdown #profil
   left: 156px;
   border: 1px solid var(--info-banner-border);
   background-color: var(--dropdown-bg);
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
@@ -413,8 +403,7 @@ html body main form #main-content #login-data #username #searchProfile #searchPr
   margin-left: 1px;
   border: 1px solid var(--info-banner-border);
   background-color: var(--dropdown-bg);
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
@@ -451,14 +440,6 @@ html body main form #main-content #login-data #password #password-form {
   width: 160px;
   padding-right: 40px;
 }
-html body main form #main-content #login-data #password #password-form:-moz-placeholder-shown + #togglePW {
-  opacity: 0;
-  pointer-events: none;
-}
-html body main form #main-content #login-data #password #password-form:-ms-input-placeholder + #togglePW {
-  opacity: 0;
-  pointer-events: none;
-}
 html body main form #main-content #login-data #password #password-form:placeholder-shown + #togglePW {
   opacity: 0;
   pointer-events: none;
@@ -494,20 +475,7 @@ html body main form #main-content #additional-settings {
   padding-bottom: 20px;
 }
 html body main form #main-content #additional-settings[open] summary ~ * {
-  -webkit-animation: sweep 0.3s ease-in-out;
-          animation: sweep 0.3s ease-in-out;
-}
-@-webkit-keyframes sweep {
-  0% {
-    opacity: 0;
-    transform: translateY(-3px);
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-  }
+  animation: sweep 0.3s ease-in-out;
 }
 @keyframes sweep {
   0% {
@@ -735,9 +703,8 @@ html body #legal-note {
 html body #legal-note a {
   color: var(--text-note-color);
   text-decoration: underline;
-  -webkit-text-decoration-style: wavy;
-          text-decoration-style: wavy;
-  -webkit-text-decoration-color: var(--selection-bg-color);
-          text-decoration-color: var(--selection-bg-color);
+  text-decoration-style: wavy;
+  text-decoration-color: var(--selection-bg-color);
 }
+
 /*# sourceMappingURL=index.css.map */

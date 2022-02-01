@@ -2,7 +2,7 @@
 checkForUpdate()
 
 function checkForUpdate() {
-    let update = true
+    let update = false
     devLog('info', 'Checking for Updates')
     if (update) {
         devLog('info', 'Update found')

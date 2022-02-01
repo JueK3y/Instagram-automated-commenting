@@ -224,9 +224,14 @@ html {
                     #download, #download #set-dow-text {
                         display: none;
                     }
-                    #download:hover #set-dow-text {
-                        display: block;
-                        color: var(--bg-main-button);
+                    #download a {
+                        #set-dow path {
+                            fill: var(--accent-default);
+                        }
+                        &:hover #set-dow-text {
+                            display: block;
+                            color: var(--bg-main-button);
+                        }
                     }
 
                     #download-failed {

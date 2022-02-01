@@ -545,7 +545,7 @@ $(document).ready(function() {                                                //
       else {
         // Check for new version
         if (updateOnline) {
-          download.style.display = ''
+          download.style.display = 'inline-block'
           update.style.display = 'none'
           settingsIcon.style.display = 'none'
           settingsUpdateIcon.style.display = 'inline-block'
@@ -556,8 +556,8 @@ $(document).ready(function() {                                                //
         else {
           noUpdate.style.display = 'inline-block'
           update.style.display = 'none'
-          settingsIcon.style.display = 'none'
-          settingsUpdateIcon.style.display = 'inline-block'
+          settingsIcon.style.display = 'inline-block'
+          settingsUpdateIcon.style.display = 'none'
           updateIcon.style.transform = 'rotate(0deg)'
           showBanner('info', 'Aktuelleste Version', 'Kein Update gefunden. IAC ist auf dem neusten Stand.', 'no-update-found', true)
           setTimeout(() => {
@@ -584,11 +584,11 @@ $(document).ready(function() {                                                //
     }
     else {
       // Install update
-      downloadSuccess = true                                                     // API check if download was successfull
+      downloadSuccess = true                                                     // --!- API check if download was successfull -!- //
       if (downloadSuccess) {
         showBanner('info', 'Update heruntergeladen', 'IAC wird jetzt geupdatet und wird ggfl. neugestartet.', 'install-update', true)
         download.style.display = 'none '
-        update.style.display = ''
+        update.style.display = 'inline-block'
         settingsIcon.style.display = 'inline-block'
         settingsUpdateIcon.style.display = 'none'
       }

@@ -263,7 +263,7 @@ html body nav #side-bar footer .settings {
   width: 310px;
   height: 30px;
 }
-html body nav #side-bar footer .settings img {
+html body nav #side-bar footer .settings #settingsIcon {
   margin-top: 5px;
   margin-left: -1px;
 }
