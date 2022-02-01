@@ -26,16 +26,26 @@
 
     --input-bg-active-color: #ffffff;
     --input-border-active-color: #ebebeb;
-    --input-border-bot-active-color: var(--bg-main-button);
+    --input-border-bot-active-color: var(--accent-default);
     
     --input-cross: #f1f1f1;
 
+    /* Accent Color */
+    /* HEX to RGB needed for accent-default */
+    --accent-default-rgb: 0, 95, 184;
+    --accent-light-rgb: 0, 115, 184;          /* G + 20 */
+    --accent-dark-rgb: 0, 45, 134;           /* G - 50, B - 50 */
+    --accent-default: rgb(var(--accent-default-rgb));
+    --accent-secondary: rgba(var(--accent-default-rgb), 0.9);
+    --accent-tertiary: rgba(var(--accent-default-rgb), 0.8);
+    --accent-sel-txt: #0078D4; /* 0, 120, 212 */
+
     /* Button */
     --text-main-button: #FFFFFF;
-    --bg-main-button: #005FB8;
-    --bg-after-main-button: linear-gradient(180deg, #0069B8 90%, #013681 100%);
-    --bg-hover-main-button: #016dd1;
-    --bg-active-main-button: #0076e4;
+    --bg-main-button: var(--accent-default);
+    --bg-after-main-button: linear-gradient(180deg, rgb(var(--accent-light-rgb)) 70%, rgb(var(--accent-dark-rgb)) 100%);
+    --bg-hover-main-button: var(--accent-secondary);
+    --bg-active-main-button: var(--accent-tertiary);
     --active-main-button-color: #d8e7f5;
 
     --text-sec-button: var(--text-color);
@@ -43,7 +53,7 @@
     --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
     --bg-hover-sec-button: rgb(247, 247, 247);
     --bg-active-sec-button: rgb(238, 238, 238);
-    --active-sec-button-color: vary(--text-color);
+    --active-sec-button-color: var(--text-color);
 
     --bg-border-button: #dbdbdb;
     
@@ -52,8 +62,8 @@
     --checkbox-bg: rgba(0,0,0, 0.0241);
     --checkbox-hover: rgba(0,0,0, 0.0578);
     --checkbox-active: rgba(0,0,0, 0.0924);
-    --checkbox-check-hover: rgba(0,95,184,0.9);
-    --checkbox-check-active: rgba(0,95,184,0.8);
+    --checkbox-check-hover: var(--accent-secondary);
+    --checkbox-check-active: var(--accent-tertiary);
 
 
     --img-size: 20px;
@@ -70,7 +80,7 @@
     --success-color: #0F7B0F;
 
     --info-banner-bg: rgba(255, 255, 255, 0.1);
-    --info-banner-icon: var(--bg-main-button);
+    --info-banner-icon: var(--accent-default);
     --info-banner-border: #ececec;
 
     --warning-banner-bg: #FFF4CE;
@@ -112,16 +122,26 @@
 
     --input-bg-active-color: #201c1c;
     --input-border-active-color: #2c2c2c;
-    --input-border-bot-active-color: #60cdff;
+    --input-border-bot-active-color: var(--accent-default);
 
     --input-cross: #333435;
 
+    /* Accent Color */
+    /* HEX to RGB needed for accent-default */
+    --accent-default-rgb: 96, 205, 255;
+    --accent-light-rgb: 96, 225, 255;          /* G + 20 */
+    --accent-dark-rgb: 96, 155, 205;           /* G - 50, B - 50 */
+    --accent-default: rgb(var(--accent-default-rgb));
+    --accent-secondary: rgba(var(--accent-default-rgb), 0.9);
+    --accent-tertiary: rgba(var(--accent-default-rgb), 0.8);
+    --accent-sel-txt: #0078D4; /* 0, 120, 212 */
+
     /* Button */
     --text-main-button: #000000;
-    --bg-main-button: #60CDFF;
-    --bg-after-main-button: linear-gradient(180deg, #6cd1ff 70%, #56b5e0 100%);
-    --bg-hover-main-button: #59bce8;
-    --bg-active-main-button: #53aad2;
+    --bg-main-button: var(--accent-default);
+    --bg-after-main-button: linear-gradient(180deg, rgb(var(--accent-light-rgb)) 70%, rgb(var(--accent-dark-rgb)) 100%);
+    --bg-hover-main-button: var(--accent-secondary);
+    --bg-active-main-button: var(--accent-tertiary);
     --active-main-button-color: #192e3a;
 
     --text-sec-button: var(--text-color);
@@ -138,8 +158,8 @@
     --checkbox-bg: rgba(0,0,0, 0.0241);
     --checkbox-hover: #262626;
     --checkbox-active: rgba(0,0,0, 0.0924);
-    --checkbox-check-hover: var(--bg-hover-main-button);
-    --checkbox-check-active: var(--bg-active-main-button);
+    --checkbox-check-hover: var(--accent-secondary);
+    --checkbox-check-active: var(--accent-tertiary);
   
     --img-size: 20px;
     --font-size: 14px;
@@ -155,7 +175,7 @@
     --success-color: #6CCB5F;
 
     --info-banner-bg: #2326278f;
-    --info-banner-icon: #60cdff;
+    --info-banner-icon: var(--accent-default);
     --info-banner-border: #2a2e30;
 
     --warning-banner-bg: #433519;

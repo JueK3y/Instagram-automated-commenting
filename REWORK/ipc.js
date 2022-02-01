@@ -1,10 +1,5 @@
 const { ipcRenderer } = require("electron")
 
-/*async function fileSelected(e) {
-    const loadedFilePath = e.target.files[0]?.path
-    let data = await window.electron.ipcRenderer.invoke('read-file', loadedFilePath)
-}*/
-
 const maxBtn = document.getElementById('maxBtn')
 const restoreBtn = document.getElementById('restoreBtn')
 const preventStart = document.getElementById('start-btn')
@@ -45,7 +40,20 @@ closeBtn.addEventListener('click', () => {
 })
 
 ipc.on('accColor', (evt, message) => {
-    console.log(message['Color'])
+    let color = message['Color']
+    console.log('Using accent color: ' + color)
+    const hex2rgb = (hex) => {
+        const r = parseInt(hex.slice(1, 3), 16)
+        const g = parseInt(hex.slice(3, 5), 16)
+        const b = parseInt(hex.slice(5, 7), 16)
+        // return {r, g, b} // return an object
+        return [ r, g, b ]
+    }
+    let baseRGB = hex2rgb('#' + color)
+    console.log(baseRGB)
+    document.querySelector('body').style.setProperty('--accent-default-rgb', baseRGB)
+    document.querySelector('body').style.setProperty('--accent-light-rgb', (baseRGB[0] + ',' + (baseRGB[1] + 20) + ',' + baseRGB[2]))
+    document.querySelector('body').style.setProperty('--accent-dark-rgb', (baseRGB[0] + ',' + (baseRGB[1] - 35) + ',' + (baseRGB[2] - 35)))
 })
 
 // Minimize 
