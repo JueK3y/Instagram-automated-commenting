@@ -43,7 +43,7 @@
     --bg-after-sec-button: linear-gradient(180deg, #e9e9e9 90%, #d3d3d3 100%);
     --bg-hover-sec-button: rgb(247, 247, 247);
     --bg-active-sec-button: rgb(238, 238, 238);
-    --active-sec-button-color: var(--text-color);
+    --active-sec-button-color: vary(--text-color);
 
     --bg-border-button: #dbdbdb;
     

@@ -1,5 +1,6 @@
-const { app, BrowserWindow, ipcMain, powerSaveBlocker, session } = require('electron');
-const windowStateKeeper = require('electron-window-state')
+const { app, BrowserWindow, ipcMain, powerSaveBlocker, session, systemPreferences } = require('electron');
+const windowStateKeeper = require('electron-window-state');
+const { nativeTheme } = require('electron/main');
 const path = require('path');
 const ipc = ipcMain
 
@@ -31,7 +32,7 @@ const createWindow = () => {
         contextIsolation: false                   // -!- Same for here? -!- //
       }
   })
-  
+
   // load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
@@ -48,6 +49,23 @@ const createWindow = () => {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  // Color changer
+  let color = systemPreferences.getAccentColor()
+
+  mainWindow.webContents.once('dom-ready', () => {
+    mainWindow.webContents.send('accColor', {'Color': color});
+  })
+
+
+  nativeTheme.on("updated", () => {
+ 
+    if (nativeTheme.shouldUseDarkColors) {
+      mainWindow.webContents.send('changedToDark')
+    } else {
+      mainWindow.webContents.send('changedToLight')
+    }
+  })
 
 
   mainWindow.on('blur', () => {

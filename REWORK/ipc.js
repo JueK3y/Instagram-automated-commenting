@@ -44,6 +44,10 @@ closeBtn.addEventListener('click', () => {
     }
 })
 
+ipc.on('accColor', (evt, message) => {
+    console.log(message['Color'])
+})
+
 // Minimize 
 minBtn.addEventListener('click', () => {
     ipc.send('minApp')

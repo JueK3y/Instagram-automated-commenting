@@ -19,7 +19,7 @@
   "author": "JueK3y",
   "license": "EULA",
   "devDependencies": {
-    "electron": "^13.3.0"
+    "electron": "^13.6.8"
   },
   "dependencies": {
     "electron-log": "^4.4.4",

@@ -7,9 +7,7 @@ html body {
 html body img {
   width: var(--img-size);
   height: var(--img-size);
-  -moz-user-select: none;
-   -ms-user-select: none;
-       user-select: none;
+  user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
   -webkit-app-region: no-drag;
@@ -18,25 +16,6 @@ html body a {
   color: var(--text-color);
   text-decoration: none;
   cursor: pointer;
-}
-@-webkit-keyframes round {
-  0% {
-    transform: rotate(0deg);
-    border-radius: 50%;
-    width: 170px;
-    height: 150px;
-  }
-  50% {
-    border-radius: 40%;
-    width: 140px;
-    height: 120px;
-  }
-  100% {
-    border-radius: 50%;
-    width: 170px;
-    height: 150px;
-    transform: rotate(365deg);
-  }
 }
 @keyframes round {
   0% {
@@ -58,10 +37,7 @@ html body a {
   }
 }
 html body .no-select {
-  -webkit-user-select: none !important;
-     -moz-user-select: none !important;
-      -ms-user-select: none !important;
-          user-select: none !important;
+  user-select: none !important;
 }
 html body .small-cursor {
   position: fixed;
@@ -75,8 +51,7 @@ html body .small-cursor {
   border-radius: 50%;
   pointer-events: none;
   transition: 1s ease-out;
-  -webkit-animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-          animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 html body .medium-title {
   font-size: var(--medium-text);
@@ -159,8 +134,7 @@ html body header #drag-region {
   left: 0;
   width: 100%;
   height: 31px;
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   z-index: 3;
   -ms-overflow-style: scrollbar;
   -webkit-app-region: drag;
@@ -211,8 +185,7 @@ html body nav #side-bar {
   height: 100vh;
   transition: 0.2s;
   font-size: var(--font-size);
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
   z-index: 3;
 }
 html body nav #side-bar .comment #idleIcon {
@@ -312,8 +285,7 @@ html body .banner {
   height: 46px;
   font-size: 14px;
   border-radius: 3px;
-  -webkit-backdrop-filter: blur(50px);
-          backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
 }
 html body .banner .banner-content {
   display: flex;
@@ -401,4 +373,5 @@ html body #error-banner-wifi #error-hide:active {
   opacity: 0.75;
   transition: 0.2s;
 }
+
 /*# sourceMappingURL=main.css.map */
