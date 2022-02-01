@@ -35,11 +35,14 @@ const createWindow = () => {
 
   // load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  
+  let color = systemPreferences.getAccentColor()
 
   mainWindow.on('ready-to-show', function() {
     mainWindowState.manage(mainWindow)
     mainWindow.show()
     mainWindow.focus()
+    mainWindow.webContents.send('accColor', {'Color': color});
   })
 
   mainWindow.webContents.on('new-window', function (e, url) {
@@ -50,14 +53,8 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
-  // Color changer
-  let color = systemPreferences.getAccentColor()
 
-  mainWindow.webContents.once('dom-ready', () => {
-    mainWindow.webContents.send('accColor', {'Color': color});
-  })
-
-
+  // -!- Needs to be in the creation proccess of window? -!- //
   nativeTheme.on("updated", () => {
  
     if (nativeTheme.shouldUseDarkColors) {
@@ -103,10 +100,7 @@ const createWindow = () => {
   ipc.on('closeApp', () => {
     mainWindow.close()
   })
-
 }
-
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -116,7 +110,7 @@ app.on('ready', () => {
     callback({
         responseHeaders: Object.assign ({
             'Content-Security-Policy': [
-              // Not secure at all and needs to be re-written
+              // -!- Not secure at all and needs to be re-written -!- //
               "default-src 'unsafe-eval' 'unsafe-inline' 'self'",
               "style-src 'unsafe-inline' 'self'",
               "script-src 'unsafe-eval' 'unsafe-inline' 'self'"
