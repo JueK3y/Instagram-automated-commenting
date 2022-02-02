@@ -12,9 +12,23 @@ const warningIcon = document.getElementById("warning-icon-img")
 const body = document.body
 
 const theme = localStorage.getItem("theme")
+const sysTheme = localStorage.getItem("system-theme")
 
+
+let color = colorIPC // colorIPC
+const hex2rgb = (hex) => {
+    const r = parseInt(hex.slice(1, 3), 16)
+    const g = parseInt(hex.slice(3, 5), 16)
+    const b = parseInt(hex.slice(5, 7), 16)
+    return [ r, g, b ]
+}
 
 function lightIcon() {
+    let baseRGB = hex2rgb('#' + color)
+    document.querySelector('body').style.setProperty('--accent-default-rgb', baseRGB)
+    document.querySelector('body').style.setProperty('--accent-light-rgb', (baseRGB[0] + ',' + (baseRGB[1] + 20) + ',' + baseRGB[2]))
+    document.querySelector('body').style.setProperty('--accent-dark-rgb', (baseRGB[0] + ',' + (baseRGB[1] - 35) + ',' + (baseRGB[2] - 35)))
+
     for (let i = 0; i < IDs.length; i++) {
         document.getElementById(IDs[i]).src = document.getElementById(IDs[i]).currentSrc.replace("dark", "light")
     }
@@ -50,7 +64,17 @@ function lightIcon() {
     catch (err) { }
 }
 
+function adjustDark(color, amount) {
+    return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
+}
+
 function darkIcon() {
+    let darkHEX = adjustDark(color, 96)
+    let darkRGB = hex2rgb(darkHEX)
+    document.querySelector('body').style.setProperty('--accent-default-rgb', darkRGB)
+    document.querySelector('body').style.setProperty('--accent-light-rgb', (darkRGB[0] + ',' + (darkRGB[1] + 20) + ',' + darkRGB[2]))
+    document.querySelector('body').style.setProperty('--accent-dark-rgb', (darkRGB[0] + ',' + (darkRGB[1] - 35) + ',' + (darkRGB[2] - 35)))
+
     for (let i = 0; i < IDs.length; i++) {
         document.getElementById(IDs[i]).src = document.getElementById(IDs[i]).currentSrc.replace("light", "dark")
     }
@@ -86,7 +110,19 @@ function darkIcon() {
     }
     catch (err) { }
 }
+
+// Theme detection
 if (theme) {
+    body.classList.add(theme);
+    if (body.classList.contains("dark")) {
+        darkIcon()
+    }
+    else {
+        lightIcon()
+    }
+}
+// -!- Does this work? -!- //
+else if (sysTheme) {
     body.classList.add(theme);
     if (body.classList.contains("dark")) {
         darkIcon()

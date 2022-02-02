@@ -7,6 +7,7 @@ const pauseButton = document.getElementById('pause-btn')
 const stopPrevent = document.getElementById('stop-btn')
 const ipc = ipcRenderer
 
+// Prevent Start
 preventStart.addEventListener('click', () => {
     setTimeout(() => {
         if (validate) {
@@ -23,6 +24,30 @@ stopPrevent.addEventListener('click', () => {
     ipc.send('stopPrevent')
 })
 
+
+// Blur password
+ipc.on('blurPw', () => {
+    document.getElementById('toggle').checked = false
+    document.getElementById("password-form").type = "password"
+    document.getElementById("togglePwImage").src = "src/img/icons/" + document.body.classList + "/eye.svg"
+})
+
+////// Color theme
+// Accent color
+ipc.on('accColor', (evt, message) => {
+    let colorIPC = message['Color']
+})
+
+// System light / dark mode
+ipc.on('changedToDark', (evt, message) => {
+    localStorage.setItem("system-theme", "dark")
+})
+ipc.on('changedToLight', (evt, message) => {
+    localStorage.setItem("system-theme", "light")
+})
+
+
+////// Window Action
 // Close
 closeBtn.addEventListener('click', () => {
     if (validate) {
@@ -39,22 +64,6 @@ closeBtn.addEventListener('click', () => {
     }
 })
 
-ipc.on('accColor', (evt, message) => {
-    let color = message['Color']
-    console.log('Using accent color: ' + color)
-    const hex2rgb = (hex) => {
-        const r = parseInt(hex.slice(1, 3), 16)
-        const g = parseInt(hex.slice(3, 5), 16)
-        const b = parseInt(hex.slice(5, 7), 16)
-        // return {r, g, b} // return an object
-        return [ r, g, b ]
-    }
-    let baseRGB = hex2rgb('#' + color)
-    console.log(baseRGB)
-    document.querySelector('body').style.setProperty('--accent-default-rgb', baseRGB)
-    document.querySelector('body').style.setProperty('--accent-light-rgb', (baseRGB[0] + ',' + (baseRGB[1] + 20) + ',' + baseRGB[2]))
-    document.querySelector('body').style.setProperty('--accent-dark-rgb', (baseRGB[0] + ',' + (baseRGB[1] - 35) + ',' + (baseRGB[2] - 35)))
-})
 
 // Minimize 
 minBtn.addEventListener('click', () => {
@@ -79,11 +88,4 @@ ipc.on('isRestored', () => {
 
 restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
-})
-
-// Blur password
-ipc.on('blurPw', () => {
-    document.getElementById('toggle').checked = false
-    document.getElementById("password-form").type = "password"
-    document.getElementById("togglePwImage").src = "src/img/icons/" + document.body.classList + "/eye.svg"
 })

@@ -38,11 +38,12 @@ const createWindow = () => {
   
   let color = systemPreferences.getAccentColor()
 
-  mainWindow.on('ready-to-show', function() {
+  mainWindow.on('ready-to-show', () => {
     mainWindowState.manage(mainWindow)
     mainWindow.show()
     mainWindow.focus()
     mainWindow.webContents.send('accColor', {'Color': color});
+    // mainWindow.webContents.send('accColor', newColor)
   })
 
   mainWindow.webContents.on('new-window', function (e, url) {
@@ -50,13 +51,17 @@ const createWindow = () => {
     require('electron').shell.openExternal(url)
   })
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  systemPreferences.on('accent-color-changed', (event, newColor) => {
+    console.log(event, newColor)
+    // mainWindow.webContents.send('accColor', {'Color': color});
+    mainWindow.webContents.send('accColor', newColor)
+    // -!- Needs to be checked -!- //
+  })
 
 
   // -!- Needs to be in the creation proccess of window? -!- //
+  // -!- Needs to be implemented -!- //
   nativeTheme.on("updated", () => {
- 
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
     } else {
