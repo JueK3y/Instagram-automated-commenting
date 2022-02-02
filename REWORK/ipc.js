@@ -35,7 +35,9 @@ ipc.on('blurPw', () => {
 ////// Color theme
 // Accent color
 ipc.on('accColor', (evt, message) => {
-    let colorIPC = message['Color']
+    let colorIPC = message
+    localStorage.setItem("accColor", colorIPC)
+    console.log(colorIPC)
 })
 
 // System light / dark mode

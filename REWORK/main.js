@@ -42,8 +42,7 @@ const createWindow = () => {
     mainWindowState.manage(mainWindow)
     mainWindow.show()
     mainWindow.focus()
-    mainWindow.webContents.send('accColor', {'Color': color});
-    // mainWindow.webContents.send('accColor', newColor)
+    mainWindow.webContents.send('accColor', color)
   })
 
   mainWindow.webContents.on('new-window', function (e, url) {
@@ -52,10 +51,7 @@ const createWindow = () => {
   })
 
   systemPreferences.on('accent-color-changed', (event, newColor) => {
-    console.log(event, newColor)
-    // mainWindow.webContents.send('accColor', {'Color': color});
     mainWindow.webContents.send('accColor', newColor)
-    // -!- Needs to be checked -!- //
   })
 
 
