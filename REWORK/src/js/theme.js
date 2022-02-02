@@ -14,7 +14,6 @@ const body = document.body
 const theme = localStorage.getItem("theme")
 const sysTheme = localStorage.getItem("system-theme")
 
-let color = localStorage.getItem("accColor")
 const hex2rgb = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16)
     const g = parseInt(hex.slice(3, 5), 16)
@@ -23,6 +22,7 @@ const hex2rgb = (hex) => {
 }
 
 function lightIcon() {
+    let color = localStorage.getItem("accColor")
     let baseRGB = hex2rgb('#' + color)
     document.querySelector('body').style.setProperty('--accent-default-rgb', baseRGB)
     document.querySelector('body').style.setProperty('--accent-light-rgb', (baseRGB[0] + ',' + (baseRGB[1] + 20) + ',' + baseRGB[2]))
@@ -68,6 +68,7 @@ function adjustDark(colorHex, amount) {
 }
 
 function darkIcon() {
+    let color = localStorage.getItem("accColor")
     let darkHEX = adjustDark('#' + color, 96)
     let darkRGB = hex2rgb(darkHEX)
     document.querySelector('body').style.setProperty('--accent-default-rgb', darkRGB)
