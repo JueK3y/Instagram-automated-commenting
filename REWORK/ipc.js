@@ -49,13 +49,16 @@ ipc.on('accColorChanged', (evt, message) => {
 })
 
 // System light / dark mode
-ipc.on('changedToDark', (evt, message) => {
+ipc.on('changedToDark', () => {
     localStorage.setItem("system-theme", "dark")
+    localStorage.setItem("use-sys-theme", "true")
+    detectTheme()
 })
-ipc.on('changedToLight', (evt, message) => {
+ipc.on('changedToLight', () => {
     localStorage.setItem("system-theme", "light")
+    localStorage.setItem("use-sys-theme", "true")
+    detectTheme()
 })
-
 
 ////// Window Action
 // Close

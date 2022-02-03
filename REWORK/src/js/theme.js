@@ -11,9 +11,6 @@ const warningIcon = document.getElementById("warning-icon-img")
 
 const body = document.body
 
-const theme = localStorage.getItem("theme")
-const sysTheme = localStorage.getItem("system-theme")
-
 const hex2rgb = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16)
     const g = parseInt(hex.slice(3, 5), 16)
@@ -115,6 +112,11 @@ function darkIcon() {
 
 // Theme detection
 function detectTheme() {
+    
+    let theme = localStorage.getItem("theme")
+    let sysTheme = localStorage.getItem("system-theme")
+    let useSystem = localStorage.getItem("use-sys-theme")
+
     if (theme) {
         body.classList.add(theme);
         if (body.classList.contains("dark")) {
@@ -123,22 +125,46 @@ function detectTheme() {
         else {
             lightIcon()
         }
+        localStorage.removeItem("use-sys-theme")
     }
-    // -!- Does this work? -!- //
-    else if (sysTheme) {
-        body.classList.add(theme);
+    else if (useSystem) {
         if (body.classList.contains("dark")) {
-            darkIcon()
+            if (sysTheme != "dark") {
+                body.classList.replace("dark", "light")
+                lightIcon()
+            }
+            else {
+                darkIcon()
+            }
+        }
+        else if (body.classList.contains("light")) {
+            if (sysTheme != "light") {
+                body.classList.replace("light", "dark")
+                darkIcon()
+            }
+            else {
+                lightIcon()
+            }
         }
         else {
-            lightIcon()
+            body.classList.add(sysTheme)
+            if (sysTheme == "dark") {
+                darkIcon()
+            }
+            else {
+                lightIcon()
+            }
         }
     }
     else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        localStorage.setItem("system-theme", "dark")
+        localStorage.setItem("use-sys-theme", "true")
         body.classList.add("dark")
         darkIcon()
     }
     else {
+        localStorage.setItem("system-theme", "light")
+        localStorage.setItem("use-sys-theme", "true")
         body.classList.add("light")
         lightIcon()
     }

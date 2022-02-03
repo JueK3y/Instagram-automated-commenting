@@ -43,6 +43,11 @@ const createWindow = () => {
     mainWindow.show()
     mainWindow.focus()
     mainWindow.webContents.send('accColor', color)
+    if (nativeTheme.shouldUseDarkColors) {
+      mainWindow.webContents.send('changedToDark')
+    } else {
+      mainWindow.webContents.send('changedToLight')
+    }
   })
 
   mainWindow.webContents.on('new-window', function (e, url) {
@@ -54,9 +59,6 @@ const createWindow = () => {
     mainWindow.webContents.send('accColorChanged', newColor)
   })
 
-
-  // -!- Needs to be in the creation proccess of window? -!- //
-  // -!- Needs to be implemented -!- //
   nativeTheme.on("updated", () => {
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
@@ -64,7 +66,6 @@ const createWindow = () => {
       mainWindow.webContents.send('changedToLight')
     }
   })
-
 
   mainWindow.on('blur', () => {
     mainWindow.webContents.send('blurPw')
