@@ -21,8 +21,10 @@ const hex2rgb = (hex) => {
     return [ r, g, b ]
 }
 
+let color;
+
 function lightIcon() {
-    let color = localStorage.getItem("accColor")
+    color = localStorage.getItem("accColor")
     let baseRGB = hex2rgb('#' + color)
     document.querySelector('body').style.setProperty('--accent-default-rgb', baseRGB)
     document.querySelector('body').style.setProperty('--accent-light-rgb', (baseRGB[0] + ',' + (baseRGB[1] + 20) + ',' + baseRGB[2]))
@@ -68,7 +70,7 @@ function adjustDark(colorHex, amount) {
 }
 
 function darkIcon() {
-    let color = localStorage.getItem("accColor")
+    color = localStorage.getItem("accColor")
     let darkHEX = adjustDark('#' + color, 96)
     let darkRGB = hex2rgb(darkHEX)
     document.querySelector('body').style.setProperty('--accent-default-rgb', darkRGB)
@@ -141,13 +143,6 @@ function detectTheme() {
         lightIcon()
     }
 }
-
-
-window.addEventListener('storage', () => {
-    console.log("Test")
-    detectTheme()
-})
-
 
 detectTheme()
 

@@ -51,7 +51,7 @@ const createWindow = () => {
   })
 
   systemPreferences.on('accent-color-changed', (event, newColor) => {
-    mainWindow.webContents.send('accColor', newColor)
+    mainWindow.webContents.send('accColorChanged', newColor)
   })
 
 
