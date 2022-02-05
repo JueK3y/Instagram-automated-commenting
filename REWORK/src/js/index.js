@@ -9,7 +9,7 @@
 // │ the manufacturer (JueK3y) withdraws from any legal responsibility.      │
 // ├─────────────────────────────────────────────────────────────────────────┤
 // │ Copyright © 2020 - 2021 by JueK3y (Julian Kennedy)                      │
-// | https://github.com/JueK3y/Instagram-automated-commenting                │
+// │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
 
 ////// URL Clear Buttton
