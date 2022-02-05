@@ -106,7 +106,8 @@ html body {
         cursor: pointer;
     }
     .deleteProfile {
-        margin-left: 30px;
+        position: absolute;
+        left: 122px;
         transition: .2s;
         .deleteProfileIcon {
             margin-top: 3px;
