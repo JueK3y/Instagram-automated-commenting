@@ -314,8 +314,10 @@ function profileUpdate() {
     for (let i = 0; i < result.length; i++) {
       let usrnme = Object.values(result[i])[0]
       console.log(usrnme)
-      $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass().addClass('uid-'+usrnme)
-      userProfile.push(usrnme)
+      if (! document.getElementsByClassName('uid-'+usrnme).length > 0) {
+        $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass().addClass('uid-'+usrnme)
+        userProfile.push(usrnme)
+      }
     }
   })
 }

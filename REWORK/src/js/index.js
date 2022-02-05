@@ -168,7 +168,20 @@ $('#start-btn').click(function() {
         setTimeout(() => {
           // $("#profile-content").load(location.href+" #profile-content>*","")
           profileUpdate()
-        }, 50)
+          // $('.uid-profile-3').css('display', 'flex').text("Boda").removeClass().addClass('uid-Boda')
+          if (document.getElementById('profile-1-name').innerText != "") {
+            document.getElementById('profile-1').style.display = 'flex'
+          }
+          if (document.getElementById('profile-2-name').innerText != "") {
+            document.getElementById('profile-2').style.display = ''
+          }
+          if (document.getElementById('profile-3-name').innerText != "") {
+            document.getElementById('profile-3').style.display = ''
+            showMore.display = ''
+            addProfile.display = 'none'
+          }
+
+        }, 500)
         // deleteUser() // After program stopped
       }
     // updateUser(username.value)
