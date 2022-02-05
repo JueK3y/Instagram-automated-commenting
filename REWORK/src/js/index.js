@@ -8,7 +8,7 @@
 // │ In the event of possible damage, the user alone is liable,              │
 // │ the manufacturer (JueK3y) withdraws from any legal responsibility.      │
 // ├─────────────────────────────────────────────────────────────────────────┤
-// │ Copyright © 2020 - 202 by JueK3y (Julian Kennedy)                      │
+// │ Copyright © 2020 - 202 by JueK3y (Julian Kennedy)                       │
 // │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
 
@@ -163,9 +163,15 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("idleIcon").style.display = "none"
     document.getElementById("runIcon").style.display = "block"
-    // -!- Check if saveProfile is checked -!-
-    // updateUser(username.value)
     setPassword(username.value, password.value)
+      if (document.getElementById("save-profile").checked == true) {
+        setTimeout(() => {
+          // $("#profile-content").load(location.href+" #profile-content>*","")
+          profileUpdate()
+        }, 50)
+        // deleteUser() // After program stopped
+      }
+    // updateUser(username.value)
     checkClick = 0
   }
 })

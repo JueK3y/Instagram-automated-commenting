@@ -300,22 +300,27 @@ $(document).ready(function() {
 let fourOrMore
 let userProfile = []
 
-displayUsername().then(result => {
-  if (result.length == 0) {
-    document.getElementById('profileDropdown').style.display = 'none'
-  }
-  else if (result.length == 1 || result.length == 2) {
-    $('.uid-profile-'+(result.length)).css('margin-bottom', '5px')
-  }
-  else if (result.length >= 4) {
-    fourOrMore = true
-  }
-  for (let i = 0; i < result.length; i++) {
-    let usrnme = Object.values(result[i])[0]
-    $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass().addClass('uid-'+usrnme)
-    userProfile.push(usrnme)
-  }
-})
+function profileUpdate() {
+  displayUsername().then(result => {
+    if (result.length == 0) {
+      document.getElementById('profileDropdown').style.display = 'none'
+    }
+    else if (result.length == 1 || result.length == 2) {
+      $('.uid-profile-'+(result.length)).css('margin-bottom', '5px')
+    }
+    else if (result.length >= 4) {
+      fourOrMore = true
+    }
+    for (let i = 0; i < result.length; i++) {
+      let usrnme = Object.values(result[i])[0]
+      console.log(usrnme)
+      $('.uid-profile-'+(i+1)).css('display', 'flex').text(usrnme).removeClass().addClass('uid-'+usrnme)
+      userProfile.push(usrnme)
+    }
+  })
+}
+
+profileUpdate()
 
 const profile1 = document.getElementById('profile-1-name')
 const profile2 = document.getElementById('profile-2-name') 
