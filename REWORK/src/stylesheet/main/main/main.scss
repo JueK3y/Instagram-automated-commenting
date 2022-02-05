@@ -360,6 +360,30 @@ html body {
         #error-icon {
             background-color: var(--error-banner-icon);
         }
+        #error-button-hide {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 50px;
+            width: 100px;
+            height: 30px;
+            border: none;
+            outline: none;
+            background: none;
+            border-radius: 2px;
+            color: var(--text-color);
+            background-color: var(--error-banner-button);
+            cursor: pointer;
+            transition: .2s;
+            &:hover {
+                opacity: .9;
+                transition: .2s;
+            }
+            &:active {
+                opacity: .75;
+                transition: .2s;
+            }
+        }
     }
     #error-banner-wifi {
         background-color: var(--error-banner-bg);

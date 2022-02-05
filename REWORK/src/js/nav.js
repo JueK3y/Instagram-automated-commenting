@@ -430,12 +430,19 @@ const changeImg = document.getElementById("wifi-img")
 var counter = 0
 var counterDisplay = 0
 showMessage = true
+showConnMessage = true
 var notConnected
 var internetSpeed
 
 $("#error-hide").click(() => {
   showMessage = false
   $("#error-banner").fadeOut()
+  $("#error-hide").fadeOut()
+})
+$("#error-button-hide").click(() => {
+  showConnMessage = false
+  $(".wifi-not-connected").fadeOut()
+  $("#error-button-hide").fadeOut()
 })
 
 
@@ -454,10 +461,16 @@ window.setInterval(() => {
       changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
       changeColor.style.background = (light) ? '#FDE7E9':'#442726'
       changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
-      showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
-      // noteMessage("WLAN deaktiviert", "Für IAC 2.0 brauchst du eine aktive Internetverbindung")  // -- Spams the note center -- //
+      if (showConnMessage) {
+        showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
+        counterDisplay += 1
+        if (counterDisplay == 3) {
+          document.getElementById("error-button-hide").style.display = "block"
+        }
+      }
     }
     else {
+      document.getElementById("error-button-hide").style.display = "none"
       if ($('.wifi-not-connected')[0]) {
         hideBanner('wifi-not-connected')
         devLog('warn', "wifi-not-connected banner exists. Removing it.")
