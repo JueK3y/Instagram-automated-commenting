@@ -166,8 +166,9 @@ $('#start-btn').click(function() {
     setPassword(username.value, password.value)
       if (document.getElementById("save-profile").checked == true) {
         setTimeout(() => {
-          // $("#profile-content").load(location.href+" #profile-content>*","")
           profileUpdate()
+        }, 50)
+        setTimeout(() => {
           // $('.uid-profile-3').css('display', 'flex').text("Boda").removeClass().addClass('uid-Boda')
           if (document.getElementById('profile-1-name').innerText != "") {
             document.getElementById('profile-1').style.display = 'flex'
@@ -180,8 +181,7 @@ $('#start-btn').click(function() {
             showMore.display = ''
             addProfile.display = 'none'
           }
-
-        }, 500)
+        }, 150)
         // deleteUser() // After program stopped
       }
     // updateUser(username.value)
