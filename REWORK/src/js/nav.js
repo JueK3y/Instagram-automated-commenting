@@ -305,11 +305,14 @@ function profileUpdate() {
     if (result.length == 0) {
       document.getElementById('profileDropdown').style.display = 'none'
     }
-    else if (result.length == 1 || result.length == 2) {
-      $('.uid-profile-'+(result.length)).css('margin-bottom', '5px')
-    }
-    else if (result.length >= 4) {
-      fourOrMore = true
+    else {
+      document.getElementById('profileDropdown').style.display = 'block'
+      if (result.length == 1 || result.length == 2) {
+        $('.uid-profile-'+(result.length)).css('margin-bottom', '5px')
+      }
+      else if (result.length >= 4) {
+        fourOrMore = true
+      }
     }
     for (let i = 0; i < result.length; i++) {
       let usrnme = Object.values(result[i])[0]
@@ -343,14 +346,14 @@ $(document).ready(function() {
       fourOrMore = false
     }
     if (profile2.innerText != "") {
-      document.getElementById('profile-2').style.display = ''
+      document.getElementById('profile-2').style.display = 'flex'
     }
     else {
       document.getElementById('profile-2').style.display = 'none'
       fourOrMore = false
     }
     if (profile3.innerText != "") {
-      document.getElementById('profile-3').style.display = ''
+      document.getElementById('profile-3').style.display = 'flex'
       showMore.display = ''
       addProfile.display = 'none'
     }
@@ -360,7 +363,6 @@ $(document).ready(function() {
     }
     if (profile1.innerText == "" && profile2.innerText == "" && profile3.innerText == "") {
       document.getElementById("profile-container").style.top  = "27px"
-    
     }
   }, 100)
   $(document).on('click', '#add-profile', function() {

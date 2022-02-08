@@ -416,6 +416,7 @@ html {
                                 position: absolute;
                                 height: 10px;
                                 width: 20px;
+                                z-index: 6;
                                 #searchProfileContent {
                                     display: none;
                                     position: absolute;
@@ -426,7 +427,6 @@ html {
                                     backdrop-filter: blur(100px);
                                     border-radius: 5px;
                                     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                                    z-index: 2;
                                     a:first-child {
                                         margin-top: 5px;
                                     }

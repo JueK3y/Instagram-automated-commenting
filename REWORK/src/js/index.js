@@ -169,18 +169,19 @@ $('#start-btn').click(function() {
           profileUpdate()
         }, 50)
         setTimeout(() => {
-          // $('.uid-profile-3').css('display', 'flex').text("Boda").removeClass().addClass('uid-Boda')
+          // -!- Does only work for adding one profile -!- //
           if (document.getElementById('profile-1-name').innerText != "") {
             document.getElementById('profile-1').style.display = 'flex'
           }
           if (document.getElementById('profile-2-name').innerText != "") {
-            document.getElementById('profile-2').style.display = ''
+            document.getElementById('profile-2').style.display = 'flex'
           }
           if (document.getElementById('profile-3-name').innerText != "") {
-            document.getElementById('profile-3').style.display = ''
+            document.getElementById('profile-3').style.display = 'flex'
             showMore.display = ''
             addProfile.display = 'none'
           }
+          // -!- Show dropdown menu 
         }, 150)
         // deleteUser() // After program stopped
       }
