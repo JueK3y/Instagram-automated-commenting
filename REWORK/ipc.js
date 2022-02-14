@@ -102,3 +102,11 @@ ipc.on('isRestored', () => {
 restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
 })
+
+
+
+// Open comment file
+document.getElementById('edit-button').addEventListener('click', () => {
+    devLog('info', 'Opening comments file.')
+    ipc.send('checkFile')
+})

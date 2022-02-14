@@ -1,7 +1,9 @@
-const { app, BrowserWindow, ipcMain, powerSaveBlocker, session, systemPreferences } = require('electron');
-const windowStateKeeper = require('electron-window-state');
-const { nativeTheme } = require('electron/main');
-const path = require('path');
+const { app, BrowserWindow, ipcMain, powerSaveBlocker, session, systemPreferences } = require('electron')
+const windowStateKeeper = require('electron-window-state')
+const { nativeTheme } = require('electron/main')
+const { shell } = require('electron')
+const path = require('path')
+const fs = require('fs')
 const ipc = ipcMain
 
 const createWindow = () => {
@@ -70,6 +72,17 @@ const createWindow = () => {
   mainWindow.on('blur', () => {
     mainWindow.webContents.send('blurPw')
   })
+
+
+
+  let fileLocation = path.join(__dirname + '/src/data/', 'comments.txt')
+
+  ipc.on('checkFile', () => {
+    if (fs.existsSync(fileLocation)) shell.openPath(fileLocation)
+    else console.log(false, fileLocation)
+  })
+
+
 
   var sleepID = undefined
 

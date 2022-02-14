@@ -1,6 +1,3 @@
-const { shell } = require('electron')
-const fs = require('electron')
-const path = require('path')
 const Store = require('electron-store')
 
 var today = new Date()
@@ -55,21 +52,4 @@ function checkFile(filePath) {
             resolve(error)
         })
     })
-}
-
-function openComments() {
-    let fileLocation = path.join(__dirname + './src/data/', 'comments.txt')
-    // -!- Path needs to be changed to users roaming folder -!- //
-    // -!- What happens if file doesn't exists? Need to be created and written -!- //
-    path.exists(fileLocation, function(exists) {
-        if (exists) {
-            console.log("test true")
-        }
-    })
-    // let checkFile = s => new Promise(r => fs.access(s, fs.constants.F_OK, e => r(!e)))
-    // checkFile(fileLocation).then(bool => console.log('It exists.'))
-
-    shell.openPath(fileLocation)
-    devLog('info', 'Opening comments file.')
-    // fs.writeFileSync(app.getPath('userData'), '! Write only one comment per line. Comments with \'!\' at the beginning will be ignored.')
 }
