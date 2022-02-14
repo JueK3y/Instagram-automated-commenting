@@ -213,6 +213,11 @@ $('#stop-btn').click(function() {
   document.getElementById("pauseIcon").style.display = "none"
 })
 
+// Open comment file
+$('#edit-button').click(function() {
+  openComments()
+})
+
 
 ////// Profile Dropdown 
 const prDdImage = document.getElementById('profileDropdownImage')
