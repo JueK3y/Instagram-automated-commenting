@@ -103,9 +103,14 @@ restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
 })
 
+// Change Min-Max Icon
+ipc.on('changeWinIcon', () => {
+    maxBtn.style.display = 'none'
+    restoreBtn.style.display = 'block'
+})
 
 
-// Open comment file
+////// Open comment file
 document.getElementById('edit-button').addEventListener('click', () => {
     devLog('info', 'Opening comments file.')
     ipc.send('checkFile')

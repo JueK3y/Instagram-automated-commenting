@@ -4,6 +4,7 @@ const { nativeTheme } = require('electron/main')
 const { shell } = require('electron')
 const path = require('path')
 const fs = require('fs')
+const { Console } = require('console')
 const ipc = ipcMain
 
 const createWindow = () => {
@@ -50,6 +51,9 @@ const createWindow = () => {
     } else {
       mainWindow.webContents.send('changedToLight')
     }
+    if (mainWindow.isMaximized()) {
+      mainWindow.webContents.send('changeWinIcon')
+    }
   })
 
   mainWindow.webContents.on('new-window', function (e, url) {
@@ -72,7 +76,6 @@ const createWindow = () => {
   mainWindow.on('blur', () => {
     mainWindow.webContents.send('blurPw')
   })
-
 
   // -!- Better in renderer process? -!- //
   let userData = app.getPath('userData')
