@@ -77,7 +77,6 @@ closeBtn.addEventListener('click', () => {
     }
 })
 
-
 // Minimize 
 minBtn.addEventListener('click', () => {
     ipc.send('minApp')

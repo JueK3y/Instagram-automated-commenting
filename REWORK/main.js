@@ -92,8 +92,6 @@ const createWindow = () => {
     shell.openPath(fileLocation)
   })
 
-
-
   var sleepID = undefined
 
   ipc.on('preventSleep', () => {
