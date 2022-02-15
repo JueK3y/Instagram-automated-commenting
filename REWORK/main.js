@@ -74,12 +74,19 @@ const createWindow = () => {
   })
 
 
-
-  let fileLocation = path.join(__dirname + '/src/data/', 'comments.txt')
+  // -!- Better in renderer process? -!- //
+  let userData = app.getPath('userData')
+  let dirLocation = path.join(userData + '/data')
+  let fileLocation = path.join(dirLocation, 'comments.txt')  
 
   ipc.on('checkFile', () => {
-    if (fs.existsSync(fileLocation)) shell.openPath(fileLocation)
-    else console.log(false, fileLocation)
+    if (! fs.existsSync(fileLocation)) {
+      if (! fs.existsSync(dirLocation)) {
+        fs.mkdirSync(dirLocation)
+      }
+      fs.writeFileSync(fileLocation, '! Write only one comment per line. Comments with \'!\' at the beginning will be ignored.')
+    }
+    shell.openPath(fileLocation)
   })
 
 
