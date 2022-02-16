@@ -163,3 +163,26 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+
+const puppeteer = require('puppeteer');
+
+// Headless Browser
+/*(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://instagram.com');
+  await page.screenshot({ path: 'Instagram-Headless.png' });
+
+  await browser.close();
+})();*/
+
+// Browser Interface
+(async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+  await page.goto('https://instagram.com');
+  await page.screenshot({ path: 'Instagram-GUI.png' });
+
+  await browser.close();
+})();
