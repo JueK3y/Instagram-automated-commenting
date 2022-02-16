@@ -16,7 +16,19 @@ puppeteer.launch({ headless: false, slowMo: 100 }).then(async browser => {    //
   const password = 'password'
   const postURL = 'https://www.instagram.com/accounts/login/'
 
-  await page.goto(postURL);
+  await page.goto(postURL)
+
+  // Check for cookie banner
+  if (await page.$('#buttonToClick') !== null) {
+    console.log("Button exists")
+    if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test") {
+      console.log("Test content")
+    }
+  }
+  else {
+    console.log("Button doesn't exist")
+  }
+
 
   // Waiting for LogIn load
   await page.waitForSelector('input[name="username"]')
@@ -27,7 +39,7 @@ puppeteer.launch({ headless: false, slowMo: 100 }).then(async browser => {    //
 
   // Submit LogIn data
   page.click('[type="submit"]'),
-  page.waitForNavigation({ waitUntil: 'networkidle0' })
+  page.waitForNavigation({ waitUntil: 'networkidle0' }) // When URL is changed
 
   await page.screenshot({ path: 'Instagram.png' })
   
