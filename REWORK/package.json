@@ -29,7 +29,8 @@
     "keytar": "^7.8.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^13.3.2",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-stealth": "^2.9.0",
     "puppeteer-in-electron": "^3.0.5",
     "python-shell": "^3.0.1"
   }
