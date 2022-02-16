@@ -167,22 +167,11 @@ app.on('activate', () => {
 
 const puppeteer = require('puppeteer');
 
-// Headless Browser
-/*(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://instagram.com');
-  await page.screenshot({ path: 'Instagram-Headless.png' });
-
-  await browser.close();
-})();*/
-
-// Browser Interface
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto('https://instagram.com');
-  await page.screenshot({ path: 'Instagram-GUI.png' });
+  await page.screenshot({ path: 'Instagram.png' });
 
   await browser.close();
 })();
