@@ -62,10 +62,10 @@ function launchMainLogic(_url, _username, _password) {
     // -!- Check alert message AFTER the submit button is clicked -!- //
 
     // Check if data is correct
-    if (await page.$('#slfErrorAlert') != null) {         // -!- Shouldn't use class detection -!- //
+    if (await page.waitForXPath('//*[@id="slfErrorAlert"]') != null) {         // -!- Shouldn't use id detection -!- //
       devLog('warn', 'Wrong LogIn data')
       await browser.close()
-      showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
+      showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten', 'wrong-login-data', true)
       // if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test")
     }
     else {
