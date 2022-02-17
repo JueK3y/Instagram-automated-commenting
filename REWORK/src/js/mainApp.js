@@ -58,16 +58,18 @@ function launchMainLogic(_url, _username, _password) {
     // Submit LogIn data
     await page.click('[type="submit"]')
 
-    await page.waitFor(750)
+
+    // -!- Check alert message AFTER the submit button is clicked -!- //
 
     // Check if data is correct
     if (await page.$('#slfErrorAlert') != null) {         // -!- Shouldn't use class detection -!- //
-      devLog('info', 'Wrong LogIn data')
+      devLog('warn', 'Wrong LogIn data')
       await browser.close()
       showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
       // if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test")
     }
     else {
+      devLog('info', 'Correct LogIn data')
       await page.waitForNavigation({ waitUntil: 'networkidle0' }) // Execute when URL is changed
       await page.screenshot({ path: 'Instagram.png' })
     }
