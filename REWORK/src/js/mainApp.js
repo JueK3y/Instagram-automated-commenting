@@ -28,7 +28,10 @@ function launchMainLogic(_url, _username, _password) {
     // Opening browser
     devLog('info', 'Opening ' + postURL)
     try {
-      await page.goto(postURL)
+      await page.goto(postURL, {
+        waitUntil: 'networkidle0',
+      })
+      //browser.on('disconnected', alert("Test"))
     }
     catch (ProtocolError) {
       devLog('error', 'Failed to execute browser action')
@@ -36,14 +39,10 @@ function launchMainLogic(_url, _username, _password) {
   
 
     // Check for cookie banner
-    if (await page.$('#buttonToClick') !== null) {
-      console.log("Button exists")
-      if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test") {
-        console.log("Test content")
-      }
-    }
-    else {
-      console.log("Button doesn't exist")
+    if (await page.$('.bIiDR') != null) {         // -!- Shouldn't use class detection -!- //
+      devLog('info', 'Found cookie banner')
+      await page.click('.bIiDR')
+      // if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test")
     }
   
   
@@ -57,11 +56,20 @@ function launchMainLogic(_url, _username, _password) {
   
 
     // Submit LogIn data
-    page.click('[type="submit"]'),
-    page.waitForNavigation({ waitUntil: 'networkidle0' }) // Execute when URL is changed
-  
-    await page.screenshot({ path: 'Instagram.png' })
-    
-    // await browser.close();
+    await page.click('[type="submit"]')
+
+    await page.waitFor(750)
+
+    // Check if data is correct
+    if (await page.$('#slfErrorAlert') != null) {         // -!- Shouldn't use class detection -!- //
+      devLog('info', 'Wrong LogIn data')
+      await browser.close()
+      showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
+      // if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test")
+    }
+    else {
+      await page.waitForNavigation({ waitUntil: 'networkidle0' }) // Execute when URL is changed
+      await page.screenshot({ path: 'Instagram.png' })
+    }
   })
 }
