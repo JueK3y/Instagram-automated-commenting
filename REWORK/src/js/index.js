@@ -68,6 +68,7 @@ function specialCharCheck(checkVar) {
 }
 
 function formError(type) {
+  devLog('warn', 'Invalid input')
   if (type == undefined) {
     urlInput.classList.add('wrong-form')
     username.classList.add('wrong-form')
@@ -100,7 +101,10 @@ const username = document.getElementById('username-form')
 urlInput.focus()
 
 $(document).on('keyup', function(e) {
-  if (e.key == "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) $('#start-btn').click()
+  if (e.key == "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) {
+    if ($('#start-btn').is(':visible')) $('#start-btn').click()
+    
+  }
 })
 
 let pause = false
@@ -152,39 +156,41 @@ $('#start-btn').click(function() {
     for (let i = 0; i < errorCode.length; i++) {
       if ($('.' + errorCode[i])[0]) {
         hideBanner(errorCode[i])
-        devLog('warn', errorCode[i] + " banner exists. Removing it.")
+        devLog('warn', errorCode[i] + ' banner exists. Removing it.')
       }
     }
   }
 
   if (validate) {
+    devLog('info', 'All input is correct, launching main logic')
     document.getElementById("start-btn").style.display = "none"
     document.getElementById("pause-btn").style.display = "block"
     document.getElementById("stop-btn").style.display = "block"
     document.getElementById("idleIcon").style.display = "none"
     document.getElementById("runIcon").style.display = "block"
-    setPassword(username.value, password.value)
-      if (document.getElementById("save-profile").checked == true) {
-        setTimeout(() => {
-          profileUpdate()
-        }, 50)
-        setTimeout(() => {
-          // -!- Does only work for adding one profile -!- //
-          if (document.getElementById('profile-1-name').innerText != "") {
-            document.getElementById('profile-1').style.display = 'flex'
-          }
-          if (document.getElementById('profile-2-name').innerText != "") {
-            document.getElementById('profile-2').style.display = 'flex'
-          }
-          if (document.getElementById('profile-3-name').innerText != "") {
-            document.getElementById('profile-3').style.display = 'flex'
-            showMore.display = ''
-            addProfile.display = 'none'
-          }
-          // -!- Show dropdown menu 
-        }, 150)
-        // deleteUser() // After program stopped
-      }
+    launchMainLogic(urlInput.value, username.value, password.value)
+    if (document.getElementById("save-profile").checked == true) {
+      devLog('info', 'Saving LogIn data')
+      setPassword(username.value, password.value)
+      setTimeout(() => {
+        profileUpdate()
+      }, 50)
+      setTimeout(() => {
+        // -!- Does only work for adding one profile -!- //
+        if (document.getElementById('profile-1-name').innerText != "") {
+          document.getElementById('profile-1').style.display = 'flex'
+        }
+        if (document.getElementById('profile-2-name').innerText != "") {
+          document.getElementById('profile-2').style.display = 'flex'
+        }
+        if (document.getElementById('profile-3-name').innerText != "") {
+          document.getElementById('profile-3').style.display = 'flex'
+          showMore.display = ''
+          addProfile.display = 'none'
+        }
+        // -!- Show dropdown menu 
+      }, 150)
+    }
     // updateUser(username.value)
     checkClick = 0
   }

@@ -8,7 +8,7 @@ function devLog(type, message) {
         log.info(message)
     }
     else if (type == 'warning' || type == 'warn') {
-        log.warn(message)
+        log.warn(message)       // -!- Doesn't display anything (except in file) -!- //
     }
     else if (type == 'error' || type == 'err') {
         log.error(message)

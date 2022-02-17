@@ -481,7 +481,7 @@ window.setInterval(() => {
       document.getElementById("error-button-hide").style.display = "none"
       if ($('.wifi-not-connected')[0]) {
         hideBanner('wifi-not-connected')
-        devLog('warn', "wifi-not-connected banner exists. Removing it.")
+        devLog('warn', 'wifi-not-connected banner exists. Removing it.')
       }
       if (internetSpeed == 0) {
         counter += 1

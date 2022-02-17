@@ -4,6 +4,7 @@ const service = 'IAC 2.0'
 
 function setPassword(username, password) {
     keytar.setPassword(service, username, password)
+    devLog('info', 'LogIn data successfully saved')
 }
 
 function displayUsername() {
