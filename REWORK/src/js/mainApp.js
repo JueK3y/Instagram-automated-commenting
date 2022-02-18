@@ -3,6 +3,8 @@ const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
+commentLoop = false
+
 
 function launchMainLogic(_url, _username, _password) {
   puppeteer.launch({ headless: false, slowMo: 100 }).then(async browser => {    // Without {} args in production
@@ -65,7 +67,7 @@ function launchMainLogic(_url, _username, _password) {
       await page.waitForSelector('#slfErrorAlert')                              // -!- Shouldn't use id detection -!- //
       devLog('warn', 'Wrong LogIn data')                                        // -!- Takes quite long -!- //
       devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')
-      showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten', 'wrong-login-data', true)
+      showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
       document.getElementById('stop-btn').click()
       await browser.close()
     }
@@ -75,15 +77,23 @@ function launchMainLogic(_url, _username, _password) {
       await page.goto(postURL, {
         waitUntil: 'networkidle0',
       })
+
+      commentLoop = true
       
       // Comment loop
-      const commInp = await page.$('[data-testid="post-comment-text-area"]')
-      await commInp.click()
-      await commInp.type('Wow 😍')
-      const commBut = await page.$('[data-testid="post-comment-input-button"]')
-      commBut.click()
+      while (commentLoop) {
+        const commInp = await page.$('[data-testid="post-comment-text-area"]')
+        const commBut = await page.$('[data-testid="post-comment-input-button"]')
+        await commInp.click()
+        await commInp.type('Wow 😍')
+        await commBut.click()
+        await page.waitForTimeout(4000)
+        // commentLoop = false
+      }
 
       await page.screenshot({ path: 'Instagram.png' })
+      commentLoop = false
+      await page.close()      // -!- Close twice? -!- //
     }
   })
 }
