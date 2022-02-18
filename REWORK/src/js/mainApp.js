@@ -14,7 +14,7 @@ function launchMainLogic(_url, _username, _password) {
     await page.waitForTimeout(5000)
     await page.screenshot({ path: 'Stealth.png' })*/
     
-    // const postURL = 'https://www.instagram.com/accounts/login/'
+    const loginURL = 'https://www.instagram.com/accounts/login/'
     let postURL = _url
     const username = _username
     const password = _password
@@ -26,9 +26,9 @@ function launchMainLogic(_url, _username, _password) {
 
 
     // Opening browser
-    devLog('info', 'Opening ' + postURL)
+    devLog('info', 'Opening instagram login page')
     try {
-      await page.goto(postURL, {
+      await page.goto(loginURL, {
         waitUntil: 'networkidle0',
       })
       //browser.on('disconnected', alert("Test"))
@@ -42,7 +42,6 @@ function launchMainLogic(_url, _username, _password) {
     if (await page.$('.bIiDR') != null) {         // -!- Shouldn't use class detection -!- //
       devLog('info', 'Found cookie banner')
       await page.click('.bIiDR')
-      // if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test")
     }
   
   
@@ -62,15 +61,28 @@ function launchMainLogic(_url, _username, _password) {
     // -!- Check alert message AFTER the submit button is clicked -!- //
 
     // Check if data is correct
-    if (await page.waitForXPath('//*[@id="slfErrorAlert"]') != null) {         // -!- Shouldn't use id detection -!- //
-      devLog('warn', 'Wrong LogIn data')
-      await browser.close()
+    try {
+      await page.waitForSelector('#slfErrorAlert')                              // -!- Shouldn't use id detection -!- //
+      devLog('warn', 'Wrong LogIn data')                                        // -!- Takes quite long -!- //
+      devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')
       showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten', 'wrong-login-data', true)
-      // if (page.evaluate(() => document.querySelector('#scrape').innerText) == "Test")
+      document.getElementById('stop-btn').click()
+      await browser.close()
     }
-    else {
+    catch(TimeoutError) {
       devLog('info', 'Correct LogIn data')
-      await page.waitForNavigation({ waitUntil: 'networkidle0' }) // Execute when URL is changed
+      devLog('info', 'Opening ' + postURL)
+      await page.goto(postURL, {
+        waitUntil: 'networkidle0',
+      })
+      
+      // Comment loop
+      const commInp = await page.$('[data-testid="post-comment-text-area"]')
+      await commInp.click()
+      await commInp.type('Wow 😍')
+      const commBut = await page.$('[data-testid="post-comment-input-button"]')
+      commBut.click()
+
       await page.screenshot({ path: 'Instagram.png' })
     }
   })
