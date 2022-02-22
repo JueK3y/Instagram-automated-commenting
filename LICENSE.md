@@ -1,5 +1,5 @@
 ### Instagram automated commenting Release v0.9.0 - v1.4.x (.x stands for all upcoming versions)
-<br>Copyright (c) 2020 - 2021 JueK3y
+<br>Copyright (c) 2020 - 2022 JueK3y
 <br>
 <br>
 <br>*** END USER LICENSE AGREEMENT ***  
@@ -92,6 +92,6 @@
 <br>Any use beyond personal use is only allowed with permission of the creator of this program (JueK3y). DO NOT modify and reupload the program. DO NOT indicate used program sections as your own.
 <br>
 <br>
-<br>¹ Note: This is the latest version of the EULA. Any old EULA issued for the program will lose its effect. Only the latest version is legally binding. The latest version is valid for release v.0.9.0 - v.1.4.x (x stands for all further sub-releases) and was last updated on 03.07.2021.
+<br>¹ Note: This is the latest version of the EULA. Any old EULA issued for the program will lose its effect. Only the latest version is legally binding. The latest version is valid for release v.0.9.0 - v.1.4.x (x stands for all further sub-releases) and was last updated on 22.02.2022.
 
 ###### _See https://juek3y.com/en/code/download/terms-of-service for the web-version._

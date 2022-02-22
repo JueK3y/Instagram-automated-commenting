@@ -161,6 +161,6 @@ _Das Programm wurde sorgfältig erstellt und oft getestet. Trotzdem kann es zu s
 <br>Der jeweilige Benutzer haftet für sich selber, auch bei Sperrung des jeweiligen Instagram Accounts aufgrund der Nutzung des Programmes._
 
 
-_@2020 - 2021 by [JueK3y](https://juek3y.com)_
+_@2020 - 2022 by [JueK3y](https://juek3y.com)_
 
 ###### _DO NOT modify and reupload the program.<br>DO NOT indicate used program sections as your own._

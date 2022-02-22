@@ -3,7 +3,7 @@ This programme is written and may only be used for educational purposes!
 Using it for real purposes violates the Instagram guidelines!
 Consequences are, for example, the blocking of the Instagram account.
 Please read Instagram's guidelines for more information.
-DO NOT indicate used program sections as your own. ©2020 - 2021 by www.github.com/JueK3y/
+DO NOT indicate used program sections as your own. ©2020 - 2022 by www.github.com/JueK3y/
 """
 
 import sys
