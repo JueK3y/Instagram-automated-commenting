@@ -110,7 +110,15 @@ ipc.on('changeWinIcon', () => {
 
 
 ////// Open comment file
-document.getElementById('edit-button').addEventListener('click', () => {
-    devLog('info', 'Opening comments file.')
-    ipc.send('checkFile')
-})
+function getCommentsPath() {
+    devLog('info', 'Getting comments file path')
+    ipc.send('checkFile', ['dirLoc', 'fileLoc'])
+    ipc.on('getFilePath', (evt, args) => {
+        returnCommentPath(args[0], args[1])
+    })
+}
+
+function openCommentFile(fileLocation) {
+    console.log('Opening ' + fileLocation)
+    ipc.send('openCommentFile', fileLocation)
+}

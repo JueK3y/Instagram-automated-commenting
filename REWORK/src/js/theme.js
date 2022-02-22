@@ -170,7 +170,11 @@ function detectTheme() {
     }
 }
 
-detectTheme()
+
+setTimeout(() => {          // -!- Rework before release -!- //
+    detectTheme()
+}, 250)
+
 
 // Button Event Handlers
 themeToDark.onclick = () => {

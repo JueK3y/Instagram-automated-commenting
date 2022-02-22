@@ -76,21 +76,26 @@ const createWindow = () => {
     mainWindow.webContents.send('blurPw')
   })
 
-  // -!- Better in renderer process? -!- //
-  let userData = app.getPath('userData')
-  let dirLocation = path.join(userData + '/data')
-  let fileLocation = path.join(dirLocation, 'comments.txt')  
 
-  ipc.on('checkFile', () => {
-    if (! fs.existsSync(fileLocation)) {
-      if (! fs.existsSync(dirLocation)) {
-        fs.mkdirSync(dirLocation)
-      }
-      fs.writeFileSync(fileLocation, '! Write only one comment per line. Comments with \'!\' at the beginning will be ignored.')
+
+  ipc.on('checkFile', (evt, arg) => {
+    let userData = app.getPath('userData')
+    let dirLocation = path.join(userData + '/data')
+    let fileLocation = path.join(dirLocation, 'comments.txt')
+    var filePathArgs = {
+      dirLoc: dirLocation,
+      fileLoc: fileLocation
     }
-    shell.openPath(fileLocation)
+    mainWindow.webContents.send('getFilePath', [filePathArgs[arg[0]], filePathArgs[arg[1]]])
   })
 
+  ipc.on('openCommentFile', (evt, path) => {
+    console.log('Opening ' + path)
+    shell.openPath(path)
+  })
+
+
+  
   let sleepID = undefined
 
   ipc.on('preventSleep', () => {

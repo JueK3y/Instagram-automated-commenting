@@ -7,9 +7,6 @@ function getUser(username) {
     if (username !== null) {
         store.get(username)
     }
-    else {
-        //
-    }
 }
 
 // Create new user with the getSaveState
