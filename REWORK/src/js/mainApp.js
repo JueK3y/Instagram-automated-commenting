@@ -66,7 +66,7 @@ function launchMainLogic(_url, _username, _password) {
     try {
       await page.waitForSelector('#slfErrorAlert')                              // -!- Shouldn't use id detection -!- //
       devLog('warn', 'Wrong LogIn data')                                        // -!- Takes quite long -!- //
-      devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')
+      devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // -!- Eval is considered as unsafe -!- //
       showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
       document.getElementById('stop-btn').click()
       await browser.close()

@@ -4,7 +4,6 @@ const { nativeTheme } = require('electron/main')
 const { shell } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const { Console } = require('console')
 const ipc = ipcMain
 
 const createWindow = () => {
