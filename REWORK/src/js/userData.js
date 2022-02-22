@@ -1,6 +1,6 @@
 const Store = require('electron-store')
 
-var today = new Date()
+let today = new Date()
 const store = new Store()
 
 function getUser(username) {

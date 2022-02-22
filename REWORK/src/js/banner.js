@@ -29,7 +29,7 @@ function hoverCheck(type, key) {
     }
 }
 
-var timeoutHandle
+let timeoutHandle
 
 function showBanner(type, title, message, key, hide) {
     // -!- If other banner already exists, add margin here -!- //

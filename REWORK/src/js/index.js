@@ -91,9 +91,9 @@ function formError(type) {
 
 
 // ONLY FOR DEMO VERSION
-var validate = false
+let validate = false
 
-var checkClick = 0                                    // -- Is checkClick for de-activating display timeout? -- //
+let checkClick = 0                                    // -- Is checkClick for de-activating display timeout? -- //
 
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
@@ -232,7 +232,7 @@ $(document).ready(() => {
     prDdImgBlur.style.display = 'none'
   })
   $(document).on('click', '#profile-content', function(e) {
-    var target = e.target.id
+    let target = e.target.id
     for(let i = 0; i <= 3; i++) {
       if (target == 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
@@ -331,7 +331,7 @@ $(document).on('focus', '#username-form', () => {
 
 $(document).on('blur', '#username-form', () => {
   $(document).on('click', '#searchProfileContent', (e) => {
-    var target = e.target.id
+    let target = e.target.id
     if (target != 'searchProfileContent') {
       const clickedProfile = String(target).slice(4)
       username.value = clickedProfile                                                                       // Get Name for ID from API

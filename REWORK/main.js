@@ -92,7 +92,7 @@ const createWindow = () => {
     shell.openPath(fileLocation)
   })
 
-  var sleepID = undefined
+  let sleepID = undefined
 
   ipc.on('preventSleep', () => {
     sleepID = powerSaveBlocker.start('prevent-display-sleep')

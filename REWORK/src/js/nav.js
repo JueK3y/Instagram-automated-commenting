@@ -81,7 +81,7 @@ function lineAnimation2(type, marPx, heiPx) {
 
 ////// ESC Button
 $(document).ready(() => {
-  var locked = false
+  let locked = false
   $(document).on('keyup', (e) => {
     if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
       if (locked) return
@@ -109,7 +109,7 @@ $(document).ready(() => {                                               // -!- M
 
 // Comment 
 $(document).ready(() => {
-  var locked = false
+  let locked = false
   $('.comment').click(() => {
     if (! $('#active').hasClass('comment') && $('#active').hasClass('profile')) {
       if (locked) return
@@ -205,7 +205,7 @@ $(document).ready(() => {
 
 
 ////// Navigation Sliding Animation
-var slideIn = false
+let slideIn = false
 
 const navPos = localStorage.getItem("navPos")
 
@@ -223,7 +223,7 @@ if (navPos) {
 
 
 $(document).ready(() => {
-  var locked = false
+  let locked = false
 
   $(document).on('keyup', (e) => {
     if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
@@ -238,7 +238,7 @@ $(document).ready(() => {
 })
 
 $(document).ready(function() {
-  var locked = false
+  let locked = false
   $(document).on('click', '#active', function() {
     if (slideIn == false) {
       if (locked) return
@@ -435,12 +435,12 @@ const elem = document.getElementById("changeText")
 const changeColor = document.getElementById("wifi")
 const changeImg = document.getElementById("wifi-img")
 
-var counter = 0
-var counterDisplay = 0
+let counter = 0
+let counterDisplay = 0
 showMessage = true
 showConnMessage = true
-var notConnected
-var internetSpeed
+let notConnected
+let internetSpeed
 
 $("#error-hide").click(() => {
   showMessage = false
@@ -534,7 +534,7 @@ window.setInterval(() => {
 
 
 ////// Update checker
-var updateOnline
+let updateOnline
 
 function setUpdateBoolean() {
   updateOnline = true
