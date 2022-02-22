@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    const cursor = $(".cursor");
+    const cursor = $('.cursor');
     const smallCursor = $('.small-cursor');
     
         $(window).mousemove(function(e) {
@@ -16,42 +16,42 @@ $(document).ready(function(){
         $(window)
             .mouseleave(function() {
                 cursor.css({
-                    opacity: "0"
+                    opacity: '0'
                 });
                 smallCursor.css({
-                  opacity: "0"
+                  opacity: '0'
                 });
             })
             .mouseenter(function() {
                 cursor.css({
-                    opacity: "1"
+                    opacity: '1'
                 });
                 smallCursor.css({
-                  opacity: "1"
+                  opacity: '1'
                 });
             });
     
-        $(".link")
+        $('.link')
             .mouseenter(function() {
                 cursor.css({
-                    transform: "scale(3.2)"
+                    transform: 'scale(3.2)'
                 });
             })
             .mouseleave(function() {
                 cursor.css({
-                    transform: "scale(1)"
+                    transform: 'scale(1)'
                 });
             });
     
         $(window)
             .mousedown(function() {
                 cursor.css({
-                    transform: "scale(.2)"
+                    transform: 'scale(.2)'
                 });
             })
             .mouseup(function() {
                 cursor.css({
-                    transform: "scale(1)"
+                    transform: 'scale(1)'
                 });
             });
     });

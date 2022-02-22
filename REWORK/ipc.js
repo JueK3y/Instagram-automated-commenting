@@ -1,4 +1,4 @@
-const { ipcRenderer } = require("electron")
+const { ipcRenderer } = require('electron')
 
 const maxBtn = document.getElementById('maxBtn')
 const restoreBtn = document.getElementById('restoreBtn')
@@ -28,19 +28,19 @@ stopPrevent.addEventListener('click', () => {
 // Blur password
 ipc.on('blurPw', () => {
     document.getElementById('toggle').checked = false
-    document.getElementById("password-form").type = "password"
-    document.getElementById("togglePwImage").src = "src/img/icons/" + document.body.classList + "/eye.svg"
+    document.getElementById('password-form').type = 'password'
+    document.getElementById('togglePwImage').src = 'src/img/icons/' + document.body.classList + '/eye.svg'
 })
 
 ////// Color theme
 // Accent color
 ipc.on('accColor', (evt, message) => {
-    localStorage.setItem("accColor", message)
+    localStorage.setItem('accColor', message)
 })
 
 ipc.on('accColorChanged', (evt, message) => {
-    localStorage.setItem("accColor", message)
-    if (body.classList.contains("dark")) {
+    localStorage.setItem('accColor', message)
+    if (body.classList.contains('dark')) {
         darkIcon()
     }
     else {
@@ -50,13 +50,13 @@ ipc.on('accColorChanged', (evt, message) => {
 
 // System light / dark mode
 ipc.on('changedToDark', () => {
-    localStorage.setItem("system-theme", "dark")
-    localStorage.setItem("use-sys-theme", "true")
+    localStorage.setItem('system-theme', 'dark')
+    localStorage.setItem('use-sys-theme', 'true')
     detectTheme()
 })
 ipc.on('changedToLight', () => {
-    localStorage.setItem("system-theme", "light")
-    localStorage.setItem("use-sys-theme", "true")
+    localStorage.setItem('system-theme', 'light')
+    localStorage.setItem('use-sys-theme', 'true')
     detectTheme()
 })
 

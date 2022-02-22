@@ -83,7 +83,7 @@ function lineAnimation2(type, marPx, heiPx) {
 $(document).ready(() => {
   let locked = false
   $(document).on('keyup', (e) => {
-    if (e.key === "Escape" && ! $('#active').hasClass('comment')) {
+    if (e.key === 'Escape' && ! $('#active').hasClass('comment')) {
       if (locked) return
       locked = true
       $('.comment').click()
@@ -94,15 +94,15 @@ $(document).ready(() => {
 
 
 $(document).ready(() => {                                               // -!- Must be modified so that button click also has a timeout -!- //
-  $("body").click(function(e) {
+  $('body').click(function(e) {
     if ($('#active').hasClass('profile')) {
-      if (! $(e.target).closest("#profile-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
+      if (! $(e.target).closest('#profile-container').length && ! $(e.target).closest('#nav-bar').length) $('.comment').click()
     }
     if ($('#active').hasClass('helpNav')) {
-      if (! $(e.target).closest("#help-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
+      if (! $(e.target).closest('#help-container').length && ! $(e.target).closest('#nav-bar').length) $('.comment').click()
     }
     if ($('#active').hasClass('settings')) {
-      if (! $(e.target).closest("#settings-container").length && ! $(e.target).closest("#nav-bar").length) $('.comment').click()
+      if (! $(e.target).closest('#settings-container').length && ! $(e.target).closest('#nav-bar').length) $('.comment').click()
     }
   })
 })
@@ -207,16 +207,16 @@ $(document).ready(() => {
 ////// Navigation Sliding Animation
 let slideIn = false
 
-const navPos = localStorage.getItem("navPos")
+const navPos = localStorage.getItem('navPos')
 
 if (navPos) {
-  $("main").css('left', '47px')
-  $("#side-bar").css('width', '55px')
-  $("#wifi").css('width', '45px')
-  $(".settings").css('width', '45px')
-  $("form").css('margin-left', '0px')
-  $(".second-text").css('display', 'none')
-  $(".navText").css('display', 'none')
+  $('main').css('left', '47px')
+  $('#side-bar').css('width', '55px')
+  $('#wifi').css('width', '45px')
+  $('.settings').css('width', '45px')
+  $('form').css('margin-left', '0px')
+  $('.second-text').css('display', 'none')
+  $('.navText').css('display', 'none')
   $('#win-title-text').text('IAC 2.0').fadeIn()
   slideIn = true
 }
@@ -226,7 +226,7 @@ $(document).ready(() => {
   let locked = false
 
   $(document).on('keyup', (e) => {
-    if (e.key === "Escape" && ! $('#active').hasClass('comment')) {
+    if (e.key === 'Escape' && ! $('#active').hasClass('comment')) {
       if (locked) return
       locked = true
 
@@ -243,52 +243,52 @@ $(document).ready(function() {
     if (slideIn === false) {
       if (locked) return
       locked = true
-      $("#side-bar").css('z-index', 0)
+      $('#side-bar').css('z-index', 0)
       setTimeout(function() {
-        $("main").animate({left: '47px'})
-        $("form").animate({marginLeft: '0px'})
+        $('main').animate({left: '47px'})
+        $('form').animate({marginLeft: '0px'})
         setTimeout(function() {
-          $("#side-bar").css('width', '55px')
-          $("#wifi").css('width', '45px')
-          $(".settings").css('width', '45px')
+          $('#side-bar').css('width', '55px')
+          $('#wifi').css('width', '45px')
+          $('.settings').css('width', '45px')
         }, 180)
         setTimeout(function() {
-          $(".second-text").css('display', 'none')
+          $('.second-text').css('display', 'none')
         }, 260)
         setTimeout(function() {
-          $(".navText").css('display', 'none')
-          $("#side-bar").css('z-index', 3)
+          $('.navText').css('display', 'none')
+          $('#side-bar').css('z-index', 3)
         }, 370)
         $('#win-title-text').fadeOut(300, function() {
           $(this).text('IAC 2.0').fadeIn(150)
         })
       }, 70)
-      localStorage.setItem("navPos", "in")
+      localStorage.setItem('navPos', 'in')
       slideIn = true
       setTimeout(() => { locked = false }, 500)
     }
     else if (slideIn) {
       if (locked) return
       locked = true
-      $("#side-bar").css('z-index', 0)
+      $('#side-bar').css('z-index', 0)
       setTimeout(function() {
-        $("#side-bar").css('width', '320px')
-        $("#wifi").css('width', '310px')
-        $(".settings").css('width', '310px')
-        $(".navText").css('display', 'block')
+        $('#side-bar').css('width', '320px')
+        $('#wifi').css('width', '310px')
+        $('.settings').css('width', '310px')
+        $('.navText').css('display', 'block')
         setTimeout(function() {
-          $(".second-text").css('display', 'contents')
+          $('.second-text').css('display', 'contents')
         }, 80)
-        $("main").animate({left: '312px'})
-        $("form").animate({marginLeft: '-533px'})
+        $('main').animate({left: '312px'})
+        $('form').animate({marginLeft: '-533px'})
         setTimeout(function() {
-          $("#side-bar").css('z-index', 3)
+          $('#side-bar').css('z-index', 3)
         }, 400)
       }, 120)
       $('#win-title-text').fadeOut(300, function() {
         $(this).text('Instagram Automated Commenting').fadeIn(150)
       })
-      localStorage.removeItem("navPos")
+      localStorage.removeItem('navPos')
       slideIn = false
       setTimeout(() => { locked = false }, 500)
     }
@@ -337,21 +337,21 @@ const addProfile = document.getElementById('add-profile').style
 $(document).ready(function() {
   setTimeout(() => {
     // -!- Simplify? -!- //
-    if (profile1.innerText !== "") {
+    if (profile1.innerText !== '') {
       document.getElementById('profile-1').style.display = 'flex'
     }
     else {
       document.getElementById('profile-1').style.display = 'none'
       fourOrMore = false
     }
-    if (profile2.innerText !== "") {
+    if (profile2.innerText !== '') {
       document.getElementById('profile-2').style.display = 'flex'
     }
     else {
       document.getElementById('profile-2').style.display = 'none'
       fourOrMore = false
     }
-    if (profile3.innerText !== "") {
+    if (profile3.innerText !== '') {
       document.getElementById('profile-3').style.display = 'flex'
       showMore.display = ''
       addProfile.display = 'none'
@@ -360,24 +360,24 @@ $(document).ready(function() {
       document.getElementById('profile-3').style.display = 'none'
       fourOrMore = false
     }
-    if (profile1.innerText === "" && profile2.innerText === "" && profile3.innerText === "") {
-      document.getElementById("profile-container").style.top  = "27px"
+    if (profile1.innerText === '' && profile2.innerText === '' && profile3.innerText === '') {
+      document.getElementById('profile-container').style.top  = '27px'
     }
   }, 100)
   $(document).on('click', '#add-profile', function() {
     // -!- Needs to be locked / fixed before release -!- //
-    /*document.getElementById("profile-container").style.top  = "15px"
-    if (profile1.innerText === "") {
+    /*document.getElementById('profile-container').style.top  = '15px'
+    if (profile1.innerText === '') {
       document.getElementById('profile-1').style.display = 'flex'
-      profile1.innerText = "Profil"
+      profile1.innerText = 'Profil'
     }
-    else if (profile2.innerText === "") {
+    else if (profile2.innerText === '') {
       document.getElementById('profile-2').style.display = ''
-      profile2.innerText = "Profil"
+      profile2.innerText = 'Profil'
     }
-    else if (profile3.innerText === "") {
+    else if (profile3.innerText === '') {
       document.getElementById('profile-3').style.display = ''
-      profile3.innerText = "Profil"
+      profile3.innerText = 'Profil'
       showMore.display = ''
       addProfile.display = 'none'
     }*/
@@ -389,9 +389,9 @@ $(document).ready(function() {
 })
 
 // -!- Simplify -!- //
-let profile1Name = ""                                                              // Get Name from JSON / API
-let profile2Name = ""
-let profile3Name = ""
+let profile1Name = ''                                                              // Get Name from JSON / API
+let profile2Name = ''
+let profile3Name = ''
 
 // Set profile names
 profile1.innerText = profile1Name
@@ -431,9 +431,9 @@ for (let i = 1; i <= 3; i++) {
 
 ////// WIFI Signal Updater
 
-const elem = document.getElementById("changeText")
-const changeColor = document.getElementById("wifi")
-const changeImg = document.getElementById("wifi-img")
+const elem = document.getElementById('changeText')
+const changeColor = document.getElementById('wifi')
+const changeImg = document.getElementById('wifi-img')
 
 let counter = 0
 let counterDisplay = 0
@@ -442,20 +442,20 @@ showConnMessage = true
 let notConnected
 let internetSpeed
 
-$("#error-hide").click(() => {
+$('#error-hide').click(() => {
   showMessage = false
-  $("#error-banner").fadeOut()
-  $("#error-hide").fadeOut()
+  $('#error-banner').fadeOut()
+  $('#error-hide').fadeOut()
 })
-$("#error-button-hide").click(() => {
+$('#error-button-hide').click(() => {
   showConnMessage = false
-  $(".wifi-not-connected").fadeOut()
-  $("#error-button-hide").fadeOut()
+  $('.wifi-not-connected').fadeOut()
+  $('#error-button-hide').fadeOut()
 })
 
 
 window.setInterval(() => {
-  const light = document.body.classList.contains("light")
+  const light = document.body.classList.contains('light')
   getNetworkDownloadSpeed().then(result => {
     if (result === false) {
       notConnected = true
@@ -468,17 +468,17 @@ window.setInterval(() => {
     if (notConnected) {                                                     // notConnected check from API
       changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
       changeColor.style.background = (light) ? '#FDE7E9':'#442726'
-      changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-off-colored.svg"
+      changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-off-colored.svg'
       if (showConnMessage) {
         showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
         counterDisplay += 1
         if (counterDisplay === 3) {
-          document.getElementById("error-button-hide").style.display = "block"
+          document.getElementById('error-button-hide').style.display = 'block'
         }
       }
     }
     else {
-      document.getElementById("error-button-hide").style.display = "none"
+      document.getElementById('error-button-hide').style.display = 'none'
       if ($('.wifi-not-connected')[0]) {
         hideBanner('wifi-not-connected')
         devLog('warn', 'wifi-not-connected banner exists. Removing it.')
@@ -487,43 +487,43 @@ window.setInterval(() => {
         counter += 1
         changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
         changeColor.style.background = (light) ? '#FDE7E9':'#442726'
-        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
+        changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-zero-colored.svg'
         if (counter === 3 && showMessage) {
-          $("#error-banner-wifi").fadeIn()
+          $('#error-banner-wifi').fadeIn()
           counterDisplay += 1
-          // noteMessage("Langsames Internet", "Ein langsames Netzwerk könnte IAC beeinträchtigen.")  // -- Spams the note center -- //
+          // noteMessage('Langsames Internet', 'Ein langsames Netzwerk könnte IAC beeinträchtigen.')  // -- Spams the note center -- //
           if (counterDisplay === 3) {
-            document.getElementById("error-hide").style.display = "block"
+            document.getElementById('error-hide').style.display = 'block'
           }
         }
       }
       else if (internetSpeed <= 1) {
         counter = 0
-        $("#error-banner-wifi").fadeOut()
+        $('#error-banner-wifi').fadeOut()
         changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
-        changeColor.style.background = "none"
-        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-one-colored.svg"
+        changeColor.style.background = 'none'
+        changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-one-colored.svg'
       }
       else if (internetSpeed <= 5) {
         counter = 0
-        $("#error-banner-wifi").fadeOut()
+        $('#error-banner-wifi').fadeOut()
         changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
-        changeColor.style.background = "none"
-        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-bad-colored.svg"
+        changeColor.style.background = 'none'
+        changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-bad-colored.svg'
       }
       else if (internetSpeed <= 10) {
         counter = 0
-        $("#error-banner-wifi").fadeOut()
+        $('#error-banner-wifi').fadeOut()
         changeColor.style.color = (light) ? '#9D5D00':'#FCE150'
-        changeColor.style.background = "none"
-        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-okay-colored.svg"
+        changeColor.style.background = 'none'
+        changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-okay-colored.svg'
       }
       else if (internetSpeed > 10) {
         counter = 0
-        $("#error-banner-wifi").fadeOut()
+        $('#error-banner-wifi').fadeOut()
         changeColor.style.color = (light) ? '#000000':'#FFFFFF'
-        changeColor.style.background = "none"
-        changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-good.svg"
+        changeColor.style.background = 'none'
+        changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-good.svg'
       }
     }
     elem.innerHTML = internetSpeed
@@ -556,7 +556,7 @@ $(document).ready(function() {                                                //
       if (counterDisplay === 3 || notConnected) {
         update.style.display = 'none'
         updateFailed.style.display = 'inline-block'
-        noteMessage("Überprüfung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
+        noteMessage('Überprüfung fehlgeschlagen', 'Es wird eine aktive Internetverbindung benötigt', true)
         setTimeout(() => {
           update.style.display = 'inline-block'
           updateFailed.style.display = 'none'
@@ -572,7 +572,7 @@ $(document).ready(function() {                                                //
           settingsUpdateIcon.style.display = 'inline-block'
           updateIcon.style.transform = 'rotate(0deg)'
           showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'update-found-search', true)
-          noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
+          noteMessage('Update für IAC', 'Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?')
         }
         else {
           noUpdate.style.display = 'inline-block'
@@ -593,7 +593,7 @@ $(document).ready(function() {                                                //
   })                                                                          
   $(document).on('click', '#download', function() {                             // Download and install update
     if (counterDisplay === 3 || notConnected) {
-      noteMessage("Download fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
+      noteMessage('Download fehlgeschlagen', 'Es wird eine aktive Internetverbindung benötigt', true)
       download.style.display = 'none '
       downloadFailed.style.display = 'inline-block'
       setTimeout(() => {
@@ -615,7 +615,7 @@ $(document).ready(function() {                                                //
       }
       else {
         showBanner('error', 'Fehlgeschlagen', 'Die neuste Version konnte nicht heruntergeladen werden.', 'install-update-failed', true)
-        noteMessage("Herunterladen fehlgeschlagen", "Die neuste Version konnte nicht heruntergeladen werden. Probiere es manuell.", true)
+        noteMessage('Herunterladen fehlgeschlagen', 'Die neuste Version konnte nicht heruntergeladen werden. Probiere es manuell.', true)
         download.style.display = 'none'
         downloadFailed.style.display = 'inline-block'
         setTimeout(() => {
@@ -636,7 +636,7 @@ setTimeout(() => {
     settingsIcon.style.display = 'none'
     settingsUpdateIcon.style.display = 'inline-block'
     showBanner('info', 'Update gefunden', 'Es gibt eine neue Version für IAC.', 'update-found-auto', true)
-    noteMessage("Update für IAC", "Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?")
+    noteMessage('Update für IAC', 'Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?')
   }
   else {
     download.style.display = 'none'       // -!- Needed? -!- //

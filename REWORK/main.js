@@ -64,7 +64,7 @@ const createWindow = () => {
     mainWindow.webContents.send('accColorChanged', newColor)
   })
 
-  nativeTheme.on("updated", () => {
+  nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
     } else {

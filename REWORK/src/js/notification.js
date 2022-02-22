@@ -1,11 +1,11 @@
 const notifier = require('node-notifier')
 
-// console.warn("The notification center can't be used in the WebDemo.")
+// console.warn('The notification center can't be used in the WebDemo.')
 
-const notification = localStorage.getItem("notification")
+const notification = localStorage.getItem('notification')
 
 if (notification) {
-  if (notification === "noteOn") {
+  if (notification === 'noteOn') {
     document.getElementById('set-note-on').style.display = 'block'
     document.getElementById('set-note-urgent').style.display = 'none'
     document.getElementById('set-note-off').style.display = 'none'
@@ -14,16 +14,16 @@ if (notification) {
     noteUrgent = false
     noteOff = false
   }
-  else if (notification === "noteUrgent") {
+  else if (notification === 'noteUrgent') {
     document.getElementById('set-note-on').style.display = 'none'
     document.getElementById('set-note-urgent').style.display = 'block'
     document.getElementById('set-note-off').style.display = 'none'
-    document.getElementById('notification-text').innerText = "Wichtig"
+    document.getElementById('notification-text').innerText = 'Wichtig'
     noteOn = false
     noteUrgent = true
     noteOff = false
   }
-  else if (notification === "noteOff") {
+  else if (notification === 'noteOff') {
     document.getElementById('set-note-on').style.display = 'none'
     document.getElementById('set-note-urgent').style.display = 'none'
     document.getElementById('set-note-off').style.display = 'block'
@@ -45,11 +45,11 @@ $(document).ready(function() {                                                  
       document.getElementById('set-note-on').style.display = 'none'
       document.getElementById('set-note-urgent').style.display = 'block'
       document.getElementById('set-note-off').style.display = 'none'
-      document.getElementById('notification-text').innerText = "Wichtig"
+      document.getElementById('notification-text').innerText = 'Wichtig'
       noteOn = false
       noteUrgent = true
       noteOff = false
-      localStorage.setItem("notification", "noteUrgent")
+      localStorage.setItem('notification', 'noteUrgent')
     }
     else if (noteUrgent) {
       document.getElementById('set-note-on').style.display = 'none'
@@ -59,7 +59,7 @@ $(document).ready(function() {                                                  
       noteOn = false
       noteUrgent = false
       noteOff = true
-      localStorage.setItem("notification", "noteOff")
+      localStorage.setItem('notification', 'noteOff')
     }
     else if (noteOff) {
       document.getElementById('set-note-on').style.display = 'block'
@@ -69,7 +69,7 @@ $(document).ready(function() {                                                  
       noteOn = true
       noteUrgent = false
       noteOff = false      
-      localStorage.setItem("notification", "noteOn")
+      localStorage.setItem('notification', 'noteOn')
     }
   })
 })

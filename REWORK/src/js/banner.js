@@ -1,22 +1,22 @@
 ////// Close
-$("#info-close").click(function() {
-    $("#info-banner").fadeOut(170)
+$('#info-close').click(function() {
+    $('#info-banner').fadeOut(170)
 })
-$("#warning-close").click(function() {
-    $("#warning-banner").fadeOut(170)
+$('#warning-close').click(function() {
+    $('#warning-banner').fadeOut(170)
 })
-$("#error-close").click(function() {
-    $("#error-banner").fadeOut(170)
+$('#error-close').click(function() {
+    $('#error-banner').fadeOut(170)
 })
-$("#error-close-wifi").click(function() {
-    $("#error-banner-wifi").fadeOut(170)
+$('#error-close-wifi').click(function() {
+    $('#error-banner-wifi').fadeOut(170)
 })
 
 
 ////// Display Function
 function hoverCheck(type, key) {
     if ($('#'+type+'-banner:hover').length !== 0) {
-        document.getElementById(type+'-banner').addEventListener("mouseleave", () => {                      // -!- Eventuell wird EventListener nicht zurückgesetzt -!- //
+        document.getElementById(type+'-banner').addEventListener('mouseleave', () => {                      // -!- Eventuell wird EventListener nicht zurückgesetzt -!- //
             setTimeout(() => {
                 $('#'+type+'-banner').fadeOut(350)
                 $('#'+type+'-banner').removeClass(key)
@@ -37,7 +37,7 @@ function showBanner(type, title, message, key, hide) {
     $('#'+type+'-banner').fadeIn(150)
     document.getElementById(type+'-title').innerHTML = title
     document.getElementById(type+'-info').innerHTML = message
-    if (key !== "") {
+    if (key !== '') {
         document.getElementById(type+'-banner').classList.add(key)
     }
     if (hide) {
@@ -53,7 +53,7 @@ function hideBanner(type) {
         $('#warning-banner').fadeOut(250)
         $('#error-banner').fadeOut(250)
     }
-    else if (type === "info" || type === "warning" || type === "error") {
+    else if (type === 'info' || type === 'warning' || type === 'error') {
         $('#'+type+'-banner').fadeOut(250)
     }
     else {

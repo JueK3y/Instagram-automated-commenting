@@ -13,7 +13,7 @@ function devLog(type, message) {
     else if (type === 'error' || type === 'err') {
         log.error(message)
     }
-    else if (message === "" || message === NaN || message === null) {
+    else if (message === '' || message === NaN || message === null) {
         log.info(type)
     }
 }

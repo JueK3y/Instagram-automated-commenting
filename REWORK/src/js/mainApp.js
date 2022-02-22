@@ -33,7 +33,7 @@ function launchMainLogic(_url, _username, _password) {
       await page.goto(loginURL, {
         waitUntil: 'networkidle0',
       })
-      //browser.on('disconnected', alert("Test"))
+      //browser.on('disconnected', alert('Test'))
     }
     catch (ProtocolError) {
       devLog('error', 'Failed to execute browser action')

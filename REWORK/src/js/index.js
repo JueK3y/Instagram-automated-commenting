@@ -19,19 +19,19 @@ $('#clearButton').click(function() {
 })
 
 ////// Password Toggle Button
-const password = document.getElementById("password-form")
-const pwImage = document.getElementById("togglePwImage")
+const password = document.getElementById('password-form')
+const pwImage = document.getElementById('togglePwImage')
 
 $('#toggle').on('click', () => {
   if (document.getElementById('toggle').checked) {
-    password.type = "text"
+    password.type = 'text'
     password.focus()
-    pwImage.src = "src/img/icons/" + document.body.classList + "/eye-hidden.svg"
+    pwImage.src = 'src/img/icons/' + document.body.classList + '/eye-hidden.svg'
   }
   else {
-    password.type = "password"
+    password.type = 'password'
     password.focus()
-    pwImage.src = "src/img/icons/" + document.body.classList + "/eye.svg"
+    pwImage.src = 'src/img/icons/' + document.body.classList + '/eye.svg'
   }
 })
 
@@ -58,7 +58,8 @@ if (programStopped) {                   // Same as above
 } */
 
 const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
-const specialChar = [' ', '!', '"', '#', '$', '%', '&', '"', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
+const specialChar = [' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
+// -!- Does \' work?
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
     if (checkVar.includes(specialChar[i])) {
@@ -101,7 +102,7 @@ const username = document.getElementById('username-form')
 urlInput.focus()
 
 $(document).on('keyup', function(e) {
-  if (e.key === "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) {
+  if (e.key === 'Enter' && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) {
     if ($('#start-btn').is(':visible')) $('#start-btn').click()
     
   }
@@ -113,17 +114,17 @@ $('#start-btn').click(function() {
   if (pause) {
     checkClick = 0
     pause = false
-    document.getElementById("pause-btn").style.display = "block"
-    document.getElementById("runIcon").style.display = "block"
-    document.getElementById("pauseIcon").style.display = "none"
-    document.getElementById("stop-btn").style.display = "none"
+    document.getElementById('pause-btn').style.display = 'block'
+    document.getElementById('runIcon').style.display = 'block'
+    document.getElementById('pauseIcon').style.display = 'none'
+    document.getElementById('stop-btn').style.display = 'none'
   }
-  hideBanner("error")                                                                                                            // -- Looks weird for the same error -- //
-  if (urlInput.value === "" && username.value === "" && password.value === "") {
+  hideBanner('error')                                                                                                            // -- Looks weird for the same error -- //
+  if (urlInput.value === '' && username.value === '' && password.value === '') {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
     formError()
   }
-  else if (urlInput.value === "") {
+  else if (urlInput.value === '') {
     showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', errorCode[1], true)
     formError(urlInput)
   }
@@ -135,7 +136,7 @@ $('#start-btn').click(function() {
     showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
     formError(urlInput)
   }
-  else if (username.value === "") {
+  else if (username.value === '') {
     showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', errorCode[4], true)
     formError(username)
   }
@@ -143,7 +144,7 @@ $('#start-btn').click(function() {
     showBanner('warning', 'Falsche Eingabe', 'Der Benutzername kann keine Sonderzeichen enthalten.', errorCode[5], true)
     formError(username)
   }
-  else if (password.value === "") {
+  else if (password.value === '') {
     showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', errorCode[6], true)
     formError(password)
   }
@@ -163,13 +164,13 @@ $('#start-btn').click(function() {
 
   if (validate) {
     devLog('info', 'All input is correct, launching main logic')
-    document.getElementById("start-btn").style.display = "none"
-    document.getElementById("pause-btn").style.display = "block"
-    document.getElementById("stop-btn").style.display = "block"
-    document.getElementById("idleIcon").style.display = "none"
-    document.getElementById("runIcon").style.display = "block"
+    document.getElementById('start-btn').style.display = 'none'
+    document.getElementById('pause-btn').style.display = 'block'
+    document.getElementById('stop-btn').style.display = 'block'
+    document.getElementById('idleIcon').style.display = 'none'
+    document.getElementById('runIcon').style.display = 'block'
     launchMainLogic(urlInput.value, username.value, password.value)
-    if (document.getElementById("save-profile").checked === true) {
+    if (document.getElementById('save-profile').checked === true) {                       // -!- True isn't needed -!- //
       devLog('info', 'Saving LogIn data')
       setPassword(username.value, password.value)
       setTimeout(() => {
@@ -177,13 +178,13 @@ $('#start-btn').click(function() {
       }, 50)
       setTimeout(() => {
         // -!- Does only work for adding one profile -!- //
-        if (document.getElementById('profile-1-name').innerText !== "") {
+        if (document.getElementById('profile-1-name').innerText !== '') {
           document.getElementById('profile-1').style.display = 'flex'
         }
-        if (document.getElementById('profile-2-name').innerText !== "") {
+        if (document.getElementById('profile-2-name').innerText !== '') {
           document.getElementById('profile-2').style.display = 'flex'
         }
-        if (document.getElementById('profile-3-name').innerText !== "") {
+        if (document.getElementById('profile-3-name').innerText !== '') {
           document.getElementById('profile-3').style.display = 'flex'
           showMore.display = ''
           addProfile.display = 'none'
@@ -199,11 +200,11 @@ $('#start-btn').click(function() {
 $('#pause-btn').click(function() {
   checkClick = 0
   pause = true
-  document.getElementById("start-btn").style.display = "block"
-  document.getElementById("pause-btn").style.display = "none"
-  document.getElementById("stop-btn").style.display = "block"
-  document.getElementById("runIcon").style.display = "none"
-  document.getElementById("pauseIcon").style.display = "block"
+  document.getElementById('start-btn').style.display = 'block'
+  document.getElementById('pause-btn').style.display = 'none'
+  document.getElementById('stop-btn').style.display = 'block'
+  document.getElementById('runIcon').style.display = 'none'
+  document.getElementById('pauseIcon').style.display = 'block'
   // -!- API pauses commenting -!- //
 })
 
@@ -211,12 +212,12 @@ $('#stop-btn').click(function() {
   validate = false
   checkClick = 1
   hideBanner('close-while-commenting')
-  document.getElementById("start-btn").style.display = "block"
-  document.getElementById("pause-btn").style.display = "none"
-  document.getElementById("stop-btn").style.display = "none"
-  document.getElementById("idleIcon").style.display = "block"
-  document.getElementById("runIcon").style.display = "none"
-  document.getElementById("pauseIcon").style.display = "none"
+  document.getElementById('start-btn').style.display = 'block'
+  document.getElementById('pause-btn').style.display = 'none'
+  document.getElementById('stop-btn').style.display = 'none'
+  document.getElementById('idleIcon').style.display = 'block'
+  document.getElementById('runIcon').style.display = 'none'
+  document.getElementById('pauseIcon').style.display = 'none'
 })
 
 ////// Profile Dropdown 
@@ -314,7 +315,7 @@ $(document).on('focus', '#username-form', () => {
     document.getElementById('searchProfileContent').style.display = 'block'
     let filter = document.getElementById('username-form').value.toUpperCase()
     for (let i = 0; i < userProfile.length; i++) {
-      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter !== "") {
+      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter !== '') {
         if (document.getElementById('uid-'+userProfile[i]) !== 0) {
           $('<a>', {
             id: 'uid-'+userProfile[i],
