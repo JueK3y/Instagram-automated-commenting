@@ -5,7 +5,7 @@ const notifier = require('node-notifier')
 const notification = localStorage.getItem("notification")
 
 if (notification) {
-  if (notification == "noteOn") {
+  if (notification === "noteOn") {
     document.getElementById('set-note-on').style.display = 'block'
     document.getElementById('set-note-urgent').style.display = 'none'
     document.getElementById('set-note-off').style.display = 'none'
@@ -14,7 +14,7 @@ if (notification) {
     noteUrgent = false
     noteOff = false
   }
-  else if (notification == "noteUrgent") {
+  else if (notification === "noteUrgent") {
     document.getElementById('set-note-on').style.display = 'none'
     document.getElementById('set-note-urgent').style.display = 'block'
     document.getElementById('set-note-off').style.display = 'none'
@@ -23,7 +23,7 @@ if (notification) {
     noteUrgent = true
     noteOff = false
   }
-  else if (notification == "noteOff") {
+  else if (notification === "noteOff") {
     document.getElementById('set-note-on').style.display = 'none'
     document.getElementById('set-note-urgent').style.display = 'none'
     document.getElementById('set-note-off').style.display = 'block'

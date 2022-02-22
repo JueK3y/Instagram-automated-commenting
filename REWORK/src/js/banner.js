@@ -15,7 +15,7 @@ $("#error-close-wifi").click(function() {
 
 ////// Display Function
 function hoverCheck(type, key) {
-    if ($('#'+type+'-banner:hover').length != 0) {
+    if ($('#'+type+'-banner:hover').length !== 0) {
         document.getElementById(type+'-banner').addEventListener("mouseleave", () => {                      // -!- Eventuell wird EventListener nicht zurückgesetzt -!- //
             setTimeout(() => {
                 $('#'+type+'-banner').fadeOut(350)
@@ -37,7 +37,7 @@ function showBanner(type, title, message, key, hide) {
     $('#'+type+'-banner').fadeIn(150)
     document.getElementById(type+'-title').innerHTML = title
     document.getElementById(type+'-info').innerHTML = message
-    if (key != "") {
+    if (key !== "") {
         document.getElementById(type+'-banner').classList.add(key)
     }
     if (hide) {
@@ -48,12 +48,12 @@ function showBanner(type, title, message, key, hide) {
 }
 
 function hideBanner(type) {
-    if (type == undefined) {
+    if (type === undefined) {
         $('#info-banner').fadeOut(250)
         $('#warning-banner').fadeOut(250)
         $('#error-banner').fadeOut(250)
     }
-    else if (type == "info" || type == "warning" || type == "error") {
+    else if (type === "info" || type === "warning" || type === "error") {
         $('#'+type+'-banner').fadeOut(250)
     }
     else {

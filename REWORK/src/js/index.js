@@ -69,7 +69,7 @@ function specialCharCheck(checkVar) {
 
 function formError(type) {
   devLog('warn', 'Invalid input')
-  if (type == undefined) {
+  if (type === undefined) {
     urlInput.classList.add('wrong-form')
     username.classList.add('wrong-form')
     password.classList.add('wrong-form')
@@ -101,7 +101,7 @@ const username = document.getElementById('username-form')
 urlInput.focus()
 
 $(document).on('keyup', function(e) {
-  if (e.key == "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) {
+  if (e.key === "Enter" && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) {
     if ($('#start-btn').is(':visible')) $('#start-btn').click()
     
   }
@@ -119,11 +119,11 @@ $('#start-btn').click(function() {
     document.getElementById("stop-btn").style.display = "none"
   }
   hideBanner("error")                                                                                                            // -- Looks weird for the same error -- //
-  if (urlInput.value == "" && username.value == "" && password.value == "") {
+  if (urlInput.value === "" && username.value === "" && password.value === "") {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
     formError()
   }
-  else if (urlInput.value == "") {
+  else if (urlInput.value === "") {
     showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', errorCode[1], true)
     formError(urlInput)
   }
@@ -135,7 +135,7 @@ $('#start-btn').click(function() {
     showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
     formError(urlInput)
   }
-  else if (username.value == "") {
+  else if (username.value === "") {
     showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', errorCode[4], true)
     formError(username)
   }
@@ -143,7 +143,7 @@ $('#start-btn').click(function() {
     showBanner('warning', 'Falsche Eingabe', 'Der Benutzername kann keine Sonderzeichen enthalten.', errorCode[5], true)
     formError(username)
   }
-  else if (password.value == "") {
+  else if (password.value === "") {
     showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', errorCode[6], true)
     formError(password)
   }
@@ -169,7 +169,7 @@ $('#start-btn').click(function() {
     document.getElementById("idleIcon").style.display = "none"
     document.getElementById("runIcon").style.display = "block"
     launchMainLogic(urlInput.value, username.value, password.value)
-    if (document.getElementById("save-profile").checked == true) {
+    if (document.getElementById("save-profile").checked === true) {
       devLog('info', 'Saving LogIn data')
       setPassword(username.value, password.value)
       setTimeout(() => {
@@ -177,13 +177,13 @@ $('#start-btn').click(function() {
       }, 50)
       setTimeout(() => {
         // -!- Does only work for adding one profile -!- //
-        if (document.getElementById('profile-1-name').innerText != "") {
+        if (document.getElementById('profile-1-name').innerText !== "") {
           document.getElementById('profile-1').style.display = 'flex'
         }
-        if (document.getElementById('profile-2-name').innerText != "") {
+        if (document.getElementById('profile-2-name').innerText !== "") {
           document.getElementById('profile-2').style.display = 'flex'
         }
-        if (document.getElementById('profile-3-name').innerText != "") {
+        if (document.getElementById('profile-3-name').innerText !== "") {
           document.getElementById('profile-3').style.display = 'flex'
           showMore.display = ''
           addProfile.display = 'none'
@@ -234,28 +234,28 @@ $(document).ready(() => {
   $(document).on('click', '#profile-content', function(e) {
     let target = e.target.id
     for(let i = 0; i <= 3; i++) {
-      if (target == 'profile-'+i+'-content') {
+      if (target === 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
         username.value = clickedProfile                                                                       // Get Name for ID from API
         getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
       }
-      else if (target == 'profile-'+i+'-img') {
+      else if (target === 'profile-'+i+'-img') {
         const clickedProfile = String(document.getElementById(target).nextElementSibling.classList).slice(4)
         username.value = clickedProfile                                                                       // Get Name for ID from API
         getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
       }
-      else if (target == 'profile-'+i+'-name') {
+      else if (target === 'profile-'+i+'-name') {
         const clickedProfile = String(document.getElementById(target).classList).slice(4)
         username.value = clickedProfile                                                                       // Get Name for ID from API
         getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
       }
-      else if (target == 'delete-'+i) {
+      else if (target === 'delete-'+i) {
         const deleteUser = String(document.getElementById(target).previousElementSibling.querySelector('p').classList).slice(4)
         const deleteProfile = String(document.getElementById(target).previousElementSibling.parentElement.id)
         document.getElementById(deleteProfile).remove()
@@ -273,7 +273,7 @@ $(document).ready(() => {
         userProfile.splice(index, 1)
         deletePassword(deleteUser)
       }
-      else if (target == 'deleteIcon-'+i) {
+      else if (target === 'deleteIcon-'+i) {
         const deleteUser = String(document.getElementById(target).parentElement.previousElementSibling.querySelector('p').classList).slice(4)
         const deleteProfile = String(document.getElementById(target).parentElement.previousElementSibling.parentElement.id)
         document.getElementById(deleteProfile).remove()
@@ -302,7 +302,7 @@ username.addEventListener('focus', function() {
 }, false)
 
 username.addEventListener('blur', function() {
-  if (username.value == '') {
+  if (username.value === '') {
     prDdImage.style.display = 'none'
     prDdImgBlur.style.display = 'block'
   }
@@ -314,8 +314,8 @@ $(document).on('focus', '#username-form', () => {
     document.getElementById('searchProfileContent').style.display = 'block'
     let filter = document.getElementById('username-form').value.toUpperCase()
     for (let i = 0; i < userProfile.length; i++) {
-      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter != "") {
-        if (document.getElementById('uid-'+userProfile[i]) != 0) {
+      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter !== "") {
+        if (document.getElementById('uid-'+userProfile[i]) !== 0) {
           $('<a>', {
             id: 'uid-'+userProfile[i],
             text: userProfile[i]
@@ -332,7 +332,7 @@ $(document).on('focus', '#username-form', () => {
 $(document).on('blur', '#username-form', () => {
   $(document).on('click', '#searchProfileContent', (e) => {
     let target = e.target.id
-    if (target != 'searchProfileContent') {
+    if (target !== 'searchProfileContent') {
       const clickedProfile = String(target).slice(4)
       username.value = clickedProfile                                                                       // Get Name for ID from API
       getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API

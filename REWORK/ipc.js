@@ -64,7 +64,7 @@ ipc.on('changedToLight', () => {
 // Close
 closeBtn.addEventListener('click', () => {
     if (validate) {
-        if (checkClick == 1) {
+        if (checkClick === 1) {
             ipc.send('closeApp')
         }
         else {

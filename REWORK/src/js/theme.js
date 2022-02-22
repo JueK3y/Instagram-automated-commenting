@@ -129,7 +129,7 @@ function detectTheme() {
     }
     else if (useSystem) {
         if (body.classList.contains("dark")) {
-            if (sysTheme != "dark") {
+            if (sysTheme !== "dark") {
                 body.classList.replace("dark", "light")
                 lightIcon()
             }
@@ -138,7 +138,7 @@ function detectTheme() {
             }
         }
         else if (body.classList.contains("light")) {
-            if (sysTheme != "light") {
+            if (sysTheme !== "light") {
                 body.classList.replace("light", "dark")
                 darkIcon()
             }
@@ -148,7 +148,7 @@ function detectTheme() {
         }
         else {
             body.classList.add(sysTheme)
-            if (sysTheme == "dark") {
+            if (sysTheme === "dark") {
                 darkIcon()
             }
             else {

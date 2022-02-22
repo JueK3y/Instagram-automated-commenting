@@ -25,28 +25,28 @@ document.getElementById('closeBtn').addEventListener('mouseout', function() {
 
 ////// Active line change
 function showContent(type, time) {                  
-  if (type == 'comment') {
+  if (type === 'comment') {
     setTimeout(() => {
       $('#profile-container').fadeOut(150)
       $('#help-container').fadeOut(150)
       $('#settings-container').fadeOut(150)
     }, time)
   }
-  else if (type == 'profile') {
+  else if (type === 'profile') {
     setTimeout(() => {
       $('#profile-container').fadeIn(150)
       $('#help-container').fadeOut(150)
       $('#settings-container').fadeOut(150)
     }, time)
   }
-  else if (type == 'helpNav') {
+  else if (type === 'helpNav') {
     setTimeout(() => {
       $('#profile-container').fadeOut(150)
       $('#help-container').fadeIn(150)
       $('#settings-container').fadeOut(150)
     }, time)
   }
-  else if (type == 'settings') {
+  else if (type === 'settings') {
     setTimeout(() => {
       $('#profile-container').fadeOut(150)
       $('#help-container').fadeOut(150)
@@ -83,7 +83,7 @@ function lineAnimation2(type, marPx, heiPx) {
 $(document).ready(() => {
   let locked = false
   $(document).on('keyup', (e) => {
-    if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
+    if (e.key === "Escape" && ! $('#active').hasClass('comment')) {
       if (locked) return
       locked = true
       $('.comment').click()
@@ -226,7 +226,7 @@ $(document).ready(() => {
   let locked = false
 
   $(document).on('keyup', (e) => {
-    if (e.key == "Escape" && ! $('#active').hasClass('comment')) {
+    if (e.key === "Escape" && ! $('#active').hasClass('comment')) {
       if (locked) return
       locked = true
 
@@ -240,7 +240,7 @@ $(document).ready(() => {
 $(document).ready(function() {
   let locked = false
   $(document).on('click', '#active', function() {
-    if (slideIn == false) {
+    if (slideIn === false) {
       if (locked) return
       locked = true
       $("#side-bar").css('z-index', 0)
@@ -302,12 +302,12 @@ let userProfile = []
 
 function profileUpdate() {
   displayUsername().then(result => {
-    if (result.length == 0) {
+    if (result.length === 0) {
       document.getElementById('profileDropdown').style.display = 'none'
     }
     else {
       document.getElementById('profileDropdown').style.display = 'block'
-      if (result.length == 1 || result.length == 2) {
+      if (result.length === 1 || result.length === 2) {
         $('.uid-profile-'+(result.length)).css('margin-bottom', '5px')
       }
       else if (result.length >= 4) {
@@ -337,21 +337,21 @@ const addProfile = document.getElementById('add-profile').style
 $(document).ready(function() {
   setTimeout(() => {
     // -!- Simplify? -!- //
-    if (profile1.innerText != "") {
+    if (profile1.innerText !== "") {
       document.getElementById('profile-1').style.display = 'flex'
     }
     else {
       document.getElementById('profile-1').style.display = 'none'
       fourOrMore = false
     }
-    if (profile2.innerText != "") {
+    if (profile2.innerText !== "") {
       document.getElementById('profile-2').style.display = 'flex'
     }
     else {
       document.getElementById('profile-2').style.display = 'none'
       fourOrMore = false
     }
-    if (profile3.innerText != "") {
+    if (profile3.innerText !== "") {
       document.getElementById('profile-3').style.display = 'flex'
       showMore.display = ''
       addProfile.display = 'none'
@@ -360,22 +360,22 @@ $(document).ready(function() {
       document.getElementById('profile-3').style.display = 'none'
       fourOrMore = false
     }
-    if (profile1.innerText == "" && profile2.innerText == "" && profile3.innerText == "") {
+    if (profile1.innerText === "" && profile2.innerText === "" && profile3.innerText === "") {
       document.getElementById("profile-container").style.top  = "27px"
     }
   }, 100)
   $(document).on('click', '#add-profile', function() {
     // -!- Needs to be locked / fixed before release -!- //
     /*document.getElementById("profile-container").style.top  = "15px"
-    if (profile1.innerText == "") {
+    if (profile1.innerText === "") {
       document.getElementById('profile-1').style.display = 'flex'
       profile1.innerText = "Profil"
     }
-    else if (profile2.innerText == "") {
+    else if (profile2.innerText === "") {
       document.getElementById('profile-2').style.display = ''
       profile2.innerText = "Profil"
     }
-    else if (profile3.innerText == "") {
+    else if (profile3.innerText === "") {
       document.getElementById('profile-3').style.display = ''
       profile3.innerText = "Profil"
       showMore.display = ''
@@ -457,7 +457,7 @@ $("#error-button-hide").click(() => {
 window.setInterval(() => {
   const light = document.body.classList.contains("light")
   getNetworkDownloadSpeed().then(result => {
-    if (result == false) {
+    if (result === false) {
       notConnected = true
       internetSpeed = '- -'
     }
@@ -472,7 +472,7 @@ window.setInterval(() => {
       if (showConnMessage) {
         showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
         counterDisplay += 1
-        if (counterDisplay == 3) {
+        if (counterDisplay === 3) {
           document.getElementById("error-button-hide").style.display = "block"
         }
       }
@@ -483,16 +483,16 @@ window.setInterval(() => {
         hideBanner('wifi-not-connected')
         devLog('warn', 'wifi-not-connected banner exists. Removing it.')
       }
-      if (internetSpeed == 0) {
+      if (internetSpeed === 0) {
         counter += 1
         changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
         changeColor.style.background = (light) ? '#FDE7E9':'#442726'
         changeImg.src = "src/img/icons/" + document.body.classList + "/wifi/wifi-zero-colored.svg"
-        if (counter == 3 && showMessage) {
+        if (counter === 3 && showMessage) {
           $("#error-banner-wifi").fadeIn()
           counterDisplay += 1
           // noteMessage("Langsames Internet", "Ein langsames Netzwerk könnte IAC beeinträchtigen.")  // -- Spams the note center -- //
-          if (counterDisplay == 3) {
+          if (counterDisplay === 3) {
             document.getElementById("error-hide").style.display = "block"
           }
         }
@@ -553,7 +553,7 @@ $(document).ready(function() {                                                //
     updateIcon.style.transition = '3s linear'
     updateIcon.style.transform = 'rotate(720deg)'
     setTimeout(() => {
-      if (counterDisplay == 3 || notConnected) {
+      if (counterDisplay === 3 || notConnected) {
         update.style.display = 'none'
         updateFailed.style.display = 'inline-block'
         noteMessage("Überprüfung fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
@@ -592,7 +592,7 @@ $(document).ready(function() {                                                //
     }, 3001)
   })                                                                          
   $(document).on('click', '#download', function() {                             // Download and install update
-    if (counterDisplay == 3 || notConnected) {
+    if (counterDisplay === 3 || notConnected) {
       noteMessage("Download fehlgeschlagen", "Es wird eine aktive Internetverbindung benötigt", true)
       download.style.display = 'none '
       downloadFailed.style.display = 'inline-block'

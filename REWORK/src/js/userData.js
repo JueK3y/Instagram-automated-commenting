@@ -4,7 +4,7 @@ let today = new Date()
 const store = new Store()
 
 function getUser(username) {
-    if (username != null) {
+    if (username !== null) {
         store.get(username)
     }
     else {
@@ -33,12 +33,12 @@ function createUser(username) {
 
 // Update user data
 function updateUser(username, nickname, pinned, checked, working) {
-    if (store.get(username) == undefined) createUser(username)
-    if (nickname != null) store.set(username+'.nickname', nickname)
-    if (pinned != null) store.set(username+'.pinned', pinned)
-    if (checked != null) store.set(username+'.verified.checked', checked)
-    if (working != null) store.set(username+'.verified.working', working)
-    if (nickname == null && pinned == null && checked == null && working == null) createUser(username)
+    if (store.get(username) === undefined) createUser(username)
+    if (nickname !== null) store.set(username+'.nickname', nickname)
+    if (pinned !== null) store.set(username+'.pinned', pinned)
+    if (checked !== null) store.set(username+'.verified.checked', checked)
+    if (working !== null) store.set(username+'.verified.working', working)
+    if (nickname === null && pinned === null && checked === null && working === null) createUser(username)
 }
 
 // Deletes user data

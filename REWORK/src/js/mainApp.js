@@ -21,7 +21,7 @@ function launchMainLogic(_url, _username, _password) {
     const username = _username
     const password = _password
   
-    if (postURL.slice(0,4) != 'http') {        // -!- Doesn't check, if :// is already there -!- //
+    if (postURL.slice(0,4) !== 'http') {        // -!- Doesn't check, if :// is already there -!- //
       devLog('info', 'Adding https:// to URL')
       postURL = 'https://' + postURL
     }
@@ -41,7 +41,7 @@ function launchMainLogic(_url, _username, _password) {
   
 
     // Check for cookie banner
-    if (await page.$('.bIiDR') != null) {         // -!- Shouldn't use class detection -!- //
+    if (await page.$('.bIiDR') !== null) {         // -!- Shouldn't use class detection -!- //
       devLog('info', 'Found cookie banner')
       await page.click('.bIiDR')
     }
