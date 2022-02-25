@@ -144,6 +144,6 @@ _The program has been carefully created and often tested. Nevertheless, damage m
 <br>The respective user is liable for himself, even if the respective Instagram account is blocked due to the use of the program._
 
 
-_@2020 - 2022 by [JueK3y](https://juek3y.com)_
+_©2020 - 2022 by [JueK3y](https://juek3y.com)_
 
 ###### _DO NOT modify and reupload the program.<br>DO NOT indicate used program sections as your own._

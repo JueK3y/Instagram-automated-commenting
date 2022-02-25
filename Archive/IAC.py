@@ -1799,7 +1799,7 @@ root.update()
 add_msg = "\nIf something is not working correctly for you, please report it under Settings --> Help.\n"
 
 messagebox.showwarning("Educational purpose only", "This program was written for educational purposes only.\nPlease "
-                                                   "use it accordingly!" + '\n' + add_msg + "\n\n@2020 - %s" % e.year +
+                                                   "use it accordingly!" + '\n' + add_msg + "\n\n©2020 - %s" % e.year +
                                                    " by JueK3y")
 
 # Label
