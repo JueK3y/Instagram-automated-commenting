@@ -21,14 +21,25 @@ IAC 2.0 is a bot which automatically comments randomly under given Instagram pos
 
 And all this free of charge? Yes! And don't worry, I won't sell your data either.
 
+<br>
 
-## How it works
-What you need:
+## Requirements
+A Computer. Small, large, laptop, PC, anything will do.
+IAC 2.0 has been tested so far for
+- Windows 8 (x64)
+- Windows 10 (x64)
+- Windows 11 (x64)
+
+but will be further developed so that it can also be used on Linux and MacOS (OSX).
+
+Also you need:
 - [IAC 2.0 (The newest version)](https://github.com/JueK3y/Instagram-automated-commenting/releases)
 - An Instagram account and the correct credentials
 - The URL of the post you want to comment on
 - The comments you want to post
 
+
+## How it works
 1. Start up IAC 2.0
 2. Enter the copied URL which leads to the Instagram post.
 3. Enter your username and password. _¹_
@@ -47,15 +58,7 @@ You can for example:
 
 _¹ Don't worry, your data is safe. They are not uploaded anywhere, but encrypted and stored on your own computer._
 
-
-## Requirements
-A Computer. Small, large, laptop, PC, anything will do.
-IAC 2.0 has been tested so far for
-- Windows 8 (x64)
-- Windows 10 (x64)
-- Windows 11 (x64)
-but will be further developed so that it can also be used on Linux and MacOS (OSX).
-
+<br>
 
 ## Bugs, missing Features & co.
 
@@ -83,6 +86,7 @@ The following dependencies were used to develop IAC 2.0:
 
 You can see all used dependencies [here](https://github.com/JueK3y/Instagram-automated-commenting/network/dependencies).
 
+<br>
 
 ## Leave a ⭐
 If you like this project, leave a star!
@@ -97,7 +101,7 @@ If you want to support the project financially, you can do it as follows:
 
 ###### Secret tip: If you use the Brave Browser, you can also easily donate BATs via the browser.
 
-
+<br>
 
 ## Legal notice
 ### End User License Agreement
