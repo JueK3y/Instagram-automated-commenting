@@ -82,12 +82,18 @@ function launchMainLogic(_url, _username, _password) {
       
       // Comment loop
       while (commentLoop) {
-        const commInp = await page.$('[data-testid="post-comment-text-area"]')
-        const commBut = await page.$('[data-testid="post-comment-input-button"]')
-        await commInp.click()
-        await commInp.type('Wow 😍')
-        await commBut.click()
-        await page.waitForTimeout(4000)
+        try {
+          await commInp.click()
+          await commInp.type('Wow 😍')
+          await commBut.click()
+          await page.waitForTimeout(4000)
+        }
+        catch(TypeError) {
+          devLog('warn', 'Wrong page link')
+          showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
+          document.getElementById('stop-btn').click()
+          await browser.close()
+        }
         // commentLoop = false
       }
 

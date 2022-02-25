@@ -1,10 +1,1 @@
-/.idea/
-/__pycache__/
-/src/
-/Resource
-/output/
-/REWORK/node_modules/
-/REWORK/Instagram.png
-/REWORK/src/py/__pycache__/
-geckodriver.log
-IGACB.py
+/REWORK/public/node_modules/
