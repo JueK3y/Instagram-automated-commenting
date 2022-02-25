@@ -1,0 +1,36 @@
+{
+  "name": "iac-rework",
+  "productName": "Instagram Automated Commenting 2.0",
+  "version": "0.8.1",
+  "description": "A new development from IAC under the name IAC 2.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
+  "keywords": [
+    "IAC",
+    "Instagram",
+    "Automated",
+    "Commenting",
+    "Bot"
+  ],
+  "author": "JueK3y",
+  "license": "EULA",
+  "devDependencies": {
+    "electron": "^13.6.9"
+  },
+  "dependencies": {
+    "electron-log": "^4.4.4",
+    "electron-store": "^8.0.1",
+    "electron-window-state": "^5.0.3",
+    "is-online": "^9.0.1",
+    "keytar": "^7.8.0",
+    "network-speed": "^2.1.1",
+    "node-notifier": "^10.0.1",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-stealth": "^2.9.0",
+    "puppeteer-in-electron": "^3.0.5"
+  }
+}
