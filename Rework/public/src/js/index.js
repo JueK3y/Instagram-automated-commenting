@@ -58,7 +58,7 @@ if (programStopped) {                   // Same as above
 } */
 
 const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
-const specialChar = [' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
+const specialChar = [' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '´', '\\', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
 // TODO: Does \' work? -!- //
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
@@ -170,7 +170,7 @@ $('#start-btn').click(function() {
     document.getElementById('idleIcon').style.display = 'none'
     document.getElementById('runIcon').style.display = 'block'
     launchMainLogic(urlInput.value, username.value, password.value)
-    if (document.getElementById('save-profile').checked === true) {                       // FIXME: True isn't needed -!- //
+    if (document.getElementById('save-profile').checked) {
       devLog('info', 'Saving LogIn data')
       setPassword(username.value, password.value)
       setTimeout(() => {
@@ -324,7 +324,10 @@ $(document).on('focus', '#username-form', () => {
         }
       }
       else {
-        document.getElementById('uid-'+userProfile[i]).remove()
+        try {
+          document.getElementById('uid-'+userProfile[i]).remove()
+        }
+        catch(TypeError) { }
       }
     }
   })

@@ -68,7 +68,7 @@ function adjustDark(colorHex, amount) {
 
 function darkIcon() {
     color = localStorage.getItem('accColor')
-    let darkHEX = adjustDark('#' + color, 96)       // FIXME: # used twice? -!- //
+    let darkHEX = adjustDark('#' + color, 96)
     let darkRGB = hex2rgb(darkHEX)
     document.querySelector('body').style.setProperty('--accent-default-rgb', darkRGB)
     document.querySelector('body').style.setProperty('--accent-light-rgb', (darkRGB[0] + ',' + (darkRGB[1] + 20) + ',' + darkRGB[2]))
