@@ -73,19 +73,23 @@ function launchMainLogic(_url, _username, _password) {
     }
     catch(TimeoutError) {
       devLog('info', 'Correct LogIn data')
-      devLog('info', 'Opening ' + postURL)
+      devLog('info', `Opening ${postURL}`)
       await page.goto(postURL, {
         waitUntil: 'networkidle0',
       })
 
       commentLoop = true
-      
+
       // Comment loop
       while (commentLoop) {
+        const commInp = await page.$('[data-testid="post-comment-text-area"]')
+        const commBut = await page.$('[data-testid="post-comment-input-button"]')
+        let comment = 'Wow 😍'
         try {
           await commInp.click()
-          await commInp.type('Wow 😍')
+          await commInp.type(comment)
           await commBut.click()
+          devLog('info', `Posting comment: ${comment}`)
           await page.waitForTimeout(4000)
         }
         catch(TypeError) {

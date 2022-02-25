@@ -157,7 +157,7 @@ $('#start-btn').click(function() {
     for (let i = 0; i < errorCode.length; i++) {
       if ($('.' + errorCode[i])[0]) {
         hideBanner(errorCode[i])
-        devLog('warn', errorCode[i] + ' banner exists. Removing it.')
+        devLog('info', `${errorCode[i]} banner exists. Removing it.`)
       }
     }
   }
