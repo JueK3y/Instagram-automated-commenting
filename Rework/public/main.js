@@ -90,7 +90,6 @@ const createWindow = () => {
   })
 
   ipc.on('openCommentFile', (evt, path) => {
-    console.log('Opening ' + path)
     shell.openPath(path)
   })
 

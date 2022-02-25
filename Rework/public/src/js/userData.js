@@ -1,4 +1,5 @@
 const Store = require('electron-store')
+const fs = require('fs')
 
 let today = new Date()
 const store = new Store()
@@ -53,19 +54,54 @@ function checkFile(filePath) {
 
 
 
-// Get comments & path
+////// Get comments & path
 let dirLocation;
 let fileLocation;
 
+// Button for opening comment file
+document.getElementById('edit-button').addEventListener('click', () => {
+    
+    getComments()
+})
+
+// Getter for dir & file location
 function returnCommentPath(_dirLocation, _fileLocation) {
     dirLocation = _dirLocation
     fileLocation = _fileLocation
-    // console.log(dirLocation, fileLocation)
 }
 
-document.getElementById('edit-button').addEventListener('click', () => {
+// Function for checking file & folder
+function checkCommentFile() {
     getCommentsPath()
+    setTimeout(() => {
+        devLog('info', 'Checking for comments file path')
+        if (! fs.existsSync(fileLocation)) {
+            if (! fs.existsSync(dirLocation)) {
+                fs.mkdirSync(dirLocation)
+            }
+            fs.writeFileSync(fileLocation, '! Write only one comment per line. Comments wiht \'!\' at the beginning will be ignored.')
+        }
+    }, 50)
+}
+
+// Function for opening comment file
+function openComments() {
+    devLog('info', 'Opening comments file')
+    checkCommentFile()
     setTimeout(() => {
         openCommentFile(fileLocation)
     }, 50)
-})
+}
+
+function getComments() {
+    checkCommentFile()
+    devLog('info', 'Reading content from comment file')
+    setTimeout(() => {
+        fs.readFile(fileLocation, 'utf-8', (err, data) => {
+            if (err) devLog('err', `The following error occured: ${err}`)
+            console.log(data)
+        })
+    }, 50)
+}
+
+// %windir%\Logs\CBS\CBS.log

@@ -119,6 +119,5 @@ function getCommentsPath() {
 }
 
 function openCommentFile(fileLocation) {
-    console.log('Opening ' + fileLocation)
     ipc.send('openCommentFile', fileLocation)
 }
