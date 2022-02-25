@@ -50,3 +50,22 @@ function checkFile(filePath) {
         })
     })
 }
+
+
+
+// Get comments & path
+let dirLocation;
+let fileLocation;
+
+function returnCommentPath(_dirLocation, _fileLocation) {
+    dirLocation = _dirLocation
+    fileLocation = _fileLocation
+    // console.log(dirLocation, fileLocation)
+}
+
+document.getElementById('edit-button').addEventListener('click', () => {
+    getCommentsPath()
+    setTimeout(() => {
+        openCommentFile(fileLocation)
+    }, 50)
+})
