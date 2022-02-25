@@ -59,7 +59,7 @@ if (programStopped) {                   // Same as above
 
 const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
 const specialChar = [' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
-// -!- Does \' work?
+// TODO: Does \' work? -!- //
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
     if (checkVar.includes(specialChar[i])) {
@@ -170,14 +170,14 @@ $('#start-btn').click(function() {
     document.getElementById('idleIcon').style.display = 'none'
     document.getElementById('runIcon').style.display = 'block'
     launchMainLogic(urlInput.value, username.value, password.value)
-    if (document.getElementById('save-profile').checked === true) {                       // -!- True isn't needed -!- //
+    if (document.getElementById('save-profile').checked === true) {                       // FIXME: True isn't needed -!- //
       devLog('info', 'Saving LogIn data')
       setPassword(username.value, password.value)
       setTimeout(() => {
         profileUpdate()
       }, 50)
       setTimeout(() => {
-        // -!- Does only work for adding one profile -!- //
+        // INFO: Does only work for adding one profile -!- //
         if (document.getElementById('profile-1-name').innerText !== '') {
           document.getElementById('profile-1').style.display = 'flex'
         }
@@ -189,7 +189,7 @@ $('#start-btn').click(function() {
           showMore.display = ''
           addProfile.display = 'none'
         }
-        // -!- Show dropdown menu 
+        // TODO: Show dropdown menu -!- //
       }, 150)
     }
     // updateUser(username.value)
@@ -205,7 +205,7 @@ $('#pause-btn').click(function() {
   document.getElementById('stop-btn').style.display = 'block'
   document.getElementById('runIcon').style.display = 'none'
   document.getElementById('pauseIcon').style.display = 'block'
-  // -!- API pauses commenting -!- //
+  // TODO: API pauses commenting -!- //
 })
 
 $('#stop-btn').click(function() {
@@ -263,7 +263,7 @@ $(document).ready(() => {
         $('.uid-'+deleteUser).remove()
         $('<a>', {
           class: 'uid-'+deleteProfile,
-          text: deleteProfile.replace('profile-', 'Profil ')        // -!- Better fix needed -!- //
+          text: deleteProfile.replace('profile-', 'Profil ')        // FIXME: Better fix needed -!- //
         }).appendTo('#profileDropdownContent')
         if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
           document.getElementById('profileDropdown').style.display = 'none'
@@ -281,7 +281,7 @@ $(document).ready(() => {
         $('.uid-'+deleteUser).remove()
         $('<a>', {
           class: 'uid-'+deleteProfile,
-          text: deleteProfile.replace('profile-', 'Profil ')        // -!- Better fix needed -!- //
+          text: deleteProfile.replace('profile-', 'Profil ')        // FIXME: Better fix needed -!- //
         }).appendTo('#profileDropdownContent')
         if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
           document.getElementById('profileDropdown').style.display = 'none'

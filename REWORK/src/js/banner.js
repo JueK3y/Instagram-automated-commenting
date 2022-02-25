@@ -16,7 +16,7 @@ $('#error-close-wifi').click(function() {
 ////// Display Function
 function hoverCheck(type, key) {
     if ($('#'+type+'-banner:hover').length !== 0) {
-        document.getElementById(type+'-banner').addEventListener('mouseleave', () => {                      // -!- Eventuell wird EventListener nicht zurückgesetzt -!- //
+        document.getElementById(type+'-banner').addEventListener('mouseleave', () => {                      // FIXME: Mouse cursor doesn't resest banner timeout -!- //
             setTimeout(() => {
                 $('#'+type+'-banner').fadeOut(350)
                 $('#'+type+'-banner').removeClass(key)
@@ -32,7 +32,7 @@ function hoverCheck(type, key) {
 let timeoutHandle
 
 function showBanner(type, title, message, key, hide) {
-    // -!- If other banner already exists, add margin here -!- //
+    // TODO: If other banner already exists, add margin here -!- //
     window.clearTimeout(timeoutHandle)
     $('#'+type+'-banner').fadeIn(150)
     document.getElementById(type+'-title').innerHTML = title

@@ -55,7 +55,7 @@ function showContent(type, time) {
   }
 }
 
-// -!- Functions for later improvement -!- //
+// TODO: Functions for later improvement -!- //
 function lineAnimation1(type, time) {
   $('.line').animate({marginTop: '-40px', height: '40px', opacity: '0'}, 300)
   setTimeout(() => {
@@ -93,7 +93,7 @@ $(document).ready(() => {
 })
 
 
-$(document).ready(() => {                                               // -!- Must be modified so that button click also has a timeout -!- //
+$(document).ready(() => {                                               // TODO: Must be modified so that button click also has a timeout -!- //
   $('body').click(function(e) {
     if ($('#active').hasClass('profile')) {
       if (! $(e.target).closest('#profile-container').length && ! $(e.target).closest('#nav-bar').length) $('.comment').click()
@@ -198,7 +198,7 @@ $(document).ready(() => {
       locked = true
       lineAnimation2('settings', 5, 19)
       setTimeout(() => { locked = false }, 600)
-      // -!- Thats... a long time -!- //
+      // INFO: Thats... a long time -!- //
     }
   })
 })
@@ -336,7 +336,7 @@ const addProfile = document.getElementById('add-profile').style
 
 $(document).ready(function() {
   setTimeout(() => {
-    // -!- Simplify? -!- //
+    // FIXME: Simplify? -!- //
     if (profile1.innerText !== '') {
       document.getElementById('profile-1').style.display = 'flex'
     }
@@ -365,7 +365,7 @@ $(document).ready(function() {
     }
   }, 100)
   $(document).on('click', '#add-profile', function() {
-    // -!- Needs to be locked / fixed before release -!- //
+    // TODO: Needs to be locked / fixed before release -!- //
     /*document.getElementById('profile-container').style.top  = '15px'
     if (profile1.innerText === '') {
       document.getElementById('profile-1').style.display = 'flex'
@@ -383,12 +383,12 @@ $(document).ready(function() {
     }*/
   })
   $(document).on('click', '#more-profile', function() {
-    // -!- Needs to be locked / added before release -!- //
+    // TODO: Needs to be locked / added before release -!- //
     // Directs to profile page
   })
 })
 
-// -!- Simplify -!- //
+// TODO: Simplify -!- //
 let profile1Name = ''                                                              // Get Name from JSON / API
 let profile2Name = ''
 let profile3Name = ''
@@ -639,7 +639,7 @@ setTimeout(() => {
     noteMessage('Update für IAC', 'Es wurde eine neue Version für IAC 2.0 gefunden. Jetzt installieren?')
   }
   else {
-    download.style.display = 'none'       // -!- Needed? -!- //
+    download.style.display = 'none'       // FIXME: Needed? -!- //
     update.style.display = ''
     settingsIcon.style.display = 'inline-block'
     settingsUpdateIcon.style.display = 'none'

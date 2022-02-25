@@ -29,9 +29,9 @@ const createWindow = () => {
       title: 'Instagram Automated Commenting',
       backgroundColor: '#202020',
       webPreferences: {
-        // sandbox: true,                         // -!- Problems with require -!- //
-        nodeIntegration: true,                    // -!- Can this be disabled in the finale release? -!- //
-        contextIsolation: false                   // -!- Same for here? -!- //
+        // sandbox: true,                         // FIXME: Problems with require -!- //
+        nodeIntegration: true,                    // TODO: Can this be disabled in the finale release? -!- //
+        contextIsolation: false                   // TODO: Same for here? -!- //
       }
   })
 
@@ -137,7 +137,7 @@ app.on('ready', () => {
     callback({
         responseHeaders: Object.assign ({
             'Content-Security-Policy': [
-              // -!- Not secure at all and needs to be re-written -!- //
+              // FIXME: Not secure at all and needs to be re-written -!- //
               "default-src 'unsafe-eval' 'unsafe-inline' 'self'",
               "style-src 'unsafe-inline' 'self'",
               "script-src 'unsafe-eval' 'unsafe-inline' 'self'"

@@ -21,7 +21,7 @@ function launchMainLogic(_url, _username, _password) {
     const username = _username
     const password = _password
   
-    if (postURL.slice(0,4) !== 'http') {        // -!- Doesn't check, if :// is already there -!- //
+    if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
       devLog('info', 'Adding https:// to URL')
       postURL = 'https://' + postURL
     }
@@ -41,7 +41,7 @@ function launchMainLogic(_url, _username, _password) {
   
 
     // Check for cookie banner
-    if (await page.$('.bIiDR') !== null) {         // -!- Shouldn't use class detection -!- //
+    if (await page.$('.bIiDR') !== null) {         // INFO: Shouldn't use class detection -!- //
       devLog('info', 'Found cookie banner')
       await page.click('.bIiDR')
     }
@@ -60,13 +60,13 @@ function launchMainLogic(_url, _username, _password) {
     await page.click('[type="submit"]')
 
 
-    // -!- Check alert message AFTER the submit button is clicked -!- //
+    // TODO: Check alert message AFTER the submit button is clicked -!- //
 
     // Check if data is correct
     try {
-      await page.waitForSelector('#slfErrorAlert')                              // -!- Shouldn't use id detection -!- //
-      devLog('warn', 'Wrong LogIn data')                                        // -!- Takes quite long -!- //
-      devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // -!- Eval is considered as unsafe -!- //
+      await page.waitForSelector('#slfErrorAlert')                              // INFO: Shouldn't use id detection -!- //
+      devLog('warn', 'Wrong LogIn data')                                        // FIXME: Takes quite long -!- //
+      devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
       showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
       document.getElementById('stop-btn').click()
       await browser.close()
@@ -93,7 +93,7 @@ function launchMainLogic(_url, _username, _password) {
 
       await page.screenshot({ path: 'Instagram.png' })
       commentLoop = false
-      await page.close()      // -!- Close twice? -!- //
+      await page.close()      // FIXME: Close twice? -!- //
     }
   })
 }
