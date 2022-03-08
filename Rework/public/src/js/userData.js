@@ -57,11 +57,12 @@ function checkFile(filePath) {
 ////// Get comments & path
 let dirLocation;
 let fileLocation;
+let comData;
 
 // Button for opening comment file
 document.getElementById('edit-button').addEventListener('click', () => {
-    
-    getComments()
+    openComments()
+    // getComments()
 })
 
 // Getter for dir & file location
@@ -94,12 +95,19 @@ function openComments() {
 }
 
 function getComments() {
+    let pureData = []
+    comData = []
     checkCommentFile()
     devLog('info', 'Reading content from comment file')
     setTimeout(() => {
         fs.readFile(fileLocation, 'utf-8', (err, data) => {
             if (err) devLog('err', `The following error occured: ${err}`)
-            console.log(data)
+            pureData = data.split('\n')
+            for (let i = 0; i < pureData.length; i++) {
+                if (pureData[i].charAt(0) != '!') {
+                    comData.push(pureData[i])
+                }
+            }
         })
     }, 50)
 }

@@ -9,7 +9,7 @@ commentLoop = false
 function launchMainLogic(_url, _username, _password) {
   puppeteer.launch({ headless: false, slowMo: 100 }).then(async browser => {    // Without {} args in production
     devLog('info', 'Main logic launch successfull')
-    const page = await browser.newPage()
+    const page = (await browser.pages())[0]
     
     // Stealh mode checker
     /*await page.goto('https://arh.antoinevastel.com/bots/areyouheadless')
@@ -79,12 +79,14 @@ function launchMainLogic(_url, _username, _password) {
       })
 
       commentLoop = true
+      getComments()
+      console.log(comData[0])
 
       // Comment loop
       while (commentLoop) {
         const commInp = await page.$('[data-testid="post-comment-text-area"]')
         const commBut = await page.$('[data-testid="post-comment-input-button"]')
-        let comment = 'Wow 😍'
+        let comment = comData
         try {
           await commInp.click()
           await commInp.type(comment)
