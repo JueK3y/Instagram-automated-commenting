@@ -531,8 +531,6 @@ window.setInterval(() => {
 }, 1250)
 
 
-
-
 ////// Update checker
 let updateOnline
 
@@ -645,3 +643,12 @@ setTimeout(() => {
     settingsUpdateIcon.style.display = 'none'
   }
 }, 3500)
+
+
+////// Developer mode
+
+$(document).on('click', '#developer-mode', () => {
+  $('#developer-mode').css('display', 'none')
+  $('#developer-settings').css('display', 'inline-block')
+  // TODO: Add developer functions
+})

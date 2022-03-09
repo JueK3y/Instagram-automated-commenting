@@ -169,6 +169,7 @@ $('#start-btn').click(function() {
     document.getElementById('stop-btn').style.display = 'block'
     document.getElementById('idleIcon').style.display = 'none'
     document.getElementById('runIcon').style.display = 'block'
+    runMainLogic = true
     launchMainLogic(urlInput.value, username.value, password.value)
     if (document.getElementById('save-profile').checked) {
       devLog('info', 'Saving LogIn data')
@@ -211,6 +212,7 @@ $('#pause-btn').click(function() {
 $('#stop-btn').click(function() {
   validate = false
   checkClick = 1
+  runMainLogic = false
   hideBanner('close-while-commenting')
   document.getElementById('start-btn').style.display = 'block'
   document.getElementById('pause-btn').style.display = 'none'

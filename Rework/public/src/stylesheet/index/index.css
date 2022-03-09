@@ -239,11 +239,20 @@ html body main #settings-container #settings-content #comment-settings #set-comm
 html body main #settings-container #settings-content #comment-settings:hover #set-comm-text {
   display: block;
 }
-html body main #settings-container #settings-content #developer #set-dev-text {
+html body main #settings-container #settings-content #developer-mode #set-dev-mde-text, html body main #settings-container #settings-content #developer-settings #set-dev-text {
   display: none;
 }
-html body main #settings-container #settings-content #developer:hover #set-dev-text {
+html body main #settings-container #settings-content #developer-mode:hover #set-dev-mde-text, html body main #settings-container #settings-content #developer-settings:hover #set-dev-text {
   display: block;
+}
+html body main #settings-container #settings-content #developer-settings {
+  display: none;
+}
+html body main #settings-container #settings-content #developer-settings #set-dev #svg-path {
+  fill: var(--accent-default);
+}
+html body main #settings-container #settings-content #developer-settings #set-dev-text {
+  color: var(--accent-default);
 }
 html body main #settings-container #settings-content #more-settings #set-more-text {
   display: none;

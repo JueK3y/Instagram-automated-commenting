@@ -104,12 +104,10 @@ function getComments() {
             if (err) devLog('err', `The following error occured: ${err}`)
             pureData = data.split('\n')
             for (let i = 0; i < pureData.length; i++) {
-                if (pureData[i].charAt(0) != '!') {
+                if (pureData[i].charAt(0) !== '!') {
                     comData.push(pureData[i])
                 }
             }
         })
     }, 50)
 }
-
-// %windir%\Logs\CBS\CBS.log

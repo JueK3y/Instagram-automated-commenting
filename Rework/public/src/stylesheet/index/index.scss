@@ -251,12 +251,22 @@ html {
                     #comment-settings:hover #set-comm-text {
                         display: block;
                     }
-                    
-                    #developer #set-dev-text {
+
+                    #developer-mode #set-dev-mde-text, #developer-settings #set-dev-text {
                         display: none;
                     }
-                    #developer:hover #set-dev-text {
+                    #developer-mode:hover #set-dev-mde-text, #developer-settings:hover #set-dev-text {
                         display: block;
+                    }
+                    
+                    #developer-settings {
+                        display: none;
+                        #set-dev #svg-path {
+                            fill: var(--accent-default);
+                        }
+                        #set-dev-text {
+                            color: var(--accent-default);
+                        }
                     }
                     
                     #more-settings #set-more-text {
