@@ -646,10 +646,27 @@ setTimeout(() => {
 
 
 ////// Developer mode
-
 $(document).on('click', '#developer-mode', () => {
   $('#developer-mode').css('display', 'none')
   $('#developer-settings').css('display', 'inline-block')
   mainLogicMode = false
   openDevConsoleIPC()
 })
+
+
+////// Small window
+$(document).on('click', '#report-bug', () => {
+  openSmallWin('', 'Fehler melden', 'Lorem ipsum test', 'Melden')
+})
+
+$(document).on('click', '#small-window-close-button', () => {
+  $('#small-window').css('display', 'none')
+})
+
+function openSmallWin(icon, title, content, mainBtn) {
+  $('#small-window').css('display', 'none')
+  $('#small-window-icon-img').src(icon)
+  $('#small-window-title').text(title)
+  $('#small-window-description').text(content)
+  $('#small-window-main-button').text(mainBtn)
+}

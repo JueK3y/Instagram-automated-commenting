@@ -12,6 +12,7 @@
     <!-- JS -->
     <script>if (typeof module === 'object') window.module = module; module = undefined;</script>
     <script src="src/js/log.js"></script>
+    <!-- TODO: Add in production <script src="src/js/blockMenu.js"></script> -->
     <script src="src/js/userPassword.js"></script>
     <script src="src/js/lib/jquery.min.js"></script>
     <script defer src="src/js/notification.js"></script>
@@ -401,6 +402,19 @@
         <div id="error-info-wifi" class="banner-info">Überprüfe deine Internet-Verbindung.</div>
         <button id="error-hide" title="Stelle diese Nachricht ab">Deaktivieren</button>
         <div id="error-close-wifi" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
+      </div>
+    </div>
+    <div id="small-window" class="no-select">
+      <div id="small-window-content">
+        <div id="small-window-header">
+          <div id="small-window-icon"><img id="small-window-icon-img" src="src/img/icons/light/help.svg"></div>
+          <div id="small-window-title">Title</div>
+        </div>
+        <div id="small-window-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit omnis iusto culpa fuga aliquam corrupti est, ab quia natus ea libero doloribus. Autem iusto eveniet error nulla doloribus iure eius!</div>
+        <div id="small-window-button">
+          <button id="small-window-main-button">- -</button>
+          <button id="small-window-close-button">Schließen</button>
+        </div>
       </div>
     </div>
     <p id="legal-note" class="no-select">Work in progress &copy; 2021 - 2022 by <a href="https://www.juek3y.com/">JueK3y</a></p>

@@ -7,7 +7,7 @@ let runMainLogic;
 commentLoop = false
 
 function launchMainLogic(_url, _username, _password, _mode) {
-  puppeteer.launch({ headless: _mode, slowMo: 100 }).then(async browser => {    // Without {} args in production
+  puppeteer.launch({ headless: _mode, slowMo: 100 }).then(async browser => {    // TODO: Without {} args in production -!- //
     while (runMainLogic) {
       devLog('info', 'Main logic launch successfull')
       const page = (await browser.pages())[0]

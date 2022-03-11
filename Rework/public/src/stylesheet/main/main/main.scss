@@ -415,4 +415,83 @@ html body {
             }
         }
     }
+    #small-window {
+        display: none;
+        position: absolute;
+        z-index: 5;
+        top: 45vh;
+        left: calc(50vw - 240px);
+        width: 600px;
+        height: auto;
+        font-size: 14px;
+        border-radius: 3px;
+        border: 1px solid var(--info-banner-border);
+        background: var(--info-banner-bg);
+        backdrop-filter: blur(50px);
+        #small-window-content {
+            #small-window-header {
+                display: flex;
+            }
+            #small-window-button {
+                display: flex;
+                width: 120px;
+                height: 35px;
+                cursor: pointer;
+                #small-window-main-button {
+                    position: relative;
+                    color: var(--text-main-button);
+                    background: var(--bg-main-button);
+                    border: 1px solid transparent;
+                    border-radius: 5px;
+                    background-clip: padding-box;
+                    transition: .2s;
+                    &::after {
+                        position: absolute;
+                        top: -1px; bottom: -1px;
+                        left: -1px; right: -1px;
+                        background: var(--bg-after-main-button);
+                        content: '';
+                        z-index: -1;
+                        border-radius: 5px;
+                    }
+                    &:hover {
+                        background-color: var(--bg-hover-main-button);
+                        transition: .2s;
+                    }
+                    &:active {
+                        color: var(--active-main-button-color);
+                        background-color: var(--bg-active-main-button);
+                        transition: .2s;
+                    }
+                }
+                #small-window-close-button {
+                    position: relative;
+                    color: var(--text-sec-button);
+                    background: var(--bg-sec-button);
+                    border: 1px solid transparent;
+                    border-radius: 5px;
+                    background-clip: padding-box;
+                    transition: .2s;
+                    &::after {
+                        position: absolute;
+                        top: -1px; bottom: -1px;
+                        left: -1px; right: -1px;
+                        background: var(--bg-after-sec-button);
+                        content: '';
+                        z-index: -1;
+                        border-radius: 5px;
+                    }
+                    &:hover {
+                        background-color: var(--bg-hover-sec-button);
+                        transition: .2s;
+                    }
+                    &:active {
+                        color: var(--active-sec-button-color);
+                        background-color: var(--bg-active-sec-button);
+                        transition: .2s;
+                    }
+                }
+            }
+        }  
+    }
 }

@@ -7,7 +7,9 @@ html body {
 html body img, html body svg {
   width: var(--img-size);
   height: var(--img-size);
-  user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
   -webkit-app-region: no-drag;
@@ -16,6 +18,25 @@ html body a {
   color: var(--text-color);
   text-decoration: none;
   cursor: pointer;
+}
+@-webkit-keyframes round {
+  0% {
+    transform: rotate(0deg);
+    border-radius: 50%;
+    width: 170px;
+    height: 150px;
+  }
+  50% {
+    border-radius: 40%;
+    width: 140px;
+    height: 120px;
+  }
+  100% {
+    border-radius: 50%;
+    width: 170px;
+    height: 150px;
+    transform: rotate(365deg);
+  }
 }
 @keyframes round {
   0% {
@@ -37,7 +58,10 @@ html body a {
   }
 }
 html body .no-select {
-  user-select: none !important;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
 }
 html body .small-cursor {
   position: fixed;
@@ -51,7 +75,8 @@ html body .small-cursor {
   border-radius: 50%;
   pointer-events: none;
   transition: 1s ease-out;
-  animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  -webkit-animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+          animation: round 25s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 html body .medium-title {
   font-size: var(--medium-text);
@@ -135,7 +160,8 @@ html body header #drag-region {
   left: 0;
   width: 100%;
   height: 31px;
-  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
   z-index: 3;
   -ms-overflow-style: scrollbar;
   -webkit-app-region: drag;
@@ -186,7 +212,8 @@ html body nav #side-bar {
   height: 100vh;
   transition: 0.2s;
   font-size: var(--font-size);
-  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
   z-index: 3;
 }
 html body nav #side-bar .comment #idleIcon {
@@ -293,7 +320,8 @@ html body .banner {
   height: 46px;
   font-size: 14px;
   border-radius: 3px;
-  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
 }
 html body .banner .banner-content {
   display: flex;
@@ -405,5 +433,86 @@ html body #error-banner-wifi #error-hide:active {
   opacity: 0.75;
   transition: 0.2s;
 }
-
+html body #small-window {
+  display: none;
+  position: absolute;
+  z-index: 5;
+  top: 45vh;
+  left: calc(50vw - 240px);
+  width: 600px;
+  height: auto;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--info-banner-border);
+  background: var(--info-banner-bg);
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+}
+html body #small-window #small-window-content #small-window-header {
+  display: flex;
+}
+html body #small-window #small-window-content #small-window-button {
+  display: flex;
+  width: 120px;
+  height: 35px;
+  cursor: pointer;
+}
+html body #small-window #small-window-content #small-window-button #small-window-main-button {
+  position: relative;
+  color: var(--text-main-button);
+  background: var(--bg-main-button);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-clip: padding-box;
+  transition: 0.2s;
+}
+html body #small-window #small-window-content #small-window-button #small-window-main-button::after {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  background: var(--bg-after-main-button);
+  content: "";
+  z-index: -1;
+  border-radius: 5px;
+}
+html body #small-window #small-window-content #small-window-button #small-window-main-button:hover {
+  background-color: var(--bg-hover-main-button);
+  transition: 0.2s;
+}
+html body #small-window #small-window-content #small-window-button #small-window-main-button:active {
+  color: var(--active-main-button-color);
+  background-color: var(--bg-active-main-button);
+  transition: 0.2s;
+}
+html body #small-window #small-window-content #small-window-button #small-window-close-button {
+  position: relative;
+  color: var(--text-sec-button);
+  background: var(--bg-sec-button);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-clip: padding-box;
+  transition: 0.2s;
+}
+html body #small-window #small-window-content #small-window-button #small-window-close-button::after {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  background: var(--bg-after-sec-button);
+  content: "";
+  z-index: -1;
+  border-radius: 5px;
+}
+html body #small-window #small-window-content #small-window-button #small-window-close-button:hover {
+  background-color: var(--bg-hover-sec-button);
+  transition: 0.2s;
+}
+html body #small-window #small-window-content #small-window-button #small-window-close-button:active {
+  color: var(--active-sec-button-color);
+  background-color: var(--bg-active-sec-button);
+  transition: 0.2s;
+}
 /*# sourceMappingURL=main.css.map */
