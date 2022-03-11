@@ -109,6 +109,7 @@ $(document).on('keyup', function(e) {
 })
 
 let pause = false
+let mainLogicMode = true
 
 $('#start-btn').click(function() {
   if (pause) {
@@ -170,7 +171,7 @@ $('#start-btn').click(function() {
     document.getElementById('idleIcon').style.display = 'none'
     document.getElementById('runIcon').style.display = 'block'
     runMainLogic = true
-    launchMainLogic(urlInput.value, username.value, password.value)
+    launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
     if (document.getElementById('save-profile').checked) {
       devLog('info', 'Saving LogIn data')
       setPassword(username.value, password.value)

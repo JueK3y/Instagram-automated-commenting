@@ -650,5 +650,6 @@ setTimeout(() => {
 $(document).on('click', '#developer-mode', () => {
   $('#developer-mode').css('display', 'none')
   $('#developer-settings').css('display', 'inline-block')
-  // TODO: Add developer functions
+  mainLogicMode = false
+  openDevConsoleIPC()
 })

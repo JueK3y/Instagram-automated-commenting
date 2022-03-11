@@ -76,8 +76,6 @@ const createWindow = () => {
     mainWindow.webContents.send('blurPw')
   })
 
-
-
   ipc.on('checkFile', (evt, arg) => {
     let userData = app.getPath('userData')
     let dirLocation = path.join(userData + '/data')
@@ -93,8 +91,6 @@ const createWindow = () => {
     shell.openPath(path)
   })
 
-
-  
   let sleepID = undefined
 
   ipc.on('preventSleep', () => {
@@ -125,6 +121,10 @@ const createWindow = () => {
 
   ipc.on('closeApp', () => {
     mainWindow.close()
+  })
+
+  ipc.on('openDevConsole', () => {
+    mainWindow.webContents.openDevTools()
   })
 }
 

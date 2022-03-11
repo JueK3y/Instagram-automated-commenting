@@ -121,3 +121,9 @@ function getCommentsPath() {
 function openCommentFile(fileLocation) {
     ipc.send('openCommentFile', fileLocation)
 }
+
+
+////// Dev Button
+function openDevConsoleIPC() {
+    ipc.send('openDevConsole')
+}
