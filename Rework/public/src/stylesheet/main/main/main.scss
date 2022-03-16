@@ -436,9 +436,9 @@ html body {
                 display: flex;
                 width: 120px;
                 height: 35px;
-                cursor: pointer;
                 #small-window-main-button {
                     position: relative;
+                    cursor: pointer;
                     color: var(--text-main-button);
                     background: var(--bg-main-button);
                     border: 1px solid transparent;
@@ -466,6 +466,7 @@ html body {
                 }
                 #small-window-close-button {
                     position: relative;
+                    cursor: pointer;
                     color: var(--text-sec-button);
                     background: var(--bg-sec-button);
                     border: 1px solid transparent;
