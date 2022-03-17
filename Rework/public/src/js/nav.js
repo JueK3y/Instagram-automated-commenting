@@ -101,9 +101,11 @@ $(document).ready(() => {                                               // TODO:
       if (! $(e.target).closest('#profile-container').length && ! $(e.target).closest('#nav-bar').length) $('.comment').click()
     }
     if ($('#active').hasClass('helpNav')) {
-      if (! $(e.target).closest('#help-container').length && ! $(e.target).closest('#nav-bar').length) {
+      alert(e.target)
+      // TODO: Add click detection for Small Window
+      if ((! $(e.target).closest('#help-container').length && ! $(e.target).closest('#nav-bar').length)) {
         $('.comment').click()
-        if (winOpen) alert("Test")
+        if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
       }
     }
     if ($('#active').hasClass('settings')) {
@@ -129,7 +131,7 @@ $(document).ready(() => {
       setTimeout(() => { locked = false }, 150)
     }
     else if (! $('#active').hasClass('comment') && ($('#active').hasClass('helpNav') || $('#active').hasClass('settings'))) {
-      if (winOpen) alert("Test")
+      if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
       if (locked) return
       locked = true
       lineAnimation1('comment', 300)
@@ -154,7 +156,7 @@ $(document).ready(() => {
       showContent('profile', 375)
     }
     else if (! $('#active').hasClass('profile') && ($('#active').hasClass('helpNav')) || $('#active').hasClass('settings')) {
-      if (winOpen) alert("Test")
+      if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
       if (locked) return
       locked = true
       lineAnimation1('profile', 320)
@@ -201,7 +203,7 @@ $(document).ready(() => {
       showContent('settings', 270)
     }
     else if (! $('#active').hasClass('settings') && ($('#active').hasClass('profile') || $('#active').hasClass('helpNav'))) {
-      if (winOpen) alert("Test")
+      if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
       if (locked) return
       locked = true
       lineAnimation2('settings', 5, 19)
@@ -677,7 +679,14 @@ function openSmallWin(icon, title, content, mainBtn, hyperlink) {
   $('#small-window-icon-img').prop('src', icon)
   $('#small-window-title').text(title)
   $('#small-window-description').text(content)
-  $('#small-window-main-button').text(mainBtn)
-  $('#small-window-main-button').attr('href', hyperlink)
+  if (mainBtn.length != 0) {
+    $('#small-window-main-href').css('display', 'block')
+    $('#small-window-main-href').text(mainBtn)
+    $('#small-window-main-href').attr('href', hyperlink)
+  }
+  else {
+    $('#small-window-main-href').css('display', 'none')
+    // TODO: Make second button to main button
+  }
   winOpen = true
 }
