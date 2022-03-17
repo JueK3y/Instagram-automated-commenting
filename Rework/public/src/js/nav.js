@@ -101,7 +101,6 @@ $(document).ready(() => {                                               // TODO:
       if (! $(e.target).closest('#profile-container').length && ! $(e.target).closest('#nav-bar').length) $('.comment').click()
     }
     if ($('#active').hasClass('helpNav')) {
-      alert(e.target)
       // TODO: Add click detection for Small Window
       if ((! $(e.target).closest('#help-container').length && ! $(e.target).closest('#nav-bar').length)) {
         $('.comment').click()
@@ -666,26 +665,40 @@ $(document).on('click', '#developer-mode', () => {
 
 ////// Small window
 $(document).on('click', '#report-bug', () => {
-  openSmallWin('src/img/icons/dark/bug.svg', 'Fehler melden', 'Hier kannst du Fehler, wie zum Beispiel Anzeigebugs oder fehlerhaftes Verhalten melden. Du wirst auf GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
+  openSmallWin('src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du auf GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
 })
 
-$(document).on('click', '#small-window-close-button', () => {
+$(document).on('click', '#info', () => {
+  openSmallWin('src/img/icons/dark/info.svg', 'Instagram Automated Commenting 2.0', 'Version: Beta Release Bet-1.9.1; Work in Progress; Copyright © 2021 - 2022 by JueK3y', '', '')
+})
+
+$(document).on('click', '.small-window-close-button', () => {
   $('#small-window').css('display', 'none')
   winOpen = false
 })
 
 function openSmallWin(icon, title, content, mainBtn, hyperlink) {
   $('#small-window').css('display', 'block')
+  if (icon.contains !== 'dark' && document.body.classList.contains('dark')) {
+    icon = icon.replace('light', 'dark')
+  }
+  else if (icon.contains !== 'light' && document.body.classList.contains('light')) {
+    icon = icon.replace('dark', 'light')
+  }
   $('#small-window-icon-img').prop('src', icon)
   $('#small-window-title').text(title)
   $('#small-window-description').text(content)
-  if (mainBtn.length != 0) {
-    $('#small-window-main-href').css('display', 'block')
+  if (mainBtn.length !== 0) {
+    $('#small-window-main-button').css('display', 'block')
+    $('#small-window-two-close').css('display', 'block')
+    $('#small-window-one-close').css('display', 'none')
     $('#small-window-main-href').text(mainBtn)
     $('#small-window-main-href').attr('href', hyperlink)
   }
   else {
-    $('#small-window-main-href').css('display', 'none')
+    $('#small-window-main-button').css('display', 'none')
+    $('#small-window-two-close').css('display', 'none')
+    $('#small-window-one-close').css('display', 'block')
     // TODO: Make second button to main button
   }
   winOpen = true

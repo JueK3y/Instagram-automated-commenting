@@ -419,8 +419,8 @@ html body {
         display: none;
         position: absolute;
         z-index: 5;
-        top: 45vh;
-        left: calc(50vw - 240px);
+        top: calc(50vh - 100px);
+        left: calc(50vw - 15%);
         width: auto;
         max-width: 45vw;
         height: auto;
@@ -434,7 +434,7 @@ html body {
             #small-window-header {
                 display: flex;
                 margin-bottom: 10px;
-                #small-window-header {
+                #small-window-title {
                     font-size: 18px;
                     margin-left: 12px;
                     margin-top: -3px;
@@ -464,8 +464,9 @@ html body {
                         border-radius: 5px;
                     }
                 }
-                #small-window-main-button {
+                #small-window-main-button, #small-window-one-close {
                     margin-right: 25px;
+                    color: var(--text-main-button);
                     background: var(--bg-main-button);
                     transition: .2s;
                     &::after {
@@ -484,7 +485,7 @@ html body {
                         color: var(--text-main-button);
                     }
                 }
-                #small-window-close-button {
+                #small-window-two-close {
                     color: var(--text-sec-button);
                     background: var(--bg-sec-button);
                     transition: .2s;

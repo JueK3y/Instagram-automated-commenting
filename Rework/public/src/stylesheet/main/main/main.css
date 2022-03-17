@@ -437,8 +437,8 @@ html body #small-window {
   display: none;
   position: absolute;
   z-index: 5;
-  top: 45vh;
-  left: calc(50vw - 240px);
+  top: calc(50vh - 100px);
+  left: calc(50vw - 15%);
   width: auto;
   max-width: 45vw;
   height: auto;
@@ -454,7 +454,7 @@ html body #small-window #small-window-content #small-window-header {
   display: flex;
   margin-bottom: 10px;
 }
-html body #small-window #small-window-content #small-window-header #small-window-header {
+html body #small-window #small-window-content #small-window-header #small-window-title {
   font-size: 18px;
   margin-left: 12px;
   margin-top: -3px;
@@ -486,39 +486,40 @@ html body #small-window #small-window-content #small-window-button button::after
   z-index: -1;
   border-radius: 5px;
 }
-html body #small-window #small-window-content #small-window-button #small-window-main-button {
+html body #small-window #small-window-content #small-window-button #small-window-main-button, html body #small-window #small-window-content #small-window-button #small-window-one-close {
   margin-right: 25px;
+  color: var(--text-main-button);
   background: var(--bg-main-button);
   transition: 0.2s;
 }
-html body #small-window #small-window-content #small-window-button #small-window-main-button::after {
+html body #small-window #small-window-content #small-window-button #small-window-main-button::after, html body #small-window #small-window-content #small-window-button #small-window-one-close::after {
   background: var(--bg-after-main-button);
 }
-html body #small-window #small-window-content #small-window-button #small-window-main-button:hover {
+html body #small-window #small-window-content #small-window-button #small-window-main-button:hover, html body #small-window #small-window-content #small-window-button #small-window-one-close:hover {
   background-color: var(--bg-hover-main-button);
   transition: 0.2s;
 }
-html body #small-window #small-window-content #small-window-button #small-window-main-button:active {
+html body #small-window #small-window-content #small-window-button #small-window-main-button:active, html body #small-window #small-window-content #small-window-button #small-window-one-close:active {
   color: var(--active-main-button-color);
   background-color: var(--bg-active-main-button);
   transition: 0.2s;
 }
-html body #small-window #small-window-content #small-window-button #small-window-main-button a {
+html body #small-window #small-window-content #small-window-button #small-window-main-button a, html body #small-window #small-window-content #small-window-button #small-window-one-close a {
   color: var(--text-main-button);
 }
-html body #small-window #small-window-content #small-window-button #small-window-close-button {
+html body #small-window #small-window-content #small-window-button #small-window-two-close {
   color: var(--text-sec-button);
   background: var(--bg-sec-button);
   transition: 0.2s;
 }
-html body #small-window #small-window-content #small-window-button #small-window-close-button::after {
+html body #small-window #small-window-content #small-window-button #small-window-two-close::after {
   background: var(--bg-after-sec-button);
 }
-html body #small-window #small-window-content #small-window-button #small-window-close-button:hover {
+html body #small-window #small-window-content #small-window-button #small-window-two-close:hover {
   background-color: var(--bg-hover-sec-button);
   transition: 0.2s;
 }
-html body #small-window #small-window-content #small-window-button #small-window-close-button:active {
+html body #small-window #small-window-content #small-window-button #small-window-two-close:active {
   color: var(--active-sec-button-color);
   background-color: var(--bg-active-sec-button);
   transition: 0.2s;

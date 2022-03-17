@@ -84,7 +84,7 @@ function noteMessage(messageTitle, messageText, importantType) {
           appID: 'Instagram Autoamted Commenting'
         },
         function (error) {
-          devLog('err', error)
+          devLog('err', `An error occurred with desktop notification: ${error}`)
         })
     }
     else if (noteUrgent && importantType) {
@@ -95,7 +95,7 @@ function noteMessage(messageTitle, messageText, importantType) {
           appID: 'Instagram Autoamted Commenting'
         },
         function (error) {
-          devLog('err', error)
+          devLog('err', `An error occurred with desktop notification: ${error}`)
         })
     }
 }

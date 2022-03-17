@@ -1,4 +1,4 @@
-const IDs = ['minBtnIcon', 'maxBtnIcon', 'restoreBtnIcon', 'closeBtnIcon', 'idleIcon', 'runIcon', 'pauseIcon', 'wifi-img', 'settingsIcon', 'help-bug', 'help-info', 'set-lang', 'set-note-on', 'set-note-urgent', 'set-note-off', 'set-up', 'set-up-failed', 'set-up-none', 'set-dow-failed', 'set-comm', 'set-dev-mde', 'addIcon', 'profileDropdownImage', 'profileDropdownImageNoFocus', 'deleteIcon-1', 'deleteIcon-2', 'deleteIcon-3']
+const IDs = ['minBtnIcon', 'maxBtnIcon', 'restoreBtnIcon', 'closeBtnIcon', 'idleIcon', 'runIcon', 'pauseIcon', 'wifi-img', 'settingsIcon', 'help-bug', 'help-info', 'set-lang', 'set-note-on', 'set-note-urgent', 'set-note-off', 'set-up', 'set-up-failed', 'set-up-none', 'set-dow-failed', 'set-comm', 'set-dev-mde', 'addIcon', 'profileDropdownImage', 'profileDropdownImageNoFocus', 'deleteIcon-1', 'deleteIcon-2', 'deleteIcon-3', 'small-window-icon-img']
 
 const themeToDark = document.getElementById('theme-to-dark')
 const themeToLight = document.getElementById('theme-to-light')
@@ -42,6 +42,8 @@ function lightIcon() {
     changeColorWIFI.style.background = 'none'
 
     $('.openExternal').prop('src', 'src/img/icons/light/open-external.svg')
+    $('.moreIcon').prop('src', 'src/img/icons/light/more.svg')
+
 
     infoIcon.src = 'src/img/icons/dark/note-info.svg'
     warningIcon.src = 'src/img/icons/dark/note-important.svg'

@@ -7,7 +7,7 @@ let runMainLogic;
 commentLoop = false
 
 function launchMainLogic(_url, _username, _password, _mode) {
-  puppeteer.launch({ headless: _mode, slowMo: 100 }).then(async browser => {    // TODO: Without {} args in production -!- //
+  puppeteer.launch({ headless: _mode, slowMo: 100 }).then(async browser => {    // TODO: Without slowMo arg in production -!- //
     while (runMainLogic) {
       devLog('info', 'Main logic launch successfull')
       const page = (await browser.pages())[0]
@@ -72,6 +72,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
         document.getElementById('stop-btn').click()
         await browser.close()
+        runMainLogic = false
       }
       catch(TimeoutError) {
         devLog('info', 'Correct LogIn data')
@@ -81,7 +82,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         })
   
         getComments()
-        commentLoop = false
+        commentLoop = true
         let comment;
         setTimeout(() => {
           comment = comData
@@ -90,23 +91,27 @@ function launchMainLogic(_url, _username, _password, _mode) {
         // Comment loop
         if (commentLoop) {
           while (commentLoop) {
-            const commInp = await page.$('[data-testid="post-comment-text-area"]')
-            const commBut = await page.$('[data-testid="post-comment-input-button"]')
-            try {
-              await commInp.click()
-              await commInp.type(comment)
-              await commBut.click()
-              devLog('info', `Posting comment: ${comment}`)
-              await page.waitForTimeout(4000)
+            await page.waitForTimeout(75)
+            for (let i = 0; i < comment.length; i++) {
+              const commInp = await page.$('[data-testid="post-comment-text-area"]')
+              const commBut = await page.$('[data-testid="post-comment-input-button"]')
+              let comment = comData
+              try {
+                await commInp.click()
+                await commInp.type(comment[i])
+                await commBut.click()
+                devLog('info', `Posting comment: ${comment[i]}`)
+                await page.waitForTimeout(8000)
+              }
+              catch(TypeError) {
+                devLog('warn', 'Wrong page link')
+                noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
+                showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
+                document.getElementById('stop-btn').click()
+                await browser.close()
+                runMainLogic = false
+              }
             }
-            catch(TypeError) {
-              devLog('warn', 'Wrong page link')
-              noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
-              showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
-              document.getElementById('stop-btn').click()
-              await browser.close()
-            }
-            // commentLoop = false
           }
         }
         else {
@@ -120,7 +125,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
               await commInp.type(comment[i])
               await commBut.click()
               devLog('info', `Posting comment: ${comment[i]}`)
-              await page.waitForTimeout(4000)
+              await page.waitForTimeout(8000)
             }
             catch(TypeError) {
               devLog('warn', 'Wrong page link')
@@ -128,6 +133,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
               showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
               document.getElementById('stop-btn').click()
               await browser.close()
+              runMainLogic = false
             }
           }
         }

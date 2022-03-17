@@ -164,38 +164,47 @@ $('#start-btn').click(function() {
   }
 
   if (validate) {
-    devLog('info', 'All input is correct, launching main logic')
-    document.getElementById('start-btn').style.display = 'none'
-    document.getElementById('pause-btn').style.display = 'block'
-    document.getElementById('stop-btn').style.display = 'block'
-    document.getElementById('idleIcon').style.display = 'none'
-    document.getElementById('runIcon').style.display = 'block'
-    runMainLogic = true
-    launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
-    if (document.getElementById('save-profile').checked) {
-      devLog('info', 'Saving LogIn data')
-      setPassword(username.value, password.value)
-      setTimeout(() => {
-        profileUpdate()
-      }, 50)
-      setTimeout(() => {
-        // INFO: Does only work for adding one profile -!- //
-        if (document.getElementById('profile-1-name').innerText !== '') {
-          document.getElementById('profile-1').style.display = 'flex'
+    getComments()
+    setTimeout(() => {
+      if (comData[0] !== undefined) {
+        devLog('info', 'All input is correct, launching main logic')
+        document.getElementById('start-btn').style.display = 'none'
+        document.getElementById('pause-btn').style.display = 'block'
+        document.getElementById('stop-btn').style.display = 'block'
+        document.getElementById('idleIcon').style.display = 'none'
+        document.getElementById('runIcon').style.display = 'block'
+        runMainLogic = true
+        launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
+        if (document.getElementById('save-profile').checked) {
+          devLog('info', 'Saving LogIn data')
+          setPassword(username.value, password.value)
+          setTimeout(() => {
+            profileUpdate()
+          }, 50)
+          setTimeout(() => {
+            // INFO: Does only work for adding one profile -!- //
+            if (document.getElementById('profile-1-name').innerText !== '') {
+              document.getElementById('profile-1').style.display = 'flex'
+            }
+            if (document.getElementById('profile-2-name').innerText !== '') {
+              document.getElementById('profile-2').style.display = 'flex'
+            }
+            if (document.getElementById('profile-3-name').innerText !== '') {
+              document.getElementById('profile-3').style.display = 'flex'
+              showMore.display = ''
+              addProfile.display = 'none'
+            }
+            // TODO: Show dropdown menu -!- //
+          }, 150)
         }
-        if (document.getElementById('profile-2-name').innerText !== '') {
-          document.getElementById('profile-2').style.display = 'flex'
-        }
-        if (document.getElementById('profile-3-name').innerText !== '') {
-          document.getElementById('profile-3').style.display = 'flex'
-          showMore.display = ''
-          addProfile.display = 'none'
-        }
-        // TODO: Show dropdown menu -!- //
-      }, 150)
-    }
-    // updateUser(username.value)
-    checkClick = 0
+        // updateUser(username.value)
+        checkClick = 0
+      }
+      else {
+        showBanner('error', 'Keine Kommentare', 'IAC 2.0 benötigt mindestens einen Kommentar.', 'zero-comments', true)
+        validate = false
+      }
+    }, 75)
   }
 })
 
