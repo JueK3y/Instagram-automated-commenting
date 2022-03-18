@@ -87,6 +87,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         setTimeout(() => {
           comment = comData
         }, 75)
+
   
         // Comment loop
         if (commentLoop) {
@@ -95,13 +96,21 @@ function launchMainLogic(_url, _username, _password, _mode) {
             for (let i = 0; i < comment.length; i++) {
               const commInp = await page.$('[data-testid="post-comment-text-area"]')
               const commBut = await page.$('[data-testid="post-comment-input-button"]')
+              const spamNotice = await page.$('.piCib')
               let comment = comData
               try {
-                await commInp.click()
-                await commInp.type(comment[i])
-                await commBut.click()
-                devLog('info', `Posting comment: ${comment[i]}`)
-                await page.waitForTimeout(8000)
+                if (spamNotice !== null) {
+                  showBanner('warning', 'Spam erkannt', 'IAC 2.0 muss etwas langsamer kommentieren.', 'spam-notice', true)
+                  await page.keyboard.press('Enter');
+                  await page.waitForTimeout(2000)
+                }
+                else {
+                  await commInp.click()
+                  await commInp.type(comment[i])
+                  await commBut.click()
+                  devLog('info', `Posting comment: ${comment[i]}`)
+                  await page.waitForTimeout(2000)
+                }
               }
               catch(TypeError) {
                 devLog('warn', 'Wrong page link')
