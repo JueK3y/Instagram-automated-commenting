@@ -167,11 +167,16 @@ html {
                             margin-right: 10px;
                         }
                     }
-                    #change-language #set-lang-text {
-                        display: none;
-                    }
-                    #change-language:hover #set-lang-text {
-                        display: block;
+                    #change-language {
+                        #set-lang-text {
+                            display: none;
+                        }
+                        &:hover #set-lang-text {
+                            display: block;
+                        }
+                        a {
+                            cursor: not-allowed;
+                        }
                     }
 
                     #notification {
@@ -245,11 +250,16 @@ html {
                         }
                     }  
                     
-                    #comment-settings #set-comm-text {
-                        display: none;
-                    }
-                    #comment-settings:hover #set-comm-text {
-                        display: block;
+                    #comment-settings {
+                        #set-comm-text {
+                            display: none;
+                        }
+                        &:hover #set-comm-text {
+                            display: block;
+                        }
+                        a {
+                            cursor: not-allowed;
+                        }
                     }
 
                     #developer-mode #set-dev-mde-text, #developer-settings #set-dev-text {
@@ -267,15 +277,22 @@ html {
                         #set-dev-text {
                             color: var(--accent-default);
                         }
+                        a {
+                            cursor: not-allowed;
+                        }
                     }
                     
-                    #more-settings #set-more-text {
-                        display: none;
+                    #more-settings {
+                        #set-more-text {
+                            display: none;
+                        }
+                        &:hover #set-more-text {
+                            display: block;
+                        }
                     }
-                    #more-settings:hover #set-more-text {
-                        display: block;
+                    a {
+                        cursor: not-allowed;
                     }
-                    
                 }
             }
             form {

@@ -13,6 +13,7 @@
 // └─────────────────────────────────────────────────────────────────────────┘
 
 let winOpen = false
+let mfaButton = false
 
 ////// Change close image on hover
 document.getElementById('closeBtn').addEventListener('mouseover', function() {
@@ -104,7 +105,7 @@ $(document).ready(() => {                                               // TODO:
       // TODO: Add click detection for Small Window
       if ((! $(e.target).closest('#help-container').length && ! $(e.target).closest('#nav-bar').length)) {
         $('.comment').click()
-        if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
+        if (winOpen) closeSmallWin()
       }
     }
     if ($('#active').hasClass('settings')) {
@@ -130,7 +131,7 @@ $(document).ready(() => {
       setTimeout(() => { locked = false }, 150)
     }
     else if (! $('#active').hasClass('comment') && ($('#active').hasClass('helpNav') || $('#active').hasClass('settings'))) {
-      if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
+      if (winOpen) closeSmallWin()
       if (locked) return
       locked = true
       lineAnimation1('comment', 300)
@@ -155,7 +156,7 @@ $(document).ready(() => {
       showContent('profile', 375)
     }
     else if (! $('#active').hasClass('profile') && ($('#active').hasClass('helpNav')) || $('#active').hasClass('settings')) {
-      if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
+      if (winOpen) closeSmallWin()
       if (locked) return
       locked = true
       lineAnimation1('profile', 320)
@@ -202,7 +203,7 @@ $(document).ready(() => {
       showContent('settings', 270)
     }
     else if (! $('#active').hasClass('settings') && ($('#active').hasClass('profile') || $('#active').hasClass('helpNav'))) {
-      if (winOpen) $('#small-window').css('display', 'none'); winOpen = false
+      if (winOpen) closeSmallWin()
       if (locked) return
       locked = true
       lineAnimation2('settings', 5, 19)
@@ -665,20 +666,55 @@ $(document).on('click', '#developer-mode', () => {
 
 ////// Small window
 $(document).on('click', '#report-bug', () => {
-  openSmallWin('src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du auf GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
+  openSmallWin('template', 'src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du auf GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
 })
 
 $(document).on('click', '#info', () => {
-  openSmallWin('src/img/icons/dark/info.svg', 'Instagram Automated Commenting 2.0', 'Version: Beta Release Bet-1.9.1; Work in Progress; Copyright © 2021 - 2022 by JueK3y', '', '')
+  openSmallWin('version', 'src/img/icons/dark/info.svg', 'Instagram Automated Commenting 2.0')
 })
 
 $(document).on('click', '.small-window-close-button', () => {
-  $('#small-window').css('display', 'none')
-  winOpen = false
+  closeSmallWin()
 })
 
-function openSmallWin(icon, title, content, mainBtn, hyperlink) {
+$(document).on('click', '#s-w-c-b-multi-fa', () => {
+  $('#small-window').css('display', 'none')
+  $('#small-window-multi-fa').css('display', 'none')
+  $('#stop-btn').click()
+  showBanner('error', 'Fehlender 2FA Code', 'IAC 2.0 kann ohne den 2FA Code nicht kommentieren.', 'no-mfa-code', true)
+  devLog('warn', 'Client error - LogIn not possible: 2FA window was closed')
+})
+
+$(document).on('click', '#s-w-m-b-multi-fa', () => {
+  const mfaCode = document.getElementById('mfa-input').value
+  if (mfaCode.length >= 6) {
+    if (mfaCode.includes(' ')) mfaCode.replace(' ', '')
+    mfaButton = true
+  }
+  else {
+    showBanner('warning', 'Fehlender 2FA Code', 'Es wird der 6-stellige 2FA Code benötigt.', 'empty-mfa-input', true)
+    devLog('warn', '2FA Button was pressed without input')
+  }
+})
+
+
+function closeSmallWin() {
+  if (document.getElementById('small-window-multi-fa').style.display !== 'block') {
+    $('#small-window').css('display', 'none')
+    $('#small-window-template').css('display', 'none')
+    $('#small-window-version').css('display', 'none')
+    $('#small-window-multi-fa').css('display', 'none')
+    winOpen = false
+  }
+}
+
+function openSmallWin(type, icon, title, content, mainBtn, hyperlink) {
   $('#small-window').css('display', 'block')
+  $('#small-window-template').css('display', 'none')
+  $('#small-window-version').css('display', 'none')
+  $('#small-window-multi-fa').css('display', 'none')
+  $('#small-window-'+type).css('display', 'block')
+
   if (icon.contains !== 'dark' && document.body.classList.contains('dark')) {
     icon = icon.replace('light', 'dark')
   }
@@ -687,19 +723,13 @@ function openSmallWin(icon, title, content, mainBtn, hyperlink) {
   }
   $('#small-window-icon-img').prop('src', icon)
   $('#small-window-title').text(title)
-  $('#small-window-description').text(content)
-  if (mainBtn.length !== 0) {
-    $('#small-window-main-button').css('display', 'block')
-    $('#small-window-two-close').css('display', 'block')
-    $('#small-window-one-close').css('display', 'none')
-    $('#small-window-main-href').text(mainBtn)
-    $('#small-window-main-href').attr('href', hyperlink)
-  }
-  else {
-    $('#small-window-main-button').css('display', 'none')
-    $('#small-window-two-close').css('display', 'none')
-    $('#small-window-one-close').css('display', 'block')
-    // TODO: Make second button to main button
+
+  if (type === 'template') {
+    $('#s-w-d-template').text(content)
+      $('#s-w-m-b-template').css('display', 'block')
+      $('#s-w-c-b-template').css('display', 'block')
+      $('#small-window-main-href').text(mainBtn)
+      if (hyperlink.length !== 0) $('#small-window-main-href').attr('href', hyperlink)
   }
   winOpen = true
 }

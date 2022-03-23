@@ -18,6 +18,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       await page.screenshot({ path: 'Stealth.png' })*/
       
       const loginURL = 'https://www.instagram.com/accounts/login/'
+      const mfaURL = 'https://www.instagram.com/accounts/login/two_factor?next=%2F'
       let postURL = _url
       const username = _username
       const password = _password
@@ -60,27 +61,47 @@ function launchMainLogic(_url, _username, _password, _mode) {
       // Submit LogIn data
       await page.click('[type="submit"]')
   
-  
       // TODO: Check alert message AFTER the submit button is clicked -!- //
   
+      
+      await page.waitForTimeout(3000)
+  
       // Check if data is correct
-      try {
+      devLog('info', 'Checking LogIn data')
+      if (await page.url() === loginURL) {
         await page.waitForSelector('#slfErrorAlert')                              // INFO: Shouldn't use id detection -!- //
-        devLog('warn', 'Wrong LogIn data')                                        // FIXME: Takes quite long -!- //
+        devLog('warn', 'Wrong LogIn data')
         devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
         noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)
-        showBanner('error', 'Falsche Eingabe', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
+        showBanner('error', 'Falsche Eingabe?', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
         document.getElementById('stop-btn').click()
         await browser.close()
         runMainLogic = false
       }
-      catch(TimeoutError) {
+      else {
+        if (await page.url() === mfaURL) {
+          devLog('warn', 'Two-Factor Auth was detected')
+          noteMessage('Zwei-Faktor Authentifizierung Code benötigt', 'Für die Anmeldung wird ein 2FA Code benötigt. Dieser kann bei der entsprechenden Auth-App oder per SMS erhalten werden.', true)
+          showBanner('warning', '2FA LogIn', 'Zum LogIn wird aufgrund 2FA ein Code benötigt.', 'multi-factor-auth', true)  
+          openSmallWin('multi-fa', 'src/img/icons/dark/info.svg', 'Instagram Automated Commenting 2.0')
+          await page.waitForFunction(() => {
+            return mfaButton === true && mfaCode.length === 6 // FIXME: Doesn't work yet -!- //
+          })
+          // TODO: Add ID's -!- //
+          await page.waitForSelector('...')
+          await page.type('...', mfaCode)
+          await page.click('...')
+          await page.waitForTimeout(3000)
+          if (await page.url() === mfaURL) await page.waitForSelector('#twoFactorErrorAlert')
+          // TODO: Add 2FA Code and check it -!- //
+          // TODO: If #twoFactorErrorAlert comes up - ask for 2FA again -!- //
+        }
         devLog('info', 'Correct LogIn data')
         devLog('info', `Opening ${postURL}`)
         await page.goto(postURL, {
           waitUntil: 'networkidle0',
         })
-  
+
         getComments()
         commentLoop = true
         let comment;
@@ -88,7 +109,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
           comment = comData
         }, 75)
 
-  
+
         // Comment loop
         if (commentLoop) {
           while (commentLoop) {
@@ -146,7 +167,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
             }
           }
         }
-  
+
         //commentLoop = false
         await page.close()
         devLog('info', 'Commenting fully completed')
@@ -154,7 +175,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
         document.getElementById('stop-btn').click()
         runMainLogic = false
-      }
+      }        
     }
   })
 }

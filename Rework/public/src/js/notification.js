@@ -82,9 +82,6 @@ function noteMessage(messageTitle, messageText, importantType) {
           message: messageText,
           icon: 'src/img/IAC-Icon.ico',
           appID: 'Instagram Autoamted Commenting'
-        },
-        function (error) {
-          devLog('err', `An error occurred with desktop notification: ${error}`)
         })
     }
     else if (noteUrgent && importantType) {
@@ -93,9 +90,6 @@ function noteMessage(messageTitle, messageText, importantType) {
           message: messageText,
           icon: 'src/img/IAC-Icon.ico',
           appID: 'Instagram Autoamted Commenting'
-        },
-        function (error) {
-          devLog('err', `An error occurred with desktop notification: ${error}`)
         })
     }
 }

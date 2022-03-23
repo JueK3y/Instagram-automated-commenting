@@ -404,18 +404,45 @@
         <div id="error-close-wifi" class="banner-close"><img class="clearIcon" src="src/img/icons/light/clear.svg" alt="Close icon for error banner"></div>
       </div>
     </div>
-    <div id="small-window" class="no-select">
+    <div id="small-window">
       <div id="small-window-content">
         <div id="small-window-header">
-          <div id="small-window-icon"><img id="small-window-icon-img"></div>
-          <div id="small-window-title">Title</div>
+          <div id="small-window-icon" class="no-select"><img id="small-window-icon-img"></div>
+          <div id="small-window-title" class="no-select">Title</div>
         </div>
-        <div id="small-window-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit omnis iusto culpa fuga aliquam corrupti est, ab quia natus ea libero doloribus. Autem iusto eveniet error nulla doloribus iure eius!</div>
-        <div id="small-window-button">
-          <button id="small-window-main-button"><a id="small-window-main-href" target="_blank">- -</a></button>
-          <button class="small-window-close-button" id="small-window-two-close">Schließen</button>
-          <button class="small-window-close-button" id="small-window-one-close">Schließen</button>
+
+        <div id="small-window-template" class="no-select">
+          <div class="small-window-description" id="s-w-d-template">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit omnis iusto culpa fuga aliquam corrupti est, ab quia natus ea libero doloribus. Autem iusto eveniet error nulla doloribus iure eius!</div>
+          <div class="small-window-button">
+            <button class="small-window-main-button" id="s-w-m-b-template" type="button"><a id="small-window-main-href" target="_blank">- -</a></button>
+            <button class="small-window-close-button small-window-two-close" id="s-w-c-b-template" type="button">Schließen</button>
+          </div>
         </div>
+
+        <div id="small-window-version">
+          <div class="small-window-description" id="s-w-d-version">
+            <p>Version: x.0.1</p>
+            <p>Developer release</p>
+            <p>Work in Progress</p>
+            <p>Copyright © 2021 - 2022 by JueK3y</p>
+          </div>
+          <div class="small-window-button" id="s-w-b-version">
+            <button class="small-window-close-button small-window-one-close" type="button">Schließen</button>
+          </div>
+        </div>
+
+        <form id="small-window-multi-fa" class="no-select">
+          <div class="small-window-description">Der benutzte Account hat 2FA aktiviert und benötigt einen zusätzlichen Code zum einloggen. Der Code kann bei der entsprechenden Authentifizierungs-App oder per SMS erhalten werden.</div>
+          <div id="s-w-f-multi-fa">
+            <label for="mfa-input">2FA Code: </label>
+            <input type="text" id="mfa-input" class="medium-form" placeholder="XXX XXX" minlength="6" maxlength="7" autocomplete="off" required>
+          </div>
+          <div class="small-window-button">
+            <button class="small-window-main-button" id="s-w-m-b-multi-fa" type="button">Bestätigen</button>
+            <button class="small-window-close-button small-window-two-close" id="s-w-c-b-multi-fa" type="button">Schließen</button>
+          </div>
+        </form>
+
       </div>
     </div>
     <p id="legal-note" class="no-select">Work in progress &copy; 2021 - 2022 by <a href="https://www.juek3y.com/">JueK3y</a></p>
