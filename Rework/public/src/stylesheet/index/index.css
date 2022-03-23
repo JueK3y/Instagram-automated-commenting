@@ -272,7 +272,7 @@ html body main #settings-container #settings-content #more-settings #set-more-te
 html body main #settings-container #settings-content #more-settings:hover #set-more-text {
   display: block;
 }
-html body main #settings-container #settings-content a {
+html body main #settings-container #settings-content #more-settings a {
   cursor: not-allowed;
 }
 html body main form {
