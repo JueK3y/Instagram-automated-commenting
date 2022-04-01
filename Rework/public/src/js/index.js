@@ -218,7 +218,7 @@ $('#start-btn').click(function() {
           openComments()
         }, 2500)
       }
-    }, 75)
+    }, 100)
   }
 })
 

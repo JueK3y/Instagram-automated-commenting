@@ -79,18 +79,23 @@ function launchMainLogic(_url, _username, _password, _mode) {
         runMainLogic = false
       }
       else {
+        // FIXME: 2FA doesn't work currently. Add support on final release -!- //
         if (await page.url() === mfaURL) {
           devLog('warn', 'Two-Factor Auth was detected')
           noteMessage('Zwei-Faktor Authentifizierung Code benötigt', 'Für die Anmeldung wird ein 2FA Code benötigt. Dieser kann bei der entsprechenden Auth-App oder per SMS erhalten werden.', true)
           showBanner('warning', '2FA LogIn', 'Zum LogIn wird aufgrund 2FA ein Code benötigt.', 'multi-factor-auth', true)  
           openSmallWin('multi-fa', 'src/img/icons/dark/info.svg', 'Instagram Automated Commenting 2.0')
+          await page.waitForTimeout(3000)
           await page.waitForFunction(() => {
-            return mfaButton === true && mfaCode.length === 6 // FIXME: Doesn't work yet -!- //
+            document.getElementById('s-w-m-b-multi-fa').onclick = () => {
+              let mfaCode = document.getElementById('mfa-input').value
+            }
+          //   return mfaButton === true && mfaCode.length === 6 // FIXME: Doesn't work yet -!- //
           })
           // TODO: Add ID's -!- //
-          await page.waitForSelector('...')
-          await page.type('...', mfaCode)
-          await page.click('...')
+          await page.waitForSelector('input[name="verificationCode"]')
+          await page.type('input[name="verificationCode"]', mfaCode)
+          await page.click('.L3NKy')
           await page.waitForTimeout(3000)
           if (await page.url() === mfaURL) await page.waitForSelector('#twoFactorErrorAlert')
           // TODO: Add 2FA Code and check it -!- //
