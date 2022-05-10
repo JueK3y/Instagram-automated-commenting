@@ -64,7 +64,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       // TODO: Check alert message AFTER the submit button is clicked -!- //
   
       
-      await page.waitForTimeout(3000)
+      await page.waitForTimeout(5000)
   
       // Check if data is correct
       devLog('info', 'Checking LogIn data')
@@ -108,14 +108,14 @@ function launchMainLogic(_url, _username, _password, _mode) {
         })
 
         getComments()
-        commentLoop = true
+        commentLoop = false        // INFO: Should the commenting loop or not? -!- //
         let comment;
         setTimeout(() => {
           comment = comData
         }, 75)
 
 
-        // Comment loop
+        // INFO: Comment loop -!- //
         if (commentLoop) {
           while (commentLoop) {
             await page.waitForTimeout(75)
@@ -139,6 +139,8 @@ function launchMainLogic(_url, _username, _password, _mode) {
                 }
               }
               catch(TypeError) {
+                // INFO: Checks for wrong URL -!- //
+                // FIXME: Gets called when closing the page manually -!- //
                 devLog('warn', 'Wrong page link')
                 noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
                 showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
@@ -172,14 +174,13 @@ function launchMainLogic(_url, _username, _password, _mode) {
             }
           }
         }
-
-        //commentLoop = false
-        await page.close()
+        // commentLoop = false
         devLog('info', 'Commenting fully completed')
         noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
         showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
         document.getElementById('stop-btn').click()
         runMainLogic = false
+        await page.close()
       }        
     }
   })
