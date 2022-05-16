@@ -35,7 +35,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         await page.goto(loginURL, {
           waitUntil: 'networkidle0',
         })
-        //browser.on('disconnected', alert('Test'))
+        // browser.on('disconnected', alert('Test'))
       }
       catch (ProtocolError) {
         devLog('error', 'Failed to execute browser action')
@@ -69,7 +69,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       // Check if data is correct
       devLog('info', 'Checking LogIn data')
       if (await page.url() === loginURL) {
-        await page.waitForSelector('#slfErrorAlert')                              // INFO: Shouldn't use id detection -!- //
+        await page.waitForSelector('#slfErrorAlert')                              // FIXME: Shouldn't use id detection -!- //
         devLog('warn', 'Wrong LogIn data')
         devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
         noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)

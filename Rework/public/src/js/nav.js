@@ -361,6 +361,7 @@ $(document).ready(function() {
       document.getElementById('profile-2').style.display = 'none'
       fourOrMore = false
     }
+
     if (profile3.innerText !== '') {
       document.getElementById('profile-3').style.display = 'flex'
       showMore.display = ''
@@ -419,7 +420,7 @@ else {
   addProfile.display = ''
 }
 
-  // Length Check
+// Length Check
 setTimeout(() => {
   if (profile1.innerText.length > 7) {
     profile1.innerText = profile1.innerText.substring(0, 4) + '...'
@@ -475,7 +476,7 @@ window.setInterval(() => {
       notConnected = false
       internetSpeed = result['mbps']
     }
-    if (notConnected) {                                                     // notConnected check from API
+    if (notConnected) {
       changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
       changeColor.style.background = (light) ? '#FDE7E9':'#442726'
       changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-off-colored.svg'
@@ -483,6 +484,7 @@ window.setInterval(() => {
         showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
         counterDisplay += 1
         if (counterDisplay === 3) {
+          // TODO: Add noteMessage -!- //
           document.getElementById('error-button-hide').style.display = 'block'
         }
       }
@@ -501,7 +503,7 @@ window.setInterval(() => {
         if (counter === 3 && showMessage) {
           $('#error-banner-wifi').fadeIn()
           counterDisplay += 1
-          // noteMessage('Langsames Internet', 'Ein langsames Netzwerk könnte IAC beeinträchtigen.')  // -- Spams the note center -- //
+          // noteMessage('Langsames Internet', 'Ein langsames Netzwerk könnte IAC beeinträchtigen.')  // INFO: Spams the note center -!- //
           if (counterDisplay === 3) {
             document.getElementById('error-hide').style.display = 'block'
           }
@@ -557,7 +559,7 @@ const updateIcon = document.getElementById('set-up')
 
 $(document).ready(function() {                                                // Check for update
   $(document).on('click', '#update', function() {
-    // Check for update here
+    // INFO: Check for update here -!- //
     updateIcon.style.transition = '3s linear'
     updateIcon.style.transform = 'rotate(720deg)'
     setTimeout(() => {
@@ -572,7 +574,7 @@ $(document).ready(function() {                                                //
         }, 3000)
       }
       else {
-        // Check for new version
+        // INFO: Check for new version -!- //
         if (updateOnline) {
           download.style.display = 'inline-block'
           update.style.display = 'none'
@@ -599,7 +601,8 @@ $(document).ready(function() {                                                //
       }
     }, 3001)
   })                                                                          
-  $(document).on('click', '#download', function() {                             // Download and install update
+  $(document).on('click', '#download', function() {
+    // Download and install update
     if (counterDisplay === 3 || notConnected) {
       noteMessage('Download fehlgeschlagen', 'Es wird eine aktive Internetverbindung benötigt', true)
       download.style.display = 'none '
@@ -613,7 +616,7 @@ $(document).ready(function() {                                                //
     }
     else {
       // Install update
-      downloadSuccess = true                                                     // --!- API check if download was successfull -!- //
+      downloadSuccess = true                                                     // TODO: API check if download was successfull -!- //
       if (downloadSuccess) {
         showBanner('info', 'Update heruntergeladen', 'IAC wird jetzt geupdatet und wird ggfl. neugestartet.', 'install-update', true)
         download.style.display = 'none '

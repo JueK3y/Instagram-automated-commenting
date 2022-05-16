@@ -35,31 +35,8 @@ $('#toggle').on('click', () => {
   }
 })
 
-////// Stop Button toggle
-
-// De-activated for demonstrational purpose
-/*
-// Program starts
-$('#start-btn').click(function() {
-  pgStart = true                        // Sends action to API, value name needs to be replaced with backend check value
-});
-
-if (programStarted) {                   // 'programStarted' is an backend value, as a confirm from the backend
-  $('#stop-btn').fadeIn()
-}
-
-// Program stops
-$('#stop-btn').click(function() {
-  pgStop = true                         // Same as above
-});
-
-if (programStopped) {                   // Same as above
-  $('#stop-btn').fadeOut()
-} */
-
 const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
 const specialChar = [' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '´', '\\', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
-// TODO: Does \' work? -!- //
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
     if (checkVar.includes(specialChar[i])) {
@@ -93,7 +70,7 @@ function formError(type) {
 // ONLY FOR DEMO VERSION
 let validate = false
 
-let checkClick = 0                                    // -- Is checkClick for de-activating display timeout? -- //
+let checkClick = 0                                    // FIXME: Is checkClick for de-activating display timeout? -!- //
 
 const urlInput = document.getElementById('url-input')
 const username = document.getElementById('username-form')
@@ -119,7 +96,7 @@ $('#start-btn').click(function() {
     document.getElementById('pauseIcon').style.display = 'none'
     document.getElementById('stop-btn').style.display = 'none'
   }
-  hideBanner('error')                                                                                                            // -- Looks weird for the same error -- //
+  hideBanner('error')                                                                                                            // FIXME: Looks weird for the same error -!- //
   if (urlInput.value === '' && username.value === '' && password.value === '') {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
     devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[0]}`)
@@ -136,7 +113,7 @@ $('#start-btn').click(function() {
     devLog('warn', `Client input was ${urlInput.value}`)
     formError(urlInput)
   }
-  else if (! urlInput.value.includes('instagram.')) {                                                                             // -- Change this value if needed -- //
+  else if (! urlInput.value.includes('instagram.')) {                                                                             // INFO: Change this value if needed -!- //
     showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
     devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`)
     devLog('warn', `Client input was ${urlInput.value}`)
@@ -254,9 +231,9 @@ const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
 $(document).ready(() => {
   $(document).on('click', '#profileDropdownContent', function(e) {
-    const clickedProfile = String(e.target.classList).slice(4)                                        // Pass ID to API and give username and password
-    username.value = clickedProfile                                                                       // Get Name for ID from API
-    getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+    const clickedProfile = String(e.target.classList).slice(4)                                        // INFO: Pass ID to API and give username and password -!- //
+    username.value = clickedProfile                                                                       // INFO: Get Name for ID from API -!- //
+    getPassword(username.value).then(result => password.value = result)                                   // INFO: Get Password for ID from API -!- //
     prDdImage.style.display = 'block'
     prDdImgBlur.style.display = 'none'
   })
@@ -265,22 +242,22 @@ $(document).ready(() => {
     for(let i = 0; i <= 3; i++) {
       if (target === 'profile-'+i+'-content') {
         const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
-        username.value = clickedProfile                                                                       // Get Name for ID from API
-        getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+        username.value = clickedProfile
+        getPassword(username.value).then(result => password.value = result)
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
       }
       else if (target === 'profile-'+i+'-img') {
         const clickedProfile = String(document.getElementById(target).nextElementSibling.classList).slice(4)
-        username.value = clickedProfile                                                                       // Get Name for ID from API
-        getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+        username.value = clickedProfile
+        getPassword(username.value).then(result => password.value = result)
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
       }
       else if (target === 'profile-'+i+'-name') {
         const clickedProfile = String(document.getElementById(target).classList).slice(4)
-        username.value = clickedProfile                                                                       // Get Name for ID from API
-        getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+        username.value = clickedProfile
+        getPassword(username.value).then(result => password.value = result)
         prDdImage.style.display = 'block'
         prDdImgBlur.style.display = 'none'
       }
@@ -291,7 +268,7 @@ $(document).ready(() => {
         $('.uid-'+deleteUser).remove()
         $('<a>', {
           class: 'uid-'+deleteProfile,
-          text: deleteProfile.replace('profile-', 'Profil ')        // FIXME: Better fix needed -!- //
+          text: deleteProfile.replace('profile-', 'Profil ')                                          // FIXME: Better fix needed -!- //
         }).appendTo('#profileDropdownContent')
         if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
           document.getElementById('profileDropdown').style.display = 'none'
@@ -309,7 +286,7 @@ $(document).ready(() => {
         $('.uid-'+deleteUser).remove()
         $('<a>', {
           class: 'uid-'+deleteProfile,
-          text: deleteProfile.replace('profile-', 'Profil ')        // FIXME: Better fix needed -!- //
+          text: deleteProfile.replace('profile-', 'Profil ')                                        // FIXME: Better fix needed -!- //
         }).appendTo('#profileDropdownContent')
         if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
           document.getElementById('profileDropdown').style.display = 'none'
@@ -324,7 +301,7 @@ $(document).ready(() => {
   })
 })
 
-// Image color changer
+////// Image color changer
 username.addEventListener('focus', function() {
   prDdImage.style.display = 'block'
   prDdImgBlur.style.display = 'none'
@@ -366,8 +343,8 @@ $(document).on('blur', '#username-form', () => {
     let target = e.target.id
     if (target != 'searchProfileContent') {
       const clickedProfile = String(target).slice(4)
-      username.value = clickedProfile                                                                       // Get Name for ID from API
-      getPassword(username.value).then(result => password.value = result)                                   // Get Password for ID from API
+      username.value = clickedProfile
+      getPassword(username.value).then(result => password.value = result)
       prDdImage.style.display = 'block'
       prDdImgBlur.style.display = 'none'
       document.getElementById('searchProfileContent').style.display = 'none'
