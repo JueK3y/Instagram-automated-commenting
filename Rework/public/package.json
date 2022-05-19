@@ -2,7 +2,20 @@
   "name": "iac_2.0",
   "productName": "IAC 2.0",
   "version": "0.8.1-alpha",
+  "license": "EULA",
   "description": "A new development from IAC under the name IAC 2.0",
+  "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
+  "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
+  "author": {
+    "name": "JueK3y",
+    "email": "hello@juek3y.com",
+    "url": "https://juek3y.com"
+  },
+  "bugs": {
+    "url": "https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose",
+    "email": "iac@juek3y.com"
+  },
+
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -10,17 +23,6 @@
     "app:dir": "electron-builder --dir",
     "app:dist": "electron-builder"
   },
-  "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
-  "keywords": [
-    "IAC",
-    "Instagram",
-    "Automated",
-    "Commenting",
-    "Bot"
-  ],
-  "author": "JueK3y",
-  "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
-  "license": "EULA",
   "devDependencies": {
     "electron": "^13.6.9"
   },
