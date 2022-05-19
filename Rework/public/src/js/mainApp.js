@@ -43,7 +43,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
     
   
       // Check for cookie banner
-      if (runMainLogic) {                                                                     // TODO: Better stillRunningCheck needed -!- //
+      if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
         if (await page.$('.bIiDR') !== null) {         // INFO: Shouldn't use class detection -!- //
           devLog('info', 'Found cookie banner')
           await page.click('.bIiDR')
@@ -71,7 +71,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       }
   
       // Submit LogIn data
-      if (runMainLogic) await page.click('[type="submit"]')                                 // TODO: Better stillRunningCheck needed -!- //
+      if (runMainLogic) await page.click('[type="submit"]')                                  // TODO: Better stillRunningCheck needed -!- //
       else {
         await page.close()
         return
@@ -79,7 +79,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
   
       // TODO: Check alert message AFTER the submit button is clicked -!- //
   
-      if (runMainLogic) await page.waitForTimeout(5000)                                    // TODO: Better stillRunningCheck needed -!- //
+      if (runMainLogic) await page.waitForTimeout(5000)                                      // TODO: Better stillRunningCheck needed -!- //
       else {
         await page.close()
         return
@@ -134,7 +134,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
           waitUntil: 'networkidle0',
         })
 
-        if (runMainLogic) getComments()                                               // TODO: Better stillRunningCheck needed -!- //
+        if (runMainLogic) getComments()                                                      // TODO: Better stillRunningCheck needed -!- //
         else {
           await page.close()
           return
@@ -150,7 +150,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         // INFO: Comment loop -!- //
         if (commentLoop) {
           while (commentLoop) {
-            if (runMainLogic) {                                                       // TODO: Better stillRunningCheck needed -!- //
+            if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //
               await page.waitForTimeout(75)
               for (let i = 0; i < comment.length; i++) {
                 const commInp = await page.$('[data-testid="post-comment-text-area"]')
@@ -168,7 +168,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
                     await commInp.type(comment[i])
                     await commBut.click()
                     devLog('info', `Posting comment: ${comment[i]}`)
-                    await page.waitForTimeout(6000)                                                     // TODO: Change this value to user based input -!- //
+                    await page.waitForTimeout(6000)                                          // TODO: Change this value to user based input -!- //
                   }
                 }
                 catch(TypeError) {
@@ -196,12 +196,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
             const commBut = await page.$('[data-testid="post-comment-input-button"]')
             let comment = comData
             try {
-              if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
+              if (runMainLogic) {                                                            // TODO: Better stillRunningCheck needed -!- //
                 await commInp.click()
                 await commInp.type(comment[i])
                 await commBut.click()
                 devLog('info', `Posting comment: ${comment[i]}`)
-                await page.waitForTimeout(6000)                                                     // TODO: Change this value to user based input -!- //
+                await page.waitForTimeout(6000)                                              // TODO: Change this value to user based input -!- //
               }
               else {
                 await page.close()
