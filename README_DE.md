@@ -35,6 +35,7 @@ IAC 2.0 wurde bisher auf
 - Windows 8 (x64)
 - Windows 10 (x64)
 - Windows 11 (x64)
+
 getestet, wird aber auch für Linux und MacOS (OSX) weiterentwickelt.
 
 Außerdem brauchst du:
