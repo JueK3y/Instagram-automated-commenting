@@ -31,7 +31,7 @@ And all this free of charge? Yes! And don't worry, I won't sell your data either
 
 ## What you need
 A Computer. Small, large, laptop, PC, anything will do.
-IAC 2.0 has been tested so far for
+<br>IAC 2.0 has been tested so far for
 - Windows 8 (x64)
 - Windows 10 (x64)
 - Windows 11 (x64)
