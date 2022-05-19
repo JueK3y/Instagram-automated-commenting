@@ -1,8 +1,11 @@
+const { autoUpdater } = require("electron-updater")
+
 // Run update check
 checkForUpdate()
 
 function checkForUpdate() {
-    let update = false
+    autoUpdater.checkForUpdatesAndNotify()
+    /* let update = false
     devLog('info', 'Checking for Updates')
     if (update) {
         devLog('info', 'Update found')
@@ -10,6 +13,6 @@ function checkForUpdate() {
     }
     else {
         devLog('info', 'No update was found')
-    }
+    } */
 }
 

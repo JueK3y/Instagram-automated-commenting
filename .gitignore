@@ -1,3 +1,3 @@
-/REWORK/public/dist/
-/REWORK/public/node_modules/
-/REWORK/private/*
+/public/dist/
+/public/node_modules/
+/private/*

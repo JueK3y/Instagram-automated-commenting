@@ -15,7 +15,6 @@
     "url": "https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose",
     "email": "iac@juek3y.com"
   },
-
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -29,6 +28,7 @@
   "dependencies": {
     "electron-log": "^4.4.6",
     "electron-store": "^8.0.1",
+    "electron-updater": "^5.0.1",
     "electron-window-state": "^5.0.3",
     "is-online": "^9.0.1",
     "keytar": "^7.9.0",
@@ -39,6 +39,9 @@
     "puppeteer-extra-plugin-stealth": "^2.9.0"
   },
   "build": {
-    "appId": "com.iac.app"
+    "appId": "com.iac.app",
+    "win": {
+      "target": "nsis"
+    }
   }
 }
