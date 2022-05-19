@@ -31,7 +31,7 @@ Und das alles kostenlos? Ja! Und keine Sorge, ich werde deine Daten auch nicht v
 
 ## Was du brauchst
 Einen Computer. Egal ob klein, groß, Laptop oder PC, alles erfüllt seinen Zweck.
-IAC 2.0 wurde bisher auf 
+<br>IAC 2.0 wurde bisher auf 
 - Windows 8 (x64)
 - Windows 10 (x64)
 - Windows 11 (x64)
