@@ -20,108 +20,103 @@ IAC ist ein Bot, welcher automatisch unter vorgegebenen Instagram Posts zufälli
 - Überarbeitete Einstellungsoptionen
 
 Technische Besonderheiten:
-- Datensicherheit: Deine Daten werden unter keinen Umständen
-  <br>hochgeladen und sind einzig und allein auf deinem Computer gespeichert
-- Regelmäßige Updates: An allen Problemen aus dem
-  <br>[IssueTracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) wird aktuell gearbeitet
-- Open Source: Die Echtheit und Funktionsweiße des Codes
-  <br>kann jederzeit selber überprüft werden
-- Automatischer Download aller benötigten Dateien
+- Datensicherheit: Deine Daten werden unter keinen Umständen hochgeladen und sind einzig und allein auf deinem Computer gespeichert
+- Regelmäßige Aktualisierungen: An allen Problemen aus dem [Community IssueTracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) wird aktuell gearbeitet
+  <br>(Es gibt natürlich auch einen Dev Issue Tracker, der andere Probleme behandelt)
+- Open Source: Die Echtheit und Funktionsweiße des Codes kann jederzeit selber überprüft werden
 
-And all this free of charge? Yes! And don't worry, I won't sell your data either.
+Und das alles kostenlos? Ja! Und keine Sorge, ich werde deine Daten auch nicht verkaufen ;)
 
 <br>
 
-## Requirements
-A Computer. Small, large, laptop, PC, anything will do.
-IAC 2.0 has been tested so far for
+## Was du brauchst
+Einen Computer. Egal ob klein, groß, Laptop oder PC, alles erfüllt seinen Zweck.
+IAC 2.0 wurde bisher auf 
 - Windows 8 (x64)
 - Windows 10 (x64)
 - Windows 11 (x64)
+getestet, wird aber auch für Linux und MacOS (OSX) weiterentwickelt.
 
-but will be further developed so that it can also be used on Linux and MacOS (OSX).
-
-Also you need:
-- [IAC 2.0 (The newest version)](https://github.com/JueK3y/Instagram-automated-commenting/releases)
-- An Instagram account and the correct credentials
-- The URL of the post you want to comment on
-- The comments you want to post
-
-
-## So funktioniert es
-1. Start up IAC 2.0
-2. Enter the copied URL which leads to the Instagram post.
-3. Enter your username and password. _¹_
-4. Open advanced settings.
-5. Click on "Edit comments" and and add your comments.
-6. Press Start and sit back. That simple.
+Außerdem brauchst du:
+- [IAC 2.0 (Die neuste Version)](https://github.com/JueK3y/Instagram-automated-commenting/releases)
+- Einen Instagram Account und die passenden LogIn Daten
+- Die URL des Posts, unter dem du kommentieren willst
+- Die Kommentare, welche du posten möchtest
 
 
-Of course, you also have the option to adjust some things.
-You can for example:
-- Add and save different profiles _¹_ (Advanced settings -> Save profile locally) 
-- Set how long IAC 2.0 should comment (Settings -> Comment settings)
-- Change the language (Not yet available)
-- And several more you can explore by yourself ;)
+## So funktioniert's
+1. Starte IAC 2.0
+2. Gib die kopierte URL ein, welche zum Instagram Post führt
+3. Gib deinen Benutzername und Passwort ein _¹_
+4. Öffne "Zusätzliche Optionen"
+5. Klicke auf "Kommentare bearbeiten" und füge deine Kommentare ein
+6. Drücke Start und lehn dich zurück. So einfach geht's
+
+
+Natürlich kannst du auch einige Dinge einstellen.
+Beispielsweise kannst du:
+- verschiedene Profile hinzufügen und speichern _¹_ (Zusätzliche Optionen -> Profil lokal speichern) 
+- festlegen, wie lange IAC 2.0 kommentieren soll (Einstellungen -> Kommentareinstellungen)
+- die Sprache ändern (Noch nicht verfügbar)
+- noch einiges mehr machen, was du selber erkunden darfst :)
 
 
 _¹ Don't worry, your data is safe. They are not uploaded anywhere, but encrypted and stored on your own computer._
 
 <br>
 
-## Bugs, missing Features & co.
+## Probleme, fehlende Features & co.
 
-- [🚀 Here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) you can submit suggestions for improvements or new features.
-- 📚 If you notice translation errors while using IAC 2.0, you can [report them here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Translation%2C+New+request&template=Translation_Error.yml).
-- 🐛 If you notice any problems or bugs (for example, display errors) during use, you can [report them here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Bug%2C+New+request&template=Bug_Report.yml).
+- [🚀 Hier](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) kannst du Vorschläge für Verbesserungen oder neue Funktionen einreichen.
+- 📚 Wenn dir bei der Verwendung von IAC 2.0 Übersetzungsfehler auffallen, kannst du [diese hier melden](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Translation%2C+New+request&template=Translation_Error.yml).
+- 🐛 Falls du während der Nutzung auf Probleme oder Fehler (z.B. Anzeigefehler) stößt, dann kannst du [sie hier melden](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Bug%2C+New+request&template=Bug_Report.yml).
 
-- Also, for any other questions or problems, you can check out [the wiki](https://github.com/JueK3y/Instagram-automated-commenting/wiki).
+- Bei anderen Fragen oder Problemen kannst du auch [im Wiki](https://github.com/JueK3y/Instagram-automated-commenting/wiki) nachsehen.
 
 
 ## Technische Daten
-The following dependencies were used to develop IAC 2.0:
+Folgende Dependencies wurden bei der Entwicklung von IAC 2.0 verwendet:
 
 - electron 13.6.9
-- electron-log 4.4.4
+- electron-log 4.4.6
 - electron-store 8.0.1
 - electron-window-state 5.0.3
 - is-online 9.0.1
-- node-keytar 7.8.0
+- node-keytar 7.9.0
 - network-speed 2.1.1
 - node-notifier 10.0.1
+- puppeteer-extra 13.4.0
 - puppeteer-extra 3.2.3
 - puppeteer-extra-plugin-stealth 2.9.0
-- puppeteer-in-electron 3.0.5
 
-You can see all used dependencies [here](https://github.com/JueK3y/Instagram-automated-commenting/network/dependencies).
+Die vollständige Liste kannst du dir [hier](https://github.com/JueK3y/Instagram-automated-commenting/network/dependencies) angucken.
+
+_Es kann vorkommmen, dass hier ältere Versionen angegeben sind als eigentlich benutzt werden._
 
 <br>
 
-## Leave a ⭐
+## Hinterlasse ein ⭐
 Wenn dir dieses Projekt gefällt, lass einen Stern da :)
 <br>Das würde mir sehr viel bedeuten.
 
 
-## Financial support
-If you want to support the project financially, you can do it as follows:
-- Using [GitHub Sponsors]() (Comming soon),
-- With [buying me a sandwich 🌮](https://www.buymeacoffee.com/juek3y),
-- or, more anonymously, via [Bitcoin]() or [Ethereum]() (Comming soon)
+## Finanzielle Unterstützung
+Wenn du das Projekt finanziell unterstützen möchtest, kannst du dies wie folgt tun:
+- Mithilfe von [GitHub Sponsors]() (Bald verfügbar)
+- Mit dem [Kauf eines Sandwiches 🌮](https://www.buymeacoffee.com/juek3y)
+- oder, anonym, mit [Bitcoin]() oder [Ethereum]() (Bald verfügbar)
 
-
-###### Secret tip: If you use the Brave Browser, you can also easily donate BATs via the browser.
+###### Kleiner Tipp: Wenn du Brave benutzt, kannst du auch [BATs](https://basicattentiontoken.org/de/) spenden.
 
 <br>
 
 ## Rechtliche Hinweiße
 ### End User License Agreement
-_There is a [EULA](LICENSE.md) for IAC 2.0. Please read it carefully before using the program.
-<br>By downloading and using the program you automatically accept the EULA.
-<br>Violations of the EULA can and will be legally punished._
+_Es gibt eine [EULA](LICENSE.md) für IAC 2.0. Bitte lies diese sorgfältig durch, bevor du das Programm verwendest.<br>Durch das Herunterladen und die Nutzung des Programmes akzeptierst du automatisch die EULA.<br>Verstöße gegen die EULA können und werden rechtlich geahndet._
 
 
-### Exclusion of liability
-_The program has been carefully developed and tested. However, damage cannot be ruled out.<br>JueK3y, as the author of the program, withdraws from any legal consequences in case of possible damages.<br>The user of the program is liable for himself and has to be responsible for possible damages caused by the program.<br>Possible damages are for example the blocking of the used Instagram account by Instagram.<br><br>Please read the [Instagram guidelines](https://help.instagram.com/477434105621119/Instagram) and the [Meta Spam Policy](https://transparency.fb.com/policies/community-standards/spam/) for more information._
+### Haftungsausschluss
+_Das Programm ist sorgfältig entwickelt und getestet worden. Dennoch können Schäden nicht ausgeschlossen werden.<br>JueK3y, als Autor des Programms, zieht sich von jeglichen rechtlichen Konsequenzen im Falle von möglichen Schäden zurück.<br>Der Benutzer des Programms haftet für sich selbst und muss für eventuelle Schäden, die durch das Programm verursacht werden, selber aufkommen.<br>Mögliche Schäden sind zum Beispiel die Sperrung des verwendeten Instagram-Kontos durch Instagram.<br><br>Bitte lesen Sie die [Instagram-Richtlinien](https://help.instagram.com/477434105621119/Instagram) und die [Meta Spam-Richtlinie](https://transparency.fb.com/policies/community-standards/spam/) für weitere Informationen._
 
 ###### _Verändern Sie das Programm NICHT und laden Sie es nicht erneut hoch.<br>Geben Sie verwendete Programmteile NICHT als Ihre eigenen an.<br>Jede Verletzung des Urheberrechts / der EULA kann und wird rechtlich geahndet._
 

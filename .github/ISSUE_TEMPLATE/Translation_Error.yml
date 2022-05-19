@@ -14,7 +14,7 @@ body:
     options:
       - German
       - English
-      - Some other language
+      - Other language
   validations:
     required: true
  
@@ -25,8 +25,7 @@ body:
     placeholder: |
       1. Go to '...'
       2. Click on '....'
-      3. Scroll down to '....'
-      4. See missing translation in line '...'
+      3. See missing translation in line '...'
   validations:
     required: true
  

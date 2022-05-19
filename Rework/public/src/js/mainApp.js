@@ -168,7 +168,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
                     await commInp.type(comment[i])
                     await commBut.click()
                     devLog('info', `Posting comment: ${comment[i]}`)
-                    await page.waitForTimeout(6000)                                          // TODO: Change this value to user based input -!- //
+                    await page.waitForTimeout(6000)     // TODO: Change this value to user based input -!- //
                   }
                 }
                 catch(TypeError) {
@@ -201,7 +201,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
                 await commInp.type(comment[i])
                 await commBut.click()
                 devLog('info', `Posting comment: ${comment[i]}`)
-                await page.waitForTimeout(6000)                                              // TODO: Change this value to user based input -!- //
+                await page.waitForTimeout(6000)     // TODO: Change this value to user based input -!- //
               }
               else {
                 await page.close()
