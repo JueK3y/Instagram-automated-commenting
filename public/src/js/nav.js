@@ -493,7 +493,7 @@ window.setInterval(() => {
       document.getElementById('error-button-hide').style.display = 'none'
       if ($('.wifi-not-connected')[0]) {
         hideBanner('wifi-not-connected')
-        devLog('warn', 'wifi-not-connected banner exists. Removing it.')
+        log.warn('wifi-not-connected banner exists. Removing it.')
       }
       if (internetSpeed === 0) {
         counter += 1
@@ -544,6 +544,8 @@ window.setInterval(() => {
 
 
 ////// Update checker
+// FIXME: Needs to be re-worked -!- //
+
 let updateOnline
 
 function setUpdateBoolean() {
@@ -660,6 +662,7 @@ setTimeout(() => {
 
 ////// Developer mode
 $(document).on('click', '#developer-mode', () => {
+  log.info('Opening DevTools')
   $('#developer-mode').css('display', 'none')
   $('#developer-settings').css('display', 'inline-block')
   mainLogicMode = false
@@ -685,7 +688,7 @@ $(document).on('click', '#s-w-c-b-multi-fa', () => {
   $('#small-window-multi-fa').css('display', 'none')
   $('#stop-btn').click()
   showBanner('error', 'Fehlender 2FA Code', 'IAC 2.0 kann ohne den 2FA Code nicht kommentieren.', 'no-mfa-code', true)
-  devLog('warn', 'Client error - LogIn not possible: 2FA window was closed')
+  log.warn('Client error - LogIn not possible: 2FA window was closed')
 })
 
 $(document).on('click', '#s-w-m-b-multi-fa', () => {
@@ -696,13 +699,14 @@ $(document).on('click', '#s-w-m-b-multi-fa', () => {
   }
   else {
     showBanner('warning', 'Fehlender 2FA Code', 'Es wird der 6-stellige 2FA Code benötigt.', 'empty-mfa-input', true)
-    devLog('warn', '2FA Button was pressed without input')
+    log.warn('2FA Button was pressed without input')
   }
 })
 
 
 function closeSmallWin() {
   if (document.getElementById('small-window-multi-fa').style.display !== 'block') {
+    log.info('Closing SmallWindow')
     $('#small-window').css('display', 'none')
     $('#small-window-template').css('display', 'none')
     $('#small-window-version').css('display', 'none')
@@ -712,6 +716,7 @@ function closeSmallWin() {
 }
 
 function openSmallWin(type, icon, title, content, mainBtn, hyperlink) {
+  log.info(`Opening SmallWindow with following values: ${type}, ${icon}, ${title}, ${content}, ${mainBtn}, ${hyperlink} `)
   $('#small-window').css('display', 'block')
   $('#small-window-template').css('display', 'none')
   $('#small-window-version').css('display', 'none')

@@ -111,7 +111,7 @@ ipc.on('changeWinIcon', () => {
 
 ////// Open comment file
 function getCommentsPath() {
-    devLog('info', 'Getting comments file path')
+    log.info('Getting comments file path')
     ipc.send('checkFile', ['dirLoc', 'fileLoc'])
     ipc.on('getFilePath', (evt, args) => {
         returnCommentPath(args[0], args[1])
@@ -127,3 +127,13 @@ function openCommentFile(fileLocation) {
 function openDevConsoleIPC() {
     ipc.send('openDevConsole')
 }
+
+
+////// Update
+ipc.on('update', (event, text) => {
+    console.log('Message from updater:', text);
+    if (text === 'Update available') {
+        setUpdateBoolean()
+        // TODO: Add update functionallity -!- //
+    }
+})

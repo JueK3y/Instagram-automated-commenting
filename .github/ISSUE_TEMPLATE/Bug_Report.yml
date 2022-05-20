@@ -13,9 +13,7 @@ body:
     label: Specification
     placeholder: "Windows Version 20H2, IAC 2.0.1"
     description: |
-      Please specify which `OS` you are using (with version number), which `browser (with version number)` and which `version of IAC` you are using.
-
-      If your IAC version is 2.0.1 or newer, you don't need to specify your browser.
+      Please specify which `OS` you are using (with version number) and which `version of IAC` you are using.
   validations:
     required: true
 

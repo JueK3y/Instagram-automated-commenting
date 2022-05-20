@@ -9,7 +9,7 @@ commentLoop = false
 function launchMainLogic(_url, _username, _password, _mode) {
   puppeteer.launch({ headless: _mode, slowMo: 100 }).then(async browser => {    // TODO: Without slowMo arg in production -!- //
     while (runMainLogic) {
-      devLog('info', 'Main logic launch successfull')
+      log.info('Main logic launch successfull')
       const page = (await browser.pages())[0]
       
       // Stealh mode checker
@@ -24,13 +24,13 @@ function launchMainLogic(_url, _username, _password, _mode) {
       const password = _password
     
       if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
-        devLog('info', 'Adding https:// to URL')
+        log.info('Adding https:// to URL')
         postURL = 'https://' + postURL
       }
   
   
       // Opening browser
-      devLog('info', 'Opening instagram login page')
+      log.info('Opening instagram login page')
       try {
         await page.goto(loginURL, {
           waitUntil: 'networkidle0',
@@ -38,14 +38,14 @@ function launchMainLogic(_url, _username, _password, _mode) {
         // browser.on('disconnected', alert('Test'))
       }
       catch (ProtocolError) {
-        devLog('error', 'Failed to execute browser action')
+        log.error('Failed to execute browser action')
       }
     
   
       // Check for cookie banner
-      if (runMainLogic) {                                                                     // TODO: Better stillRunningCheck needed -!- //
+      if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
         if (await page.$('.bIiDR') !== null) {         // INFO: Shouldn't use class detection -!- //
-          devLog('info', 'Found cookie banner')
+          log.info('Found cookie banner')
           await page.click('.bIiDR')
         }
       }
@@ -71,7 +71,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       }
   
       // Submit LogIn data
-      if (runMainLogic) await page.click('[type="submit"]')                                 // TODO: Better stillRunningCheck needed -!- //
+      if (runMainLogic) await page.click('[type="submit"]')                                  // TODO: Better stillRunningCheck needed -!- //
       else {
         await page.close()
         return
@@ -79,18 +79,18 @@ function launchMainLogic(_url, _username, _password, _mode) {
   
       // TODO: Check alert message AFTER the submit button is clicked -!- //
   
-      if (runMainLogic) await page.waitForTimeout(5000)                                    // TODO: Better stillRunningCheck needed -!- //
+      if (runMainLogic) await page.waitForTimeout(5000)                                      // TODO: Better stillRunningCheck needed -!- //
       else {
         await page.close()
         return
       }
   
       // Check if data is correct
-      devLog('info', 'Checking LogIn data')
+      log.info('Checking LogIn data')
       if (await page.url() === loginURL) {
         await page.waitForSelector('#slfErrorAlert')                              // FIXME: Shouldn't use id detection -!- //
-        devLog('warn', 'Wrong LogIn data')
-        devLog('warn', 'Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
+        log.warn('Wrong LogIn data')
+        log.warn('Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
         noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)
         showBanner('error', 'Falsche Eingabe?', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
         document.getElementById('stop-btn').click()
@@ -100,7 +100,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       else {
         // FIXME: 2FA doesn't work currently. Add support on final release -!- //
         if (await page.url() === mfaURL) {
-          devLog('warn', 'Two-Factor Auth was detected')
+          log.warn('Two-Factor Auth was detected')
 
           // TODO: Delete this, if 2FA works -!- //
           noteMessage('Zwei-Faktor Authentifizierung entdeckt', 'In dieser Version wird das Anmelden mit 2FA noch nicht unterstützt', true)
@@ -128,13 +128,13 @@ function launchMainLogic(_url, _username, _password, _mode) {
           // TODO: Add 2FA Code and check it -!- //
           // TODO: If #twoFactorErrorAlert comes up - ask for 2FA again -!- // */
         }
-        devLog('info', 'Correct LogIn data')
-        devLog('info', `Opening ${postURL}`)
+        log.info('Correct LogIn data')
+        log.info(`Opening ${postURL}`)
         await page.goto(postURL, {
           waitUntil: 'networkidle0',
         })
 
-        if (runMainLogic) getComments()                                               // TODO: Better stillRunningCheck needed -!- //
+        if (runMainLogic) getComments()                                                      // TODO: Better stillRunningCheck needed -!- //
         else {
           await page.close()
           return
@@ -150,7 +150,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         // INFO: Comment loop -!- //
         if (commentLoop) {
           while (commentLoop) {
-            if (runMainLogic) {                                                       // TODO: Better stillRunningCheck needed -!- //
+            if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //
               await page.waitForTimeout(75)
               for (let i = 0; i < comment.length; i++) {
                 const commInp = await page.$('[data-testid="post-comment-text-area"]')
@@ -167,14 +167,14 @@ function launchMainLogic(_url, _username, _password, _mode) {
                     await commInp.click()
                     await commInp.type(comment[i])
                     await commBut.click()
-                    devLog('info', `Posting comment: ${comment[i]}`)
-                    await page.waitForTimeout(6000)                                                     // TODO: Change this value to user based input -!- //
+                    log.info(`Posting comment: ${comment[i]}`)
+                    await page.waitForTimeout(6000)     // TODO: Change this value to user based input -!- //
                   }
                 }
                 catch(TypeError) {
                   // INFO: Checks for wrong URL -!- //
                   // FIXME: Gets called when closing the page manually -!- //
-                  devLog('warn', 'Wrong page link')
+                  log.warn('Wrong page link')
                   noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
                   showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
                   document.getElementById('stop-btn').click()
@@ -196,12 +196,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
             const commBut = await page.$('[data-testid="post-comment-input-button"]')
             let comment = comData
             try {
-              if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
+              if (runMainLogic) {                                                            // TODO: Better stillRunningCheck needed -!- //
                 await commInp.click()
                 await commInp.type(comment[i])
                 await commBut.click()
-                devLog('info', `Posting comment: ${comment[i]}`)
-                await page.waitForTimeout(6000)                                                     // TODO: Change this value to user based input -!- //
+                log.info(`Posting comment: ${comment[i]}`)
+                await page.waitForTimeout(6000)     // TODO: Change this value to user based input -!- //
               }
               else {
                 await page.close()
@@ -209,7 +209,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
               }
             }
             catch(TypeError) {
-              devLog('warn', 'Wrong page link')
+              log.warn('Wrong page link')
               noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
               showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
               document.getElementById('stop-btn').click()
@@ -219,7 +219,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
           }
         }
         // commentLoop = false
-        devLog('info', 'Commenting fully completed')
+        log.info('Commenting fully completed')
         noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
         showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
         document.getElementById('stop-btn').click()

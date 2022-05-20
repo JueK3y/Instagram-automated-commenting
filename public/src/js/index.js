@@ -99,45 +99,45 @@ $('#start-btn').click(function() {
   hideBanner('error')                                                                                                            // FIXME: Looks weird for the same error -!- //
   if (urlInput.value === '' && username.value === '' && password.value === '') {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[0]}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[0]}`)
     formError()
   }
   else if (urlInput.value === '') {
     showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', errorCode[1], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[1]}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[1]}`)
     formError(urlInput)
   }
   else if (urlInput.value.length < 16) {
     showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', errorCode[2], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[2]}`)
-    devLog('warn', `Client input was ${urlInput.value}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[2]}`)
+    log.warn(`Client input was ${urlInput.value}`)
     formError(urlInput)
   }
   else if (! urlInput.value.includes('instagram.')) {                                                                             // INFO: Change this value if needed -!- //
     showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`)
-    devLog('warn', `Client input was ${urlInput.value}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`)
+    log.warn(`Client input was ${urlInput.value}`)
     formError(urlInput)
   }
   else if (username.value === '') {
     showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', errorCode[4], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[4]}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[4]}`)
     formError(username)
   }
   else if (specialCharCheck(username.value)) {
     showBanner('warning', 'Falsche Eingabe', 'Der Benutzername kann keine Sonderzeichen enthalten.', errorCode[5], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[5]}`)
-    devLog('warn', `Client input was ${username.value}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[5]}`)
+    log.warn(`Client input was ${username.value}`)
     formError(username)
   }
   else if (password.value === '') {
     showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', errorCode[6], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[6]}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[6]}`)
     formError(password)
   }
   else if (password.value.length < 5) {
     showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', errorCode[7], true)
-    devLog('warn', `Client error - Start of IAC 2.0 not possible: ${errorCode[7]}`)
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[7]}`)
     formError(password)
   }
   else {
@@ -145,7 +145,7 @@ $('#start-btn').click(function() {
     for (let i = 0; i < errorCode.length; i++) {
       if ($('.' + errorCode[i])[0]) {
         hideBanner(errorCode[i])
-        devLog('info', `${errorCode[i]} banner exists. Removing it`)
+        log.info(`${errorCode[i]} banner exists. Removing it`)
       }
     }
   }
@@ -154,7 +154,7 @@ $('#start-btn').click(function() {
     getComments()
     setTimeout(() => {
       if (comData[0] !== undefined) {
-        devLog('info', 'All input is correct, launching main logic')
+        log.info('All input is correct, launching main logic')
         document.getElementById('start-btn').style.display = 'none'
         document.getElementById('pause-btn').style.display = 'block'
         document.getElementById('stop-btn').style.display = 'block'
@@ -163,7 +163,7 @@ $('#start-btn').click(function() {
         runMainLogic = true
         launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
         if (document.getElementById('save-profile').checked) {
-          devLog('info', 'Saving LogIn data')
+          log.info('Saving LogIn data')
           setPassword(username.value, password.value)
           setTimeout(() => {
             profileUpdate()
@@ -189,7 +189,7 @@ $('#start-btn').click(function() {
       }
       else {
         showBanner('error', 'Keine Kommentare', 'IAC 2.0 benötigt mindestens einen Kommentar.', 'zero-comments', true)
-        devLog('warn', 'Client error - Start of IAC 2.0 not possible: Empty comment file')
+        log.warn('Client error - Start of IAC 2.0 not possible: Empty comment file')
         validate = false
         setTimeout(() => {
           openComments()
@@ -207,7 +207,7 @@ $('#pause-btn').click(function() {
   document.getElementById('stop-btn').style.display = 'block'
   document.getElementById('runIcon').style.display = 'none'
   document.getElementById('pauseIcon').style.display = 'block'
-  devLog('info', 'Pause button was pressed')
+  log.info('Pause button was pressed')
   // TODO: API pauses commenting -!- //
 })
 
@@ -222,7 +222,7 @@ $('#stop-btn').click(function() {
   document.getElementById('idleIcon').style.display = 'block'
   document.getElementById('runIcon').style.display = 'none'
   document.getElementById('pauseIcon').style.display = 'none'
-  devLog('info', 'Stop button was pressed')
+  log.info('Stop button was pressed')
 })
 
 ////// Profile Dropdown 

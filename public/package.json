@@ -3,9 +3,12 @@
   "productName": "IAC 2.0",
   "version": "0.8.1-alpha",
   "license": "EULA",
-  "description": "A new development from IAC under the name IAC 2.0",
+  "description": "A bot for automatic commenting on Instagram",
   "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
-  "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JueK3y/Instagram-automated-commenting"
+  },
   "author": {
     "name": "JueK3y",
     "email": "hello@juek3y.com",
@@ -15,13 +18,12 @@
     "url": "https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose",
     "email": "iac@juek3y.com"
   },
-
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app:dir": "electron-builder --dir",
-    "app:dist": "electron-builder"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "devDependencies": {
     "electron": "^13.6.9"
@@ -29,6 +31,7 @@
   "dependencies": {
     "electron-log": "^4.4.6",
     "electron-store": "^8.0.1",
+    "electron-updater": "^5.0.1",
     "electron-window-state": "^5.0.3",
     "is-online": "^9.0.1",
     "keytar": "^7.9.0",
@@ -39,6 +42,13 @@
     "puppeteer-extra-plugin-stealth": "^2.9.0"
   },
   "build": {
-    "appId": "com.iac.app"
+    "appId": "com.iac.app",
+    "productName": "IAC 2.0",
+    "win": {
+      "target": "nsis",
+      "publish": {
+        "provider": "github"
+      }
+    }
   }
 }

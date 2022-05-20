@@ -12,5 +12,5 @@ Since the project is being completely reworked, no security issues from versions
 
 ## Reporting a Vulnerability
 
-Currently, the contact form for security issues is being expanded.
-<br>If you want to report a security issue, please [create a new issue ticket](https://github.com/JueK3y/Instagram-automated-commenting/issues/new).
+If you want to report a security issue, please [create a new issue ticket](https://github.com/JueK3y/Instagram-automated-commenting/issues/new).
+<br>For critical security issues, please email [iac@juek3y.com](mailto:iac@juek3y.com).
