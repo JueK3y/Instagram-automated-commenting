@@ -8,7 +8,6 @@ const path = require('path')
 const fs = require('fs')
 const ipc = ipcMain
 
-
 log.info('--- Main start of IAC 2.0 ---')
 
 const createWindow = () => {
