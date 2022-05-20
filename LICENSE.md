@@ -1,5 +1,3 @@
-### This License is currently NOT in use
-
 <h2>End-User License Agreement (EULA) of IAC 2.0</h2>
 
 <p>This End-User License Agreement ("EULA") is a legal agreement between you and JueK3y.</p>
