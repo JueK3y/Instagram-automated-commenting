@@ -1,3 +1,7 @@
+const log = require('electron-log')
+
+log.info('--- Renderer start of IAC 2.0 ---')
+
 document.oncontextmenu = function() {
     return false;
 }

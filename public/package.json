@@ -3,9 +3,12 @@
   "productName": "IAC 2.0",
   "version": "0.8.1-alpha",
   "license": "EULA",
-  "description": "A new development from IAC under the name IAC 2.0",
+  "description": "A bot for automatic commenting on Instagram",
   "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
-  "repository": "https://github.com/JueK3y/Instagram-automated-commenting",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JueK3y/Instagram-automated-commenting"
+  },
   "author": {
     "name": "JueK3y",
     "email": "hello@juek3y.com",
@@ -19,8 +22,8 @@
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app:dir": "electron-builder --dir",
-    "app:dist": "electron-builder"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "devDependencies": {
     "electron": "^13.6.9"
@@ -40,8 +43,12 @@
   },
   "build": {
     "appId": "com.iac.app",
+    "productName": "IAC 2.0",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "publish": {
+        "provider": "github"
+      }
     }
   }
 }

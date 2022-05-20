@@ -1,10 +1,15 @@
 const { app, BrowserWindow, ipcMain, powerSaveBlocker, session, systemPreferences } = require('electron')
 const windowStateKeeper = require('electron-window-state')
+const { autoUpdater } = require('electron-updater')
 const { nativeTheme } = require('electron/main')
 const { shell } = require('electron')
+const log = require('electron-log')
 const path = require('path')
 const fs = require('fs')
 const ipc = ipcMain
+
+
+log.info('--- Main start of IAC 2.0 ---')
 
 const createWindow = () => {
   // Create the browser window.
@@ -125,6 +130,52 @@ const createWindow = () => {
 
   ipc.on('openDevConsole', () => {
     mainWindow.webContents.openDevTools()
+  })
+  
+  autoUpdater.logger = log;
+  autoUpdater.logger.transports.file.level = 'info';
+
+  autoUpdater.checkForUpdatesAndNotify()
+  
+  const sendStatusToWindow = (text) => {
+    log.info(text);
+    if (mainWindow) {
+      mainWindow.webContents.send('update', text)
+    }
+  }
+
+  // sendStatusToWindow('Update available')
+  
+  ////// Update
+  autoUpdater.on('checking-for-update', () => {
+    sendStatusToWindow('Checking for update...')
+  })
+
+  autoUpdater.on('update-available', () => {
+    sendStatusToWindow('Update available')
+  })
+
+  autoUpdater.on('update-not-available', () => {
+    sendStatusToWindow('Update not available')
+  })
+
+  autoUpdater.on('error', err => {
+    log.error(`Update-Error: ${err.toString()}`)
+    mainWindow.webContents.send('message', `Error in auto-updater: ${err.toString()}`)
+  })
+
+  autoUpdater.on('download-progress', progressObj => {
+    sendStatusToWindow(
+      `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+    )
+  })
+
+  autoUpdater.on('update-downloaded', () => {
+    sendStatusToWindow('Update downloaded; will install now')
+    // Wait 5 seconds, then quit and install
+    // In your application, you don't need to wait 500 ms.
+    // You could call autoUpdater.quitAndInstall(); immediately
+    autoUpdater.quitAndInstall()
   })
 }
 

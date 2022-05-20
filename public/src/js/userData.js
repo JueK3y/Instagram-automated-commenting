@@ -75,7 +75,7 @@ function returnCommentPath(_dirLocation, _fileLocation) {
 function checkCommentFile() {
     getCommentsPath()
     setTimeout(() => {
-        devLog('info', 'Checking for comments file path')
+        log.info('Checking for comments file path')
         if (! fs.existsSync(fileLocation)) {
             if (! fs.existsSync(dirLocation)) {
                 fs.mkdirSync(dirLocation)
@@ -87,7 +87,7 @@ function checkCommentFile() {
 
 // Function for opening comment file
 function openComments() {
-    devLog('info', 'Opening comments file')
+    log.info('Opening comments file')
     checkCommentFile()
     setTimeout(() => {
         openCommentFile(fileLocation)
@@ -98,10 +98,10 @@ function getComments() {
     let pureData = []
     comData = []
     checkCommentFile()
-    devLog('info', 'Reading content from comment file')
+    log.info('Reading content from comment file')
     setTimeout(() => {
         fs.readFile(fileLocation, 'utf-8', (err, data) => {
-            if (err) devLog('err', `The following error occured: ${err}`)
+            if (err) log.error(`The following error occured: ${err}`)
             pureData = data.split('\n')
             for (let i = 0; i < pureData.length; i++) {
                 if (pureData[i].charAt(0) !== '!') {
