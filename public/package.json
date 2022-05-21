@@ -29,7 +29,6 @@
     "electron": "^13.6.9"
   },
   "dependencies": {
-    "electron-builder": "^23.0.3",
     "electron-log": "^4.4.6",
     "electron-store": "^8.0.1",
     "electron-updater": "^5.0.1",
