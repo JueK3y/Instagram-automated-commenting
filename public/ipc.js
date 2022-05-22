@@ -10,6 +10,9 @@ const ipc = ipcRenderer
 // INFO: Get current version -!- //
 ipc.on('getCurVer', (event, text) => {
     document.getElementById('currentVersion').innerText = text
+    if (text.includes('alpha')) document.getElementById('verType').innerText = 'Alpha release'
+    else if (text.includes('beta')) document.getElementById('verType').innerText = 'Beta release'
+    else document.getElementById('verType').innerText = 'Public release'
 })
 
 // INFO: Prevent Start -!- //
