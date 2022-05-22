@@ -1,5 +1,5 @@
 {
-  "name": "iac_2.0",
+  "name": "iac_2",
   "productName": "IAC 2.0",
   "version": "0.8.2-alpha",
   "license": "EULA",
@@ -42,8 +42,9 @@
     "puppeteer-extra-plugin-stealth": "^2.9.0"
   },
   "build": {
-    "appId": "com.iac.app",
+    "appId": "jue3ky.iac_2.app",
     "productName": "IAC 2.0",
+    "copyright": "Copyright © 2022 JueK3y",
     "win": {
       "target": "nsis",
       "publish": {
