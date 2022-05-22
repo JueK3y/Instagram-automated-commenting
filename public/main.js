@@ -48,7 +48,8 @@ const createWindow = () => {
     mainWindowState.manage(mainWindow)
     mainWindow.show()
     mainWindow.focus()
-    mainWindow.webContents.send('accColor', color)
+    mainWindow.webContents.send('accColor', color)    
+    mainWindow.webContents.send('getCurVer', process.env.npm_package_version)
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
     } else {

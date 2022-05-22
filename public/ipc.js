@@ -7,6 +7,11 @@ const pauseButton = document.getElementById('pause-btn')
 const stopPrevent = document.getElementById('stop-btn')
 const ipc = ipcRenderer
 
+// INFO: Get current version -!- //
+ipc.on('getCurVer', (event, text) => {
+    document.getElementById('currentVersion').innerText = text
+})
+
 // INFO: Prevent Start -!- //
 preventStart.addEventListener('click', () => {
     setTimeout(() => {
