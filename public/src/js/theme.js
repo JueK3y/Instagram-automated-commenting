@@ -112,7 +112,7 @@ function darkIcon() {
     catch (err) { }
 }
 
-// Theme detection
+// INFO: Theme detection -!- //
 function detectTheme() {
     
     let theme = localStorage.getItem('theme')
@@ -178,7 +178,7 @@ setTimeout(() => {          // FIXME: Rework before release -!- //
 }, 250)
 
 
-// Button Event Handlers
+// INFO: Button Event Handlers -!- //
 themeToDark.onclick = () => {
     localStorage.setItem('theme', 'dark')
     body.classList.replace('light', 'dark')

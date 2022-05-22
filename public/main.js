@@ -11,7 +11,7 @@ const ipc = ipcMain
 log.info('--- Main start of IAC 2.0 ---')
 
 const createWindow = () => {
-  // Create the browser window.
+  // INFO: Create the browser window -!- //
   const mainWindowState = windowStateKeeper({
     defaultWidth: 1200,
     defaultHeight: 800
@@ -39,7 +39,7 @@ const createWindow = () => {
       }
   })
 
-  // load the index.html of the app.
+  // INFO: Load the index.html of the app -!- //
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   
   let color = systemPreferences.getAccentColor()

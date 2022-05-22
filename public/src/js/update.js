@@ -1,4 +1,4 @@
-// Run update check
+// INFO: Run update check -!- //
 // checkForUpdate()
 
 function checkForUpdate() {

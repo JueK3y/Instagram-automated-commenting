@@ -67,7 +67,8 @@ function formError(type) {
 }
 
 
-// ONLY FOR DEMO VERSION
+// INFO: ONLY FOR DEMO VERSION -!- //
+// TODO: Check validate value -!- //
 let validate = false
 
 let checkClick = 0                                    // FIXME: Is checkClick for de-activating display timeout? -!- //

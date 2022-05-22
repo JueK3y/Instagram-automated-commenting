@@ -114,7 +114,7 @@ $(document).ready(() => {                                               // TODO:
   })
 })
 
-// Comment 
+// INFO: Comment -!- //
 $(document).ready(() => {
   let locked = false
   $('.comment').click(() => {
@@ -140,7 +140,7 @@ $(document).ready(() => {
     showContent('comment', 220)
   }) 
   
-  // Profile 
+  // INFO: Profile -!- //
   $('.profile').click(() => {
     if (! $('#active').hasClass('profile') && $('#active').hasClass('comment')) {
       if (locked) return
@@ -164,7 +164,7 @@ $(document).ready(() => {
     }
   }) 
   
-  // Help 
+  // INFO: Help -!- //
   $('.helpNav').click(() => {
     if (! $('#active').hasClass('helpNav') && ($('#active').hasClass('comment')) || $('#active').hasClass('profile')) {
       if (locked) return
@@ -187,7 +187,7 @@ $(document).ready(() => {
     }
   }) 
   
-  // Settings 
+  // INFO: Settings -!- //
   $('.settings').click(() => {
     if (! $('#active').hasClass('settings') && $('#active').hasClass('comment')) {
       if (locked) return
@@ -395,22 +395,22 @@ $(document).ready(function() {
   })
   $(document).on('click', '#more-profile', function() {
     // TODO: Needs to be locked / added before release -!- //
-    // Directs to profile page
+    // INFO: Directs to profile page -!- //
   })
 })
 
 // TODO: Simplify -!- //
-let profile1Name = ''                                                              // Get Name from JSON / API
+let profile1Name = ''                                                              // INFO: Get Name from JSON / API -!- //
 let profile2Name = ''
 let profile3Name = ''
 
-// Set profile names
+// INFO: Set profile names -!- //
 profile1.innerText = profile1Name
 profile2.innerText = profile2Name
 profile3.innerText = profile3Name
 
                                       
-// Display more / add button
+// INFO: Display more / add button -!- //
 if (fourOrMore) {
   showMore.display = ''
   addProfile.display = 'none'
@@ -420,7 +420,7 @@ else {
   addProfile.display = ''
 }
 
-// Length Check
+// INFO: Length Check -!- //
 setTimeout(() => {
   if (profile1.innerText.length > 7) {
     profile1.innerText = profile1.innerText.substring(0, 4) + '...'
@@ -544,8 +544,8 @@ window.setInterval(() => {
 
 
 ////// Update checker
-// FIXME: Needs to be re-worked -!- //
 
+////// FIXME: Needs to be re-worked -!- //
 let updateOnline
 
 function setUpdateBoolean() {
@@ -559,9 +559,10 @@ const download = document.getElementById('download')
 const downloadFailed = document.getElementById('download-failed')
 const updateIcon = document.getElementById('set-up')
 
-$(document).ready(function() {                                                // Check for update
+$(document).ready(function() {
   $(document).on('click', '#update', function() {
     // INFO: Check for update here -!- //
+    // TODO: Add this function - checkUpdateIPC() -!- //
     updateIcon.style.transition = '3s linear'
     updateIcon.style.transform = 'rotate(720deg)'
     setTimeout(() => {
@@ -578,6 +579,7 @@ $(document).ready(function() {                                                //
       else {
         // INFO: Check for new version -!- //
         if (updateOnline) {
+          // INFO: Get updateOnline value from main function -!- //
           download.style.display = 'inline-block'
           update.style.display = 'none'
           settingsIcon.style.display = 'none'
@@ -604,7 +606,8 @@ $(document).ready(function() {                                                //
     }, 3001)
   })                                                                          
   $(document).on('click', '#download', function() {
-    // Download and install update
+    // INFO: Download and install update -!- //
+    // TODO: Add this function - downloadUpdateIPC() -!- //
     if (counterDisplay === 3 || notConnected) {
       noteMessage('Download fehlgeschlagen', 'Es wird eine aktive Internetverbindung benötigt', true)
       download.style.display = 'none '

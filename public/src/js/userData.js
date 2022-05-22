@@ -10,7 +10,7 @@ function getUser(username) {
     }
 }
 
-// Create new user with the getSaveState
+// INFO: Create new user with the getSaveState -!- //
 function createUser(username) {
     store.set(
         username, {
@@ -29,7 +29,7 @@ function createUser(username) {
     )
 }
 
-// Update user data
+// INFO: Update user data -!- //
 function updateUser(username, nickname, pinned, checked, working) {
     if (store.get(username) === undefined) createUser(username)
     if (nickname !== null) store.set(username+'.nickname', nickname)
@@ -39,7 +39,7 @@ function updateUser(username, nickname, pinned, checked, working) {
     if (nickname === null && pinned === null && checked === null && working === null) createUser(username)
 }
 
-// Deletes user data
+// INFO: Deletes user data
 function deleteUser(username) {
     store.delete(username)
 }
@@ -59,19 +59,19 @@ let dirLocation;
 let fileLocation;
 let comData;
 
-// Button for opening comment file
+// INFO: Button for opening comment file -!- //
 document.getElementById('edit-button').addEventListener('click', () => {
     openComments()
     // getComments()
 })
 
-// Getter for dir & file location
+// INFO: Getter for dir & file location -!-
 function returnCommentPath(_dirLocation, _fileLocation) {
     dirLocation = _dirLocation
     fileLocation = _fileLocation
 }
 
-// Function for checking file & folder
+// INFO: Function for checking file & folder -!- //
 function checkCommentFile() {
     getCommentsPath()
     setTimeout(() => {

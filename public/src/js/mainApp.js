@@ -12,7 +12,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       log.info('Main logic launch successfull')
       const page = (await browser.pages())[0]
       
-      // Stealh mode checker
+      // INFO: Stealh mode checker -!- //
       /*await page.goto('https://arh.antoinevastel.com/bots/areyouheadless')
       await page.waitForTimeout(5000)
       await page.screenshot({ path: 'Stealth.png' })*/
@@ -29,7 +29,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       }
   
   
-      // Opening browser
+      // INFO: Opening browser -!- //
       log.info('Opening instagram login page')
       try {
         await page.goto(loginURL, {
@@ -42,7 +42,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       }
     
   
-      // Check for cookie banner
+      // INFO: Check for cookie banner -!- //
       if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
         if (await page.$('.bIiDR') !== null) {         // INFO: Shouldn't use class detection -!- //
           log.info('Found cookie banner')
@@ -56,11 +56,11 @@ function launchMainLogic(_url, _username, _password, _mode) {
 
     
     
-      // Waiting for LogIn load
+      // INFO: Waiting for LogIn load -!- //
       await page.waitForSelector('input[name="username"]')
     
   
-      // Entering LogIn data
+      // INFO: Entering LogIn data -!- //
       if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
         await page.type('input[name="username"]', username)
         await page.type('input[name="password"]', password)
@@ -70,7 +70,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         return
       }
   
-      // Submit LogIn data
+      // INFO: Submit LogIn data -!- //
       if (runMainLogic) await page.click('[type="submit"]')                                  // TODO: Better stillRunningCheck needed -!- //
       else {
         await page.close()
@@ -85,7 +85,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         return
       }
   
-      // Check if data is correct
+      // INFO: Check if data is correct -!- //
       log.info('Checking LogIn data')
       if (await page.url() === loginURL) {
         await page.waitForSelector('#slfErrorAlert')                              // FIXME: Shouldn't use id detection -!- //

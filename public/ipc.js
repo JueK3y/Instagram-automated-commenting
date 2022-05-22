@@ -7,7 +7,7 @@ const pauseButton = document.getElementById('pause-btn')
 const stopPrevent = document.getElementById('stop-btn')
 const ipc = ipcRenderer
 
-// Prevent Start
+// INFO: Prevent Start -!- //
 preventStart.addEventListener('click', () => {
     setTimeout(() => {
         if (validate) {
@@ -25,7 +25,7 @@ stopPrevent.addEventListener('click', () => {
 })
 
 
-// Blur password
+// INFO: Blur password -!- //
 ipc.on('blurPw', () => {
     document.getElementById('toggle').checked = false
     document.getElementById('password-form').type = 'password'
@@ -33,7 +33,7 @@ ipc.on('blurPw', () => {
 })
 
 ////// Color theme
-// Accent color
+// INFO: Accent color -!- //
 ipc.on('accColor', (evt, message) => {
     localStorage.setItem('accColor', message)
 })
@@ -48,7 +48,7 @@ ipc.on('accColorChanged', (evt, message) => {
     }
 })
 
-// System light / dark mode
+// INFO: System light / dark mode -!- //
 ipc.on('changedToDark', () => {
     localStorage.setItem('system-theme', 'dark')
     localStorage.setItem('use-sys-theme', 'true')
@@ -61,7 +61,7 @@ ipc.on('changedToLight', () => {
 })
 
 ////// Window Action
-// Close
+// INFO: Close -!- //
 closeBtn.addEventListener('click', () => {
     if (validate) {
         if (checkClick === 1) {
@@ -77,12 +77,12 @@ closeBtn.addEventListener('click', () => {
     }
 })
 
-// Minimize 
+// INFO: Minimize -!- //
 minBtn.addEventListener('click', () => {
     ipc.send('minApp')
 })
 
-// Maximize
+// INFO: Maximize -!- //
 ipc.on('isMaximized', () => {
     maxBtn.style.display = 'none'
     restoreBtn.style.display = 'block'
@@ -92,7 +92,7 @@ maxBtn.addEventListener('click', () => {
     ipc.send('maxApp')
 })
 
-// Restore
+// INFO: Restore -!- //
 ipc.on('isRestored', () => {
     maxBtn.style.display = 'block'
     restoreBtn.style.display = 'none'
@@ -102,7 +102,7 @@ restoreBtn.addEventListener('click', () => {
     ipc.send('restoreApp')
 })
 
-// Change Min-Max Icon
+// INFO: Change Min-Max Icon -!- //
 ipc.on('changeWinIcon', () => {
     maxBtn.style.display = 'none'
     restoreBtn.style.display = 'block'
