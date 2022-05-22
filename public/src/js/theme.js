@@ -174,7 +174,7 @@ function detectTheme() {
 
 
 setTimeout(() => {          // FIXME: Rework before release -!- //
-    detectTheme()
+    detectTheme()           // TODO: Check if icon are still buggy -!- //
 }, 250)
 
 
