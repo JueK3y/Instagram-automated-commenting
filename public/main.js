@@ -2,10 +2,10 @@ const { app, BrowserWindow, ipcMain, powerSaveBlocker, session, systemPreference
 const windowStateKeeper = require('electron-window-state')
 const { autoUpdater } = require('electron-updater')
 const { nativeTheme } = require('electron/main')
+const { version } = require('./package.json')
 const { shell } = require('electron')
 const log = require('electron-log')
 const path = require('path')
-const fs = require('fs')
 const ipc = ipcMain
 
 log.info('--- Main start of IAC 2.0 ---')
@@ -49,7 +49,7 @@ const createWindow = () => {
     mainWindow.show()
     mainWindow.focus()
     mainWindow.webContents.send('accColor', color)    
-    mainWindow.webContents.send('getCurVer', process.env.npm_package_version)
+    mainWindow.webContents.send('getCurVer', version)
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
     } else {
