@@ -146,7 +146,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
           comment = comData
         }, 75)
 
-
+        let comTime
         // INFO: Comment loop -!- //
         if (commentLoop) {
           while (commentLoop) {
@@ -168,7 +168,9 @@ function launchMainLogic(_url, _username, _password, _mode) {
                     await commInp.type(comment[i])
                     await commBut.click()
                     log.info(`Posting comment: ${comment[i]}`)
-                    await page.waitForTimeout(6000)     // TODO: Change this value to user based input -!- //
+                    comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+                    log.info(`Waiting for ${comTime} miliseconds`)
+                    await page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
                   }
                 }
                 catch(TypeError) {
