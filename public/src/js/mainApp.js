@@ -44,9 +44,9 @@ function launchMainLogic(_url, _username, _password, _mode) {
   
       // INFO: Check for cookie banner -!- //
       if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
-        if (await page.$('.bIiDR') !== null) {         // INFO: Shouldn't use class detection -!- //
+        if (await page.$('.HoLwm') !== null) {         // INFO: Shouldn't use class detection -!- //
           log.info('Found cookie banner')
-          await page.click('.bIiDR')
+          await page.click('.HoLwm')
         }
       }
       else {
@@ -130,9 +130,18 @@ function launchMainLogic(_url, _username, _password, _mode) {
         }
         log.info('Correct LogIn data')
         log.info(`Opening ${postURL}`)
-        await page.goto(postURL, {
-          waitUntil: 'networkidle0',
-        })
+        try {
+          await page.goto(postURL, {
+            waitUntil: 'networkidle0',
+          })
+        }
+        catch {
+          log.error('Timeout error in loading post url; try again')
+          showBanner('error', 'Ladefehler', 'Die URL konnte nicht geladen werden. Bitte erneut versuchen.', 'post-timeout', true)
+          document.getElementById('stop-btn').click()
+          runMainLogic = false
+          await browser.close()
+        }
 
         if (runMainLogic) getComments()                                                      // TODO: Better stillRunningCheck needed -!- //
         else {
@@ -140,7 +149,8 @@ function launchMainLogic(_url, _username, _password, _mode) {
           return
         }
         
-        commentLoop = false        // INFO: Should the commenting loop or not? -!- //
+        commentLoop = false                                                                 // INFO: Should the commenting loop or not? -!- //
+        log.info(`Looping comments: ${commentLoop}`)
         let comment
         setTimeout(() => {
           comment = comData
@@ -153,20 +163,23 @@ function launchMainLogic(_url, _username, _password, _mode) {
             if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //
               await page.waitForTimeout(75)
               for (let i = 0; i < comment.length; i++) {
-                const commInp = await page.$('[data-testid="post-comment-text-area"]')
-                const commBut = await page.$('[data-testid="post-comment-input-button"]')
+                // const commInp = await page.$('[data-testid="post-comment-text-area"]')
+                // const commBut = await page.$('[data-testid="post-comment-input-button"]')
+                // const commInp = await page.$x('//*[@id="mount_0_0_0r"]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/div[1]/div[1]/article/div/div[2]/div/div[2]/section[3]/div/form/textarea')    
+                // const commBut = await page.$x('/html/body/div[1]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/div[1]/div[1]/article/div/div[2]/div/div[2]/section[3]/div/form/button')
                 const spamNotice = await page.$('.piCib')
                 let comment = comData
                 try {
                   if (spamNotice !== null) {
                     showBanner('warning', 'Spam erkannt', 'IAC 2.0 muss etwas langsamer kommentieren.', 'spam-notice', true)
+                    log.warn("Instagram detected spam, commenting slower")
                     await page.keyboard.press('Enter');
                     await page.waitForTimeout(2000)
                   }
                   else {
-                    await commInp.click()
-                    await commInp.type(comment[i])
-                    await commBut.click()
+                    await page.click('._ablz')
+                    await page.type('._ablz', comment[i])
+                    // await page.click()
                     log.info(`Posting comment: ${comment[i]}`)
                     comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                     log.info(`Waiting for ${comTime} miliseconds`)
@@ -178,7 +191,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
                   // FIXME: Gets called when closing the page manually -!- //
                   log.warn('Wrong page link')
                   noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
-                  showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
+                  showBanner('error', 'Falsche URL', 'Bitte URL überprüfen und erneut versuchen', 'wrong-ig-url', true)
                   document.getElementById('stop-btn').click()
                   await browser.close()
                   runMainLogic = false
@@ -194,14 +207,11 @@ function launchMainLogic(_url, _username, _password, _mode) {
         else {
           await page.waitForTimeout(75)
           for (let i = 0; i < comment.length; i++) {
-            const commInp = await page.$('[data-testid="post-comment-text-area"]')
-            const commBut = await page.$('[data-testid="post-comment-input-button"]')
             let comment = comData
             try {
               if (runMainLogic) {                                                            // TODO: Better stillRunningCheck needed -!- //
-                await commInp.click()
-                await commInp.type(comment[i])
-                await commBut.click()
+                await page.click('._ablz')
+                await page.type('._ablz', comment[i])
                 log.info(`Posting comment: ${comment[i]}`)
                 comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                 log.info(`Waiting for ${comTime} miliseconds`)
@@ -215,7 +225,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
             catch(TypeError) {
               log.warn('Wrong page link')
               noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
-              showBanner('error', 'Falsche URL', 'Die eingegebene URL muss zu einem Instagram Post führen.', 'wrong-ig-url', true)
+              showBanner('error', 'Falsche URL', 'Bitte URL überprüfen und erneut versuchen', 'wrong-ig-url', true)
               document.getElementById('stop-btn').click()
               runMainLogic = false
               await browser.close()
