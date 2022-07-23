@@ -48,7 +48,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
   
       // INFO: Check for cookie banner -!- //
       if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
-        if (await page.$('.HoLwm') !== null) {         // INFO: Shouldn't use class detection -!- //
+        if (await page.$('.HoLwm') !== null) {                                               // INFO: Shouldn't use class detection -!- //
           log.info('Found cookie banner')
           await page.click('.HoLwm')
         }
@@ -61,7 +61,13 @@ function launchMainLogic(_url, _username, _password, _mode) {
     
     
       // INFO: Waiting for LogIn load -!- //
-      await page.waitForSelector('input[name="username"]')
+      if (runMainLogic) {
+        await page.waitForSelector('input[name="username"]')
+      }
+      else {
+        await page.close()
+        return
+      }
     
   
       // INFO: Entering LogIn data -!- //
