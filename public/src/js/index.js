@@ -158,8 +158,6 @@ $('#start-btn').click(function() {
     }
   }
 
-  validate = true
-
   if (validate) {
     getComments()
     setTimeout(() => {

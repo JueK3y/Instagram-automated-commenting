@@ -7,8 +7,7 @@ let runMainLogic;
 commentLoop = false
 
 function launchMainLogic(_url, _username, _password, _mode) {
-  puppeteer.launch({ headless: _mode, slowMo: 50, executablePath: process.env.CHROMIUM_PATH, args: ['--no-sandbox',
-  '--disable-setuid-sandbox', '--use-gl=egl'], ignoreDefaultArgs: ['--disable-extensions']}).then(async browser => {    // TODO: Without slowMo arg in production -!- //
+  puppeteer.launch({ headless: _mode, slowMo: 50, executablePath: process.env.CHROMIUM_PATH}).then(async browser => {    // TODO: Without slowMo arg in production -!- //
     while (runMainLogic) {
       log.info('Main logic launch successfull')
       const page = (await browser.pages())[0]
