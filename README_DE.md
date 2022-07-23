@@ -22,7 +22,7 @@ IAC ist ein Bot, welcher automatisch unter vorgegebenen Instagram Posts zufälli
 Technische Besonderheiten:
 - Datensicherheit: Deine Daten werden unter keinen Umständen hochgeladen und sind einzig und allein auf deinem Computer gespeichert
 - Regelmäßige Aktualisierungen: An allen Problemen aus dem [Community IssueTracker](https://github.com/JueK3y/Instagram-automated-commenting/issues) wird aktuell gearbeitet
-  <br>(Es gibt natürlich auch einen Dev Issue Tracker, der andere Probleme behandelt)
+  <br>(Es gibt natürlich auch einen Dev Issue Tracker, der andere Probleme beinhaltet)
 - Open Source: Die Echtheit und Funktionsweiße des Codes kann jederzeit selber überprüft werden
 
 Und das alles kostenlos? Ja! Und keine Sorge, ich werde deine Daten auch nicht verkaufen ;)
@@ -39,7 +39,7 @@ Einen Computer. Egal ob klein, groß, Laptop oder PC, alles erfüllt seinen Zwec
 getestet, wird aber auch für Linux und MacOS (OSX) weiterentwickelt.
 
 Außerdem brauchst du:
-- [IAC 2.0 (Die neuste Version)](https://github.com/JueK3y/Instagram-automated-commenting/releases)
+- [IAC 2.0 (Die neuste Version)](https://github.com/JueK3y/Instagram-automated-commenting/releases/latest)
 - Einen Instagram Account und die passenden LogIn Daten
 - Die URL des Posts, unter dem du kommentieren willst
 - Die Kommentare, welche du posten möchtest
@@ -61,8 +61,7 @@ Beispielsweise kannst du:
 - die Sprache ändern (Noch nicht verfügbar)
 - noch einiges mehr machen, was du selber erkunden darfst :)
 
-
-_¹ Don't worry, your data is safe. They are not uploaded anywhere, but encrypted and stored on your own computer._
+_¹ Keine Angst, deine Daten sind hier sicher. Sie werden nirgends hochgeladen und nur verschlüsselt auf deinem eigenen Rechner gespeichert._
 
 <br>
 

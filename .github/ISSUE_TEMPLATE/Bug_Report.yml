@@ -14,6 +14,7 @@ body:
     placeholder: "Windows Version 20H2, IAC 2.0.1"
     description: |
       Please specify which `OS` you are using (with version number) and which `version of IAC` you are using.
+      If you use the current code instead of an IAC version, please specify the branch instead.
   validations:
     required: true
 
