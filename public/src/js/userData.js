@@ -80,7 +80,7 @@ function checkCommentFile() {
             if (! fs.existsSync(dirLocation)) {
                 fs.mkdirSync(dirLocation)
             }
-            fs.writeFileSync(fileLocation, '! Write only one comment per line. Comments wiht \'!\' at the beginning will be ignored.')
+            fs.writeFileSync(fileLocation, '! Write only one comment per line. Comments with \'!\' at the beginning will be ignored.')
         }
     }, 50)
 }
