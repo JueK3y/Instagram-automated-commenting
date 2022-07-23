@@ -88,16 +88,16 @@ $(document).on('keyup', function(e) {
 let pause = false
 let mainLogicMode = true
 
-$('#start-btn').click(function() {
+$('#start-btn').click(function() {   
+  if ($('#start-btn').is(':disabled')) {
+    return
+  }  
+  $('#start-btn').prop('disabled', true)
   if (pause) {
     checkClick = 0
     pause = false
-    document.getElementById('pause-btn').style.display = 'block'
-    document.getElementById('runIcon').style.display = 'block'
-    document.getElementById('pauseIcon').style.display = 'none'
-    document.getElementById('stop-btn').style.display = 'none'
   }
-  hideBanner('error')                                                                                                            // FIXME: Looks weird for the same error -!- //
+  hideBanner('error')                                                                                      // FIXME: Looks weird for the same error -!- //
   if (urlInput.value === '' && username.value === '' && password.value === '') {
     showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
     log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[0]}`)
@@ -142,11 +142,18 @@ $('#start-btn').click(function() {
     formError(password)
   }
   else {
-    validate = true
-    for (let i = 0; i < errorCode.length; i++) {
-      if ($('.' + errorCode[i])[0]) {
-        hideBanner(errorCode[i])
-        log.info(`${errorCode[i]} banner exists. Removing it`)
+    if (noWiFi) {
+      showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', true)
+      log.warn('Client error - Start of IAC 2.0 not possible: No WiFi')
+      $('#start-btn').prop('disabled', false)
+    }
+    else {
+      validate = true
+      for (let i = 0; i < errorCode.length; i++) {
+        if ($('.' + errorCode[i])[0]) {
+          hideBanner(errorCode[i])
+          log.info(`${errorCode[i]} banner exists. Removing it`)
+        }
       }
     }
   }
@@ -154,6 +161,7 @@ $('#start-btn').click(function() {
   if (validate) {
     getComments()
     setTimeout(() => {
+      $('#start-btn').prop('disabled', false)
       if (comData[0] !== undefined) {
         log.info('All input is correct, launching main logic')
         document.getElementById('start-btn').style.display = 'none'
@@ -161,6 +169,7 @@ $('#start-btn').click(function() {
         document.getElementById('stop-btn').style.display = 'block'
         document.getElementById('idleIcon').style.display = 'none'
         document.getElementById('runIcon').style.display = 'block'
+        document.getElementById('pauseIcon').style.display = 'none'
         runMainLogic = true
         launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
         if (document.getElementById('save-profile').checked) {
@@ -196,7 +205,7 @@ $('#start-btn').click(function() {
           openComments()
         }, 2500)
       }
-    }, 100)
+    }, 600)
   }
 })
 
@@ -206,8 +215,9 @@ $('#pause-btn').click(function() {
   document.getElementById('start-btn').style.display = 'block'
   document.getElementById('pause-btn').style.display = 'none'
   document.getElementById('stop-btn').style.display = 'block'
-  document.getElementById('runIcon').style.display = 'none'
-  document.getElementById('pauseIcon').style.display = 'block'
+  document.getElementById('idleIcon').style.display = 'none'
+  document.getElementById('runIcon').style.display = 'block'
+  document.getElementById('pauseIcon').style.display = 'none'
   log.info('Pause button was pressed')
   // TODO: API pauses commenting -!- //
 })

@@ -297,10 +297,6 @@ html body main form #main-content #post-url #url-input:-moz-placeholder-shown + 
   opacity: 0;
   pointer-events: none;
 }
-html body main form #main-content #post-url #url-input:-ms-input-placeholder + #clearButton {
-  opacity: 0;
-  pointer-events: none;
-}
 html body main form #main-content #post-url #url-input:placeholder-shown + #clearButton {
   opacity: 0;
   pointer-events: none;
@@ -476,10 +472,6 @@ html body main form #main-content #login-data #password #password-form {
   padding-right: 40px;
 }
 html body main form #main-content #login-data #password #password-form:-moz-placeholder-shown + #togglePW {
-  opacity: 0;
-  pointer-events: none;
-}
-html body main form #main-content #login-data #password #password-form:-ms-input-placeholder + #togglePW {
   opacity: 0;
   pointer-events: none;
 }
@@ -686,8 +678,14 @@ html body main form #main-content #start-stop #start-btn:active {
   background-color: var(--bg-active-main-button);
   transition: 0.2s;
 }
+html body main form #main-content #start-stop #start-btn:disabled {
+  cursor: not-allowed;
+  background-color: var(--input-color);
+  transition: 0.2s;
+}
 html body main form #main-content #start-stop #pause-btn {
   display: none;
+  cursor: not-allowed;
   position: relative;
   margin-right: 30px;
   color: var(--text-main-button);

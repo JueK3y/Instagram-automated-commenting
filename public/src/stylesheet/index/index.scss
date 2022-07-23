@@ -670,9 +670,15 @@ html {
                                 background-color: var(--bg-active-main-button);
                                 transition: .2s;
                             }
+                            &:disabled {
+                                cursor: not-allowed;
+                                background-color: var(--input-color);
+                                transition: .2s;
+                            }
                         }
                         #pause-btn {
                             display: none;
+                            cursor: not-allowed;
                             position: relative;
                             margin-right: 30px;
                             color: var(--text-main-button);

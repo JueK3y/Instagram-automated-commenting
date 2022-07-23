@@ -1,7 +1,7 @@
 {
   "name": "iac_2",
   "productName": "IAC 2.0",
-  "version": "0.8.2-alpha",
+  "version": "0.8.4-alpha",
   "license": "EULA",
   "description": "A bot for automatic commenting on Instagram",
   "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
@@ -31,25 +31,27 @@
   "dependencies": {
     "electron-log": "^4.4.6",
     "electron-store": "^8.0.1",
-    "electron-updater": "^5.0.1",
+    "electron-updater": "^5.0.5",
     "electron-window-state": "^5.0.3",
     "is-online": "^9.0.1",
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^13.4.0",
-    "puppeteer-extra": "^3.2.3",
-    "puppeteer-extra-plugin-stealth": "^2.9.0"
+    "puppeteer": "^15.5.0",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-stealth": "^2.11.0"
   },
   "build": {
     "appId": "jue3ky.iac_2.app",
     "productName": "IAC 2.0",
-    "copyright": "Copyright © 2022 JueK3y",
+    "copyright": "Copyright © 2022 by JueK3y",
     "win": {
       "target": "nsis",
       "publish": {
         "provider": "github"
       }
-    }
+    },
+   "asar": true,
+   "asarUnpack": "node_modules/puppeteer/.local-chromium/**/*"
   }
 }

@@ -470,10 +470,12 @@ window.setInterval(() => {
   getNetworkDownloadSpeed().then(result => {
     if (result === false) {
       notConnected = true
+      noWiFi = true
       internetSpeed = '- -'
     }
     else {
       notConnected = false
+      noWiFi = false
       internetSpeed = result['mbps']
     }
     if (notConnected) {
@@ -496,6 +498,7 @@ window.setInterval(() => {
         log.warn('wifi-not-connected banner exists. Removing it.')
       }
       if (internetSpeed === 0) {
+        noWiFi = true
         counter += 1
         changeColor.style.color = (light) ? '#C42B1C':'#FF99A4'
         changeColor.style.background = (light) ? '#FDE7E9':'#442726'
