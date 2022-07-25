@@ -39,7 +39,7 @@ A Computer. Small, large, laptop, PC, anything will do.
 but will be further developed so that it can also be used on Linux and MacOS (OSX).
 
 Also you need:
-- [IAC 2.0 (The newest version)](https://github.com/JueK3y/Instagram-automated-commenting/releases)
+- [IAC 2.0 (The newest version)](https://github.com/JueK3y/Instagram-automated-commenting/releases/latest)
 - An Instagram account and the correct credentials
 - The URL of the post you want to comment on
 - The comments you want to post
