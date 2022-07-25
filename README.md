@@ -76,19 +76,20 @@ _¹ Don't worry, your data is safe. They are not uploaded anywhere, but encrypte
 
 
 ## Technical data
-The following dependencies were used to develop IAC 2.0:
+The following dependencies were used to develop IAC 2.0 (Last checked: 25.07.2022):
 
-- electron 13.6.9
+- electron 15.5.5
 - electron-log 4.4.6
 - electron-store 8.0.1
+- electron-builder 5.0.5
 - electron-window-state 5.0.3
 - is-online 9.0.1
 - node-keytar 7.9.0
 - network-speed 2.1.1
 - node-notifier 10.0.1
-- puppeteer-extra 13.4.0
-- puppeteer-extra 3.2.3
-- puppeteer-extra-plugin-stealth 2.9.0
+- puppeteer 15.5.0
+- puppeteer-extra 3.3.4
+- puppeteer-extra-plugin-stealth 2.11.0
 
 You can see all used dependencies [here](https://github.com/JueK3y/Instagram-automated-commenting/network/dependencies).
 
