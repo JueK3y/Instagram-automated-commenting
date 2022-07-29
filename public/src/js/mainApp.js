@@ -188,8 +188,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
                   }
                   else {
                     await page.click('._ablz')
+                    const inputValue = await page.$eval('._ablz', el => el.value);
+                    for (let i = 0; i < inputValue.length; i++) {
+                      await page.keyboard.press('Backspace')
+                    }
                     await page.type('._ablz', comment[i])
-                    // await page.click()
+                    await page.keyboard.press('Enter')
                     log.info(`Posting comment: ${comment[i]}`)
                     comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                     log.info(`Waiting for ${comTime} miliseconds`)
@@ -221,7 +225,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
             try {
               if (runMainLogic) {                                                            // TODO: Better stillRunningCheck needed -!- //
                 await page.click('._ablz')
+                const inputValue = await page.$eval('._ablz', el => el.value);
+                for (let i = 0; i < inputValue.length; i++) {
+                  await page.keyboard.press('Backspace')
+                }
                 await page.type('._ablz', comment[i])
+                await page.keyboard.press('Enter')
                 log.info(`Posting comment: ${comment[i]}`)
                 comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                 log.info(`Waiting for ${comTime} miliseconds`)
@@ -248,7 +257,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
         showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
         document.getElementById('stop-btn').click()
         runMainLogic = false
-        await page.close()
+        for (let page of await this.browser.page()) {
+          await page.close({
+            "runBeforeUnload": true
+          });
+        }
+        await this.browser.close()
       }        
     }
   })
