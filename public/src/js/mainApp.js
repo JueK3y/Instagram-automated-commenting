@@ -37,7 +37,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       log.info('Opening instagram login page')
       try {
         await page.goto(loginURL, {
-          waitUntil: 'networkidle0',
+          waitUntil: 'networkidle2',
         })
         // browser.on('disconnected', alert('Test'))
       }
@@ -257,12 +257,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
         document.getElementById('stop-btn').click()
         runMainLogic = false
-        for (let page of await this.browser.page()) {
-          await page.close({
-            "runBeforeUnload": true
-          });
-        }
-        await this.browser.close()
+        await browser.close()
       }        
     }
   })
