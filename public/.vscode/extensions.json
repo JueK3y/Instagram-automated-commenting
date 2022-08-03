@@ -2,6 +2,7 @@
     "recommendations": [
         "codelios.dartsass",
         "pkief.material-icon-theme",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "akamud.vscode-theme-onedark"
     ]
 }
