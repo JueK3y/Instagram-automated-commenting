@@ -30,14 +30,13 @@
   },
   "dependencies": {
     "electron-log": "^4.4.8",
-    "electron-store": "^8.0.2",
     "electron-updater": "^5.0.5",
     "electron-window-state": "^5.0.3",
     "is-online": "^9.0.1",
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^15.5.0",
+    "puppeteer": "^16.0.0",
     "puppeteer-extra": "^3.3.4",
     "puppeteer-extra-plugin-stealth": "^2.11.0"
   },

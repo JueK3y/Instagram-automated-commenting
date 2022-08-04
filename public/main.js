@@ -129,7 +129,7 @@ const createWindow = () => {
   })
 
   ipc.on('openDevConsole', () => {
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()     // FIXME: Syntax Error when calling DevTools
   })
   
   autoUpdater.logger = log;

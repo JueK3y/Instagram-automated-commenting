@@ -1,10 +1,10 @@
-const Store = require('electron-store')
+//const Store = require('electron-store')
 const fs = require('fs')
 
 let today = new Date()
-const store = new Store()
+//const store = new Store()
 
-function getUser(username) {
+/* function getUser(username) {
     if (username !== null) {
         store.get(username)
     }
@@ -42,7 +42,7 @@ function updateUser(username, nickname, pinned, checked, working) {
 // INFO: Deletes user data
 function deleteUser(username) {
     store.delete(username)
-}
+} */
 
 function checkFile(filePath) {
     return new Promise((resolve, reject) => {
