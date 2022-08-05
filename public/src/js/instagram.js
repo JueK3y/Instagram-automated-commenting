@@ -51,6 +51,8 @@ const instagram = {
     validation: async () => {                                // FIXME: Better fix needed
         // await instagram.page.waitForTimeout(5000)
 
+        // Better solution: If (S1 || s2)
+
         if (await instagram.page.waitForSelector('#slfErrorAlert')) {
             let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
             log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
