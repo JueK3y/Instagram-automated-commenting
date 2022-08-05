@@ -4,7 +4,6 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 const loginURL = 'https://www.instagram.com/accounts/login/'
-const errorMessage = ['Sorry, your password was incorrect. Please double-check your password.']
 
 function getChromiumExecPath() {
     return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked');
@@ -49,22 +48,43 @@ const instagram = {
         await loginButton[0].click()
     },
 
-    validation: async () => {
-        await instagram.page.waitForTimeout(1500)
-        
-        if (await instagram.page.url() === loginURL) {
-            let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)      
-            for (let i = 0; i < errorMessage.length; i++) {
-                if (loginMessage.includes(errorMessage[i])) {
-                    log.warn(`Client error - LogIn not possible: '${errorMessage[i]}'`)
-                    return false;
-                }
-            }
+    validation: async () => {                                // FIXME: Better fix needed
+        // await instagram.page.waitForTimeout(5000)
+
+        if (await instagram.page.waitForSelector('#slfErrorAlert')) {
+            let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+            log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
+            await instagram.browser.close()
+            return
         }
+        /*let requestURL = await instagram.page.waitForRequest(request => {
+            return request.url()
+        })*/
+        else if (instagram.page.url() !== loginURL) {
+            log.info("LogIn successfull")
+        }
+        else {
+            log.info("test")
+        }
+
+
+        
+        /* let loginFailed = await page.evaluate(() => {
+            if (await instagram.page.url() === loginURL) {
+                let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
+                return true;
+            }
+        })
+
+        if (loginFailed) {
+            await instagram.browser.close()
+            return
+        } */
     },
 
     urlChange: async () => {
-        
+
     }
 }
 
