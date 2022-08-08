@@ -45,29 +45,26 @@ const instagram = {
         await instagram.page.type('input[name="username"]', username, { delay: 50 })
         await instagram.page.type('input[name="password"]', password, { delay: 50 })
 
-        await loginButton[0].click()
+        await Promise.all([
+            loginButton[0].click(),
+            instagram.page.waitForNavigation({waitUntil: 'networkidle2'})
+        ])
     },
 
-    validation: async () => {                                // FIXME: Better fix needed
-        // await instagram.page.waitForTimeout(5000)
+    validation: async () => {
 
-        // Better solution: If (S1 || s2)
-
+    if ((await instagram.page.url() !== loginURL) || (await instagram.page.waitForSelector('#slfErrorAlert'))) {
+        if (await instagram.page.url() !== loginURL) {
+            log.info("LogIn successfull")
+            log.info(instagram.page.url())
+        }
         if (await instagram.page.waitForSelector('#slfErrorAlert')) {
             let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
             log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
             await instagram.browser.close()
             return
         }
-        /*let requestURL = await instagram.page.waitForRequest(request => {
-            return request.url()
-        })*/
-        else if (instagram.page.url() !== loginURL) {
-            log.info("LogIn successfull")
-        }
-        else {
-            log.info("test")
-        }
+    }
 
 
         
