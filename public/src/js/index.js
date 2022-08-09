@@ -8,7 +8,7 @@
 // │ In the event of possible damage, the user alone is liable,              │
 // │ the manufacturer (JueK3y) withdraws from any legal responsibility.      │
 // ├─────────────────────────────────────────────────────────────────────────┤
-// │ Copyright © 2020 - 2022 by JueK3y (Julian Kennedy)                       │
+// │ Copyright © 2020 - 2022 by JueK3y (Julian Kennedy)                      │
 // │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
 
@@ -46,6 +46,7 @@ function specialCharCheck(checkVar) {
 }
 
 function formError(type) {
+  $('#start-btn').prop('disabled', false)
   if (type === undefined) {
     urlInput.classList.add('wrong-form')
     username.classList.add('wrong-form')
