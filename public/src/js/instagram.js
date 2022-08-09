@@ -13,10 +13,10 @@ const instagram = {
     browser: null,
     page: null,
 
-    initialize: async () => {
+    initialize: async (mode) => {
         instagram.browser = await puppeteer.launch({
             slowMo: 50,
-            headless: false,
+            headless: mode,
             executablePath: getChromiumExecPath()
         })
 
@@ -45,26 +45,50 @@ const instagram = {
         await instagram.page.type('input[name="username"]', username, { delay: 50 })
         await instagram.page.type('input[name="password"]', password, { delay: 50 })
 
-        await Promise.all([
-            loginButton[0].click(),
-            instagram.page.waitForNavigation({waitUntil: 'networkidle2'})
-        ])
+        loginButton[0].click()
     },
 
     validation: async () => {
 
-    if ((await instagram.page.url() !== loginURL) || (await instagram.page.waitForSelector('#slfErrorAlert'))) {
-        if (await instagram.page.url() !== loginURL) {
-            log.info("LogIn successfull")
-            log.info(instagram.page.url())
-        }
-        if (await instagram.page.waitForSelector('#slfErrorAlert')) {
-            let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-            log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
-            await instagram.browser.close()
-            return
-        }
-    }
+        await instagram.page.waitForTimeout(15000)
+
+        let p1 = instagram.page.url();
+        let p2 = instagram.page.waitForSelector('#slfErrorAlert');        // or data-testid="login-error-message"
+
+        const result = await Promise.race([p1,p2]) 
+
+        log.info('Result: ' + result)
+        log.info('P1: ' + p1)
+        log.info('P2: ' + p2)
+
+        /*Promise.race([promise1, promise2]).then((result) => {
+            log.info(result)
+            log.info(promise1)
+            log.info(promise2)
+            /*if (promise1) {
+                let loginMessage = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
+                instagram.browser.close()
+                return
+            }
+            if (promise2) {
+                log.info("LogIn successfull")
+                log.info(instagram.page.url())
+            }*/
+        //})
+
+        /*Promise.race([promise1, promise2]).then((result) => {
+            if (result == promise1) {
+                log.info("LogIn successfull")
+                log.info(instagram.page.url())
+            }
+            else if (result == promise2) {
+                let loginMessage = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
+                instagram.browser.close()
+                return
+            }
+        })*/
 
 
         
@@ -82,8 +106,13 @@ const instagram = {
         } */
     },
 
-    urlChange: async () => {
+    urlChange: async (postURL) => {
+        if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
+            log.info('Adding https:// to URL')
+            postURL = 'https://' + postURL
+        }
 
+        await instagram.page.goto(postURL, { waitUntil: 'networkidle2' })
     }
 }
 
