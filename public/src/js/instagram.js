@@ -49,34 +49,64 @@ const instagram = {
     },
 
     validation: async () => {
-
         await instagram.page.waitForTimeout(15000)
 
-        let p1 = instagram.page.url();
-        let p2 = instagram.page.waitForSelector('#slfErrorAlert');        // or data-testid="login-error-message"
+
+        /*await instagram.page.$('[data-testid="login-error-message"]')
+        await instagram.page.waitForSelector('#slfErrorAlert')
+
+
+        let p1 = (instagram.page.url() !== loginURL)
+        let p2 = (instagram.page.waitForSelector('#slfErrorAlert'))
+
 
         const result = await Promise.race([p1,p2]) 
 
         log.info('Result: ' + result)
         log.info('P1: ' + p1)
-        log.info('P2: ' + p2)
+        log.info('P2: ' + p2)*/
+
+
+        // let promise1 = (instagram.page.url() !== loginURL);                     // Returns boolean, not promise answer (pr answer needed!)
+        let promise1 = new Promise(function(resolve, reject) {
+            log.info('Checking url promise')
+            if (instagram.page.url() !== loginURL) {
+                log.info('Promise resolved!')
+                resolve();
+            } else {
+                log.info('Promise rejected, wrong LogIn Data?')
+                reject();
+            } 
+        });
+        let promise2 = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+        // let promise2 = instagram.page.waitForSelector('#slfErrorAlert');        // Returns promise answer
+
+        Promise.race([promise1, promise2]).then((result) => 
+            log.info("result"),
+            log.info(result),
+            log.info("promise1"),
+            log.info(promise1),
+            log.info("promise2"),
+            log.info(promise2)
+        )
 
         /*Promise.race([promise1, promise2]).then((result) => {
             log.info(result)
             log.info(promise1)
             log.info(promise2)
-            /*if (promise1) {
-                let loginMessage = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
-                instagram.browser.close()
-                return
+            if (promise1) {
+                log.info('LogIn successfull')
+                log.info(instagram.page.url())
             }
             if (promise2) {
-                log.info("LogIn successfull")
-                log.info(instagram.page.url())
-            }*/
-        //})
+                let loginMessage = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
+                // instagram.browser.close()
+                return
+            }
+        })*/
 
+        
         /*Promise.race([promise1, promise2]).then((result) => {
             if (result == promise1) {
                 log.info("LogIn successfull")
@@ -91,7 +121,20 @@ const instagram = {
         })*/
 
 
-        
+        /*if ((await instagram.page.url() !== loginURL) || (await instagram.page.waitForSelector('#slfErrorAlert'))) {
+            if (await instagram.page.url() !== loginURL) {
+                log.info("LogIn successfull")
+                log.info(instagram.page.url())
+            }
+            if (await instagram.page.waitForSelector('#slfErrorAlert')) {
+                let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
+                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
+                await instagram.browser.close()
+                return
+            }
+        }*/
+
+
         /* let loginFailed = await page.evaluate(() => {
             if (await instagram.page.url() === loginURL) {
                 let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
@@ -107,6 +150,7 @@ const instagram = {
     },
 
     urlChange: async (postURL) => {
+        log.info('Changing URL')
         if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
             log.info('Adding https:// to URL')
             postURL = 'https://' + postURL
