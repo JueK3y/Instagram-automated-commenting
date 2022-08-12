@@ -14,6 +14,7 @@ IAC ist ein Bot, welcher automatisch unter vorgegebenen Instagram Posts zufälli
 - Hauptfunktion: Automatisches Kommentieren in zufälliger Reihenfolge
 - GUI: Moderne, erneuerte Benutzeroberfläche im Stil von Windows 11
 - Profile: Hinzufügen mehrerer Profile für einen schnelleren Start
+- Funktioniert mit Posts & Reels und unterstützt die Verwendung von Emojis 🥳
 - Einfaches Importieren und Bearbeiten von eigenen Kommentaren
 - Verbesserte Informations-, Warn- und Fehleranzeige
 - Verbesserte Prüfung der Internetgeschwindigkeit
