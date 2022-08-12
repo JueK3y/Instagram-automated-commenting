@@ -139,8 +139,8 @@ function openDevConsoleIPC() {
 
 ////// Update
 ipc.on('update', (event, text) => {
-    console.log('Message from updater:', text);
-    if (text === 'Update available') {
+    log.info('Message from updater:', text);
+    if (text === 'Update available.') {
         setUpdateBoolean()
         // TODO: Add update functionallity -!- //
     }

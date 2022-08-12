@@ -132,10 +132,11 @@ const createWindow = () => {
     mainWindow.webContents.openDevTools()     // FIXME: Syntax Error when calling DevTools
   })
   
+  // ------ AutoUpdater ------
   autoUpdater.logger = log;
   autoUpdater.logger.transports.file.level = 'info';
 
-  autoUpdater.checkForUpdatesAndNotify()
+  autoUpdater.checkForUpdatesAndNotify();
   
   const sendStatusToWindow = (text) => {
     log.info(text);
@@ -144,18 +145,15 @@ const createWindow = () => {
     }
   }
 
-  // sendStatusToWindow('Update available')
-  
-  ////// Update
   autoUpdater.on('checking-for-update', () => {
     sendStatusToWindow('Checking for update...')
   })
 
-  autoUpdater.on('update-available', () => {
-    sendStatusToWindow('Update available')
+  autoUpdater.on('update-available', info => {
+    sendStatusToWindow('Update available.')
   })
 
-  autoUpdater.on('update-not-available', () => {
+  autoUpdater.on('update-not-available', info => {
     sendStatusToWindow('Update not available')
   })
 
@@ -171,11 +169,8 @@ const createWindow = () => {
   })
 
   autoUpdater.on('update-downloaded', () => {
-    sendStatusToWindow('Update downloaded; will install now')
-    // Wait 5 seconds, then quit and install
-    // In your application, you don't need to wait 500 ms.
-    // You could call autoUpdater.quitAndInstall(); immediately
-    autoUpdater.quitAndInstall()
+    // sendStatusToWindow('Update downloaded; will install now')
+    autoUpdater.quitAndInstall();
   })
 }
 
