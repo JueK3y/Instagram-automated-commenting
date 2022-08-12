@@ -14,6 +14,7 @@ IAC 2.0 is a bot which automatically comments randomly under given Instagram pos
 - Main function: Automatic commenting in random order
 - GUI: Modern, fresh UI in Windows 11 style
 - Profiles: Adding several profiles for a quicker startup
+- Works with Posts & Reels and supports the use of emojis 🥳
 - Easily import and edit your own comments
 - Improved information, warning and error display
 - Improved internet speed check
