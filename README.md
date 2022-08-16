@@ -58,8 +58,8 @@ Also you need:
 Of course, you also have the option to adjust some things.
 You can for example:
 - Add and save different profiles _¹_ (Additional options -> Save profile locally) 
-- Set how long IAC 2.0 should comment (Settings -> Comment settings)
-- Change the language (Not yet available)
+- Set how long IAC 2.0 should comment (Settings -> Comment settings) (Not yet available)
+- Change the language (Settings -> Language) (Not yet available)
 - And several more you can explore by yourself ;)
 
 
