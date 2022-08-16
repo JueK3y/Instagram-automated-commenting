@@ -43,6 +43,9 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   
   let color = systemPreferences.getAccentColor()
+  
+  autoUpdater.logger = log;
+  autoUpdater.logger.transports.file.level = 'info';
 
   mainWindow.on('ready-to-show', () => {
     mainWindowState.manage(mainWindow)
@@ -50,6 +53,7 @@ const createWindow = () => {
     mainWindow.focus()
     mainWindow.webContents.send('accColor', color)    
     mainWindow.webContents.send('getCurVer', version)
+    autoUpdater.checkForUpdatesAndNotify();
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
     } else {
@@ -65,6 +69,10 @@ const createWindow = () => {
     require('electron').shell.openExternal(url)
   })
 
+  mainWindow.on('blur', () => {
+    mainWindow.webContents.send('blurPw')
+  })
+
   systemPreferences.on('accent-color-changed', (event, newColor) => {
     mainWindow.webContents.send('accColorChanged', newColor)
   })
@@ -77,10 +85,46 @@ const createWindow = () => {
     }
   })
 
-  mainWindow.on('blur', () => {
-    mainWindow.webContents.send('blurPw')
+
+  // ------ AutoUpdater ------ //
+  const sendStatusToWindow = (text) => {
+    log.info(text);
+    if (mainWindow) {
+      mainWindow.webContents.send('update', text)
+    }
+  }
+
+  autoUpdater.on('checking-for-update', () => {
+    sendStatusToWindow('Checking for update...')
   })
 
+  autoUpdater.on('update-available', (info) => {
+    sendStatusToWindow('Update available.')
+    autoUpdater.autoDownload()
+  })
+
+  autoUpdater.on('update-not-available', (info) => {
+    sendStatusToWindow('Update not available.')
+  })
+
+  autoUpdater.on('error', (err) => {
+    log.error(`Update-Error: ${err.toString()}`)
+    mainWindow.webContents.send('message', `Error in auto-updater: ${err.toString()}`)
+  })
+
+  autoUpdater.on('download-progress', progressObj => {
+    sendStatusToWindow(
+      `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+    )
+  })
+
+  autoUpdater.on('update-downloaded', () => {
+    sendStatusToWindow('Update downloaded; will install now')
+    autoUpdater.quitAndInstall();
+  })
+
+
+  // ------ IPC ------ //
   ipc.on('checkFile', (evt, arg) => {
     let userData = app.getPath('userData')
     let dirLocation = path.join(userData + '/data')
@@ -131,47 +175,6 @@ const createWindow = () => {
   ipc.on('openDevConsole', () => {
     mainWindow.webContents.openDevTools()     // FIXME: Syntax Error when calling DevTools
   })
-  
-  // ------ AutoUpdater ------
-  autoUpdater.logger = log;
-  autoUpdater.logger.transports.file.level = 'info';
-
-  autoUpdater.checkForUpdatesAndNotify();
-  
-  const sendStatusToWindow = (text) => {
-    log.info(text);
-    if (mainWindow) {
-      mainWindow.webContents.send('update', text)
-    }
-  }
-
-  autoUpdater.on('checking-for-update', () => {
-    sendStatusToWindow('Checking for update...')
-  })
-
-  autoUpdater.on('update-available', info => {
-    sendStatusToWindow('Update available.')
-  })
-
-  autoUpdater.on('update-not-available', info => {
-    sendStatusToWindow('Update not available')
-  })
-
-  autoUpdater.on('error', err => {
-    log.error(`Update-Error: ${err.toString()}`)
-    mainWindow.webContents.send('message', `Error in auto-updater: ${err.toString()}`)
-  })
-
-  autoUpdater.on('download-progress', progressObj => {
-    sendStatusToWindow(
-      `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
-    )
-  })
-
-  autoUpdater.on('update-downloaded', () => {
-    // sendStatusToWindow('Update downloaded; will install now')
-    autoUpdater.quitAndInstall();
-  })
 }
 
 // This method will be called when Electron has finished
@@ -192,6 +195,7 @@ app.on('ready', () => {
   })
   createWindow();
 })
+
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
