@@ -105,7 +105,7 @@ function getComments() {
             pureData = data.split('\n')
             for (let i = 0; i < pureData.length; i++) {
                 if (pureData[i].charAt(0) !== '!') {
-                    comData.push(pureData[i])
+                    if (pureData[i].length !== 0) comData.push(pureData[i])
                 }
             }
         })

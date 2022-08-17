@@ -232,7 +232,6 @@ function launchMainLogic(_url, _username, _password, _mode) {
                 }
                 await page.type('._ablz', comment[i])
                 await page.keyboard.press('Enter')
-                log.info(`Posting comment: ${comment[i]}`)
                 if (i === (comment.length - 1)) {
                   log.info('Commenting fully completed')
                   noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)

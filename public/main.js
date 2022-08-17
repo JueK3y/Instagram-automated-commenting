@@ -81,7 +81,9 @@ const createWindow = () => {
     if (nativeTheme.shouldUseDarkColors) {
       mainWindow.webContents.send('changedToDark')
     } else {
-      mainWindow.webContents.send('changedToLight')
+      
+      mainWindow.webCont
+      ents.send('changedToLight')
     }
   })
 
@@ -111,6 +113,10 @@ const createWindow = () => {
     mainWindow.webContents.send('message', `Error in auto-updater: ${err.toString()}`)
   })
 
+  //ipc.on('downloadUpdate', () => {
+    
+  //})
+
   autoUpdater.on('download-progress', progressObj => {
     sendStatusToWindow(
       `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
@@ -118,7 +124,8 @@ const createWindow = () => {
   })
 
   autoUpdater.on('update-downloaded', () => {
-    sendStatusToWindow('Update downloaded; will install now')
+    sendStatusToWindow('Update successfully downloaded.')
+    // TODO: Ask before quitting
     autoUpdater.quitAndInstall();
   })
 
