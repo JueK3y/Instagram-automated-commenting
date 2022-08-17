@@ -100,7 +100,6 @@ const createWindow = () => {
 
   autoUpdater.on('update-available', (info) => {
     sendStatusToWindow('Update available.')
-    autoUpdater.autoDownload()
   })
 
   autoUpdater.on('update-not-available', (info) => {
