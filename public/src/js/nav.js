@@ -551,8 +551,9 @@ window.setInterval(() => {
 ////// FIXME: Needs to be re-worked -!- //
 let updateOnline
 
-function setUpdateBoolean() {
-  updateOnline = true
+function updateState(value) {
+  if (value === 'available') updateOnline = true
+  else if (value === 'downloaded') downloadSuccess = true
 }
 
 const update = document.getElementById('update')
@@ -609,8 +610,11 @@ $(document).ready(function() {
     }, 3001)
   })                                                                          
   $(document).on('click', '#download', function() {
+    noteMessage('Update-Download', 'Das Update wird jetzt heruntergeladen.', true)
     // INFO: Download and install update -!- //
+    // TODO: Download update (timeout, until update is downloaded)
     // TODO: Add this function - downloadUpdateIPC() -!- //
+    // downloadUpdateIPC()
     if (counterDisplay === 3 || notConnected) {
       noteMessage('Download fehlgeschlagen', 'Es wird eine aktive Internetverbindung benötigt', true)
       download.style.display = 'none '
@@ -623,8 +627,6 @@ $(document).ready(function() {
       }, 3000)
     }
     else {
-      // Install update
-      downloadSuccess = true                                                     // TODO: API check if download was successfull -!- //
       if (downloadSuccess) {
         showBanner('info', 'Update heruntergeladen', 'IAC wird jetzt geupdatet und wird ggfl. neugestartet.', 'install-update', true)
         download.style.display = 'none '
@@ -646,6 +648,7 @@ $(document).ready(function() {
       }
     }
   })
+  // TODO: Add installation option
 })
 
 setTimeout(() => {

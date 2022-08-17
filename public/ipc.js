@@ -139,9 +139,16 @@ function openDevConsoleIPC() {
 
 ////// Update
 ipc.on('update', (event, text) => {
-    console.log('Message from updater:', text);
-    if (text === 'Update available') {
-        setUpdateBoolean()
+    log.info('Message from updater:', text);
+    if (text === 'Update available.') {
+        updateState('available')
         // TODO: Add update functionallity -!- //
     }
+    else if (text === 'Update successfully downloaded.') {
+        updateState('downloaded')
+    }
 })
+
+function downloadUpdateIPC() {
+    ipc.send('downloadUpdate')
+}

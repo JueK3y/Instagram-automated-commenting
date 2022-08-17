@@ -138,6 +138,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
           // TODO: Add 2FA Code and check it -!- //
           // TODO: If #twoFactorErrorAlert comes up - ask for 2FA again -!- // */
         }
+        showBanner('info', 'LogIn erfolgreich', 'Das Einloggen in Instagram war erfolgreich.', 'login-success', true)
         log.info('Correct LogIn data')
         log.info(`Opening ${postURL}`)
         try {
@@ -205,7 +206,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
                   // FIXME: Gets called when closing the page manually -!- //
                   log.warn('Wrong page link')
                   noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
-                  showBanner('error', 'Falsche URL', 'Bitte URL überprüfen und erneut versuchen', 'wrong-ig-url', true)
+                  showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
                   document.getElementById('stop-btn').click()
                   await browser.close()
                   runMainLogic = false
@@ -223,18 +224,27 @@ function launchMainLogic(_url, _username, _password, _mode) {
           for (let i = 0; i < comment.length; i++) {
             let comment = comData
             try {
-              if (runMainLogic) {                                                            // TODO: Better stillRunningCheck needed -!- //
+              if (runMainLogic) {                                                           // TODO: Better stillRunningCheck needed -!- //
                 await page.click('._ablz')
-                const inputValue = await page.$eval('._ablz', el => el.value);
+                const inputValue = await page.$eval('._ablz', el => el.value)               // INFO: Deletes current input
                 for (let i = 0; i < inputValue.length; i++) {
                   await page.keyboard.press('Backspace')
                 }
                 await page.type('._ablz', comment[i])
                 await page.keyboard.press('Enter')
-                log.info(`Posting comment: ${comment[i]}`)
-                comTime = (Math.floor(Math.random() * 100) + 5) * 1000
-                log.info(`Waiting for ${comTime} miliseconds`)
-                await page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
+                if (i === (comment.length - 1)) {
+                  log.info('Commenting fully completed')
+                  noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
+                  showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
+                  document.getElementById('stop-btn').click()
+                  runMainLogic = false
+                  await browser.close()
+                }
+                else {
+                  comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+                  log.info(`Waiting for ${comTime} miliseconds`)
+                  await page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
+                }
               }
               else {
                 await page.close()
@@ -244,7 +254,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
             catch(TypeError) {
               log.warn('Wrong page link')
               noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
-              showBanner('error', 'Falsche URL', 'Bitte URL überprüfen und erneut versuchen', 'wrong-ig-url', true)
+              showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
               document.getElementById('stop-btn').click()
               runMainLogic = false
               await browser.close()
