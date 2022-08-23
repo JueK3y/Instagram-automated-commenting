@@ -87,8 +87,6 @@ const createWindow = () => {
     }
   })
 
-  log.info(app.getLocale())
-
   // ------ AutoUpdater ------ //
   const sendStatusToWindow = (text) => {
     log.info(text);
