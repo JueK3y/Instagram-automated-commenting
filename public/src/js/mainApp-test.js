@@ -1,6 +1,4 @@
-const target = require('C:/Users/julia/Documents/Projekte/IAC 2.0/Develop/Instagram-automated-commenting/public/src/js/instagram');
-// NOT PRODUCTION READY
-// FIXME: NEEDS TO BE FIXED ASAP
+const target = require('./src/js/instagram');
 
 log.info('Launching bot')
 
