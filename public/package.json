@@ -22,8 +22,6 @@
   "scripts": {
     "start": "electron .",
     "format": "prettier --write \"./**/*.{js,html,json}\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
   "devDependencies": {
