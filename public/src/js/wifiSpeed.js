@@ -1,8 +1,17 @@
-const isOnline = require("is-online");
+const isReachable = require("is-reachable");
 const NetworkSpeed = require("network-speed");
 
 async function getNetworkDownloadSpeed() {
-  if (await isOnline()) {
+  if (await isReachable("google.com")) {
+    const testNetworkSpeed = new NetworkSpeed();
+    const baseUrl = "https://eu.httpbin.org/stream-bytes/500000";
+    const fileSizeInBytes = 500000;
+    const speed = await testNetworkSpeed.checkDownloadSpeed(
+      baseUrl,
+      fileSizeInBytes
+    );
+    return speed;
+  } else if (await isReachable("instagram.com")) {
     const testNetworkSpeed = new NetworkSpeed();
     const baseUrl = "https://eu.httpbin.org/stream-bytes/500000";
     const fileSizeInBytes = 500000;
