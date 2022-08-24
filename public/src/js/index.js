@@ -13,356 +13,493 @@
 // └─────────────────────────────────────────────────────────────────────────┘
 
 ////// URL Clear Buttton
-$('#clearButton').click(function() {
-  $('#url-input').val('')
-  $('#url-input').focus()
-})
+$("#clearButton").click(function () {
+  $("#url-input").val("");
+  $("#url-input").focus();
+});
 
 ////// Password Toggle Button
-const password = document.getElementById('password-form')
-const pwImage = document.getElementById('togglePwImage')
+const password = document.getElementById("password-form");
+const pwImage = document.getElementById("togglePwImage");
 
-$('#toggle').on('click', () => {
-  if (document.getElementById('toggle').checked) {
-    password.type = 'text'
-    password.focus()
-    pwImage.src = 'src/img/icons/' + document.body.classList + '/eye-hidden.svg'
+$("#toggle").on("click", () => {
+  if (document.getElementById("toggle").checked) {
+    password.type = "text";
+    password.focus();
+    pwImage.src =
+      "src/img/icons/" + document.body.classList + "/eye-hidden.svg";
+  } else {
+    password.type = "password";
+    password.focus();
+    pwImage.src = "src/img/icons/" + document.body.classList + "/eye.svg";
   }
-  else {
-    password.type = 'password'
-    password.focus()
-    pwImage.src = 'src/img/icons/' + document.body.classList + '/eye.svg'
-  }
-})
+});
 
-const errorCode = ['form-empty', 'url-empty', 'url-too-short', 'wrong-url', 'username-empty', 'wrong-username', 'password-empty', 'password-too-short']
-const specialChar = [' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '´', '\\', '{', '|', '}', '~', '§', '°', 'ß', 'ö', 'ä', 'ü']
+const errorCode = [
+  "form-empty",
+  "url-empty",
+  "url-too-short",
+  "wrong-url",
+  "username-empty",
+  "wrong-username",
+  "password-empty",
+  "password-too-short",
+];
+const specialChar = [
+  " ",
+  "!",
+  '"',
+  "#",
+  "$",
+  "%",
+  "&",
+  "'",
+  "(",
+  ")",
+  "*",
+  "+",
+  ",",
+  "/",
+  ":",
+  ";",
+  "<",
+  "=",
+  ">",
+  "?",
+  "@",
+  "[",
+  "]",
+  "^",
+  "`",
+  "´",
+  "\\",
+  "{",
+  "|",
+  "}",
+  "~",
+  "§",
+  "°",
+  "ß",
+  "ö",
+  "ä",
+  "ü",
+];
 function specialCharCheck(checkVar) {
   for (let i = 0; i < specialChar.length; i++) {
     if (checkVar.includes(specialChar[i])) {
-      return true
+      return true;
     }
   }
 }
 
 function formError(type) {
-  $('#start-btn').prop('disabled', false)
+  $("#start-btn").prop("disabled", false);
   if (type === undefined) {
-    urlInput.classList.add('wrong-form')
-    username.classList.add('wrong-form')
-    password.classList.add('wrong-form')
-    urlInput.focus()
+    urlInput.classList.add("wrong-form");
+    username.classList.add("wrong-form");
+    password.classList.add("wrong-form");
+    urlInput.focus();
     setTimeout(() => {
-      urlInput.classList.remove('wrong-form')
-      username.classList.remove('wrong-form')
-      password.classList.remove('wrong-form')
-    }, 1300)
-  }
-  else {
-    type.classList.add('wrong-form')
-    type.focus()
+      urlInput.classList.remove("wrong-form");
+      username.classList.remove("wrong-form");
+      password.classList.remove("wrong-form");
+    }, 1300);
+  } else {
+    type.classList.add("wrong-form");
+    type.focus();
     setTimeout(() => {
-      type.classList.remove('wrong-form')
-    }, 1300)
+      type.classList.remove("wrong-form");
+    }, 1300);
   }
 }
 
-
 // INFO: ONLY FOR DEMO VERSION -!- //
 // TODO: Check validate value -!- //
-let validate = false
+let validate = false;
 
-let checkClick = 0                                    // FIXME: Is checkClick for de-activating display timeout? -!- //
+let checkClick = 0; // FIXME: Is checkClick for de-activating display timeout? -!- //
 
-const urlInput = document.getElementById('url-input')
-const username = document.getElementById('username-form')
+const urlInput = document.getElementById("url-input");
+const username = document.getElementById("username-form");
 
-urlInput.focus()
+urlInput.focus();
 
-$(document).on('keyup', function(e) {
-  if (e.key === 'Enter' && ($(urlInput).is(':focus') || $(username).is(':focus') || $(password).is(':focus'))) {
-    if ($('#start-btn').is(':visible')) $('#start-btn').click()
-    
+$(document).on("keyup", function (e) {
+  if (
+    e.key === "Enter" &&
+    ($(urlInput).is(":focus") ||
+      $(username).is(":focus") ||
+      $(password).is(":focus"))
+  ) {
+    if ($("#start-btn").is(":visible")) $("#start-btn").click();
   }
-})
+});
 
-let pause = false
-let mainLogicMode = true
+let pause = false;
+let mainLogicMode = true;
 
-$('#start-btn').click(function() {   
-  if ($('#start-btn').is(':disabled')) {
-    return
-  }  
-  $('#start-btn').prop('disabled', true)
+$("#start-btn").click(function () {
+  if ($("#start-btn").is(":disabled")) {
+    return;
+  }
+  $("#start-btn").prop("disabled", true);
   if (pause) {
-    checkClick = 0
-    pause = false
+    checkClick = 0;
+    pause = false;
   }
-  hideBanner('error')                                                                                      // FIXME: Looks weird for the same error -!- //
-  if (urlInput.value === '' && username.value === '' && password.value === '') {
-    showBanner('error', 'Keine Eingabe', 'Bitte fülle die vorgegebenen Felder aus.', errorCode[0], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[0]}`)
-    formError()
-  }
-  else if (urlInput.value === '') {
-    showBanner('warning', 'Keine URL', 'Bitte gib eine passende URL ein.', errorCode[1], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[1]}`)
-    formError(urlInput)
-  }
-  else if (urlInput.value.length < 16) {
-    showBanner('warning', 'Falsche Eingabe', 'Sicher, dass du eine URL angegeben hast?', errorCode[2], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[2]}`)
-    log.warn(`Client input was ${urlInput.value}`)
-    formError(urlInput)
-  }
-  else if (! urlInput.value.includes('instagram.')) {                                                                             // INFO: Change this value if needed -!- //
-    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`)
-    log.warn(`Client input was ${urlInput.value}`)
-    formError(urlInput)
-  }
-  else if (username.value === '') {
-    showBanner('warning', 'Kein Benutzername', 'Bitte gib den Benutzername an.', errorCode[4], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[4]}`)
-    formError(username)
-  }
-  else if (specialCharCheck(username.value)) {
-    showBanner('warning', 'Falsche Eingabe', 'Der Benutzername kann keine Sonderzeichen enthalten.', errorCode[5], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[5]}`)
-    log.warn(`Client input was ${username.value}`)
-    formError(username)
-  }
-  else if (password.value === '') {
-    showBanner('warning', 'Kein Passwort', 'Bitte gib das dazugehörige Password ein.', errorCode[6], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[6]}`)
-    formError(password)
-  }
-  else if (password.value.length < 5) {
-    showBanner('warning', 'Passwort zu kurz', 'Bitte überprüfe das eingegebene Passwort.', errorCode[7], true)
-    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[7]}`)
-    formError(password)
-  }
-  else {
+  hideBanner("error"); // FIXME: Looks weird for the same error -!- //
+  if (urlInput.value === "" && username.value === "" && password.value === "") {
+    showBanner(
+      "error",
+      "Keine Eingabe",
+      "Bitte fülle die vorgegebenen Felder aus.",
+      errorCode[0],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[0]}`);
+    formError();
+  } else if (urlInput.value === "") {
+    showBanner(
+      "warning",
+      "Keine URL",
+      "Bitte gib eine passende URL ein.",
+      errorCode[1],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[1]}`);
+    formError(urlInput);
+  } else if (urlInput.value.length < 16) {
+    showBanner(
+      "warning",
+      "Falsche Eingabe",
+      "Sicher, dass du eine URL angegeben hast?",
+      errorCode[2],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[2]}`);
+    log.warn(`Client input was ${urlInput.value}`);
+    formError(urlInput);
+  } else if (!urlInput.value.includes("instagram.")) {
+    // INFO: Change this value if needed -!- //
+    showBanner(
+      "warning",
+      "Falsche URL",
+      "Sicher, dass es sich hierbei um einen Instagram Post handelt?",
+      errorCode[3],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`);
+    log.warn(`Client input was ${urlInput.value}`);
+    formError(urlInput);
+  } else if (username.value === "") {
+    showBanner(
+      "warning",
+      "Kein Benutzername",
+      "Bitte gib den Benutzername an.",
+      errorCode[4],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[4]}`);
+    formError(username);
+  } else if (specialCharCheck(username.value)) {
+    showBanner(
+      "warning",
+      "Falsche Eingabe",
+      "Der Benutzername kann keine Sonderzeichen enthalten.",
+      errorCode[5],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[5]}`);
+    log.warn(`Client input was ${username.value}`);
+    formError(username);
+  } else if (password.value === "") {
+    showBanner(
+      "warning",
+      "Kein Passwort",
+      "Bitte gib das dazugehörige Password ein.",
+      errorCode[6],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[6]}`);
+    formError(password);
+  } else if (password.value.length < 5) {
+    showBanner(
+      "warning",
+      "Passwort zu kurz",
+      "Bitte überprüfe das eingegebene Passwort.",
+      errorCode[7],
+      true
+    );
+    log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[7]}`);
+    formError(password);
+  } else {
     if (noWiFi) {
-      showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', true)
-      log.warn('Client error - Start of IAC 2.0 not possible: No WiFi')
-      $('#start-btn').prop('disabled', false)
-    }
-    else {
-      validate = true
+      showBanner(
+        "error",
+        "WLAN deaktiviert",
+        "Du benötigst eine aktive Internetverbindung.",
+        "wifi-not-connected",
+        true
+      );
+      log.warn("Client error - Start of IAC 2.0 not possible: No WiFi");
+      $("#start-btn").prop("disabled", false);
+    } else {
+      validate = true;
       for (let i = 0; i < errorCode.length; i++) {
-        if ($('.' + errorCode[i])[0]) {
-          hideBanner(errorCode[i])
-          log.info(`${errorCode[i]} banner exists. Removing it`)
+        if ($("." + errorCode[i])[0]) {
+          hideBanner(errorCode[i]);
+          log.info(`${errorCode[i]} banner exists. Removing it`);
         }
       }
     }
   }
 
   if (validate) {
-    getComments()
+    getComments();
     setTimeout(() => {
-      $('#start-btn').prop('disabled', false)
+      $("#start-btn").prop("disabled", false);
       if (comData[0] !== undefined) {
-        log.info('All input is correct, launching main logic')
-        document.getElementById('start-btn').style.display = 'none'
-        document.getElementById('pause-btn').style.display = 'block'
-        document.getElementById('stop-btn').style.display = 'block'
-        document.getElementById('idleIcon').style.display = 'none'
-        document.getElementById('runIcon').style.display = 'block'
-        document.getElementById('pauseIcon').style.display = 'none'
-        runMainLogic = true
-        launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
-        if (document.getElementById('save-profile').checked) {
-          log.info('Saving LogIn data')
-          setPassword(username.value, password.value)
+        log.info("All input is correct, launching main logic");
+        document.getElementById("start-btn").style.display = "none";
+        document.getElementById("pause-btn").style.display = "block";
+        document.getElementById("stop-btn").style.display = "block";
+        document.getElementById("idleIcon").style.display = "none";
+        document.getElementById("runIcon").style.display = "block";
+        document.getElementById("pauseIcon").style.display = "none";
+        runMainLogic = true;
+        launchMainLogic(
+          urlInput.value,
+          username.value,
+          password.value,
+          mainLogicMode
+        );
+        if (document.getElementById("save-profile").checked) {
+          log.info("Saving LogIn data");
+          setPassword(username.value, password.value);
           setTimeout(() => {
-            profileUpdate()
-          }, 50)
+            profileUpdate();
+          }, 50);
           setTimeout(() => {
             // INFO: Does only work for adding one profile -!- //
-            if (document.getElementById('profile-1-name').innerText !== '') {
-              document.getElementById('profile-1').style.display = 'flex'
+            if (document.getElementById("profile-1-name").innerText !== "") {
+              document.getElementById("profile-1").style.display = "flex";
             }
-            if (document.getElementById('profile-2-name').innerText !== '') {
-              document.getElementById('profile-2').style.display = 'flex'
+            if (document.getElementById("profile-2-name").innerText !== "") {
+              document.getElementById("profile-2").style.display = "flex";
             }
-            if (document.getElementById('profile-3-name').innerText !== '') {
-              document.getElementById('profile-3').style.display = 'flex'
-              showMore.display = ''
-              addProfile.display = 'none'
+            if (document.getElementById("profile-3-name").innerText !== "") {
+              document.getElementById("profile-3").style.display = "flex";
+              showMore.display = "";
+              addProfile.display = "none";
             }
             // TODO: Show dropdown menu -!- //
-          }, 150)
+          }, 150);
         }
         // updateUser(username.value)
-        checkClick = 0
-      }
-      else {
-        showBanner('error', 'Keine Kommentare', 'IAC 2.0 benötigt mindestens einen Kommentar.', 'zero-comments', true)
-        log.warn('Client error - Start of IAC 2.0 not possible: Empty comment file')
-        validate = false
+        checkClick = 0;
+      } else {
+        showBanner(
+          "error",
+          "Keine Kommentare",
+          "IAC 2.0 benötigt mindestens einen Kommentar.",
+          "zero-comments",
+          true
+        );
+        log.warn(
+          "Client error - Start of IAC 2.0 not possible: Empty comment file"
+        );
+        validate = false;
         setTimeout(() => {
-          openComments()
-        }, 2500)
+          openComments();
+        }, 2500);
       }
-    }, 600)
+    }, 600);
   }
-})
+});
 
-$('#pause-btn').click(function() {
-  checkClick = 0
-  pause = true
-  document.getElementById('start-btn').style.display = 'block'
-  document.getElementById('pause-btn').style.display = 'none'
-  document.getElementById('stop-btn').style.display = 'block'
-  document.getElementById('idleIcon').style.display = 'none'
-  document.getElementById('runIcon').style.display = 'block'
-  document.getElementById('pauseIcon').style.display = 'none'
-  log.info('Pause button was pressed')
+$("#pause-btn").click(function () {
+  checkClick = 0;
+  pause = true;
+  document.getElementById("start-btn").style.display = "block";
+  document.getElementById("pause-btn").style.display = "none";
+  document.getElementById("stop-btn").style.display = "block";
+  document.getElementById("idleIcon").style.display = "none";
+  document.getElementById("runIcon").style.display = "block";
+  document.getElementById("pauseIcon").style.display = "none";
+  log.info("Pause button was pressed");
   // TODO: API pauses commenting -!- //
-})
+});
 
-$('#stop-btn').click(function() {
-  validate = false
-  checkClick = 1
-  runMainLogic = false
-  hideBanner('close-while-commenting')
-  document.getElementById('start-btn').style.display = 'block'
-  document.getElementById('pause-btn').style.display = 'none'
-  document.getElementById('stop-btn').style.display = 'none'
-  document.getElementById('idleIcon').style.display = 'block'
-  document.getElementById('runIcon').style.display = 'none'
-  document.getElementById('pauseIcon').style.display = 'none'
-  log.info('Stop button was pressed')
-})
+$("#stop-btn").click(function () {
+  validate = false;
+  checkClick = 1;
+  runMainLogic = false;
+  hideBanner("close-while-commenting");
+  document.getElementById("start-btn").style.display = "block";
+  document.getElementById("pause-btn").style.display = "none";
+  document.getElementById("stop-btn").style.display = "none";
+  document.getElementById("idleIcon").style.display = "block";
+  document.getElementById("runIcon").style.display = "none";
+  document.getElementById("pauseIcon").style.display = "none";
+  log.info("Stop button was pressed");
+});
 
-////// Profile Dropdown 
-const prDdImage = document.getElementById('profileDropdownImage')
-const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
+////// Profile Dropdown
+const prDdImage = document.getElementById("profileDropdownImage");
+const prDdImgBlur = document.getElementById("profileDropdownImageNoFocus");
 
 $(document).ready(() => {
-  $(document).on('click', '#profileDropdownContent', function(e) {
-    const clickedProfile = String(e.target.classList).slice(4)                                        // INFO: Pass ID to API and give username and password -!- //
-    username.value = clickedProfile                                                                       // INFO: Get Name for ID from API -!- //
-    getPassword(username.value).then(result => password.value = result)                                   // INFO: Get Password for ID from API -!- //
-    prDdImage.style.display = 'block'
-    prDdImgBlur.style.display = 'none'
-  })
-  $(document).on('click', '#profile-content', function(e) {
-    let target = e.target.id
-    for(let i = 0; i <= 3; i++) {
-      if (target === 'profile-'+i+'-content') {
-        const clickedProfile = String(document.getElementById(target).querySelector('p').classList).slice(4)
-        username.value = clickedProfile
-        getPassword(username.value).then(result => password.value = result)
-        prDdImage.style.display = 'block'
-        prDdImgBlur.style.display = 'none'
-      }
-      else if (target === 'profile-'+i+'-img') {
-        const clickedProfile = String(document.getElementById(target).nextElementSibling.classList).slice(4)
-        username.value = clickedProfile
-        getPassword(username.value).then(result => password.value = result)
-        prDdImage.style.display = 'block'
-        prDdImgBlur.style.display = 'none'
-      }
-      else if (target === 'profile-'+i+'-name') {
-        const clickedProfile = String(document.getElementById(target).classList).slice(4)
-        username.value = clickedProfile
-        getPassword(username.value).then(result => password.value = result)
-        prDdImage.style.display = 'block'
-        prDdImgBlur.style.display = 'none'
-      }
-      else if (target === 'delete-'+i) {
-        const deleteUser = String(document.getElementById(target).previousElementSibling.querySelector('p').classList).slice(4)
-        const deleteProfile = String(document.getElementById(target).previousElementSibling.parentElement.id)
-        document.getElementById(deleteProfile).remove()
-        $('.uid-'+deleteUser).remove()
-        $('<a>', {
-          class: 'uid-'+deleteProfile,
-          text: deleteProfile.replace('profile-', 'Profil ')                                          // FIXME: Better fix needed -!- //
-        }).appendTo('#profileDropdownContent')
-        if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
-          document.getElementById('profileDropdown').style.display = 'none'
+  $(document).on("click", "#profileDropdownContent", function (e) {
+    const clickedProfile = String(e.target.classList).slice(4); // INFO: Pass ID to API and give username and password -!- //
+    username.value = clickedProfile; // INFO: Get Name for ID from API -!- //
+    getPassword(username.value).then((result) => (password.value = result)); // INFO: Get Password for ID from API -!- //
+    prDdImage.style.display = "block";
+    prDdImgBlur.style.display = "none";
+  });
+  $(document).on("click", "#profile-content", function (e) {
+    let target = e.target.id;
+    for (let i = 0; i <= 3; i++) {
+      if (target === "profile-" + i + "-content") {
+        const clickedProfile = String(
+          document.getElementById(target).querySelector("p").classList
+        ).slice(4);
+        username.value = clickedProfile;
+        getPassword(username.value).then((result) => (password.value = result));
+        prDdImage.style.display = "block";
+        prDdImgBlur.style.display = "none";
+      } else if (target === "profile-" + i + "-img") {
+        const clickedProfile = String(
+          document.getElementById(target).nextElementSibling.classList
+        ).slice(4);
+        username.value = clickedProfile;
+        getPassword(username.value).then((result) => (password.value = result));
+        prDdImage.style.display = "block";
+        prDdImgBlur.style.display = "none";
+      } else if (target === "profile-" + i + "-name") {
+        const clickedProfile = String(
+          document.getElementById(target).classList
+        ).slice(4);
+        username.value = clickedProfile;
+        getPassword(username.value).then((result) => (password.value = result));
+        prDdImage.style.display = "block";
+        prDdImgBlur.style.display = "none";
+      } else if (target === "delete-" + i) {
+        const deleteUser = String(
+          document
+            .getElementById(target)
+            .previousElementSibling.querySelector("p").classList
+        ).slice(4);
+        const deleteProfile = String(
+          document.getElementById(target).previousElementSibling.parentElement
+            .id
+        );
+        document.getElementById(deleteProfile).remove();
+        $(".uid-" + deleteUser).remove();
+        $("<a>", {
+          class: "uid-" + deleteProfile,
+          text: deleteProfile.replace("profile-", "Profil "), // FIXME: Better fix needed -!- //
+        }).appendTo("#profileDropdownContent");
+        if (
+          $(".uid-profile-1").length &&
+          $(".uid-profile-2").length &&
+          $(".uid-profile-3").length
+        ) {
+          document.getElementById("profileDropdown").style.display = "none";
         }
-        document.getElementById('more-profile').style.display = 'none'
-        document.getElementById('add-profile').style.display = 'block'
-        index = userProfile.indexOf(deleteUser)
-        userProfile.splice(index, 1)
-        deletePassword(deleteUser)
-      }
-      else if (target === 'deleteIcon-'+i) {
-        const deleteUser = String(document.getElementById(target).parentElement.previousElementSibling.querySelector('p').classList).slice(4)
-        const deleteProfile = String(document.getElementById(target).parentElement.previousElementSibling.parentElement.id)
-        document.getElementById(deleteProfile).remove()
-        $('.uid-'+deleteUser).remove()
-        $('<a>', {
-          class: 'uid-'+deleteProfile,
-          text: deleteProfile.replace('profile-', 'Profil ')                                        // FIXME: Better fix needed -!- //
-        }).appendTo('#profileDropdownContent')
-        if ($('.uid-profile-1').length && $('.uid-profile-2').length && $('.uid-profile-3').length) {
-          document.getElementById('profileDropdown').style.display = 'none'
+        document.getElementById("more-profile").style.display = "none";
+        document.getElementById("add-profile").style.display = "block";
+        index = userProfile.indexOf(deleteUser);
+        userProfile.splice(index, 1);
+        deletePassword(deleteUser);
+      } else if (target === "deleteIcon-" + i) {
+        const deleteUser = String(
+          document
+            .getElementById(target)
+            .parentElement.previousElementSibling.querySelector("p").classList
+        ).slice(4);
+        const deleteProfile = String(
+          document.getElementById(target).parentElement.previousElementSibling
+            .parentElement.id
+        );
+        document.getElementById(deleteProfile).remove();
+        $(".uid-" + deleteUser).remove();
+        $("<a>", {
+          class: "uid-" + deleteProfile,
+          text: deleteProfile.replace("profile-", "Profil "), // FIXME: Better fix needed -!- //
+        }).appendTo("#profileDropdownContent");
+        if (
+          $(".uid-profile-1").length &&
+          $(".uid-profile-2").length &&
+          $(".uid-profile-3").length
+        ) {
+          document.getElementById("profileDropdown").style.display = "none";
         }
-        document.getElementById('more-profile').style.display = 'none'
-        document.getElementById('add-profile').style.display = 'block'
-        index = userProfile.indexOf(deleteUser)
-        userProfile.splice(index, 1)
-        deletePassword(deleteUser)
+        document.getElementById("more-profile").style.display = "none";
+        document.getElementById("add-profile").style.display = "block";
+        index = userProfile.indexOf(deleteUser);
+        userProfile.splice(index, 1);
+        deletePassword(deleteUser);
       }
     }
-  })
-})
+  });
+});
 
 ////// Image color changer
-username.addEventListener('focus', function() {
-  prDdImage.style.display = 'block'
-  prDdImgBlur.style.display = 'none'
-}, false)
+username.addEventListener(
+  "focus",
+  function () {
+    prDdImage.style.display = "block";
+    prDdImgBlur.style.display = "none";
+  },
+  false
+);
 
-username.addEventListener('blur', function() {
-  if (username.value === '') {
-    prDdImage.style.display = 'none'
-    prDdImgBlur.style.display = 'block'
-  }
-}, false)
+username.addEventListener(
+  "blur",
+  function () {
+    if (username.value === "") {
+      prDdImage.style.display = "none";
+      prDdImgBlur.style.display = "block";
+    }
+  },
+  false
+);
 
 ////// Serach function
-$(document).on('focus', '#username-form', () => {
-  $(document).on('keyup', '#username-form', () => {
-    document.getElementById('searchProfileContent').style.display = 'block'
-    let filter = document.getElementById('username-form').value.toUpperCase()
+$(document).on("focus", "#username-form", () => {
+  $(document).on("keyup", "#username-form", () => {
+    document.getElementById("searchProfileContent").style.display = "block";
+    let filter = document.getElementById("username-form").value.toUpperCase();
     for (let i = 0; i < userProfile.length; i++) {
-      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter != '') {
-        if (document.getElementById('uid-'+userProfile[i]) != 0) {
-          $('<a>', {
-            id: 'uid-'+userProfile[i],
-            text: userProfile[i]
-          }).appendTo('#searchProfileContent')
+      if (userProfile[i].toUpperCase().indexOf(filter) > -1 && filter != "") {
+        if (document.getElementById("uid-" + userProfile[i]) != 0) {
+          $("<a>", {
+            id: "uid-" + userProfile[i],
+            text: userProfile[i],
+          }).appendTo("#searchProfileContent");
         }
-      }
-      else {
+      } else {
         try {
-          document.getElementById('uid-'+userProfile[i]).remove()
-        }
-        catch(TypeError) { }
+          document.getElementById("uid-" + userProfile[i]).remove();
+        } catch (TypeError) {}
       }
     }
-  })
-})
+  });
+});
 
-$(document).on('blur', '#username-form', () => {
-  $(document).on('click', '#searchProfileContent', (e) => {
-    let target = e.target.id
-    if (target != 'searchProfileContent') {
-      const clickedProfile = String(target).slice(4)
-      username.value = clickedProfile
-      getPassword(username.value).then(result => password.value = result)
-      prDdImage.style.display = 'block'
-      prDdImgBlur.style.display = 'none'
-      document.getElementById('searchProfileContent').style.display = 'none'
+$(document).on("blur", "#username-form", () => {
+  $(document).on("click", "#searchProfileContent", (e) => {
+    let target = e.target.id;
+    if (target != "searchProfileContent") {
+      const clickedProfile = String(target).slice(4);
+      username.value = clickedProfile;
+      getPassword(username.value).then((result) => (password.value = result));
+      prDdImage.style.display = "block";
+      prDdImgBlur.style.display = "none";
+      document.getElementById("searchProfileContent").style.display = "none";
     }
-  })
+  });
   setTimeout(() => {
-    document.getElementById('searchProfileContent').style.display = 'none'
-  }, 250)
-})
+    document.getElementById("searchProfileContent").style.display = "none";
+  }, 250);
+});

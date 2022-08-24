@@ -21,12 +21,14 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "format": "prettier --write \"./**/*.{js,html,json}\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^15.5.7"
+    "electron": "^15.5.7",
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "electron-log": "^4.4.8",
@@ -36,7 +38,6 @@
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^16.0.0",
     "puppeteer-extra": "^3.3.4",
     "puppeteer-extra-plugin-stealth": "^2.11.0"
   },

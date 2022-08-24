@@ -1,12 +1,12 @@
 {
-    "recommendations": [
-        "codelios.dartsass",
-        "pkief.material-icon-theme",
-        "eamodio.gitlens",
-        "akamud.vscode-theme-onedark",
-        "dbaeumer.vscode-eslint",
-        "dominicvonk.parameter-hints",
-        "christian-kohler.npm-intellisense",
-        "syler.sass-indented"
-    ]
+  "recommendations": [
+    "codelios.dartsass",
+    "pkief.material-icon-theme",
+    "eamodio.gitlens",
+    "akamud.vscode-theme-onedark",
+    "dbaeumer.vscode-eslint",
+    "dominicvonk.parameter-hints",
+    "christian-kohler.npm-intellisense",
+    "syler.sass-indented"
+  ]
 }
