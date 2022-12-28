@@ -483,7 +483,7 @@ window.setInterval(() => {
       changeColor.style.background = (light) ? '#FDE7E9':'#442726'
       changeImg.src = 'src/img/icons/' + document.body.classList + '/wifi/wifi-off-colored.svg'
       if (showConnMessage) {
-        showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
+        showBanner('error', 'Internetverbindung deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', false)
         counterDisplay += 1
         if (counterDisplay === 3) {
           // TODO: Add noteMessage -!- //
