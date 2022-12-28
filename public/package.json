@@ -26,7 +26,7 @@
     "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^18.3.7"
+    "electron": "^22.0.0"
   },
   "dependencies": {
     "electron-log": "^4.4.8",
