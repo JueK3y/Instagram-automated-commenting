@@ -26,13 +26,13 @@
     "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^18.3.7"
+    "electron": "^22.0.0"
   },
   "dependencies": {
     "electron-log": "^4.4.8",
     "electron-updater": "^4.6.5",
     "electron-window-state": "^5.0.3",
-    "is-online": "^9.0.1",
+    "is-online": "^10.0.0",
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
