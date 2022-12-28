@@ -48,9 +48,9 @@ function launchMainLogic(_url, _username, _password, _mode) {
   
       // INFO: Check for cookie banner -!- //
       if (runMainLogic) {                                                                    // TODO: Better stillRunningCheck needed -!- //
-        if (await page.$('.HoLwm') !== null) {                                               // INFO: Shouldn't use class detection -!- //
+        if (await page.$('._a9_1') !== null) {                                               // INFO: Shouldn't use class detection -!- //
           log.info('Found cookie banner')
-          await page.click('.HoLwm')
+          await page.click('._a9_1')                                                         // FIXME: Faulty error detection -!- //
         }
       }
       else {
@@ -188,12 +188,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
                     await page.waitForTimeout(2000)
                   }
                   else {
-                    await page.click('._ablz')
-                    const inputValue = await page.$eval('._ablz', el => el.value);
+                    await page.click('textarea.x1i0vuye')
+                    const inputValue = await page.$eval('textarea.x1i0vuye', el => el.value);
                     for (let i = 0; i < inputValue.length; i++) {
                       await page.keyboard.press('Backspace')
                     }
-                    await page.type('._ablz', comment[i])
+                    await page.type('textarea.x1i0vuye', comment[i])
                     await page.keyboard.press('Enter')
                     log.info(`Posting comment: ${comment[i]}`)
                     comTime = (Math.floor(Math.random() * 100) + 5) * 1000
@@ -225,12 +225,13 @@ function launchMainLogic(_url, _username, _password, _mode) {
             let comment = comData
             try {
               if (runMainLogic) {                                                           // TODO: Better stillRunningCheck needed -!- //
-                await page.click('._ablz')
-                const inputValue = await page.$eval('._ablz', el => el.value)               // INFO: Deletes current input
+                await page.click('textarea.x1i0vuye')
+                let inputValue = await page.$eval('textarea.x1i0vuye', el => el.value)               // INFO: Deletes current input
+                log.info(inputValue)
                 for (let i = 0; i < inputValue.length; i++) {
                   await page.keyboard.press('Backspace')
                 }
-                await page.type('._ablz', comment[i])
+                await page.type('textarea.x1i0vuye', comment[i])
                 await page.keyboard.press('Enter')
                 log.info(`Posting comment: ${comment[i]}`)
                 if (i === (comment.length - 1)) {
@@ -253,6 +254,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
               }
             }
             catch(TypeError) {
+              log.info(TypeError)
               log.warn('Wrong page link')
               noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
               showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)

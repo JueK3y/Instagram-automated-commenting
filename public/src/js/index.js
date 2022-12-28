@@ -144,7 +144,7 @@ $('#start-btn').click(function() {
   }
   else {
     if (noWiFi) {
-      showBanner('error', 'WLAN deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', true)
+      showBanner('error', 'Internetverbindung deaktiviert', 'Du benötigst eine aktive Internetverbindung.', 'wifi-not-connected', true)
       log.warn('Client error - Start of IAC 2.0 not possible: No WiFi')
       $('#start-btn').prop('disabled', false)
     }
