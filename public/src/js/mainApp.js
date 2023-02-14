@@ -97,7 +97,9 @@ function launchMainLogic(_url, _username, _password, _mode) {
   
       // INFO: Check if data is correct -!- //
       log.info('Checking LogIn data')
+      await page.waitForTimeout(75)
       if (await page.url() === loginURL) {
+        await page.waitForTimeout(75)
         await page.waitForSelector('#slfErrorAlert')                              // FIXME: Shouldn't use id detection -!- //
         log.warn('Wrong LogIn data')
         log.warn('Instagram error message: "' + await page.$eval('#slfErrorAlert', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
