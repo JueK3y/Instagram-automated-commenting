@@ -156,6 +156,18 @@ function launchMainLogic(_url, _username, _password, _mode) {
           await browser.close()
         }
 
+        try {
+          await page.click('textarea.x1i0vuye')
+        }
+        catch(err) {
+          log.warn('Comment function disabled')
+          noteMessage('Kommentieren nicht möglich', 'Der Ersteller hat die Kommentar-Funktion deaktiviert.', true)
+          showBanner('error', 'Kommentieren nicht möglich', 'Der Ersteller verbietet das Kommentieren.', 'comment-function-disabled', true)
+          document.getElementById('stop-btn').click()
+          runMainLogic = false
+          await browser.close()
+        }
+
         if (runMainLogic) getComments()                                                      // TODO: Better stillRunningCheck needed -!- //
         else {
           await page.close()
@@ -171,6 +183,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
 
         let comTime
         // INFO: Comment loop -!- //
+
         if (commentLoop) {
           while (commentLoop) {
             if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //

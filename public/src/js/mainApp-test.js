@@ -1,4 +1,4 @@
-const target = require('C:/Users/julia/Documents/Projekte/IAC 2.0/Develop/Instagram-automated-commenting/public/src/js/instagram');
+const target = require('./src/js/instagram');
 // NOT PRODUCTION READY
 // FIXME: NEEDS TO BE FIXED ASAP
 

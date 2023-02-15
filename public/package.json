@@ -1,7 +1,7 @@
 {
   "name": "iac_2",
   "productName": "IAC 2.0",
-  "version": "0.8.5-alpha",
+  "version": "0.8.6-alpha",
   "license": "EULA",
   "description": "A bot for automatic commenting on Instagram",
   "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
@@ -43,7 +43,7 @@
   "build": {
     "appId": "jue3ky.iac_2.app",
     "productName": "IAC 2.0",
-    "copyright": "Copyright © 2022 by JueK3y",
+    "copyright": "Copyright © 2023 by JueK3y",
     "win": {
       "target": "nsis",
       "icon": "icon.ico",
