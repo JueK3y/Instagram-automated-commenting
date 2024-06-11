@@ -1,5 +1,6 @@
 const isOnline = require('is-online')
 const NetworkSpeed = require('network-speed')
+const { clipboard } = require('electron')
 
 async function getNetworkDownloadSpeed() {
   if (await isOnline()) {
@@ -12,6 +13,12 @@ async function getNetworkDownloadSpeed() {
   else {
     return false
   }
+}
+
+
+async function checkClipboard() {
+  return clipboard.readText()
+  // TODO: Can be done just once
 }
 
 /*getNetworkUploadSpeed();

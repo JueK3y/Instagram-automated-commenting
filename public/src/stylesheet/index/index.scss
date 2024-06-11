@@ -343,6 +343,31 @@ html {
                                 height: 12px;
                             }
                         }
+                        #pasteButton {
+                            position: absolute;
+                            display: none;
+                            border: none;
+                            outline: none;
+                            background: none;
+                            margin-top: -29.5px;
+                            margin-left: 436px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            transition: .2s;
+                            &:hover {
+                                background-color: var(--input-cross);
+                                transition: .2s;
+                            }
+                            &:active {
+                                opacity: .8;
+                                transition: .2s;
+                            }
+                            img {
+                                margin-top: 3px;
+                                width: 12px;
+                                height: 12px;
+                            }
+                        }
                     }
                     #login-data {
                         display: flex;

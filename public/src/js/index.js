@@ -11,11 +11,20 @@
 // │ Copyright © 2020 - 2024 by JueK3y (Julian Kennedy)                      │
 // │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
+let clipboardString
+
 
 ////// URL Clear Buttton
 $('#clearButton').click(function() {
   $('#url-input').val('')
   $('#url-input').focus()
+})
+
+////// URL Clear Buttton
+$('#pasteButton').click(function() {
+  $('#url-input').val(clipboardString)
+  $('#url-input').focus()
+  $('#pasteButton').css('display', 'none')
 })
 
 ////// Password Toggle Button
@@ -237,11 +246,21 @@ $('#stop-btn').click(function() {
   log.info('Stop button was pressed')
 })
 
-////// Profile Dropdown 
+////// Clipboard & Profile Dropdown 
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
 $(document).ready(() => {
+  checkClipboard().then(result =>  {
+    clipboardString = result
+    if (clipboardString.includes('instagram') && urlInput.value === '') {
+      document.getElementById('pasteButton').style.display = 'block'
+      log.info('Showing paste icon')
+    }
+    else {
+      document.getElementById('pasteButton').style.display = 'none'
+    }
+  })
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = String(e.target.classList).slice(4)                                        // INFO: Pass ID to API and give username and password -!- //
     username.value = clickedProfile                                                                       // INFO: Get Name for ID from API -!- //

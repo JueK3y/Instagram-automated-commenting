@@ -49,6 +49,7 @@ function lightIcon() {
     warningIcon.src = 'src/img/icons/dark/note-important.svg'
     $('.error-icon-img').prop('src', 'src/img/icons/dark/clear.svg')
     $('.clearIcon').prop('src', 'src/img/icons/light/clear.svg')
+    $('.pasteIcon').prop('src', 'src/img/icons/light/paste.svg')
 
     try {
         if (document.getElementById('toggle').checked) {
@@ -97,6 +98,7 @@ function darkIcon() {
     warningIcon.src = 'src/img/icons/light/note-important.svg'
     $('.error-icon-img').prop('src', 'src/img/icons/light/clear-dark.svg')
     $('.clearIcon').prop('src', 'src/img/icons/dark/clear.svg')
+    $('.pasteIcon').prop('src', 'src/img/icons/dark/paste.svg')
 
     try {
         if (document.getElementById('toggle').checked) {

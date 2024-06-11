@@ -328,6 +328,31 @@ html body main form #main-content #post-url #clearButton img {
   width: 12px;
   height: 12px;
 }
+html body main form #main-content #post-url #pasteButton {
+  position: absolute;
+  display: none;
+  border: none;
+  outline: none;
+  background: none;
+  margin-top: -29.5px;
+  margin-left: 436px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+html body main form #main-content #post-url #pasteButton:hover {
+  background-color: var(--input-cross);
+  transition: 0.2s;
+}
+html body main form #main-content #post-url #pasteButton:active {
+  opacity: 0.8;
+  transition: 0.2s;
+}
+html body main form #main-content #post-url #pasteButton img {
+  margin-top: 3px;
+  width: 12px;
+  height: 12px;
+}
 html body main form #main-content #login-data {
   display: flex;
   padding-top: 15px;

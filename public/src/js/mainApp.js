@@ -4,6 +4,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 let runMainLogic;
+let commentArea = 'textarea.x1i0vuye'
 commentLoop = false
 
 function getChromiumExecPath() {
@@ -11,7 +12,7 @@ function getChromiumExecPath() {
 }
 
 function launchMainLogic(_url, _username, _password, _mode) {
-  puppeteer.launch({ headless: _mode, slowMo: 50, executablePath: getChromiumExecPath()}).then(async browser => {    // TODO: Without slowMo arg in production -!- //
+  puppeteer.launch({ headless: _mode, slowMo: 35, executablePath: getChromiumExecPath()}).then(async browser => {    // TODO: Without slowMo arg in production -!- //
     while (runMainLogic) {
       log.info('Main logic launch successfull')
       const page = (await browser.pages())[0]
@@ -157,7 +158,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
         }
 
         try {
-          await page.click('textarea.x1i0vuye')
+          await page.click(commentArea)
         }
         catch(err) {
           log.warn('Comment function disabled')
@@ -203,12 +204,12 @@ function launchMainLogic(_url, _username, _password, _mode) {
                     await page.waitForTimeout(2000)
                   }
                   else {
-                    await page.click('textarea.x1i0vuye')
-                    const inputValue = await page.$eval('textarea.x1i0vuye', el => el.value);
+                    await page.click(commentArea)
+                    const inputValue = await page.$eval(commentArea, el => el.value);
                     for (let i = 0; i < inputValue.length; i++) {
                       await page.keyboard.press('Backspace')
                     }
-                    await page.type('textarea.x1i0vuye', comment[i])
+                    await page.type(commentArea, comment[i])
                     await page.keyboard.press('Enter')
                     log.info(`Posting comment: ${comment[i]}`)
                     comTime = (Math.floor(Math.random() * 100) + 5) * 1000
@@ -240,24 +241,17 @@ function launchMainLogic(_url, _username, _password, _mode) {
             let comment = comData
             try {
               if (runMainLogic) {                                                           // TODO: Better stillRunningCheck needed -!- //
-                await page.click('textarea.x1i0vuye')
-                let inputValue = await page.$eval('textarea.x1i0vuye', el => el.value)               // INFO: Deletes current input
+                await page.click(commentArea)
+                let inputValue = await page.$eval(commentArea, el => el.value)               // INFO: Deletes current input
                 log.info(inputValue)
                 for (let i = 0; i < inputValue.length; i++) {
                   await page.keyboard.press('Backspace')
                 }
-                await page.type('textarea.x1i0vuye', comment[i])
+                await page.type(commentArea, comment[i])
                 await page.keyboard.press('Enter')
                 log.info(`Posting comment: ${comment[i]}`)
-                if (i === (comment.length - 1)) {
-                  log.info('Commenting fully completed')
-                  noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
-                  showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
-                  document.getElementById('stop-btn').click()
-                  runMainLogic = false
-                  await browser.close()
-                }
-                else {
+                await page.waitForTimeout(50)
+                if (i !== (comment.length - 1)) {
                   comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                   log.info(`Waiting for ${comTime} miliseconds`)
                   await page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
