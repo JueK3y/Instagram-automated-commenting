@@ -123,4 +123,4 @@ _Das Programm ist sorgfältig entwickelt und getestet worden. Dennoch können Sc
 ###### _Verändern Sie das Programm NICHT und laden Sie es nicht erneut hoch.<br>Geben Sie verwendete Programmteile NICHT als Ihre eigenen an.<br>Jede Verletzung des Urheberrechts / der EULA kann und wird rechtlich geahndet._
 
 
-_©2020 - 2022 by [JueK3y](https://juek3y.com)_
+_©2020 - 2024 by [JueK3y](https://juek3y.com)_

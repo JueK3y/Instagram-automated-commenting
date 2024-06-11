@@ -124,4 +124,4 @@ _The program has been carefully developed and tested. However, damage cannot be 
 ###### _DO NOT modify and reupload the program.<br>DO NOT indicate used program sections as your own.<br>Any copyright / EULA violation can and will be legally punished._
 
 
-_©2020 - 2022 by [JueK3y](https://juek3y.com)_
+_©2020 - 2024 by [JueK3y](https://juek3y.com)_
