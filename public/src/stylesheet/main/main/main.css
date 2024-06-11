@@ -8,7 +8,6 @@ html body img, html body svg {
   width: var(--img-size);
   height: var(--img-size);
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
@@ -60,7 +59,6 @@ html body a {
 html body .no-select {
   -webkit-user-select: none !important;
      -moz-user-select: none !important;
-      -ms-user-select: none !important;
           user-select: none !important;
 }
 html body .small-cursor {
@@ -313,7 +311,6 @@ html body nav #side-bar footer .settings p {
 html body .banner {
   display: none;
   position: absolute;
-  z-index: 5;
   top: 80px;
   left: calc(50vw - 240px);
   width: 600px;
@@ -361,6 +358,7 @@ html body .banner .banner-content .banner-close img {
   height: 14px;
 }
 html body #info-banner {
+  z-index: 5;
   border: 1px solid var(--info-banner-border);
   background: var(--info-banner-bg);
 }
@@ -368,12 +366,14 @@ html body #info-banner #info-icon {
   background-color: var(--info-banner-icon);
 }
 html body #warning-banner {
+  z-index: 6;
   background: var(--warning-banner-bg);
 }
 html body #warning-banner #warning-icon {
   background-color: var(--warning-banner-icon);
 }
 html body #error-banner {
+  z-index: 8;
   background-color: var(--error-banner-bg);
 }
 html body #error-banner #error-icon {
@@ -403,7 +403,12 @@ html body #error-banner #error-button-hide:active {
   opacity: 0.75;
   transition: 0.2s;
 }
+html body .wifi-not-connected {
+  width: 690px !important;
+  left: calc(50vw - 285px);
+}
 html body #error-banner-wifi {
+  z-index: 7;
   background-color: var(--error-banner-bg);
 }
 html body #error-banner-wifi #error-icon-wifi {

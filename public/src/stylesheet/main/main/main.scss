@@ -296,7 +296,6 @@ html body {
     .banner {
         display: none;
         position: absolute;
-        z-index: 5;
         top: 80px;
         left: calc(50vw - 240px);
         width: 600px;
@@ -343,6 +342,7 @@ html body {
         }
     }
     #info-banner {
+        z-index: 5;
         border: 1px solid var(--info-banner-border);
         background: var(--info-banner-bg);
         #info-icon {
@@ -350,12 +350,14 @@ html body {
         }
     }
     #warning-banner {
+        z-index: 6;
         background: var(--warning-banner-bg);
         #warning-icon {
             background-color: var(--warning-banner-icon);
         }
     }
     #error-banner {
+        z-index: 8;
         background-color: var(--error-banner-bg);
         #error-icon {
             background-color: var(--error-banner-icon);
@@ -385,7 +387,12 @@ html body {
             }
         }
     }
+    .wifi-not-connected {
+        width: 690px !important;
+        left: calc(50vw - 285px);
+    }
     #error-banner-wifi {
+        z-index: 7;
         background-color: var(--error-banner-bg);
         #error-icon-wifi {
             background-color: var(--error-banner-icon);

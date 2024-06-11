@@ -43,7 +43,7 @@
   "build": {
     "appId": "jue3ky.iac_2.app",
     "productName": "IAC 2.0",
-    "copyright": "Copyright © 2023 by JueK3y",
+    "copyright": "Copyright © 2024 by JueK3y",
     "win": {
       "target": "nsis",
       "icon": "icon.ico",
