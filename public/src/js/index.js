@@ -226,8 +226,8 @@ $('#pause-btn').click(function() {
   document.getElementById('pause-btn').style.display = 'none'
   document.getElementById('stop-btn').style.display = 'block'
   document.getElementById('idleIcon').style.display = 'none'
-  document.getElementById('runIcon').style.display = 'block'
-  document.getElementById('pauseIcon').style.display = 'none'
+  document.getElementById('runIcon').style.display = 'none'
+  document.getElementById('pauseIcon').style.display = 'block'
   log.info('Pause button was pressed')
   // TODO: API pauses commenting -!- //
 })
