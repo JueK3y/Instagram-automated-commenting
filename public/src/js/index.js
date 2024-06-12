@@ -247,6 +247,9 @@ $('#stop-btn').click(function() {
 })
 
 ////// Clipboard & Profile Dropdown 
+const pasteButton = document.getElementById('pasteButton')
+const pasteImg = document.getElementById('pasteIconFocus')
+const pasteImgBlur = document.getElementById('pasteIconNoFocus')
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
@@ -254,11 +257,11 @@ $(document).ready(() => {
   checkClipboard().then(result =>  {
     clipboardString = result
     if (clipboardString.includes('instagram') && urlInput.value === '') {
-      document.getElementById('pasteButton').style.display = 'block'
+      pasteButton.style.display = 'block'
       log.info('Showing paste icon')
     }
     else {
-      document.getElementById('pasteButton').style.display = 'none'
+      pasteButton.style.display = 'none'
     }
   })
   $(document).on('click', '#profileDropdownContent', function(e) {
@@ -333,11 +336,21 @@ $(document).ready(() => {
 })
 
 ////// Image color changer
+document.getElementById('url-input').addEventListener('focus', function() {
+  pasteImg.style.display = 'block'
+  pasteImgBlur.style.display = 'none'
+}, false)
+document.getElementById('url-input').addEventListener('blur', function() {
+  if (document.getElementById('url-input').value === '') {
+    pasteImg.style.display = 'none'
+    pasteImgBlur.style.display = 'block'
+  }
+}, false)
+
 username.addEventListener('focus', function() {
   prDdImage.style.display = 'block'
   prDdImgBlur.style.display = 'none'
 }, false)
-
 username.addEventListener('blur', function() {
   if (username.value === '') {
     prDdImage.style.display = 'none'

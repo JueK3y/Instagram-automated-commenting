@@ -316,7 +316,12 @@ html {
                             opacity: 0;
                             pointer-events: none;
                         }
+                        #url-input:not(:placeholder-shown) ~ #pasteButton {
+                            opacity: 0;
+                            display: none;
+                        }
                         #clearButton {
+                            z-index: 2;
                             position: absolute;
                             display: block;
                             border: none;
@@ -344,6 +349,7 @@ html {
                             }
                         }
                         #pasteButton {
+                            z-index: 1;
                             position: absolute;
                             display: none;
                             border: none;
@@ -351,6 +357,8 @@ html {
                             background: none;
                             margin-top: -29.5px;
                             margin-left: 436px;
+                            width: 28px;
+                            height: 24px;
                             border-radius: 5px;
                             cursor: pointer;
                             transition: .2s;
@@ -363,9 +371,14 @@ html {
                                 transition: .2s;
                             }
                             img {
-                                margin-top: 3px;
-                                width: 12px;
-                                height: 12px;
+                                fill: var(--text-color);
+                                margin-top: 1.5px;
+                                margin-left: -1.5px;
+                                width: 20px;
+                                height: 20px;
+                            }
+                            #pasteIconNoFocus {
+                                display: none;
                             }
                         }
                     }
