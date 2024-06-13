@@ -98,7 +98,7 @@ function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
       }
   
       // INFO: Check if data is correct -!- //
-      await page.waitForTimeout(75)
+      await page.waitForTimeout(10000)
       log.info('Checking LogIn data')
       // TODO: Listen to URL Change, if not changed within 10 sec, check for login error -!- //
       if (await page.url() === loginURL) {

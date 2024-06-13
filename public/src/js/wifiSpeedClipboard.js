@@ -1,9 +1,9 @@
-const isOnline = require('is-online')
 const NetworkSpeed = require('network-speed')
 const { clipboard } = require('electron')
 
+
 async function getNetworkDownloadSpeed() {
-  if (await isOnline()) {
+  if (!!await require('dns').promises.resolve('google.com').catch(()=>{})) {        // TODO: Timeout way to long -!- //
     const testNetworkSpeed = new NetworkSpeed()
     const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000'
     const fileSizeInBytes = 500000
