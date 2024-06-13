@@ -1,7 +1,7 @@
 {
   "name": "iac_2",
   "productName": "IAC 2.0",
-  "version": "0.8.6-alpha",
+  "version": "0.8.7-alpha",
   "license": "EULA",
   "description": "A bot for automatic commenting on Instagram",
   "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
@@ -29,6 +29,7 @@
     "electron": "^31.0.1"
   },
   "dependencies": {
+    "clipboard-event": "^1.6.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^4.6.5",
     "electron-window-state": "^5.0.3",

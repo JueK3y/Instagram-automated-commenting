@@ -18,6 +18,7 @@ let clipboardString
 $('#clearButton').click(function() {
   $('#url-input').val('')
   $('#url-input').focus()
+  showClipboard()
 })
 
 ////// URL Clear Buttton
@@ -253,7 +254,7 @@ const pasteImgBlur = document.getElementById('pasteIconNoFocus')
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
-$(document).ready(() => {
+function showClipboard() {
   checkClipboard().then(result =>  {
     clipboardString = result
     if (clipboardString.includes('instagram') && urlInput.value === '') {
@@ -264,6 +265,10 @@ $(document).ready(() => {
       pasteButton.style.display = 'none'
     }
   })
+}
+
+$(document).ready(() => {
+  showClipboard()
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = String(e.target.classList).slice(4)                                        // INFO: Pass ID to API and give username and password -!- //
     username.value = clickedProfile                                                                       // INFO: Get Name for ID from API -!- //
