@@ -239,6 +239,15 @@ html body main #settings-container #settings-content #download-failed #set-dow-t
 html body main #settings-container #settings-content #download-failed:hover #set-dow-text-failed {
   display: block;
 }
+html body main #settings-container #settings-content #comment-mode #mod-comm-loop {
+  display: none;
+}
+html body main #settings-container #settings-content #comment-mode #mod-comm-text {
+  display: none;
+}
+html body main #settings-container #settings-content #comment-mode:hover #mod-comm-text {
+  display: block;
+}
 html body main #settings-container #settings-content #comment-settings #set-comm-text {
   display: none;
 }

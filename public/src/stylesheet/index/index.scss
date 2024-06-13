@@ -248,8 +248,20 @@ html {
                         &:hover #set-dow-text-failed {
                             display: block;
                         }
-                    }  
-                    
+                    } 
+
+                    #comment-mode {
+                        #mod-comm-loop {
+                            display: none;
+                        }
+                        #mod-comm-text {
+                            display: none;
+                        }
+                        &:hover #mod-comm-text {
+                            display: block;
+                        }
+                    }
+
                     #comment-settings {
                         #set-comm-text {
                             display: none;

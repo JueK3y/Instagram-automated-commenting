@@ -1,17 +1,17 @@
 const puppeteer = require('puppeteer-extra')
-
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+
 puppeteer.use(StealthPlugin())
 
 let runMainLogic;
 let commentArea = 'textarea.x1i0vuye'
-commentLoop = false
+let commentLoop
 
 function getChromiumExecPath() {
   return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked');
 }
 
-function launchMainLogic(_url, _username, _password, _mode) {
+function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
   puppeteer.launch({ headless: _mode, slowMo: 35, executablePath: getChromiumExecPath()}).then(async browser => {    // TODO: Without slowMo arg in production -!- //
     while (runMainLogic) {
       log.info('Main logic launch successfull')
@@ -27,6 +27,7 @@ function launchMainLogic(_url, _username, _password, _mode) {
       let postURL = _url
       const username = _username
       const password = _password
+      const commentMode = _commentMode
     
       if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
         log.info('Adding https:// to URL')
@@ -97,8 +98,9 @@ function launchMainLogic(_url, _username, _password, _mode) {
       }
   
       // INFO: Check if data is correct -!- //
-      log.info('Checking LogIn data')
       await page.waitForTimeout(75)
+      log.info('Checking LogIn data')
+      // TODO: Listen to URL Change, if not changed within 10 sec, check for login error -!- //
       if (await page.url() === loginURL) {
         await page.waitForTimeout(75)
         await page.waitForSelector('#slfErrorAlert')                              // FIXME: Shouldn't use id detection -!- //
@@ -175,7 +177,10 @@ function launchMainLogic(_url, _username, _password, _mode) {
           return
         }
         
-        commentLoop = false                                                                 // INFO: Should the commenting loop or not? -!- //
+        if (commentMode === 'once') commentLoop = false
+        else if (commentMode === 'loop') commentLoop = true
+        else commentLoop = false                                                                 // INFO: Should the commenting loop or not? -!- //
+
         log.info(`Looping comments: ${commentLoop}`)
         let comment
         setTimeout(() => {

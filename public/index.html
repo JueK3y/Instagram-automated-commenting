@@ -16,6 +16,7 @@
     <script src="src/js/lib/jquery.min.js"></script>
     <script defer src="src/js/notification.js"></script>
     <script defer src="src/js/wifiSpeedClipboard.js"></script>
+    <script defer src="src/js/comments.js"></script>
     <script defer src="src/js/userData.js"></script>
     <script defer src="src/js/mainApp.js"></script>
     <script defer src="src/js/banner.js"></script>
@@ -201,7 +202,7 @@
               <img id="set-note-on" src="src/img/icons/light/alert.svg" alt="Icon of a bell">
               <img id="set-note-urgent" src="src/img/icons/light/alert-urgent.svg" alt="Icon of a bell">
               <img id="set-note-off" src="src/img/icons/light/alert-off.svg" alt="Icon of a bell">
-              <p id="set-note-text">Benachrichtungen: <span id="notification-text">Alle</i></p>
+              <p id="set-note-text">Benachrichtungen: <span id="notification-text">Alle</span></p>
             </a>
           </li>
           <li id="update">
@@ -234,6 +235,13 @@
             <a>
               <img id="set-dow-failed" src="src/img/icons/light/download-fail.svg" alt="Icon of the downlaod symbol in an error state">
               <p id="set-dow-text-failed">Fehlgeschlagen</p>
+            </a>
+          </li>
+          <li id="comment-mode">
+            <a>
+              <img id="mod-comm-once" src="src/img/icons/light/comment-once.svg" alt="Icon of the comment mode">
+              <img id="mod-comm-loop" src="src/img/icons/light/comment-loop.svg" alt="Icon of the comment mode"> <!-- TODO: Better icon needed -->
+              <p id="mod-comm-text">Modus: <span id="comm-text">Einmalig</span></p>
             </a>
           </li>
           <li id="comment-settings">
@@ -426,7 +434,7 @@
             <p>Version: <span id="currentVersion">x.x.x</span></p>
             <p id="verType">Developer release</p>
             <p>Work in Progress</p>
-            <p>Copyright © 2021 - 2024 by JueK3y</p>
+            <p>Copyright © 2020 - 2024 by JueK3y</p>
             <!-- TODO: Automate current year and version -!-->
           </div>
           <div class="small-window-button" id="s-w-b-version">
@@ -448,7 +456,7 @@
 
       </div>
     </div>
-    <p id="legal-note" class="no-select">Work in progress &copy; 2021 - 2024 by <a href="https://www.juek3y.com/">JueK3y</a></p>
+    <p id="legal-note" class="no-select">Work in progress &copy; 2020 - 2024 by <a href="https://www.juek3y.com/">JueK3y</a></p>
     <div class="small-cursor"></div>
   </body>
 </html>

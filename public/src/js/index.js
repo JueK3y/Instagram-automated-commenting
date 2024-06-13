@@ -125,7 +125,7 @@ $('#start-btn').click(function() {
     formError(urlInput)
   }
   else if (! urlInput.value.includes('instagram.')) {                                                                             // INFO: Change this value if needed -!- //
-    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
+    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)     // TODO: Add the option do ignore the banner and launch anyways -!- //
     log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`)
     log.warn(`Client input was ${urlInput.value}`)
     formError(urlInput)
@@ -181,7 +181,7 @@ $('#start-btn').click(function() {
         document.getElementById('runIcon').style.display = 'block'
         document.getElementById('pauseIcon').style.display = 'none'
         runMainLogic = true
-        launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
+        launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode, localStorage.getItem('commentMode'))
         if (document.getElementById('save-profile').checked) {
           log.info('Saving LogIn data')
           setPassword(username.value, password.value)

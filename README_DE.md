@@ -74,30 +74,9 @@ _¹ Keine Angst, deine Daten sind hier sicher. Sie werden nirgends hochgeladen u
 
 - Bei anderen Fragen oder Problemen kannst du auch [im Wiki](https://github.com/JueK3y/Instagram-automated-commenting/wiki) nachsehen.
 
-
-## Technische Daten
-Folgende Dependencies wurden bei der Entwicklung von IAC 2.0 verwendet (Stand 25.07.2022):
-
-- electron 15.5.5
-- electron-log 4.4.6
-- electron-store 8.0.1
-- electron-builder 5.0.5
-- electron-window-state 5.0.3
-- is-online 9.0.1
-- node-keytar 7.9.0
-- network-speed 2.1.1
-- node-notifier 10.0.1
-- puppeteer 15.5.0
-- puppeteer-extra 3.3.4
-- puppeteer-extra-plugin-stealth 2.11.0
-
-Die vollständige Liste kannst du dir [hier](https://github.com/JueK3y/Instagram-automated-commenting/network/dependencies) angucken.
-
-_Es kann vorkommmen, dass hier ältere Versionen angegeben sind als eigentlich benutzt werden._
-
 <br>
 
-## Hinterlasse ein ⭐
+## Lasse ein ⭐ da
 Wenn dir dieses Projekt gefällt, lass einen Stern da :)
 <br>Das würde mir sehr viel bedeuten.
 
