@@ -98,6 +98,7 @@ function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
       }
   
       // INFO: Check if data is correct -!- //
+
       await page.waitForTimeout(10000)
       log.info('Checking LogIn data')
       // TODO: Listen to URL Change, if not changed within 10 sec, check for login error -!- //
@@ -177,9 +178,10 @@ function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
           return
         }
         
+        // INFO: Should the commenting loop or not? -!- //
         if (commentMode === 'once') commentLoop = false
         else if (commentMode === 'loop') commentLoop = true
-        else commentLoop = false                                                                 // INFO: Should the commenting loop or not? -!- //
+        else commentLoop = false
 
         log.info(`Looping comments: ${commentLoop}`)
         let comment
@@ -190,6 +192,7 @@ function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
         let comTime
         // INFO: Comment loop -!- //
 
+        // TODO: What should happen, if @User cannot be posted? -!- //
         if (commentLoop) {
           while (commentLoop) {
             if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //
@@ -210,12 +213,22 @@ function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
                   }
                   else {
                     await page.click(commentArea)
-                    const inputValue = await page.$eval(commentArea, el => el.value);
+                    const inputValue = await page.$eval(commentArea, el => el.value)
                     for (let i = 0; i < inputValue.length; i++) {
                       await page.keyboard.press('Backspace')
                     }
                     await page.type(commentArea, comment[i])
+                    await page.waitForTimeout(250)
                     await page.keyboard.press('Enter')
+                    await page.waitForTimeout(250)
+                    await page.keyboard.press('Enter')
+                    await page.waitForTimeout(250)
+                    await page.keyboard.press('Enter')
+                    await page.waitForTimeout(250)
+                    await page.keyboard.press('Enter')
+                    await page.waitForTimeout(250)
+                    await page.keyboard.press('Enter')
+                    await page.waitForTimeout(250)
                     log.info(`Posting comment: ${comment[i]}`)
                     comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                     log.info(`Waiting for ${comTime} miliseconds`)
@@ -253,9 +266,19 @@ function launchMainLogic(_url, _username, _password, _mode, _commentMode) {
                   await page.keyboard.press('Backspace')
                 }
                 await page.type(commentArea, comment[i])
+                await page.waitForTimeout(250)
                 await page.keyboard.press('Enter')
+                await page.waitForTimeout(250)
+                await page.keyboard.press('Enter')
+                await page.waitForTimeout(250)
+                await page.keyboard.press('Enter')
+                await page.waitForTimeout(250)
+                await page.keyboard.press('Enter')
+                await page.waitForTimeout(250)
+                await page.keyboard.press('Enter')
+                await page.waitForTimeout(250)
                 log.info(`Posting comment: ${comment[i]}`)
-                await page.waitForTimeout(50)
+                await page.waitForTimeout(100)
                 if (i !== (comment.length - 1)) {
                   comTime = (Math.floor(Math.random() * 100) + 5) * 1000
                   log.info(`Waiting for ${comTime} miliseconds`)

@@ -257,7 +257,7 @@ const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 function showClipboard() {
   checkClipboard().then(result =>  {
     clipboardString = result
-    if (clipboardString.includes('instagram') && urlInput.value === '') {
+    if (clipboardString.includes('instagram.') && urlInput.value === '') {
       pasteButton.style.display = 'block'
       log.info('Showing paste icon')
     }
