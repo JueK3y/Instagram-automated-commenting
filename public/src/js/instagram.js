@@ -1,163 +1,256 @@
+const { timeout } = require('puppeteer')
 const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
 puppeteer.use(StealthPlugin())
+let commentArea = 'textarea.x1i0vuye'
+let commentLoop
 
 const loginURL = 'https://www.instagram.com/accounts/login/'
+const mfaURL = 'https://www.instagram.com/accounts/login/two_factor?next=%2F'
+const stpBtn = document.getElementById('stop-btn')
 
 function getChromiumExecPath() {
-    return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked');
+  return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked')
 }
 
 const instagram = {
-    browser: null,
-    page: null,
+  browser: null,
+  page: null,
 
-    initialize: async (mode) => {
-        instagram.browser = await puppeteer.launch({
-            slowMo: 50,
-            headless: mode,
-            executablePath: getChromiumExecPath()
-        })
+  initialize: async (mode) => {
+    instagram.browser = await puppeteer.launch({
+        slowMo: 35,
+        headless: mode,
+        executablePath: getChromiumExecPath()
+    })
 
-        instagram.page = (await instagram.browser.pages())[0]
+    instagram.page = (await instagram.browser.pages())[0]
 
-        log.info('Instagram initialization successful')
-    },
+    log.info('Instagram initialization successful')
+  },
 
-    login: async (username, password) => {
-        await instagram.page.goto(loginURL, { waitUntil: 'networkidle2' })
+  login: async (username, password) => {
+    await instagram.page.goto(loginURL, { waitUntil: 'networkidle2' })
 
-        let cookieButton = await instagram.page.$x('/html/body/div[4]/div/div/button[1]')
-
-        try {
-            await cookieButton[0].click()
-            log.info('Cookies accepted')
-        }
-        catch (error) {
-            log.error(error)
-            log.info('Cookie banner not found')
-        }
-        
-        // LogIn process
-        let loginButton = await instagram.page.$x('//*[@id="loginForm"]/div/div[3]')
-
-        await instagram.page.type('input[name="username"]', username, { delay: 50 })
-        await instagram.page.type('input[name="password"]', password, { delay: 50 })
-
-        loginButton[0].click()
-    },
-
-    validation: async () => {
-        await instagram.page.waitForTimeout(15000)
-
-
-        /*await instagram.page.$('[data-testid="login-error-message"]')
-        await instagram.page.waitForSelector('#slfErrorAlert')
-
-
-        let p1 = (instagram.page.url() !== loginURL)
-        let p2 = (instagram.page.waitForSelector('#slfErrorAlert'))
-
-
-        const result = await Promise.race([p1,p2]) 
-
-        log.info('Result: ' + result)
-        log.info('P1: ' + p1)
-        log.info('P2: ' + p2)*/
-
-
-        // let promise1 = (instagram.page.url() !== loginURL);                     // Returns boolean, not promise answer (pr answer needed!)
-        let promise1 = new Promise(function(resolve, reject) {
-            log.info('Checking url promise')
-            if (instagram.page.url() !== loginURL) {
-                log.info('Promise resolved!')
-                resolve();
-            } else {
-                log.info('Promise rejected, wrong LogIn Data?')
-                reject();
-            } 
-        });
-        let promise2 = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-        // let promise2 = instagram.page.waitForSelector('#slfErrorAlert');        // Returns promise answer
-
-        Promise.race([promise1, promise2]).then((result) => 
-            log.info("result"),
-            log.info(result),
-            log.info("promise1"),
-            log.info(promise1),
-            log.info("promise2"),
-            log.info(promise2)
-        )
-
-        /*Promise.race([promise1, promise2]).then((result) => {
-            log.info(result)
-            log.info(promise1)
-            log.info(promise2)
-            if (promise1) {
-                log.info('LogIn successfull')
-                log.info(instagram.page.url())
-            }
-            if (promise2) {
-                let loginMessage = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
-                // instagram.browser.close()
-                return
-            }
-        })*/
-
-        
-        /*Promise.race([promise1, promise2]).then((result) => {
-            if (result == promise1) {
-                log.info("LogIn successfull")
-                log.info(instagram.page.url())
-            }
-            else if (result == promise2) {
-                let loginMessage = instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
-                instagram.browser.close()
-                return
-            }
-        })*/
-
-
-        /*if ((await instagram.page.url() !== loginURL) || (await instagram.page.waitForSelector('#slfErrorAlert'))) {
-            if (await instagram.page.url() !== loginURL) {
-                log.info("LogIn successfull")
-                log.info(instagram.page.url())
-            }
-            if (await instagram.page.waitForSelector('#slfErrorAlert')) {
-                let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
-                await instagram.browser.close()
-                return
-            }
-        }*/
-
-
-        /* let loginFailed = await page.evaluate(() => {
-            if (await instagram.page.url() === loginURL) {
-                let loginMessage = await instagram.page.$eval('#slfErrorAlert', element => element.innerHTML)
-                log.warn(`Client error - LogIn not possible: '${loginMessage}'`)
-                return true;
-            }
-        })
-
-        if (loginFailed) {
-            await instagram.browser.close()
-            return
-        } */
-    },
-
-    urlChange: async (postURL) => {
-        log.info('Changing URL')
-        if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
-            log.info('Adding https:// to URL')
-            postURL = 'https://' + postURL
-        }
-
-        await instagram.page.goto(postURL, { waitUntil: 'networkidle2' })
+    try {
+        await instagram.page.click('._a9_1')
+        log.info('Cookies accepted')
     }
+    catch (error) {
+        log.error(error)
+        log.info('Cookie banner not found')
+    }
+    
+    // LogIn process
+    await instagram.page.waitForSelector('input[name="username"]')
+    await instagram.page.type('input[name="username"]', username, { delay: 50 })
+    await instagram.page.type('input[name="password"]', password, { delay: 50 })
+
+    await instagram.page.click('[type="submit"]') 
+  },
+
+  validation: async () => {
+    await instagram.page.waitForSelector('[data-visualcompletion="loading-state"]')
+    log.info('Checking Login-Data')
+
+    await new Promise(r => setTimeout(r, 500))
+
+    if (await instagram.page.url() === loginURL) {
+      log.info('No URL change detected')
+      try {
+        await instagram.page.waitForNavigation({timeout: 7500})
+      } 
+      catch (error) {
+        log.warn('Wrong LogIn data')
+        log.warn('Instagram error message: "' + await instagram.page.$eval('._ab2z', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
+        noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)
+        showBanner('error', 'Falsche Eingabe?', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
+        stpBtn.click()
+        runMainLogic = false
+        await instagram.browser.close()
+        return false
+        // TODO: Doesn't stop here, idk
+      }
+    }
+
+    // TODO: Introduce 2-FA Check -!- //
+    if (await instagram.page.url() === mfaURL) {
+      log.warn('Two-Factor Auth was detected')
+      noteMessage('Zwei-Faktor Authentifizierung entdeckt', 'In dieser Version wird das Anmelden mit 2FA noch nicht unterstützt', true)
+      showBanner('warning', '2FA LogIn', '2FA Login zur Zeit nicht möglich.', 'multi-factor-auth', true)
+      stpBtn.click()
+      runMainLogic = false
+      await instagram.browser.close()
+    }
+
+    showBanner('info', 'LogIn erfolgreich', 'Das Einloggen in Instagram war erfolgreich.', 'login-success', true)
+    log.info('Correct LogIn data')
+  },
+
+  urlReader: async (postURL) => {
+    if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
+      log.info('Adding https:// to URL')
+      postURL = 'https://' + postURL
+    }
+    
+    log.info(`Opening ${postURL}`)
+
+    try {
+      await instagram.page.goto(postURL, {waitUntil: 'networkidle0'})
+    }
+    catch {
+      // TODO: Catch certain error & check, why it gets called after wrong LogIn Data -!- //
+      log.error('Timeout error in loading post url; try again')
+      showBanner('error', 'Ladefehler', 'Die URL konnte nicht geladen werden. Bitte erneut versuchen.', 'post-timeout', true)
+      noteMessage('Ladefehler', 'Es gab ein Problem mit dem Laden der URL. Bitte versuche es erneut.', true)
+      // TODO: Add red circle around Instagram URL text field -!- //
+      stpBtn.click()
+      runMainLogic = false
+      await instagram.browser.close()
+    }
+
+    // INFO: 404 Check -!- //
+    if (await instagram.page.$("span::-p-text(may have been removed)")) {
+      log.error('404 Error: URL redirects to empty page')
+      showBanner('error', 'Falscher Link', 'Die URL ist falsch. Bitte den eingefügten Link überprüfen.', '404-error', true)
+      noteMessage('Falsche URL', 'Der Link konnte nicht geladen werden. Bitte überprüfe die eingegebenen Instagram URL und probiere es erneut.', true)
+      // TODO: Add red circle around Instagram URL text field -!- //
+      stpBtn.click()
+      runMainLogic = false
+      await instagram.browser.close()
+    }
+  },
+
+  comment: async(commentMode) => {
+    // INFO: Comment disabled Check -!- //
+    /* try {
+      await instagram.page.click(commentArea)
+    }
+    catch(err) {
+      log.warn('Comment function disabled')
+      noteMessage('Kommentieren nicht möglich', 'Der Ersteller hat die Kommentar-Funktion deaktiviert.', true)
+      showBanner('error', 'Kommentieren nicht möglich', 'Der Ersteller verbietet das Kommentieren.', 'comment-function-disabled', true)
+      stpBtn.click()
+      runMainLogic = false
+      await instagram.browser.close()   
+    } */
+
+    getComments()
+
+    // INFO: Should the commenting loop or not? -!- //
+    if (commentMode === 'once') commentLoop = false
+    else if (commentMode === 'loop') commentLoop = true
+    else commentLoop = false
+
+    log.info(`Looping comments: ${commentLoop}`)
+    let comment
+    comment = comData
+
+    let comTime
+
+    // INFO: Comment loop -!- //
+    if (commentLoop) {
+      while (commentLoop) {
+        if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //
+          // await instagram.page.waitForTimeout(75)
+          for (let i = 0; i < comment.length; i++) {
+            const spamNotice = await instagram.page.$('.piCib')
+            let comment = comData
+            try {
+              if (spamNotice !== null) {
+                showBanner('warning', 'Spam erkannt', 'IAC 2.0 muss etwas langsamer kommentieren.', 'spam-notice', true)
+                log.warn("Instagram detected spam, commenting slower")
+                await instagram.page.keyboard.press('Enter')
+                await instagram.page.waitForTimeout(2000)
+              }
+              else {
+                await instagram.page.click(commentArea)
+                const inputValue = await instagram.page.$eval(commentArea, el => el.value)
+                for (let i = 0; i < inputValue.length; i++) {
+                  await instagram.page.keyboard.press('Backspace')
+                }
+                await instagram.page.type(commentArea, comment[i])
+                await instagram.page.keyboard.press('Enter', { dely: 250 })
+                await instagram.page.keyboard.press('Enter', { dely: 250 })
+                await instagram.page.keyboard.press('Enter', { dely: 250 })
+                await instagram.page.keyboard.press('Enter', { dely: 250 })
+                await instagram.page.keyboard.press('Enter', { dely: 250 })
+                log.info(`Posting comment: ${comment[i]}`)
+                comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+                log.info(`Waiting for ${comTime} miliseconds`)
+                await new Promise(r => setTimeout(r, comTime))
+                // await instagram.page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
+              }
+            }
+            catch(TypeError) {
+              // INFO: Checks for wrong URL -!- //
+              // FIXME: Gets called when closing the page manually -!- //
+              log.warn('Wrong page link')
+              noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
+              showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
+              document.getElementById('stop-btn').click()
+              await instagram.browser.close()
+              runMainLogic = false
+            }
+          }
+        }
+        else await instagram.page.close()
+      }
+    }
+    else {
+      await new Promise(r => setTimeout(r, 150))
+      for (let i = 0; i < comment.length; i++) {
+        log.info(comment.length)
+        log.info(i)
+        let comment = comData
+        log.info(comment)
+        try {
+          if (runMainLogic) {                                                           // TODO: Better stillRunningCheck needed -!- //
+            await instagram.page.click(commentArea)
+            let inputValue = await instagram.page.$eval(commentArea, el => el.value)               // INFO: Deletes current input
+            log.info(inputValue)
+            for (let i = 0; i < inputValue.length; i++) {
+              await instagram.page.keyboard.press('Backspace')
+            }
+            await instagram.page.type(commentArea, comment[i])
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            log.info(`Posting comment: ${comment[i]}`)
+            if (i !== (comment.length - 1)) {
+              comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+              log.info(`Waiting for ${comTime} miliseconds`)
+              await new Promise(r => setTimeout(r, comTime))
+              // await instagram.page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
+            }
+          }
+          else {
+            await instagram.page.close()
+            
+          }
+        }
+        catch(TypeError) {
+          log.info(TypeError)
+          log.warn('Wrong page link')
+          noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
+          showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
+          document.getElementById('stop-btn').click()
+          runMainLogic = false
+          await instagram.browser.close()
+        }
+      }
+    }
+    // commentLoop = false
+    log.info('Commenting fully completed')
+    noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
+    showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
+    document.getElementById('stop-btn').click()
+    runMainLogic = false
+    await instagram.browser.close()
+  }
 }
 
 module.exports = instagram

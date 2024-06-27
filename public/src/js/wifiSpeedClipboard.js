@@ -23,7 +23,6 @@ async function checkClipboard() {
 
 clipboardListener.startListening()
 clipboardListener.on('change', () => {
-  log.info('change detected')
   showClipboard()
 })
 

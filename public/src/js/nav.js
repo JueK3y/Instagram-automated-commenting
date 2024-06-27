@@ -550,6 +550,7 @@ window.setInterval(() => {
 
 ////// FIXME: Needs to be re-worked -!- //
 let updateOnline
+let downloadSuccess
 
 function updateState(value) {
   if (value === 'available') updateOnline = true
@@ -674,6 +675,7 @@ $(document).on('click', '#developer-mode', () => {
   log.info('Opening DevTools')
   $('#developer-mode').css('display', 'none')
   $('#developer-settings').css('display', 'inline-block')
+  if (!slideIn) $('.settings').click()
   mainLogicMode = false
   openDevConsoleIPC()
 })

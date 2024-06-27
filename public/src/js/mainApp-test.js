@@ -10,5 +10,6 @@ async function launchMainLogic(_url, _username, _password, _mode) {
     await target.initialize(_mode)    
     await target.login(_username, _password)
     await target.validation()
-    // await target.urlChange(_url)
+    await target.urlReader(_url)
+    await target.comment(_mode)
 }
