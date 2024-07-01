@@ -11,9 +11,7 @@
 // │ Copyright © 2020 - 2024 by JueK3y (Julian Kennedy)                      │
 // │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
-// let runMainLogic
 let clipboardString
-
 
 ////// URL Clear Buttton
 $('#clearButton').click(function() {

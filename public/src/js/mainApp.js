@@ -1,15 +1,10 @@
 const target = require('./src/js/instagram');
-// NOT PRODUCTION READY
-// FIXME: NEEDS TO BE FIXED ASAP
-
-log.info('Launching bot')
 
 async function launchMainLogic(_url, _username, _password, _mode) {
     log.info('Bot launch successfull')
-
-    await target.initialize(_mode)    
-    await target.login(_username, _password)
-    await target.validation()
-    await target.urlReader(_url)
-    await target.comment(_mode, comData)
+    if (runMainLogic) await target.initialize(_mode)    
+    if (runMainLogic) await target.login(_username, _password)
+    if (runMainLogic) await target.validation()
+    if (runMainLogic) await target.urlReader(_url)
+    if (runMainLogic) await target.comment(_mode, comData)
 }

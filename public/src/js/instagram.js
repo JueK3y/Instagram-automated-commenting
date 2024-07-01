@@ -63,17 +63,19 @@ const instagram = {
       catch (error) {
         log.warn('Wrong LogIn data')
         try {
+          // TODO: Check content of error message and display correct noteMessage (Wrong password f. ex.) -!- //
           log.warn('Instagram error message: "' + await instagram.page.$eval('._ab2z', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
         }
-        catch {}
+        catch (e) {
+          log.info(e)
+        }
         noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)
         showBanner('error', 'Falsche Eingabe?', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
         formError(password)
         stpBtn.click()
         runMainLogic = false
         await instagram.browser.close()
-        return false
-        // TODO: Doesn't stop here, idk
+        // FIXME: Doesn't stop here -!- //
       }
     }
 
@@ -86,12 +88,12 @@ const instagram = {
       runMainLogic = false
       await instagram.browser.close()
     }
-
-    showBanner('info', 'LogIn erfolgreich', 'Das Einloggen in Instagram war erfolgreich.', 'login-success', true)
-    log.info('Correct LogIn data')
   },
 
   urlReader: async (postURL) => {
+    showBanner('info', 'LogIn erfolgreich', 'Das Einloggen in Instagram war erfolgreich.', 'login-success', true)
+    log.info('Correct LogIn data')
+
     if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
       log.info('Adding https:// to URL')
       postURL = 'https://' + postURL
@@ -107,7 +109,6 @@ const instagram = {
       log.error('Timeout error in loading post url; try again')
       showBanner('error', 'Ladefehler', 'Die URL konnte nicht geladen werden. Bitte erneut versuchen.', 'post-timeout', true)
       noteMessage('Ladefehler', 'Es gab ein Problem mit dem Laden der URL. Bitte versuche es erneut.', true)
-      // TODO: Add red circle around Instagram URL text field -!- //
       stpBtn.click()
       runMainLogic = false
       await instagram.browser.close()

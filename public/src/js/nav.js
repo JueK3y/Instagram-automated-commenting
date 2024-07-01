@@ -683,7 +683,7 @@ $(document).on('click', '#developer-mode', () => {
 
 ////// Small window
 $(document).on('click', '#report-bug', () => {
-  openSmallWin('template', 'src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du auf GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
+  openSmallWin('template', 'src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du zu GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
 })
 
 $(document).on('click', '#info', () => {
