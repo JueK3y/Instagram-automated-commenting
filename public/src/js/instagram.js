@@ -1,4 +1,3 @@
-const { timeout } = require('puppeteer')
 const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
@@ -54,7 +53,7 @@ const instagram = {
     await instagram.page.waitForSelector('[data-visualcompletion="loading-state"]')
     log.info('Checking Login-Data')
 
-    await new Promise(r => setTimeout(r, 500))
+    await new Promise(r => setTimeout(r, 1500))
 
     if (await instagram.page.url() === loginURL) {
       log.info('No URL change detected')
@@ -63,9 +62,13 @@ const instagram = {
       } 
       catch (error) {
         log.warn('Wrong LogIn data')
-        log.warn('Instagram error message: "' + await instagram.page.$eval('._ab2z', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
+        try {
+          log.warn('Instagram error message: "' + await instagram.page.$eval('._ab2z', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
+        }
+        catch {}
         noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)
         showBanner('error', 'Falsche Eingabe?', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
+        formError(password)
         stpBtn.click()
         runMainLogic = false
         await instagram.browser.close()
@@ -115,16 +118,16 @@ const instagram = {
       log.error('404 Error: URL redirects to empty page')
       showBanner('error', 'Falscher Link', 'Die URL ist falsch. Bitte den eingefügten Link überprüfen.', '404-error', true)
       noteMessage('Falsche URL', 'Der Link konnte nicht geladen werden. Bitte überprüfe die eingegebenen Instagram URL und probiere es erneut.', true)
-      // TODO: Add red circle around Instagram URL text field -!- //
+      formError(urlInput)
       stpBtn.click()
       runMainLogic = false
       await instagram.browser.close()
     }
   },
 
-  comment: async(commentMode) => {
-    // INFO: Comment disabled Check -!- //
-    /* try {
+  comment: async(commentMode, comData) => {
+    // INFO: Checks if comments are turned off -!- //
+    try {
       await instagram.page.click(commentArea)
     }
     catch(err) {
@@ -134,9 +137,7 @@ const instagram = {
       stpBtn.click()
       runMainLogic = false
       await instagram.browser.close()   
-    } */
-
-    getComments()
+    }
 
     // INFO: Should the commenting loop or not? -!- //
     if (commentMode === 'once') commentLoop = false
@@ -145,105 +146,99 @@ const instagram = {
 
     log.info(`Looping comments: ${commentLoop}`)
     let comment
-    comment = comData
+    setTimeout(() => {
+      comment = comData
+    }, 75)
 
     let comTime
 
     // INFO: Comment loop -!- //
-    if (commentLoop) {
-      while (commentLoop) {
-        if (runMainLogic) {                                                              // TODO: Better stillRunningCheck needed -!- //
-          // await instagram.page.waitForTimeout(75)
-          for (let i = 0; i < comment.length; i++) {
-            const spamNotice = await instagram.page.$('.piCib')
-            let comment = comData
-            try {
-              if (spamNotice !== null) {
-                showBanner('warning', 'Spam erkannt', 'IAC 2.0 muss etwas langsamer kommentieren.', 'spam-notice', true)
-                log.warn("Instagram detected spam, commenting slower")
-                await instagram.page.keyboard.press('Enter')
-                await instagram.page.waitForTimeout(2000)
-              }
-              else {
-                await instagram.page.click(commentArea)
-                const inputValue = await instagram.page.$eval(commentArea, el => el.value)
-                for (let i = 0; i < inputValue.length; i++) {
-                  await instagram.page.keyboard.press('Backspace')
-                }
-                await instagram.page.type(commentArea, comment[i])
-                await instagram.page.keyboard.press('Enter', { dely: 250 })
-                await instagram.page.keyboard.press('Enter', { dely: 250 })
-                await instagram.page.keyboard.press('Enter', { dely: 250 })
-                await instagram.page.keyboard.press('Enter', { dely: 250 })
-                await instagram.page.keyboard.press('Enter', { dely: 250 })
-                log.info(`Posting comment: ${comment[i]}`)
-                comTime = (Math.floor(Math.random() * 100) + 5) * 1000
-                log.info(`Waiting for ${comTime} miliseconds`)
-                await new Promise(r => setTimeout(r, comTime))
-                // await instagram.page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
-              }
-            }
-            catch(TypeError) {
-              // INFO: Checks for wrong URL -!- //
-              // FIXME: Gets called when closing the page manually -!- //
-              log.warn('Wrong page link')
-              noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
-              showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
-              document.getElementById('stop-btn').click()
-              await instagram.browser.close()
-              runMainLogic = false
-            }
-          }
-        }
-        else await instagram.page.close()
-      }
-    }
-    else {
-      await new Promise(r => setTimeout(r, 150))
+    await new Promise(r => setTimeout(r, 150))
+    if (commentLoop) {                                                           // TODO: Better stillRunningCheck needed -!- //
       for (let i = 0; i < comment.length; i++) {
-        log.info(comment.length)
-        log.info(i)
+        const spamNotice = await instagram.page.$('.piCib')
         let comment = comData
-        log.info(comment)
         try {
-          if (runMainLogic) {                                                           // TODO: Better stillRunningCheck needed -!- //
-            await instagram.page.click(commentArea)
-            let inputValue = await instagram.page.$eval(commentArea, el => el.value)               // INFO: Deletes current input
-            log.info(inputValue)
-            for (let i = 0; i < inputValue.length; i++) {
-              await instagram.page.keyboard.press('Backspace')
+          if (runMainLogic) {   
+            if (spamNotice !== null) {
+              showBanner('warning', 'Spam erkannt', 'IAC 2.0 muss etwas langsamer kommentieren.', 'spam-notice', true)
+              log.warn("Instagram detected spam, commenting slower")
+              await instagram.page.keyboard.press('Enter')
+              await instagram.page.waitForTimeout(2000)
             }
-            await instagram.page.type(commentArea, comment[i])
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            log.info(`Posting comment: ${comment[i]}`)
-            if (i !== (comment.length - 1)) {
+            else {
+              await instagram.page.click(commentArea)
+              const inputValue = await instagram.page.$eval(commentArea, el => el.value)
+              for (let i = 0; i < inputValue.length; i++) {
+                await instagram.page.keyboard.press('Backspace')
+              }
+              await instagram.page.type(commentArea, comment[i], { delay: 150 })
+              await instagram.page.keyboard.press('Enter', { dely: 250 })
+              await instagram.page.keyboard.press('Enter', { dely: 250 })
+              await instagram.page.keyboard.press('Enter', { dely: 250 })
+              // TODO: Check if Instagram blocks commenting, error pops up -!- //
+              await instagram.page.keyboard.press('Enter', { dely: 250 })
+              await instagram.page.keyboard.press('Enter', { dely: 250 })
+              log.info(`Posting comment: ${comment[i]}`)
               comTime = (Math.floor(Math.random() * 100) + 5) * 1000
               log.info(`Waiting for ${comTime} miliseconds`)
-              await new Promise(r => setTimeout(r, comTime))
-              // await instagram.page.waitForTimeout(comTime)     // TODO: Change this value to user based input -!- //
+              await new Promise(r => setTimeout(r, comTime))  // TODO: Change this value to user based input -!- //
             }
           }
-          else {
-            await instagram.page.close()
-            
-          }
+          else await instagram.page.close()
         }
         catch(TypeError) {
-          log.info(TypeError)
+          // INFO: Checks for wrong URL -!- //
+          // FIXME: Gets called when closing the page manually -!- //
           log.warn('Wrong page link')
           noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
           showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
+          formError(urlInput)
           document.getElementById('stop-btn').click()
           runMainLogic = false
           await instagram.browser.close()
         }
       }
     }
-    // commentLoop = false
+    else {
+      for (let i = 0; i < comment.length; i++) {
+        let comment = comData
+        try {
+          if (runMainLogic) {                                                                       // TODO: Better stillRunningCheck needed -!- //
+            await instagram.page.click(commentArea)
+            let inputValue = await instagram.page.$eval(commentArea, el => el.value)                // INFO: Deletes current input
+            for (let i = 0; i < inputValue.length; i++) {
+              await instagram.page.keyboard.press('Backspace')
+            }
+            await instagram.page.type(commentArea, comment[i], { delay: 150 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            // TODO: Check if Instagram blocks commenting, error pops up -!- //
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            log.info(`Posting comment: ${comment[i]}`)
+            if (i !== (comment.length - 1)) {
+              comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+              log.info(`Waiting for ${comTime} miliseconds`)
+              await new Promise(r => setTimeout(r, comTime))  // TODO: Change this value to user based input -!- //
+            }
+          }
+          else await instagram.page.close()
+        }
+        catch(TypeError) {
+          log.info(TypeError)
+          log.warn('Wrong page link')
+          noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
+          showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
+          formError(urlInput)
+          document.getElementById('stop-btn').click()
+          runMainLogic = false
+          await instagram.browser.close()
+        }
+      }
+    }
+    await new Promise(r => setTimeout(r, 150))
     log.info('Commenting fully completed')
     noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
     showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)

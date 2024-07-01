@@ -61,6 +61,7 @@ let comData;
 
 // INFO: Button for opening comment file -!- //
 document.getElementById('edit-button').addEventListener('click', () => {
+    log.info('Button clicked')
     openComments()
     // getComments()
 })
@@ -80,9 +81,9 @@ function checkCommentFile() {
             if (! fs.existsSync(dirLocation)) {
                 fs.mkdirSync(dirLocation)
             }
-            fs.writeFileSync(fileLocation, '! Write only one comment per line. Comments with \'!\' at the beginning will be ignored.')
+            fs.writeFileSync(fileLocation, '_ Write only one comment per line. Comments with \'_\' at the beginning will be ignored.')
         }
-    }, 50)
+    }, 110)
 }
 
 // Function for opening comment file
@@ -104,7 +105,7 @@ function getComments() {
             if (err) log.error(`The following error occured: ${err}`)
             pureData = data.split('\n')
             for (let i = 0; i < pureData.length; i++) {
-                if (pureData[i].charAt(0) !== '!') {
+                if (pureData[i].charAt(0) !== '_') {
                     if (pureData[i].length !== 0) comData.push(pureData[i])
                 }
             }

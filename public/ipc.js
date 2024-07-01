@@ -119,11 +119,16 @@ ipc.on('changeWinIcon', () => {
 
 ////// Open comment file
 function getCommentsPath() {
-    log.info('Getting comments file path')
-    ipc.send('checkFile', ['dirLoc', 'fileLoc'])
-    ipc.on('getFilePath', (evt, args) => {
-        returnCommentPath(args[0], args[1])
-    })
+    try {
+        log.info('Getting comments file path')
+        ipc.send('checkFile', ['dirLoc', 'fileLoc'])
+        ipc.on('getFilePath', (evt, args) => {
+            returnCommentPath(args[0], args[1])
+        })
+    }
+    catch (e) {
+        log.info(e)
+    }
 }
 
 function openCommentFile(fileLocation) {

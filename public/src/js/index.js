@@ -172,8 +172,8 @@ $('#start-btn').click(function() {
 
   if (validate) {
     getComments()
+    $('#start-btn').prop('disabled', false)
     setTimeout(() => {
-      $('#start-btn').prop('disabled', false)
       if (comData[0] !== undefined) {
         log.info('All input is correct, launching main logic')
         document.getElementById('start-btn').style.display = 'none'
@@ -217,7 +217,7 @@ $('#start-btn').click(function() {
           openComments()
         }, 2500)
       }
-    }, 600)
+    }, 250)
   }
 })
 
