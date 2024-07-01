@@ -69,7 +69,7 @@ _¹ Don't worry, your data is safe. They are not uploaded anywhere, but encrypte
 
 ## Bugs, missing Features & co.
 
-- [🚀 Here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) you can submit suggestions for improvements or new features.
+- 🚀 [Here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) you can submit suggestions for improvements or new features.
 - 📚 If you notice translation errors while using IAC 2.0, you can [report them here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Translation%2C+New+request&template=Translation_Error.yml).
 - 🐛 If you notice any problems or bugs (for example, display errors) during use, you can [report them here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Bug%2C+New+request&template=Bug_Report.yml).
 

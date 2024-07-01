@@ -68,7 +68,7 @@ _¹ Keine Angst, deine Daten sind hier sicher. Sie werden nirgends hochgeladen u
 
 ## Probleme, fehlende Features & co.
 
-- [🚀 Hier](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) kannst du Vorschläge für Verbesserungen oder neue Funktionen einreichen.
+- 🚀 [Hier](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) kannst du Vorschläge für Verbesserungen oder neue Funktionen einreichen.
 - 📚 Wenn dir bei der Verwendung von IAC 2.0 Übersetzungsfehler auffallen, kannst du [diese hier melden](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Translation%2C+New+request&template=Translation_Error.yml).
 - 🐛 Falls du während der Nutzung auf Probleme oder Fehler (z.B. Anzeigefehler) stößt, dann kannst du [sie hier melden](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Bug%2C+New+request&template=Bug_Report.yml).
 

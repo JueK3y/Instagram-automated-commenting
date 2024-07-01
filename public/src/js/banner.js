@@ -32,7 +32,7 @@ function hoverCheck(type, key) {
 let timeoutHandle
 
 function showBanner(type, title, message, key, hide) {
-    // TODO: If other banner already exists, add margin here -!- //
+    // TODO: If other banner already exists, add margin here so it doesnt overlap -!- //
     window.clearTimeout(timeoutHandle)
     $('#'+type+'-banner').fadeIn(150)
     document.getElementById(type+'-title').innerHTML = title

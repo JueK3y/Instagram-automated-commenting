@@ -124,9 +124,7 @@ const instagram = {
       runMainLogic = false
       await instagram.browser.close()
     }
-  },
 
-  comment: async(commentMode, comData) => {
     // INFO: Checks if comments are turned off -!- //
     try {
       await instagram.page.click(commentArea)
@@ -139,7 +137,9 @@ const instagram = {
       runMainLogic = false
       await instagram.browser.close()   
     }
+  },
 
+  comment: async(commentMode, comData) => {
     // INFO: Should the commenting loop or not? -!- //
     if (commentMode === 'once') commentLoop = false
     else if (commentMode === 'loop') commentLoop = true
