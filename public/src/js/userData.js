@@ -92,7 +92,7 @@ function openComments() {
     checkCommentFile()
     setTimeout(() => {
         openCommentFile(fileLocation)
-    }, 50)
+    }, 150)
 }
 
 function getComments() {

@@ -124,7 +124,9 @@ const instagram = {
       runMainLogic = false
       await instagram.browser.close()
     }
+  },
 
+  commentCheck: async() => {
     // INFO: Checks if comments are turned off -!- //
     try {
       await instagram.page.click(commentArea)
@@ -239,7 +241,7 @@ const instagram = {
         }
       }
     }
-    await new Promise(r => setTimeout(r, 150))
+    await new Promise(r => setTimeout(r, 500))
     log.info('Commenting fully completed')
     noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
     showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
