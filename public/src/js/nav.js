@@ -337,8 +337,11 @@ function profileUpdate() {
 profileUpdate()
 
 const profile1 = document.getElementById('profile-1-name')
-const profile2 = document.getElementById('profile-2-name') 
+const profile1Dr = document.getElementById('profile-1-dropdown') 
+const profile2 = document.getElementById('profile-2-name')
+const profile2Dr = document.getElementById('profile-2-dropdown')
 const profile3 = document.getElementById('profile-3-name') 
+const profile3Dr = document.getElementById('profile-3-dropdown') 
 
 const showMore = document.getElementById('more-profile').style
 const addProfile = document.getElementById('add-profile').style
@@ -422,17 +425,12 @@ else {
 
 // INFO: Length Check -!- //
 setTimeout(() => {
-  if (profile1.innerText.length > 10) {
-    profile1.innerText = profile1.innerText.substring(0, 7) + '...'
-  } 
-  
-  if (profile2.innerText.length > 10) {
-    profile2.innerText = profile2.innerHTML.substring(0, 7) + '...'
-  }
-  
-  if (profile3.innerText.length > 10) {
-    profile3.innerText = profile3.innerHTML.substring(0, 7) + '...'
-  }
+  if (profile1.innerText.length > 10) profile1.innerText = profile1.innerText.substring(0, 7) + '...'
+  if (profile1Dr.innerText.length > 17) profile1Dr.innerText = profile1Dr.innerText.substring(0, 14) + '...'
+  if (profile2.innerText.length > 10) profile2.innerText = profile2.innerText.substring(0, 7) + '...'
+  if (profile2Dr.innerText.length > 17) profile2Dr.innerText = profile2Dr.innerText.substring(0, 14) + '...'
+  if (profile3.innerText.length > 10) profile3.innerText = profile3.innerText.substring(0, 7) + '...'
+  if (profile3Dr.innerText.length > 17) profile3Dr.innerText = profile3Dr.innerText.substring(0, 14) + '...'
 }, 300)
 
 for (let i = 1; i <= 3; i++) {
