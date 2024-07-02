@@ -422,16 +422,16 @@ else {
 
 // INFO: Length Check -!- //
 setTimeout(() => {
-  if (profile1.innerText.length > 7) {
-    profile1.innerText = profile1.innerText.substring(0, 4) + '...'
+  if (profile1.innerText.length > 10) {
+    profile1.innerText = profile1.innerText.substring(0, 7) + '...'
   } 
   
-  if (profile2.innerText.length > 7) {
-    profile2.innerText = profile2.innerHTML.substring(0, 4) + '...'
+  if (profile2.innerText.length > 10) {
+    profile2.innerText = profile2.innerHTML.substring(0, 7) + '...'
   }
   
-  if (profile3.innerText.length > 7) {
-    profile3.innerText = profile3.innerHTML.substring(0, 4) + '...'
+  if (profile3.innerText.length > 10) {
+    profile3.innerText = profile3.innerHTML.substring(0, 7) + '...'
   }
 }, 300)
 
