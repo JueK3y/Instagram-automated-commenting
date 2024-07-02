@@ -69,32 +69,11 @@ _¹ Don't worry, your data is safe. They are not uploaded anywhere, but encrypte
 
 ## Bugs, missing Features & co.
 
-- [🚀 Here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) you can submit suggestions for improvements or new features.
+- 🚀 [Here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Enhancement%2C+New+request&template=Feature_Request.yml) you can submit suggestions for improvements or new features.
 - 📚 If you notice translation errors while using IAC 2.0, you can [report them here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Translation%2C+New+request&template=Translation_Error.yml).
 - 🐛 If you notice any problems or bugs (for example, display errors) during use, you can [report them here](https://github.com/JueK3y/Instagram-automated-commenting/issues/new?assignees=JueK3y-Prv&labels=Bug%2C+New+request&template=Bug_Report.yml).
 
 - Also, for any other questions or problems, you can check out [the wiki](https://github.com/JueK3y/Instagram-automated-commenting/wiki).
-
-
-## Technical data
-The following dependencies were used to develop IAC 2.0 (Last checked: 25.07.2022):
-
-- electron 15.5.5
-- electron-log 4.4.6
-- electron-store 8.0.1
-- electron-builder 5.0.5
-- electron-window-state 5.0.3
-- is-online 9.0.1
-- node-keytar 7.9.0
-- network-speed 2.1.1
-- node-notifier 10.0.1
-- puppeteer 15.5.0
-- puppeteer-extra 3.3.4
-- puppeteer-extra-plugin-stealth 2.11.0
-
-You can see all used dependencies [here](https://github.com/JueK3y/Instagram-automated-commenting/network/dependencies).
-
-_It may happen that older versions are specified here than are actually used._
 
 <br>
 
@@ -124,4 +103,4 @@ _The program has been carefully developed and tested. However, damage cannot be 
 ###### _DO NOT modify and reupload the program.<br>DO NOT indicate used program sections as your own.<br>Any copyright / EULA violation can and will be legally punished._
 
 
-_©2020 - 2022 by [JueK3y](https://juek3y.com)_
+_©2020 - 2024 by [JueK3y](https://juek3y.com)_

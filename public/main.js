@@ -64,10 +64,10 @@ const createWindow = () => {
     }
   })
 
-  mainWindow.webContents.on('new-window', function (e, url) {
-    e.preventDefault()
-    require('electron').shell.openExternal(url)
-  })
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: 'deny' };
+  });
 
   mainWindow.on('blur', () => {
     mainWindow.webContents.send('blurPw')

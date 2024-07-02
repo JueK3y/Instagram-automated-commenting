@@ -248,8 +248,20 @@ html {
                         &:hover #set-dow-text-failed {
                             display: block;
                         }
-                    }  
-                    
+                    } 
+
+                    #comment-mode {
+                        #mod-comm-loop {
+                            display: none;
+                        }
+                        #mod-comm-text {
+                            display: none;
+                        }
+                        &:hover #mod-comm-text {
+                            display: block;
+                        }
+                    }
+
                     #comment-settings {
                         #set-comm-text {
                             display: none;
@@ -316,7 +328,12 @@ html {
                             opacity: 0;
                             pointer-events: none;
                         }
+                        #url-input:not(:placeholder-shown) ~ #pasteButton {
+                            opacity: 0;
+                            display: none;
+                        }
                         #clearButton {
+                            z-index: 2;
                             position: absolute;
                             display: block;
                             border: none;
@@ -341,6 +358,39 @@ html {
                                 margin-top: 3px;
                                 width: 12px;
                                 height: 12px;
+                            }
+                        }
+                        #pasteButton {
+                            z-index: 1;
+                            position: absolute;
+                            display: none;
+                            border: none;
+                            outline: none;
+                            background: none;
+                            margin-top: -29.5px;
+                            margin-left: 436px;
+                            width: 28px;
+                            height: 24px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            transition: .2s;
+                            &:hover {
+                                background-color: var(--input-cross);
+                                transition: .2s;
+                            }
+                            &:active {
+                                opacity: .8;
+                                transition: .2s;
+                            }
+                            img {
+                                fill: var(--text-color);
+                                margin-top: 1.5px;
+                                margin-left: -1.5px;
+                                width: 20px;
+                                height: 20px;
+                            }
+                            #pasteIconNoFocus {
+                                display: none;
                             }
                         }
                     }

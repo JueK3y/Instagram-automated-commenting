@@ -8,14 +8,23 @@
 // │ In the event of possible damage, the user alone is liable,              │
 // │ the manufacturer (JueK3y) withdraws from any legal responsibility.      │
 // ├─────────────────────────────────────────────────────────────────────────┤
-// │ Copyright © 2020 - 2023 by JueK3y (Julian Kennedy)                      │
+// │ Copyright © 2020 - 2024 by JueK3y (Julian Kennedy)                      │
 // │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
+let clipboardString
 
 ////// URL Clear Buttton
 $('#clearButton').click(function() {
   $('#url-input').val('')
   $('#url-input').focus()
+  showClipboard()
+})
+
+////// URL Clear Buttton
+$('#pasteButton').click(function() {
+  $('#url-input').val(clipboardString)
+  $('#url-input').focus()
+  $('#pasteButton').css('display', 'none')
 })
 
 ////// Password Toggle Button
@@ -116,7 +125,7 @@ $('#start-btn').click(function() {
     formError(urlInput)
   }
   else if (! urlInput.value.includes('instagram.')) {                                                                             // INFO: Change this value if needed -!- //
-    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)
+    showBanner('warning', 'Falsche URL', 'Sicher, dass es sich hierbei um einen Instagram Post handelt?', errorCode[3], true)     // TODO: Add the option do ignore the banner and launch anyways -!- //
     log.warn(`Client error - Start of IAC 2.0 not possible: ${errorCode[3]}`)
     log.warn(`Client input was ${urlInput.value}`)
     formError(urlInput)
@@ -161,8 +170,8 @@ $('#start-btn').click(function() {
 
   if (validate) {
     getComments()
+    $('#start-btn').prop('disabled', false)
     setTimeout(() => {
-      $('#start-btn').prop('disabled', false)
       if (comData[0] !== undefined) {
         log.info('All input is correct, launching main logic')
         document.getElementById('start-btn').style.display = 'none'
@@ -172,7 +181,7 @@ $('#start-btn').click(function() {
         document.getElementById('runIcon').style.display = 'block'
         document.getElementById('pauseIcon').style.display = 'none'
         runMainLogic = true
-        launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode)
+        launchMainLogic(urlInput.value, username.value, password.value, mainLogicMode, localStorage.getItem('commentMode'))
         if (document.getElementById('save-profile').checked) {
           log.info('Saving LogIn data')
           setPassword(username.value, password.value)
@@ -206,7 +215,7 @@ $('#start-btn').click(function() {
           openComments()
         }, 2500)
       }
-    }, 600)
+    }, 250)
   }
 })
 
@@ -217,8 +226,8 @@ $('#pause-btn').click(function() {
   document.getElementById('pause-btn').style.display = 'none'
   document.getElementById('stop-btn').style.display = 'block'
   document.getElementById('idleIcon').style.display = 'none'
-  document.getElementById('runIcon').style.display = 'block'
-  document.getElementById('pauseIcon').style.display = 'none'
+  document.getElementById('runIcon').style.display = 'none'
+  document.getElementById('pauseIcon').style.display = 'block'
   log.info('Pause button was pressed')
   // TODO: API pauses commenting -!- //
 })
@@ -237,11 +246,28 @@ $('#stop-btn').click(function() {
   log.info('Stop button was pressed')
 })
 
-////// Profile Dropdown 
+////// Clipboard & Profile Dropdown 
+const pasteButton = document.getElementById('pasteButton')
+const pasteImg = document.getElementById('pasteIconFocus')
+const pasteImgBlur = document.getElementById('pasteIconNoFocus')
 const prDdImage = document.getElementById('profileDropdownImage')
 const prDdImgBlur = document.getElementById('profileDropdownImageNoFocus')
 
+function showClipboard() {
+  checkClipboard().then(result =>  {
+    clipboardString = result
+    if (clipboardString.includes('instagram.') && urlInput.value === '') {
+      pasteButton.style.display = 'block'
+      log.info('Showing paste icon')
+    }
+    else {
+      pasteButton.style.display = 'none'
+    }
+  })
+}
+
 $(document).ready(() => {
+  showClipboard()
   $(document).on('click', '#profileDropdownContent', function(e) {
     const clickedProfile = String(e.target.classList).slice(4)                                        // INFO: Pass ID to API and give username and password -!- //
     username.value = clickedProfile                                                                       // INFO: Get Name for ID from API -!- //
@@ -314,11 +340,21 @@ $(document).ready(() => {
 })
 
 ////// Image color changer
+document.getElementById('url-input').addEventListener('focus', function() {
+  pasteImg.style.display = 'block'
+  pasteImgBlur.style.display = 'none'
+}, false)
+document.getElementById('url-input').addEventListener('blur', function() {
+  if (document.getElementById('url-input').value === '') {
+    pasteImg.style.display = 'none'
+    pasteImgBlur.style.display = 'block'
+  }
+}, false)
+
 username.addEventListener('focus', function() {
   prDdImage.style.display = 'block'
   prDdImgBlur.style.display = 'none'
 }, false)
-
 username.addEventListener('blur', function() {
   if (username.value === '') {
     prDdImage.style.display = 'none'

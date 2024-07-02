@@ -8,7 +8,7 @@
 // │ In the event of possible damage, the user alone is liable,              │
 // │ the manufacturer (JueK3y) withdraws from any legal responsibility.      │
 // ├─────────────────────────────────────────────────────────────────────────┤
-// │ Copyright © 2020 - 2023 by JueK3y (Julian Kennedy)                      │
+// │ Copyright © 2020 - 2024 by JueK3y (Julian Kennedy)                      │
 // │ https://github.com/JueK3y/Instagram-automated-commenting                │
 // └─────────────────────────────────────────────────────────────────────────┘
 
@@ -337,8 +337,11 @@ function profileUpdate() {
 profileUpdate()
 
 const profile1 = document.getElementById('profile-1-name')
-const profile2 = document.getElementById('profile-2-name') 
+const profile1Dr = document.getElementById('profile-1-dropdown') 
+const profile2 = document.getElementById('profile-2-name')
+const profile2Dr = document.getElementById('profile-2-dropdown')
 const profile3 = document.getElementById('profile-3-name') 
+const profile3Dr = document.getElementById('profile-3-dropdown') 
 
 const showMore = document.getElementById('more-profile').style
 const addProfile = document.getElementById('add-profile').style
@@ -422,17 +425,12 @@ else {
 
 // INFO: Length Check -!- //
 setTimeout(() => {
-  if (profile1.innerText.length > 7) {
-    profile1.innerText = profile1.innerText.substring(0, 4) + '...'
-  } 
-  
-  if (profile2.innerText.length > 7) {
-    profile2.innerText = profile2.innerHTML.substring(0, 4) + '...'
-  }
-  
-  if (profile3.innerText.length > 7) {
-    profile3.innerText = profile3.innerHTML.substring(0, 4) + '...'
-  }
+  if (profile1.innerText.length > 10) profile1.innerText = profile1.innerText.substring(0, 7) + '...'
+  if (profile1Dr.innerText.length > 17) profile1Dr.innerText = profile1Dr.innerText.substring(0, 14) + '...'
+  if (profile2.innerText.length > 10) profile2.innerText = profile2.innerText.substring(0, 7) + '...'
+  if (profile2Dr.innerText.length > 17) profile2Dr.innerText = profile2Dr.innerText.substring(0, 14) + '...'
+  if (profile3.innerText.length > 10) profile3.innerText = profile3.innerText.substring(0, 7) + '...'
+  if (profile3Dr.innerText.length > 17) profile3Dr.innerText = profile3Dr.innerText.substring(0, 14) + '...'
 }, 300)
 
 for (let i = 1; i <= 3; i++) {
@@ -550,6 +548,7 @@ window.setInterval(() => {
 
 ////// FIXME: Needs to be re-worked -!- //
 let updateOnline
+let downloadSuccess
 
 function updateState(value) {
   if (value === 'available') updateOnline = true
@@ -674,6 +673,7 @@ $(document).on('click', '#developer-mode', () => {
   log.info('Opening DevTools')
   $('#developer-mode').css('display', 'none')
   $('#developer-settings').css('display', 'inline-block')
+  if (!slideIn) $('.settings').click()
   mainLogicMode = false
   openDevConsoleIPC()
 })
@@ -681,7 +681,7 @@ $(document).on('click', '#developer-mode', () => {
 
 ////// Small window
 $(document).on('click', '#report-bug', () => {
-  openSmallWin('template', 'src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du auf GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
+  openSmallWin('template', 'src/img/icons/dark/bug.svg', 'Fehler melden', 'Falls dir ein Fehler, wie zum Beispiel ein Übersetzungs-, Anzeige oder Logikfehler aufgefallen ist, kannst du diesen hier melden. Bei Klick auf Melden wirst du zu GitHub weitergeleitet.', 'Melden', 'https://github.com/JueK3y/Instagram-automated-commenting/issues/new/choose')
 })
 
 $(document).on('click', '#info', () => {
@@ -693,7 +693,8 @@ $(document).on('click', '.small-window-close-button', () => {
 })
 
 $(document).on('click', '#s-w-c-b-multi-fa', () => {
-  $('#small-window').css('display', 'none')
+  $('#small-window-big').css('display', 'none')
+  $('#small-window-small').css('display', 'none')
   $('#small-window-multi-fa').css('display', 'none')
   $('#stop-btn').click()
   showBanner('error', 'Fehlender 2FA Code', 'IAC 2.0 kann ohne den 2FA Code nicht kommentieren.', 'no-mfa-code', true)
@@ -716,7 +717,13 @@ $(document).on('click', '#s-w-m-b-multi-fa', () => {
 function closeSmallWin() {
   if (document.getElementById('small-window-multi-fa').style.display !== 'block') {
     log.info('Closing SmallWindow')
-    $('#small-window').css('display', 'none')
+    if (document.getElementById('small-window-small')) {
+      $('#small-window-small').css('display', 'none')
+      document.getElementById('small-window-small').id = 'small-window-big'
+    }
+    else {
+      $('#small-window-big').css('display', 'none')
+    }
     $('#small-window-template').css('display', 'none')
     $('#small-window-version').css('display', 'none')
     $('#small-window-multi-fa').css('display', 'none')
@@ -726,7 +733,21 @@ function closeSmallWin() {
 
 function openSmallWin(type, icon, title, content, mainBtn, hyperlink) {
   log.info(`Opening SmallWindow with following values: ${type}, ${icon}, ${title}, ${content}, ${mainBtn}, ${hyperlink} `)
-  $('#small-window').css('display', 'block')
+  log.info(type)
+  if (document.getElementById('small-window-small')) {
+    if (type === 'version') $('#small-window-small').css('display', 'block')
+    else {
+      $('#small-window-small').css('display', 'none')
+      document.getElementById('small-window-small').id = 'small-window-big'
+      $('#small-window-big').css('display', 'block')
+    }
+  }
+  else if (type === 'version') {
+    $('#small-window-big').css('display', 'none')
+    document.getElementById('small-window-big').id = 'small-window-small'
+    $('#small-window-small').css('display', 'block')
+  }
+  else $('#small-window-big').css('display', 'block')
   $('#small-window-template').css('display', 'none')
   $('#small-window-version').css('display', 'none')
   $('#small-window-multi-fa').css('display', 'none')
