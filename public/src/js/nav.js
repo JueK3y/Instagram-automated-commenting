@@ -695,7 +695,8 @@ $(document).on('click', '.small-window-close-button', () => {
 })
 
 $(document).on('click', '#s-w-c-b-multi-fa', () => {
-  $('#small-window').css('display', 'none')
+  $('#small-window-big').css('display', 'none')
+  $('#small-window-small').css('display', 'none')
   $('#small-window-multi-fa').css('display', 'none')
   $('#stop-btn').click()
   showBanner('error', 'Fehlender 2FA Code', 'IAC 2.0 kann ohne den 2FA Code nicht kommentieren.', 'no-mfa-code', true)
@@ -718,7 +719,13 @@ $(document).on('click', '#s-w-m-b-multi-fa', () => {
 function closeSmallWin() {
   if (document.getElementById('small-window-multi-fa').style.display !== 'block') {
     log.info('Closing SmallWindow')
-    $('#small-window').css('display', 'none')
+    if (document.getElementById('small-window-small')) {
+      $('#small-window-small').css('display', 'none')
+      document.getElementById('small-window-small').id = 'small-window-big'
+    }
+    else {
+      $('#small-window-big').css('display', 'none')
+    }
     $('#small-window-template').css('display', 'none')
     $('#small-window-version').css('display', 'none')
     $('#small-window-multi-fa').css('display', 'none')
@@ -728,7 +735,21 @@ function closeSmallWin() {
 
 function openSmallWin(type, icon, title, content, mainBtn, hyperlink) {
   log.info(`Opening SmallWindow with following values: ${type}, ${icon}, ${title}, ${content}, ${mainBtn}, ${hyperlink} `)
-  $('#small-window').css('display', 'block')
+  log.info(type)
+  if (document.getElementById('small-window-small')) {
+    if (type === 'version') $('#small-window-small').css('display', 'block')
+    else {
+      $('#small-window-small').css('display', 'none')
+      document.getElementById('small-window-small').id = 'small-window-big'
+      $('#small-window-big').css('display', 'block')
+    }
+  }
+  else if (type === 'version') {
+    $('#small-window-big').css('display', 'none')
+    document.getElementById('small-window-big').id = 'small-window-small'
+    $('#small-window-small').css('display', 'block')
+  }
+  else $('#small-window-big').css('display', 'block')
   $('#small-window-template').css('display', 'none')
   $('#small-window-version').css('display', 'none')
   $('#small-window-multi-fa').css('display', 'none')

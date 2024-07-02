@@ -422,12 +422,17 @@ html body {
             }
         }
     }
-    #small-window {
+    #small-window-small {
+        left: calc(50vw - 15%);
+    }
+    #small-window-big {
+        left: calc(50vw - 23%);
+    }
+    #small-window-small, #small-window-big {
         display: none;
         position: absolute;
-        z-index: 5;
+        z-index: 10;
         top: calc(50vh - 100px);
-        left: calc(50vw - 15%);
         width: auto;
         max-width: 45vw;
         height: auto;
