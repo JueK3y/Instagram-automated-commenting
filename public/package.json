@@ -32,7 +32,7 @@
   "dependencies": {
     "clipboard-event": "^1.6.0",
     "electron-log": "^5.1.5",
-    "electron-updater": "^4.6.5",
+    "electron-updater": "^6.3.0",
     "electron-window-state": "^5.0.3",
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
