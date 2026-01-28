@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "electron": "^31.0.1",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^26.6.0"
   },
   "dependencies": {
     "clipboard-event": "^1.6.0",
