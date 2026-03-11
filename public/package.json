@@ -37,14 +37,14 @@
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^22.12.1",
-    "puppeteer-extra": "^3.3.4",
-    "puppeteer-extra-plugin-stealth": "^2.11.0"
+    "puppeteer": "^24.39.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "build": {
     "appId": "jue3ky.iac_2.app",
     "productName": "IAC 2.0",
-    "copyright": "Copyright © 2024 by JueK3y",
+    "copyright": "Copyright © 2026 by JueK3y",
     "win": {
       "target": "nsis",
       "icon": "icon.ico",

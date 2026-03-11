@@ -183,6 +183,109 @@ const createWindow = () => {
   })
 }
 
+ipcMain.on('open-login-window', async (event, credentials) => {
+    const loginWin = new BrowserWindow({
+      width: 450,
+      height: 700,
+      title: 'Bitte bei Instagram anmelden',
+      autoHideMenuBar: true,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        partition: 'persist:instagram' 
+      }
+    });
+
+    loginWin.webContents.userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+    const igSession = session.fromPartition('persist:instagram');
+    await igSession.cookies.set({ url: 'https://www.instagram.com', name: 'ig_cb', value: '1' });
+
+    let loginSuccessSent = false; 
+
+    const checkLoginStatus = async () => {
+        if (loginSuccessSent) return;
+        const cookies = await igSession.cookies.get({ domain: '.instagram.com' });
+        const hasSessionId = cookies.some(c => c.name === 'sessionid');
+
+        if (hasSessionId) {
+            loginSuccessSent = true;
+            event.reply('login-success', cookies);
+            loginWin.close();
+        }
+    };
+
+    loginWin.webContents.on('dom-ready', async () => {
+        const cookies = await igSession.cookies.get({ domain: '.instagram.com' });
+        if (cookies.some(c => c.name === 'sessionid')) {
+            checkLoginStatus(); 
+            return; 
+        }
+
+        if (credentials && credentials.username && credentials.password) {
+            await loginWin.webContents.executeJavaScript(`
+                const overlay = document.createElement('div');
+                overlay.id = 'iac-overlay';
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0'; overlay.style.left = '0';
+                overlay.style.width = '100vw'; overlay.style.height = '100vh';
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.85)';
+                overlay.style.color = '#fff';
+                overlay.style.display = 'flex';
+                overlay.style.flexDirection = 'column';
+                overlay.style.alignItems = 'center';
+                overlay.style.justifyContent = 'center';
+                overlay.style.zIndex = '99999';
+                overlay.style.fontFamily = 'sans-serif';
+                overlay.innerHTML = '<h2 style="margin-bottom: 10px;">IAC 2.0 meldet dich an...</h2><p>Bitte kurz warten.</p>';
+                document.body.appendChild(overlay);
+
+                setTimeout(() => {
+                    const userField = document.querySelector('input[name="username"]');
+                    const passField = document.querySelector('input[type="password"]');
+                    const loginBtn = document.querySelector('button[type="submit"]');
+
+                    if (userField && passField) {
+                        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                        
+                        nativeInputValueSetter.call(userField, "${credentials.username}");
+                        userField.dispatchEvent(new Event('input', { bubbles: true }));
+
+                        nativeInputValueSetter.call(passField, "${credentials.password}");
+                        passField.dispatchEvent(new Event('input', { bubbles: true }));
+
+                        if (loginBtn) {
+                            setTimeout(() => {
+                                loginBtn.click();
+                                setTimeout(() => {
+                                    if(document.getElementById('iac-overlay')) {
+                                        document.getElementById('iac-overlay').remove();
+                                    }
+                                }, 3500); 
+                            }, 500);
+                        }
+                    } else {
+                        if(document.getElementById('iac-overlay')) {
+                            document.getElementById('iac-overlay').remove();
+                        }
+                    }
+                }, 1500);
+            `);
+        }
+    });
+
+    loginWin.webContents.on('did-navigate', checkLoginStatus);
+    loginWin.webContents.on('did-navigate-in-page', checkLoginStatus);
+
+    loginWin.on('closed', () => {
+      if (!loginSuccessSent) {
+        event.reply('login-closed', null); 
+      }
+    });
+
+    loginWin.loadURL('https://www.instagram.com/');
+});
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.

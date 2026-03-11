@@ -1,4 +1,6 @@
 /public/dist/
 /public/node_modules/
 /private/*
-public/package-lock.json
+/public/package-lock.json
+/public/instagram_session_data
+

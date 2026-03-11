@@ -1,8 +1,9 @@
 const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+const { ipcRenderer } = require('electron')
 
 puppeteer.use(StealthPlugin())
-let commentArea = 'textarea.x1i0vuye'
+let commentArea = 'textarea[autocomplete="off"]'
 let commentLoop
 
 const loginURL = 'https://www.instagram.com/accounts/login/'
@@ -18,76 +19,71 @@ const instagram = {
   page: null,
 
   initialize: async (mode) => {
+    // Puppeteer startet im Hintergrund (bzw. sichtbar, je nach mode)
     instagram.browser = await puppeteer.launch({
         slowMo: 35,
-        headless: mode,
-        executablePath: getChromiumExecPath()
-    })
+        headless: mode, 
+        executablePath: getChromiumExecPath(),
+        userDataDir: './instagram_session_data', 
+        args: ['--disable-blink-features=AutomationControlled']
+    });
 
-    instagram.page = (await instagram.browser.pages())[0]
+    instagram.page = (await instagram.browser.pages())[0];
 
-    log.info('Instagram initialization successful')
+    log.info('Instagram initialization successful');
   },
 
   login: async (username, password) => {
-    await instagram.page.goto(loginURL, { waitUntil: 'networkidle2' })
+    log.info('Starte nativen Electron-Login...');
 
-    try {
-        await instagram.page.click('._a9_1')
-        log.info('Cookies accepted')
-    }
-    catch (error) {
-        log.error(error)
-        log.info('Cookie banner not found')
-    }
-    
-    // LogIn process
-    await instagram.page.waitForSelector('input[name="username"]')
-    await instagram.page.type('input[name="username"]', username, { delay: 50 })
-    await instagram.page.type('input[name="password"]', password, { delay: 50 })
+    const cookies = await new Promise((resolve) => {
+      ipcRenderer.once('login-success', (event, cookies) => resolve(cookies));
+      ipcRenderer.once('login-closed', () => resolve(null)); 
+      ipcRenderer.send('open-login-window', { username: username, password: password });
+    });
 
-    await instagram.page.click('[type="submit"]') 
+    if (!cookies) {
+       log.error('Login-Fenster wurde geschlossen, Abbruch.');
+       showBanner('error', 'Login abgebrochen', 'Das Anmeldefenster wurde manuell geschlossen.', 'login-closed', true);
+       stpBtn.click();
+       runMainLogic = false;
+       await instagram.browser.close();
+       return;
+    }
+
+    log.info('Cookies erfolgreich extrahiert. Injiziere in Puppeteer...');
+
+    // 2. Formatieren und in Puppeteer setzen
+    const puppeteerCookies = cookies.map(c => ({
+      name: c.name,
+      value: c.value,
+      domain: c.domain,
+      path: c.path,
+      secure: c.secure,
+      httpOnly: c.httpOnly,
+      sameSite: c.sameSite
+    }));
+
+    await instagram.page.setCookie(...puppeteerCookies);
+    await instagram.page.goto('https://www.instagram.com/', { waitUntil: 'networkidle2' });
   },
 
   validation: async () => {
-    await instagram.page.waitForSelector('[data-visualcompletion="loading-state"]')
-    log.info('Checking Login-Data')
-
-    await new Promise(r => setTimeout(r, 1500))
-
-    if (await instagram.page.url() === loginURL) {
-      log.info('No URL change detected')
-      try {
-        await instagram.page.waitForNavigation({timeout: 7500})
-      } 
-      catch (error) {
-        log.warn('Wrong LogIn data')
-        try {
-          // TODO: Check content of error message and display correct noteMessage (Wrong password f. ex.) -!- //
-          log.warn('Instagram error message: "' + await instagram.page.$eval('._ab2z', element => element.innerHTML) + '"')     // FIXME: Eval is considered as unsafe -!- //
-        }
-        catch (e) {
-          log.info(e)
-        }
-        noteMessage('Falsche LogIn Daten', 'Bitte überprüfe die eingegebenen LogIn Daten und probiere es erneut.', true)
-        showBanner('error', 'Falsche Eingabe?', 'Bitte überprüfe die angegebenen LogIn Daten.', 'wrong-login-data', true)
-        formError(password)
-        stpBtn.click()
-        runMainLogic = false
-        await instagram.browser.close()
-        // FIXME: Doesn't stop here -!- //
-      }
+    log.info('Prüfe, ob Puppeteer die Cookies akzeptiert hat...');
+    const currentUrl = await instagram.page.url();
+    
+    if (currentUrl.includes('login')) {
+       log.warn('Trotz Cookies nicht eingeloggt. Session abgelaufen?');
+       noteMessage('Fehler beim Übernehmen', 'Die Sitzung konnte nicht an den Bot übergeben werden.', true);
+       showBanner('error', 'Login fehlgeschlagen', 'Sitzung nicht übernommen.', 'cookie-fail', true);
+       stpBtn.click();
+       runMainLogic = false;
+       await instagram.browser.close();
+       return;
     }
-
-    // TODO: Introduce 2-FA Check -!- //
-    if (await instagram.page.url() === mfaURL) {
-      log.warn('Two-Factor Auth was detected')
-      noteMessage('Zwei-Faktor Authentifizierung entdeckt', 'In dieser Version wird das Anmelden mit 2FA noch nicht unterstützt', true)
-      showBanner('warning', '2FA LogIn', '2FA Login zur Zeit nicht möglich.', 'multi-factor-auth', true)
-      stpBtn.click()
-      runMainLogic = false
-      await instagram.browser.close()
-    }
+    
+    log.info('Login erfolgreich verifiziert! Der Bot ist bereit zum Kommentieren.');
+    showBanner('info', 'LogIn erfolgreich', 'Die Sitzung wurde erfolgreich übernommen.', 'login-success', true);
   },
 
   urlReader: async (postURL) => {
@@ -159,15 +155,21 @@ const instagram = {
     await new Promise(r => setTimeout(r, 150))
     if (commentLoop) {                                                           // TODO: Better stillRunningCheck needed -!- //
       for (let i = 0; i < comment.length; i++) {
-        const spamNotice = await instagram.page.$('.piCib')
+        const spamDialog = await instagram.page.$('div[role="dialog"]');
         let comment = comData
         try {
           if (runMainLogic) {   
-            if (spamNotice !== null) {
-              showBanner('warning', 'Spam erkannt', 'IAC 2.0 muss etwas langsamer kommentieren.', 'spam-notice', true)
-              log.warn("Instagram detected spam, commenting slower")
-              await instagram.page.keyboard.press('Enter')
-              await instagram.page.waitForTimeout(2000)
+            if (spamDialog !== null) {
+              showBanner('warning', 'Unterbrechung erkannt', 'Instagram hat uns gestoppt. IAC 2.0 macht kurz Pause.', 'spam-notice', true);
+              log.warn("Instagram popup detected, commenting slower");
+
+              const dialogButtons = await spamDialog.$$('button');
+              
+              if (dialogButtons.length > 0) {
+                  const confirmButton = dialogButtons[dialogButtons.length - 1];
+                  await confirmButton.click();
+              }
+              await instagram.page.waitForTimeout(5000);
             }
             else {
               await instagram.page.click(commentArea)
