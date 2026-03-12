@@ -184,153 +184,169 @@ const createWindow = () => {
 }
 
 ipcMain.on('open-login-window', async (event, credentials) => {
-  const safeUsername = (credentials && credentials.username) 
-      ? credentials.username.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase() 
-      : 'default';
-  const partitionName = `persist:instagram_${safeUsername}`;
+    const safeUsername = (credentials && credentials.username) 
+        ? credentials.username.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase() 
+        : 'default';
+    const partitionName = `persist:instagram_${safeUsername}`;
 
-  const loginWin = new BrowserWindow({
-    width: 450,
-    height: 700,
-    title: `Instagram Login - ${credentials.username || 'Unknown'}`,
-    autoHideMenuBar: true,
-    webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
-      partition: partitionName 
-    }
-  });
-
-  loginWin.webContents.userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
-
-  const igSession = session.fromPartition(partitionName);
-  await igSession.cookies.set({ url: 'https://www.instagram.com', name: 'ig_cb', value: '1' });
-
-  let loginSuccessSent = false; 
-
-  const checkLoginStatus = async () => {
-      if (loginSuccessSent) return;
-      const cookies = await igSession.cookies.get({ domain: '.instagram.com' });
-      if (cookies.some(c => c.name === 'sessionid')) {
-          loginSuccessSent = true;
-          event.reply('login-success', cookies);
-          loginWin.close();
+    const loginWin = new BrowserWindow({
+      width: 450,
+      height: 700,
+      title: `Instagram Login - ${credentials.username || 'Unbekannt'}`,
+      autoHideMenuBar: true,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        partition: partitionName 
       }
-  };
+    });
 
-  const typeText = async (text) => {
-      for (const char of text) {
-          loginWin.webContents.sendInputEvent({ type: 'char', keyCode: char });
-          await new Promise(r => setTimeout(r, 20 + Math.random() * 30)); 
+    loginWin.webContents.userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+    const igSession = session.fromPartition(partitionName);
+    await igSession.cookies.set({ url: 'https://www.instagram.com', name: 'ig_cb', value: '1' });
+
+    let loginSuccessSent = false; 
+    let twoFactorSent = false;
+
+    const checkLoginStatus = async () => {
+        if (loginSuccessSent) return;
+        const cookies = await igSession.cookies.get({ domain: '.instagram.com' });
+        if (cookies.some(c => c.name === 'sessionid')) {
+            loginSuccessSent = true;
+            event.reply('login-success', cookies);
+            loginWin.close();
+        }
+    };
+
+    const typeText = async (text) => {
+        for (const char of text) {
+            loginWin.webContents.sendInputEvent({ type: 'char', keyCode: char });
+            await new Promise(r => setTimeout(r, 20 + Math.random() * 30)); 
+        }
+    };
+
+    let hasTyped = false;
+
+    loginWin.on('page-title-updated', async (e, title) => {
+        if (title === 'IAC_2FA_REQUIRED' && !twoFactorSent) {
+            twoFactorSent = true;
+            event.reply('2fa-required');
+        }
+
+        if (title === 'IAC_READY_TO_TYPE' && !hasTyped) {
+            hasTyped = true;
+            await new Promise(r => setTimeout(r, 500));
+            
+            await typeText(credentials.username);
+            
+            loginWin.webContents.sendInputEvent({ type: 'keyDown', keyCode: 'Tab' });
+            loginWin.webContents.sendInputEvent({ type: 'keyUp', keyCode: 'Tab' });
+            await new Promise(r => setTimeout(r, 300));
+            
+            await typeText(credentials.password);
+            await new Promise(r => setTimeout(r, 500));
+            
+            loginWin.webContents.sendInputEvent({ type: 'keyDown', keyCode: 'Return' });
+            loginWin.webContents.sendInputEvent({ type: 'char', keyCode: '\r' });
+            loginWin.webContents.sendInputEvent({ type: 'keyUp', keyCode: 'Return' });
+            
+            await loginWin.webContents.executeJavaScript(`
+                new Promise((resolve) => {
+                    let checkCount = 0;
+                    const btnInterval = setInterval(() => {
+                        checkCount++;
+                        const buttons = Array.from(document.querySelectorAll('div[role="button"]'));
+                        const loginBtn = buttons.find(b => !b.querySelector('svg') && b.innerText.length > 0);
+                        
+                        if (loginBtn && loginBtn.getAttribute('aria-disabled') !== 'true') {
+                            clearInterval(btnInterval);
+                            loginBtn.click();
+                            resolve();
+                        } else if (checkCount > 15) {
+                            clearInterval(btnInterval);
+                            resolve();
+                        }
+                    }, 250);
+                });
+            `);
+
+            setTimeout(() => {
+                if (!loginWin.isDestroyed()) {
+                    loginWin.webContents.executeJavaScript(`
+                        if(document.getElementById('iac-overlay')) {
+                            document.getElementById('iac-overlay').remove();
+                        }
+                    `);
+                }
+            }, 3000);
+        }
+    });
+
+    loginWin.webContents.on('dom-ready', async () => {
+        const cookies = await igSession.cookies.get({ domain: '.instagram.com' });
+        if (cookies.some(c => c.name === 'sessionid')) {
+            checkLoginStatus(); 
+            return; 
+        }
+
+        if (credentials && credentials.username && credentials.password) {
+            await loginWin.webContents.executeJavaScript(`
+                const overlay = document.createElement('div');
+                overlay.id = 'iac-overlay';
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0'; overlay.style.left = '0';
+                overlay.style.width = '100vw'; overlay.style.height = '100vh';
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.85)';
+                overlay.style.color = '#fff';
+                overlay.style.display = 'flex';
+                overlay.style.flexDirection = 'column';
+                overlay.style.alignItems = 'center';
+                overlay.style.justifyContent = 'center';
+                overlay.style.zIndex = '99999';
+                overlay.style.fontFamily = 'sans-serif';
+                overlay.innerHTML = '<h2 style="color: #ffffff !important; margin-bottom: 10px;">IAC 2.0 meldet dich an...</h2><p style="color: #ffffff !important; margin-bottom: 20px;">Bitte kurz warten.</p><button id="iac-cancel-btn" style="padding: 10px 20px; background-color: #ed4956; color: #ffffff !important; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Abbrechen & manuell anmelden</button>';
+                document.body.appendChild(overlay);
+
+                document.getElementById('iac-cancel-btn').addEventListener('click', () => {
+                    overlay.remove();
+                });
+
+                setTimeout(() => {
+                    const cookieBtn = document.querySelector('button._a9--._ap36._a9_1') || document.querySelector('button._a9--._ap36._asz1');
+                    if (cookieBtn) cookieBtn.click();
+                }, 1500);
+
+                const focusInterval = setInterval(() => {
+                    const userField = document.querySelector('input[name="username"]') || document.querySelector('input[name="email"]');
+                    if (userField) {
+                        clearInterval(focusInterval);
+                        userField.focus();
+                        document.title = 'IAC_READY_TO_TYPE';
+                    }
+                }, 500);
+
+                setInterval(() => {
+                    const twoFactorField = document.querySelector('input[name="verificationCode"]');
+                    const urlCheck = window.location.href.includes('two_factor');
+                    if ((twoFactorField || urlCheck) && document.title !== 'IAC_2FA_REQUIRED') {
+                        document.title = 'IAC_2FA_REQUIRED';
+                    }
+                }, 1000);
+            `);
+        }
+    });
+
+    loginWin.webContents.on('did-navigate', checkLoginStatus);
+    loginWin.webContents.on('did-navigate-in-page', checkLoginStatus);
+
+    loginWin.on('closed', () => {
+      if (!loginSuccessSent) {
+        event.reply('login-closed', null); 
       }
-  };
+    });
 
-  let hasTyped = false;
-
-  loginWin.on('page-title-updated', async (e, title) => {
-    if (title === 'IAC_READY_TO_TYPE' && !hasTyped) {
-      hasTyped = true;
-      await new Promise(r => setTimeout(r, 500));
-      
-      await typeText(credentials.username);
-      
-      loginWin.webContents.sendInputEvent({ type: 'keyDown', keyCode: 'Tab' });
-      loginWin.webContents.sendInputEvent({ type: 'keyUp', keyCode: 'Tab' });
-      await new Promise(r => setTimeout(r, 300));
-      
-      await typeText(credentials.password);
-      await new Promise(r => setTimeout(r, 500));
-      
-      loginWin.webContents.sendInputEvent({ type: 'keyDown', keyCode: 'Return' });
-      loginWin.webContents.sendInputEvent({ type: 'char', keyCode: '\r' });
-      loginWin.webContents.sendInputEvent({ type: 'keyUp', keyCode: 'Return' });
-      
-      await loginWin.webContents.executeJavaScript(`
-          new Promise((resolve) => {
-              let checkCount = 0;
-              const btnInterval = setInterval(() => {
-                  checkCount++;
-                  const buttons = Array.from(document.querySelectorAll('div[role="button"]'));
-                  const loginBtn = buttons.find(b => !b.querySelector('svg') && b.innerText.length > 0);
-                  
-                  if (loginBtn && loginBtn.getAttribute('aria-disabled') !== 'true') {
-                      clearInterval(btnInterval);
-                      loginBtn.click();
-                      resolve();
-                  } else if (checkCount > 15) {
-                      clearInterval(btnInterval);
-                      resolve();
-                  }
-              }, 250);
-          });
-      `);
-
-      setTimeout(() => {
-          loginWin.webContents.executeJavaScript(`
-              if(document.getElementById('iac-overlay')) {
-                  document.getElementById('iac-overlay').remove();
-              }
-          `);
-      }, 3000);
-    }
-  });
-
-  loginWin.webContents.on('dom-ready', async () => {
-      const cookies = await igSession.cookies.get({ domain: '.instagram.com' });
-      if (cookies.some(c => c.name === 'sessionid')) {
-          checkLoginStatus(); 
-          return; 
-      }
-
-      if (credentials && credentials.username && credentials.password) {
-          await loginWin.webContents.executeJavaScript(`
-              const overlay = document.createElement('div');
-              overlay.id = 'iac-overlay';
-              overlay.style.position = 'fixed';
-              overlay.style.top = '0'; overlay.style.left = '0';
-              overlay.style.width = '100vw'; overlay.style.height = '100vh';
-              overlay.style.backgroundColor = 'rgba(0,0,0,0.85)';
-              overlay.style.color = '#fff';
-              overlay.style.display = 'flex';
-              overlay.style.flexDirection = 'column';
-              overlay.style.alignItems = 'center';
-              overlay.style.justifyContent = 'center';
-              overlay.style.zIndex = '99999';
-              overlay.style.fontFamily = 'sans-serif';
-              overlay.innerHTML = '<h2 style="margin-bottom: 10px;">IAC 2.0 logging in...</h2><p style="margin-bottom: 20px;">Please wait.</p><button id="iac-cancel-btn" style="padding: 10px 20px; background-color: #ed4956; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Cancel & Login Manually</button>';
-              document.body.appendChild(overlay);
-
-              document.getElementById('iac-cancel-btn').addEventListener('click', () => {
-                  overlay.remove();
-              });
-
-              setTimeout(() => {
-                  const cookieBtn = document.querySelector('button._a9--._ap36._a9_1') || document.querySelector('button._a9--._ap36._asz1');
-                  if (cookieBtn) cookieBtn.click();
-              }, 1500);
-
-              const focusInterval = setInterval(() => {
-                  const userField = document.querySelector('input[name="username"]') || document.querySelector('input[name="email"]');
-                  if (userField) {
-                      clearInterval(focusInterval);
-                      userField.focus();
-                      document.title = 'IAC_READY_TO_TYPE';
-                  }
-              }, 500);
-          `);
-      }
-  });
-
-  loginWin.webContents.on('did-navigate', checkLoginStatus);
-  loginWin.webContents.on('did-navigate-in-page', checkLoginStatus);
-
-  loginWin.on('closed', () => {
-    if (!loginSuccessSent) {
-      event.reply('login-closed', null); 
-    }
-  });
-
-  loginWin.loadURL('https://www.instagram.com/');
+    loginWin.loadURL('https://www.instagram.com/');
 });
 
 // This method will be called when Electron has finished

@@ -34,16 +34,32 @@ const instagram = {
   },
 
   login: async (username, password) => {
-    log.info('Starte nativen Electron-Login...');
+    log.info('Starting native Electron login...');
+
+    ipcRenderer.on('2fa-required', () => {
+       log.info('2FA verification detected, notifying user...');
+       if (typeof noteMessage === 'function') {
+           noteMessage('2FA erforderlich', 'Bitte gib deinen Sicherheitscode im Instagram-Fenster ein.', false);
+       }
+       if (typeof showBanner === 'function') {
+           showBanner('info', '2FA erforderlich', 'Bitte gib den 6-stelligen Code im Instagram-Fenster ein.', '2fa-info', true);
+       }
+    });
 
     const cookies = await new Promise((resolve) => {
-      ipcRenderer.once('login-success', (event, cookies) => resolve(cookies));
-      ipcRenderer.once('login-closed', () => resolve(null)); 
+      ipcRenderer.once('login-success', (event, cookies) => {
+          ipcRenderer.removeAllListeners('2fa-required');
+          resolve(cookies);
+      });
+      ipcRenderer.once('login-closed', () => {
+          ipcRenderer.removeAllListeners('2fa-required');
+          resolve(null);
+      }); 
       ipcRenderer.send('open-login-window', { username: username, password: password });
     });
 
     if (!cookies) {
-       log.error('Login-Fenster wurde geschlossen, Abbruch.');
+       log.error('Login window was closed manually. Aborting.');
        showBanner('error', 'Login abgebrochen', 'Das Anmeldefenster wurde manuell geschlossen.', 'login-closed', true);
        stpBtn.click();
        runMainLogic = false;
@@ -51,7 +67,7 @@ const instagram = {
        return;
     }
 
-    log.info('Cookies erfolgreich extrahiert. Injiziere in Puppeteer...');
+    log.info('Cookies extracted successfully. Injecting into Puppeteer...');
 
     const puppeteerCookies = cookies.map(c => ({
       name: c.name,
@@ -63,10 +79,8 @@ const instagram = {
       sameSite: c.sameSite
     }));
 
-    log.info('Cleaning up browser pages and setting cookies...');
-    
     const pages = await instagram.browser.pages();
-    instagram.page = pages[0];
+    instagram.page = pages[0]; 
     
     for (let i = 1; i < pages.length; i++) {
         await pages[i].close(); 
