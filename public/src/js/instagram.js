@@ -53,7 +53,6 @@ const instagram = {
 
     log.info('Cookies erfolgreich extrahiert. Injiziere in Puppeteer...');
 
-    // 2. Formatieren und in Puppeteer setzen
     const puppeteerCookies = cookies.map(c => ({
       name: c.name,
       value: c.value,
@@ -63,6 +62,17 @@ const instagram = {
       httpOnly: c.httpOnly,
       sameSite: c.sameSite
     }));
+
+    log.info('Cleaning up browser pages and setting cookies...');
+    
+    const pages = await instagram.browser.pages();
+    instagram.page = pages[0];
+    
+    for (let i = 1; i < pages.length; i++) {
+        await pages[i].close(); 
+    }
+    
+    await instagram.page.bringToFront();
 
     await instagram.page.setCookie(...puppeteerCookies);
     await instagram.page.goto('https://www.instagram.com/', { waitUntil: 'networkidle2' });
