@@ -10,6 +10,14 @@ const loginURL = 'https://www.instagram.com/accounts/login/'
 const mfaURL = 'https://www.instagram.com/accounts/login/two_factor?next=%2F'
 const stpBtn = document.getElementById('stop-btn')
 
+async function smartSleep(ms) {
+    const iterations = ms / 250;
+    for (let i = 0; i < iterations; i++) {
+        if (!runMainLogic) break;
+        await new Promise(r => setTimeout(r, 250));
+    }
+}
+
 function getChromiumExecPath() {
   return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked')
 }
@@ -201,17 +209,19 @@ const instagram = {
               for (let i = 0; i < inputValue.length; i++) {
                 await instagram.page.keyboard.press('Backspace')
               }
-              await instagram.page.type(commentArea, comment[i], { delay: 150 })
-              await instagram.page.keyboard.press('Enter', { dely: 250 })
-              await instagram.page.keyboard.press('Enter', { dely: 250 })
-              await instagram.page.keyboard.press('Enter', { dely: 250 })
-              // TODO: Check if Instagram blocks commenting, error pops up -!- //
-              await instagram.page.keyboard.press('Enter', { dely: 250 })
-              await instagram.page.keyboard.press('Enter', { dely: 250 })
+              await instagram.page.type(commentArea, comment[i], { delay: 65 })
+              
+              await smartSleep(300)
+              await instagram.page.keyboard.press('Enter', { delay: 100 })
+              await smartSleep(300)
+              await instagram.page.keyboard.press('Enter', { delay: 100 })
+
               log.info(`Posting comment: ${comment[i]}`)
+              
               comTime = (Math.floor(Math.random() * 100) + 5) * 1000
               log.info(`Waiting for ${comTime} miliseconds`)
-              await new Promise(r => setTimeout(r, comTime))  // TODO: Change this value to user based input -!- //
+              
+              await smartSleep(comTime)
             }
           }
           else await instagram.page.close()
@@ -239,18 +249,18 @@ const instagram = {
             for (let i = 0; i < inputValue.length; i++) {
               await instagram.page.keyboard.press('Backspace')
             }
-            await instagram.page.type(commentArea, comment[i], { delay: 150 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            // TODO: Check if Instagram blocks commenting, error pops up -!- //
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
-            await instagram.page.keyboard.press('Enter', { dely: 250 })
+            await instagram.page.type(commentArea, comment[i], { delay: 65 })
+            await smartSleep(300)
+            await instagram.page.keyboard.press('Enter', { delay: 100 })
+            await smartSleep(300)
+            await instagram.page.keyboard.press('Enter', { delay: 100 })
+
             log.info(`Posting comment: ${comment[i]}`)
             if (i !== (comment.length - 1)) {
               comTime = (Math.floor(Math.random() * 100) + 5) * 1000
               log.info(`Waiting for ${comTime} miliseconds`)
-              await new Promise(r => setTimeout(r, comTime))  // TODO: Change this value to user based input -!- //
+              
+              await smartSleep(comTime)
             }
           }
           else await instagram.page.close()
