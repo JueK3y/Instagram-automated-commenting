@@ -1,13 +1,15 @@
-const puppeteer = require('puppeteer-extra')
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+const puppeteerCore = require('puppeteer-core');
+const { addExtra } = require('puppeteer-extra');
+const puppeteer = addExtra(puppeteerCore);
+
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const { ipcRenderer } = require('electron')
 
 puppeteer.use(StealthPlugin())
 let commentArea = 'textarea[autocomplete="off"]'
 let commentLoop
+let stopMonitor = null;
 
-const loginURL = 'https://www.instagram.com/accounts/login/'
-const mfaURL = 'https://www.instagram.com/accounts/login/two_factor?next=%2F'
 const stpBtn = document.getElementById('stop-btn')
 
 async function smartSleep(ms) {
@@ -18,27 +20,27 @@ async function smartSleep(ms) {
     }
 }
 
-function getChromiumExecPath() {
-  return puppeteer.executablePath().replace('app.asar', 'app.asar.unpacked')
-}
-
 const instagram = {
   browser: null,
   page: null,
 
   initialize: async (mode) => {
-    // Puppeteer startet im Hintergrund (bzw. sichtbar, je nach mode)
-    instagram.browser = await puppeteer.launch({
-        slowMo: 35,
-        headless: mode, 
-        executablePath: getChromiumExecPath(),
-        userDataDir: './instagram_session_data', 
-        args: ['--disable-blink-features=AutomationControlled']
-    });
+    log.info('Speichere Sichtbarkeits-Modus für späteren Bot-Start...');
+    instagram._mode = mode; 
 
-    instagram.page = (await instagram.browser.pages())[0];
-
-    log.info('Instagram initialization successful');
+    if (stopMonitor) clearInterval(stopMonitor);
+    stopMonitor = setInterval(async () => {
+        if (typeof runMainLogic !== 'undefined' && !runMainLogic) {
+            log.info('Stop button detected: Force closing bot window...');
+            if (instagram.page && !instagram.page.isClosed()) {
+                await instagram.page.close().catch(() => {});
+            }
+            if (instagram.browser) {
+                instagram.browser.disconnect();
+            }
+            clearInterval(stopMonitor);
+        }
+    }, 500);
   },
 
   login: async (username, password) => {
@@ -67,37 +69,44 @@ const instagram = {
     });
 
     if (!cookies) {
-       log.error('Login window was closed manually. Aborting.');
-       showBanner('error', 'Login abgebrochen', 'Das Anmeldefenster wurde manuell geschlossen.', 'login-closed', true);
-       stpBtn.click();
-       runMainLogic = false;
-       await instagram.browser.close();
-       return;
+      log.error('Login window was closed manually. Aborting.');
+      showBanner('error', 'Login abgebrochen', 'Das Anmeldefenster wurde manuell geschlossen.', 'login-closed', true);
+      stpBtn.click();
+      runMainLogic = false;
+      if (instagram.page && !instagram.page.isClosed()) await instagram.page.close();
+      if (instagram.browser) instagram.browser.disconnect();
+      return;
     }
 
-    log.info('Cookies extracted successfully. Injecting into Puppeteer...');
+    log.info('Login erfolgreich. Erstelle geteiltes Bot-Fenster...');
 
-    const puppeteerCookies = cookies.map(c => ({
-      name: c.name,
-      value: c.value,
-      domain: c.domain,
-      path: c.path,
-      secure: c.secure,
-      httpOnly: c.httpOnly,
-      sameSite: c.sameSite
-    }));
+    const isVisible = !instagram._mode; 
+    
+    const wsUrl = await new Promise((resolve) => {
+        ipcRenderer.once('bot-window-ready', (event, url) => resolve(url));
+        ipcRenderer.send('create-bot-window', { isVisible: isVisible, username: username });
+    });
+
+    if (!wsUrl) {
+        log.error('Konnte keine Debugger-URL finden! Verbindung abgebrochen.');
+        return;
+    }
+
+    instagram.browser = await puppeteer.connect({
+        browserWSEndpoint: wsUrl,
+        defaultViewport: null
+    });
 
     const pages = await instagram.browser.pages();
-    instagram.page = pages[0]; 
-    
-    for (let i = 1; i < pages.length; i++) {
-        await pages[i].close(); 
+    instagram.page = pages.find(p => p.url().includes('robots.txt'));
+    if (!instagram.page) {
+        instagram.page = pages[pages.length - 1];
     }
-    
-    await instagram.page.bringToFront();
 
-    await instagram.page.setCookie(...puppeteerCookies);
-    await instagram.page.goto('https://www.instagram.com/', { waitUntil: 'networkidle2' });
+    await new Promise(r => setTimeout(r, 1000));
+
+    log.info('Lade Instagram-Startseite...');
+    await instagram.page.goto('https://www.instagram.com/', { waitUntil: 'domcontentloaded', timeout: 60000 });
   },
 
   validation: async () => {
@@ -105,13 +114,14 @@ const instagram = {
     const currentUrl = await instagram.page.url();
     
     if (currentUrl.includes('login')) {
-       log.warn('Trotz Cookies nicht eingeloggt. Session abgelaufen?');
-       noteMessage('Fehler beim Übernehmen', 'Die Sitzung konnte nicht an den Bot übergeben werden.', true);
-       showBanner('error', 'Login fehlgeschlagen', 'Sitzung nicht übernommen.', 'cookie-fail', true);
-       stpBtn.click();
-       runMainLogic = false;
-       await instagram.browser.close();
-       return;
+      log.warn('Trotz Cookies nicht eingeloggt. Session abgelaufen?');
+      noteMessage('Fehler beim Übernehmen', 'Die Sitzung konnte nicht an den Bot übergeben werden.', true);
+      showBanner('error', 'Login fehlgeschlagen', 'Sitzung nicht übernommen.', 'cookie-fail', true);
+      stpBtn.click();
+      runMainLogic = false;
+      if (instagram.page && !instagram.page.isClosed()) await instagram.page.close();
+      if (instagram.browser) instagram.browser.disconnect();
+      return;
     }
     
     log.info('Login erfolgreich verifiziert! Der Bot ist bereit zum Kommentieren.');
@@ -119,10 +129,11 @@ const instagram = {
   },
 
   urlReader: async (postURL) => {
+    if (!runMainLogic) return;
     showBanner('info', 'LogIn erfolgreich', 'Das Einloggen in Instagram war erfolgreich.', 'login-success', true)
     log.info('Correct LogIn data')
 
-    if (postURL.slice(0,4) !== 'http') {        // INFO: Doesn't check, if :// is already there -!- //
+    if (postURL.slice(0,4) !== 'http') {        
       log.info('Adding https:// to URL')
       postURL = 'https://' + postURL
     }
@@ -130,27 +141,36 @@ const instagram = {
     log.info(`Opening ${postURL}`)
 
     try {
-      await instagram.page.goto(postURL, {waitUntil: 'networkidle0'})
+      await instagram.page.goto(postURL, {waitUntil: 'domcontentloaded', timeout: 60000})
+      await new Promise(r => setTimeout(r, 2000)); 
     }
-    catch {
-      // TODO: Catch certain error & check, why it gets called after wrong LogIn Data -!- //
+    catch (err) {
+      if (!runMainLogic || err.message.includes('TargetCloseError') || err.message.includes('Session closed')) {
+          return; 
+      }
+      
       log.error('Timeout error in loading post url; try again')
       showBanner('error', 'Ladefehler', 'Die URL konnte nicht geladen werden. Bitte erneut versuchen.', 'post-timeout', true)
       noteMessage('Ladefehler', 'Es gab ein Problem mit dem Laden der URL. Bitte versuche es erneut.', true)
       stpBtn.click()
       runMainLogic = false
-      await instagram.browser.close()
+      if (instagram.page && !instagram.page.isClosed()) await instagram.page.close();
+      if (instagram.browser) instagram.browser.disconnect();
+      return;
     }
 
-    // INFO: 404 Check -!- //
+    if (!runMainLogic) return;
+
+    // 404 Check 
     if (await instagram.page.$("span::-p-text(may have been removed)")) {
       log.error('404 Error: URL redirects to empty page')
       showBanner('error', 'Falscher Link', 'Die URL ist falsch. Bitte den eingefügten Link überprüfen.', '404-error', true)
       noteMessage('Falsche URL', 'Der Link konnte nicht geladen werden. Bitte überprüfe die eingegebenen Instagram URL und probiere es erneut.', true)
-      formError(urlInput)
+      if (typeof formError === 'function') formError(urlInput)
       stpBtn.click()
       runMainLogic = false
-      await instagram.browser.close()
+      if (instagram.page && !instagram.page.isClosed()) await instagram.page.close();
+      if (instagram.browser) instagram.browser.disconnect();
     }
   },
 
@@ -165,12 +185,12 @@ const instagram = {
       showBanner('error', 'Kommentieren nicht möglich', 'Der Ersteller verbietet das Kommentieren.', 'comment-function-disabled', true)
       stpBtn.click()
       runMainLogic = false
-      await instagram.browser.close()   
+      if (instagram.page && !instagram.page.isClosed()) await instagram.page.close();
+      if (instagram.browser) instagram.browser.disconnect();
     }
   },
 
   comment: async(commentMode, comData) => {
-    // INFO: Should the commenting loop or not? -!- //
     if (commentMode === 'once') commentLoop = false
     else if (commentMode === 'loop') commentLoop = true
     else commentLoop = false
@@ -183,107 +203,118 @@ const instagram = {
 
     let comTime
 
-    // INFO: Comment loop -!- //
     await new Promise(r => setTimeout(r, 150))
-    if (commentLoop) {                                                           // TODO: Better stillRunningCheck needed -!- //
+    
+    if (commentLoop) {                                                           
       for (let i = 0; i < comment.length; i++) {
-        const spamDialog = await instagram.page.$('div[role="dialog"]');
-        let comment = comData
+        if (!runMainLogic) break; 
+
         try {
-          if (runMainLogic) {   
-            if (spamDialog !== null) {
-              showBanner('warning', 'Unterbrechung erkannt', 'Instagram hat uns gestoppt. IAC 2.0 macht kurz Pause.', 'spam-notice', true);
-              log.warn("Instagram popup detected, commenting slower");
+          const spamDialog = await instagram.page.$('div[role="dialog"]');
+          if (spamDialog !== null) {
+            showBanner('warning', 'Unterbrechung erkannt', 'Instagram hat uns gestoppt. IAC 2.0 macht kurz Pause.', 'spam-notice', true);
+            log.warn("Instagram popup detected, commenting slower");
 
-              const dialogButtons = await spamDialog.$$('button');
-              
-              if (dialogButtons.length > 0) {
-                  const confirmButton = dialogButtons[dialogButtons.length - 1];
-                  await confirmButton.click();
-              }
-              await instagram.page.waitForTimeout(5000);
+            const dialogButtons = await spamDialog.$$('button');
+            if (dialogButtons.length > 0) {
+                const confirmButton = dialogButtons[dialogButtons.length - 1];
+                await confirmButton.click();
             }
-            else {
-              await instagram.page.click(commentArea)
-              const inputValue = await instagram.page.$eval(commentArea, el => el.value)
-              for (let i = 0; i < inputValue.length; i++) {
-                await instagram.page.keyboard.press('Backspace')
-              }
-              await instagram.page.type(commentArea, comment[i], { delay: 65 })
-              
-              await smartSleep(300)
-              await instagram.page.keyboard.press('Enter', { delay: 100 })
-              await smartSleep(300)
-              await instagram.page.keyboard.press('Enter', { delay: 100 })
-
-              log.info(`Posting comment: ${comment[i]}`)
-              
-              comTime = (Math.floor(Math.random() * 100) + 5) * 1000
-              log.info(`Waiting for ${comTime} miliseconds`)
-              
-              await smartSleep(comTime)
-            }
+            await smartSleep(5000); 
           }
-          else await instagram.page.close()
+          else {
+            await instagram.page.click(commentArea)
+            const inputValue = await instagram.page.$eval(commentArea, el => el.value)
+            
+            for (let j = 0; j < inputValue.length; j++) {
+              await instagram.page.keyboard.press('Backspace')
+            }
+            await instagram.page.type(commentArea, comment[i], { delay: 65 })
+            
+            await smartSleep(300)
+            if (!runMainLogic) break;
+            await instagram.page.keyboard.press('Enter', { delay: 100 })
+            
+            await smartSleep(300)
+            if (!runMainLogic) break;
+            await instagram.page.keyboard.press('Enter', { delay: 100 })
+
+            log.info(`Posting comment: ${comment[i]}`)
+            
+            comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+            log.info(`Waiting for ${comTime} miliseconds`)
+            
+            await smartSleep(comTime)
+          }
         }
-        catch(TypeError) {
-          // INFO: Checks for wrong URL -!- //
-          // FIXME: Gets called when closing the page manually -!- //
-          log.warn('Wrong page link')
+        catch(err) {
+          if (!runMainLogic || err.message.includes('TargetCloseError') || err.message.includes('Session closed')) {
+              break;
+          }
+          log.warn('Element not found or wrong URL: ' + err.message)
           noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
           showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
-          formError(urlInput)
-          document.getElementById('stop-btn').click()
+          if (typeof formError === 'function') formError(urlInput)
           runMainLogic = false
-          await instagram.browser.close()
+          break;
         }
       }
     }
     else {
       for (let i = 0; i < comment.length; i++) {
-        let comment = comData
-        try {
-          if (runMainLogic) {                                                                       // TODO: Better stillRunningCheck needed -!- //
-            await instagram.page.click(commentArea)
-            let inputValue = await instagram.page.$eval(commentArea, el => el.value)                // INFO: Deletes current input
-            for (let i = 0; i < inputValue.length; i++) {
-              await instagram.page.keyboard.press('Backspace')
-            }
-            await instagram.page.type(commentArea, comment[i], { delay: 65 })
-            await smartSleep(300)
-            await instagram.page.keyboard.press('Enter', { delay: 100 })
-            await smartSleep(300)
-            await instagram.page.keyboard.press('Enter', { delay: 100 })
+        if (!runMainLogic) break;
 
-            log.info(`Posting comment: ${comment[i]}`)
-            if (i !== (comment.length - 1)) {
-              comTime = (Math.floor(Math.random() * 100) + 5) * 1000
-              log.info(`Waiting for ${comTime} miliseconds`)
-              
-              await smartSleep(comTime)
-            }
+        try {
+          await instagram.page.click(commentArea)
+          let inputValue = await instagram.page.$eval(commentArea, el => el.value)                
+          for (let j = 0; j < inputValue.length; j++) {
+            await instagram.page.keyboard.press('Backspace')
           }
-          else await instagram.page.close()
+          await instagram.page.type(commentArea, comment[i], { delay: 65 })
+          
+          await smartSleep(300)
+          if (!runMainLogic) break;
+          await instagram.page.keyboard.press('Enter', { delay: 100 })
+          
+          await smartSleep(300)
+          if (!runMainLogic) break;
+          await instagram.page.keyboard.press('Enter', { delay: 100 })
+
+          log.info(`Posting comment: ${comment[i]}`)
+          if (i !== (comment.length - 1)) {
+            comTime = (Math.floor(Math.random() * 100) + 5) * 1000
+            log.info(`Waiting for ${comTime} miliseconds`)
+            await smartSleep(comTime)
+          }
         }
-        catch(TypeError) {
-          log.info(TypeError)
-          log.warn('Wrong page link')
+        catch(err) {
+          if (!runMainLogic || err.message.includes('TargetCloseError') || err.message.includes('Session closed')) {
+              break;
+          }
+          log.warn('Element not found or wrong URL: ' + err.message)
           noteMessage('Falsche URL?', 'Bitte überprüfe die URL und probiere es erneut.', true)
           showBanner('error', 'Falsche URL?', 'Bitte URL überprüfen und erneut versuchen.', 'wrong-ig-url', true)
-          formError(urlInput)
-          document.getElementById('stop-btn').click()
+          if (typeof formError === 'function') formError(urlInput)
           runMainLogic = false
-          await instagram.browser.close()
+          break;
         }
       }
     }
+
     await new Promise(r => setTimeout(r, 500))
-    log.info('Commenting fully completed')
-    noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
-    showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
+    
+    if (runMainLogic) {
+        log.info('Commenting fully completed')
+        noteMessage('Kommentieren abgeschlossen', 'IAC 2.0 hat alle Kommentare erfolgreich gepostet.', true)
+        showBanner('info', 'Kommentieren fertig', 'Das Kommentieren wurde erfolgreich abgeschlossen.', 'commenting-completed', true)
+    } else {
+        log.info('Commenting was manually stopped by the user.')
+    }
+
     document.getElementById('stop-btn').click()
     runMainLogic = false
-    await instagram.browser.close()
+    if (instagram.page && !instagram.page.isClosed()) await instagram.page.close();
+    if (instagram.browser) instagram.browser.disconnect();
   }
 }
 

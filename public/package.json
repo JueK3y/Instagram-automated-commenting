@@ -1,7 +1,7 @@
 {
   "name": "iac_2",
   "productName": "IAC 2.0",
-  "version": "0.8.7-alpha",
+  "version": "0.9.0-alpha",
   "license": "EULA",
   "description": "A bot for automatic commenting on Instagram",
   "homepage": "https://github.com/JueK3y/Instagram-automated-commenting",
@@ -37,7 +37,7 @@
     "keytar": "^7.9.0",
     "network-speed": "^2.1.1",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^24.39.0",
+    "puppeteer-core": "^24.39.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
@@ -52,7 +52,6 @@
         "provider": "github"
       }
     },
-    "asar": true,
-    "asarUnpack": "node_modules/puppeteer/.local-chromium/**/*"
+    "asar": true
   }
 }
