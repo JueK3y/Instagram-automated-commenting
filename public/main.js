@@ -43,7 +43,8 @@ const createWindow = () => {
   // INFO: Load the index.html of the app -!- //
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   
-  let color = systemPreferences.getAccentColor()
+  let color = ''
+  try { color = systemPreferences.getAccentColor() } catch (_) {}
   
   autoUpdater.logger = log;
   autoUpdater.logger.transports.file.level = 'info';
@@ -74,9 +75,11 @@ const createWindow = () => {
     mainWindow.webContents.send('blurPw')
   })
 
-  systemPreferences.on('accent-color-changed', (event, newColor) => {
-    mainWindow.webContents.send('accColorChanged', newColor)
-  })
+  try {
+    systemPreferences.on('accent-color-changed', (event, newColor) => {
+      mainWindow.webContents.send('accColorChanged', newColor)
+    })
+  } catch (_) {}
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
